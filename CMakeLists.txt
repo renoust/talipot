@@ -332,6 +332,15 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
   # Quazip
   FIND_PACKAGE(QuaZip)
 
+  # Qhull
+  IF(WIN32)
+    # prefer static qhull on windows
+    SET(QHULL_USE_STATIC TRUE)
+  ENDIF(WIN32)
+  UNSET(QHULL_HEADER CACHE)
+  UNSET(QHULL_LIBRARIES CACHE)
+  FIND_PACKAGE(Qhull)
+
   IF(TULIP_BUILD_PYTHON_COMPONENTS)
   # Python
   # After finding the Python interpreter, try to find if SIP and its dev tools are installed on the host system.
@@ -572,7 +581,7 @@ SET(GZStreamInclude ${PROJECT_SOURCE_DIR}/thirdparty/gzstream/)
 SET(GZStreamLibrary gzstream-tulip-${TulipMMVersion})
 IF(NOT TULIP_BUILD_CORE_ONLY)
   IF(QUAZIP_FOUND)
-    SET(QuazipInclude ${QUAZIP_INCLUDE_DIR})
+    SET(QuazipInclude ${QUAZIP_INCLUDE_DIRS})
     SET(QuazipLibrary ${QUAZIP_LIBRARIES})
   ELSE(QUAZIP_FOUND)
     SET(QuazipInclude ${PROJECT_SOURCE_DIR}/thirdparty/quazip/)
@@ -587,7 +596,15 @@ ENDIF(NOT TULIP_BUILD_CORE_ONLY)
 
 SET(OGDFInclude ${PROJECT_SOURCE_DIR}/thirdparty/OGDF/include)
 SET(OGDFLibrary OGDF-tulip-${TulipMMVersion})
-SET(QHULLInclude ${PROJECT_SOURCE_DIR}/thirdparty)
+
+IF(QHULL_FOUND)
+  SET(QhullInclude ${QHULL_INCLUDE_DIRS})
+  SET(QhullLibrary ${QHULL_LIBRARIES})
+ELSE(QHULL_FOUND)
+  SET(QhullInclude ${PROJECT_SOURCE_DIR}/thirdparty)
+  SET(QhullLibrary qhullstatic)
+ENDIF(QHULL_FOUND)
+
 SET(UTF8CppInclude ${PROJECT_SOURCE_DIR}/thirdparty/utf8-cpp/source)
 SET(YajlLibrary yajl-tulip-${TulipMMVersion})
 SET(QtAwesomeLibrary QtAwesome)
