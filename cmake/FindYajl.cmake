@@ -3,11 +3,6 @@
 #  YAJL_FOUND - System has YAJL
 #  YAJL_INCLUDE_DIRS - The YAJL include directories
 #  YAJL_LIBRARIES - The libraries needed to use YAJL
-#  YAJL_DEFINITIONS - Compiler switches required for using YAJL
-
-find_package(PkgConfig)
-pkg_check_modules(PC_YAJL QUIET yajl)
-set(YAJL_DEFINITIONS ${PC_YAJL_CFLAGS_OTHER})
 
 find_path(YAJL_INCLUDE_DIR yajl/yajl_version.h
           HINTS ${PC_YAJL_INCLUDEDIR} ${PC_YAJL_INCLUDE_DIRS}
