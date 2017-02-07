@@ -220,6 +220,16 @@ IF(TULIP_BUILD_PYTHON_COMPONENTS)
 ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
 
 ## ========================================================
+## Enable memory checks (disable openmp)
+## ========================================================
+IF(LINUX)
+  OPTION(TULIP_CHECK_MEMORY "Overload new and delete operators to check for memory leaks (Warning: enabling this automatically disables the use of OpenMP)" OFF)
+  IF(TULIP_CHECK_MEMORY)
+    SET(TULIP_CHECK_MEMORY_FLAGS "-include ${CMAKE_SOURCE_DIR}/library/tulip-core/include/tulip/MemoryChecker.h")
+  ENDIF(TULIP_CHECK_MEMORY)
+ENDIF(LINUX)
+
+## ========================================================
 ## Required packages
 ## ========================================================
 IF(MINGW)
@@ -242,18 +252,17 @@ IF(NOT EMSCRIPTEN)
 
 ENDIF(NOT EMSCRIPTEN)
 
-# Yajl
-SET(YAJL_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src/api ${CMAKE_CURRENT_BINARY_DIR}/thirdparty/yajl/yajl-2.1.0/include)
+# Qhull
+IF(WIN32)
+  # prefer static qhull on windows
+  SET(QHULL_USE_STATIC TRUE)
+ENDIF(WIN32)
+UNSET(QHULL_HEADER CACHE)
+UNSET(QHULL_LIBRARIES CACHE)
+FIND_PACKAGE(Qhull)
 
-## ========================================================
-## Enable memory checks (disable openmp)
-## ========================================================
-IF(LINUX)
-  OPTION(TULIP_CHECK_MEMORY "Overload new and delete operators to check for memory leaks (Warning: enabling this automatically disables the use of OpenMP)" OFF)
-  IF(TULIP_CHECK_MEMORY)
-    SET(TULIP_CHECK_MEMORY_FLAGS "-include ${CMAKE_SOURCE_DIR}/library/tulip-core/include/tulip/MemoryChecker.h")
-  ENDIF(TULIP_CHECK_MEMORY)
-ENDIF(LINUX)
+#Yajl
+FIND_PACKAGE(Yajl)
 
 # OpenMP
 IF(NOT CLANG)
@@ -331,15 +340,6 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
 
   # Quazip
   FIND_PACKAGE(QuaZip)
-
-  # Qhull
-  IF(WIN32)
-    # prefer static qhull on windows
-    SET(QHULL_USE_STATIC TRUE)
-  ENDIF(WIN32)
-  UNSET(QHULL_HEADER CACHE)
-  UNSET(QHULL_LIBRARIES CACHE)
-  FIND_PACKAGE(Qhull)
 
   IF(TULIP_BUILD_PYTHON_COMPONENTS)
   # Python
@@ -575,7 +575,7 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
 ENDIF(NOT TULIP_BUILD_CORE_ONLY)
 
 ## ========================================================
-## Include paths
+## Include and library paths
 ## ========================================================
 SET(GZStreamInclude ${PROJECT_SOURCE_DIR}/thirdparty/gzstream/)
 SET(GZStreamLibrary gzstream-tulip-${TulipMMVersion})
@@ -605,8 +605,15 @@ ELSE(QHULL_FOUND)
   SET(QhullLibrary qhullstatic)
 ENDIF(QHULL_FOUND)
 
+IF(YAJL_FOUND)
+  SET(YajlInclude ${YAJL_INCLUDE_DIRS})
+  SET(YajlLibrary ${YAJL_LIBRARIES})
+ELSE(YAJL_FOUND)
+  SET(YajlInclude ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src/api ${CMAKE_CURRENT_BINARY_DIR}/thirdparty/yajl/yajl-2.1.0/include)
+  SET(YajlLibrary yajl-tulip-${TulipMMVersion})
+ENDIF(YAJL_FOUND)
+
 SET(UTF8CppInclude ${PROJECT_SOURCE_DIR}/thirdparty/utf8-cpp/source)
-SET(YajlLibrary yajl-tulip-${TulipMMVersion})
 SET(QtAwesomeLibrary QtAwesome)
 SET(QtAwesomeInclude ${PROJECT_SOURCE_DIR}/thirdparty/QtAwesome)
 
