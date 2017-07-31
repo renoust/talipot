@@ -1,0 +1,292 @@
+language: cpp
+cache: ccache
+
+jobs:
+  include:
+    - stage: tulip core build
+      os: linux
+      dist: trusty
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - cmake
+            - ccache
+            - ninja-build
+            - python-pip
+            - doxygen
+            - graphviz
+            - libqt4-dev
+            - libqtwebkit-dev
+            - libglew-dev
+            - libpng-dev
+            - libfreetype6-dev
+            - libqhull-dev
+            - libquazip-dev
+            - libyajl-dev
+            - libpython2.7-dev
+            - libcppunit-dev
+            - binutils-dev
+      install:
+        - sudo pip install sphinx
+      env:
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON
+        - ninja -j4
+        - ninja runTests
+
+    - 
+      os: linux
+      dist: trusty
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - deadsnakes
+          packages:
+            - g++-7
+            - cmake
+            - ccache
+            - ninja-build
+            - libglew-dev
+            - libpng-dev
+            - libfreetype6-dev
+            - libqhull-dev
+            - libquazip-dev
+            - libyajl-dev
+            - python3.6
+            - libpython3.6-dev
+            - libcppunit-dev
+            - binutils-dev
+      before_install:
+        - sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
+        - sudo apt-get -qy update
+        - eval "${MATRIX_EVAL}"
+      install:
+        - sudo apt-get -qy install qt59-meta-minimal qt59webengine
+      env:
+        - TULIP_CXX_FLAGS="-std=c++11"
+        - PYTHON_EXECUTABLE=/usr/bin/python3.6
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON
+        - ninja -j4
+        - ninja runTests
+            
+    - 
+      os: osx
+      compiler: clang
+      install:
+        # set columns in terminal, required for curl to work correctly:
+        - export COLUMNS=80
+        - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+        - chmod +x ./macports-ci
+        - travis_wait ./macports-ci install
+        - export PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
+        - sudo port -N install cmake
+        - sudo port -N install ccache
+        - sudo port -N install ninja
+        - sudo port -N install qhull
+        - sudo port -N install yajl
+        - sudo port -N install autoconf
+        - sudo port -N install automake
+        - sudo port -N install libtool
+        - sudo port -N install pkgconfig
+        # cppunit 1.13.2 is the last version supporting C++98, so grab it, compile and install it
+        - wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+        - tar -xvzf cppunit-1.13.2.tar.gz
+        - cd cppunit-1.13.2
+        - CC=clang CXX=clang++ CXXFLAGS=-stdlib=libstdc++ LIBS=-lstdc++.6 ./configure --prefix=/opt/local
+        - sudo make -j4 install
+        - cd ..
+      env:
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON
+        - ninja -j4
+        - ninja runTests
+    
+    - 
+      os: osx
+      osx_image: xcode9
+      compiler: clang
+      install:
+        # set columns in terminal, required for curl to work correctly:
+        - export COLUMNS=80
+        - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+        - chmod +x ./macports-ci
+        - travis_wait ./macports-ci install
+        - export PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
+        - sudo port -N install cmake
+        - sudo port -N install ccache
+        - sudo port -N install ninja
+        - sudo port -N install qhull
+        - sudo port -N install yajl
+        - sudo port -N install pkgconfig
+        - sudo port -N install cppunit
+      env:
+        - TULIP_CXX_FLAGS="-std=c++11 -stdlib=libc++"
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+        
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON
+        - ninja -j4
+        - ninja runTests
+        
+    - stage: tulip complete build
+      os: linux
+      dist: trusty
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - cmake
+            - ccache
+            - ninja-build
+            - python-pip
+            - doxygen
+            - graphviz
+            - libqt4-dev
+            - libqtwebkit-dev
+            - libglew-dev
+            - libpng-dev
+            - libfreetype6-dev
+            - libqhull-dev
+            - libquazip-dev
+            - libyajl-dev
+            - libpython2.7-dev
+            - libcppunit-dev
+            - binutils-dev
+      install:
+        - sudo pip install sphinx
+      env:
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH} -DTULIP_USE_QT5=${TULIP_USE_QT5} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=ON -DTULIP_USE_CCACHE=ON
+        - ninja -j4
+        - ninja runTests
+
+    - 
+      os: linux
+      dist: trusty
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - deadsnakes
+          packages:
+            - g++-7
+            - cmake
+            - ccache
+            - ninja-build
+            - libglew-dev
+            - libpng-dev
+            - libfreetype6-dev
+            - libqhull-dev
+            - libquazip-dev
+            - libyajl-dev
+            - python3.6
+            - libpython3.6-dev
+            - libcppunit-dev
+            - binutils-dev
+      before_install:
+        - sudo add-apt-repository -y ppa:beineri/opt-qt591-trusty
+        - sudo apt-get -qy update
+        - eval "${MATRIX_EVAL}"
+      install:
+        - sudo apt-get -qy install qt59-meta-minimal qt59webengine
+      env:
+        - TULIP_CXX_FLAGS="-std=c++11"
+        - PYTHON_EXECUTABLE=/usr/bin/python3.6
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DCMAKE_PREFIX_PATH=/opt/qt59/ -DTULIP_USE_QT5=ON -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=OFF -DTULIP_USE_CCACHE=ON
+        - ninja -j4
+        - ninja runTests
+            
+    - 
+      os: osx
+      compiler: clang
+      install:
+        # set columns in terminal, required for curl to work correctly:
+        - export COLUMNS=80
+        - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+        - chmod +x ./macports-ci
+        - travis_wait ./macports-ci install
+        - export PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
+        - sudo port -N install cmake
+        - sudo port -N install ccache
+        - sudo port -N install ninja
+        - sudo port -N install qt4-mac
+        - sudo port -N install freetype
+        - sudo port -N install glew
+        - sudo port -N install libpng
+        - sudo port -N install jpeg
+        - sudo port -N install qhull
+        - sudo port -N install yajl
+        - sudo port -N install autoconf
+        - sudo port -N install automake
+        - sudo port -N install libtool
+        - sudo port -N install pkgconfig
+        # cppunit 1.13.2 is the last version supporting C++98, so grab it, compile and install it
+        - wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+        - tar -xvzf cppunit-1.13.2.tar.gz
+        - cd cppunit-1.13.2
+        - CC=clang CXX=clang++ CXXFLAGS=-stdlib=libstdc++ LIBS=-lstdc++.6 ./configure --prefix=/opt/local
+        - sudo make -j4 install
+        - cd ..
+      env:
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH} -DTULIP_USE_QT5=${TULIP_USE_QT5} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=${TULIP_BUILD_DOC} -DTULIP_USE_CCACHE=ON
+        - ninja -j4
+        - ninja runTests
+    
+    - 
+      os: osx
+      osx_image: xcode9
+      compiler: clang
+      install:
+        # set columns in terminal, required for curl to work correctly:
+        - export COLUMNS=80
+        - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+        - chmod +x ./macports-ci
+        - travis_wait ./macports-ci install
+        - export PATH=/opt/local/bin:/opt/local/libexec/qt4/bin:$PATH
+        - sudo port -N install cmake
+        - sudo port -N install ccache
+        - sudo port -N install ninja
+        - sudo port -N install qt5-qtbase
+        - sudo port -N install qt5-qtwebkit
+        - sudo port -N install freetype
+        - sudo port -N install glew
+        - sudo port -N install libpng
+        - sudo port -N install jpeg
+        - sudo port -N install qhull
+        - sudo port -N install yajl
+        - sudo port -N install pkgconfig
+        - sudo port -N install cppunit
+      env:
+        - TULIP_CXX_FLAGS="-std=c++11 -stdlib=libc++"
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
+        
+      script:
+        - mkdir build && cd build
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="${TULIP_CXX_FLAGS}" -DTULIP_USE_QT5=ON -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=${TULIP_BUILD_DOC} -DTULIP_USE_CCACHE=ON
+        - ninja -j4
+        - ninja runTests
+
+        
+
+
+
