@@ -1,0 +1,29 @@
+os: Visual Studio 2015
+
+cache:      
+  - C:\msys64\home\appveyor\.ccache
+
+environment:
+  matrix:
+    - MSYS2_ARCH: x86_64
+      MSYSTEM: MINGW64
+
+    - MSYS2_ARCH: i686
+      MSYSTEM: MINGW32
+            
+    - CMAKE_VS_GENERATOR: "Visual Studio 14 2015 Win64"
+      MSVC_PLATFORM: "x64"
+      MSVC_PLATFORM_TOOLSET: "v140"
+      QT5_DIR: "C:/Qt/5.9.1/msvc2015_64"
+      PYTHON_EXECUTABLE: "C:/Python36-x64/python.exe"
+
+    - CMAKE_VS_GENERATOR: "Visual Studio 14 2015"
+      MSVC_PLATFORM: "Win32"
+      MSVC_PLATFORM_TOOLSET: "v140"
+      QT5_DIR: "C:/Qt/5.9.1/msvc2015"
+      PYTHON_EXECUTABLE: "C:/Python36/python.exe"
+
+build_script:
+  - 'if defined MSYS2_ARCH ("%APPVEYOR_BUILD_FOLDER%\appveyor_msys2.bat") else ("%APPVEYOR_BUILD_FOLDER%\appveyor_msvc.bat")'
+
+deploy: off
