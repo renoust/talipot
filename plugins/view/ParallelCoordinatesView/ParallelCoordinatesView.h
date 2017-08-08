@@ -22,7 +22,7 @@
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <GL/gl.h>
+#include <tulip/OpenGlIncludes.h>
 
 #include "ParallelCoordinatesDrawing.h"
 #include "ParallelCoordinatesGraphProxy.h"
