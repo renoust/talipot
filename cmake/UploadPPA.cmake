@@ -18,6 +18,11 @@
 # (otherwise the packaging preparation step will be executed each time make is called)
 ##
 
+INCLUDE(${CMAKE_CURRENT_LIST_DIR}/CPackComponents.cmake)
+INCLUDE(${CMAKE_CURRENT_LIST_DIR}/CPackInstaller.cmake)
+
+INCLUDE(CPack)
+
 FIND_PROGRAM(DEBUILD_EXECUTABLE debuild)
 FIND_PROGRAM(DPUT_EXECUTABLE dput)
 
@@ -27,7 +32,7 @@ IF(NOT DEBUILD_EXECUTABLE OR NOT DPUT_EXECUTABLE)
 ENDIF(NOT DEBUILD_EXECUTABLE OR NOT DPUT_EXECUTABLE)
 
 # run a shell script to determine the package type to upload : snapshot or release (user input required)
-EXECUTE_PROCESS(COMMAND bash ${CMAKE_SOURCE_DIR}/get_package_type.sh
+EXECUTE_PROCESS(COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/ppa_scripts/get_package_type.sh
 		ERROR_VARIABLE PACKAGE_TYPE)
 
 IF("${PACKAGE_TYPE}" STREQUAL "snapshot")
@@ -42,46 +47,45 @@ ELSE()
 ENDIF()
 
 # some cmake options to set when building the binary packages 
-SET(CPACK_DEBIAN_CMAKE_OPTIONS "-DUBUNTU_PPA_BUILD=ON -DCMAKE_BUILD_TYPE=Release")
+SET(CPACK_DEBIAN_CMAKE_OPTIONS "-DTULIP_PYTHON_SYSTEM_INSTALL=ON -DCMAKE_BUILD_TYPE=Release")
 # the launcphad identifier
-SET(LAUNCHPAD_ID "tulipsoftware")
+SET(LAUNCHPAD_ID "anlambert")
 # the destination ppa host
 IF(SNAPSHOT_PACKAGE)
-  SET(DPUT_HOST "ppa:${LAUNCHPAD_ID}/ppasnapshots")
+  SET(DPUT_HOST "ppa:${LAUNCHPAD_ID}/tulipsnapshots")
 ELSE()
-  SET(DPUT_HOST "ppa:${LAUNCHPAD_ID}/ppa")
+  SET(DPUT_HOST "ppa:${LAUNCHPAD_ID}/tulip")
 ENDIF()
 
 # the user name associated to the GPG key used to sign the source packages
-SET(GPG_USERNAME "Tulip Dev Team")
+SET(GPG_USERNAME "Antoine Lambert")
 
-SET(PACKAGE_WITH_DEBUG_INFOS "libtulip-${TulipMajorVersion}.${TulipMinorVersion};libtulip-ogl-${TulipMajorVersion}.${TulipMinorVersion};"
-                             "libtulip-qt-${TulipMajorVersion}.${TulipMinorVersion};tulip;tulip-plugins;tulip-python;tulip-ogdf")
+SET(PACKAGE_WITH_DEBUG_INFOS "libtulip-core-${TulipMajorVersion}.${TulipMinorVersion};libtulip-ogl-${TulipMajorVersion}.${TulipMinorVersion};"
+                             "libtulip-gui-${TulipMajorVersion}.${TulipMinorVersion};tulip;tulip-plugins;tulip-python;tulip-ogdf")
 
-EXECUTE_PROCESS(COMMAND date -R  OUTPUT_VARIABLE DATE_TIME)
+EXECUTE_PROCESS(COMMAND date -R OUTPUT_VARIABLE DATE_TIME)
 
 IF(RELEASE_PACKAGE)
 
   # the url of the uploaded source archives 
-  SET(PPA_ARCHIVES_URL "http://ppa.launchpad.net/${LAUNCHPAD_ID}/ppa/ubuntu/pool/main/t/tulip/")	
+  SET(PPA_ARCHIVES_URL "http://ppa.launchpad.net/${LAUNCHPAD_ID}/tulip/ubuntu/pool/main/t/tulip/")
 
   # run a shell script to generate a version number for the package to upload (user input required)
-  EXECUTE_PROCESS(COMMAND bash ${CMAKE_SOURCE_DIR}/gen_debian_package_version_number.sh ${TulipVersion} ${PPA_ARCHIVES_URL}
+  EXECUTE_PROCESS(COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/ppa_scripts/gen_debian_package_version_number.sh ${TulipVersion} ${PPA_ARCHIVES_URL}
 		  ERROR_VARIABLE PACKAGE_VERSION)
 
   SET(CPACK_DEBIAN_PACKAGE_REVISION "-1ubuntu${PACKAGE_VERSION}")
 
 ELSE()
   
-  EXECUTE_PROCESS(COMMAND svn info  
-		  COMMAND grep Revision:
-		  COMMAND cut -c11-
-		  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		  OUTPUT_VARIABLE LAST_SVN_REVISION)
+  EXECUTE_PROCESS(COMMAND git rev-parse HEAD
+                  COMMAND cut -c1-7
+                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                  OUTPUT_VARIABLE LAST_GIT_REVISION)
   
-  STRING(REPLACE "\n" "" LAST_SVN_REVISION "${LAST_SVN_REVISION}")
+  STRING(REPLACE "\n" "" LAST_GIT_REVISION "${LAST_GIT_REVISION}")
 
-  SET(CPACK_DEBIAN_PACKAGE_REVISION "-0ubuntu0+svn${LAST_SVN_REVISION}")
+  SET(CPACK_DEBIAN_PACKAGE_REVISION "-0ubuntu0+git${LAST_GIT_REVISION}")
 
 ENDIF()
 
@@ -102,17 +106,18 @@ IF(NOT CPACK_DEBIAN_PACKAGE_PRIORITY)
   SET(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 ENDIF(NOT CPACK_DEBIAN_PACKAGE_PRIORITY)
 
-EXECUTE_PROCESS(COMMAND bash ${CMAKE_SOURCE_DIR}/get_package_changelog.sh
-		ERROR_VARIABLE PACKAGE_CHANGELOG)
+EXECUTE_PROCESS(COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/ppa_scripts/get_package_changelog.sh
+                ERROR_VARIABLE PACKAGE_CHANGELOG)
 
 ######################################################################################
 # copy the source tree (list of directories to copy must be provided in the SOURCE_DIRS_TO_COPY variable)
 
 FILE(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/Debian)
-EXECUTE_PROCESS(COMMAND mkdir ${CMAKE_BINARY_DIR}/Debian)
-SET(DEBIAN_SOURCE_ORIG_DIR ${CMAKE_BINARY_DIR}/Debian/${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
+SET(DEBIAN_SOURCE_ORIG_DIR "${CMAKE_BINARY_DIR}/Debian/${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+EXECUTE_PROCESS(COMMAND mkdir -p "${DEBIAN_SOURCE_ORIG_DIR}.orig")
 
-EXECUTE_PROCESS(COMMAND svn export . "${DEBIAN_SOURCE_ORIG_DIR}.orig"
+EXECUTE_PROCESS(COMMAND git archive HEAD
+                COMMAND tar -x -C "${DEBIAN_SOURCE_ORIG_DIR}.orig"
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 
@@ -121,12 +126,12 @@ IF(RELEASE_PACKAGE)
   # Check if the original source tarball has been uploaded and download it
   MESSAGE("Try to downloading tulip_${TulipVersion}.orig.tar.gz from ${PPA_ARCHIVES_URL}")
   EXECUTE_PROCESS(COMMAND wget ${PPA_ARCHIVES_URL}tulip_${TulipVersion}.orig.tar.gz WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Debian
-		RESULT_VARIABLE WGET_RET)
+    RESULT_VARIABLE WGET_RET)
 
   IF(NOT WGET_RET EQUAL 0)
     MESSAGE("tulip_${TulipVersion}.orig.tar.gz not found in ${PPA_ARCHIVES_URL}. It will be created and uploaded.")
     # create the original source tarball
-    EXECUTE_PROCESS(COMMAND tar -czf "${CPACK_DEBIAN_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}.orig.tar.gz" "${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.orig/" WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Debian)  
+    EXECUTE_PROCESS(COMMAND tar -czf "${CPACK_DEBIAN_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}.orig.tar.gz" "${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.orig/" WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Debian)
     SET(DEBUILD_OPTIONS "-sa")
   ELSE()
     SET(DEBUILD_OPTIONS "-sd")
@@ -142,7 +147,7 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
   EXECUTE_PROCESS(COMMAND cp -R ${DEBIAN_SOURCE_ORIG_DIR}.orig ${DEBIAN_SOURCE_DIR})
   EXECUTE_PROCESS(COMMAND mkdir ${DEBIAN_SOURCE_DIR}/debian)
 
-  ############################################################################## 
+  ##############################################################################
   # debian/control
   SET(DEBIAN_CONTROL ${DEBIAN_SOURCE_DIR}/debian/control)
 
@@ -155,7 +160,7 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
 
   FOREACH(DEP ${CPACK_${RELEASE_UPPER}_BUILD_DEPENDS})
     FILE(APPEND ${DEBIAN_CONTROL} "${DEP}, ")
-  ENDFOREACH(DEP ${CPACK_${RELEASE_UPPER}_BUILD_DEPENDS})  
+  ENDFOREACH(DEP ${CPACK_${RELEASE_UPPER}_BUILD_DEPENDS})
 
   FILE(APPEND ${DEBIAN_CONTROL} "debhelper, cmake\n"
     "Standards-Version: 3.9.1\n"
@@ -171,46 +176,46 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
       STRING(REPLACE "_" "-" COMPONENT "${COMPONENT}")
       
       IF("${COMPONENT}" MATCHES "lib.*[^dev]+$")
-	SET(COMPONENT "${COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
+  SET(COMPONENT "${COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
       ENDIF()
 
       IF("${COMPONENT}" MATCHES "lib.*[dev]+$")
-	STRING(REPLACE "dev" "${TulipMajorVersion}.${TulipMinorVersion}" BIN_COMPONENT "${COMPONENT}")
-	SET(DEPENDS "${BIN_COMPONENT} (= \${binary:Version})")
+  STRING(REPLACE "dev" "${TulipMajorVersion}.${TulipMinorVersion}" BIN_COMPONENT "${COMPONENT}")
+  SET(DEPENDS "${BIN_COMPONENT} (= \${binary:Version})")
       ELSE()
-	SET(DEPENDS "\${shlibs:Depends}")  
+  SET(DEPENDS "\${shlibs:Depends}")
       ENDIF()
 
       SET(DEPENDS "${DEPENDS}, \${misc:Depends}")
 
       FOREACH(DEP ${CPACK_COMPONENT_${UPPER_COMPONENT}_${RELEASE_UPPER}_DEPENDS})
-	IF("${DEPENDS}" STREQUAL "")
-	  SET(DEPENDS "${DEP}")
-	ELSE()
-	  SET(DEPENDS "${DEPENDS}, ${DEP}")
-	ENDIF()
+  IF("${DEPENDS}" STREQUAL "")
+    SET(DEPENDS "${DEP}")
+  ELSE()
+    SET(DEPENDS "${DEPENDS}, ${DEP}")
+  ENDIF()
       ENDFOREACH(DEP ${CPACK_COMPONENT_${UPPER_COMPONENT}_${RELEASE_UPPER}_DEPENDS})
 
       FILE(APPEND ${DEBIAN_CONTROL} "\n"
-	"Package: ${COMPONENT}\n"
-	"Architecture: any\n"
-	"Depends: ${DEPENDS}\n"
-	"Description: ${CPACK_PACKAGE_DESCRIPTION_SUMMARY}"
-	" : ${CPACK_COMPONENT_${UPPER_COMPONENT}_DISPLAY_NAME}\n"
-	" ${CPACK_COMPONENT_${UPPER_COMPONENT}_DESCRIPTION}\n")
+  "Package: ${COMPONENT}\n"
+  "Architecture: any\n"
+  "Depends: ${DEPENDS}\n"
+  "Description: ${CPACK_PACKAGE_DESCRIPTION_SUMMARY}"
+  " : ${CPACK_COMPONENT_${UPPER_COMPONENT}_DISPLAY_NAME}\n"
+  " ${CPACK_COMPONENT_${UPPER_COMPONENT}_DESCRIPTION}\n")
 
       LIST(FIND PACKAGE_WITH_DEBUG_INFOS ${COMPONENT} DEBUG_INFOS)
 
       IF(NOT ${DEBUG_INFOS} EQUAL -1)
-	FILE(APPEND ${DEBIAN_CONTROL} "\n"
-	  "Package: ${COMPONENT}-dbg\n"
-	  "Architecture: any\n"
-	  "Section: debug\n"
-	  "Priority: extra\n"
-	  "Depends: ${COMPONENT} (= \${binary:Version}), \${misc:Depends}\n"
-	  "Description: ${CPACK_PACKAGE_DESCRIPTION_SUMMARY}"
-	  " : ${CPACK_COMPONENT_${UPPER_COMPONENT}_DISPLAY_NAME} - Debug Symbols\n"
-	  " ${CPACK_COMPONENT_${UPPER_COMPONENT}_DESCRIPTION}\n")
+  FILE(APPEND ${DEBIAN_CONTROL} "\n"
+    "Package: ${COMPONENT}-dbg\n"
+    "Architecture: any\n"
+    "Section: debug\n"
+    "Priority: extra\n"
+    "Depends: ${COMPONENT} (= \${binary:Version}), \${misc:Depends}\n"
+    "Description: ${CPACK_PACKAGE_DESCRIPTION_SUMMARY}"
+    " : ${CPACK_COMPONENT_${UPPER_COMPONENT}_DISPLAY_NAME} - Debug Symbols\n"
+    " ${CPACK_COMPONENT_${UPPER_COMPONENT}_DESCRIPTION}\n")
       ENDIF()
 
     ENDIF()
@@ -256,15 +261,15 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
       STRING(REPLACE "_" "-" DEB_COMPONENT "${COMPONENT}")
 
       IF("${DEB_COMPONENT}" MATCHES "lib.*[^dev]+$")
-	SET(DEB_COMPONENT "${DEB_COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
+  SET(DEB_COMPONENT "${DEB_COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
       ENDIF()
 
       SET(PATH debian/${DEB_COMPONENT})
 
       FILE(APPEND ${DEBIAN_RULES}
-	"	cd $(BUILDDIR); cmake ${CPACK_DEBIAN_CMAKE_OPTIONS} -DCOMPONENT=${COMPONENT} -DCMAKE_INSTALL_PREFIX=../${PATH}/usr -P cmake_install.cmake\n"
-	"	mkdir ${PATH}/DEBIAN\n"
-	"	dpkg-gensymbols -p${DEB_COMPONENT} -P${PATH}\n")
+  "	cd $(BUILDDIR); cmake ${CPACK_DEBIAN_CMAKE_OPTIONS} -DCOMPONENT=${COMPONENT} -DCMAKE_INSTALL_PREFIX=../${PATH}/usr -P cmake_install.cmake\n"
+  "	mkdir ${PATH}/DEBIAN\n"
+  "	dpkg-gensymbols -p${DEB_COMPONENT} -P${PATH}\n")
 
     ENDIF()
 
@@ -273,7 +278,7 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
   FILE(APPEND ${DEBIAN_RULES}
     "	dh_shlibdeps\n")
 
-  FOREACH(COMPONENT ${PACKAGE_WITH_DEBUG_INFOS}) 
+  FOREACH(COMPONENT ${PACKAGE_WITH_DEBUG_INFOS})
     
     SET(PATH debian/${COMPONENT}-dbg)
     FILE(APPEND ${DEBIAN_RULES}
@@ -290,12 +295,12 @@ FOREACH(RELEASE ${CPACK_UBUNTU_DISTRIBUTION_RELEASES})
     IF(${EXCLUDED} EQUAL -1)
       STRING(REPLACE "_" "-" COMPONENT "${COMPONENT}")
       IF("${COMPONENT}" MATCHES "lib.*[^dev]+$")
-	SET(COMPONENT "${COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
+  SET(COMPONENT "${COMPONENT}-${TulipMajorVersion}.${TulipMinorVersion}")
       ENDIF()
       SET(PATH debian/${COMPONENT})
       FILE(APPEND ${DEBIAN_RULES}
-	"	dpkg-gencontrol -p${COMPONENT} -P${PATH} -Tdebian/${COMPONENT}.substvars\n"
-	"	dpkg --build ${PATH} ..\n")
+  "	dpkg-gencontrol -p${COMPONENT} -P${PATH} -Tdebian/${COMPONENT}.substvars\n"
+  "	dpkg --build ${PATH} ..\n")
     ENDIF()
 
   ENDFOREACH(COMPONENT ${CPACK_COMPONENTS_ALL})
@@ -342,5 +347,5 @@ ENDFOREACH(RELEASE ${CPACK_DEBIAN_DISTRIBUTION_RELEASES})
 ##############################################################################
 # dput ppa:your-lp-id/ppa <source.changes>
 ADD_CUSTOM_TARGET(dput ${DPUT_EXECUTABLE} -f ${DPUT_HOST} ${DEB_SOURCE_CHANGES}
-                  DEPENDS ${DEB_SOURCE_CHANGES} 
+                  DEPENDS ${DEB_SOURCE_CHANGES}
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Debian)

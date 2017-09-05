@@ -1,9 +1,31 @@
+# Define a software component. Setting variables for its dependencies, display name, description, etc
+# Those meta informations are mainly used when building software bundle using CPack
+MACRO(DEFINE_COMPONENT comp display_name desc deps group)
+  SET(CPACK_COMPONENTS_ALL
+  ${CPACK_COMPONENTS_ALL}
+  ${comp})
+  STRING(TOUPPER ${comp} CN)
+  SET(CPACK_COMPONENT_${CN}_DISPLAY_NAME ${display_name})
+  SET(CPACK_COMPONENT_${CN}_DESCRIPTION "${desc}.")
+  IF(NOT "${deps}" STREQUAL "")
+    SET(CPACK_COMPONENT_${CN}_DEPENDS ${deps})
+  ENDIF()
+  SET(CPACK_COMPONENT_${CN}_GROUP ${group})
+ENDMACRO()
+
 SET(CPACK_COMPONENT_GROUP_THIRDPARTY_DESCRIPTION "Thirdparty libraries.")
 SET(CPACK_COMPONENT_GROUP_LIBRARIES_DESCRIPTION "Tulip framework dynamic libraries.")
 SET(CPACK_COMPONENT_GROUP_HEADERS_DESCRIPTION "Tulip framework C++ headers.")
 SET(CPACK_COMPONENT_GROUP_SOFTWARE_DESCRIPTION "Tulip softwares.")
 SET(CPACK_COMPONENT_GROUP_PLUGINS_DESCRIPTION "Tulip base plugins set.")
 SET(CPACK_COMPONENT_GROUP_EXTRAS_DESCRIPTION "Tulip extra files and documentation.")
+
+SET(LIBS_GROUP_NAME "Libraries")
+  SET(HEADERS_GROUP_NAME "Headers")
+  SET(SOFTWARE_GROUP_NAME "Runtime")
+  SET(PLUGINS_GROUP_NAME "Plugins")
+  SET(EXTRAS_GROUP_NAME "Extras")
+SET(THIRDPARTY_GROUP_NAME "Third party")
 
 #thirdparty
 DEFINE_COMPONENT(ftgl "FTGL" "A library to render freetype fonts in openGL scenes." ""  ${THIRDPARTY_GROUP_NAME})

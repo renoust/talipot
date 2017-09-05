@@ -402,7 +402,7 @@ IF(TULIP_BUILD_PYTHON_COMPONENTS)
       # Ensure that correct Python include path and library are selected by CMake on Linux (in case of non standard installation)
     ELSEIF(LINUX)
       SET(CMAKE_INCLUDE_PATH ${PYTHON_HOME_PATH}/../include ${CMAKE_INCLUDE_PATH})
-      SET(CMAKE_LIBRARY_PATH ${PYTHON_HOME_PATH}/../lib ${CMAKE_LIBRARY_PATH})  
+      SET(CMAKE_LIBRARY_PATH ${PYTHON_HOME_PATH}/../lib ${CMAKE_LIBRARY_PATH})
     ENDIF(WIN32)
 
     FIND_PACKAGE(PythonLibs REQUIRED)
@@ -467,7 +467,7 @@ IF(TULIP_BUILD_PYTHON_COMPONENTS)
         MESSAGE(STATUS "Using SIP ${SIP_VERSION_THIRDPARTY} located in thirdparty for generating the Python bindings.")
         SET(SIP_LIB tulipsip)
         SET(SYSTEM_SIP FALSE)
-        
+
         TRY_COMPILE(SIP_OK ${CMAKE_CURRENT_BINARY_DIR}/thirdparty/sip-${SIP_VERSION_THIRDPARTY}/sipgen ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/sip-${SIP_VERSION_THIRDPARTY}/sipgen sip
           CMAKE_FLAGS -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
           -DPYTHON_INCLUDE_DIR=${PYTHON_INCLUDE_DIR} -DPYTHON_INCLUDE_DIR2=${PYTHON_INCLUDE_DIR2}
@@ -535,7 +535,7 @@ IF(TULIP_BUILD_PYTHON_COMPONENTS)
             WORKING_DIRECTORY ${TULIPGUI_PYTHON_FOLDER}/../
             DEPENDS tulip-core-wheel)
 
-        ENDIF(NOT LINUX)  
+        ENDIF(NOT LINUX)
 
         # In order to upload the generated wheels, an account must be created on PyPi
         # and the following configuration must be stored in the ~/.pypirc file
@@ -782,7 +782,7 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
                 cmake/FindQtX.cmake
                 cmake/FindSphinx.cmake
           DESTINATION ${TulipShareInstallDir})
-	
+
   ADD_SUBDIRECTORY(bundlers)
 
   ## ========================================================
@@ -838,7 +838,7 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
     # updated in plugins/view/GeographicView,
     # and finally used in software/tulip_perpective/CMakeLists.txt
     SET_PROPERTY(GLOBAL PROPERTY FIXUP_BUNDLE_LIBS "")
-    
+
     INSTALL(DIRECTORY ${QT_PLUGINS_DIR}/imageformats DESTINATION ${TulipBinInstallDir})
     IF(USE_QT5)
       INSTALL(DIRECTORY ${QT_PLUGINS_DIR}/platforms DESTINATION ${TulipBinInstallDir})
@@ -924,3 +924,9 @@ echo archive \${TAR_FILE} successfully generated" OUTPUT_FILE ${make_tar_file})
   ENDIF(LINUX)
 
 ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+
+
+SET(TULIP_ENABLE_DPUT_TARGET OFF CACHE INTERNAL "")
+IF(LINUX AND TULIP_ENABLE_DPUT_TARGET)
+  INCLUDE(cmake/UploadPPA.cmake)
+ENDIF(LINUX AND TULIP_ENABLE_DPUT_TARGET)
