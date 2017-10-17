@@ -970,3 +970,24 @@ echo archive \${TAR_FILE} successfully generated" OUTPUT_FILE ${make_tar_file})
   ENDIF(LINUX)
 
 ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+
+IF(WIN32)
+  SET(CPACK_SOURCE_GENERATOR "ZIP")
+ELSE(WIN32)
+  SET(CPACK_SOURCE_GENERATOR "TGZ")
+  SET(CPACK_SOURCE_INSTALLED_DIRECTORIES
+     "${CMAKE_SOURCE_DIR}" "."
+     "${CMAKE_BINARY_DIR}/tulip_spec/" ".")
+  CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/bundlers/rpm/tulip.spec.in" "${CMAKE_BINARY_DIR}/tulip_spec/tulip.spec")
+ENDIF(WIN32)
+
+SET(CPACK_PACKAGE_VERSION "${TulipMajorVersion}.${TulipMinorVersion}.${TulipReleaseVersion}")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${TulipMajorVersion}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${TulipMinorVersion}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${TulipReleaseVersion}")
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME "tulip-${TulipMajorVersion}.${TulipMinorVersion}.${TulipReleaseVersion}")
+
+LIST(APPEND CPACK_SOURCE_IGNORE_FILES ".git")
+LIST(APPEND CPACK_SOURCE_IGNORE_FILES ".svn")
+
+INCLUDE(CPack)

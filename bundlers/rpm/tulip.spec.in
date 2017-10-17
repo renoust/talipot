@@ -1,0 +1,106 @@
+%define		tulip_major	@TulipMajorVersion@
+%define		tulip_minor	@TulipMinorVersion@
+%define		tulip_release	@TulipReleaseVersion@
+
+# release cannot contain "-". If it's a developpement release, switch to 0.1 rpm_release.
+%if "%{tulip_release}" == "0-dev"
+%define		rpm_release	0.1
+%define		package_release	0
+%else
+%define		rpm_release	1
+%define		package_release %{tulip_release}
+%endif
+
+%define		name	tulip
+%define		version %{tulip_major}.%{tulip_minor}.%{package_release}
+%define		release	%{rpm_release}
+
+%define		tulip_archive_name	%{name}-%{tulip_major}.%{tulip_minor}.%{tulip_release}
+
+Name:           %{name}
+Version:        %{version}
+Release:        %{rpm_release}%{?dist}
+Summary:        Large graphs analysis, drawing and visualization framework.
+Group:          Applications/Engineering
+License:        GPL
+URL:            http://tulip.labri.fr/
+Source:         https://codeload.github.com/tulip5/tulip/tar.gz/%{tulip_archive_name}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  cmake >= 2.8.12
+BuildRequires:	doxygen, graphviz, python-sphinx
+BuildRequires:	subversion, binutils-devel python, python-devel
+BuildRequires:	qt-devel >= 4.6.0, qtwebkit-devel
+BuildRequires:	libGL-devel, glew-devel,
+BuildRequires:	freetype-devel, zlib-devel, libjpeg-devel, libpng-devel
+BuildRequires:	quazip-devel, yajl-devel, qhull-devel
+
+%description
+Tulip is an information visualization framework dedicated to the analysis and
+visualization of relational data. Tulip aims to provide the developer with a
+complete library, supporting the design of interactive information
+visualization applications for relational data that can be tailored to the
+problems he or she is addressing.
+
+%package devel
+Group:		Applications/Libraries
+Summary:	Large graphs analysis, drawing and visualization framework API.
+Requires:	tulip = %{version}
+
+%description devel
+Tulip is an information visualization framework dedicated to the analysis and 
+visualization of relational data.
+Written in C++ the framework enables the development of algorithms, visual
+encodings, interaction techniques, data models, and domain-specific
+visualizations. One of the goal of Tulip is to facilitates the reuse of
+components and allows the developers to focus on programming their application.
+This development pipeline makes the framework efficient for research
+prototyping as well as the development of end-user applications.
+
+%prep
+%setup -q -n %{tulip_archive_name}
+
+%build
+mkdir build; cd build
+# note that ccache is not required to build tulip (the cmake configuration will not fail if it is not present)
+# but it helps to speedup CI builds on Travis
+%{cmake} -DCMAKE_BUILD_TYPE=Release -DTULIP_PYTHON_SITE_INSTALL=ON -DTULIP_USE_CCACHE=ON ..
+# TODO: Add a flag so builder can choose between qt4 and qt5
+# -DTULIP_USE_QT5=y
+%{__make} %{?_smp_mflags}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+cd build
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%doc AUTHORS COPYING COPYING.LESSER ChangeLog INSTALL.linux NEWS README
+%{_bindir}/tulip
+%{_bindir}/tulip_perspective
+%{_libdir}/lib*tulip*
+%{_libdir}/tulip/*
+%{_datadir}/tulip
+%{_datadir}/mime/packages/application-x-tulip-*
+%{_datadir}/applications/Tulip-*
+%{_datadir}/pixmaps/*tulip*
+%{_datadir}/icons/*tulip*
+%{python_sitearch}/%{name}*
+%doc %{_docdir}/%{name}/tulip-user/*
+%doc %{_docdir}/%{name}/tulip-python/*
+
+%files devel
+%defattr(-,root,root,-)
+%{_bindir}/tulip-config
+%{_includedir}/tulip
+%{_includedir}/tulip2ogdf
+%{_libdir}/cmake/TULIP/*
+%doc %{_docdir}/%{name}/tulip-dev/*
+%doc %{_docdir}/%{name}/doxygen/*
+
+%changelog
+* Wed Oct 11 2017 Olivier Lahaye <olivier.lahaye@cea.fr> 5.0.1-1
+- Initial packaging.
