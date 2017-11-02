@@ -16,6 +16,43 @@ language: cpp
 # define build jobs
 jobs:
   include:
+   #==============================================================================================================================================================
+    # Tulip AppImage build on CentOS
+    - stage: Tulip AppImage build (CentOS)
+      # Tulip AppImage build on CentOS 6
+      os: linux
+      dist: trusty
+      cache:
+        directories:
+          - $HOME/ccache
+
+      sudo: required
+      env:
+        - OS_TYPE=centos
+        - OS_VERSION=6
+
+      services:
+        - docker
+
+      before_install:
+        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+        - sudo service docker restart
+        - sleep 5
+        - sudo docker pull centos:${OS_VERSION}
+        - sudo docker create -v $HOME/ccache:/ccache --name ccache centos:${OS_VERSION}
+
+      script:
+        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/tulip:rw centos:${OS_VERSION} /bin/bash -c "bash -xe /tulip/bundlers/linux/tulip_appimage_centos6_build.sh"
+    
+      deploy:
+        on:
+          all_branches: true
+        provider: bintray
+        file: "build/TulipAppImageToBintray.json"
+        user: "anlambert"
+        key:
+          secure: "Ak2sv7ArwPAnXriH1PeBzl4zqbcAwYLxBQFqMjw4jFgBq+R7jHT9nkMu3kl1pNFZOKOkKtAZMfBsZxFwepY9d4xl69GnVrcTQR7V2F1ntDjCUe46BknfOl85BnrY2kXtg0IK9pF7DgrXonE5hUrUNZaMhziUbnqgUbndvkVXOQCz8GwwkCycuBz956b4UVA/9i0mg6b5u+3PVtyk81BaA9dqs+ed4vdQxCR9savyDx37h57kg8GPABS+7KEXVjGcVAXH7IWG8EciXRhmnkI6xucRU5oRG7xnUeC5zFAzEq9z5DxoF35ayZ3k2dtMv7WD6l7QeIU57CHR6R52w1fGXkqa9e16VaJVpfGMAqpgGe/VBFE32N7rK0rIQvY8pZRGnhNPunm85JUDelbbvKjmfHFPIGprwtG45Iy26ZQ3qC9nOwvKxqQm9x9YnQ+uvwJPNR5oHHK1pV6fa060c80h06wRSrIr0cutWgmLw+fXJreXODNqh4YQH4k5W0LzIi+/TIat5FgzOdDMYl5SEt4fSAdIKCoxQSUSOmWyDyPeXCH9vMmcOhKuDIFBFv5IuY9RrxfTXbU4s0+mqZAq1w4AMTKJriBmA0UAZ9xyQqEmt3KMS3+GRDCoxVhPaI7jD8n1L0IaBBJD/enY9RjAbL839RUc0/0GWbIieSvMjyvUiAY="
+          
   #==============================================================================================================================================================
     # Tulip core build stage on Linux
     - stage: Tulip core build (Linux)
@@ -239,33 +276,8 @@ jobs:
         # run Tulip unit tests
         - ninja runTests
 
-  #==============================================================================================================================================================
-    # Tulip AppImage build on CentOS
-    - stage: Tulip AppImage build (CentOS)
-      # Tulip AppImage build on CentOS 6
-      os: linux
-      dist: trusty
-      cache:
-        directories:
-          - $HOME/ccache
+ 
 
-      sudo: required
-      env:
-        - OS_TYPE=centos
-        - OS_VERSION=6
-
-      services:
-        - docker
-
-      before_install:
-        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
-        - sudo service docker restart
-        - sleep 5
-        - sudo docker pull centos:${OS_VERSION}
-        - sudo docker create -v $HOME/ccache:/ccache --name ccache centos:${OS_VERSION}
-
-      script:
-        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/tulip:rw centos:${OS_VERSION} /bin/bash -c "bash -xe /tulip/bundlers/linux/tulip_appimage_centos6_build.sh"
 
   #==============================================================================================================================================================
     # Tulip core build stage on Mac OS

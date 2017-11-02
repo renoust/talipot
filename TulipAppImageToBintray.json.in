@@ -1,0 +1,33 @@
+{
+    "package": {
+        "name": "Tulip",
+        "repo": "tulip_binaries",
+        "subject": "anlambert",
+        "desc": "Large graphs analysis, drawing and visualization framework",
+        "website_url": "http://tulip.labri.fr",
+        "issue_tracker_url": "https://github.com/tulip5/tulip/issues",
+        "vcs_url": "https://github.com/tulip5/tulip.git",
+        "github_use_tag_release_notes": true,
+        "licenses": ["LGPL-3.0"],
+        "labels": ["graph", "graph drawing", "visualization"],
+        "public_download_numbers": true,
+        "public_stats": true
+    },
+
+    "version": {
+        "name": "@TulipVersion@",
+        "gpgSign": false
+    },
+
+    "files": [
+        {
+            "includePattern": "build/(Tulip.*\\.AppImage)", 
+            "uploadPattern": "$1",
+            "matrixParams": {
+                "override": 1 
+            }
+        }
+    ],
+    
+    "publish": true
+}
