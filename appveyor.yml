@@ -79,8 +79,8 @@ deploy:
       APPVEYOR_REPO_NAME: Tulip-Dev/tulip
 
 # send build status notifications to tulipdev mailing list
-notifications:
-  - provider: Email
-    to:
-      - tulipdev@labri.fr
-    on_build_success: false
+#notifications:
+  #- provider: Email
+    #to:
+      #- tulipdev@labri.fr
+    #on_build_success: false
