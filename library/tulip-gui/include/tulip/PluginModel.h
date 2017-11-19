@@ -40,12 +40,12 @@ private:
 
 public:
   SimplePluginListModel(const QList<std::string> &plugins, QObject *parent = nullptr);
-  virtual ~SimplePluginListModel();
-  int columnCount(const QModelIndex & = QModelIndex()) const;
-  int rowCount(const QModelIndex &parent = QModelIndex()) const;
-  QModelIndex parent(const QModelIndex &) const;
-  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-  QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+  ~SimplePluginListModel() override;
+  int columnCount(const QModelIndex & = QModelIndex()) const override;
+  int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+  QModelIndex parent(const QModelIndex &) const override;
+  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+  QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
   QList<std::string> plugins() const;
   std::string pluginName(const QModelIndex &index) const;
 };
@@ -130,11 +130,11 @@ public:
   explicit PluginModel(QObject *parent = nullptr) : TulipModel(parent), _root(nullptr) {
     buildTree();
   }
-  virtual ~PluginModel() {
+  ~PluginModel() override {
     delete _root;
   }
 
-  int rowCount(const QModelIndex &parent = QModelIndex()) const {
+  int rowCount(const QModelIndex &parent = QModelIndex()) const override {
     TreeItem *item = _root;
 
     if (parent.isValid())
@@ -143,11 +143,11 @@ public:
     return item->children.size();
   }
 
-  int columnCount(const QModelIndex & = QModelIndex()) const {
+  int columnCount(const QModelIndex & = QModelIndex()) const override {
     return 1;
   }
 
-  QModelIndex parent(const QModelIndex &child) const {
+  QModelIndex parent(const QModelIndex &child) const override {
     if (!child.isValid())
       return QModelIndex();
 
@@ -161,7 +161,7 @@ public:
     return createIndex(row, child.column(), childItem->parent);
   }
 
-  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const {
+  QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override {
     TreeItem *parentItem = _root;
 
     if (parent.isValid()) {
@@ -174,7 +174,7 @@ public:
     return createIndex(row, column, parentItem->children[row]);
   }
 
-  QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const {
+  QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override {
     TreeItem *item = static_cast<TreeItem *>(index.internalPointer());
 
     if (role == Qt::DisplayRole)
@@ -201,7 +201,7 @@ public:
     return QVariant();
   }
 
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const {
+  Qt::ItemFlags flags(const QModelIndex &index) const override {
     Qt::ItemFlags result(QAbstractItemModel::flags(index));
 
     if (index.isValid()) {

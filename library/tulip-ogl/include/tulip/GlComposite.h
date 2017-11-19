@@ -49,7 +49,7 @@ public:
   /**
    * @brief Destructor
    */
-  ~GlComposite();
+  ~GlComposite() override;
 
   /**
    * @brief Clear the composite
@@ -97,7 +97,7 @@ public:
    * For more information on stencil  :
    * @see GlSimpleEntity
    */
-  virtual void setStencil(int stencil) {
+  void setStencil(int stencil) override {
     this->stencil = stencil;
 
     for (auto &_sortedElement : _sortedElements) {
@@ -115,24 +115,24 @@ public:
   /**
    * @brief translate the composite with children
    */
-  virtual void translate(const Coord &mouvement);
+  void translate(const Coord &mouvement) override;
 
   /**
    * @brief Function to export data in outString (in XML format)
    */
-  virtual void getXML(std::string &outString);
+  void getXML(std::string &outString) override;
 
   /**
    * @brief Function to set data with inString (in XML format)
    */
-  virtual void setWithXML(const std::string &inString, unsigned int &currentPosition);
+  void setWithXML(const std::string &inString, unsigned int &currentPosition) override;
 
   ///@cond DOXYGEN_HIDDEN
 
   /**
    * Function used to visit composite's children
    */
-  virtual void acceptVisitor(GlSceneVisitor *visitor) {
+  void acceptVisitor(GlSceneVisitor *visitor) override {
     // visitor->visit(this);
     for (auto &_sortedElement : _sortedElements) {
       if (_sortedElement->isVisible()) {
@@ -176,7 +176,7 @@ public:
    * \attention This function do nothing, GlComposite is a GlSimpleEntity so draw function must be
    * define
    */
-  virtual void draw(float, Camera *) {}
+  void draw(float, Camera *) override {}
 
   ///@endcond
 
