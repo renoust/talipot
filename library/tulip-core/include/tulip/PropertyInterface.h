@@ -433,7 +433,7 @@ public:
    *
    * @warning The ownership of the iterator is given to the caller.
    */
-  virtual tlp::Iterator<node> *getNonDefaultValuatedNodes(const Graph * = NULL) const = 0;
+  virtual tlp::Iterator<node> *getNonDefaultValuatedNodes(const Graph * = nullptr) const = 0;
 
   /**
    * @brief Returns the number of nodes with a non default value.
@@ -442,7 +442,7 @@ public:
    * @return the number of nodes with a non default value.
    *
    */
-  virtual unsigned int numberOfNonDefaultValuatedNodes(const Graph * = NULL) const = 0;
+  virtual unsigned int numberOfNonDefaultValuatedNodes(const Graph * = nullptr) const = 0;
 
   /**
    * @brief Gets an Iterator on all non-default valuated edges.
@@ -451,14 +451,14 @@ public:
    *
    * @warning The ownership of the iterator is given to the caller.
    */
-  virtual tlp::Iterator<edge> *getNonDefaultValuatedEdges(const Graph * = NULL) const = 0;
+  virtual tlp::Iterator<edge> *getNonDefaultValuatedEdges(const Graph * = nullptr) const = 0;
 
   /**
    * @brief Returns the number of edges with a non default value.
    * @return the number of edges with a non default value.
    *
    */
-  virtual unsigned int numberOfNonDefaultValuatedEdges(const Graph * = NULL) const = 0;
+  virtual unsigned int numberOfNonDefaultValuatedEdges(const Graph * = nullptr) const = 0;
 
   /**
    * @brief Returns the size in bytes of a node's value.

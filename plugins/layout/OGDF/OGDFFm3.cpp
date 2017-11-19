@@ -324,9 +324,9 @@ OGDFFm3::~OGDFFm3() {}
 void OGDFFm3::beforeCall() {
   ogdf::FMMMLayout *fmmm = static_cast<ogdf::FMMMLayout *>(ogdfLayoutAlgo);
 
-  if (dataSet != 0) {
+  if (dataSet != nullptr) {
     fmmm->useHighLevelOptions(true);
-    SizeProperty *size = NULL;
+    SizeProperty *size = nullptr;
 
     if (dataSet->get("Node Size", size))
       tlpToOGDF->copyTlpNodeSizeToOGDF(size);
@@ -494,7 +494,7 @@ void OGDFFm3::callOGDFLayoutAlgorithm(ogdf::GraphAttributes &gAttributes) {
 
   ogdf::FMMMLayout *fmmm = static_cast<ogdf::FMMMLayout *>(ogdfLayoutAlgo);
 
-  NumericProperty *length = NULL;
+  NumericProperty *length = nullptr;
 
   if (dataSet->get("Edge Length Property", length) && length) {
     EdgeArray<double> edgeLength(tlpToOGDF->getOGDFGraph());

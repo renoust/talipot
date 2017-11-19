@@ -30,7 +30,7 @@ using namespace std;
 */
 template <class T>
 PairingHeap<T>::PairingHeap(bool (*lessThan)(T const &lhs, T const &rhs)) {
-  root = NULL;
+  root = nullptr;
   counter = 0;
   this->lessThan = lessThan;
 }
@@ -61,7 +61,7 @@ template <class T>
 PairNode<T> *PairingHeap<T>::insert(const T &x) {
   PairNode<T> *newNode = new PairNode<T>(x);
 
-  if (root == NULL)
+  if (root == nullptr)
     root = newNode;
   else
     compareAndLink(root, newNode);
@@ -95,8 +95,8 @@ void PairingHeap<T>::deleteMin() {
 
   PairNode<T> *oldRoot = root;
 
-  if (root->leftChild == NULL)
-    root = NULL;
+  if (root->leftChild == nullptr)
+    root = nullptr;
   else
     root = combineSiblings(root->leftChild);
 
@@ -110,7 +110,7 @@ void PairingHeap<T>::deleteMin() {
 */
 template <class T>
 bool PairingHeap<T>::isEmpty() const {
-  return root == NULL;
+  return root == nullptr;
 }
 
 /**
@@ -128,7 +128,7 @@ bool PairingHeap<T>::isFull() const {
 template <class T>
 void PairingHeap<T>::makeEmpty() {
   reclaimMemory(root);
-  root = NULL;
+  root = nullptr;
 }
 
 /**
@@ -150,7 +150,7 @@ const PairingHeap<T> &PairingHeap<T>::operator=(const PairingHeap<T> &rhs) {
 */
 template <class T>
 void PairingHeap<T>::reclaimMemory(PairNode<T> *t) const {
-  if (t != NULL) {
+  if (t != nullptr) {
     reclaimMemory(t->leftChild);
     reclaimMemory(t->nextSibling);
     delete t;
@@ -195,7 +195,7 @@ void PairingHeap<T>::decreaseKey(PairNode<T> *p, const T &newVal) {
 */
 template <class T>
 void PairingHeap<T>::compareAndLink(PairNode<T> *&first, PairNode<T> *second) const {
-  if (second == NULL)
+  if (second == nullptr)
     return;
 
   if (lessThan(second->element, first->element)) {
@@ -204,7 +204,7 @@ void PairingHeap<T>::compareAndLink(PairNode<T> *&first, PairNode<T> *second) co
     first->prev = second;
     first->nextSibling = second->leftChild;
 
-    if (first->nextSibling != NULL)
+    if (first->nextSibling != nullptr)
       first->nextSibling->prev = first;
 
     second->leftChild = first;
@@ -214,12 +214,12 @@ void PairingHeap<T>::compareAndLink(PairNode<T> *&first, PairNode<T> *second) co
     second->prev = first;
     first->nextSibling = second->nextSibling;
 
-    if (first->nextSibling != NULL)
+    if (first->nextSibling != nullptr)
       first->nextSibling->prev = first;
 
     second->nextSibling = first->leftChild;
 
-    if (second->nextSibling != NULL)
+    if (second->nextSibling != nullptr)
       second->nextSibling->prev = second;
 
     first->leftChild = second;
@@ -233,7 +233,7 @@ void PairingHeap<T>::compareAndLink(PairNode<T> *&first, PairNode<T> *second) co
 */
 template <class T>
 PairNode<T> *PairingHeap<T>::combineSiblings(PairNode<T> *firstSibling) const {
-  if (firstSibling->nextSibling == NULL)
+  if (firstSibling->nextSibling == nullptr)
     return firstSibling;
 
   // Allocate the array
@@ -242,19 +242,19 @@ PairNode<T> *PairingHeap<T>::combineSiblings(PairNode<T> *firstSibling) const {
   // Store the subtrees in an array
   int numSiblings = 0;
 
-  for (; firstSibling != NULL; numSiblings++) {
+  for (; firstSibling != nullptr; numSiblings++) {
     if (numSiblings == int(treeArray.size()))
       treeArray.resize(numSiblings * 2);
 
     treeArray[numSiblings] = firstSibling;
-    firstSibling->prev->nextSibling = NULL; // break links
+    firstSibling->prev->nextSibling = nullptr; // break links
     firstSibling = firstSibling->nextSibling;
   }
 
   if (numSiblings == int(treeArray.size()))
     treeArray.resize(numSiblings + 1);
 
-  treeArray[numSiblings] = NULL;
+  treeArray[numSiblings] = nullptr;
 
   // Combine subtrees two at a time, going left to right
   int i = 0;

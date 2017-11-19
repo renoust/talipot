@@ -114,10 +114,10 @@ char *getTulipLibDir(char *buf) {
 
   ptr = dlopen(libTulipName.c_str(), RTLD_LAZY);
 
-  if (ptr != NULL) {
+  if (ptr != nullptr) {
     void *symbol = dlsym(ptr, "getTulipLibDir");
 
-    if (symbol != NULL) {
+    if (symbol != nullptr) {
       if (dladdr(symbol, &info)) {
         std::string tmp = info.dli_fname;
         tulipLibDir = tmp.substr(0, tmp.rfind('/') + 1);
@@ -159,7 +159,7 @@ void tlp::initTulipLib(const char *appDirPath) {
 
   getEnvTlp = getenv("TLP_DIR");
 
-  if (getEnvTlp == 0) {
+  if (getEnvTlp == nullptr) {
     if (appDirPath) {
 #ifdef _WIN32
       TulipLibDir = std::string(appDirPath) + "/../" + TULIP_INSTALL_LIBDIR_STR;
@@ -193,14 +193,14 @@ void tlp::initTulipLib(const char *appDirPath) {
     TulipLibDir += '/';
 
   // check TulipLibDir exists
-  bool tlpDirSet = (getEnvTlp != NULL);
+  bool tlpDirSet = (getEnvTlp != nullptr);
 
   if (tlpDirSet)
     checkDirectory(TulipLibDir);
 
   getEnvTlp = getenv(TULIP_PLUGINS_PATH_VARIABLE);
 
-  if (getEnvTlp != NULL) {
+  if (getEnvTlp != nullptr) {
     TulipPluginsPath = string(getEnvTlp);
 #ifdef _WIN32
     // ensure it is a unix-style path

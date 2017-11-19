@@ -152,7 +152,7 @@ struct TypedDataSerializer : public DataTypeSerializer {
     if (ok)
       return new TypedData<T>(new T(value));
 
-    return NULL;
+    return nullptr;
   }
   // set a value into a DataSet
   virtual bool setData(DataSet &ds, const std::string &prop, const std::string &value) = 0;

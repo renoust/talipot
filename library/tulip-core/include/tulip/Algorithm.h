@@ -52,8 +52,9 @@ public:
    * parameters, and a PluginProgress
    * to give feedback to the user about the tasks the algorithm is performing.
    */
-  Algorithm(const PluginContext *context) : graph(NULL), pluginProgress(NULL), dataSet(NULL) {
-    if (context != NULL) {
+  Algorithm(const PluginContext *context)
+      : graph(nullptr), pluginProgress(nullptr), dataSet(nullptr) {
+    if (context != nullptr) {
       const AlgorithmContext *algorithmContext = static_cast<const AlgorithmContext *>(context);
       graph = algorithmContext->graph;
       pluginProgress = algorithmContext->pluginProgress;

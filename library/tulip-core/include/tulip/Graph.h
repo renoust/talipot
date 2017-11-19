@@ -72,7 +72,7 @@ enum ElementType {
  * @param filename the file in one of the supported formats to parse.
  * @return Graph* the imported Graph, NULL if the import failed.
  **/
-TLP_SCOPE Graph *loadGraph(const std::string &filename, tlp::PluginProgress *progress = NULL);
+TLP_SCOPE Graph *loadGraph(const std::string &filename, tlp::PluginProgress *progress = nullptr);
 
 /**
  * @ingroup Graph
@@ -97,7 +97,7 @@ TLP_SCOPE Graph *loadGraph(const std::string &filename, tlp::PluginProgress *pro
  * @return bool whether the export was successfull or not.
  **/
 TLP_SCOPE bool saveGraph(Graph *graph, const std::string &filename,
-                         tlp::PluginProgress *progress = NULL, tlp::DataSet *data = NULL);
+                         tlp::PluginProgress *progress = nullptr, tlp::DataSet *data = nullptr);
 
 /**
  * @ingroup Graph
@@ -117,7 +117,7 @@ TLP_SCOPE bool saveGraph(Graph *graph, const std::string &filename,
  * @return bool Whether the export was successfull or not.
  **/
 TLP_SCOPE bool exportGraph(Graph *graph, std::ostream &outputStream, const std::string &format,
-                           DataSet &dataSet, PluginProgress *progress = NULL);
+                           DataSet &dataSet, PluginProgress *progress = nullptr);
 
 /**
  * @ingroup Graph
@@ -138,7 +138,7 @@ TLP_SCOPE bool exportGraph(Graph *graph, std::ostream &outputStream, const std::
  * @return :Graph* The graph containing the imported data, or NULL in case of failure.
  **/
 TLP_SCOPE Graph *importGraph(const std::string &format, DataSet &dataSet,
-                             PluginProgress *progress = NULL, Graph *newGraph = NULL);
+                             PluginProgress *progress = nullptr, Graph *newGraph = nullptr);
 
 /**
  * @ingroup Graph
@@ -160,8 +160,8 @@ TLP_SCOPE Graph *newGraph();
  * The output selection is used to select the appended nodes & edges
  * \warning The input selection is extended to all selected edge ends.
  */
-TLP_SCOPE void copyToGraph(Graph *outG, const Graph *inG, BooleanProperty *inSelection = NULL,
-                           BooleanProperty *outSelection = NULL);
+TLP_SCOPE void copyToGraph(Graph *outG, const Graph *inG, BooleanProperty *inSelection = nullptr,
+                           BooleanProperty *outSelection = nullptr);
 
 /**
  * @ingroup Graph
@@ -169,7 +169,7 @@ TLP_SCOPE void copyToGraph(Graph *outG, const Graph *inG, BooleanProperty *inSel
  * If no selection is done (inSel=NULL), the whole graph is reseted to default value.
  * \warning The selection is extended to all selected edge ends.
  */
-TLP_SCOPE void removeFromGraph(Graph *ioG, BooleanProperty *inSelection = NULL);
+TLP_SCOPE void removeFromGraph(Graph *ioG, BooleanProperty *inSelection = nullptr);
 
 /**
  * @ingroup Graph
@@ -265,7 +265,7 @@ public:
    * @return bool Whether the algorithm was successfully applied.
    **/
   bool applyAlgorithm(const std::string &algorithm, std::string &errorMessage,
-                      DataSet *dataSet = NULL, PluginProgress *progress = NULL);
+                      DataSet *dataSet = nullptr, PluginProgress *progress = nullptr);
 
   //=========================================================================
   // Graph hierarchy access and building
@@ -291,7 +291,7 @@ public:
     * @param name The name of the newly created subgraph. Defaults to "unnamed".
     * @return :Graph* The newly created subgraph.
     **/
-  virtual Graph *addSubGraph(BooleanProperty *selection = NULL,
+  virtual Graph *addSubGraph(BooleanProperty *selection = nullptr,
                              const std::string &name = "unnamed") = 0;
 
   /**
@@ -327,14 +327,14 @@ public:
    * @param name The name of the newly created subgraph.
    * @return The newly created subgraph.
    */
-  Graph *inducedSubGraph(const std::vector<node> &nodes, Graph *parentSubGraph = NULL,
+  Graph *inducedSubGraph(const std::vector<node> &nodes, Graph *parentSubGraph = nullptr,
                          const std::string &name = "unnamed");
 
   /**
    * @brief deprecated, use inducedSubGraph(const std::set<node>&, Graph* = NULL, const std::string&
    * = "unamed") instead
    */
-  _DEPRECATED Graph *inducedSubGraph(const std::set<node> &nodeSet, Graph *parentSubGraph = NULL,
+  _DEPRECATED Graph *inducedSubGraph(const std::set<node> &nodeSet, Graph *parentSubGraph = nullptr,
                                      const std::string &name = "unnamed");
 
   /**
@@ -350,7 +350,7 @@ public:
    * @param name The name of the newly created subgraph.
    * @return The newly created subgraph.
    */
-  Graph *inducedSubGraph(BooleanProperty *selection, Graph *parentSubGraph = NULL,
+  Graph *inducedSubGraph(BooleanProperty *selection, Graph *parentSubGraph = nullptr,
                          const std::string &name = "unnamed");
 
   /**
@@ -1435,8 +1435,8 @@ public:
    * pligin.
    */
   bool applyPropertyAlgorithm(const std::string &algorithm, PropertyInterface *result,
-                              std::string &errorMessage, PluginProgress *progress = NULL,
-                              DataSet *parameters = NULL);
+                              std::string &errorMessage, PluginProgress *progress = nullptr,
+                              DataSet *parameters = nullptr);
 
   // updates management
   /**
@@ -1506,7 +1506,7 @@ public:
    * @see canPopThenUnPop()
    */
   virtual void push(bool unpopAllowed = true,
-                    std::vector<PropertyInterface *> *propertiesToPreserveOnPop = NULL) = 0;
+                    std::vector<PropertyInterface *> *propertiesToPreserveOnPop = nullptr) = 0;
 
   /**
    * @brief Undoes modifications and reverts the whole graph hierarchy back to a previous state.
@@ -1793,13 +1793,13 @@ public:
     else
       info.eltId = id;
 
-    vectInfos.addedNodes = NULL;
+    vectInfos.addedNodes = nullptr;
   }
   // constructor for subgraph events
   GraphEvent(const Graph &g, GraphEventType graphEvtType, const Graph *sg)
       : Event(g, Event::TLP_MODIFICATION), evtType(graphEvtType) {
     info.subGraph = sg;
-    vectInfos.addedNodes = NULL;
+    vectInfos.addedNodes = nullptr;
   }
 
   // constructor for attribute/property events
@@ -1807,7 +1807,7 @@ public:
              Event::EventType evtType = Event::TLP_MODIFICATION)
       : Event(g, evtType), evtType(graphEvtType) {
     info.name = new std::string(str);
-    vectInfos.addedNodes = NULL;
+    vectInfos.addedNodes = nullptr;
   }
 
   // constructor for rename property events
@@ -1815,7 +1815,7 @@ public:
              const std::string &newName)
       : Event(g, Event::TLP_MODIFICATION), evtType(graphEvtType) {
     info.renamedProp = new std::pair<PropertyInterface *, std::string>(prop, newName);
-    vectInfos.addedNodes = NULL;
+    vectInfos.addedNodes = nullptr;
   }
 
   ~GraphEvent();

@@ -37,7 +37,7 @@ using namespace tlp;
 using namespace std;
 
 EditColorScaleInteractor::EditColorScaleInteractor()
-    : currentProperty(NULL), colorScale(NULL), widthPercent(.80f), heightPercent(.1f),
+    : currentProperty(nullptr), colorScale(nullptr), widthPercent(.80f), heightPercent(.1f),
       heightPosition(.1f), glMainWidgetWidth(0), glMainWidgetHeight(0),
       selectionLayer(new GlLayer("SelectionLayer")) {}
 
@@ -93,7 +93,7 @@ bool EditColorScaleInteractor::eventFilter(QObject *obj, QEvent *event) {
 void EditColorScaleInteractor::viewChanged(View *view) {
   SOMView *somView = static_cast<SOMView *>(view);
 
-  if (somView != NULL) {
+  if (somView != nullptr) {
     assert(colorScale == NULL);
     GlMainWidget *glMainWidget = somView->getMapWidget();
     Size screenSize(glMainWidget->width() * widthPercent, glMainWidget->height() * heightPercent);

@@ -28,7 +28,7 @@
 
 class TreeViewDelegate : public QStyledItemDelegate {
 public:
-  TreeViewDelegate(QObject *parent = 0) : QStyledItemDelegate(parent) {}
+  TreeViewDelegate(QObject *parent = nullptr) : QStyledItemDelegate(parent) {}
 
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const {
     QSize result = QStyledItemDelegate::sizeHint(option, index);
@@ -38,7 +38,7 @@ public:
 };
 
 TreeViewComboBox::TreeViewComboBox(QWidget *parent)
-    : QComboBox(parent), _treeView(NULL), _skipNextHide(false), _popupVisible(false) {
+    : QComboBox(parent), _treeView(nullptr), _skipNextHide(false), _popupVisible(false) {
   _treeView = new QTreeView(this);
   _treeView->setEditTriggers(QTreeView::NoEditTriggers);
   _treeView->setAlternatingRowColors(true);

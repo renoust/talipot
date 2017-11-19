@@ -49,10 +49,10 @@ static void computeGraphPoints(Iterator<node> *itN, Iterator<edge> *itE,
                                const LayoutProperty *layout, const SizeProperty *size,
                                const DoubleProperty *rotation, const BooleanProperty *selection,
                                BUILDER &builder) {
-  if (itN != NULL) {
+  if (itN != nullptr) {
     node itn;
     forEach(itn, itN) {
-      if ((selection == NULL) || selection->getNodeValue(itn)) {
+      if ((selection == nullptr) || selection->getNodeValue(itn)) {
         Vec3f nSize(size->getNodeValue(itn));
         Vec3f point(layout->getNodeValue(itn));
         double rot(rotation->getNodeValue(itn));
@@ -73,10 +73,10 @@ static void computeGraphPoints(Iterator<node> *itN, Iterator<edge> *itE,
     }
   }
 
-  if ((itE != NULL) && layout->numberOfNonDefaultValuatedEdges()) {
+  if ((itE != nullptr) && layout->numberOfNonDefaultValuatedEdges()) {
     edge ite;
     forEach(ite, itE) {
-      if ((selection == NULL) || selection->getEdgeValue(ite)) {
+      if ((selection == nullptr) || selection->getEdgeValue(ite)) {
         LineType::RealType::const_iterator itCoord;
         const LineType::RealType &bends = layout->getEdgeValue(ite);
 
@@ -152,7 +152,7 @@ pair<Coord, Coord> tlp::computeBoundingRadius(const Graph *graph, const LayoutPr
     const Coord &curCoord = layout->getNodeValue(itn);
     Size curSize(size->getNodeValue(itn) / 2.0f);
 
-    if (selection == 0 || selection->getNodeValue(itn)) {
+    if (selection == nullptr || selection->getNodeValue(itn)) {
       double nodeRad = sqrt(curSize.getW() * curSize.getW() + curSize.getH() * curSize.getH());
       Coord radDir = curCoord - centre;
       double curRad = nodeRad + radDir.norm();
@@ -174,7 +174,7 @@ pair<Coord, Coord> tlp::computeBoundingRadius(const Graph *graph, const LayoutPr
   if (layout->numberOfNonDefaultValuatedEdges()) {
     edge ite;
     forEach(ite, graph->getEdges()) {
-      if (selection == NULL || selection->getEdgeValue(ite)) {
+      if (selection == nullptr || selection->getEdgeValue(ite)) {
         LineType::RealType::const_iterator itCoord;
         const LineType::RealType &bends = layout->getEdgeValue(ite);
 

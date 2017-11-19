@@ -69,7 +69,7 @@ static bool runQHull(int dim, vector<double> &points,
                              const_cast<char *>(qhullCommand.c_str()), NULL, stderr);
 #else
   int qhullKo = qh_new_qhull(dim, points.size() / dim, &points[0], false,
-                             const_cast<char *>(qhullCommand.c_str()), NULL, stderr);
+                             const_cast<char *>(qhullCommand.c_str()), nullptr, stderr);
 #endif
 
   if (!qhullKo) {

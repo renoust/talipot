@@ -84,11 +84,11 @@ struct entityWithDistanceCompare {
 //====================================================
 
 GlScene::GlScene(GlLODCalculator *calculator)
-    : backgroundColor(255, 255, 255, 255), viewOrtho(true), glGraphComposite(NULL),
-      graphLayer(NULL), clearBufferAtDraw(true), inDraw(false), clearDepthBufferAtDraw(true),
+    : backgroundColor(255, 255, 255, 255), viewOrtho(true), glGraphComposite(nullptr),
+      graphLayer(nullptr), clearBufferAtDraw(true), inDraw(false), clearDepthBufferAtDraw(true),
       clearStencilBufferAtDraw(true) {
 
-  if (calculator != NULL)
+  if (calculator != nullptr)
     lodCalculator = calculator;
   else
     lodCalculator = new GlCPULODCalculator();
@@ -179,7 +179,7 @@ void GlScene::draw() {
   if (lodCalculator->needEntities()) {
     GlLODSceneVisitor *lodVisitor;
 
-    lodVisitor = new GlLODSceneVisitor(lodCalculator, NULL);
+    lodVisitor = new GlLODSceneVisitor(lodCalculator, nullptr);
 
     for (auto &it : layersList) {
       it.second->acceptVisitor(lodVisitor);
@@ -194,7 +194,7 @@ void GlScene::draw() {
 
   Camera *camera;
   // Iterate on Camera
-  Camera *oldCamera = NULL;
+  Camera *oldCamera = nullptr;
 
   vector<LayerLODUnit>::iterator itLayer;
 
@@ -262,7 +262,7 @@ void GlScene::draw() {
 GlLayer *GlScene::createLayer(const std::string &name) {
   GlLayer *oldLayer = getLayer(name);
 
-  if (oldLayer != NULL) {
+  if (oldLayer != nullptr) {
     tlp::warning()
         << "Warning : You have a layer in the scene with same name : old layer will be deleted"
         << endl;
@@ -281,7 +281,7 @@ GlLayer *GlScene::createLayer(const std::string &name) {
 
 GlLayer *GlScene::createLayerBefore(const std::string &layerName,
                                     const std::string &beforeLayerWithName) {
-  GlLayer *newLayer = NULL;
+  GlLayer *newLayer = nullptr;
   GlLayer *oldLayer = getLayer(layerName);
 
   for (vector<pair<string, GlLayer *>>::iterator it = layersList.begin(); it != layersList.end();
@@ -294,7 +294,7 @@ GlLayer *GlScene::createLayerBefore(const std::string &layerName,
       if (hasOnlookers())
         sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_ADDLAYER, layerName, newLayer));
 
-      if (oldLayer != NULL) {
+      if (oldLayer != nullptr) {
         removeLayer(oldLayer);
         tlp::warning()
             << "Warning : You have a layer in the scene with same name : old layer will be deleted"
@@ -310,7 +310,7 @@ GlLayer *GlScene::createLayerBefore(const std::string &layerName,
 
 GlLayer *GlScene::createLayerAfter(const std::string &layerName,
                                    const std::string &afterLayerWithName) {
-  GlLayer *newLayer = NULL;
+  GlLayer *newLayer = nullptr;
   GlLayer *oldLayer = getLayer(layerName);
 
   for (vector<pair<string, GlLayer *>>::iterator it = layersList.begin(); it != layersList.end();
@@ -324,7 +324,7 @@ GlLayer *GlScene::createLayerAfter(const std::string &layerName,
       if (hasOnlookers())
         sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_ADDLAYER, layerName, newLayer));
 
-      if (oldLayer != NULL) {
+      if (oldLayer != nullptr) {
         tlp::warning()
             << "Warning : You have a layer in the scene with same name : old layer will be deleted"
             << endl;
@@ -341,7 +341,7 @@ GlLayer *GlScene::createLayerAfter(const std::string &layerName,
 void GlScene::addExistingLayer(GlLayer *layer) {
   GlLayer *oldLayer = getLayer(layer->getName());
 
-  if (oldLayer != NULL) {
+  if (oldLayer != nullptr) {
     tlp::warning()
         << "Warning : You have a layer in the scene with same name : old layer will be deleted"
         << endl;
@@ -368,7 +368,7 @@ bool GlScene::addExistingLayerBefore(GlLayer *layer, const std::string &beforeLa
       if (hasOnlookers())
         sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_ADDLAYER, layer->getName(), layer));
 
-      if (oldLayer != NULL) {
+      if (oldLayer != nullptr) {
         tlp::warning()
             << "Warning : You have a layer in the scene with same name : old layer will be deleted"
             << endl;
@@ -397,7 +397,7 @@ bool GlScene::addExistingLayerAfter(GlLayer *layer, const std::string &afterLaye
       if (hasOnlookers())
         sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_ADDLAYER, layer->getName(), layer));
 
-      if (oldLayer != NULL) {
+      if (oldLayer != nullptr) {
         tlp::warning()
             << "Warning : You have a layer in the scene with same name : old layer will be deleted"
             << endl;
@@ -419,7 +419,7 @@ GlLayer *GlScene::getLayer(const std::string &name) {
     }
   }
 
-  return NULL;
+  return nullptr;
 }
 
 void GlScene::removeLayer(const std::string &name, bool deleteLayer) {
@@ -432,7 +432,7 @@ void GlScene::removeLayer(const std::string &name, bool deleteLayer) {
       if (deleteLayer)
         delete it->second;
       else
-        it->second->setScene(NULL);
+        it->second->setScene(nullptr);
 
       layersList.erase(it);
       return;
@@ -450,7 +450,7 @@ void GlScene::removeLayer(GlLayer *layer, bool deleteLayer) {
       if (deleteLayer)
         delete it->second;
       else
-        it->second->setScene(NULL);
+        it->second->setScene(nullptr);
 
       layersList.erase(it);
       return;
@@ -491,7 +491,7 @@ void GlScene::computeAjustSceneToSize(int width, int height, Coord *center, Coor
   if (glGraphComposite)
     visitor = new GlBoundingBoxSceneVisitor(glGraphComposite->getInputData());
   else
-    visitor = new GlBoundingBoxSceneVisitor(NULL);
+    visitor = new GlBoundingBoxSceneVisitor(nullptr);
 
   for (auto &it : layersList) {
     if (it.second->getCamera().is3D() && (!it.second->useSharedCamera()))
@@ -602,8 +602,8 @@ void GlScene::ajustSceneToSize(int width, int height) {
   float zoomFactor;
   BoundingBox sceneBoundingBox;
 
-  computeAjustSceneToSize(width, height, &center, &eye, &sceneRadius, NULL, NULL, &sceneBoundingBox,
-                          &zoomFactor);
+  computeAjustSceneToSize(width, height, &center, &eye, &sceneRadius, nullptr, nullptr,
+                          &sceneBoundingBox, &zoomFactor);
 
   for (auto &it : layersList) {
     Camera &camera = it.second->getCamera();
@@ -692,8 +692,8 @@ void GlScene::glGraphCompositeRemoved(GlLayer *layer, GlGraphComposite *glGraphC
     // fixes unused warning in release
     (void)layer;
     assert(graphLayer == layer);
-    graphLayer = NULL;
-    this->glGraphComposite = NULL;
+    graphLayer = nullptr;
+    this->glGraphComposite = nullptr;
   }
 }
 
@@ -759,7 +759,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
   selectLODCalculator->clear();
 
   // Collect entities if needed
-  GlLODSceneVisitor *lodVisitor = new GlLODSceneVisitor(selectLODCalculator, NULL);
+  GlLODSceneVisitor *lodVisitor = new GlLODSceneVisitor(selectLODCalculator, nullptr);
 
   if (layerInScene) {
     if (selectLODCalculator->needEntities()) {

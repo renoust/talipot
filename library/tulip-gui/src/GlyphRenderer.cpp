@@ -29,7 +29,7 @@
 using namespace tlp;
 using namespace std;
 
-GlyphRenderer *GlyphRenderer::_instance = NULL;
+GlyphRenderer *GlyphRenderer::_instance = nullptr;
 
 GlyphRenderer::GlyphRenderer() : _graph(newGraph()), _node(_graph->addNode()) {
   // Init graph parameters.
@@ -56,7 +56,7 @@ GlyphRenderer::GlyphRenderer() : _graph(newGraph()), _node(_graph->addNode()) {
 
   // _graph is no longer needed
   delete _graph;
-  _graph = NULL;
+  _graph = nullptr;
 }
 
 GlyphRenderer::~GlyphRenderer() {
@@ -64,7 +64,7 @@ GlyphRenderer::~GlyphRenderer() {
 }
 
 GlyphRenderer &GlyphRenderer::getInst() {
-  if (_instance == NULL) {
+  if (_instance == nullptr) {
     _instance = new GlyphRenderer();
   }
 
@@ -92,7 +92,7 @@ QPixmap GlyphRenderer::render(unsigned int pluginId) {
   return _previews[pluginId];
 }
 
-EdgeExtremityGlyphRenderer *EdgeExtremityGlyphRenderer::_instance = NULL;
+EdgeExtremityGlyphRenderer *EdgeExtremityGlyphRenderer::_instance = nullptr;
 EdgeExtremityGlyphRenderer::EdgeExtremityGlyphRenderer() : _graph(newGraph()) {
   // No edge extremity pixmap
   _previews[EdgeExtremityShape::None] = QPixmap();
@@ -131,7 +131,7 @@ EdgeExtremityGlyphRenderer::EdgeExtremityGlyphRenderer() : _graph(newGraph()) {
 
   // _graph is no longer needed
   delete _graph;
-  _graph = NULL;
+  _graph = nullptr;
 }
 
 EdgeExtremityGlyphRenderer::~EdgeExtremityGlyphRenderer() {
@@ -139,7 +139,7 @@ EdgeExtremityGlyphRenderer::~EdgeExtremityGlyphRenderer() {
 }
 
 EdgeExtremityGlyphRenderer &EdgeExtremityGlyphRenderer::getInst() {
-  if (_instance == NULL) {
+  if (_instance == nullptr) {
     _instance = new EdgeExtremityGlyphRenderer();
   }
 

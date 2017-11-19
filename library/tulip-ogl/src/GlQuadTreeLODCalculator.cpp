@@ -53,8 +53,8 @@ BoundingBox computeNewBoundingBox(const BoundingBox &box, const Coord &centerSce
 }
 
 GlQuadTreeLODCalculator::GlQuadTreeLODCalculator()
-    : haveToCompute(true), haveToInitObservers(true), currentGraph(NULL), layoutProperty(NULL),
-      sizeProperty(NULL), selectionProperty(NULL) {}
+    : haveToCompute(true), haveToInitObservers(true), currentGraph(nullptr),
+      layoutProperty(nullptr), sizeProperty(nullptr), selectionProperty(nullptr) {}
 
 GlQuadTreeLODCalculator::~GlQuadTreeLODCalculator() {
   setHaveToCompute();
@@ -80,19 +80,19 @@ void GlQuadTreeLODCalculator::setScene(GlScene &scene) {
 void GlQuadTreeLODCalculator::setInputData(const GlGraphInputData *newInputData) {
   setHaveToCompute();
 
-  if (newInputData == NULL) {
-    currentCamera = NULL;
-    currentGraph = NULL;
-    layoutProperty = NULL;
-    sizeProperty = NULL;
-    selectionProperty = NULL;
+  if (newInputData == nullptr) {
+    currentCamera = nullptr;
+    currentGraph = nullptr;
+    layoutProperty = nullptr;
+    sizeProperty = nullptr;
+    selectionProperty = nullptr;
   }
 
   GlLODCalculator::setInputData(newInputData);
 }
 
 bool GlQuadTreeLODCalculator::needEntities() {
-  if (inputData != NULL) {
+  if (inputData != nullptr) {
     // Checks if the properties in the GlGraphInputData have changed
     if (layoutProperty != inputData->getElementLayout() ||
         sizeProperty != inputData->getElementSize() ||
@@ -215,7 +215,7 @@ void GlQuadTreeLODCalculator::compute(const Vector<int, 4> &globalViewport,
     for (auto &it : layersLODVector) {
       Camera *camera = (it.camera);
 
-      GlLayer *currentLayer = NULL;
+      GlLayer *currentLayer = nullptr;
 
       for (const auto &itL : layersVector) {
         if (&itL.second->getCamera() == camera) {
@@ -226,7 +226,7 @@ void GlQuadTreeLODCalculator::compute(const Vector<int, 4> &globalViewport,
 
       cameras.push_back(camera);
 
-      if (currentLayer != NULL) {
+      if (currentLayer != nullptr) {
         layerToCamera.insert(pair<GlLayer *, Camera>(currentLayer, *camera));
       }
 
@@ -302,18 +302,18 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
     if (entitiesGlobalBoundingBox.isValid())
       entitiesQuadTree.push_back(new QuadTreeNode<GlSimpleEntity *>(entitiesGlobalBoundingBox));
     else
-      entitiesQuadTree.push_back(NULL);
+      entitiesQuadTree.push_back(nullptr);
 
     if (nodesGlobalBoundingBox.isValid()) {
       nodesQuadTree.push_back(new QuadTreeNode<unsigned int>(nodesGlobalBoundingBox));
     } else {
-      nodesQuadTree.push_back(NULL);
+      nodesQuadTree.push_back(nullptr);
     }
 
     if (edgesGlobalBoundingBox.isValid()) {
       edgesQuadTree.push_back(new QuadTreeNode<unsigned int>(edgesGlobalBoundingBox));
     } else {
-      edgesQuadTree.push_back(NULL);
+      edgesQuadTree.push_back(nullptr);
     }
 
     // Add entities in quadtrees
@@ -479,7 +479,7 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
 #endif
     {
       if ((renderingEntitiesFlag & RenderingSimpleEntities) != 0 &&
-          entitiesQuadTree[quadTreesVectorPosition] != NULL) {
+          entitiesQuadTree[quadTreesVectorPosition] != nullptr) {
         if (aX == 0 && aY == 0) {
           if ((renderingEntitiesFlag & RenderingWithoutRemove) == 0)
             entitiesQuadTree[quadTreesVectorPosition]->getElementsWithRatio(cameraBoundingBox,
@@ -509,17 +509,17 @@ void GlQuadTreeLODCalculator::removeObservers() {
 
     if (layoutProperty) {
       layoutProperty->removeListener(this);
-      layoutProperty = NULL;
+      layoutProperty = nullptr;
     }
 
     if (sizeProperty) {
       sizeProperty->removeListener(this);
-      sizeProperty = NULL;
+      sizeProperty = nullptr;
     }
 
     if (selectionProperty) {
       selectionProperty->removeListener(this);
-      selectionProperty = NULL;
+      selectionProperty = nullptr;
     }
   }
 
@@ -534,19 +534,19 @@ void GlQuadTreeLODCalculator::addObservers() {
 
     layoutProperty = inputData->getElementLayout();
 
-    if (layoutProperty != NULL) {
+    if (layoutProperty != nullptr) {
       layoutProperty->addListener(this);
     }
 
     sizeProperty = inputData->getElementSize();
 
-    if (sizeProperty != NULL) {
+    if (sizeProperty != nullptr) {
       sizeProperty->addListener(this);
     }
 
     selectionProperty = inputData->getElementSelected();
 
-    if (selectionProperty != NULL) {
+    if (selectionProperty != nullptr) {
       selectionProperty->addListener(this);
     }
   }
@@ -625,18 +625,18 @@ void GlQuadTreeLODCalculator::treatEvent(const Event &ev) {
 
     if (dynamic_cast<tlp::Graph *>(ev.sender())) {
       clear();
-      setInputData(NULL);
+      setInputData(nullptr);
     }
 
     PropertyInterface *property;
 
     if ((property = dynamic_cast<PropertyInterface *>(ev.sender()))) {
       if (property == layoutProperty) {
-        layoutProperty = NULL;
+        layoutProperty = nullptr;
       } else if (property == sizeProperty) {
-        sizeProperty = NULL;
+        sizeProperty = nullptr;
       } else if (property == selectionProperty) {
-        selectionProperty = NULL;
+        selectionProperty = nullptr;
       }
     }
   }

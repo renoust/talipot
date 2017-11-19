@@ -176,7 +176,7 @@ Observable *Event::sender() const {
 class NoObservableIterator : public Iterator<Observable *> {
 public:
   Observable *next() {
-    return NULL;
+    return nullptr;
   }
   bool hasNext() {
     return false;

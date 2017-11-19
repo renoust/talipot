@@ -50,7 +50,7 @@ void SelectionButton::paintEvent(QPaintEvent *e) {
   p.drawPixmap(10, height() / 2 - pixmap.height() / 2, pixmap);
 }
 
-TulipPerspectiveProcessHandler *TulipPerspectiveProcessHandler::_instance = 0;
+TulipPerspectiveProcessHandler *TulipPerspectiveProcessHandler::_instance = nullptr;
 
 TulipPerspectiveProcessHandler::TulipPerspectiveProcessHandler() {
   listen(QHostAddress::LocalHost);
@@ -74,7 +74,7 @@ QProcess *TulipPerspectiveProcessHandler::fromId(unsigned int id) {
       return k;
   }
 
-  return NULL;
+  return nullptr;
 }
 
 TulipPerspectiveProcessHandler *TulipPerspectiveProcessHandler::instance() {
@@ -100,7 +100,7 @@ void TulipPerspectiveProcessHandler::createPerspective(const QString &perspectiv
     args << "--" + k + "=" + parameters[k].toString();
 
   args << "--port=" + QString::number(serverPort());
-  time_t perspectiveId = time(NULL);
+  time_t perspectiveId = time(nullptr);
   args << "--id=" + QString::number(perspectiveId);
 
   QDir appDir(QApplication::applicationDirPath());
@@ -227,7 +227,7 @@ void TulipPerspectiveProcessHandler::perspectiveReadyRead() {
   else if (tokens[0] == "PROJECT_LOCATION") {
     QProcess *p = fromId(tokens[1].toUInt());
 
-    if (p != NULL) {
+    if (p != nullptr) {
       PerspectiveProcessInfo info = _processInfo[p];
       info.projectPath = args2;
       _processInfo[p] = info;

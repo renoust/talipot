@@ -48,7 +48,7 @@ class TLP_PYTHON_SCOPE AutoCompletionList : public QListWidget {
   bool _wasActivated;
 
 public:
-  explicit AutoCompletionList(tlp::PythonCodeEditor *parent = 0);
+  explicit AutoCompletionList(tlp::PythonCodeEditor *parent = nullptr);
 
 protected:
   void insertSelectedItem();
@@ -71,7 +71,7 @@ class TLP_PYTHON_SCOPE FindReplaceDialog : public QDialog {
   void setSearchResult(const bool result);
 
 public:
-  FindReplaceDialog(QPlainTextEdit *_editor, QWidget *parent = NULL);
+  FindReplaceDialog(QPlainTextEdit *_editor, QWidget *parent = nullptr);
   ~FindReplaceDialog();
 
   void setFindMode(const bool findMode);
@@ -102,7 +102,7 @@ class TLP_PYTHON_SCOPE PythonCodeEditor : public QPlainTextEdit {
   friend class AutoCompletionList;
 
 public:
-  explicit PythonCodeEditor(QWidget *parent = 0);
+  explicit PythonCodeEditor(QWidget *parent = nullptr);
   ~PythonCodeEditor();
 
   QString getCleanCode() const;

@@ -34,11 +34,12 @@ using namespace std;
 using namespace tlp;
 
 MouseEdgeBuilder::MouseEdgeBuilder()
-    : _source(node()), _started(false), _graph(NULL), _layoutProperty(NULL), glMainWidget(NULL) {}
+    : _source(node()), _started(false), _graph(nullptr), _layoutProperty(nullptr),
+      glMainWidget(nullptr) {}
 
 bool MouseEdgeBuilder::eventFilter(QObject *widget, QEvent *e) {
 
-  if (glMainWidget == NULL)
+  if (glMainWidget == nullptr)
     glMainWidget = dynamic_cast<GlMainWidget *>(widget);
 
   assert(glMainWidget);
@@ -151,7 +152,7 @@ bool MouseEdgeBuilder::draw(GlMainWidget *glMainWidget) {
   vector<Color> lineColors;
   lineColors.resize(lineVertices.size(), Color(255, 0, 0, 255));
   GlLine editedEdge(lineVertices, lineColors);
-  editedEdge.draw(0, 0);
+  editedEdge.draw(0, nullptr);
   return true;
 }
 
@@ -166,12 +167,12 @@ void MouseEdgeBuilder::clearObserver() {
   if (_graph)
     _graph->removeListener(this);
 
-  _graph = NULL;
+  _graph = nullptr;
 
   if (_layoutProperty)
     _layoutProperty->removeListener(this);
 
-  _layoutProperty = NULL;
+  _layoutProperty = nullptr;
 }
 
 void MouseEdgeBuilder::treatEvent(const Event &evt) {

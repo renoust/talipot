@@ -274,7 +274,7 @@ static const char *paramHelp[] = {
     "Determines, for each node, the number of strongest link kept at each iteration."};
 //=================================================
 MCLClustering::MCLClustering(const tlp::PluginContext *context)
-    : DoubleAlgorithm(context), weights(NULL), _r(2.0), _k(5) {
+    : DoubleAlgorithm(context), weights(nullptr), _r(2.0), _k(5) {
   addInParameter<double>("inflate", paramHelp[0], "2.", false);
   addInParameter<NumericProperty *>("weights", paramHelp[1], "", false);
   addInParameter<unsigned int>("pruning", paramHelp[2], "5", false);
@@ -300,11 +300,11 @@ bool MCLClustering::run() {
   g.alloc(inW);
   g.alloc(outW);
 
-  weights = NULL;
+  weights = nullptr;
   _r = 2.;
   _k = 5;
 
-  if (dataSet != 0) {
+  if (dataSet != nullptr) {
     dataSet->get("weights", weights);
     dataSet->get("inflate", _r);
     dataSet->get("pruning", _k);
@@ -326,7 +326,7 @@ bool MCLClustering::run() {
     node tgt = nodeMapping.getNodeValue(eEnds.second);
     edge tmp = g.addEdge(src, tgt);
 
-    double weight = (weights != NULL) ? weights->getEdgeDoubleValue(e) : 1.0;
+    double weight = (weights != nullptr) ? weights->getEdgeDoubleValue(e) : 1.0;
     inW[tmp] = weight;
     outW[tmp] = 0.;
     // add reverse edge
@@ -342,7 +342,7 @@ bool MCLClustering::run() {
     double sum = 0.;
     outW[tmp] = 0.;
 
-    if (weights != 0) {
+    if (weights != nullptr) {
       double tmpVal = inW[tmp] = 0.;
       forEach(e, g.getOutEdges(n)) {
         double eVal = inW[e];

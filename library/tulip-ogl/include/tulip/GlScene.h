@@ -55,13 +55,13 @@ struct SelectedEntity {
   };
 
   SelectedEntity()
-      : simpleEntity(NULL), complexEntityId(uint(-1)), entityType(UNKNOW_SELECTED),
-        complexEntityGraph(NULL) {}
+      : simpleEntity(nullptr), complexEntityId(uint(-1)), entityType(UNKNOW_SELECTED),
+        complexEntityGraph(nullptr) {}
   SelectedEntity(GlSimpleEntity *entity)
       : simpleEntity(entity), complexEntityId(uint(-1)), entityType(SIMPLE_ENTITY_SELECTED),
-        complexEntityGraph(NULL) {}
+        complexEntityGraph(nullptr) {}
   SelectedEntity(Graph *graph, unsigned int id, SelectedEntityType type)
-      : simpleEntity(NULL), complexEntityId(id), entityType(type), complexEntityGraph(graph) {}
+      : simpleEntity(nullptr), complexEntityId(id), entityType(type), complexEntityGraph(graph) {}
 
   GlSimpleEntity *getSimpleEntity() const {
     assert(simpleEntity != NULL);
@@ -166,7 +166,7 @@ public:
    * this default lod calculator, to do that : put your calculator in constructor parameters
    * Available calculators are : GlCPULODCalculator and GlQuadTreeLODCalculator
    */
-  GlScene(GlLODCalculator *calculator = NULL);
+  GlScene(GlLODCalculator *calculator = nullptr);
 
   ~GlScene();
 
@@ -205,7 +205,8 @@ public:
    */
   void computeAjustSceneToSize(int width, int height, Coord *center, Coord *eye, float *sceneRadius,
                                float *xWhiteFactor, float *yWhiteFactor,
-                               BoundingBox *sceneBoundingBox = NULL, float *zoomFactor = NULL);
+                               BoundingBox *sceneBoundingBox = nullptr,
+                               float *zoomFactor = nullptr);
 
   /**
    * Ajust camera to have entities near borders

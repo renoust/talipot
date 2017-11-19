@@ -96,7 +96,7 @@ void SizeProperty::scale(const tlp::Vector<float, 3> &v, Iterator<node> *itN, It
 }
 //=============================================================================
 void SizeProperty::scale(const tlp::Vector<float, 3> &v, const Graph *sg) {
-  if (sg == NULL)
+  if (sg == nullptr)
     sg = graph;
 
   if (sg->numberOfNodes() == 0)
@@ -110,7 +110,7 @@ void SizeProperty::scale(const tlp::Vector<float, 3> &v, const Graph *sg) {
 }
 //=============================================================================
 Size SizeProperty::getMax(const Graph *sg) {
-  if (sg == NULL)
+  if (sg == nullptr)
     sg = graph;
 
   unsigned int sgi = sg->getId();
@@ -125,7 +125,7 @@ Size SizeProperty::getMax(const Graph *sg) {
 }
 //=============================================================================
 Size SizeProperty::getMin(const Graph *sg) {
-  if (sg == NULL)
+  if (sg == nullptr)
     sg = graph;
 
   unsigned int sgi = sg->getId();
@@ -219,7 +219,7 @@ void SizeProperty::setValueToGraphNodes(tlp::StoredType<Size>::ReturnedConstValu
 //=============================================================================
 PropertyInterface *SizeProperty::clonePrototype(Graph *g, const std::string &n) const {
   if (!g)
-    return 0;
+    return nullptr;
 
   // allow to get an unregistered property (empty name)
   SizeProperty *p = n.empty() ? new SizeProperty(g) : g->getLocalProperty<SizeProperty>(n);
@@ -239,7 +239,7 @@ int SizeProperty::compare(const node n1, const node n2) const {
 //=============================================================================
 PropertyInterface *SizeVectorProperty::clonePrototype(Graph *g, const std::string &n) const {
   if (!g)
-    return 0;
+    return nullptr;
 
   // allow to get an unregistered property (empty name)
   SizeVectorProperty *p =

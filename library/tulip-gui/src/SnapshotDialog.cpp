@@ -80,8 +80,8 @@ protected:
 };
 
 SnapshotDialog::SnapshotDialog(const View *v, QWidget *parent)
-    : QDialog(parent), ui(new Ui::SnapshotDialogData()), view(v), scene(NULL), pixmapItem(NULL),
-      ratio(-1), inSizeSpinBoxValueChanged(false) {
+    : QDialog(parent), ui(new Ui::SnapshotDialogData()), view(v), scene(nullptr),
+      pixmapItem(nullptr), ratio(-1), inSizeSpinBoxValueChanged(false) {
   ui->setupUi(this);
 
   int maxTextureSize = 0;
@@ -176,7 +176,7 @@ void SnapshotDialog::accept() {
 
   QImage image(pixmap.toImage());
 
-  if (!image.save(fileName, 0, ui->qualitySpinBox->value())) {
+  if (!image.save(fileName, nullptr, ui->qualitySpinBox->value())) {
     QMessageBox::critical(this, "Snapshot cannot be saved",
                           "Snapshot cannot be saved in file: " + fileName);
     this->setEnabled(true);
@@ -247,7 +247,7 @@ void SnapshotDialog::sizeSpinBoxValueChanged() {
 
     ratio = float(ui->widthSpinBox->value()) / float(ui->heightSpinBox->value());
 
-    if (pixmapItem != NULL) {
+    if (pixmapItem != nullptr) {
       delete scene;
     }
 

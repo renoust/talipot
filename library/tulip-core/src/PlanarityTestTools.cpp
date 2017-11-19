@@ -348,8 +348,8 @@ void PlanarityTestImpl::addOldCNodeRBCToNewRBC(node oldCNode, node, node n, node
   // or v = parent[oldCNode].
 
   BmdLink<node> *firstItem = RBC[oldCNode].firstItem();
-  BmdLink<node> *predItem = RBC[oldCNode].cyclicPred(firstItem, 0);
-  BmdLink<node> *succItem = RBC[oldCNode].cyclicSucc(firstItem, 0);
+  BmdLink<node> *predItem = RBC[oldCNode].cyclicPred(firstItem, nullptr);
+  BmdLink<node> *succItem = RBC[oldCNode].cyclicSucc(firstItem, nullptr);
 
   node predNode = predItem->getData();
   node succNode = succItem->getData();
@@ -770,8 +770,8 @@ bool PlanarityTestImpl::testCNodeCounter(Graph *, node cNode, node n, node n1, n
     return false;
 
   BmdLink<node> *it1 = RBC[cNode].firstItem();
-  BmdLink<node> *it1l = RBC[cNode].cyclicPred(it1, 0);
-  BmdLink<node> *it1r = RBC[cNode].cyclicSucc(it1, 0);
+  BmdLink<node> *it1l = RBC[cNode].cyclicPred(it1, nullptr);
+  BmdLink<node> *it1r = RBC[cNode].cyclicSucc(it1, nullptr);
 
   jl = it1l->getData();
   jr = it1r->getData();
@@ -780,7 +780,7 @@ bool PlanarityTestImpl::testCNodeCounter(Graph *, node cNode, node n, node n1, n
   int count = 0;
 
   // goes to the left;
-  BmdLink<node> *a = NULL, *s = it1;
+  BmdLink<node> *a = nullptr, *s = it1;
 
   while (labelB.get(jl.id) <= dfsPosNum.get(n.id)) {
     if (labelB.get(jl.id) == dfsPosNum.get(n.id)) {
@@ -871,7 +871,7 @@ bool PlanarityTestImpl::testObstructionFromTerminalNode(Graph *sG, node w, node 
 //=================================================================
 BmdLink<node> *PlanarityTestImpl::searchRBC(int dir, BmdLink<node> *it, node n,
                                             list<node> &traversedNodesInRBC) {
-  if (it != NULL && (it->prev() == NULL || it->succ() == NULL)) // 1st or last item in RBC;
+  if (it != nullptr && (it->prev() == nullptr || it->succ() == nullptr)) // 1st or last item in RBC;
     return it;
 
   BmdLink<node> *prev = it;
@@ -889,7 +889,8 @@ BmdLink<node> *PlanarityTestImpl::searchRBC(int dir, BmdLink<node> *it, node n,
   node u = it->getData();
   int b = labelB.get(u.id);
 
-  while (it != NULL && (b <= dfsPosNum.get(n.id) || dir != 1) && state.get(u.id) == NOT_VISITED) {
+  while (it != nullptr && (b <= dfsPosNum.get(n.id) || dir != 1) &&
+         state.get(u.id) == NOT_VISITED) {
     aux1 = it->prev();
 
     if (aux1 == prev)
@@ -901,18 +902,18 @@ BmdLink<node> *PlanarityTestImpl::searchRBC(int dir, BmdLink<node> *it, node n,
     state.set(u.id, VISITED_IN_RBC);
     traversedNodesInRBC.push_back(u);
 
-    if (it != NULL) {
+    if (it != nullptr) {
       u = it->getData();
       b = labelB.get(u.id);
     }
   }
 
-  if (it == NULL)
+  if (it == nullptr)
     return prev;
-  else if (state.get(u.id) != NOT_VISITED || (it->prev() == NULL || it->succ() == NULL))
+  else if (state.get(u.id) != NOT_VISITED || (it->prev() == nullptr || it->succ() == nullptr))
     return it;
   else
-    return NULL;
+    return nullptr;
 }
 //=================================================================
 /*
@@ -944,7 +945,7 @@ node PlanarityTestImpl::findActiveCNode(node u, node w, list<node> &nl) {
   traversedNodesInRBC.push_back(u);
   BmdLink<node> *it = searchRBC(1, it1, w, traversedNodesInRBC);
 
-  if (it == NULL)
+  if (it == nullptr)
     it = searchRBC(0, it1, w, traversedNodesInRBC);
 
   assert(it != NULL);
@@ -952,7 +953,7 @@ node PlanarityTestImpl::findActiveCNode(node u, node w, list<node> &nl) {
   node v = it->getData();
   node cNode;
 
-  if (it->prev() != 0 && it->succ() != 0)
+  if (it->prev() != nullptr && it->succ() != nullptr)
     cNode = parent.get(v.id); // path compressed;
   else
     cNode = activeCNode[it];

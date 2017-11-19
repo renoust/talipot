@@ -82,7 +82,7 @@ void SOMMap::initMap() {
     gridDataSet.set("oppositeNodesConnected", oppositeConnected);
     // Suppress spacing
     gridDataSet.set("spacing", 0.0);
-    graph_component = importGraph("Grid", gridDataSet, NULL, graph_component);
+    graph_component = importGraph("Grid", gridDataSet, nullptr, graph_component);
   }
 
   assert(graph_component != NULL);

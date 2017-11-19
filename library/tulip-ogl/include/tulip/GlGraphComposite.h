@@ -57,7 +57,7 @@ public:
    * You can specify a GlGraphRenderer, if you don't do this a GlGraphHighDetailsRenderer will be
    * used to display the graph
    */
-  GlGraphComposite(Graph *graph, GlGraphRenderer *graphRenderer = NULL);
+  GlGraphComposite(Graph *graph, GlGraphRenderer *graphRenderer = nullptr);
 
   /**
    * @brief Build a GlGraphComposite with the graph data

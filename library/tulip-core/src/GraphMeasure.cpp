@@ -43,10 +43,10 @@ inline Iterator<node> *getIt(const Graph *graph, node n, EDGE_TYPE direction) {
 
   default:
     tlp::warning() << __PRETTY_FUNCTION__ << "serious bug..." << std::endl;
-    return 0;
+    return nullptr;
   }
 
-  return NULL;
+  return nullptr;
 }
 }
 //================================================================

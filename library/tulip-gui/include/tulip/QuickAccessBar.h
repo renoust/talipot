@@ -55,7 +55,7 @@ protected:
   GlGraphRenderingParameters *renderingParameters() const;
 
 public:
-  QuickAccessBar(QWidget *parent = 0);
+  QuickAccessBar(QWidget *parent = nullptr);
 public slots:
   void setGlMainView(tlp::GlMainView *);
   virtual void reset() = 0;
@@ -105,8 +105,8 @@ public:
   };
   Q_DECLARE_FLAGS(QuickAccessButtons, QuickAccessButton)
 
-  explicit QuickAccessBarImpl(QGraphicsItem *quickAccessBarItem = NULL,
-                              QuickAccessButtons button = ALLBUTTONS, QWidget *parent = 0);
+  explicit QuickAccessBarImpl(QGraphicsItem *quickAccessBarItem = nullptr,
+                              QuickAccessButtons button = ALLBUTTONS, QWidget *parent = nullptr);
   virtual ~QuickAccessBarImpl();
 
   QPushButton *showEdgesButton();

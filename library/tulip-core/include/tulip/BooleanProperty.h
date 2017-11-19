@@ -48,14 +48,14 @@ public:
    * i.e true => false, false => true.
    * If sg is NULL, the graph given when creating the property is considered.
    */
-  void reverse(const Graph *sg = NULL);
+  void reverse(const Graph *sg = nullptr);
 
   /**
    * Reverses all the direction of edges of the visible graph
    * which are true in this BooleanProperty.
    * * If sg is NULL, the graph given when creating the property is considered.
    */
-  void reverseEdgeDirection(Graph *sg = NULL);
+  void reverseEdgeDirection(Graph *sg = nullptr);
 };
 
 /**

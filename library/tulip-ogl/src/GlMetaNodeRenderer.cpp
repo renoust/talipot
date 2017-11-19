@@ -65,7 +65,7 @@ void GlMetaNodeRenderer::render(node n, float, Camera *camera) {
     return;
 
   Graph *metaGraph = _inputData->getGraph()->getNodeMetaInfo(n);
-  GlScene *scene = NULL;
+  GlScene *scene = nullptr;
 
   if (_metaGraphToSceneMap.count(metaGraph) != 0) {
     scene = _metaGraphToSceneMap[metaGraph];

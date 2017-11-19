@@ -72,5 +72,5 @@ ColorScale *GradientManager::getColorScale(const std::string &propertyName) {
   if (colorScaleMap.find(propertyName) != colorScaleMap.end()) {
     return colorScaleMap[propertyName];
   } else
-    return NULL;
+    return nullptr;
 }

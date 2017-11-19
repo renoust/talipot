@@ -340,7 +340,7 @@ bool StrengthClustering::run() {
   if (!graph->applyPropertyAlgorithm("Strength", values, errMsg, pluginProgress))
     return false;
 
-  NumericProperty *metric = NULL;
+  NumericProperty *metric = nullptr;
 
   //  subgraphsLayout = true;
   //  quotientLayout = true;

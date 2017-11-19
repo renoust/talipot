@@ -39,7 +39,7 @@ protected:
 
 PLUGIN(GlArrow2DEdgeExtremity)
 
-GlTriangle *GlArrow2DEdgeExtremity::triangle = 0;
+GlTriangle *GlArrow2DEdgeExtremity::triangle = nullptr;
 
 GlArrow2DEdgeExtremity::GlArrow2DEdgeExtremity(tlp::PluginContext *gc) : EdgeExtremityGlyph(gc) {
   if (!triangle) {
@@ -59,5 +59,5 @@ void GlArrow2DEdgeExtremity::draw(edge e, node, const Color &glyphColor, const C
   triangle->setFillColor(glyphColor);
   triangle->setOutlineSize(width);
   triangle->setOutlineColor(borderColor);
-  triangle->draw(lod, NULL);
+  triangle->draw(lod, nullptr);
 }

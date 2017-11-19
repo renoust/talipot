@@ -106,7 +106,7 @@ static const sipAPIDef *getSipAPI() {
 #endif
 }
 
-static const sipAPIDef *sipAPIPtr = NULL;
+static const sipAPIDef *sipAPIPtr = nullptr;
 
 inline const sipAPIDef *sipAPI() {
   if (!sipAPIPtr) {

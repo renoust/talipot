@@ -60,7 +60,8 @@ void MouseLassoNodesSelectorInteractor::construct() {
 PLUGIN(MouseLassoNodesSelectorInteractor)
 
 MouseLassoNodesSelectorInteractorComponent::MouseLassoNodesSelectorInteractorComponent()
-    : drawInteractor(false), camera(NULL), graph(NULL), viewSelection(NULL), dragStarted(false) {}
+    : drawInteractor(false), camera(nullptr), graph(nullptr), viewSelection(nullptr),
+      dragStarted(false) {}
 
 MouseLassoNodesSelectorInteractorComponent::~MouseLassoNodesSelectorInteractorComponent() {}
 
@@ -303,7 +304,7 @@ bool MouseLassoNodesSelectorInteractorComponent::draw(GlMainWidget *glWidget) {
 
     camera2D.initGl();
     GlComplexPolygon complexPolygon(polygon, Color(0, 255, 0, 100), Color(0, 255, 0));
-    complexPolygon.draw(0, 0);
+    complexPolygon.draw(0, nullptr);
   }
 
   drawInteractor = false;

@@ -49,14 +49,14 @@ public:
     assert(_box.isValid());
 
     for (auto &i : children)
-      i = 0;
+      i = nullptr;
   }
   /**
    * Basic destructor
    */
   ~QuadTreeNode() {
     for (auto &i : children)
-      if (i != NULL)
+      if (i != nullptr)
         delete i;
   }
   /**
@@ -105,7 +105,7 @@ public:
       }
 
       for (auto &i : children) {
-        if (i != NULL)
+        if (i != nullptr)
           i->getElements(box, result);
       }
     }
@@ -120,7 +120,7 @@ public:
     }
 
     for (auto &i : children) {
-      if (i != NULL)
+      if (i != nullptr)
         i->getElements(result);
     }
   }
@@ -150,7 +150,7 @@ public:
         }
 
         for (auto &i : children) {
-          if (i != NULL)
+          if (i != nullptr)
             i->getElementsWithRatio(box, result, ratio);
         }
       }
@@ -165,7 +165,7 @@ public:
 
         if (!find) {
           for (auto &i : children) {
-            if (i != NULL && i->_box.intersect(box)) {
+            if (i != nullptr && i->_box.intersect(box)) {
               // if children[i]!=NULL we are sure to find an elements in that branch of the tree
               // thus we do not have to explore the other branches.
               i->getElementsWithRatio(box, result, ratio);
@@ -180,11 +180,11 @@ public:
 private:
   //======================================
   QuadTreeNode *getChild(int i) {
-    if (children[i] == 0) {
+    if (children[i] == nullptr) {
       Rectangle<float> box(getChildBox(i));
 
       if (box[0] == _box[0] && box[1] == _box[1])
-        return NULL;
+        return nullptr;
 
       children[i] = new QuadTreeNode<TYPE>(box);
     }

@@ -35,7 +35,8 @@ using namespace std;
 using namespace tlp;
 
 MouseBoxZoomer::MouseBoxZoomer(Qt::MouseButton button, Qt::KeyboardModifier modifier)
-    : mButton(button), kModifier(modifier), x(0), y(0), w(0), h(0), started(false), graph(0) {}
+    : mButton(button), kModifier(modifier), x(0), y(0), w(0), h(0), started(false), graph(nullptr) {
+}
 MouseBoxZoomer::~MouseBoxZoomer() {}
 //=====================================================================
 bool MouseBoxZoomer::eventFilter(QObject *widget, QEvent *e) {
@@ -56,7 +57,7 @@ bool MouseBoxZoomer::eventFilter(QObject *widget, QEvent *e) {
         graph = inputData->getGraph();
       } else {
         if (inputData->getGraph() != graph) {
-          graph = NULL;
+          graph = nullptr;
           started = false;
         }
       }
@@ -79,7 +80,7 @@ bool MouseBoxZoomer::eventFilter(QObject *widget, QEvent *e) {
     if ((qMouseEv->buttons() & mButton) &&
         (kModifier == Qt::NoModifier || qMouseEv->modifiers() & kModifier)) {
       if (inputData->getGraph() != graph) {
-        graph = NULL;
+        graph = nullptr;
         started = false;
       }
 
@@ -111,7 +112,7 @@ bool MouseBoxZoomer::eventFilter(QObject *widget, QEvent *e) {
     if ((qMouseEv->button() == mButton &&
          (kModifier == Qt::NoModifier || qMouseEv->modifiers() & kModifier))) {
       if (inputData->getGraph() != graph) {
-        graph = NULL;
+        graph = nullptr;
         started = false;
       }
 
@@ -151,7 +152,7 @@ bool MouseBoxZoomer::draw(GlMainWidget *glw) {
     return false;
 
   if (glw->getScene()->getGlGraphComposite()->getInputData()->getGraph() != graph) {
-    graph = NULL;
+    graph = nullptr;
     started = false;
   }
 

@@ -311,7 +311,7 @@ bool BubblePack::run() {
     return true;
   }
 
-  if (!((dataSet != NULL) && dataSet->get("node size", nodeSize))) {
+  if (!((dataSet != nullptr) && dataSet->get("node size", nodeSize))) {
     if (graph->existProperty("viewSize")) {
       nodeSize = graph->getProperty<SizeProperty>("viewSize");
     } else {
@@ -320,7 +320,7 @@ bool BubblePack::run() {
     }
   }
 
-  if (dataSet == 0 || !dataSet->get("complexity", nAlgo))
+  if (dataSet == nullptr || !dataSet->get("complexity", nAlgo))
     nAlgo = true;
 
   result->setAllEdgeValue(vector<Coord>(0));

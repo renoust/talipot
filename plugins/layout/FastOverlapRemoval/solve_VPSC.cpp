@@ -117,13 +117,13 @@ void Solver::refine() {
     for (auto b : *bs) {
       Constraint *c = b->findMinLM();
 
-      if (c != NULL && c->lm < 0) {
+      if (c != nullptr && c->lm < 0) {
 #ifdef RECTANGLE_OVERLAP_LOGGING
         ofstream f(LOGFILE, ios::app);
         f << "Split on constraint: " << *c << endl;
 #endif
         // Split on c
-        Block *l = NULL, *r = NULL;
+        Block *l = nullptr, *r = nullptr;
         bs->split(b, l, r, c);
         bs->cleanup();
         // split alters the block set so we have to restart
@@ -188,7 +188,7 @@ void IncSolver::satisfy() {
 #endif
   splitBlocks();
   long splitCtr = 0;
-  Constraint *v = NULL;
+  Constraint *v = nullptr;
 
   while ((v = mostViolated(inactive)) && (v->equality || v->slack() < ZERO_UPPERBOUND)) {
     assert(!v->active);
@@ -264,13 +264,13 @@ void IncSolver::splitBlocks() {
   for (auto b : *bs) {
     Constraint *v = b->findMinLM();
 
-    if (v != NULL && v->lm < ZERO_UPPERBOUND) {
+    if (v != nullptr && v->lm < ZERO_UPPERBOUND) {
       assert(!v->equality);
 #ifdef RECTANGLE_OVERLAP_LOGGING
       f << "    found split point: " << *v << " lm=" << v->lm << endl;
 #endif
       splitCnt++;
-      Block *b = v->left->block, *l = NULL, *r = NULL;
+      Block *b = v->left->block, *l = nullptr, *r = nullptr;
       assert(v->left->block == v->right->block);
       double pos = b->posn;
       b->split(l, r, v);
@@ -299,7 +299,7 @@ void IncSolver::splitBlocks() {
  */
 Constraint *IncSolver::mostViolated(ConstraintList &l) {
   double minSlack = DBL_MAX;
-  Constraint *v = NULL;
+  Constraint *v = nullptr;
 #ifdef RECTANGLE_OVERLAP_LOGGING
   ofstream f(LOGFILE, ios::app);
   f << "Looking for most violated..." << endl;
@@ -364,7 +364,7 @@ bool Solver::constraintGraphIsCyclic(const unsigned n, Variable *const vs[]) {
   }
 
   while (!localGraph.empty()) {
-    node *u = NULL;
+    node *u = nullptr;
     vector<node *>::iterator i = localGraph.begin();
 
     for (; i != localGraph.end(); ++i) {

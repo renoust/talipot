@@ -501,7 +501,7 @@ CSVImportColumnToGraphPropertyMappingProxy::getPropertyInterface(unsigned int co
       propertyType = "string";
     }
 
-    PropertyInterface *interf = NULL;
+    PropertyInterface *interf = nullptr;
 
     // The property already exists. Need to check if existing property is compatible with the new
     // one.
@@ -522,7 +522,7 @@ CSVImportColumnToGraphPropertyMappingProxy::getPropertyInterface(unsigned int co
 
         if (overwritePropertiesButton == QMessageBox::NoToAll ||
             overwritePropertiesButton == QMessageBox::No) {
-          interf = NULL;
+          interf = nullptr;
         } else {
           interf = graph->getProperty(propertyName);
         }
@@ -533,7 +533,7 @@ CSVImportColumnToGraphPropertyMappingProxy::getPropertyInterface(unsigned int co
             parent->tr("A property with the name \"") + tlpStringToQString(propertyName) +
                 parent->tr(
                     "\" already exists with a different type. This property will be ignored."));
-        interf = NULL;
+        interf = nullptr;
       }
     } else {
       interf = graph->getProperty(propertyName, propertyType);
@@ -562,7 +562,7 @@ bool CSVGraphImport::line(unsigned int row, const vector<string> &lineTokens) {
     return true;
   }
 
-  vector<PropertyInterface *> props(lineTokens.size(), NULL);
+  vector<PropertyInterface *> props(lineTokens.size(), nullptr);
 
   for (size_t column = 0; column < lineTokens.size(); ++column) {
     if (importParameters.importColumn(column))
@@ -580,7 +580,7 @@ bool CSVGraphImport::line(unsigned int row, const vector<string> &lineTokens) {
 
       // If the property don't exists or
       // if the token is empty no need to import the value
-      if (property != NULL && !token.empty()) {
+      if (property != nullptr && !token.empty()) {
         bool isVectorProperty = (property->getTypename().find("vector") == 0);
         string tokenCopy;
 

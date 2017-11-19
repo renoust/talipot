@@ -470,14 +470,14 @@ void PlanarityTestImpl::addOldCNodeToEmbedding(bool embBackEdgesOutW, Graph *sG,
                                                tlp::BmdList<edge> &embList) {
 
   BmdLink<node> *it = RBC[oldCNode].firstItem();
-  BmdLink<node> *itl = RBC[oldCNode].cyclicPred(it, 0);
-  BmdLink<node> *itr = RBC[oldCNode].cyclicSucc(it, 0);
+  BmdLink<node> *itl = RBC[oldCNode].cyclicPred(it, nullptr);
+  BmdLink<node> *itr = RBC[oldCNode].cyclicSucc(it, nullptr);
   node jl = itl->getData();
   node jr = itr->getData();
 
   list<node> listNodesL, listNodesR;
   // goes to the left;
-  BmdLink<node> *aux = NULL;
+  BmdLink<node> *aux = nullptr;
   BmdLink<node> *s = it;
 
   while (labelB.get(jl.id) <= dfsPosNum.get(w.id)) {

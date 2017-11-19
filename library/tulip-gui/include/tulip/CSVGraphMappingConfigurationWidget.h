@@ -47,7 +47,7 @@ class CSVToGraphDataMapping;
 class TLP_QT_SCOPE CSVGraphMappingConfigurationWidget : public QWidget {
   Q_OBJECT
 public:
-  CSVGraphMappingConfigurationWidget(QWidget *parent = NULL);
+  CSVGraphMappingConfigurationWidget(QWidget *parent = nullptr);
   ~CSVGraphMappingConfigurationWidget();
 
   /**

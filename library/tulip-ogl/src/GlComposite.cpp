@@ -224,7 +224,7 @@ GlSimpleEntity *GlComposite::findGlEntity(const string &key) {
   ITM ite = elements.find(key);
 
   if (ite == elements.end())
-    return NULL;
+    return nullptr;
 
   return (*ite).second;
 }

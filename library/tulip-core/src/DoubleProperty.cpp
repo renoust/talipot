@@ -201,11 +201,11 @@ static void computeEdgeMinValue(
 }
 
 // 2 arrays to hold the predefined functions
-DoubleNodePredefinedCalculator nodeCalculators[] = {NULL, computeNodeAvgValue, computeNodeSumValue,
-                                                    computeNodeMaxValue, computeNodeMinValue};
+DoubleNodePredefinedCalculator nodeCalculators[] = {
+    nullptr, computeNodeAvgValue, computeNodeSumValue, computeNodeMaxValue, computeNodeMinValue};
 
-DoubleEdgePredefinedCalculator edgeCalculators[] = {NULL, computeEdgeAvgValue, computeEdgeSumValue,
-                                                    computeEdgeMaxValue, computeEdgeMinValue};
+DoubleEdgePredefinedCalculator edgeCalculators[] = {
+    nullptr, computeEdgeAvgValue, computeEdgeSumValue, computeEdgeMaxValue, computeEdgeMinValue};
 
 class DoublePropertyPredefinedCalculator
     : public AbstractProperty<tlp::DoubleType, tlp::DoubleType,
@@ -345,7 +345,7 @@ void DoubleProperty::setValueToGraphEdges(tlp::StoredType<double>::ReturnedConst
 //=================================================================================
 PropertyInterface *DoubleProperty::clonePrototype(Graph *g, const std::string &n) const {
   if (!g)
-    return 0;
+    return nullptr;
 
   // allow to get an unregistered property (empty name)
   DoubleProperty *p = n.empty() ? new DoubleProperty(g) : g->getLocalProperty<DoubleProperty>(n);
@@ -356,7 +356,7 @@ PropertyInterface *DoubleProperty::clonePrototype(Graph *g, const std::string &n
 //=================================================================================
 PropertyInterface *DoubleVectorProperty::clonePrototype(Graph *g, const std::string &n) const {
   if (!g)
-    return 0;
+    return nullptr;
 
   // allow to get an unregistered property (empty name)
   DoubleVectorProperty *p =

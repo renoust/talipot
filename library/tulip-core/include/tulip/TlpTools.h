@@ -52,7 +52,7 @@ extern TLP_SCOPE std::string TulipShareDir;
  *  (you must dispose of a standard Tulip installation for that feature to work).
  * 4. a fallback value of 'C:/Tulip/lib/' on windows, or '/usr/local/lib/' on Unix.
  */
-extern TLP_SCOPE void initTulipLib(const char *appDirPath = NULL);
+extern TLP_SCOPE void initTulipLib(const char *appDirPath = nullptr);
 
 /**
  * @ingroup Plugins

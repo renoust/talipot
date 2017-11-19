@@ -272,9 +272,9 @@ struct yy_buffer_state {
 #endif /* !YY_STRUCT_YY_BUFFER_STATE */
 
 /* Stack of input buffers. */
-static size_t yy_buffer_stack_top = 0;          /**< index of top of stack. */
-static size_t yy_buffer_stack_max = 0;          /**< capacity of stack. */
-static YY_BUFFER_STATE *yy_buffer_stack = NULL; /**< Stack as an array. */
+static size_t yy_buffer_stack_top = 0;             /**< index of top of stack. */
+static size_t yy_buffer_stack_max = 0;             /**< capacity of stack. */
+static YY_BUFFER_STATE *yy_buffer_stack = nullptr; /**< Stack as an array. */
 
 /* We provide macros for accessing buffer states in case in the
  * future we want to put the buffer states in a more general
@@ -295,7 +295,7 @@ static int yy_n_chars; /* number of characters read into yy_ch_buf */
 int yyleng;
 
 /* Points to current character in buffer. */
-static char *yy_c_buf_p = (char *)NULL;
+static char *yy_c_buf_p = (char *)nullptr;
 static int yy_init = 0;  /* whether we need to initialize */
 static int yy_start = 0; /* start state number */
 
@@ -355,7 +355,7 @@ void *yyrealloc(void *, yy_size_t);
 
 typedef unsigned char YY_CHAR;
 
-FILE *yyin = (FILE *)0, *yyout = (FILE *)0;
+FILE *yyin = (FILE *)nullptr, *yyout = (FILE *)nullptr;
 
 typedef int yy_state_type;
 
@@ -1183,7 +1183,7 @@ static int yy_get_next_buffer(void) {
             yyrealloc((void *)b->yy_ch_buf, b->yy_buf_size + 2);
       } else
         /* Can't grow it, we don't own it. */
-        b->yy_ch_buf = 0;
+        b->yy_ch_buf = nullptr;
 
       if (!b->yy_ch_buf)
         YY_FATAL_ERROR("fatal error - scanner input buffer overflow");

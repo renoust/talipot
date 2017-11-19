@@ -207,8 +207,8 @@ bool CSVTableWidget::end(unsigned int, unsigned int) {
 
 CSVImportConfigurationWidget::CSVImportConfigurationWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::CSVImportConfigurationWidget),
-      validator(new PropertyNameValidator(propertyWidgets, this)), maxLineNumber(0), parser(NULL),
-      firstLine(0), guessFirstLineIsHeader(true) {
+      validator(new PropertyNameValidator(propertyWidgets, this)), maxLineNumber(0),
+      parser(nullptr), firstLine(0), guessFirstLineIsHeader(true) {
   ui->setupUi(this);
 
   // Import line number change
@@ -423,7 +423,7 @@ QString CSVImportConfigurationWidget::generateColumnName(unsigned int col) const
   if (useFirstLineAsPropertyName()) {
     QTableWidgetItem *item = ui->previewTableWidget->item(0, col);
 
-    if (item != NULL) {
+    if (item != nullptr) {
       return item->text();
     } else {
       return QString("Column_") + QString::number(col);
@@ -661,7 +661,7 @@ bool CSVImportConfigurationWidget::eventFilter(QObject *obj, QEvent *evt) {
   if (evt->type() == QEvent::Resize) {
     PropertyConfigurationWidget *columnWidget = qobject_cast<PropertyConfigurationWidget *>(obj);
 
-    if (columnWidget != NULL) {
+    if (columnWidget != nullptr) {
       columnSizeChanged(columnWidget->getPropertyNumber());
     }
   }
@@ -673,7 +673,7 @@ void CSVImportConfigurationWidget::columnSizeChanged(unsigned int i) {
   //    assert(_columns.size()>i);
   PropertyConfigurationWidget *widget = propertyWidgets[i];
 
-  if (widget != NULL) {
+  if (widget != nullptr) {
     // QRect widgetRect = ui->horizontalLayout_4->;
     ui->previewTableWidget->setColumnWidth(i, widget->width());
   }

@@ -28,7 +28,7 @@ using namespace tlp;
 NodeLinkDiagramComponentInteractor::NodeLinkDiagramComponentInteractor(const QString &iconPath,
                                                                        const QString &text,
                                                                        unsigned int priority)
-    : GLInteractorComposite(QIcon(iconPath), text), _label(NULL), _priority(priority) {}
+    : GLInteractorComposite(QIcon(iconPath), text), _label(nullptr), _priority(priority) {}
 
 NodeLinkDiagramComponentInteractor::~NodeLinkDiagramComponentInteractor() {
   delete _label;

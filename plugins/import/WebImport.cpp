@@ -89,7 +89,7 @@ struct less<UrlElement> {
 }
 
 HttpContext::HttpContext()
-    : status(false), code(-1), reply(NULL), processed(false), redirected(false), isHtml(false) {}
+    : status(false), code(-1), reply(nullptr), processed(false), redirected(false), isHtml(false) {}
 
 HttpContext::~HttpContext() {
   if (reply) {
@@ -125,7 +125,7 @@ void HttpContext::finished() {
 
   reply->close();
   reply->deleteLater();
-  reply = NULL;
+  reply = nullptr;
 }
 
 void HttpContext::headerReceived() {
@@ -155,7 +155,7 @@ void HttpContext::headerReceived() {
 
         reply->close();
         reply->deleteLater();
-        reply = NULL;
+        reply = nullptr;
       }
 
       return;
@@ -167,7 +167,7 @@ void HttpContext::headerReceived() {
         (value.canConvert<QString>() && value.toString().contains(QString("text/html")));
     reply->close();
     reply->deleteLater();
-    reply = NULL;
+    reply = nullptr;
   }
 }
 
@@ -184,10 +184,10 @@ void HttpContext::setTimer(QTimer *timer) {
   connect(timer, SIGNAL(timeout()), SLOT(timeout()));
 }
 
-UrlElement::UrlElement() : http_prefix("http://"), data(""), context(0) {}
+UrlElement::UrlElement() : http_prefix("http://"), data(""), context(nullptr) {}
 UrlElement::UrlElement(const UrlElement &c)
     : http_prefix(c.http_prefix), data(""), server(c.server), url(c.url), clean_url(c.clean_url),
-      context(NULL) {}
+      context(nullptr) {}
 
 void UrlElement::setUrl(const std::string &theUrl) {
   url = theUrl;
@@ -206,7 +206,7 @@ void UrlElement::fill(std::string &result) {
 void UrlElement::clear() {
   if (context) {
     delete context;
-    context = NULL;
+    context = nullptr;
   }
 
   data = "";
@@ -222,7 +222,7 @@ bool UrlElement::load() {
 
 static const char *not_html_extensions[] = {
     ".bmp", ".css", ".doc", ".ico", ".exe", ".gif", ".gz",  ".js", ".jpeg", ".jpg", ".pdf",
-    ".png", ".ps",  ".rss", ".tar", ".tgz", ".wav", ".zip", ".z",  0 /* must be the last */
+    ".png", ".ps",  ".rss", ".tar", ".tgz", ".wav", ".zip", ".z",  nullptr /* must be the last */
 };
 
 bool UrlElement::isHtmlPage() {
@@ -280,7 +280,7 @@ bool UrlElement::siteconnect(const std::string &server, const std::string &path,
 } /* end, siteconnect */
 
 static const char *rejected_protocols[] = {
-    "ftp:", "gopher:", "sftp:", "javascript:", "mms:", "mailto:", 0 /* must be the last */
+    "ftp:", "gopher:", "sftp:", "javascript:", "mms:", "mailto:", nullptr /* must be the last */
 };
 
 UrlElement UrlElement::parseUrl(const std::string &href) {
@@ -291,7 +291,7 @@ UrlElement UrlElement::parseUrl(const std::string &href) {
   for (i = 0; i < len; ++i)
     lowercase[i] = tolower(lowercase[i]);
 
-  for (i = 0; rejected_protocols[i] != 0; i++) {
+  for (i = 0; rejected_protocols[i] != nullptr; i++) {
     if (lowercase.find(rejected_protocols[i]) != string::npos)
       break;
   }
@@ -445,8 +445,8 @@ struct WebImport : public ImportModule {
   bool extractNonHttp;
 
   WebImport(tlp::PluginContext *context)
-      : ImportModule(context), labels(NULL), urls(NULL), colors(NULL), redirectionColor(NULL),
-        maxSize(1000), visitOther(false), extractNonHttp(true) {
+      : ImportModule(context), labels(nullptr), urls(nullptr), colors(nullptr),
+        redirectionColor(nullptr), maxSize(1000), visitOther(false), extractNonHttp(true) {
     addInParameter<string>("server", paramHelp[0], "www.labri.fr");
     addInParameter<string>("web page", paramHelp[1], "");
     addInParameter<int>("max size", paramHelp[2], "1000");
@@ -652,7 +652,8 @@ struct WebImport : public ImportModule {
   void parseUrl(const string &href, UrlElement &starturl) {
     UrlElement newUrl = starturl.parseUrl(href);
 
-    if (newUrl.isValid() && (extractNonHttp || newUrl.is_http()) && addEdge(starturl, newUrl, 0, 0))
+    if (newUrl.isValid() && (extractNonHttp || newUrl.is_http()) &&
+        addEdge(starturl, newUrl, nullptr, nullptr))
       addUrl(newUrl, visitOther || (newUrl.server == starturl.server));
   }
   //========================================================
@@ -719,7 +720,7 @@ struct WebImport : public ImportModule {
     visitOther = false;
     extractNonHttp = true;
 
-    if (dataSet != NULL) {
+    if (dataSet != nullptr) {
       dataSet->get("server", server);
       dataSet->get("web page", url);
       dataSet->get("max size", maxSize);

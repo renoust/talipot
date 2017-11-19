@@ -59,7 +59,7 @@ QModelIndex SceneLayersModel::index(int row, int column, const QModelIndex &pare
     return createIndex(row, column, layer);
   }
 
-  GlComposite *composite = NULL;
+  GlComposite *composite = nullptr;
 
   if (!parent.parent().isValid()) { // 1st sublevel, parent is a layer
     GlLayer *layer = static_cast<GlLayer *>(parent.internalPointer());
@@ -118,12 +118,12 @@ QModelIndex SceneLayersModel::parent(const QModelIndex &child) const {
   GlSimpleEntity *entity = static_cast<GlSimpleEntity *>(child.internalPointer());
   GlComposite *parent = entity->getParent();
 
-  if (parent == NULL)
+  if (parent == nullptr)
     return QModelIndex();
 
   GlComposite *ancestor = parent->getParent();
 
-  if (ancestor == NULL) { // Parent is a layer composite
+  if (ancestor == nullptr) { // Parent is a layer composite
     int row = 0;
 
     for (auto &layer : layers) {
@@ -165,7 +165,7 @@ int SceneLayersModel::rowCount(const QModelIndex &parent) const {
   if (_scene->getGlGraphComposite() == entity)
     return GRAPH_COMPOSITE_IDS.size();
 
-  if (dynamic_cast<GlComposite *>(entity) != NULL)
+  if (dynamic_cast<GlComposite *>(entity) != nullptr)
     return static_cast<GlComposite *>(entity)->getGlEntities().size();
 
   return 0;
@@ -176,9 +176,9 @@ int SceneLayersModel::columnCount(const QModelIndex &) const {
 }
 
 QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
-  GlComposite *parent = NULL;
-  GlSimpleEntity *entity = NULL;
-  GlLayer *layer = NULL;
+  GlComposite *parent = nullptr;
+  GlSimpleEntity *entity = nullptr;
+  GlLayer *layer = nullptr;
 
   if (GRAPH_COMPOSITE_IDS.contains(index.internalId())) {
     quint32 id = index.internalId();
@@ -249,7 +249,7 @@ QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
   }
 
   if (role == Qt::DisplayRole && index.column() == 0) {
-    if (layer != NULL)
+    if (layer != nullptr)
       return layer->getName().c_str();
 
     std::map<std::string, GlSimpleEntity *> siblings = parent->getGlEntities();
@@ -260,7 +260,7 @@ QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
     }
   }
 
-  if (role == Qt::FontRole && layer != NULL) {
+  if (role == Qt::FontRole && layer != nullptr) {
     QFont f;
     f.setBold(true);
     return f;
@@ -330,8 +330,8 @@ bool SceneLayersModel::setData(const QModelIndex &index, const QVariant &value, 
     return true;
   }
 
-  GlSimpleEntity *entity = NULL;
-  GlLayer *layer = NULL;
+  GlSimpleEntity *entity = nullptr;
+  GlLayer *layer = nullptr;
 
   if (!index.parent().isValid()) {
     layer = static_cast<GlLayer *>(index.internalPointer());

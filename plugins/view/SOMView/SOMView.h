@@ -403,7 +403,7 @@ private slots:
   /**
    * Set it's SOM bmu node color for each node of the input sample.
    */
-  void updateNodeColorMapping(tlp::ColorProperty *cp = NULL);
+  void updateNodeColorMapping(tlp::ColorProperty *cp = nullptr);
 
   /**
    * Slot called when the grid structure properties are updated.

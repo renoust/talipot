@@ -67,7 +67,7 @@ void CSVParsingConfigurationQWizardPage::parserChanged() {
   // Force widget to clear content.
   previewTableWidget->begin();
 
-  if (parser != NULL) {
+  if (parser != nullptr) {
     previewTableWidget->setEnabled(true);
     SimplePluginProgressDialog progress(this);
     progress.showPreview(false);
@@ -168,10 +168,10 @@ CSVGraphMappingConfigurationQWizardPage *CSVImportWizard::getMappingConfiguratio
 void CSVImportWizard::accept() {
   bool processIsValid = false;
 
-  if (graph != NULL) {
+  if (graph != nullptr) {
     CSVParser *parser = getParsingConfigurationPage()->buildParser();
 
-    if (parser != NULL) {
+    if (parser != nullptr) {
       processIsValid = true;
       CSVImportParameters importParam = getImportConfigurationPage()->getImportParameters();
       // Get row to graph element mapping
@@ -181,7 +181,7 @@ void CSVImportWizard::accept() {
           new CSVImportColumnToGraphPropertyMappingProxy(graph, importParam, this);
 
       // Invalid mapping objects
-      if (rowMapping == NULL || columnMapping == NULL) {
+      if (rowMapping == nullptr || columnMapping == nullptr) {
         processIsValid = false;
       }
 

@@ -46,7 +46,7 @@ static const char *paramHelp[] = {
 #define ORIENTATION "vertical;horizontal;"
 //=============================================================================
 TreeReingoldAndTilfordExtended::TreeReingoldAndTilfordExtended(const tlp::PluginContext *context)
-    : LayoutAlgorithm(context), lengthMetric(0) {
+    : LayoutAlgorithm(context), lengthMetric(nullptr) {
   addNodeSizePropertyParameter(this);
   addInParameter<IntegerProperty>("edge length", paramHelp[0], "", false);
   addInParameter<StringCollection>("orientation", paramHelp[1], ORIENTATION, true,
@@ -361,13 +361,13 @@ bool TreeReingoldAndTilfordExtended::run() {
 
   getSpacingParameters(dataSet, nodeSpacing, spacing);
   orientation = "horizontal";
-  lengthMetric = NULL;
+  lengthMetric = nullptr;
   ortho = true;
   useLength = false;
   compactLayout = true;
   bool boundingCircles = false;
 
-  if (dataSet != NULL) {
+  if (dataSet != nullptr) {
     useLength = dataSet->get("edge length", lengthMetric);
     dataSet->get("orthogonal", ortho);
     dataSet->get("bounding circles", boundingCircles);
@@ -383,7 +383,7 @@ bool TreeReingoldAndTilfordExtended::run() {
 
   bool deleteLenghtMetric = false;
 
-  if (lengthMetric == NULL) {
+  if (lengthMetric == nullptr) {
     lengthMetric = new IntegerProperty(graph);
     lengthMetric->setAllNodeValue(1);
     lengthMetric->setAllEdgeValue(1);

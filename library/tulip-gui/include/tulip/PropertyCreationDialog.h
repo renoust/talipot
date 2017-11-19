@@ -53,11 +53,11 @@ public:
   /**
     * @brief Constructs a property creation dialog with the given parent.
     **/
-  explicit PropertyCreationDialog(QWidget *parent = NULL);
+  explicit PropertyCreationDialog(QWidget *parent = nullptr);
   /**
     * @brief Constructs a property creation dialog with the given parent graph and parent widget.
     **/
-  explicit PropertyCreationDialog(tlp::Graph *graph, QWidget *parent = NULL,
+  explicit PropertyCreationDialog(tlp::Graph *graph, QWidget *parent = nullptr,
                                   const std::string &selectedType = "");
   ~PropertyCreationDialog();
 
@@ -95,7 +95,7 @@ public:
     *
     * @param graph The graph to use as parent for the properties to create.
     **/
-  static PropertyInterface *createNewProperty(tlp::Graph *graph, QWidget *parent = NULL,
+  static PropertyInterface *createNewProperty(tlp::Graph *graph, QWidget *parent = nullptr,
                                               const std::string &selectedType = "");
 private slots:
   void checkValidity();

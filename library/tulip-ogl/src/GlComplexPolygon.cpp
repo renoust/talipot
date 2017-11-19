@@ -361,7 +361,7 @@ void GlComplexPolygon::runTesselation() {
   verticesData.clear();
   verticesIndices.clear();
   // instantiate the tesselator from libtess2
-  TESStesselator *tess = tessNewTess(NULL);
+  TESStesselator *tess = tessNewTess(nullptr);
 
   // add contours
   for (auto &point : points) {
@@ -372,7 +372,7 @@ void GlComplexPolygon::runTesselation() {
   const int nvp = 6;
 
   // run tesselation with the same default winding rule as in the GLU tesselator
-  if (tessTesselate(tess, TESS_WINDING_ODD, TESS_POLYGONS, nvp, 3, 0)) {
+  if (tessTesselate(tess, TESS_WINDING_ODD, TESS_POLYGONS, nvp, 3, nullptr)) {
     const float *verts = tessGetVertices(tess);
     const int *elems = tessGetElements(tess);
     const int nelems = tessGetElementCount(tess);
@@ -492,7 +492,7 @@ void GlComplexPolygon::draw(float, Camera *) {
       if (GlShaderProgram::shaderProgramsSupported() &&
           GlShaderProgram::geometryShaderSupported()) {
 
-        static GlShaderProgram *outlineExtrusionShader = NULL;
+        static GlShaderProgram *outlineExtrusionShader = nullptr;
 
         if (!outlineExtrusionShader) {
           outlineExtrusionShader = new GlShaderProgram();
