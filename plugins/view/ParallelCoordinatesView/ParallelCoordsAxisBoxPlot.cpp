@@ -355,10 +355,10 @@ void ParallelCoordsAxisBoxPlot::initOrUpdateBoxPlots() {
 }
 
 void ParallelCoordsAxisBoxPlot::buildGlAxisPlot(vector<ParallelAxis *> currentAxis) {
-  for (unsigned int i = 0; i < currentAxis.size(); ++i) {
-    if (dynamic_cast<QuantitativeParallelAxis *>(currentAxis[i])) {
+  for (auto &currentAxi : currentAxis) {
+    if (dynamic_cast<QuantitativeParallelAxis *>(currentAxi)) {
       QuantitativeParallelAxis *quantitativeAxis =
-          static_cast<QuantitativeParallelAxis *>(currentAxis[i]);
+          static_cast<QuantitativeParallelAxis *>(currentAxi);
 
       if (quantitativeAxis->getMedianStringValue() != "KO")
         axisBoxPlotMap[quantitativeAxis] = new GlAxisBoxPlot(quantitativeAxis, lightBlue, darkBlue);

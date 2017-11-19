@@ -283,11 +283,9 @@ void CaptionItem::generateGradients(const vector<pair<double, Color>> &metricToC
 
   Color color;
 
-  for (vector<pair<double, Color>>::const_iterator it = metricToColorFiltered.begin();
-       it != metricToColorFiltered.end(); ++it) {
-    float position =
-        (maxProp - minProp) ? (1. - ((*it).first - minProp) / (maxProp - minProp)) : 0.0;
-    color = (*it).second;
+  for (const auto &it : metricToColorFiltered) {
+    float position = (maxProp - minProp) ? (1. - (it.first - minProp) / (maxProp - minProp)) : 0.0;
+    color = it.second;
     activeGradient.setColorAt(position, QColor(color[0], color[1], color[2], 255));
     hideGradient.setColorAt(position, QColor(color[0], color[1], color[2], 100));
   }
@@ -433,12 +431,12 @@ void CaptionItem::treatEvents(const vector<Event> &ev) {
   bool propertyEvent = false;
   bool graphEvent = false;
 
-  for (vector<Event>::const_iterator it = ev.begin(); it != ev.end(); ++it) {
+  for (const auto &it : ev) {
 
-    PropertyInterface *prop = dynamic_cast<PropertyInterface *>((*it).sender());
-    Graph *graph = dynamic_cast<Graph *>((*it).sender());
+    PropertyInterface *prop = dynamic_cast<PropertyInterface *>(it.sender());
+    Graph *graph = dynamic_cast<Graph *>(it.sender());
 
-    if ((*it).type() == Event::TLP_DELETE)
+    if (it.type() == Event::TLP_DELETE)
       deleteEvent = true;
 
     if (prop)

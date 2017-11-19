@@ -269,36 +269,35 @@ void HistogramView::setState(const DataSet &dataSet) {
   if (!selectedProperties.empty()) {
     buildHistograms();
 
-    for (size_t j = 0; j < selectedProperties.size(); ++j) {
+    for (const auto &selectedPropertie : selectedProperties) {
       unsigned int nbHistogramBins = 0;
 
-      Histogram *histo = histogramsMap[selectedProperties[j]];
+      Histogram *histo = histogramsMap[selectedPropertie];
 
-      if (histogramParametersMap[selectedProperties[j]].get("nb histogram bins", nbHistogramBins)) {
+      if (histogramParametersMap[selectedPropertie].get("nb histogram bins", nbHistogramBins)) {
         histo->setLayoutUpdateNeeded();
         histo->setNbHistogramBins(nbHistogramBins);
       }
 
       unsigned int nbXGraduations = 0;
 
-      if (histogramParametersMap[selectedProperties[j]].get("x axis nb graduations",
-                                                            nbXGraduations)) {
+      if (histogramParametersMap[selectedPropertie].get("x axis nb graduations", nbXGraduations)) {
         histo->setLayoutUpdateNeeded();
         histo->setNbXGraduations(nbXGraduations);
       }
 
       unsigned int yAxisIncrementStep = 0;
 
-      if (histogramParametersMap[selectedProperties[j]].get("y axis increment step",
-                                                            yAxisIncrementStep)) {
+      if (histogramParametersMap[selectedPropertie].get("y axis increment step",
+                                                        yAxisIncrementStep)) {
         histo->setLayoutUpdateNeeded();
         histo->setYAxisIncrementStep(yAxisIncrementStep);
       }
 
       bool cumulativeFrequenciesHisto = false;
 
-      if (histogramParametersMap[selectedProperties[j]].get("cumulative frequencies histogram",
-                                                            cumulativeFrequenciesHisto)) {
+      if (histogramParametersMap[selectedPropertie].get("cumulative frequencies histogram",
+                                                        cumulativeFrequenciesHisto)) {
         histo->setLayoutUpdateNeeded();
         histo->setCumulativeHistogram(cumulativeFrequenciesHisto);
         histo->setLastCumulativeHistogram(cumulativeFrequenciesHisto);
@@ -306,50 +305,50 @@ void HistogramView::setState(const DataSet &dataSet) {
 
       bool uniformQuantification = false;
 
-      if (histogramParametersMap[selectedProperties[j]].get("uniform quantification",
-                                                            uniformQuantification)) {
+      if (histogramParametersMap[selectedPropertie].get("uniform quantification",
+                                                        uniformQuantification)) {
         histo->setLayoutUpdateNeeded();
         histo->setUniformQuantification(uniformQuantification);
       }
 
       bool xAxisLogScale = false;
 
-      if (histogramParametersMap[selectedProperties[j]].get("x axis logscale", xAxisLogScale)) {
+      if (histogramParametersMap[selectedPropertie].get("x axis logscale", xAxisLogScale)) {
         histo->setLayoutUpdateNeeded();
         histo->setXAxisLogScale(xAxisLogScale);
       }
 
       bool yAxisLogScale = false;
 
-      if (histogramParametersMap[selectedProperties[j]].get("y axis logscale", yAxisLogScale)) {
+      if (histogramParametersMap[selectedPropertie].get("y axis logscale", yAxisLogScale)) {
         histo->setLayoutUpdateNeeded();
         histo->setYAxisLogScale(yAxisLogScale);
       }
 
       bool useCustomAxisScale = false;
 
-      if (histogramParametersMap[selectedProperties[j]].get("x axis custom scale",
-                                                            useCustomAxisScale)) {
+      if (histogramParametersMap[selectedPropertie].get("x axis custom scale",
+                                                        useCustomAxisScale)) {
         histo->setLayoutUpdateNeeded();
         histo->setXAxisScaleDefined(useCustomAxisScale);
 
         if (useCustomAxisScale) {
           std::pair<double, double> axisScale(0, 0);
-          histogramParametersMap[selectedProperties[j]].get("x axis scale min", axisScale.first);
-          histogramParametersMap[selectedProperties[j]].get("x axis scale max", axisScale.second);
+          histogramParametersMap[selectedPropertie].get("x axis scale min", axisScale.first);
+          histogramParametersMap[selectedPropertie].get("x axis scale max", axisScale.second);
           histo->setXAxisScale(axisScale);
         }
       }
 
-      if (histogramParametersMap[selectedProperties[j]].get("y axis custom scale",
-                                                            useCustomAxisScale)) {
+      if (histogramParametersMap[selectedPropertie].get("y axis custom scale",
+                                                        useCustomAxisScale)) {
         histo->setLayoutUpdateNeeded();
         histo->setYAxisScaleDefined(useCustomAxisScale);
 
         if (useCustomAxisScale) {
           std::pair<double, double> axisScale(0, 0);
-          histogramParametersMap[selectedProperties[j]].get("y axis scale min", axisScale.first);
-          histogramParametersMap[selectedProperties[j]].get("y axis scale max", axisScale.second);
+          histogramParametersMap[selectedPropertie].get("y axis scale min", axisScale.first);
+          histogramParametersMap[selectedPropertie].get("y axis scale max", axisScale.second);
           histo->setXAxisScale(axisScale);
         }
       }
@@ -718,9 +717,8 @@ void HistogramView::buildHistograms() {
   // reenable user input
   tlp::enableQtUserInput();
 
-  for (vector<GlLabel *>::iterator it = propertiesLabels.begin(); it != propertiesLabels.end();
-       ++it) {
-    (*it)->setSize(Size((*it)->getSize()[0], minSize));
+  for (auto &propertiesLabel : propertiesLabels) {
+    propertiesLabel->setSize(Size(propertiesLabel->getSize()[0], minSize));
   }
 }
 
@@ -756,9 +754,9 @@ vector<Histogram *> HistogramView::getHistograms() const {
 void HistogramView::destroyHistogramsIfNeeded() {
   vector<string> propertiesToRemove;
 
-  for (size_t i = 0; i < selectedProperties.size(); ++i) {
-    if (!_histoGraph || !_histoGraph->existProperty(selectedProperties[i])) {
-      if (histogramsMap[selectedProperties[i]] == detailedHistogram) {
+  for (const auto &selectedPropertie : selectedProperties) {
+    if (!_histoGraph || !_histoGraph->existProperty(selectedPropertie)) {
+      if (histogramsMap[selectedPropertie] == detailedHistogram) {
         if (!smallMultiplesView) {
           mainLayer->deleteGlEntity(detailedHistogram->getBinsComposite());
         }
@@ -766,16 +764,15 @@ void HistogramView::destroyHistogramsIfNeeded() {
         detailedHistogram = NULL;
       }
 
-      propertiesToRemove.push_back(selectedProperties[i]);
-      delete histogramsMap[selectedProperties[i]];
-      histogramsMap.erase(selectedProperties[i]);
+      propertiesToRemove.push_back(selectedPropertie);
+      delete histogramsMap[selectedPropertie];
+      histogramsMap.erase(selectedPropertie);
     }
   }
 
-  for (size_t i = 0; i < propertiesToRemove.size(); ++i) {
-    selectedProperties.erase(
-        remove(selectedProperties.begin(), selectedProperties.end(), propertiesToRemove[i]),
-        selectedProperties.end());
+  for (const auto &i : propertiesToRemove) {
+    selectedProperties.erase(remove(selectedProperties.begin(), selectedProperties.end(), i),
+                             selectedProperties.end());
   }
 }
 
@@ -955,16 +952,15 @@ void HistogramView::interactorsInstalled(const QList<tlp::Interactor *> &) {
 void HistogramView::toggleInteractors(const bool activate) {
   QList<Interactor *> interactorsList = interactors();
 
-  for (QList<Interactor *>::iterator it = interactorsList.begin(); it != interactorsList.end();
-       ++it) {
-    if (!(dynamic_cast<HistogramInteractorNavigation *>(*it))) {
-      (*it)->action()->setEnabled(activate);
+  for (auto &it : interactorsList) {
+    if (!(dynamic_cast<HistogramInteractorNavigation *>(it))) {
+      it->action()->setEnabled(activate);
 
       if (!activate) {
-        (*it)->action()->setChecked(false);
+        it->action()->setChecked(false);
       }
     } else if (!activate) {
-      (*it)->action()->setChecked(true);
+      it->action()->setChecked(true);
     }
 
     interactorsActivated = activate;

@@ -216,8 +216,7 @@ private:
     total_weight = 0;
     const std::vector<edge> &edges = quotient->edges();
 
-    for (std::vector<edge>::const_iterator it = edges.begin(); it != edges.end(); ++it) {
-      edge e = *it;
+    for (auto e : edges) {
       std::pair<node, node> ends = quotient->ends(e);
       node src = ends.first;
       node tgt = ends.second;

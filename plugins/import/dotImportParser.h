@@ -431,12 +431,12 @@ struct DOT_YY {
     bool di = isStrict ? isDirected : (inOp == "->");
 
     // produit cartesien A x B
-    for (unsigned int i = 0; i < inA.size(); i++) {
-      for (unsigned int j = 0; j < inB.size(); j++) {
-        edgeA.push_back(graph->addEdge(inA[i], inB[j]));
+    for (auto i : inA) {
+      for (auto j : inB) {
+        edgeA.push_back(graph->addEdge(i, j));
 
         if (!di) {
-          edgeA.push_back(graph->addEdge(inB[j], inA[i]));
+          edgeA.push_back(graph->addEdge(j, i));
         }
       }
     }
@@ -492,8 +492,8 @@ struct DOT_YY {
     if (inAttr.mask & DOT_ATTR::LAYOUT) {
       LayoutProperty *layoutP = graph->getProperty<LayoutProperty>(TLP_LAYOUT_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        layoutP->setNodeValue(inA[i], inAttr.layout);
+      for (auto i : inA)
+        layoutP->setNodeValue(i, inAttr.layout);
     }
 
     // Label
@@ -503,9 +503,9 @@ struct DOT_YY {
       StringProperty *string2P = graph->getProperty<StringProperty>(TLP_EXTLABEL_PROXY_NAME);
       std::string label = doStringEscaping(inAttr.label);
 
-      for (unsigned int i = 0; i < inA.size(); i++) {
-        stringP->setNodeValue(inA[i], label);
-        string2P->setNodeValue(inA[i], inAttr.label);
+      for (auto i : inA) {
+        stringP->setNodeValue(i, label);
+        string2P->setNodeValue(i, inAttr.label);
       }
     }
 
@@ -531,8 +531,8 @@ struct DOT_YY {
 
       SizeProperty *sizeP = graph->getProperty<SizeProperty>(TLP_SIZE_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        sizeP->setNodeValue(inA[i], s);
+      for (auto i : inA)
+        sizeP->setNodeValue(i, s);
     }
 
     // Color
@@ -540,29 +540,29 @@ struct DOT_YY {
     if (inAttr.mask & DOT_ATTR::FILL_COLOR) {
       ColorProperty *colP = graph->getProperty<ColorProperty>(TLP_COLOR_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        colP->setNodeValue(inA[i], inAttr.fillcolor);
+      for (auto i : inA)
+        colP->setNodeValue(i, inAttr.fillcolor);
     }
 
     if (inAttr.mask & DOT_ATTR::COLOR) {
       ColorProperty *colP = graph->getProperty<ColorProperty>(TLP_BORDERCOLOR_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        colP->setNodeValue(inA[i], inAttr.color);
+      for (auto i : inA)
+        colP->setNodeValue(i, inAttr.color);
     }
 
     if (inAttr.mask & DOT_ATTR::FONT_COLOR) {
       ColorProperty *colP = graph->getProperty<ColorProperty>(TLP_FONTCOLOR_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        colP->setNodeValue(inA[i], inAttr.fontcolor);
+      for (auto i : inA)
+        colP->setNodeValue(i, inAttr.fontcolor);
     }
 
     // Shape
     {
       IntegerProperty *shapeP = graph->getProperty<IntegerProperty>(TLP_SHAPE_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++) {
+      for (auto i : inA) {
         int shape = DEFAULT_SHAPE;
 
         if (inAttr.mask & DOT_ATTR::SHAPE)
@@ -570,7 +570,7 @@ struct DOT_YY {
 
         // default shape is an ellipse
         // we use a distored circle
-        shapeP->setNodeValue(inA[i], (shape != DEFAULT_SHAPE) ? shape : 2);
+        shapeP->setNodeValue(i, (shape != DEFAULT_SHAPE) ? shape : 2);
       }
     }
 
@@ -579,8 +579,8 @@ struct DOT_YY {
     if (inAttr.mask & DOT_ATTR::COMMENT) {
       StringProperty *cmntP = graph->getProperty<StringProperty>(TLP_COMMENT_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        cmntP->setNodeValue(inA[i], inAttr.comment);
+      for (auto i : inA)
+        cmntP->setNodeValue(i, inAttr.comment);
     }
 
     // URL
@@ -588,8 +588,8 @@ struct DOT_YY {
     if ((inAttr.mask & DOT_ATTR::URL) && inAttr.url.size()) {
       StringProperty *urlP = graph->getProperty<StringProperty>(TLP_URL_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        urlP->setNodeValue(inA[i], inAttr.url);
+      for (auto i : inA)
+        urlP->setNodeValue(i, inAttr.url);
     }
   }
 
@@ -606,9 +606,9 @@ struct DOT_YY {
       StringProperty *string2P = graph->getProperty<StringProperty>(TLP_EXTLABEL_PROXY_NAME);
       std::string label = doStringEscaping(inAttr.label);
 
-      for (unsigned int i = 0; i < inA.size(); i++) {
-        stringP->setEdgeValue(inA[i], label);
-        string2P->setEdgeValue(inA[i], inAttr.label);
+      for (auto i : inA) {
+        stringP->setEdgeValue(i, label);
+        string2P->setEdgeValue(i, inAttr.label);
       }
     }
 
@@ -617,8 +617,8 @@ struct DOT_YY {
     if ((inAttr.mask & DOT_ATTR::HEAD_LABEL) && inAttr.headLabel.size()) {
       StringProperty *labelP = graph->getProperty<StringProperty>(TLP_HEAD_LABEL_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        labelP->setEdgeValue(inA[i], inAttr.headLabel);
+      for (auto i : inA)
+        labelP->setEdgeValue(i, inAttr.headLabel);
     }
 
     // Tail-Label
@@ -626,16 +626,16 @@ struct DOT_YY {
     if ((inAttr.mask & DOT_ATTR::TAIL_LABEL) && inAttr.tailLabel.size()) {
       StringProperty *labelP = graph->getProperty<StringProperty>(TLP_TAIL_LABEL_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        labelP->setEdgeValue(inA[i], inAttr.tailLabel);
+      for (auto i : inA)
+        labelP->setEdgeValue(i, inAttr.tailLabel);
     }
 
     // Color
     if (inAttr.mask & DOT_ATTR::COLOR) {
       ColorProperty *colP = graph->getProperty<ColorProperty>(TLP_COLOR_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        colP->setEdgeValue(inA[i], inAttr.color);
+      for (auto i : inA)
+        colP->setEdgeValue(i, inAttr.color);
     }
 
     // Comment
@@ -643,8 +643,8 @@ struct DOT_YY {
     if (inAttr.mask & DOT_ATTR::COMMENT) {
       StringProperty *cmntP = graph->getProperty<StringProperty>(TLP_COMMENT_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        cmntP->setEdgeValue(inA[i], inAttr.comment);
+      for (auto i : inA)
+        cmntP->setEdgeValue(i, inAttr.comment);
     }
 
     // URL
@@ -652,8 +652,8 @@ struct DOT_YY {
     if ((inAttr.mask & DOT_ATTR::URL) && inAttr.url.size()) {
       StringProperty *urlP = graph->getProperty<StringProperty>(TLP_URL_PROXY_NAME);
 
-      for (unsigned int i = 0; i < inA.size(); i++)
-        urlP->setEdgeValue(inA[i], inAttr.url);
+      for (auto i : inA)
+        urlP->setEdgeValue(i, inAttr.url);
     }
   }
 

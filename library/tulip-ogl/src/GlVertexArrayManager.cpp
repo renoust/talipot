@@ -768,10 +768,10 @@ void GlVertexArrayManager::addEdge(GlEdge *gledge) {
       colors.clear();
       getColors(&centerLine[0], centerLine.size(), srcColor, tgtColor, colors);
 
-      for (size_t i = 0; i < colors.size(); ++i) {
+      for (const auto &color : colors) {
         if (inputData->parameters->isEdgeColorInterpolate()) {
-          quadsColorsArray.push_back(colors[i]);
-          quadsColorsArray.push_back(colors[i]);
+          quadsColorsArray.push_back(color);
+          quadsColorsArray.push_back(color);
         } else {
           quadsColorsArray.push_back(edgeColor);
           quadsColorsArray.push_back(edgeColor);

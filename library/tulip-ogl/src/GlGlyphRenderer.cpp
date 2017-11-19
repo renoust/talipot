@@ -114,9 +114,7 @@ void GlGlyphRenderer::endRendering() {
 
   _glyphShader->activate();
 
-  for (size_t i = 0; i < _nodeGlyphsToRender.size(); ++i) {
-    const NodeGlyphData &glyphData = _nodeGlyphsToRender[i];
-
+  for (const auto &glyphData : _nodeGlyphsToRender) {
     if (glyphData.selected) {
       glStencilFunc(GL_LEQUAL, _inputData->parameters->getSelectedNodesStencil(), 0xFFFF);
     } else {
@@ -137,9 +135,7 @@ void GlGlyphRenderer::endRendering() {
     glyphData.glyph->draw(glyphData.n, glyphData.lod);
   }
 
-  for (size_t i = 0; i < _edgeExtremityGlyphsToRender.size(); ++i) {
-    const EdgeExtremityGlyphData &glyphData = _edgeExtremityGlyphsToRender[i];
-
+  for (const auto &glyphData : _edgeExtremityGlyphsToRender) {
     if (glyphData.selected) {
       glStencilFunc(GL_LEQUAL, _inputData->parameters->getSelectedEdgesStencil(), 0xFFFF);
     } else {

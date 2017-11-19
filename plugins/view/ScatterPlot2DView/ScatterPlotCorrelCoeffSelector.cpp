@@ -60,8 +60,8 @@ bool pointInPolygon(const vector<Coord> &polygon, const Coord &point) {
 bool isPolygonAincludesInB(const vector<Coord> &A, const vector<Coord> &B) {
   bool ret = true;
 
-  for (size_t i = 0; i < A.size(); ++i) {
-    ret = ret && pointInPolygon(B, A[i]);
+  for (const auto &i : A) {
+    ret = ret && pointInPolygon(B, i);
 
     if (!ret)
       break;
@@ -81,16 +81,16 @@ GlEditableComplexPolygon::GlEditableComplexPolygon(std::vector<Coord> polygonPoi
 }
 
 void GlEditableComplexPolygon::translate(const Coord &move) {
-  for (size_t i = 0; i < polygonPoints.size(); ++i) {
-    polygonPoints[i] += move;
+  for (auto &polygonPoint : polygonPoints) {
+    polygonPoint += move;
   }
 }
 
 BoundingBox GlEditableComplexPolygon::getBoundingBox() {
   BoundingBox ret;
 
-  for (size_t i = 0; i < polygonPoints.size(); ++i) {
-    ret.expand(polygonPoints[i]);
+  for (const auto &polygonPoint : polygonPoints) {
+    ret.expand(polygonPoint);
   }
 
   return ret;
@@ -179,9 +179,9 @@ void GlEditableComplexPolygon::draw(float lod, Camera *camera) {
     Camera camera2D(camera->getScene(), false);
     camera2D.setScene(camera->getScene());
 
-    for (size_t i = 0; i < polygonPoints.size(); ++i) {
+    for (const auto &polygonPoint : polygonPoints) {
       camera->initGl();
-      Coord tmp = camera->worldTo2DViewport(polygonPoints[i]);
+      Coord tmp = camera->worldTo2DViewport(polygonPoint);
       camera2D.initGl();
       basicCircle.set(tmp, POINT_RADIUS, 0.);
       basicCircle.draw(lod, camera);
@@ -333,10 +333,8 @@ bool ScatterPlotCorrelCoeffSelector::eventFilter(QObject *obj, QEvent *e) {
         } else if (selectedAction == selectData) {
           Observable::holdObservers();
 
-          for (size_t i = 0; i < polygonsToNodesSubsetAndCorrelCoeff[selectedPolygon].first.size();
-               ++i) {
-            viewSelection->setNodeValue(
-                polygonsToNodesSubsetAndCorrelCoeff[selectedPolygon].first[i], true);
+          for (auto i : polygonsToNodesSubsetAndCorrelCoeff[selectedPolygon].first) {
+            viewSelection->setNodeValue(i, true);
           }
 
           for (size_t i = 0; i < polygonsToNodesSubsetAndCorrelCoeff[selectedPolygon].first.size();
@@ -403,8 +401,8 @@ bool ScatterPlotCorrelCoeffSelector::draw(GlMainWidget *glMainWidget) {
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  for (size_t i = 0; i < polygons.size(); ++i) {
-    polygons[i]->draw(0, &camera);
+  for (auto &polygon : polygons) {
+    polygon->draw(0, &camera);
   }
 
   camera.initGl();
@@ -454,9 +452,9 @@ bool ScatterPlotCorrelCoeffSelector::draw(GlMainWidget *glMainWidget) {
                         foregroundColor);
   }
 
-  for (size_t i = 0; i < polygonEdit.size(); ++i) {
+  for (const auto &i : polygonEdit) {
     camera.initGl();
-    Coord pointCoord(camera.worldTo2DViewport(polygonEdit[i]));
+    Coord pointCoord(camera.worldTo2DViewport(i));
     camera2D.initGl();
     basicCircle.set(pointCoord, POINT_RADIUS, 0.);
     basicCircle.draw(0, 0);
@@ -480,30 +478,29 @@ void ScatterPlotCorrelCoeffSelector::getPolygonAndPointUnderPointerIfAny(
   selectedPolygonPoint = NULL;
   Coord pointerViewportCoord(camera->worldTo2DViewport(pointerSceneCoord));
 
-  for (size_t i = 0; i < polygons.size(); ++i) {
-    selectedPolygonPoint =
-        polygons[i]->getPolygonVertexUnderPointerIfAny(pointerViewportCoord, camera);
+  for (auto &polygon : polygons) {
+    selectedPolygonPoint = polygon->getPolygonVertexUnderPointerIfAny(pointerViewportCoord, camera);
 
     if (selectedPolygonPoint != NULL) {
-      selectedPolygon = polygons[i];
+      selectedPolygon = polygon;
       break;
     }
   }
 
   if (selectedPolygon == NULL) {
-    for (size_t i = 0; i < polygons.size(); ++i) {
-      if (polygons[i]->pointInsidePolygon(pointerSceneCoord)) {
-        selectedPolygon = polygons[i];
+    for (auto &polygon : polygons) {
+      if (polygon->pointInsidePolygon(pointerSceneCoord)) {
+        selectedPolygon = polygon;
         break;
       }
     }
   }
 
-  for (size_t i = 0; i < polygons.size(); ++i) {
-    if (polygons[i] == selectedPolygon) {
-      polygons[i]->setSelected(true);
+  for (auto &polygon : polygons) {
+    if (polygon == selectedPolygon) {
+      polygon->setSelected(true);
     } else {
-      polygons[i]->setSelected(false);
+      polygon->setSelected(false);
     }
   }
 }
@@ -521,8 +518,8 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
   vector<Coord> polygonScr;
   const vector<Coord> &polygonVertices = polygon->getPolygonVertices();
 
-  for (size_t i = 0; i < polygonVertices.size(); ++i) {
-    polygonScr.push_back(camera.worldTo2DViewport(polygonVertices[i]));
+  for (const auto &polygonVertice : polygonVertices) {
+    polygonScr.push_back(camera.worldTo2DViewport(polygonVertice));
   }
 
   polygonScr.push_back(camera.worldTo2DViewport(polygonVertices[0]));
@@ -542,8 +539,8 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
   if (!tmpNodes.empty()) {
     GlNode glNode(0);
 
-    for (size_t i = 0; i < tmpNodes.size(); ++i) {
-      glNode.id = tmpNodes[i].getComplexEntityId();
+    for (auto &tmpNode : tmpNodes) {
+      glNode.id = tmpNode.getComplexEntityId();
       BoundingBox nodeBB(
           glNode.getBoundingBox(glWidget->getScene()->getGlGraphComposite()->getInputData()));
       float dx = nodeBB[1][0] - nodeBB[0][0];
@@ -594,7 +591,7 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
       quad.push_back(quad[0]);
 
       if (isPolygonAincludesInB(quad, polygonScr)) {
-        selectedNodes.push_back(node(tmpNodes[i].getComplexEntityId()));
+        selectedNodes.push_back(node(tmpNode.getComplexEntityId()));
       }
     }
   }
@@ -609,8 +606,7 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
 
     double sumxiyi = 0, sumxi = 0, sumyi = 0, sumxi2 = 0, sumyi2 = 0;
 
-    for (size_t i = 0; i < selectedNodes.size(); ++i) {
-      node n = selectedNodes[i];
+    for (auto n : selectedNodes) {
       double xValue = 0, yValue = 0;
 
       xValue = xProp->getNodeDoubleValue(n);

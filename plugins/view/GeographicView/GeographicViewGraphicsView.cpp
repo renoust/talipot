@@ -85,16 +85,16 @@ GlComposite *readPolyFile(QString fileName) {
     float lng;
     float lat;
 
-    for (QStringList::iterator it = strList.begin(); it != strList.end(); ++it) {
-      (*it).toDouble(&ok);
+    for (auto &it : strList) {
+      it.toDouble(&ok);
 
       if (ok) {
         if (!findLng) {
           findLng = true;
-          lng = (*it).toDouble();
+          lng = it.toDouble();
         } else {
           findLat = true;
-          lat = (*it).toDouble();
+          lat = it.toDouble();
         }
       }
     }
@@ -240,16 +240,16 @@ void simplifyPolyFile(QString fileName, float definition) {
     float lng;
     float lat;
 
-    for (QStringList::iterator it = strList.begin(); it != strList.end(); ++it) {
-      (*it).toDouble(&ok);
+    for (auto &it : strList) {
+      it.toDouble(&ok);
 
       if (ok) {
         if (!findLng) {
           findLng = true;
-          lng = (*it).toDouble();
+          lng = it.toDouble();
         } else {
           findLat = true;
-          lat = (*it).toDouble();
+          lat = it.toDouble();
         }
       }
     }
@@ -305,32 +305,31 @@ void simplifyPolyFile(QString fileName, float definition) {
 
   Coord *lastCoord = NULL;
 
-  for (map<string, vector<vector<Coord>>>::iterator it1 = clearPolygons.begin();
-       it1 != clearPolygons.end(); ++it1) {
-    out << (*it1).first.c_str();
+  for (auto &clearPolygon : clearPolygons) {
+    out << clearPolygon.first.c_str();
 
     unsigned int i = 1;
 
-    for (vector<vector<Coord>>::iterator it2 = (*it1).second.begin(); it2 != (*it1).second.end();
-         ++it2) {
+    for (vector<vector<Coord>>::iterator it2 = clearPolygon.second.begin();
+         it2 != clearPolygon.second.end(); ++it2) {
       out << i << "\n";
 
-      for (vector<Coord>::iterator it3 = (*it2).begin(); it3 != (*it2).end(); ++it3) {
+      for (auto &it3 : (*it2)) {
         if (lastCoord == NULL) {
-          out << (*it3)[0] << " " << (*it3)[1] << "\n";
-          lastCoord = &(*it3);
+          out << it3[0] << " " << it3[1] << "\n";
+          lastCoord = &it3;
         } else {
-          if ((*lastCoord).dist(*it3) > definition) {
-            if (simplifiedCoord.count(*it3) == 0) {
-              out << (*it3)[0] << " " << (*it3)[1] << "\n";
-              lastCoord = &(*it3);
+          if ((*lastCoord).dist(it3) > definition) {
+            if (simplifiedCoord.count(it3) == 0) {
+              out << it3[0] << " " << it3[1] << "\n";
+              lastCoord = &it3;
             } else {
-              lastCoord = &simplifiedCoord[*it3];
+              lastCoord = &simplifiedCoord[it3];
               out << (*lastCoord)[0] << " " << (*lastCoord)[1] << "\n";
             }
           } else {
-            if (simplifiedCoord.count(*it3) == 0)
-              simplifiedCoord[*it3] = *lastCoord;
+            if (simplifiedCoord.count(it3) == 0)
+              simplifiedCoord[it3] = *lastCoord;
           }
         }
       }
@@ -676,10 +675,9 @@ void GeographicViewGraphicsView::mapToPolygon() {
 
     Coord nodePos = geoLayout->getNodeValue(n);
 
-    for (map<string, GlSimpleEntity *>::const_iterator it = entities.begin(); it != entities.end();
-         ++it) {
-      if ((*it).second->getBoundingBox().contains(nodePos)) {
-        GlComplexPolygon *polygon = static_cast<GlComplexPolygon *>((*it).second);
+    for (const auto &entitie : entities) {
+      if (entitie.second->getBoundingBox().contains(nodePos)) {
+        GlComplexPolygon *polygon = static_cast<GlComplexPolygon *>(entitie.second);
 
         const vector<vector<Coord>> polygonSides = polygon->getPolygonSides();
 
@@ -707,9 +705,8 @@ void GeographicViewGraphicsView::mapToPolygon() {
 
             BoundingBox bb;
 
-            for (vector<Coord>::const_iterator it3 = polygonSides[0].begin();
-                 it3 != polygonSides[0].end(); ++it3) {
-              bb.expand(*it3);
+            for (const auto &it3 : polygonSides[0]) {
+              bb.expand(it3);
             }
 
             geoLayout->setNodeValue(n, bb.center());
@@ -1231,9 +1228,8 @@ void GeographicViewGraphicsView::switchViewType() {
       forEach(e, graph->getEdges()) {
         vector<Coord> edgeBendsCoords;
 
-        for (unsigned int i = 0; i < edgeBendsLatLng[e].size(); ++i) {
-          edgeBendsCoords.push_back(Coord(edgeBendsLatLng[e][i].second * 2.,
-                                          latitudeToMercator(edgeBendsLatLng[e][i].first * 2.), 0));
+        for (auto &i : edgeBendsLatLng[e]) {
+          edgeBendsCoords.push_back(Coord(i.second * 2., latitudeToMercator(i.first * 2.), 0));
         }
 
         geoLayout->setEdgeValue(e, edgeBendsCoords);

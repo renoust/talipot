@@ -191,8 +191,7 @@ void PlanarityTestImpl::preProcessing(Graph *g) {
 
   // forall(e, edgeInT0) {
   //  tlp::warning() << "Edge in T0: " ;
-  for (list<edge>::iterator it = edgeInT0.begin(); it != edgeInT0.end(); ++it) {
-    edge e = *it;
+  for (auto e : edgeInT0) {
     //    tlp::warning() << e.id << ",";
     std::pair<node, node> ends = g->ends(e);
     node n = ends.first;
@@ -723,19 +722,19 @@ node PlanarityTestImpl::findNodeWithLabelBGreaterThanDfsN(bool saveLastNodeTrave
 
   // restores parent;
   // forall(v, nl)
-  for (list<node>::iterator it1 = nl.begin(); it1 != nl.end(); ++it1)
-    parent.set((*it1).id, p[*it1]);
+  for (auto &it1 : nl)
+    parent.set(it1.id, p[it1]);
 
   if (result.isValid())
     return result;
 
   // restores info if result is nil;
   // forall(v, nl2) {
-  for (list<node>::iterator it2 = nl2.begin(); it2 != nl2.end(); ++it2) {
-    labelB.set((*it2).id, b[*it2]);
+  for (auto &it2 : nl2) {
+    labelB.set(it2.id, b[it2]);
 
     if (embed) // needed to calculate obstruction edges;
-      nodeLabelB.set((*it2).id, nb[*it2]);
+      nodeLabelB.set(it2.id, nb[it2]);
   }
 
   // to update label_b of n correctly in future iteration
@@ -964,15 +963,14 @@ node PlanarityTestImpl::findActiveCNode(node u, node w, list<node> &nl) {
 
   // path compression;
   // forall(v, traversedNodesInRBC)
-  for (list<node>::iterator it = traversedNodesInRBC.begin(); it != traversedNodesInRBC.end();
-       ++it) {
-    if (*it != first) {
-      if (*it != u)
+  for (auto &it : traversedNodesInRBC) {
+    if (it != first) {
+      if (it != u)
         nl.push_back(v);
 
-      parent.set((*it).id, cNode);
+      parent.set(it.id, cNode);
     } else
-      state.set((*it).id, NOT_VISITED);
+      state.set(it.id, NOT_VISITED);
   }
 
   return cNode;

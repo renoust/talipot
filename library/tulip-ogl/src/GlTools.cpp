@@ -421,9 +421,9 @@ std::vector<Coord> computeNormals(const std::vector<Coord> &vertices,
     normals[facesIndices[i + 2]] += normal;
   }
 
-  for (size_t i = 0; i < normals.size(); ++i) {
-    if (normals[i].norm() != 0) {
-      normals[i] /= normals[i].norm();
+  for (auto &normal : normals) {
+    if (normal.norm() != 0) {
+      normal /= normal.norm();
     }
   }
 

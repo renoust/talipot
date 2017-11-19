@@ -273,9 +273,7 @@ void Ordering::updateNewSelectableNodes(node node_f, node no_tmp2, edge, node no
 void Ordering::updateSelectableFaces(vector<Face> v_faces) {
   Face derniere = Gp->getFaceContaining(v1[0], v1[1]);
 
-  for (unsigned int m = 0; m < v_faces.size(); ++m) {
-    Face f_tmp = v_faces[m];
-
+  for (auto f_tmp : v_faces) {
     if (f_tmp == derniere || isOuterFace.get(f_tmp.id))
       continue;
 
@@ -894,8 +892,8 @@ void Ordering::selectAndUpdate(node n) {
   while (!done && tmp2 != v1[1]) {
     done = true;
 
-    for (unsigned int i = 0; i < faces.size(); ++i)
-      if (Gp->containNode(faces[i], tmp2)) {
+    for (auto face : faces)
+      if (Gp->containNode(face, tmp2)) {
         done = false;
         break;
       }
@@ -916,8 +914,8 @@ void Ordering::selectAndUpdate(node n) {
     tmp2 = tmp;
     tmp = left.get(tmp2.id);
 
-    for (unsigned int i = 0; i < faces.size(); ++i)
-      if (Gp->containNode(faces[i], tmp)) {
+    for (auto face : faces)
+      if (Gp->containNode(face, tmp)) {
         done = true;
         break;
       }

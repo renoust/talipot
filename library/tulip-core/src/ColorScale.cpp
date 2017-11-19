@@ -139,11 +139,11 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
   colorMap.clear();
 
   // insert all values in [0, 1]
-  for (map<float, Color>::const_iterator it = newColorMap.begin(); it != newColorMap.end(); ++it) {
-    if ((*it).first < 0.f || (*it).first > 1.f)
+  for (const auto &it : newColorMap) {
+    if (it.first < 0.f || it.first > 1.f)
       continue;
     else
-      colorMap[(*it).first] = (*it).second;
+      colorMap[it.first] = it.second;
   }
 
   if (!colorMap.empty()) {
@@ -179,8 +179,8 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
 
 void ColorScale::setColorMapTransparency(unsigned char alpha) {
   // force the alpha value of all mapped colors
-  for (map<float, Color>::iterator it = colorMap.begin(); it != colorMap.end(); ++it) {
-    Color &color = it->second;
+  for (auto &it : colorMap) {
+    Color &color = it.second;
     color.setA(alpha);
   }
 }

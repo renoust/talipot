@@ -60,9 +60,8 @@ public:
       visitor->visit(this);
     }
 
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      (*it)->acceptVisitor(visitor);
+    for (auto &_sortedElement : _sortedElements) {
+      _sortedElement->acceptVisitor(visitor);
     }
   }
 

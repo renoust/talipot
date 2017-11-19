@@ -93,8 +93,8 @@ vector<node> findMaxCycle(Graph *sg, PluginProgress *pluginProgress) {
   std::vector<std::vector<node>> components;
   ConnectedTest::computeConnectedComponents(g, components);
 
-  for (unsigned int i = 0; i < components.size(); ++i) {
-    g->inducedSubGraph(components[i]);
+  for (const auto &component : components) {
+    g->inducedSubGraph(component);
   }
 
   Graph *g_tmp;
@@ -192,12 +192,12 @@ bool Circular::run() {
     MutableContainer<bool> inCir;
     inCir.setAll(false);
 
-    for (unsigned int i = 0; i < cycleOrdering.size(); ++i)
-      inCir.set(cycleOrdering[i].id, true);
+    for (auto &i : cycleOrdering)
+      inCir.set(i.id, true);
 
-    for (unsigned int i = 0; i < dfsOrdering.size(); ++i)
-      if (!inCir.get(dfsOrdering[i].id))
-        cycleOrdering.push_back(dfsOrdering[i]);
+    for (auto &i : dfsOrdering)
+      if (!inCir.get(i.id))
+        cycleOrdering.push_back(i);
 
     vector<node>::const_iterator it = cycleOrdering.begin();
 

@@ -233,8 +233,8 @@ std::vector<Coord> tlp::computeConvexHull(const Graph *graph, const LayoutProper
 std::vector<Coord> tlp::computeConvexHull(const std::vector<tlp::Coord> &points) {
   ConvexHullCalculator calc;
 
-  for (size_t i = 0; i < points.size(); ++i) {
-    calc.addPoint(points[i]);
+  for (const auto &point : points) {
+    calc.addPoint(point);
   }
 
   return calc.getResult();
@@ -275,8 +275,8 @@ bool tlp::computeLinesIntersection(const std::pair<tlp::Coord, tlp::Coord> &line
 Coord tlp::computePolygonCentroid(const vector<Coord> &points) {
   vector<Vec3d> pointsCp;
 
-  for (size_t i = 0; i < points.size(); ++i) {
-    pointsCp.push_back(Vec3d(points[i][0], points[i][1], 0.0));
+  for (const auto &point : points) {
+    pointsCp.push_back(Vec3d(point[0], point[1], 0.0));
   }
 
   pointsCp.push_back(Vec3d(points[0][0], points[0][1], 0.0));
@@ -338,9 +338,7 @@ bool tlp::isLayoutCoPlanar(const vector<Coord> &points, Mat3f &invTransformMatri
   normalize(b);
 
   // compute the distance of each point to the plane
-  for (size_t i = 0; i < points.size(); ++i) {
-    const Coord &D = points[i];
-
+  for (const auto &D : points) {
     // if the point is too far from the plane, the layout is not coplanar
     if (abs(c.dotProduct(D - A)) > 1e-3) {
       return false;
@@ -381,13 +379,13 @@ std::vector<tlp::Coord> tlp::computeRegularPolygon(unsigned int numberOfSides,
     box.expand(points.back());
   }
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it)[0] =
+  for (auto &point : points) {
+    point[0] =
         center[0] +
-        (((*it)[0] - ((box[1][0] + box[0][0]) / 2.)) / ((box[1][0] - box[0][0]) / 2.)) * size[0];
-    (*it)[1] =
+        ((point[0] - ((box[1][0] + box[0][0]) / 2.)) / ((box[1][0] - box[0][0]) / 2.)) * size[0];
+    point[1] =
         center[1] +
-        (((*it)[1] - ((box[1][1] + box[0][1]) / 2.)) / ((box[1][1] - box[0][1]) / 2.)) * size[1];
+        ((point[1] - ((box[1][1] + box[0][1]) / 2.)) / ((box[1][1] - box[0][1]) / 2.)) * size[1];
   }
 
   return points;

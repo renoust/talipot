@@ -130,19 +130,18 @@ void SOMMap::registerModification(const vector<string> &propertiesToListen) {
   // Get all properties
   vector<PropertyInterface *> properties;
 
-  for (vector<string>::const_iterator it = propertiesToListen.begin();
-       it != propertiesToListen.end(); ++it) {
+  for (const auto &it : propertiesToListen) {
     // If the properties don't exist create it
-    if (!existProperty((*it))) {
+    if (!existProperty(it)) {
 #ifndef NDEBUG
       std::cerr << __PRETTY_FUNCTION__ << ":" << __LINE__ << " "
                 << "Property doesn't exist creating new" << std::endl;
 #endif
       DoubleProperty *property = new DoubleProperty(this);
-      addLocalProperty((*it), property);
+      addLocalProperty(it, property);
       properties.push_back(property);
     } else
-      properties.push_back(getProperty((*it)));
+      properties.push_back(getProperty(it));
   }
 
   // Store all the value from the DynamicVectors in the properties

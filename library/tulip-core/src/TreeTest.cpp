@@ -253,8 +253,8 @@ static Graph *computeTreeInternal(Graph *graph, Graph *rGraph, bool isConnected,
   std::vector<std::vector<node>> components;
   ConnectedTest::computeConnectedComponents(rGraph, components);
 
-  for (unsigned int i = 0; i < components.size(); ++i) {
-    rGraph->inducedSubGraph(components[i]);
+  for (const auto &component : components) {
+    rGraph->inducedSubGraph(component);
   }
 
   // create a new subgraph for the tree
@@ -328,8 +328,8 @@ void TreeTest::cleanComputedTree(tlp::Graph *graph, tlp::Graph *tree) {
   if (sg->getAttribute<vector<edge> *>(REVERSED_EDGES, reversedEdges)) {
     sg->removeAttribute(REVERSED_EDGES);
 
-    for (vector<edge>::iterator ite = reversedEdges->begin(); ite != reversedEdges->end(); ++ite) {
-      rg->reverse(*ite);
+    for (auto &reversedEdge : *reversedEdges) {
+      rg->reverse(reversedEdge);
     }
 
     delete reversedEdges;

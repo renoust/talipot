@@ -62,8 +62,8 @@ void Dijkstra::initDijkstra(const tlp::Graph *const forbidden, tlp::node srcTlp,
 
   const vector<node> &bNodes = graph.nodes();
 
-  for (size_t i = 0; i < bNodes.size(); ++i) {
-    n = bNodes[i];
+  for (auto bNode : bNodes) {
+    n = bNode;
 
     if (n != src) { // init all nodes to +inf
       DijkstraElement *tmp = new DijkstraElement(DBL_MAX / 2. + 10., node(), n);
@@ -104,8 +104,8 @@ void Dijkstra::initDijkstra(const tlp::Graph *const forbidden, tlp::node srcTlp,
     edge e;
     const vector<edge> &adjEdges = graph.star(u.n);
 
-    for (size_t i = 0; i < adjEdges.size(); ++i) {
-      e = adjEdges[i];
+    for (auto adjEdge : adjEdges) {
+      e = adjEdge;
       node v = graph.opposite(e, u.n);
       DijkstraElement &dEle = *mapDik[v];
       // assert(weights.get(edik2tlp[e]) > 0);
@@ -138,13 +138,13 @@ void Dijkstra::initDijkstra(const tlp::Graph *const forbidden, tlp::node srcTlp,
 
   node tmpN;
 
-  for (size_t i = 0; i < bNodes.size(); ++i) {
-    tmpN = bNodes[i];
+  for (auto bNode : bNodes) {
+    tmpN = bNode;
     DijkstraElement *dEle = mapDik[tmpN];
     nodeDistance[tmpN.id] = dEle->dist;
 
-    for (size_t i = 0; i < dEle->usedEdge.size(); ++i) {
-      usedEdges[dEle->usedEdge[i]] = true;
+    for (auto &i : dEle->usedEdge) {
+      usedEdges[i] = true;
     }
 
     delete dEle;
@@ -165,8 +165,8 @@ void Dijkstra::searchPaths(node ntlp, IntegerProperty *depth) {
   edge e;
   const vector<edge> &adjEdges = graph.star(n);
 
-  for (size_t i = 0; i < adjEdges.size(); ++i) {
-    e = adjEdges[i];
+  for (auto adjEdge : adjEdges) {
+    e = adjEdge;
 
     if (!usedEdges[e])
       continue;
@@ -207,8 +207,8 @@ void Dijkstra::searchPath(node ntlp, vector<node> &vNodes) {
     bool findEdge = false;
     const vector<edge> &adjEdges = graph.star(n);
 
-    for (size_t i = 0; i < adjEdges.size(); ++i) {
-      edik = adjEdges[i];
+    for (auto adjEdge : adjEdges) {
+      edik = adjEdge;
       e = edik2tlp[edik];
 
       if (!usedEdges[edik])

@@ -41,8 +41,8 @@ bool QStringListType::read(std::istream &iss, RealType &t) {
   if (!StringVectorType::read(iss, stdVect))
     return false;
 
-  for (unsigned int i = 0; i < stdVect.size(); ++i)
-    t.push_back(tlp::tlpStringToQString(stdVect[i]));
+  for (const auto &i : stdVect)
+    t.push_back(tlp::tlpStringToQString(i));
 
   return true;
 }

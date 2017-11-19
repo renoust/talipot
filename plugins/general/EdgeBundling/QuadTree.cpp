@@ -279,7 +279,7 @@ void QuadTreeBundle::createQuadTree(Graph *graph, tlp::LayoutProperty *lay,
 
   recQuad(a, b, c, d, input);
 
-  for (size_t i = 0; i < resultNode.size(); ++i) {
-    graph->delNode(resultNode[i], true);
+  for (auto i : resultNode) {
+    graph->delNode(i, true);
   }
 }

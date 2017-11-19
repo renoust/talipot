@@ -634,8 +634,8 @@ struct WebImport : public ImportModule {
 
     string lowercase(url.data);
 
-    for (size_t i = 0; i < lowercase.length(); ++i)
-      lowercase[i] = tolower(lowercase[i]);
+    for (char &i : lowercase)
+      i = tolower(i);
 
     findAndTreatUrls(lowercase, " href", url);
     findAndTreatUrls(lowercase, " src", url);

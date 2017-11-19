@@ -83,25 +83,25 @@ void CliqueEnumeration::maxCliquePivot(set<node> &P, const vector<node> &R, set<
     getNeighborhood(p, neighp);
     set<node> tovisit;
 
-    for (set<node>::iterator its = P.begin(); its != P.end(); ++its) {
-      if (neighp.find(*its) == neighp.end())
-        tovisit.insert(*its);
+    for (auto its : P) {
+      if (neighp.find(its) == neighp.end())
+        tovisit.insert(its);
     }
 
-    for (set<node>::const_iterator its = tovisit.begin(); its != tovisit.end(); ++its) {
+    for (auto its : tovisit) {
       set<node> neighx;
-      getNeighborhood(*its, neighx);
+      getNeighborhood(its, neighx);
       set<node> newP;
       set_intersection(P.begin(), P.end(), neighx.begin(), neighx.end(),
                        inserter(newP, newP.begin()));
       vector<node> newR(R);
-      newR.push_back(*its);
+      newR.push_back(its);
       set<node> newX;
       set_intersection(X.begin(), X.end(), neighx.begin(), neighx.end(),
                        inserter(newX, newX.begin()));
       maxCliquePivot(newP, newR, newX);
-      P.erase(*its);
-      X.insert(*its);
+      P.erase(its);
+      X.insert(its);
     }
   }
 }

@@ -358,17 +358,17 @@ void GraphStorage::setEdgeOrder(const node n, const std::vector<edge> &v) {
   MutableContainer<int> isEle;
   isEle.setAll(0);
 
-  for (std::vector<edge>::const_iterator it = v.begin(); it != v.end(); ++it) {
-    isEle.add(it->id, 1);
+  for (auto it : v) {
+    isEle.add(it.id, 1);
   }
 
   std::vector<edge>::const_iterator it2 = v.begin();
   std::vector<edge> &currentOrder = nodeData[n.id].edges;
 
-  for (unsigned int i = 0; i < currentOrder.size(); ++i) {
-    if (isEle.get(currentOrder[i].id) > 0) {
-      isEle.add(currentOrder[i].id, -1);
-      currentOrder[i] = *it2;
+  for (auto &i : currentOrder) {
+    if (isEle.get(i.id) > 0) {
+      isEle.add(i.id, -1);
+      i = *it2;
       ++it2;
     }
   }
@@ -484,8 +484,8 @@ void GraphStorage::delNode(const node n) {
 
   const std::vector<edge> &edges = nodeData[n.id].edges;
 
-  for (std::vector<edge>::const_iterator i = edges.begin(); i != edges.end(); ++i) {
-    const std::pair<node, node> &iEnds = ends(*i);
+  for (auto i : edges) {
+    const std::pair<node, node> &iEnds = ends(i);
     node src = iEnds.first;
     node tgt = iEnds.second;
 
@@ -493,9 +493,9 @@ void GraphStorage::delNode(const node n) {
       if (src != n)
         nodeData[src.id].outDegree -= 1;
 
-      removeFromEdges(*i, n);
+      removeFromEdges(i, n);
     } else
-      loops.push_back(*i);
+      loops.push_back(i);
   }
 
   for (std::vector<edge>::const_iterator it = loops.begin(); it != loops.end(); ++it)
@@ -599,8 +599,8 @@ void GraphStorage::delAllEdges() {
   edgeIds.clear();
 
   // loop on nodes to clear adjacency edges
-  for (std::vector<NodeData>::iterator it = nodeData.begin(); it != nodeData.end(); ++it) {
-    (*it).edges.clear();
+  for (auto &it : nodeData) {
+    it.edges.clear();
   }
 }
 //=======================================================

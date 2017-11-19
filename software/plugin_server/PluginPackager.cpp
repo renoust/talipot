@@ -141,9 +141,9 @@ int main(int argc, char **argv) {
       stream.writeStartElement("dependencies");
       const std::list<Dependency> &deps = PluginLister::getPluginDependencies(info.name());
 
-      for (std::list<Dependency>::const_iterator it = deps.begin(); it != deps.end(); ++it) {
+      for (const auto &dep : deps) {
         stream.writeStartElement("dependency");
-        stream.writeAttribute("name", tlp::tlpStringToQString(it->pluginName));
+        stream.writeAttribute("name", tlp::tlpStringToQString(dep.pluginName));
         stream.writeEndElement(); // dependency
       }
 

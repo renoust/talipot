@@ -122,9 +122,8 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
   vector<Camera> cameras;
   const vector<pair<string, GlLayer *>> &layerList = baseScene.getLayersList();
 
-  for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-       it != layerList.end(); ++it) {
-    cameras.push_back((*it).second->getCamera());
+  for (const auto &it : layerList) {
+    cameras.push_back(it.second->getCamera());
   }
 
   // Compute visible part of the scene
@@ -157,16 +156,14 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
     baseScene.centerScene();
     _oldCameras.clear();
 
-    for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-         it != layerList.end(); ++it) {
-      _oldCameras.push_back(it->second->getCamera());
+    for (const auto &it : layerList) {
+      _oldCameras.push_back(it.second->getCamera());
     }
   } else {
     unsigned int i = 0;
 
-    for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-         it != layerList.end(); ++it) {
-      it->second->getCamera().loadCameraParametersWith(_oldCameras[i]);
+    for (const auto &it : layerList) {
+      it.second->getCamera().loadCameraParametersWith(_oldCameras[i]);
       ++i;
     }
   }
@@ -210,15 +207,14 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
 
     const vector<pair<string, GlLayer *>> &layersList = baseScene.getLayersList();
 
-    for (vector<pair<string, GlLayer *>>::const_iterator it = layersList.begin();
-         it != layersList.end(); ++it) {
-      layersVisibility.push_back(it->second->isVisible());
+    for (const auto &it : layersList) {
+      layersVisibility.push_back(it.second->isVisible());
 
-      if (it->second->isAWorkingLayer())
-        it->second->setVisible(false);
+      if (it.second->isAWorkingLayer())
+        it.second->setVisible(false);
 
-      if (_hiddenLayers.count(it->first) != 0)
-        it->second->setVisible(false);
+      if (_hiddenLayers.count(it.first) != 0)
+        it.second->setVisible(false);
     }
 
     // Draw the scene
@@ -228,10 +224,9 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
 
     vector<bool>::iterator itTmp = layersVisibility.begin();
 
-    for (vector<pair<string, GlLayer *>>::const_iterator it = layersList.begin();
-         it != layersList.end(); ++it) {
+    for (const auto &it : layersList) {
       if ((*itTmp) == true)
-        it->second->setVisible(true);
+        it.second->setVisible(true);
 
       ++itTmp;
     }
@@ -246,9 +241,8 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
   // invert applied camera transformations
   unsigned int i = 0;
 
-  for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-       it != layerList.end(); ++it) {
-    it->second->getCamera() = cameras[i];
+  for (const auto &it : layerList) {
+    it.second->getCamera() = cameras[i];
     ++i;
   }
 
@@ -333,26 +327,23 @@ void GlOverviewGraphicsItem::setScenePosition(QPointF pos) {
   vector<Camera> cameras;
   const vector<pair<string, GlLayer *>> &layerList = baseScene.getLayersList();
 
-  for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-       it != layerList.end(); ++it) {
-    cameras.push_back(it->second->getCamera());
+  for (const auto &it : layerList) {
+    cameras.push_back(it.second->getCamera());
   }
 
   baseScene.centerScene();
 
   vector<Coord> centerPos;
 
-  for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-       it != layerList.end(); ++it) {
-    centerPos.push_back(it->second->getCamera().viewportTo3DWorld(position));
+  for (const auto &it : layerList) {
+    centerPos.push_back(it.second->getCamera().viewportTo3DWorld(position));
   }
 
   unsigned int i = 0;
 
-  for (vector<pair<string, GlLayer *>>::const_iterator it = layerList.begin();
-       it != layerList.end(); ++it) {
+  for (const auto &it : layerList) {
     Coord eyesVector = cameras[i].getEyes() - cameras[i].getCenter();
-    Camera &camera = (*it).second->getCamera();
+    Camera &camera = it.second->getCamera();
     camera = cameras[i];
     camera.setCenter(centerPos[i]);
     camera.setEyes(centerPos[i] + eyesVector);

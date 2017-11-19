@@ -48,8 +48,8 @@ Block::Block(Variable *const v) {
 double Block::desiredWeightedPosition() {
   double wp = 0;
 
-  for (Vit v = vars->begin(); v != vars->end(); ++v) {
-    wp += ((*v)->desiredPosition - (*v)->offset) * (*v)->weight;
+  for (auto &var : *vars) {
+    wp += (var->desiredPosition - var->offset) * var->weight;
   }
 
   return wp;
@@ -69,12 +69,10 @@ void Block::setUpConstraintHeap(PairingHeap<Constraint *> *&h, bool in) {
   delete h;
   h = new PairingHeap<Constraint *>(&compareConstraints);
 
-  for (Vit i = vars->begin(); i != vars->end(); ++i) {
-    Variable *v = *i;
+  for (auto v : *vars) {
     vector<Constraint *> *cs = in ? &(v->in) : &(v->out);
 
-    for (Cit j = cs->begin(); j != cs->end(); ++j) {
-      Constraint *c = *j;
+    for (auto c : *cs) {
       c->timeStamp = blockTimeCtr;
 
       if ((c->left->block != this && in) || (c->right->block != this && !in)) {
@@ -120,8 +118,7 @@ void Block::merge(Block *b, Constraint *c, double dist) {
   weight += b->weight;
   posn = wposn / weight;
 
-  for (Vit i = b->vars->begin(); i != b->vars->end(); ++i) {
-    Variable *v = *i;
+  for (auto v : *b->vars) {
     v->block = this;
     v->offset += dist;
     vars->push_back(v);
@@ -190,8 +187,8 @@ Constraint *Block::findMinInConstraint() {
     }
   }
 
-  for (Cit i = outOfDate.begin(); i != outOfDate.end(); ++i) {
-    v = *i;
+  for (auto &i : outOfDate) {
+    v = i;
     v->timeStamp = blockTimeCtr;
     in->insert(v);
   }
@@ -400,14 +397,14 @@ bool Block::isActiveDirectedPathBetween(Variable *u, Variable *v) {
   if (u == v)
     return true;
 
-  for (Cit c = u->out.begin(); c != u->out.end(); ++c) {
-    if (canFollowRight(*c, NULL)) {
-      if (isActiveDirectedPathBetween((*c)->right, v)) {
-        (*c)->visited = true;
+  for (auto &c : u->out) {
+    if (canFollowRight(c, NULL)) {
+      if (isActiveDirectedPathBetween(c->right, v)) {
+        c->visited = true;
         return true;
       }
 
-      (*c)->visited = false;
+      c->visited = false;
     }
   }
 
@@ -452,9 +449,9 @@ void Block::split(Block *&l, Block *&r, Constraint *c) {
 double Block::cost() {
   double c = 0;
 
-  for (Vit v = vars->begin(); v != vars->end(); ++v) {
-    double diff = (*v)->position() - (*v)->desiredPosition;
-    c += (*v)->weight * diff * diff;
+  for (auto &var : *vars) {
+    double diff = var->position() - var->desiredPosition;
+    c += var->weight * diff * diff;
   }
 
   return c;
@@ -462,8 +459,8 @@ double Block::cost() {
 ostream &operator<<(ostream &os, const Block &b) {
   os << "Block:";
 
-  for (Block::Vit v = b.vars->begin(); v != b.vars->end(); ++v) {
-    os << " " << **v;
+  for (auto &var : *b.vars) {
+    os << " " << *var;
   }
 
   if (b.deleted) {

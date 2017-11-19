@@ -262,9 +262,8 @@ bool MouseEdgeBendEditor::compute(GlMainWidget *glMainWidget) {
     const vector<pair<std::string, GlLayer *>> &layersList =
         glMainWidget->getScene()->getLayersList();
 
-    for (vector<pair<std::string, GlLayer *>>::const_iterator it = layersList.begin();
-         it != layersList.end(); ++it) {
-      if ((*it).second == layer) {
+    for (const auto &it : layersList) {
+      if (it.second == layer) {
         layerInScene = true;
         break;
       }

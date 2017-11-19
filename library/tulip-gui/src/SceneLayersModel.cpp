@@ -74,10 +74,9 @@ QModelIndex SceneLayersModel::index(int row, int column, const QModelIndex &pare
   int i = 0;
   std::map<std::string, GlSimpleEntity *> entities = composite->getGlEntities();
 
-  for (std::map<std::string, GlSimpleEntity *>::iterator it = entities.begin();
-       it != entities.end(); ++it) {
+  for (auto &entitie : entities) {
     if (i++ == row)
-      return createIndex(row, column, it->second);
+      return createIndex(row, column, entitie.second);
   }
 
   return QModelIndex();
@@ -86,15 +85,13 @@ QModelIndex SceneLayersModel::index(int row, int column, const QModelIndex &pare
 QModelIndex SceneLayersModel::graphCompositeIndex() const {
   std::vector<std::pair<std::string, GlLayer *>> layers = _scene->getLayersList();
 
-  for (std::vector<std::pair<std::string, GlLayer *>>::iterator it = layers.begin();
-       it != layers.end(); ++it) {
-    GlComposite *composite = it->second->getComposite();
+  for (auto &layer : layers) {
+    GlComposite *composite = layer.second->getComposite();
     int row = 0;
     std::map<std::string, GlSimpleEntity *> entities = composite->getGlEntities();
 
-    for (std::map<std::string, GlSimpleEntity *>::iterator it = entities.begin();
-         it != entities.end(); ++it) {
-      if (it->second == _scene->getGlGraphComposite())
+    for (auto &entitie : entities) {
+      if (entitie.second == _scene->getGlGraphComposite())
         return createIndex(row, 0, _scene->getGlGraphComposite());
 
       row++;
@@ -113,9 +110,8 @@ QModelIndex SceneLayersModel::parent(const QModelIndex &child) const {
 
   std::vector<std::pair<std::string, GlLayer *>> layers = _scene->getLayersList();
 
-  for (std::vector<std::pair<std::string, GlLayer *>>::iterator it = layers.begin();
-       it != layers.end(); ++it) {
-    if (it->second == child.internalPointer())
+  for (auto &layer : layers) {
+    if (layer.second == child.internalPointer())
       return QModelIndex(); // Item was a layer, aka. a top level item.
   }
 
@@ -130,10 +126,9 @@ QModelIndex SceneLayersModel::parent(const QModelIndex &child) const {
   if (ancestor == NULL) { // Parent is a layer composite
     int row = 0;
 
-    for (std::vector<std::pair<std::string, GlLayer *>>::iterator it = layers.begin();
-         it != layers.end(); ++it) {
-      if (it->second->getComposite() == parent)
-        return createIndex(row, 0, it->second); // Item was a layer, aka. a top level item.
+    for (auto &layer : layers) {
+      if (layer.second->getComposite() == parent)
+        return createIndex(row, 0, layer.second); // Item was a layer, aka. a top level item.
 
       row++;
     }
@@ -142,9 +137,8 @@ QModelIndex SceneLayersModel::parent(const QModelIndex &child) const {
   int row = 0;
   std::map<std::string, GlSimpleEntity *> entities = ancestor->getGlEntities();
 
-  for (std::map<std::string, GlSimpleEntity *>::iterator it = entities.begin();
-       it != entities.end(); ++it) {
-    if (it->second == parent)
+  for (auto &entitie : entities) {
+    if (entitie.second == parent)
       return createIndex(row, 0, parent);
 
     row++;
@@ -260,10 +254,9 @@ QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
 
     std::map<std::string, GlSimpleEntity *> siblings = parent->getGlEntities();
 
-    for (std::map<std::string, GlSimpleEntity *>::iterator it = siblings.begin();
-         it != siblings.end(); ++it) {
-      if (it->second == entity)
-        return it->first.c_str();
+    for (auto &sibling : siblings) {
+      if (sibling.second == entity)
+        return sibling.first.c_str();
     }
   }
 
@@ -398,9 +391,9 @@ void SceneLayersModel::treatEvent(const Event &e) {
       if (glse->getSceneEventType() == GlSceneEvent::TLP_DELENTITY) {
         QModelIndexList persistentIndexes = persistentIndexList();
 
-        for (int i = 0; i < persistentIndexes.size(); ++i) {
-          if (persistentIndexes.at(i).internalPointer() == glse->getGlSimpleEntity()) {
-            changePersistentIndex(persistentIndexes.at(i), QModelIndex());
+        for (const auto &persistentIndexe : persistentIndexes) {
+          if (persistentIndexe.internalPointer() == glse->getGlSimpleEntity()) {
+            changePersistentIndex(persistentIndexe, QModelIndex());
             break;
           }
         }

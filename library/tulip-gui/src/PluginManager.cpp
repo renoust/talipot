@@ -172,9 +172,8 @@ PluginManager::PluginInformationList PluginManager::listPlugins(PluginLocations 
   if (locations.testFlag(Local)) {
     std::list<std::string> localResults = PluginLister::instance()->availablePlugins();
 
-    for (std::list<std::string>::iterator it = localResults.begin(); it != localResults.end();
-         ++it) {
-      const Plugin &info = PluginLister::instance()->pluginInformation(*it);
+    for (auto &localResult : localResults) {
+      const Plugin &info = PluginLister::instance()->pluginInformation(localResult);
 
       if (QString(info.category().c_str()).contains(categoryFilter) &&
           QString(info.name().c_str()).contains(nameFilter, Qt::CaseInsensitive)) {
@@ -255,9 +254,8 @@ void PluginInformation::fillLocalInfo(const Plugin &info) {
   std::list<tlp::Dependency> dependencies =
       PluginLister::instance()->getPluginDependencies(info.name());
 
-  for (std::list<tlp::Dependency>::iterator it = dependencies.begin(); it != dependencies.end();
-       ++it) {
-    installedVersion.dependencies.push_back(it->pluginName.c_str());
+  for (auto &dependencie : dependencies) {
+    installedVersion.dependencies.push_back(dependencie.pluginName.c_str());
   }
 
   installedVersion.isValid = true;

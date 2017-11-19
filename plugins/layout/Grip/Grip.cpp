@@ -124,8 +124,8 @@ bool Grip::run() {
   ConnectedTest::computeConnectedComponents(graph, components);
 
   if (components.size() > 1) {
-    for (unsigned int i = 0; i < components.size(); ++i) {
-      currentGraph = graph->inducedSubGraph(components[i]);
+    for (const auto &component : components) {
+      currentGraph = graph->inducedSubGraph(component);
       computeCurrentGraphLayout();
       graph->delSubGraph(currentGraph);
     }

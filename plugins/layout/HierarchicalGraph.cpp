@@ -194,13 +194,12 @@ void HierarchicalGraph::computeEdgeBends(const tlp::Graph *mySGraph, tlp::Layout
   MutableContainer<bool> isReversed;
   isReversed.setAll(false);
 
-  for (vector<edge>::const_iterator it = reversedEdges.begin(); it != reversedEdges.end(); ++it)
-    isReversed.set((*it).id, true);
+  for (auto reversedEdge : reversedEdges)
+    isReversed.set(reversedEdge.id, true);
 
-  for (TLP_HASH_MAP<edge, edge>::const_iterator it = replacedEdges.begin();
-       it != replacedEdges.end(); ++it) {
-    edge toUpdate = (*it).first;
-    edge start = (*it).second;
+  for (auto replacedEdge : replacedEdges) {
+    edge toUpdate = replacedEdge.first;
+    edge start = replacedEdge.second;
     edge end = start;
     node tgt;
 

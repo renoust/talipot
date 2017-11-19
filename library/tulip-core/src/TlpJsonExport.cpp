@@ -310,14 +310,14 @@ public:
       } else if (attribute.second->getTypeName() == string(typeid(vector<node>).name())) {
         vector<node> *vn = static_cast<vector<node> *>(attribute.second->value);
 
-        for (size_t i = 0; i < vn->size(); ++i) {
-          (*vn)[i].id = graph->nodePos((*vn)[i]);
+        for (auto &i : *vn) {
+          i.id = graph->nodePos(i);
         }
       } else if (attribute.second->getTypeName() == string(typeid(vector<edge>).name())) {
         vector<edge> *ve = static_cast<vector<edge> *>(attribute.second->value);
 
-        for (size_t i = 0; i < ve->size(); ++i) {
-          (*ve)[i].id = graph->edgePos((*ve)[i]);
+        for (auto &i : *ve) {
+          i.id = graph->edgePos(i);
         }
       }
 

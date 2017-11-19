@@ -383,17 +383,16 @@ void GeographicView::loadStoredPolyInformation(const DataSet &dataset) {
     GlComposite *composite = geoViewGraphicsView->getPolygon();
     const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
 
-    for (map<string, GlSimpleEntity *>::const_iterator it = entities.begin(); it != entities.end();
-         ++it) {
+    for (const auto &entitie : entities) {
       DataSet entityData;
 
-      if (polyConf.exist((*it).first)) {
-        polyConf.get((*it).first, entityData);
+      if (polyConf.exist(entitie.first)) {
+        polyConf.get(entitie.first, entityData);
         Color color;
         entityData.get("color", color);
-        static_cast<GlComplexPolygon *>((*it).second)->setFillColor(color);
+        static_cast<GlComplexPolygon *>(entitie.second)->setFillColor(color);
         entityData.get("outlineColor", color);
-        static_cast<GlComplexPolygon *>((*it).second)->setOutlineColor(color);
+        static_cast<GlComplexPolygon *>(entitie.second)->setOutlineColor(color);
       }
     }
   }
@@ -404,13 +403,12 @@ void GeographicView::saveStoredPolyInformation(DataSet &dataset) const {
   DataSet polyConf;
   const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
 
-  for (map<string, GlSimpleEntity *>::const_iterator it = entities.begin(); it != entities.end();
-       ++it) {
+  for (const auto &entitie : entities) {
     DataSet entityData;
-    entityData.set("color", static_cast<GlComplexPolygon *>((*it).second)->getFillColor());
+    entityData.set("color", static_cast<GlComplexPolygon *>(entitie.second)->getFillColor());
     entityData.set("outlineColor",
-                   static_cast<GlComplexPolygon *>((*it).second)->getOutlineColor());
-    polyConf.set((*it).first, entityData);
+                   static_cast<GlComplexPolygon *>(entitie.second)->getOutlineColor());
+    polyConf.set(entitie.first, entityData);
   }
 
   dataset.set("polygons", polyConf);
@@ -434,9 +432,8 @@ void GeographicView::registerTriggers() {
                                                       ->getInputData()
                                                       ->properties();
 
-  for (std::set<tlp::PropertyInterface *>::iterator it = properties.begin(); it != properties.end();
-       ++it) {
-    addRedrawTrigger(*it);
+  for (auto propertie : properties) {
+    addRedrawTrigger(propertie);
   }
 }
 
@@ -447,8 +444,8 @@ QPixmap GeographicView::snapshot(const QSize &size) const {
   QList<QGraphicsProxyWidget *> gWidgetsToRestore;
   QList<QGraphicsItem *> sceneItems = geoViewGraphicsView->scene()->items();
 
-  for (int i = 0; i < sceneItems.size(); ++i) {
-    QGraphicsProxyWidget *gWidget = dynamic_cast<QGraphicsProxyWidget *>(sceneItems.at(i));
+  for (auto sceneItem : sceneItems) {
+    QGraphicsProxyWidget *gWidget = dynamic_cast<QGraphicsProxyWidget *>(sceneItem);
 
     if (gWidget && gWidget->isVisible()) {
       gWidget->hide();
@@ -476,8 +473,8 @@ QPixmap GeographicView::snapshot(const QSize &size) const {
                                         QRect(0, 0, width, height));
 
   // restore the graphics widgets previously hidden
-  for (int i = 0; i < gWidgetsToRestore.size(); ++i) {
-    gWidgetsToRestore.at(i)->show();
+  for (auto i : gWidgetsToRestore) {
+    i->show();
   }
 
   QImage snapshotImage = renderFbo2.toImage();

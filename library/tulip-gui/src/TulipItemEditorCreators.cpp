@@ -938,8 +938,8 @@ void QVectorBoolEditorCreator::setEditorData(QWidget *editor, const QVariant &v,
   QVector<QVariant> editorData;
   QVector<bool> vect = v.value<QVector<bool>>();
 
-  for (int i = 0; i < vect.size(); ++i) {
-    editorData.push_back(QVariant::fromValue<bool>(vect[i]));
+  for (bool i : vect) {
+    editorData.push_back(QVariant::fromValue<bool>(i));
   }
 
   static_cast<VectorEditor *>(editor)->setVector(editorData, qMetaTypeId<bool>());

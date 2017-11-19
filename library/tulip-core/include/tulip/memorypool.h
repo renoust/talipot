@@ -93,9 +93,9 @@ private:
   class MemoryChunkManager {
   public:
     ~MemoryChunkManager() {
-      for (unsigned int i = 0; i < MAXNBTHREADS; ++i) {
-        for (size_t j = 0; j < _allocatedChunks[i].size(); ++j) {
-          free(_allocatedChunks[i][j]);
+      for (auto &_allocatedChunk : _allocatedChunks) {
+        for (size_t j = 0; j < _allocatedChunk.size(); ++j) {
+          free(_allocatedChunk[j]);
         }
       }
     }

@@ -403,16 +403,15 @@ void ScatterPlot2DView::graphChanged(Graph *) {
 void ScatterPlot2DView::toggleInteractors(const bool activate) {
   QList<Interactor *> interactorsList = interactors();
 
-  for (QList<Interactor *>::iterator it = interactorsList.begin(); it != interactorsList.end();
-       ++it) {
-    if (!(dynamic_cast<ScatterPlot2DInteractorNavigation *>(*it))) {
-      (*it)->action()->setEnabled(activate);
+  for (auto &it : interactorsList) {
+    if (!(dynamic_cast<ScatterPlot2DInteractorNavigation *>(it))) {
+      it->action()->setEnabled(activate);
 
       if (!activate) {
-        (*it)->action()->setChecked(false);
+        it->action()->setChecked(false);
       }
     } else if (!activate) {
-      (*it)->action()->setChecked(true);
+      it->action()->setChecked(true);
     }
 
     interactorsActivated = activate;
@@ -753,19 +752,19 @@ void ScatterPlot2DView::destroyOverviewsIfNeeded() {
 
   vector<string> propertiesToRemove;
 
-  for (size_t i = 0; i < selectedGraphProperties.size(); ++i) {
+  for (const auto &selectedGraphPropertie : selectedGraphProperties) {
 
-    if (!scatterPlotGraph || !scatterPlotGraph->existProperty(selectedGraphProperties[i])) {
-      propertiesToRemove.push_back(selectedGraphProperties[i]);
+    if (!scatterPlotGraph || !scatterPlotGraph->existProperty(selectedGraphPropertie)) {
+      propertiesToRemove.push_back(selectedGraphPropertie);
 
-      if (detailedScatterPlotPropertyName.first == selectedGraphProperties[i] ||
-          detailedScatterPlotPropertyName.second == selectedGraphProperties[i]) {
+      if (detailedScatterPlotPropertyName.first == selectedGraphPropertie ||
+          detailedScatterPlotPropertyName.second == selectedGraphPropertie) {
         detailedScatterPlotPropertyName = make_pair("", "");
       }
 
       map<pair<string, string>, ScatterPlot2D *>::iterator overviewToDestroyIt;
       overviewToDestroyIt = find_if(scatterPlotsMap.begin(), scatterPlotsMap.end(),
-                                    map_pair_string_key_contains(selectedGraphProperties[i]));
+                                    map_pair_string_key_contains(selectedGraphPropertie));
 
       while (overviewToDestroyIt != scatterPlotsMap.end()) {
         if (overviewToDestroyIt->second == detailedScatterPlot) {
@@ -782,15 +781,15 @@ void ScatterPlot2DView::destroyOverviewsIfNeeded() {
         scatterPlotsGenMap.erase(overviewToDestroyIt->first);
         scatterPlotsMap.erase(overviewToDestroyIt);
         overviewToDestroyIt = find_if(scatterPlotsMap.begin(), scatterPlotsMap.end(),
-                                      map_pair_string_key_contains(selectedGraphProperties[i]));
+                                      map_pair_string_key_contains(selectedGraphPropertie));
       }
     }
   }
 
-  for (size_t i = 0; i < propertiesToRemove.size(); ++i) {
-    selectedGraphProperties.erase(remove(selectedGraphProperties.begin(),
-                                         selectedGraphProperties.end(), propertiesToRemove[i]),
-                                  selectedGraphProperties.end());
+  for (const auto &i : propertiesToRemove) {
+    selectedGraphProperties.erase(
+        remove(selectedGraphProperties.begin(), selectedGraphProperties.end(), i),
+        selectedGraphProperties.end());
   }
 
   if (!propertiesToRemove.empty()) {
@@ -799,10 +798,9 @@ void ScatterPlot2DView::destroyOverviewsIfNeeded() {
 }
 
 void ScatterPlot2DView::destroyOverviews() {
-  for (map<pair<string, string>, ScatterPlot2D *>::iterator it = scatterPlotsMap.begin();
-       it != scatterPlotsMap.end(); ++it) {
-    matrixComposite->deleteGlEntity(it->second);
-    delete it->second;
+  for (auto &it : scatterPlotsMap) {
+    matrixComposite->deleteGlEntity(it.second);
+    delete it.second;
   }
 
   scatterPlotsMap.clear();

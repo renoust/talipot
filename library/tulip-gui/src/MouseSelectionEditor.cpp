@@ -84,11 +84,11 @@ MouseSelectionEditor::MouseSelectionEditor() : glMainWidget(NULL), layer(NULL), 
   advRect.setOutlineMode(false);
   advRect.setFillColor(hudColor);
 
-  for (unsigned int i = 0; i < 8; ++i) {
-    _controls[i].setFillMode(true);
-    _controls[i].setOutlineMode(true);
-    _controls[i].setFillColor(Color(255, 40, 40, 200));
-    _controls[i].setOutlineColor(Color(128, 20, 20, 200));
+  for (auto &_control : _controls) {
+    _control.setFillMode(true);
+    _control.setOutlineMode(true);
+    _control.setFillColor(Color(255, 40, 40, 200));
+    _control.setOutlineColor(Color(128, 20, 20, 200));
   }
 }
 //========================================================================================
@@ -226,14 +226,14 @@ bool MouseSelectionEditor::eventFilter(QObject *widget, QEvent *e) {
       bool advShape = false;
 
       for (unsigned int i = 0; (i < select.size()) && (shapeId == -1); ++i) {
-        for (int j = 0; j < 8; ++j) {
-          if (select[i].getSimpleEntity() == &_controls[j]) {
+        for (auto &_control : _controls) {
+          if (select[i].getSimpleEntity() == &_control) {
             shapeId = i;
           }
         }
 
-        for (int j = 0; j < 6; ++j) {
-          if (select[i].getSimpleEntity() == &_advControls[j]) {
+        for (auto &_advControl : _advControls) {
+          if (select[i].getSimpleEntity() == &_advControl) {
             advShape = true;
             shapeId = i;
           }
@@ -322,9 +322,9 @@ bool MouseSelectionEditor::eventFilter(QObject *widget, QEvent *e) {
     stopEdition();
 
     // restore colors
-    for (unsigned int i = 0; i < 8; ++i) {
-      _controls[i].setFillColor(Color(255, 40, 40, 200));
-      _controls[i].setOutlineColor(Color(128, 20, 20, 200));
+    for (auto &_control : _controls) {
+      _control.setFillColor(Color(255, 40, 40, 200));
+      _control.setOutlineColor(Color(128, 20, 20, 200));
     }
 
     glMainWidget->setCursor(QCursor(Qt::ArrowCursor));
@@ -419,9 +419,8 @@ bool MouseSelectionEditor::compute(GlMainWidget *glMainWidget) {
     const vector<pair<std::string, GlLayer *>> &layersList =
         glMainWidget->getScene()->getLayersList();
 
-    for (vector<pair<std::string, GlLayer *>>::const_iterator it = layersList.begin();
-         it != layersList.end(); ++it) {
-      if ((*it).second == layer) {
+    for (const auto &it : layersList) {
+      if (it.second == layer) {
         layerInScene = true;
         break;
       }
@@ -978,8 +977,8 @@ bool MouseSelectionEditor::computeFFD(GlMainWidget *glMainWidget) {
   positions[6] = Coord(0, y, ffdCenter[2]) + tmpCenter;   // Bottom
   positions[7] = Coord(x, y, ffdCenter[2]) + tmpCenter;   // Bottom l
 
-  for (int i = 0; i < 8; i++) {
-    positions[i][2] = 0;
+  for (auto &position : positions) {
+    position[2] = 0;
   }
 
   // Parameters of the rectangle that shows the selected area.
@@ -999,60 +998,56 @@ bool MouseSelectionEditor::computeFFD(GlMainWidget *glMainWidget) {
 
   vector<Coord> advControlVect;
 
-  for (unsigned int i = 0; i < arrowWithLineSize; ++i) {
-    advControlVect.push_back(arrowWithLine[i] + positions[7] + Coord(-11, 8, 0));
+  for (const auto &i : arrowWithLine) {
+    advControlVect.push_back(i + positions[7] + Coord(-11, 8, 0));
   }
 
   _advControls[0] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < arrowWithLineSize; ++i) {
-    advControlVect.push_back(Coord(arrowWithLine[i][0], -arrowWithLine[i][1], 0) + positions[7] +
-                             Coord(-25, 8, 0));
+  for (const auto &i : arrowWithLine) {
+    advControlVect.push_back(Coord(i[0], -i[1], 0) + positions[7] + Coord(-25, 8, 0));
   }
 
   _advControls[1] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < arrowWithLineSize; ++i) {
-    advControlVect.push_back(Coord(-arrowWithLine[i][1], arrowWithLine[i][0], 0) + positions[7] +
-                             Coord(-39, 8, 0));
+  for (const auto &i : arrowWithLine) {
+    advControlVect.push_back(Coord(-i[1], i[0], 0) + positions[7] + Coord(-39, 8, 0));
   }
 
   _advControls[2] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < arrowWithLineSize; ++i) {
-    advControlVect.push_back(Coord(arrowWithLine[i][1], arrowWithLine[i][0], 0) + positions[7] +
-                             Coord(-53, 8, 0));
+  for (const auto &i : arrowWithLine) {
+    advControlVect.push_back(Coord(i[1], i[0], 0) + positions[7] + Coord(-53, 8, 0));
   }
 
   _advControls[3] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < twoArrowWithLineSize; ++i) {
-    advControlVect.push_back(twoArrowWithLine[i] + positions[7] + Coord(-67, 8, 0));
+  for (const auto &i : twoArrowWithLine) {
+    advControlVect.push_back(i + positions[7] + Coord(-67, 8, 0));
   }
 
   _advControls[4] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < twoArrowWithLineSize; ++i) {
-    advControlVect.push_back(Coord(twoArrowWithLine[i][1], twoArrowWithLine[i][0], 0) +
-                             positions[7] + Coord(-81, 8, 0));
+  for (const auto &i : twoArrowWithLine) {
+    advControlVect.push_back(Coord(i[1], i[0], 0) + positions[7] + Coord(-81, 8, 0));
   }
 
   _advControls[5] =
       GlComplexPolygon(advControlVect, Color(255, 40, 40, 200), Color(128, 20, 20, 200));
   advControlVect.clear();
 
-  for (unsigned int i = 0; i < 6; ++i) {
-    _advControls[i].setStencil(0);
+  for (auto &_advControl : _advControls) {
+    _advControl.setStencil(0);
   }
 
   return true;

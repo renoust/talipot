@@ -103,11 +103,9 @@ void ColorScaleConfigDialog::accept() {
         gradient = TulipSettings::instance().value(gradientScaleId).toBool();
         TulipSettings::instance().endGroup();
 
-        for (int i = 0; i < colorsVector.size(); ++i) {
-          colors.push_back(Color(colorsVector.at(i).value<QColor>().red(),
-                                 colorsVector.at(i).value<QColor>().green(),
-                                 colorsVector.at(i).value<QColor>().blue(),
-                                 colorsVector.at(i).value<QColor>().alpha()));
+        for (const auto &i : colorsVector) {
+          colors.push_back(Color(i.value<QColor>().red(), i.value<QColor>().green(),
+                                 i.value<QColor>().blue(), i.value<QColor>().alpha()));
         }
 
         std::reverse(colors.begin(), colors.end());
@@ -173,9 +171,7 @@ void ColorScaleConfigDialog::loadImageColorScalesFromDir(const QString &colorSca
     dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
     QFileInfoList list = dir.entryInfoList();
 
-    for (int i = 0; i < list.size(); ++i) {
-      QFileInfo fileInfo = list.at(i);
-
+    for (auto fileInfo : list) {
       if (fileInfo.isDir()) {
         loadImageColorScalesFromDir(fileInfo.absoluteFilePath());
       } else if (fileInfo.suffix() == "png") {
@@ -229,8 +225,8 @@ void ColorScaleConfigDialog::displaySavedGradientPreview() {
       vector<Color> colors = tulipImageColorScales[savedColorScaleId];
       std::reverse(colors.begin(), colors.end());
 
-      for (size_t i = 0; i < colors.size(); ++i) {
-        colorsList.push_back(QColor(colors[i][0], colors[i][1], colors[i][2], colors[i][3]));
+      for (auto &color : colors) {
+        colorsList.push_back(QColor(color[0], color[1], color[2], color[3]));
       }
     } else {
       TulipSettings::instance().beginGroup("ColorScales");
@@ -239,8 +235,8 @@ void ColorScaleConfigDialog::displaySavedGradientPreview() {
       gradient = TulipSettings::instance().value(gradientScaleId).toBool();
       TulipSettings::instance().endGroup();
 
-      for (int i = 0; i < colorsListv.size(); ++i) {
-        colorsList.push_back(colorsListv.at(i).value<QColor>());
+      for (const auto &i : colorsListv) {
+        colorsList.push_back(i.value<QColor>());
       }
     }
 
@@ -291,8 +287,8 @@ void ColorScaleConfigDialog::displayGradientPreview(const QList<QColor> &colorsV
     qreal increment = 1.0 / (colorsVector.size() - 1);
     qreal relPos = 0;
 
-    for (int i = 0; i < colorsVector.size(); ++i) {
-      qLinearGradient.setColorAt(clamp(relPos, 0.0, 1.0), colorsVector.at(i));
+    for (const auto &i : colorsVector) {
+      qLinearGradient.setColorAt(clamp(relPos, 0.0, 1.0), i);
       relPos += increment;
     }
 
@@ -445,8 +441,8 @@ void ColorScaleConfigDialog::reeditSaveColorScale(QListWidgetItem *savedColorSca
     gradient = TulipSettings::instance().value(gradientScaleId).toBool();
     TulipSettings::instance().endGroup();
 
-    for (int i = 0; i < colorsListv.size(); ++i) {
-      QColor color = colorsListv.at(i).value<QColor>();
+    for (const auto &i : colorsListv) {
+      QColor color = i.value<QColor>();
       colorsList.push_back(Color(color.red(), color.green(), color.blue(), color.alpha()));
     }
 

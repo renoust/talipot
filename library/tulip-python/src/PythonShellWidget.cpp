@@ -276,9 +276,7 @@ void PythonShellWidget::updateAutoCompletionList(bool) {
       QVector<QString> dynamicAutoCompletionList =
           PythonInterpreter::getInstance()->getObjectDictEntries(context[0], context[1]);
 
-      for (int i = 0; i < dynamicAutoCompletionList.size(); ++i) {
-        QString entry = dynamicAutoCompletionList[i];
-
+      for (auto entry : dynamicAutoCompletionList) {
         if (_autoCompletionList->findItems(entry, Qt::MatchExactly).empty())
           _autoCompletionList->addItem(entry);
       }
@@ -289,9 +287,7 @@ void PythonShellWidget::updateAutoCompletionList(bool) {
         QVector<QString> dynamicAutoCompletionList =
             PythonInterpreter::getInstance()->getGlobalDictEntries(context[0]);
 
-        for (int i = 0; i < dynamicAutoCompletionList.size(); ++i) {
-          QString entry = dynamicAutoCompletionList[i];
-
+        for (auto entry : dynamicAutoCompletionList) {
           if (_autoCompletionList->findItems(entry, Qt::MatchExactly).empty())
             _autoCompletionList->addItem(entry);
         }

@@ -121,14 +121,13 @@ bool SOMPreviewComposite::isElement(GlEntity *entity) {
 
     map<string, GlSimpleEntity *> displays = current->getGlEntities();
 
-    for (map<string, GlSimpleEntity *>::iterator itElements = displays.begin();
-         itElements != displays.end(); ++itElements) {
-      if (itElements->second == entity) {
+    for (auto &display : displays) {
+      if (display.second == entity) {
         return true;
       }
 
       // If the element is a composite add it to the list of composite to explore.
-      GlComposite *composite = dynamic_cast<GlComposite *>(itElements->second);
+      GlComposite *composite = dynamic_cast<GlComposite *>(display.second);
 
       if (composite) {
         compositeToExplore.push_back(composite);

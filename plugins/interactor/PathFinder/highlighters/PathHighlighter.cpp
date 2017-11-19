@@ -52,14 +52,14 @@ void PathHighlighter::clear() {
   if (backupScene) {
     GlLayer *layer = getWorkingLayer(backupScene);
 
-    for (map<string, bool>::iterator it = entities.begin(); it != entities.end(); ++it) {
-      string entityName(it->first);
+    for (auto &entitie : entities) {
+      string entityName(entitie.first);
       GlSimpleEntity *entity(layer->findGlEntity(entityName));
 
       if (entity) {
         layer->deleteGlEntity(entity);
 
-        if (it->second)
+        if (entitie.second)
           delete entity;
       }
     }

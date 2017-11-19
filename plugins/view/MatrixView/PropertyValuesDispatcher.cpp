@@ -73,8 +73,8 @@ void PropertyValuesDispatcher::afterSetNodeValue(tlp::PropertyInterface *sourceP
     std::string strVal = sourceProp->getNodeStringValue(n);
     vector<int> vect = _graphEntitiesToDisplayedNodes->getNodeValue(n);
 
-    for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
-      targetProp->setNodeStringValue(node(*it), strVal);
+    for (int &it : vect)
+      targetProp->setNodeStringValue(node(it), strVal);
   } else if (sourceProp->getGraph()->getRoot() == _target->getRoot()) {
     PropertyInterface *targetProp = _source->getProperty(sourceProp->getName());
     unsigned int id = _displayedNodesToGraphEntities->getNodeValue(n);
@@ -84,8 +84,8 @@ void PropertyValuesDispatcher::afterSetNodeValue(tlp::PropertyInterface *sourceP
       // update the other node
       vector<int> vect = _graphEntitiesToDisplayedNodes->getNodeValue(node(id));
 
-      for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it) {
-        node n1(*it);
+      for (int &it : vect) {
+        node n1(it);
 
         if (n1 != n)
           sourceProp->setNodeStringValue(n1, sourceProp->getNodeStringValue(n));
@@ -96,8 +96,8 @@ void PropertyValuesDispatcher::afterSetNodeValue(tlp::PropertyInterface *sourceP
 
       vector<int> vect = _graphEntitiesToDisplayedNodes->getEdgeValue(edge(id));
 
-      for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it) {
-        node n1(*it);
+      for (int &it : vect) {
+        node n1(it);
 
         if (n1 != n)
           sourceProp->setNodeStringValue(n1, sourceProp->getNodeStringValue(n));
@@ -120,8 +120,8 @@ void PropertyValuesDispatcher::afterSetEdgeValue(tlp::PropertyInterface *sourceP
     std::string strVal = sourceProp->getEdgeStringValue(e);
     vector<int> vect = _graphEntitiesToDisplayedNodes->getEdgeValue(e);
 
-    for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
-      targetProp->setNodeStringValue(node(*it), strVal);
+    for (int &it : vect)
+      targetProp->setNodeStringValue(node(it), strVal);
 
     edge ee = _edgesMap[e];
 
@@ -137,8 +137,8 @@ void PropertyValuesDispatcher::afterSetEdgeValue(tlp::PropertyInterface *sourceP
 
     vector<int> vect = _graphEntitiesToDisplayedNodes->getEdgeValue(edge(id));
 
-    for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
-      sourceProp->setNodeStringValue(node(*it), strVal);
+    for (int &it : vect)
+      sourceProp->setNodeStringValue(node(it), strVal);
   }
 
   _modifying = false;

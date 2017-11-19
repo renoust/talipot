@@ -100,9 +100,8 @@ public:
   virtual void setStencil(int stencil) {
     this->stencil = stencil;
 
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      (*it)->setStencil(stencil);
+    for (auto &_sortedElement : _sortedElements) {
+      _sortedElement->setStencil(stencil);
     }
   }
 
@@ -135,9 +134,8 @@ public:
    */
   virtual void acceptVisitor(GlSceneVisitor *visitor) {
     // visitor->visit(this);
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      if ((*it)->isVisible()) {
+    for (auto &_sortedElement : _sortedElements) {
+      if (_sortedElement->isVisible()) {
 
 #ifndef NDEBUG
         GlComposite *composite = dynamic_cast<GlComposite *>(*it);
@@ -154,7 +152,7 @@ public:
 
 #endif
 
-        (*it)->acceptVisitor(visitor);
+        _sortedElement->acceptVisitor(visitor);
       }
     }
   }

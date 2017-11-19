@@ -165,8 +165,8 @@ void GlAbstractPolygon::draw(float lod, Camera *) {
       for (size_t i = 1; i < points.size() && normalPoints.size() < 3; ++i) {
         bool find = false;
 
-        for (size_t j = 0; j < normalPoints.size(); ++j) {
-          if (normalPoints[j] == points[i]) {
+        for (auto &normalPoint : normalPoints) {
+          if (normalPoint == points[i]) {
             find = true;
             break;
           }
@@ -426,8 +426,8 @@ void GlAbstractPolygon::draw(float lod, Camera *) {
 void GlAbstractPolygon::translate(const Coord &vec) {
   boundingBox.translate(vec);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it) += vec;
+  for (auto &point : points) {
+    point += vec;
   }
 
   clearGenerated();
@@ -436,8 +436,8 @@ void GlAbstractPolygon::translate(const Coord &vec) {
 void GlAbstractPolygon::scale(const Size &factor) {
   boundingBox.scale(factor);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it) *= factor;
+  for (auto &point : points) {
+    point *= factor;
   }
 
   clearGenerated();
@@ -474,8 +474,8 @@ void GlAbstractPolygon::setWithXML(const string &inString, unsigned int &current
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
   GlXMLTools::setWithXML(inString, currentPosition, "outlineSize", outlineSize);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    boundingBox.expand(*it);
+  for (auto &point : points) {
+    boundingBox.expand(point);
   }
 }
 //============================================================
@@ -522,8 +522,8 @@ void GlAbstractPolygon::clearGenerated() {
 void GlAbstractPolygon::recomputeBoundingBox() {
   boundingBox = BoundingBox();
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    boundingBox.expand(*it);
+  for (auto &point : points) {
+    boundingBox.expand(point);
   }
 }
 }

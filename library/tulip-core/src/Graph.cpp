@@ -291,20 +291,20 @@ Graph *tlp::loadGraph(const std::string &filename, PluginProgress *progress) {
 
   list<string> importPlugins = PluginLister::instance()->availablePlugins<ImportModule>();
 
-  for (list<string>::iterator it = importPlugins.begin(); it != importPlugins.end(); ++it) {
+  for (auto &it : importPlugins) {
     const ImportModule &importPlugin =
-        static_cast<const ImportModule &>(PluginLister::instance()->pluginInformation(*it));
+        static_cast<const ImportModule &>(PluginLister::instance()->pluginInformation(it));
     list<string> extensions = importPlugin.fileExtensions();
     list<string> gzipextensions = importPlugin.gzipFileExtensions();
 
-    for (list<string>::iterator itE = extensions.begin(); itE != extensions.end(); ++itE)
-      if (filename.rfind(*itE) == (filename.size() - (*itE).size())) {
+    for (auto &extension : extensions)
+      if (filename.rfind(extension) == (filename.size() - extension.size())) {
         importPluginName = importPlugin.name();
         break;
       }
 
-    for (list<string>::iterator itE = gzipextensions.begin(); itE != gzipextensions.end(); ++itE)
-      if (filename.rfind(*itE) == (filename.size() - (*itE).size())) {
+    for (auto &gzipextension : gzipextensions)
+      if (filename.rfind(gzipextension) == (filename.size() - gzipextension.size())) {
         importPluginName = importPlugin.name();
         break;
       }
@@ -324,8 +324,8 @@ bool tlp::saveGraph(Graph *graph, const std::string &filename, PluginProgress *p
   string exportPluginName;
   list<string> exportPlugins = PluginLister::instance()->availablePlugins<ExportModule>();
 
-  for (list<string>::iterator it = exportPlugins.begin(); it != exportPlugins.end(); ++it) {
-    ExportModule *exportPlugin = PluginLister::instance()->getPluginObject<ExportModule>(*it, NULL);
+  for (auto &it : exportPlugins) {
+    ExportModule *exportPlugin = PluginLister::instance()->getPluginObject<ExportModule>(it, NULL);
     string ext(exportPlugin->fileExtension());
 
     if (filename.rfind(ext) != string::npos &&
@@ -1765,14 +1765,8 @@ void Graph::createMetaNodes(Iterator<Graph *> *itS, Graph *quotientGraph, vector
         set<node> &metaSources = nMapping[eEnds.first];
         set<node> &metaTargets = nMapping[eEnds.second];
 
-        for (set<node>::const_iterator itms = metaSources.begin(); itms != metaSources.end();
-             ++itms) {
-          node mSource = *itms;
-
-          for (set<node>::const_iterator itmt = metaTargets.begin(); itmt != metaTargets.end();
-               ++itmt) {
-            node mTarget = *itmt;
-
+        for (auto mSource : metaSources) {
+          for (auto mTarget : metaTargets) {
             if (mSource != mTarget) {
               MetaEdge tmp;
               tmp.source = mSource.id, tmp.target = mTarget.id;

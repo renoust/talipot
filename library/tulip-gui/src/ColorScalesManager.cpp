@@ -29,9 +29,7 @@ void ColorScalesManager::getColorScalesFromDir(const string &colorScalesDir,
     dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
     QFileInfoList list = dir.entryInfoList();
 
-    for (int i = 0; i < list.size(); ++i) {
-      QFileInfo fileInfo = list.at(i);
-
+    for (auto fileInfo : list) {
       if (fileInfo.isDir()) {
         getColorScalesFromDir(QStringToTlpString(fileInfo.absoluteFilePath()), colorScalesList);
       } else if (fileInfo.suffix() == "png") {
@@ -108,9 +106,7 @@ string ColorScalesManager::findColorScaleFile(const string &rootDir, const strin
     dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
     QFileInfoList list = dir.entryInfoList();
 
-    for (int i = 0; i < list.size(); ++i) {
-      QFileInfo fileInfo = list.at(i);
-
+    for (auto fileInfo : list) {
       if (fileInfo.isDir()) {
         ret = findColorScaleFile(QStringToTlpString(fileInfo.absoluteFilePath()), colorScaleName);
 
@@ -194,8 +190,8 @@ void ColorScalesManager::registerColorScale(const string &colorScaleName,
       QVariantMap colorsMap;
       map<float, Color> colorsMapTlp = colorScale.getColorMap();
 
-      for (map<float, Color>::iterator it = colorsMapTlp.begin(); it != colorsMapTlp.end(); ++it) {
-        colorsMap[QString::number(it->first)] = colorToQColor(it->second);
+      for (auto &it : colorsMapTlp) {
+        colorsMap[QString::number(it.first)] = colorToQColor(it.second);
       }
 
       TulipSettings::instance().beginGroup("ColorScalesNoRegular");

@@ -457,8 +457,8 @@ static bool generateTexture(const std::string &filename, const TextureInfo &text
 bool GlTextureLoader::loadTexture(const string &filename, GlTexture &texture) {
   string extension = filename.substr(filename.find_last_of('.') + 1);
 
-  for (unsigned int i = 0; i < extension.length(); ++i)
-    extension[i] = static_cast<char>(toupper(extension[i]));
+  for (char &i : extension)
+    i = static_cast<char>(toupper(i));
 
   TextureLoader_t *loader = NULL;
 
@@ -539,15 +539,15 @@ void GlTextureManager::registerExternalTexture(const std::string &textureName,
 
 //====================================================================
 void GlTextureManager::deleteTexture(const string &name) {
-  for (ContextAndTextureMap::iterator it = texturesMap.begin(); it != texturesMap.end(); ++it) {
-    TextureUnit::iterator it2 = it->second.find(name);
+  for (auto &it : texturesMap) {
+    TextureUnit::iterator it2 = it.second.find(name);
 
-    if (it2 != it->second.end()) {
+    if (it2 != it.second.end()) {
       for (unsigned int i = 0; i < it2->second.spriteNumber; ++i)
         glDeleteTextures(1, &(it2->second.id[i]));
 
       delete[] it2->second.id;
-      it->second.erase(name);
+      it.second.erase(name);
     }
   }
 }

@@ -154,13 +154,13 @@ void updateLayout(node src, edge e, Graph *graph, LayoutProperty *layout,
     sens = false;
   }
 
-  for (unsigned int j = 0; j < bends.size(); ++j) {
+  for (auto &bend : bends) {
     const Coord &coord = layout->getNodeValue(nBends[i]);
 
     if (!layout3D)
-      (bends[j] = coord)[2] = 0;
+      (bend = coord)[2] = 0;
     else
-      bends[j] = coord;
+      bend = coord;
 
     if (sens)
       ++i;
@@ -406,13 +406,13 @@ bool EdgeBundling::run() {
   // their enclosing cell vertices.
   // So connect the other ones to the enclosing cell vertices too
   // in order for the shortest path computation to work
-  for (size_t i = 0; i < samePositionNodes.size(); ++i) {
+  for (auto &samePositionNode : samePositionNodes) {
     tlp::node rep;
 
     // get the nodes that has been connected to the voronoi cell vertices
-    for (size_t j = 0; j < samePositionNodes[i].size(); ++j) {
-      if (gridGraph->deg(samePositionNodes[i][j]) > 0) {
-        rep = samePositionNodes[i][j];
+    for (size_t j = 0; j < samePositionNode.size(); ++j) {
+      if (gridGraph->deg(samePositionNode[j]) > 0) {
+        rep = samePositionNode[j];
         break;
       }
     }
@@ -422,11 +422,11 @@ bool EdgeBundling::run() {
     // we can use forEach instead of stableForEach
     tlp::node n;
     forEach(n, gridGraph->getOutNodes(rep)) {
-      for (size_t j = 0; j < samePositionNodes[i].size(); ++j) {
-        if (samePositionNodes[i][j] == rep)
+      for (size_t j = 0; j < samePositionNode.size(); ++j) {
+        if (samePositionNode[j] == rep)
           continue;
 
-        tlp::edge e = gridGraph->addEdge(samePositionNodes[i][j], n);
+        tlp::edge e = gridGraph->addEdge(samePositionNode[j], n);
         ntype.setEdgeValue(e, 2);
       }
     }
@@ -538,9 +538,9 @@ bool EdgeBundling::run() {
       }
 
       if (optimizationLevel > 1)
-        for (unsigned int i = 0; i < toDelete.size(); i++) {
-          orderedNodes.erase(toDelete[i]);
-          vertexCoverGraph->delNode(toDelete[i]);
+        for (auto i : toDelete) {
+          orderedNodes.erase(i);
+          vertexCoverGraph->delNode(i);
         }
 
       forceEdgeTest = false;
@@ -631,12 +631,12 @@ bool EdgeBundling::run() {
 
               // update preference property (if their is two shortest path try to use the
               // one with high preference)
-              for (size_t ii = 0; ii < tmpV.size(); ++ii) {
-                double res = preference.getNodeValue(tmpV[ii]) + 1;
+              for (auto ii : tmpV) {
+                double res = preference.getNodeValue(ii) + 1;
 #ifdef _OPENMP
 #pragma omp critical(PREF)
 #endif
-                preference.setNodeValue(tmpV[ii], res);
+                preference.setNodeValue(ii, res);
               }
 
               if (!layout3D)
@@ -648,8 +648,7 @@ bool EdgeBundling::run() {
         }
       }
 
-      for (size_t j = 0; j < toTreatByThreads.size(); ++j) {
-        node n = toTreatByThreads[j];
+      for (auto n : toTreatByThreads) {
         vector<node> neigbors;
         node n2;
         forEach(n2, vertexCoverGraph->getInOutNodes(n)) {
@@ -659,9 +658,9 @@ bool EdgeBundling::run() {
         orderedNodes.erase(n);
         vertexCoverGraph->delNode(n);
 
-        for (unsigned int i = 0; i < neigbors.size(); ++i) {
-          computeDistance(neigbors[i]);
-          orderedNodes.insert(neigbors[i]);
+        for (auto neigbor : neigbors) {
+          computeDistance(neigbor);
+          orderedNodes.insert(neigbor);
         }
       }
     }
@@ -687,24 +686,24 @@ bool EdgeBundling::run() {
   }
 
   // Reinsert multiple edges if any and update their layout
-  for (size_t i = 0; i < removedEdges.size(); ++i) {
-    std::pair<node, node> eEnds = graph->ends(removedEdges[i]);
+  for (auto removedEdge : removedEdges) {
+    std::pair<node, node> eEnds = graph->ends(removedEdge);
 
     if (eEnds.first == eEnds.second)
-      oriGraph->addEdge(removedEdges[i]);
+      oriGraph->addEdge(removedEdge);
     else {
       tlp::edge origEdge = oriGraph->existEdge(eEnds.first, eEnds.second);
 
       if (origEdge.isValid()) {
-        oriGraph->addEdge(removedEdges[i]);
-        layout->setEdgeValue(removedEdges[i], layout->getEdgeValue(origEdge));
+        oriGraph->addEdge(removedEdge);
+        layout->setEdgeValue(removedEdge, layout->getEdgeValue(origEdge));
       } else {
         origEdge = oriGraph->existEdge(eEnds.second, eEnds.first);
         assert(origEdge.isValid());
-        oriGraph->addEdge(removedEdges[i]);
+        oriGraph->addEdge(removedEdge);
         std::vector<tlp::Coord> bends = layout->getEdgeValue(origEdge);
         std::reverse(bends.begin(), bends.end());
-        layout->setEdgeValue(removedEdges[i], bends);
+        layout->setEdgeValue(removedEdge, bends);
       }
     }
   }

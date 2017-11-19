@@ -243,10 +243,10 @@ void PixelOrientedView::setState(const DataSet &dataSet) {
 
     propertiesSelectionWidget->setSelectedProperties(selectedGraphProperties);
 
-    for (size_t i = 0; i < selectedGraphProperties.size(); ++i) {
+    for (const auto &selectedGraphPropertie : selectedGraphProperties) {
       bool overviewGenerated = false;
-      dataSet.get(selectedGraphProperties[i], overviewGenerated);
-      overviewGenMap[selectedGraphProperties[i]] = overviewGenerated;
+      dataSet.get(selectedGraphPropertie, overviewGenerated);
+      overviewGenMap[selectedGraphPropertie] = overviewGenerated;
     }
 
     string layoutName("");
@@ -301,8 +301,8 @@ DataSet PixelOrientedView::state() const {
 
   map<string, bool> tmpOverviewGenMap = overviewGenMap;
 
-  for (size_t i = 0; i < selectedGraphProperties.size(); ++i) {
-    dataSet.set(selectedGraphProperties[i], tmpOverviewGenMap[selectedGraphProperties[i]]);
+  for (const auto &selectedGraphPropertie : selectedGraphProperties) {
+    dataSet.set(selectedGraphPropertie, tmpOverviewGenMap[selectedGraphPropertie]);
   }
 
   dataSet.set("lastViewWindowWidth", getGlMainWidget()->width());
@@ -418,32 +418,31 @@ void PixelOrientedView::initPixelView() {
 void PixelOrientedView::destroyOverviewsIfNeeded() {
   vector<string> propertiesToRemove;
 
-  for (size_t i = 0; i < selectedGraphProperties.size(); ++i) {
-    if (!pixelOrientedGraph->existProperty(selectedGraphProperties[i])) {
-      if (overviewsMap[selectedGraphProperties[i]] == detailOverview) {
+  for (const auto &selectedGraphPropertie : selectedGraphProperties) {
+    if (!pixelOrientedGraph->existProperty(selectedGraphPropertie)) {
+      if (overviewsMap[selectedGraphPropertie] == detailOverview) {
         detailOverview = NULL;
         detailOverviewPropertyName = "";
       }
 
-      delete overviewsMap[selectedGraphProperties[i]];
-      overviewsMap.erase(selectedGraphProperties[i]);
-      delete dataMap[selectedGraphProperties[i]];
-      dataMap.erase(selectedGraphProperties[i]);
-      propertiesToRemove.push_back(selectedGraphProperties[i]);
+      delete overviewsMap[selectedGraphPropertie];
+      overviewsMap.erase(selectedGraphPropertie);
+      delete dataMap[selectedGraphPropertie];
+      dataMap.erase(selectedGraphPropertie);
+      propertiesToRemove.push_back(selectedGraphPropertie);
     }
   }
 
-  for (size_t i = 0; i < propertiesToRemove.size(); ++i) {
-    selectedGraphProperties.erase(remove(selectedGraphProperties.begin(),
-                                         selectedGraphProperties.end(), propertiesToRemove[i]),
-                                  selectedGraphProperties.end());
+  for (const auto &i : propertiesToRemove) {
+    selectedGraphProperties.erase(
+        remove(selectedGraphProperties.begin(), selectedGraphProperties.end(), i),
+        selectedGraphProperties.end());
   }
 }
 
 void PixelOrientedView::destroyData() {
-  for (map<string, TulipGraphDimension *>::iterator it = dataMap.begin(); it != dataMap.end();
-       ++it) {
-    delete it->second;
+  for (auto &it : dataMap) {
+    delete it.second;
   }
 
   dataMap.clear();
@@ -660,13 +659,12 @@ void PixelOrientedView::updateOverviews(const bool updateAll) {
   // before allowing the progressBar display
   QApplication::processEvents();
 
-  for (map<string, PixelOrientedOverview *>::iterator it = overviewsMap.begin();
-       it != overviewsMap.end(); ++it) {
-    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it->first) !=
+  for (auto &it : overviewsMap) {
+    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it.first) !=
         selectedGraphProperties.end()) {
-      if (updateAll || overviewGenMap[it->first]) {
-        (it->second)->computePixelView();
-        overviewGenMap[it->first] = true;
+      if (updateAll || overviewGenMap[it.first]) {
+        (it.second)->computePixelView();
+        overviewGenMap[it.first] = true;
       }
 
       progressBar->progress(++currentStep, nbOverviews);
@@ -799,16 +797,15 @@ void PixelOrientedView::interactorsInstalled(const QList<tlp::Interactor *> &) {
 void PixelOrientedView::toggleInteractors(const bool activate) {
   QList<Interactor *> interactorsList = interactors();
 
-  for (QList<Interactor *>::iterator it = interactorsList.begin(); it != interactorsList.end();
-       ++it) {
-    if (!(dynamic_cast<PixelOrientedInteractorNavigation *>(*it))) {
-      (*it)->action()->setEnabled(activate);
+  for (auto &it : interactorsList) {
+    if (!(dynamic_cast<PixelOrientedInteractorNavigation *>(it))) {
+      it->action()->setEnabled(activate);
 
       if (!activate) {
-        (*it)->action()->setChecked(false);
+        it->action()->setChecked(false);
       }
     } else if (!activate) {
-      (*it)->action()->setChecked(true);
+      it->action()->setChecked(true);
     }
 
     interactorsActivated = activate;

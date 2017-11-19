@@ -322,9 +322,9 @@ void OctreeBundle::createOctree(Graph *graph, tlp::LayoutProperty *lay, tlp::Siz
 
   recQuad(fr, ba, input);
 
-  for (size_t i = 0; i < unvalidEdges.size(); ++i) {
-    node src = unvalidEdges[i].first;
-    node tgt = unvalidEdges[i].second;
+  for (auto &unvalidEdge : unvalidEdges) {
+    node src = unvalidEdge.first;
+    node tgt = unvalidEdge.second;
     edge e;
 
     if ((e = graph->existEdge(src, tgt)).isValid())

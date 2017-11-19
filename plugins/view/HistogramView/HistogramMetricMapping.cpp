@@ -338,9 +338,9 @@ void GlEditableCurve::updateSize(const Coord &newMinPoint, const Coord &newMaxPo
   float oldLength = maxPoint.getX() - minPoint.getX();
   float newLength = newMaxPoint.getX() - newMinPoint.getX();
 
-  for (size_t i = 0; i < curvePoints.size(); ++i) {
-    curvePoints[i].setX(newMinPoint.getX() +
-                        ((curvePoints[i].getX() - minPoint.getX()) * newLength) / oldLength);
+  for (auto &curvePoint : curvePoints) {
+    curvePoint.setX(newMinPoint.getX() +
+                    ((curvePoint.getX() - minPoint.getX()) * newLength) / oldLength);
   }
 
   minPoint = newMinPoint;
@@ -473,9 +473,9 @@ void GlGlyphScale::setGlyphsList(const vector<int> &glyphsList) {
 
   glyphScaleMap.clear();
 
-  for (size_t i = 0; i < glyphsList.size(); ++i) {
+  for (int i : glyphsList) {
     node n = glyphGraph->addNode();
-    glyphGraphShape->setNodeValue(n, glyphsList[i]);
+    glyphGraphShape->setNodeValue(n, i);
   }
 
   size = length / glyphsList.size();
@@ -1008,13 +1008,11 @@ bool HistogramMetricMapping::draw(GlMainWidget *glMainWidget) {
 
     glDisable(GL_LIGHTING);
 
-    for (size_t i = 0; i < curvePointsCp.size(); ++i) {
-      Coord startLine(xStart, curvePointsCp[i].getY(), 0);
-      GlLines::glDrawLine(startLine, curvePointsCp[i], 0.5, GlLines::TLP_DASHED, lineColor,
-                          lineColor);
-      Coord endLine(curvePointsCp[i].getX(), yEnd);
-      GlLines::glDrawLine(curvePointsCp[i], endLine, 0.5, GlLines::TLP_DASHED, lineColor,
-                          lineColor);
+    for (auto &i : curvePointsCp) {
+      Coord startLine(xStart, i.getY(), 0);
+      GlLines::glDrawLine(startLine, i, 0.5, GlLines::TLP_DASHED, lineColor, lineColor);
+      Coord endLine(i.getX(), yEnd);
+      GlLines::glDrawLine(i, endLine, 0.5, GlLines::TLP_DASHED, lineColor, lineColor);
     }
 
     glEnable(GL_LIGHTING);

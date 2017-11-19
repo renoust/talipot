@@ -332,8 +332,8 @@ bool BubbleTree::run() {
     graph->push(false);
     ConnectedTest::computeConnectedComponents(graph, components);
 
-    for (unsigned int i = 0; i < components.size(); ++i) {
-      Graph *tmp = graph->inducedSubGraph(components[i]);
+    for (const auto &component : components) {
+      Graph *tmp = graph->inducedSubGraph(component);
       tmp->applyPropertyAlgorithm("Bubble Tree", result, err, pluginProgress, dataSet);
     }
 

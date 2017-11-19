@@ -377,8 +377,7 @@ bool TulipProject::removeAllDirPrivate(const QString &path, bool removeRootDir) 
                                               QDir::AllDirs | QDir::Files,
                                           QDir::DirsFirst));
 
-  for (QFileInfoList::iterator it = entries.begin(); it != entries.end(); ++it) {
-    QFileInfo info(*it);
+  for (auto info : entries) {
     bool result = true;
 
     if (info.isDir()) {

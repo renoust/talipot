@@ -271,10 +271,10 @@ void CSVImportConfigurationWidget::updateWidget(const std::string &title) {
       // parse the first line only
       parser->parse(this, &progress, true);
 
-      for (unsigned int i = 0; i < columnHeaderType.size(); ++i) {
+      for (const auto &i : columnHeaderType) {
         // If there is at least one column with a header type different
         // from StringProperty, then the first line is not the header
-        if (columnHeaderType[i] != StringProperty::propertyTypename) {
+        if (i != StringProperty::propertyTypename) {
           setUseFirstLineAsPropertyName(false);
           break;
         }
@@ -476,10 +476,9 @@ void CSVImportConfigurationWidget::updateLineNumbers(bool resetValues) {
 }
 
 void CSVImportConfigurationWidget::clearPropertiesTypeList() {
-  for (vector<PropertyConfigurationWidget *>::iterator it = propertyWidgets.begin();
-       it != propertyWidgets.end(); ++it) {
-    ui->gridLayout->removeWidget(*it);
-    (*it)->deleteLater();
+  for (auto &propertyWidget : propertyWidgets) {
+    ui->gridLayout->removeWidget(propertyWidget);
+    propertyWidget->deleteLater();
   }
 
   propertyWidgets.clear();
@@ -567,9 +566,8 @@ QValidator::State PropertyNameValidator::validate(QString &input, int &) const {
   // Only one property can have the same name
   unsigned int count = 0;
 
-  for (vector<PropertyConfigurationWidget *>::const_iterator it = widgets.begin();
-       it != widgets.end(); ++it) {
-    if ((*it)->getPropertyName().compare(input) == 0) {
+  for (auto widget : widgets) {
+    if (widget->getPropertyName().compare(input) == 0) {
       ++count;
     }
   }

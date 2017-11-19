@@ -34,13 +34,14 @@ DoubleStringsListRelationDialog::DoubleStringsListRelationDialog(
     : QDialog(parent), _ui(new Ui::DoubleStringsListRelationDialogData) {
   _ui->setupUi(this);
 
-  for (vector<string>::const_iterator it = firstValues.begin(); it != firstValues.end(); ++it) {
-    _ui->firstListWidget->addItem((*it).c_str());
+  for (const auto &firstValue : firstValues) {
+    _ui->firstListWidget->addItem(firstValue.c_str());
   }
 
-  for (vector<Color>::const_iterator it = secondValues.begin(); it != secondValues.end(); ++it) {
+  for (const auto &secondValue : secondValues) {
     QListWidgetItem *item = new QListWidgetItem;
-    item->setBackground(QBrush(QColor((*it)[0], (*it)[1], (*it)[2], (*it)[3])));
+    item->setBackground(
+        QBrush(QColor(secondValue[0], secondValue[1], secondValue[2], secondValue[3])));
     _ui->secondListWidget->addItem(item);
   }
 

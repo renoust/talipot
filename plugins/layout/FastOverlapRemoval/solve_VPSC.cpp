@@ -32,8 +32,8 @@ IncSolver::IncSolver(const unsigned n, Variable *const vs[], const unsigned m, C
     : Solver(n, vs, m, cs), splitCnt(0) {
   inactive.assign(cs, cs + m);
 
-  for (ConstraintList::iterator i = inactive.begin(); i != inactive.end(); ++i) {
-    (*i)->active = false;
+  for (auto &i : inactive) {
+    i->active = false;
   }
 }
 Solver::Solver(const unsigned n, Variable *const vs[], const unsigned m, Constraint *cs[])
@@ -77,9 +77,7 @@ void Solver::printBlocks() {
 void Solver::satisfy() {
   list<Variable *> *vs = bs->totalOrder();
 
-  for (list<Variable *>::iterator i = vs->begin(); i != vs->end(); ++i) {
-    Variable *v = *i;
-
+  for (auto v : *vs) {
     if (!v->block->deleted) {
       bs->mergeLeft(v->block);
     }
@@ -111,14 +109,12 @@ void Solver::refine() {
     solved = true;
     maxtries--;
 
-    for (set<Block *>::const_iterator i = bs->begin(); i != bs->end(); ++i) {
-      Block *b = *i;
+    for (auto b : *bs) {
       b->setUpInConstraints();
       b->setUpOutConstraints();
     }
 
-    for (set<Block *>::const_iterator i = bs->begin(); i != bs->end(); ++i) {
-      Block *b = *i;
+    for (auto b : *bs) {
       Constraint *c = b->findMinLM();
 
       if (c != NULL && c->lm < 0) {
@@ -248,8 +244,7 @@ void IncSolver::moveBlocks() {
   f << "moveBlocks()..." << endl;
 #endif
 
-  for (set<Block *>::const_iterator i(bs->begin()); i != bs->end(); ++i) {
-    Block *b = *i;
+  for (auto b : *bs) {
     b->wposn = b->desiredWeightedPosition();
     b->posn = b->wposn / b->weight;
   }
@@ -266,8 +261,7 @@ void IncSolver::splitBlocks() {
   splitCnt = 0;
 
   // Split each block if necessary on min LM
-  for (set<Block *>::const_iterator i(bs->begin()); i != bs->end(); ++i) {
-    Block *b = *i;
+  for (auto b : *bs) {
     Constraint *v = b->findMinLM();
 
     if (v != NULL && v->lm < ZERO_UPPERBOUND) {
@@ -396,8 +390,8 @@ bool Solver::constraintGraphIsCyclic(const unsigned n, Variable *const vs[]) {
     }
   }
 
-  for (unsigned i = 0; i < localGraph.size(); ++i) {
-    delete localGraph[i];
+  for (auto &i : localGraph) {
+    delete i;
   }
 
   return false;

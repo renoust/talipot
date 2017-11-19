@@ -328,27 +328,26 @@ void GlAxis::setGradsLabelsHeight(float height) {
 
   unsigned int i = 0;
 
-  for (vector<GlLabel *>::iterator it = gradsLabelsVector.begin(); it != gradsLabelsVector.end();
-       ++it) {
-    BoundingBox textBoundingBox = (*it)->getTextBoundingBox();
+  for (auto &it : gradsLabelsVector) {
+    BoundingBox textBoundingBox = it->getTextBoundingBox();
     float labelWidth = (labelHeight / (textBoundingBox[1][1] - textBoundingBox[0][1])) *
                        (textBoundingBox[1][0] - textBoundingBox[0][0]);
-    (*it)->setSize(Size(labelWidth, labelHeight));
+    it->setSize(Size(labelWidth, labelHeight));
 
     if (axisOrientation == HORIZONTAL_AXIS) {
       if (axisGradsPosition == LEFT_OR_BELOW)
-        (*it)->setPosition(Coord(axisBaseCoord.getX() + i * spaceBetweenAxisGrads,
-                                 axisBaseCoord.getY() - axisGradsWidth / 2 - labelWidth / 2 - 2));
+        it->setPosition(Coord(axisBaseCoord.getX() + i * spaceBetweenAxisGrads,
+                              axisBaseCoord.getY() - axisGradsWidth / 2 - labelWidth / 2 - 2));
       else if (axisGradsPosition == RIGHT_OR_ABOVE)
-        (*it)->setPosition(Coord(axisBaseCoord.getX() + i * spaceBetweenAxisGrads,
-                                 axisBaseCoord.getY() + axisGradsWidth / 2 + labelWidth / 2 + 2));
+        it->setPosition(Coord(axisBaseCoord.getX() + i * spaceBetweenAxisGrads,
+                              axisBaseCoord.getY() + axisGradsWidth / 2 + labelWidth / 2 + 2));
     } else if (axisOrientation == VERTICAL_AXIS) {
       if (axisGradsPosition == LEFT_OR_BELOW)
-        (*it)->setPosition(Coord(axisBaseCoord.getX() - axisGradsWidth / 2. - labelWidth / 2. - 2,
-                                 axisBaseCoord.getY() + i * spaceBetweenAxisGrads));
+        it->setPosition(Coord(axisBaseCoord.getX() - axisGradsWidth / 2. - labelWidth / 2. - 2,
+                              axisBaseCoord.getY() + i * spaceBetweenAxisGrads));
       else if (axisGradsPosition == RIGHT_OR_ABOVE)
-        (*it)->setPosition(Coord(axisBaseCoord.getX() + axisGradsWidth / 2. + labelWidth / 2. + 2,
-                                 axisBaseCoord.getY() + i * spaceBetweenAxisGrads));
+        it->setPosition(Coord(axisBaseCoord.getX() + axisGradsWidth / 2. + labelWidth / 2. + 2,
+                              axisBaseCoord.getY() + i * spaceBetweenAxisGrads));
     }
 
     ++i;

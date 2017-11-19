@@ -193,9 +193,8 @@ void GlMetaNodeRenderer::treatEvent(const Event &e) {
 }
 
 void GlMetaNodeRenderer::clearScenes() {
-  for (map<Graph *, GlScene *>::iterator it = _metaGraphToSceneMap.begin();
-       it != _metaGraphToSceneMap.end(); ++it) {
-    delete it->second;
+  for (auto &it : _metaGraphToSceneMap) {
+    delete it.second;
   }
 
   _metaGraphToSceneMap.clear();

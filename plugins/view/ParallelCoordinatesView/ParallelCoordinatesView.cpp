@@ -811,10 +811,9 @@ void ParallelCoordinatesView::setDataUnderPointerSelectFlag(const int x, const i
                                                             const bool selectFlag) {
   const set<unsigned int> &dataUnderPointer(mapGlEntitiesInRegionToData(x, y, 1, 1));
 
-  for (set<unsigned int>::const_iterator it = dataUnderPointer.begin();
-       it != dataUnderPointer.end(); ++it) {
-    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(*it))
-      graphProxy->setDataSelected(*it, selectFlag);
+  for (unsigned int it : dataUnderPointer) {
+    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(it))
+      graphProxy->setDataSelected(it, selectFlag);
   }
 }
 
@@ -824,10 +823,9 @@ void ParallelCoordinatesView::setDataInRegionSelectFlag(const int x, const int y
                                                         const bool selectFlag) {
   const set<unsigned int> &dataUnderPointer(mapGlEntitiesInRegionToData(x, y, width, height));
 
-  for (set<unsigned int>::const_iterator it = dataUnderPointer.begin();
-       it != dataUnderPointer.end(); ++it) {
-    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(*it))
-      graphProxy->setDataSelected(*it, selectFlag);
+  for (unsigned int it : dataUnderPointer) {
+    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(it))
+      graphProxy->setDataSelected(it, selectFlag);
   }
 }
 
@@ -838,10 +836,9 @@ void ParallelCoordinatesView::resetSelection() {
 void ParallelCoordinatesView::deleteDataUnderPointer(const int x, const int y) {
   const set<unsigned int> &dataUnderPointer(mapGlEntitiesInRegionToData(x, y, 1, 1));
 
-  for (set<unsigned int>::const_iterator it = dataUnderPointer.begin();
-       it != dataUnderPointer.end(); ++it) {
-    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(*it))
-      graphProxy->deleteData(*it);
+  for (unsigned int it : dataUnderPointer) {
+    if (!graphProxy->highlightedEltsSet() || graphProxy->isDataHighlighted(it))
+      graphProxy->deleteData(it);
   }
 }
 
@@ -888,9 +885,8 @@ void ParallelCoordinatesView::highlightDataUnderPointer(const int x, const int y
 
   const set<unsigned int> &dataUnderPointer(mapGlEntitiesInRegionToData(x, y, 1, 1));
 
-  for (set<unsigned int>::const_iterator it = dataUnderPointer.begin();
-       it != dataUnderPointer.end(); ++it) {
-    graphProxy->addOrRemoveEltToHighlight(*it);
+  for (unsigned int it : dataUnderPointer) {
+    graphProxy->addOrRemoveEltToHighlight(it);
   }
 
   graphProxy->colorDataAccordingToHighlightedElts();
@@ -905,9 +901,8 @@ void ParallelCoordinatesView::highlightDataInRegion(const int x, const int y, co
 
   const set<unsigned int> &dataUnderPointer = mapGlEntitiesInRegionToData(x, y, width, height);
 
-  for (set<unsigned int>::const_iterator it = dataUnderPointer.begin();
-       it != dataUnderPointer.end(); ++it) {
-    graphProxy->addOrRemoveEltToHighlight(*it);
+  for (unsigned int it : dataUnderPointer) {
+    graphProxy->addOrRemoveEltToHighlight(it);
   }
 
   graphProxy->colorDataAccordingToHighlightedElts();
@@ -924,8 +919,8 @@ ParallelAxis *ParallelCoordinatesView::getAxisUnderPointer(const int x, const in
       &getGlMainWidget()->getScene()->getLayer("Main")->getCamera());
   axisSelectionLayer->getComposite()->reset(false);
 
-  for (size_t i = 0; i < allAxis.size(); ++i) {
-    axisSelectionLayer->addGlEntity(allAxis[i], getStringFromNumber(allAxis[i]));
+  for (auto &allAxi : allAxis) {
+    axisSelectionLayer->addGlEntity(allAxi, getStringFromNumber(allAxi));
   }
 
   vector<SelectedEntity> pickedEntities;

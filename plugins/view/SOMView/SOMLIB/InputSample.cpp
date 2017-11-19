@@ -77,14 +77,13 @@ void InputSample::buildPropertyVector(const std::vector<std::string> &properties
   propertiesList.clear();
   PropertyInterface *property;
 
-  for (vector<string>::const_iterator it = propertiesToListen.begin();
-       it != propertiesToListen.end(); ++it) {
-    if (rootGraph->existProperty(*it)) {
-      property = rootGraph->getProperty((*it));
+  for (const auto &it : propertiesToListen) {
+    if (rootGraph->existProperty(it)) {
+      property = rootGraph->getProperty(it);
       string type = property->getTypename();
 
       if (type.compare("double") == 0 || type.compare("int") == 0) {
-        propertiesNameList.push_back(*it);
+        propertiesNameList.push_back(it);
         propertiesList.push_back(static_cast<NumericProperty *>(property));
       } else {
         cerr << __PRETTY_FUNCTION__ << ":" << __LINE__ << " "
@@ -212,15 +211,13 @@ void InputSample::clearGraphObs() {
 }
 
 void InputSample::initPropertiesObs() {
-  for (vector<NumericProperty *>::iterator it = propertiesList.begin(); it != propertiesList.end();
-       ++it) {
-    (*it)->addObserver(this);
+  for (auto &it : propertiesList) {
+    it->addObserver(this);
   }
 }
 void InputSample::clearPropertiesObs() {
-  for (vector<NumericProperty *>::iterator it = propertiesList.begin(); it != propertiesList.end();
-       ++it) {
-    (*it)->removeObserver(this);
+  for (auto &it : propertiesList) {
+    it->removeObserver(this);
   }
 }
 
@@ -232,9 +229,8 @@ void InputSample::update(std::set<Observable *>::iterator begin,
   for (std::set<Observable *>::iterator it = begin; it != end; ++it) {
     unsigned int propNum = 0;
 
-    for (std::vector<tlp::NumericProperty *>::iterator itP = propertiesList.begin();
-         itP != propertiesList.end(); ++itP) {
-      if ((*it) == (*itP)) {
+    for (auto &itP : propertiesList) {
+      if ((*it) == itP) {
         // mWeightTab.setAll(DynamicVector<double> ());
         mWeightTab.clear();
 

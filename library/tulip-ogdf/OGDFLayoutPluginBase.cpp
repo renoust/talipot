@@ -201,8 +201,8 @@ void OGDFLayoutPluginBase::transposeLayoutVertically() {
     std::vector<tlp::Coord> bends = result->getEdgeValue(edges[i]);
 
     if (bends.size()) {
-      for (size_t i = 0; i < bends.size(); ++i) {
-        bends[i][1] = midY - (bends[i][1] - midY);
+      for (auto &bend : bends) {
+        bend[1] = midY - (bend[1] - midY);
       }
 
       result->setEdgeValue(edges[i], bends);

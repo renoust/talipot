@@ -106,8 +106,8 @@ public:
   std::vector<Edge> voronoiEdgesForSite(const unsigned int siteIdx) {
     std::vector<Edge> ret;
 
-    for (size_t i = 0; i < siteToCellEdges[siteIdx].size(); ++i) {
-      ret.push_back(edges[siteToCellEdges[siteIdx][i]]);
+    for (unsigned int i : siteToCellEdges[siteIdx]) {
+      ret.push_back(edges[i]);
     }
 
     return ret;

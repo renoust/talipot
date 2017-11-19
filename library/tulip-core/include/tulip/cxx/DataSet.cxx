@@ -21,10 +21,7 @@
 // DataSet implementation
 template <typename T>
 bool tlp::DataSet::get(const std::string &str, T &value) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    const std::pair<std::string, tlp::DataType *> &p = *it;
-
+  for (const auto &p : data) {
     if (p.first == str) {
       value = *(static_cast<T *>(p.second->value));
       return true;

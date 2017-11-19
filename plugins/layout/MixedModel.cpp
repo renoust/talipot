@@ -111,8 +111,8 @@ bool MixedModel::run() {
   std::vector<std::vector<node>> components;
   ConnectedTest::computeConnectedComponents(Pere, components);
 
-  for (unsigned int i = 0; i < components.size(); ++i) {
-    Pere->inducedSubGraph(components[i]);
+  for (const auto &component : components) {
+    Pere->inducedSubGraph(component);
   }
 
   vector<edge> edge_planar;
@@ -207,8 +207,7 @@ bool MixedModel::run() {
       graphMap = computePlanarConMap(G);
       vector<edge> re_added = getPlanarSubGraph(graphMap, unplanar_edges);
 
-      for (unsigned int ui = 0; ui < re_added.size(); ++ui) {
-        edge e = re_added[ui];
+      for (auto e : re_added) {
         G->addEdge(e);
         resultatAlgoSelection.setEdgeValue(e, true);
         edge_planar.push_back(e);
@@ -374,8 +373,7 @@ vector<edge> MixedModel::getPlanarSubGraph(tlp::PlanarConMap *sg,
                                            std::vector<tlp::edge> unplanar_edges) {
   vector<edge> res;
 
-  for (unsigned int ui = 0; ui < unplanar_edges.size(); ++ui) {
-    edge e = unplanar_edges[ui];
+  for (auto e : unplanar_edges) {
     const pair<node, node> &eEnds = sg->ends(e);
     Face f = sg->sameFace(eEnds.first, eEnds.second);
 
@@ -464,8 +462,7 @@ void MixedModel::placeNodesEdges() {
     maxX /= 8;
     maxY /= 8;
 
-    for (unsigned int ui = 0; ui < unplanar_edges.size(); ++ui) {
-      edge e = unplanar_edges[ui];
+    for (auto e : unplanar_edges) {
       const pair<node, node> &eEnds = carte->ends(e);
       node n = eEnds.first;
       node v = eEnds.second;
@@ -792,8 +789,7 @@ void MixedModel::assignInOutPoints() { // on considère qu'il n'y a pas d'arc do
       }
 
       if (k != 0) {
-        for (unsigned int ui = 0; ui < listOfEdgesIN.size(); ++ui) {
-          edge e_tmp = listOfEdgesIN[ui];
+        for (auto e_tmp : listOfEdgesIN) {
           const pair<node, node> &eEnds = carte->ends(e_tmp);
           node n_tmp = (eEnds.first == v) ? eEnds.second : eEnds.first;
 
@@ -1086,9 +1082,9 @@ void MixedModel::computeCoords() {
 
   float somme = 0;
 
-  for (unsigned int i = 0; i < C.size(); ++i) {
-    somme += NodeCoords[C[i]].getX();
-    NodeCoords[C[i]].setX(somme);
+  for (auto i : C) {
+    somme += NodeCoords[i].getX();
+    NodeCoords[i].setX(somme);
   }
 
   for (int k = size_V - 1; k >= 0; k--) {

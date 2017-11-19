@@ -79,9 +79,9 @@ list<edge> PlanarityTest::getObstructionsEdges(Graph *graph) {
   set<edge> tmpAdded(addedEdges.begin(), addedEdges.end());
   list<edge> result;
 
-  for (list<edge>::iterator it = tmpList.begin(); it != tmpList.end(); ++it) {
-    if (tmpAdded.find(*it) == tmpAdded.end())
-      result.push_back(*it);
+  for (auto &it : tmpList) {
+    if (tmpAdded.find(it) == tmpAdded.end())
+      result.push_back(it);
   }
 
   return result;

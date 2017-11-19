@@ -56,9 +56,7 @@ bool PlanarityTestImpl::isPlanar(bool embedsg) {
     // finds all terminal nodes and their respective components in T[V_G \ L];
     findTerminalNodes(sg, n1, listOfComponents, terminalNodes);
 
-    for (list<node>::iterator it = listOfComponents.begin(); it != listOfComponents.end(); ++it) {
-      node comp = *it;
-
+    for (auto comp : listOfComponents) {
       if (terminalNodes[comp].size() > 0) {
         // creates a new c-node to represent current component;
         //  tlp::warning() << "  *terminal nodes for w = " << dfsPosNum.get(n1.id) << ":\n";
@@ -261,14 +259,14 @@ void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfC
 
   // groups all back-edges in T_w by their respective 2-connected component;
   // forall(e, listEdges)
-  for (list<edge>::iterator it = listEdges.begin(); it != listEdges.end(); ++it)
-    listBackEdges[componentOf[sG->source(*it)]].push_back(*it);
+  for (auto &listEdge : listEdges)
+    listBackEdges[componentOf[sG->source(listEdge)]].push_back(listEdge);
 
   // restores state[target] for all traversed nodes target;
   // node target;
   // forall (target, traversed_nodes)
-  for (list<node>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto &traversedNode : traversedNodes)
+    state.set(traversedNode.id, NOT_VISITED);
 }
 //=================================================================
 bool PlanarityTestImpl::findObstruction(Graph *sG, node n, list<node> &terminalNodes) {

@@ -65,9 +65,8 @@ bool EditColorScaleInteractor::eventFilter(QObject *obj, QEvent *event) {
     bool foundGlColorScale = false;
 
     if (!entities.empty()) {
-      for (vector<SelectedEntity>::iterator entityIterator = entities.begin();
-           entityIterator != entities.end(); ++entityIterator) {
-        if ((*entityIterator).getSimpleEntity() == colorScale->getGlColorScale()) {
+      for (auto &entitie : entities) {
+        if (entitie.getSimpleEntity() == colorScale->getGlColorScale()) {
           ColorScaleConfigDialog dialog(*colorScale->getGlColorScale()->getColorScale(),
                                         glMainWidget);
           foundGlColorScale = true;
@@ -134,9 +133,8 @@ bool EditColorScaleInteractor::draw(GlMainWidget *glMainWidget) {
 
       map<string, GlSimpleEntity *> displays = colorScale->getGlEntities();
 
-      for (map<string, GlSimpleEntity *>::iterator it = displays.begin(); it != displays.end();
-           ++it) {
-        it->second->draw(0, &camera2D);
+      for (auto &display : displays) {
+        display.second->draw(0, &camera2D);
       }
     }
   }

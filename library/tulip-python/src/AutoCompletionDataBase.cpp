@@ -275,8 +275,7 @@ void AutoCompletionDataBase::analyseCurrentScriptCode(const QString &code, const
 
   QVector<QString> importedModules = PythonInterpreter::getInstance()->getImportedModulesList();
 
-  for (int i = 0; i < importedModules.size(); ++i) {
-    QString moduleName = importedModules[i];
+  for (auto moduleName : importedModules) {
     _globalAutoCompletionList.insert(moduleName);
 
     if (moduleName.indexOf(".") != -1) {
@@ -294,8 +293,8 @@ void AutoCompletionDataBase::analyseCurrentScriptCode(const QString &code, const
     QVector<QString> builtinDictContent =
         PythonInterpreter::getInstance()->getObjectDictEntries(builtinModName);
 
-    for (int i = 0; i < builtinDictContent.size(); ++i) {
-      _globalAutoCompletionList.insert(builtinDictContent[i]);
+    for (const auto &i : builtinDictContent) {
+      _globalAutoCompletionList.insert(i);
     }
   }
 
@@ -756,14 +755,14 @@ QString AutoCompletionDataBase::findTypeForExpr(const QString &expr,
   QString cleanExpr = expr;
   int parenLevel = 0;
 
-  for (int i = 0; i < cleanExpr.length(); ++i) {
-    if (cleanExpr[i] == '(') {
+  for (auto &&i : cleanExpr) {
+    if (i == '(') {
       parenLevel += 1;
-    } else if (cleanExpr[i] == ')') {
+    } else if (i == ')') {
       parenLevel -= 1;
-    } else if (cleanExpr[i] == '.') {
+    } else if (i == '.') {
       if (parenLevel > 0) {
-        cleanExpr[i] = '_';
+        i = '_';
       }
     }
   }
@@ -1154,8 +1153,8 @@ static QSet<QString> getAlgorithmPluginsListOfType(const QString &type, const QS
   QSet<QString> ret;
   std::list<std::string> pluginNames = tlp::PluginLister::availablePlugins();
 
-  for (std::list<std::string>::iterator it = pluginNames.begin(); it != pluginNames.end(); ++it) {
-    tlp::Plugin *plugin = tlp::PluginLister::instance()->getPluginObject(*it, NULL);
+  for (auto &it : pluginNames) {
+    tlp::Plugin *plugin = tlp::PluginLister::instance()->getPluginObject(it, NULL);
 
     if (plugin->category() != tlp::GLYPH_CATEGORY && plugin->category() != EEGLYPH_CATEGORY &&
         plugin->category() != tlp::INTERACTOR_CATEGORY &&
@@ -1163,13 +1162,13 @@ static QSet<QString> getAlgorithmPluginsListOfType(const QString &type, const QS
         plugin->category() != tlp::PERSPECTIVE_CATEGORY) {
 
       if (type.isEmpty() || plugin->category() == QStringToTlpString(type)) {
-        QString pluginName = "\"" + tlpStringToQString(*it) + "\"";
+        QString pluginName = "\"" + tlpStringToQString(it) + "\"";
 
         if (pluginName.startsWith(prefix)) {
           ret.insert(pluginName);
         }
 
-        pluginName = "'" + tlpStringToQString(*it) + "'";
+        pluginName = "'" + tlpStringToQString(it) + "'";
 
         if (pluginName.startsWith(prefix)) {
           ret.insert(pluginName);
@@ -1336,8 +1335,7 @@ QSet<QString> AutoCompletionDataBase::getAllDictForType(const QString &type, con
 
   QVector<QString> baseTypes = PythonInterpreter::getInstance()->getBaseTypesForType(type);
 
-  for (int i = 0; i < baseTypes.size(); ++i) {
-    QString baseType = baseTypes[i];
+  for (auto baseType : baseTypes) {
     baseType.replace("_tulipgui", "tlpgui");
     baseType.replace("_tulip", "tlp");
 
@@ -1504,8 +1502,7 @@ AutoCompletionDataBase::getParamTypesForMethodOrFunction(const QString &type,
   QVector<QVector<QString>> ret = _apiDb->getParamTypesForMethodOrFunction(fullName);
   QVector<QString> baseTypes = PythonInterpreter::getInstance()->getBaseTypesForType(type);
 
-  for (int i = 0; i < baseTypes.size(); ++i) {
-    QString baseType = baseTypes[i];
+  for (auto baseType : baseTypes) {
     baseType.replace("_tulipgui", "tlpgui");
     baseType.replace("_tulip", "tlp");
 
@@ -1531,8 +1528,7 @@ QString AutoCompletionDataBase::getReturnTypeForMethodOrFunction(const QString &
   if (ret == "") {
     QVector<QString> baseTypes = PythonInterpreter::getInstance()->getBaseTypesForType(type);
 
-    for (int i = 0; i < baseTypes.size(); ++i) {
-      QString baseType = baseTypes[i];
+    for (auto baseType : baseTypes) {
       baseType.replace("_tulipgui", "tlpgui");
       baseType.replace("_tulip", "tlp");
 

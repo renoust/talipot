@@ -215,18 +215,18 @@ private:
     tlp::Coord minC = meshBB[0];
     tlp::Coord maxC = meshBB[1];
 
-    for (size_t i = 0; i < vertices.size(); ++i) {
+    for (auto &vertice : vertices) {
       if (meshBB.height() > meshBB.width()) {
-        vertices[i][0] = ((vertices[i][0] - minC[0]) / (maxC[0] - minC[0]) - 0.5) *
-                         (meshBB.width() / float(meshBB.height()));
-        vertices[i][1] = ((vertices[i][1] - minC[1]) / (maxC[1] - minC[1])) - 0.5;
+        vertice[0] = ((vertice[0] - minC[0]) / (maxC[0] - minC[0]) - 0.5) *
+                     (meshBB.width() / float(meshBB.height()));
+        vertice[1] = ((vertice[1] - minC[1]) / (maxC[1] - minC[1])) - 0.5;
       } else {
-        vertices[i][0] = ((vertices[i][0] - minC[0]) / (maxC[0] - minC[0])) - 0.5;
-        vertices[i][1] = (((vertices[i][1] - minC[1]) / (maxC[1] - minC[1])) - 0.5) *
-                         (meshBB.height() / float(meshBB.width()));
+        vertice[0] = ((vertice[0] - minC[0]) / (maxC[0] - minC[0])) - 0.5;
+        vertice[1] = (((vertice[1] - minC[1]) / (maxC[1] - minC[1])) - 0.5) *
+                     (meshBB.height() / float(meshBB.width()));
       }
 
-      const tlp::Coord &v = vertices[i];
+      const tlp::Coord &v = vertice;
       texCoords.push_back(Vec2f(v[0] + 0.5, v[1] + 0.5));
     }
 
@@ -254,8 +254,8 @@ private:
     nbIndices = indices.size();
     nbOutlineIndices = outlineIndices.size();
 
-    for (size_t i = 0; i < vertices.size(); ++i) {
-      boundingBox.expand(vertices[i]);
+    for (const auto &vertice : vertices) {
+      boundingBox.expand(vertice);
     }
   }
 };

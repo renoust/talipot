@@ -156,8 +156,8 @@ void Dikjstra::initDikjstra(const tlp::Graph *const graph, const tlp::Graph *con
     DikjstraElement *dEle = mapDik.get(tmpN.id);
     nodeDistance.set(tmpN.id, dEle->dist);
 
-    for (unsigned int i = 0; i < dEle->usedEdge.size(); ++i) {
-      usedEdges.set(dEle->usedEdge[i].id, true);
+    for (auto &i : dEle->usedEdge) {
+      usedEdges.set(i.id, true);
     }
 
     delete dEle;

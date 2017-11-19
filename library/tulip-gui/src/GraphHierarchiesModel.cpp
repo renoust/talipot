@@ -307,8 +307,8 @@ GraphHierarchiesModel::GraphHierarchiesModel(QObject *parent)
 
 GraphHierarchiesModel::GraphHierarchiesModel(const GraphHierarchiesModel &copy)
     : TulipModel(copy.QObject::parent()), tlp::Observable() {
-  for (int i = 0; i < copy.size(); ++i)
-    addGraph(copy[i]);
+  for (auto i : copy)
+    addGraph(i);
 
   _currentGraph = NULL;
 }

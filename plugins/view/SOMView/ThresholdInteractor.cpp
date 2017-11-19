@@ -341,13 +341,11 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 
       map<string, GlSimpleEntity *> displays = layer->getGlEntities();
 
-      for (vector<SelectedEntity>::iterator itPE = selectedEntities.begin();
-           itPE != selectedEntities.end(); ++itPE) {
-        for (map<string, GlSimpleEntity *>::iterator itDisplay = displays.begin();
-             itDisplay != displays.end(); ++itDisplay) {
-          GlComposite *composite = dynamic_cast<GlComposite *>(itDisplay->second);
+      for (auto &selectedEntitie : selectedEntities) {
+        for (auto &display : displays) {
+          GlComposite *composite = dynamic_cast<GlComposite *>(display.second);
 
-          if (composite && !composite->findKey(itPE->getSimpleEntity()).empty()) {
+          if (composite && !composite->findKey(selectedEntitie.getSimpleEntity()).empty()) {
 
             Slider *slider = dynamic_cast<Slider *>(composite);
 
@@ -358,8 +356,8 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 
             break;
           } else {
-            if (itDisplay->second == (itPE->getSimpleEntity())) {
-              Slider *slider = dynamic_cast<Slider *>(itDisplay->second);
+            if (display.second == (selectedEntitie.getSimpleEntity())) {
+              Slider *slider = dynamic_cast<Slider *>(display.second);
 
               if (slider) {
                 // finalSelectedEntities.insert(slider);
@@ -462,8 +460,8 @@ void ThresholdInteractor::performSelection(SOMView *view, tlp::Iterator<node> *i
 
     if (nodeValue <= rightSliderRealValue && nodeValue >= leftSliderRealValue) {
       if (mappingTab.find(n) != mappingTab.end()) {
-        for (set<node>::iterator it = mappingTab[n].begin(); it != mappingTab[n].end(); ++it) {
-          selection->setNodeValue(*it, true);
+        for (auto it : mappingTab[n]) {
+          selection->setNodeValue(it, true);
         }
       }
 

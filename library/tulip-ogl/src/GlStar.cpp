@@ -61,13 +61,13 @@ void GlStar::computeStar() {
     box.expand(points.back());
   }
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it)[0] =
+  for (auto &point : points) {
+    point[0] =
         position[0] +
-        (((*it)[0] - ((box[1][0] + box[0][0]) / 2.)) / ((box[1][0] - box[0][0]) / 2.)) * size[0];
-    (*it)[1] =
+        ((point[0] - ((box[1][0] + box[0][0]) / 2.)) / ((box[1][0] - box[0][0]) / 2.)) * size[0];
+    point[1] =
         position[1] +
-        (((*it)[1] - ((box[1][1] + box[0][1]) / 2.)) / ((box[1][1] - box[0][1]) / 2.)) * size[1];
+        ((point[1] - ((box[1][1] + box[0][1]) / 2.)) / ((box[1][1] - box[0][1]) / 2.)) * size[1];
   }
 
   boundingBox.expand(position + size / 2.f);

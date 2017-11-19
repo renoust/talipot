@@ -474,11 +474,11 @@ AxisSlider *ParallelCoordsAxisSliders::getSliderUnderPointer(GlMainWidget *glWid
   vector<SelectedEntity> pickedEntities;
 
   if (glWidget->pickGlEntities(x, y, pickedEntities, selectionLayer)) {
-    for (size_t i = 0; i < pickedEntities.size(); ++i) {
+    for (auto &pickedEntitie : pickedEntities) {
       vector<AxisSlider *>::iterator it;
 
       for (it = axisSlidersMap[axis].begin(); it != axisSlidersMap[axis].end(); ++it) {
-        if ((*it) == pickedEntities[i].getSimpleEntity()) {
+        if ((*it) == pickedEntitie.getSimpleEntity()) {
           return (*it);
         }
       }

@@ -72,27 +72,27 @@ void ParenMatcherHighlighter::highlightBlock(const QString &text) {
     pos = simpleQuotesRegexp.indexIn(modifiedText, pos + simpleQuotesRegexp.matchedLength());
   }
 
-  for (int i = 0; i < _leftParensToMatch.size(); ++i) {
-    int leftPos = modifiedText.indexOf(_leftParensToMatch.at(i));
+  for (char i : _leftParensToMatch) {
+    int leftPos = modifiedText.indexOf(i);
 
     while (leftPos != -1) {
       ParenInfo info;
-      info.character = _leftParensToMatch.at(i);
+      info.character = i;
       info.position = currentBlock().position() + leftPos;
       data->insert(info);
-      leftPos = modifiedText.indexOf(_leftParensToMatch.at(i), leftPos + 1);
+      leftPos = modifiedText.indexOf(i, leftPos + 1);
     }
   }
 
-  for (int i = 0; i < _rightParensToMatch.size(); ++i) {
-    int rightPos = modifiedText.indexOf(_rightParensToMatch.at(i));
+  for (char i : _rightParensToMatch) {
+    int rightPos = modifiedText.indexOf(i);
 
     while (rightPos != -1) {
       ParenInfo info;
-      info.character = _rightParensToMatch.at(i);
+      info.character = i;
       info.position = currentBlock().position() + rightPos;
       data->insert(info);
-      rightPos = modifiedText.indexOf(_rightParensToMatch.at(i), rightPos + 1);
+      rightPos = modifiedText.indexOf(i, rightPos + 1);
     }
   }
 

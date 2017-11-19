@@ -932,8 +932,7 @@ void GraphUpdatesRecorder::doUpdates(GraphImpl *g, bool undo) {
     // rebuild
     renamedProperties.clear();
 
-    for (unsigned int i = 0; i < renamings.size(); ++i) {
-      const std::pair<PropertyInterface *, std::string> &renaming = renamings[i];
+    for (const auto &renaming : renamings) {
       renamedProperties[renaming.first] = renaming.second;
     }
   }

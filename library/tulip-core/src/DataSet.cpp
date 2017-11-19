@@ -65,9 +65,8 @@ DataSet &DataSet::operator=(const DataSet &set) {
   if (this != &set) {
     data.clear();
 
-    for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = set.data.begin();
-         it != set.data.end(); ++it) {
-      data.push_back(std::pair<std::string, tlp::DataType *>((*it).first, (*it).second->clone()));
+    for (const auto &it : set.data) {
+      data.push_back(std::pair<std::string, tlp::DataType *>(it.first, it.second->clone()));
     }
   }
 
@@ -75,17 +74,15 @@ DataSet &DataSet::operator=(const DataSet &set) {
 }
 
 DataSet::~DataSet() {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    if (it->second)
-      delete it->second;
+  for (auto &it : data) {
+    if (it.second)
+      delete it.second;
   }
 }
 
 bool DataSet::exist(const string &str) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    if ((*it).first == str)
+  for (const auto &it : data) {
+    if (it.first == str)
       return true;
   }
 
@@ -106,10 +103,9 @@ void DataSet::remove(const string &str) {
 }
 
 DataType *DataSet::getData(const string &str) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    if ((*it).first == str)
-      return it->second ? it->second->clone() : NULL;
+  for (const auto &it : data) {
+    if (it.first == str)
+      return it.second ? it.second->clone() : NULL;
   }
 
   return NULL;
@@ -118,10 +114,7 @@ DataType *DataSet::getData(const string &str) const {
 void DataSet::setData(const std::string &str, const DataType *value) {
   DataType *val = value ? value->clone() : NULL;
 
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    std::pair<std::string, tlp::DataType *> &p = *it;
-
+  for (auto &p : data) {
     if (p.first == str) {
       if (p.second)
         delete p.second;
@@ -226,10 +219,7 @@ bool DataSet::readData(std::istream &is, const std::string &prop,
 
   if (dt) {
     // replace any prexisting value associated to prop
-    for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-         it != data.end(); ++it) {
-      std::pair<std::string, tlp::DataType *> &p = *it;
-
+    for (auto &p : data) {
       if (p.first == prop) {
         if (p.second)
           delete p.second;

@@ -132,8 +132,8 @@ public:
 
     const vector<node> &nodes = graph->nodes();
 
-    for (set<edgeS>::iterator it = myGraph.begin(); it != myGraph.end(); ++it) {
-      graph->addEdge(nodes[it->source], nodes[it->target]);
+    for (auto it : myGraph) {
+      graph->addEdge(nodes[it.source], nodes[it.target]);
     }
 
     return true;

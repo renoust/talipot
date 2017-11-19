@@ -39,9 +39,9 @@ std::vector<std::string> TulipViewsManager::getTulipViews() {
   std::vector<std::string> ret;
   std::list<std::string> views = PluginLister::instance()->availablePlugins<View>();
 
-  for (std::list<std::string>::iterator it = views.begin(); it != views.end(); ++it) {
-    if (*it != "Python Script view") {
-      ret.push_back(*it);
+  for (auto &view : views) {
+    if (view != "Python Script view") {
+      ret.push_back(view);
     }
   }
 
@@ -77,9 +77,9 @@ std::vector<tlp::View *> TulipViewsManager::getOpenedViewsWithName(const std::st
   std::vector<tlp::View *> views = getOpenedViews();
   std::vector<tlp::View *> ret;
 
-  for (size_t i = 0; i < views.size(); ++i) {
-    if (views[i]->name() == viewName) {
-      ret.push_back(views[i]);
+  for (auto &view : views) {
+    if (view->name() == viewName) {
+      ret.push_back(view);
     }
   }
 
@@ -160,9 +160,9 @@ std::vector<tlp::View *> TulipViewsManager::getViewsOfGraph(tlp::Graph *graph) {
       }
     }
   } else {
-    for (size_t i = 0; i < openedViews.size(); ++i) {
-      if (openedViews[i]->graph() == graph) {
-        ret.push_back(openedViews[i]);
+    for (auto &openedView : openedViews) {
+      if (openedView->graph() == graph) {
+        ret.push_back(openedView);
       }
     }
   }
@@ -176,16 +176,16 @@ void TulipViewsManager::closeAllViews() {
   if (workspace) {
     QList<tlp::View *> views = workspace->panels();
 
-    for (int i = 0; i < views.size(); ++i) {
-      if (views.at(i)->name() != "Python Script view") {
-        workspace->delView(views.at(i));
+    for (auto view : views) {
+      if (view->name() != "Python Script view") {
+        workspace->delView(view);
       }
     }
   } else {
     std::vector<tlp::View *> openedViewsCp(openedViews);
 
-    for (size_t i = 0; i < openedViewsCp.size(); ++i) {
-      closeView(openedViewsCp[i]);
+    for (auto &i : openedViewsCp) {
+      closeView(i);
     }
   }
 }
@@ -204,9 +204,9 @@ void TulipViewsManager::closeViewsRelatedToGraph(tlp::Graph *graph) {
   } else {
     std::vector<tlp::View *> openedViewsCp(openedViews);
 
-    for (size_t i = 0; i < openedViewsCp.size(); ++i) {
-      if (openedViewsCp[i]->graph() == graph) {
-        closeView(openedViewsCp[i]);
+    for (auto &i : openedViewsCp) {
+      if (i->graph() == graph) {
+        closeView(i);
       }
     }
   }
@@ -257,9 +257,9 @@ bool TulipViewsManager::areViewsVisible() {
   tlp::Workspace *workspace = tlpWorkspace();
 
   if (!workspace) {
-    for (size_t i = 0; i < openedViews.size(); ++i) {
-      ret = ret || (viewToWindow.find(openedViews[i]) != viewToWindow.end() &&
-                    viewToWindow[openedViews[i]]->isVisible());
+    for (auto openedView : openedViews) {
+      ret = ret || (viewToWindow.find(openedView) != viewToWindow.end() &&
+                    viewToWindow[openedView]->isVisible());
     }
   }
 

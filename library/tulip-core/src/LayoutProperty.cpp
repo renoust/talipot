@@ -126,8 +126,8 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
       bool reset = false;
 
       // check if min has to be updated
-      for (unsigned i = 0; i < newValue.size(); ++i) {
-        if (minV > newValue[i]) {
+      for (const auto &i : newValue) {
+        if (minV > i) {
           reset = true;
           break;
         }
@@ -135,8 +135,8 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
 
       if (!reset) {
         // check if max has to be updated
-        for (unsigned i = 0; i < newValue.size(); ++i) {
-          if (maxV < newValue[i]) {
+        for (const auto &i : newValue) {
+          if (maxV < i) {
             reset = true;
             break;
           }
@@ -145,8 +145,8 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
 
       if (!reset) {
         // check if minV belongs to oldV
-        for (unsigned i = 0; i < oldV.size(); ++i) {
-          if (minV == oldV[i]) {
+        for (const auto &i : oldV) {
+          if (minV == i) {
             reset = false;
             break;
           }
@@ -155,8 +155,8 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
 
       if (!reset) {
         // check if maxV belongs to oldV
-        for (unsigned i = 0; i < oldV.size(); ++i) {
-          if (maxV == oldV[i]) {
+        for (const auto &i : oldV) {
+          if (maxV == i) {
             reset = false;
             break;
           }
@@ -844,9 +844,9 @@ double LayoutProperty::edgeLength(const edge e) const {
   double result = 0;
   const vector<Coord> &tmp = getEdgeValue(e);
 
-  for (unsigned int i = 0; i < tmp.size(); ++i) {
-    result += (tmp[i] - start).norm();
-    start = tmp[i];
+  for (const auto &i : tmp) {
+    result += (i - start).norm();
+    start = i;
   }
 
   result += (end - start).norm();

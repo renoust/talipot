@@ -62,9 +62,8 @@ public:
         tlp::GraphProperty *prop =
             graphIterator->first->getProperty<tlp::GraphProperty>(propertyIterator->first);
 
-        for (TemporaryGraphValue::const_iterator valueIterator = propertyIterator->second.begin();
-             valueIterator != propertyIterator->second.end(); ++valueIterator) {
-          prop->setNodeValue(tlp::node(valueIterator->first), _clusterIndex[valueIterator->second]);
+        for (auto valueIterator : propertyIterator->second) {
+          prop->setNodeValue(tlp::node(valueIterator.first), _clusterIndex[valueIterator.second]);
         }
       }
     }

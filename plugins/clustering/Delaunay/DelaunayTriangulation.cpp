@@ -45,8 +45,8 @@ static bool delaunayTriangulation(tlp::Graph *graph, bool simplicesSubGraphs, bo
     const std::vector<tlp::node> &nodes = graph->nodes();
     delaunaySg->addNodes(nodes);
 
-    for (size_t i = 0; i < edges.size(); ++i) {
-      delaunaySg->addEdge(nodes[edges[i].first], nodes[edges[i].second]);
+    for (auto &edge : edges) {
+      delaunaySg->addEdge(nodes[edge.first], nodes[edge.second]);
     }
 
     if (simplicesSubGraphs) {

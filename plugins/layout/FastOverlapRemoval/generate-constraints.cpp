@@ -65,13 +65,11 @@ struct Node {
     leftNeighbours = left;
     rightNeighbours = right;
 
-    for (NodeSet::iterator i = left->begin(); i != left->end(); ++i) {
-      Node *v = *(i);
+    for (auto v : *left) {
       v->addRightNeighbour(this);
     }
 
-    for (NodeSet::iterator i = right->begin(); i != right->end(); ++i) {
-      Node *v = *(i);
+    for (auto v : *right) {
       v->addLeftNeighbour(this);
     }
   }

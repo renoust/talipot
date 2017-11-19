@@ -36,8 +36,7 @@ GlyphScaleConfigDialog::GlyphScaleConfigDialog(QWidget *parent)
   _ui->tableWidget->setRowCount(5);
   list<string> pluginsList = PluginLister::instance()->availablePlugins<Glyph>();
 
-  for (list<string>::iterator it = pluginsList.begin(); it != pluginsList.end(); ++it) {
-    string glyphName = *it;
+  for (auto glyphName : pluginsList) {
     glyphsNameList << QString(glyphName.c_str());
   }
 

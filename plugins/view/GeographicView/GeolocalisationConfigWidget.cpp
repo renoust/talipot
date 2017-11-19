@@ -82,17 +82,17 @@ void GeolocalisationConfigWidget::setGraph(Graph *graph) {
   _ui->lngPropCB->clear();
   vector<string> doubleProperties = getGraphPropertiesListAccordingToType(graph, "double");
 
-  for (unsigned int i = 0; i < doubleProperties.size(); ++i) {
-    _ui->latPropCB->addItem(tlpStringToQString(doubleProperties[i]));
-    _ui->lngPropCB->addItem(tlpStringToQString(doubleProperties[i]));
+  for (const auto &doublePropertie : doubleProperties) {
+    _ui->latPropCB->addItem(tlpStringToQString(doublePropertie));
+    _ui->lngPropCB->addItem(tlpStringToQString(doublePropertie));
   }
 
   _ui->edgesPathsPropertyCB->clear();
   vector<string> doubleVectorProperties =
       getGraphPropertiesListAccordingToType(graph, "vector<double>");
 
-  for (size_t i = 0; i < doubleVectorProperties.size(); ++i) {
-    _ui->edgesPathsPropertyCB->addItem(tlpStringToQString(doubleVectorProperties[i]));
+  for (const auto &doubleVectorPropertie : doubleVectorProperties) {
+    _ui->edgesPathsPropertyCB->addItem(tlpStringToQString(doubleVectorPropertie));
   }
 }
 

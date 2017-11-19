@@ -90,17 +90,15 @@ void PathFinder::construct() {
   _configurationWidget->setCurrentweightComboIndex(
       _configurationWidget->weightComboFindText(weightMetric.c_str()));
 
-  for (map<PathAlgorithm::EdgeOrientation, string>::iterator it = edgeOrientationLabels.begin();
-       it != edgeOrientationLabels.end(); ++it)
-    _configurationWidget->addedgeOrientationComboItem(it->second.c_str());
+  for (auto &edgeOrientationLabel : edgeOrientationLabels)
+    _configurationWidget->addedgeOrientationComboItem(edgeOrientationLabel.second.c_str());
 
   _configurationWidget->setCurrentedgeOrientationComboIndex(
       _configurationWidget->edgeOrientationComboFindText(
           edgeOrientationLabels[edgeOrientation].c_str()));
 
-  for (map<PathAlgorithm::PathType, string>::iterator it = pathsTypesLabels.begin();
-       it != pathsTypesLabels.end(); ++it)
-    _configurationWidget->addpathsTypeComboItem(it->second.c_str());
+  for (auto &pathsTypesLabel : pathsTypesLabels)
+    _configurationWidget->addpathsTypeComboItem(pathsTypesLabel.second.c_str());
 
   setPathsType(pathsTypesLabels[pathsTypes].c_str());
 
@@ -154,10 +152,9 @@ void PathFinder::setWeightMetric(const QString &metric) {
 void PathFinder::setEdgeOrientation(const QString &metric) {
   string cmp(QStringToTlpString(metric));
 
-  for (map<PathAlgorithm::EdgeOrientation, string>::iterator it = edgeOrientationLabels.begin();
-       it != edgeOrientationLabels.end(); ++it) {
-    if (it->second.compare(cmp) == 0)
-      edgeOrientation = it->first;
+  for (auto &edgeOrientationLabel : edgeOrientationLabels) {
+    if (edgeOrientationLabel.second.compare(cmp) == 0)
+      edgeOrientation = edgeOrientationLabel.first;
   }
 }
 
@@ -168,10 +165,9 @@ void PathFinder::setSelectAllPaths(bool s) {
 void PathFinder::setPathsType(const QString &pathType) {
   string cmp(QStringToTlpString(pathType));
 
-  for (map<PathAlgorithm::PathType, string>::iterator it = pathsTypesLabels.begin();
-       it != pathsTypesLabels.end(); ++it) {
-    if (it->second.compare(cmp) == 0)
-      pathsTypes = it->first;
+  for (auto &pathsTypesLabel : pathsTypesLabels) {
+    if (pathsTypesLabel.second.compare(cmp) == 0)
+      pathsTypes = pathsTypesLabel.first;
   }
 
   bool disabled(pathsTypes != PathAlgorithm::AllPaths);
@@ -222,8 +218,8 @@ void PathFinder::configureHighlighterButtonPressed() {
   QList<QListWidgetItem *> lst = listWidget->selectedItems();
   string text("");
 
-  for (QList<QListWidgetItem *>::iterator it = lst.begin(); it != lst.end(); ++it)
-    text = QStringToTlpString((*it)->text());
+  for (auto &it : lst)
+    text = QStringToTlpString(it->text());
 
   QSet<PathHighlighter *> highlighters(getPathFinderComponent()->getHighlighters());
   PathHighlighter *hler = NULL;
@@ -271,8 +267,8 @@ void PathFinder::configureHighlighterButtonPressed() {
 PathFinderComponent *PathFinder::getPathFinderComponent() {
   // Look upon all the installed components and stop as soon as we get a PathFinderComponent *
   // object.
-  for (iterator it = begin(); it != end(); ++it) {
-    PathFinderComponent *c = dynamic_cast<PathFinderComponent *>(*it);
+  for (auto &it : *this) {
+    PathFinderComponent *c = dynamic_cast<PathFinderComponent *>(it);
 
     if (c)
       return c;

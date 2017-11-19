@@ -240,9 +240,8 @@ HistogramStatistics::HistogramStatistics(const HistogramStatistics &histoStats)
 HistogramStatistics::~HistogramStatistics() {
   cleanupAxis();
 
-  for (map<QString, KernelFunction *>::iterator it = kernelFunctionsMap.begin();
-       it != kernelFunctionsMap.end(); ++it) {
-    delete it->second;
+  for (auto &it : kernelFunctionsMap) {
+    delete it.second;
   }
 }
 
@@ -384,9 +383,8 @@ void HistogramStatistics::computeInteractor() {
 
   propertyMean /= (nbElements);
 
-  for (map<unsigned int, double>::iterator it = graphPropertyValueSet.begin();
-       it != graphPropertyValueSet.end(); ++it) {
-    propertyStandardDeviation += square(it->second - propertyMean);
+  for (auto &it : graphPropertyValueSet) {
+    propertyStandardDeviation += square(it.second - propertyMean);
   }
 
   propertyStandardDeviation = sqrt(propertyStandardDeviation / (nbElements - 1));
@@ -404,9 +402,8 @@ void HistogramStatistics::computeInteractor() {
     for (double val = min; val <= max; val += sampleStep) {
       float fx = 0;
 
-      for (map<unsigned, double>::iterator it = graphPropertyValueSet.begin();
-           it != graphPropertyValueSet.end(); ++it) {
-        fx += float((*kf)((val - (it->second)) / (bandwidth / 2.)));
+      for (auto &it : graphPropertyValueSet) {
+        fx += float((*kf)((val - (it.second)) / (bandwidth / 2.)));
       }
 
       fx *= (1.f / float(graphPropertyValueSet.size() * (bandwidth / 2.)));

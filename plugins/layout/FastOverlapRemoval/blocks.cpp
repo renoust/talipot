@@ -42,8 +42,8 @@ Blocks::Blocks(const int n, Variable *const vs[]) : vs(vs), nvs(n) {
 Blocks::~Blocks(void) {
   blockTimeCtr = 0;
 
-  for (set<Block *>::iterator i = begin(); i != end(); ++i) {
-    delete *i;
+  for (auto i : *this) {
+    delete i;
   }
 
   clear();
@@ -172,9 +172,7 @@ void Blocks::removeBlock(Block *doomed) {
 void Blocks::cleanup() {
   vector<Block *> bcopy(begin(), end());
 
-  for (vector<Block *>::iterator i = bcopy.begin(); i != bcopy.end(); ++i) {
-    Block *b = *i;
-
+  for (auto b : bcopy) {
     if (b->deleted) {
       erase(b);
       delete b;
@@ -212,8 +210,8 @@ void Blocks::split(Block *b, Block *&l, Block *&r, Constraint *c) {
 double Blocks::cost() {
   double c = 0;
 
-  for (set<Block *>::iterator i = begin(); i != end(); ++i) {
-    c += (*i)->cost();
+  for (auto i : *this) {
+    c += i->cost();
   }
 
   return c;

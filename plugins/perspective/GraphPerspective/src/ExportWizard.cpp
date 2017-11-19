@@ -121,14 +121,14 @@ void ExportWizard::pathChanged(QString s) {
 
   std::list<std::string> modules = PluginLister::instance()->availablePlugins<ExportModule>();
 
-  for (std::list<std::string>::iterator itm = modules.begin(); itm != modules.end(); ++itm) {
-    ExportModule *p = PluginLister::instance()->getPluginObject<ExportModule>(*itm, NULL);
+  for (auto &module : modules) {
+    ExportModule *p = PluginLister::instance()->getPluginObject<ExportModule>(module, NULL);
     std::list<std::string> extension = p->allFileExtensions();
 
     for (list<string>::const_iterator extit = extension.begin(); extit != extension.end();
          ++extit) {
       if (s.endsWith((*extit).c_str())) {
-        selectedExport = itm->c_str();
+        selectedExport = module.c_str();
         delete p;
         break;
       }
@@ -159,14 +159,14 @@ void ExportWizard::browseButtonClicked() {
   QString all = "all supported formats (";
   const std::list<std::string> modules = PluginLister::instance()->availablePlugins<ExportModule>();
 
-  for (std::list<std::string>::const_iterator itm = modules.begin(); itm != modules.end(); ++itm) {
-    ExportModule *p = PluginLister::instance()->getPluginObject<ExportModule>(*itm, NULL);
+  for (const auto &module : modules) {
+    ExportModule *p = PluginLister::instance()->getPluginObject<ExportModule>(module, NULL);
     const std::list<std::string> extension = p->allFileExtensions();
     filter += tlpStringToQString(p->name()) + " (";
 
-    for (list<string>::const_iterator it = extension.begin(); it != extension.end(); ++it) {
-      filter += (*it).c_str() + QString(" ");
-      all += (*it).c_str() + QString(" ");
+    for (const auto &it : extension) {
+      filter += it.c_str() + QString(" ");
+      all += it.c_str() + QString(" ");
     }
 
     filter.resize(filter.length() - 1);

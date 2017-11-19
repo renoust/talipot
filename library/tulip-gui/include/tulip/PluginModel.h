@@ -78,8 +78,7 @@ class PluginModel : public tlp::TulipModel {
     QMap<QString, QMap<QString, QStringList>> pluginTree;
     std::list<std::string> plugins = PluginLister::instance()->availablePlugins<PLUGIN>();
 
-    for (std::list<std::string>::iterator it = plugins.begin(); it != plugins.end(); ++it) {
-      std::string name = *it;
+    for (auto name : plugins) {
       const Plugin &plugin = PluginLister::instance()->pluginInformation(name);
       pluginTree[tlp::tlpStringToQString(plugin.category())]
                 [tlp::tlpStringToQString(plugin.group())]

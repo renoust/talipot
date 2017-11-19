@@ -117,11 +117,11 @@ void MCLClustering::power(node n) {
     }
   }
 
-  for (TLP_HASH_MAP<node, double>::iterator it = newTargets.begin(); it != newTargets.end(); ++it) {
+  for (auto &newTarget : newTargets) {
     edge ne;
-    ne = g.addEdge(n, it->first);
+    ne = g.addEdge(n, newTarget.first);
     inW[ne] = 0.;
-    outW[ne] = it->second;
+    outW[ne] = newTarget.second;
   }
 }
 //==================================================

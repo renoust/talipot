@@ -284,9 +284,9 @@ public:
     pickGlEntities(x, y, width, height, entities, layer);
     bool foundEntity = false;
 
-    for (std::vector<SelectedEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-      if ((*it).getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
-        pickedEntities.push_back((*it).getSimpleEntity());
+    for (auto &entitie : entities) {
+      if (entitie.getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
+        pickedEntities.push_back(entitie.getSimpleEntity());
         foundEntity = true;
       }
     }
@@ -304,9 +304,9 @@ public:
     pickGlEntities(x, y, entities, layer);
     bool foundEntity = false;
 
-    for (std::vector<SelectedEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-      if ((*it).getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
-        pickedEntities.push_back((*it).getSimpleEntity());
+    for (auto &entitie : entities) {
+      if (entitie.getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
+        pickedEntities.push_back(entitie.getSimpleEntity());
         foundEntity = true;
       }
     }

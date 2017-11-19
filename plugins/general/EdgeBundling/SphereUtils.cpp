@@ -46,12 +46,12 @@ void moveBendsToSphere(Graph *graph, float ray, LayoutProperty *layout) {
     vector<Coord> bends;
     bends = layout->getEdgeValue(e);
 
-    for (size_t i = 0; i < bends.size(); ++i) {
-      Coord c = bends[i];
+    for (auto &bend : bends) {
+      Coord c = bend;
       double dist = c.norm();
       c /= dist;
       c *= ray;
-      bends[i] = c;
+      bend = c;
     }
 
     layout->setEdgeValue(e, bends);

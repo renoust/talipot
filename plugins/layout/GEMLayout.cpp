@@ -360,8 +360,8 @@ bool GEMLayout::run() {
     graph->push(false);
     ConnectedTest::computeConnectedComponents(graph, components);
 
-    for (size_t i = 0; i < components.size(); ++i) {
-      Graph *tmp = graph->inducedSubGraph(components[i]);
+    for (const auto &component : components) {
+      Graph *tmp = graph->inducedSubGraph(component);
       tmp->applyPropertyAlgorithm("GEM (Frick)", result, err, pluginProgress, dataSet);
     }
 

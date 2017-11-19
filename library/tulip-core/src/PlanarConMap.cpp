@@ -846,21 +846,21 @@ void PlanarConMap::mergeFaces(Face f, Face g) {
   // Search for edges to delete
   vector<edge> ve = facesEdges[f];
 
-  for (unsigned int i = 0; i < ve.size(); ++i) {
-    isInF.set(ve[i].id, true);
+  for (auto &i : ve) {
+    isInF.set(i.id, true);
 
-    if (!last_found && containEdge(g, ve[i])) {
+    if (!last_found && containEdge(g, i)) {
       first_found = true;
-      last = ve[i];
+      last = i;
     } else if (first_found)
       last_found = true;
   }
 
   ve = facesEdges[g];
 
-  for (unsigned int i = 0; i < ve.size(); ++i)
-    if (isInF.get(ve[i].id))
-      toDel.push_back(ve[i]);
+  for (auto &i : ve)
+    if (isInF.get(i.id))
+      toDel.push_back(i);
 
   assert(!toDel.empty());
   assert(toDel.size() != facesEdges[g].size() && toDel.size() != facesEdges[f].size());

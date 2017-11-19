@@ -54,14 +54,14 @@ void TLPBExport::writeAttributes(ostream &os, Graph *g) {
       } else if (attribute.second->getTypeName() == string(typeid(vector<node>).name())) {
         vector<node> *vn = static_cast<vector<node> *>(attribute.second->value);
 
-        for (size_t i = 0; i < vn->size(); ++i) {
-          (*vn)[i].id = getNode((*vn)[i]).id;
+        for (auto &i : *vn) {
+          i.id = getNode(i).id;
         }
       } else if (attribute.second->getTypeName() == string(typeid(vector<edge>).name())) {
         vector<edge> *ve = static_cast<vector<edge> *>(attribute.second->value);
 
-        for (size_t i = 0; i < ve->size(); ++i) {
-          (*ve)[i].id = getEdge((*ve)[i]).id;
+        for (auto &i : *ve) {
+          i.id = getEdge(i).id;
         }
       }
     }

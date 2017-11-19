@@ -142,10 +142,10 @@ Strahler StrahlerMetric::topSortStrahler(tlp::node n, int &curPref, TLP_HASH_MAP
   result.stacks = 0;
   result.usedStack = 0;
 
-  for (list<StackEval>::iterator it = tmpEval.begin(); it != tmpEval.end(); ++it) {
-    result.usedStack += it->usedS;
-    result.stacks = std::max(result.stacks, it->freeS + it->usedS);
-    result.stacks -= it->usedS;
+  for (auto &it : tmpEval) {
+    result.usedStack += it.usedS;
+    result.stacks = std::max(result.stacks, it.freeS + it.usedS);
+    result.stacks -= it.usedS;
   }
 
   result.stacks = result.stacks + result.usedStack;

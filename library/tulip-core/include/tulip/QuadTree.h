@@ -48,16 +48,16 @@ public:
   QuadTreeNode(const tlp::Rectangle<float> &box) : _box(box) {
     assert(_box.isValid());
 
-    for (int i = 0; i < 4; ++i)
-      children[i] = 0;
+    for (auto &i : children)
+      i = 0;
   }
   /**
    * Basic destructor
    */
   ~QuadTreeNode() {
-    for (int i = 0; i < 4; ++i)
-      if (children[i] != NULL)
-        delete children[i];
+    for (auto &i : children)
+      if (i != NULL)
+        delete i;
   }
   /**
    * Insert an element in the quadtree
@@ -104,9 +104,9 @@ public:
         result.push_back(entities[i]);
       }
 
-      for (unsigned int i = 0; i < 4; ++i) {
-        if (children[i] != NULL)
-          children[i]->getElements(box, result);
+      for (auto &i : children) {
+        if (i != NULL)
+          i->getElements(box, result);
       }
     }
   }
@@ -119,9 +119,9 @@ public:
       result.push_back(entities[i]);
     }
 
-    for (unsigned int i = 0; i < 4; ++i) {
-      if (children[i] != NULL)
-        children[i]->getElements(result);
+    for (auto &i : children) {
+      if (i != NULL)
+        i->getElements(result);
     }
   }
 
@@ -149,9 +149,9 @@ public:
           result.push_back(entities[i]);
         }
 
-        for (unsigned int i = 0; i < 4; ++i) {
-          if (children[i] != NULL)
-            children[i]->getElementsWithRatio(box, result, ratio);
+        for (auto &i : children) {
+          if (i != NULL)
+            i->getElementsWithRatio(box, result, ratio);
         }
       }
       // elements are too small return only one elements (we must seach it)
@@ -164,11 +164,11 @@ public:
         }
 
         if (!find) {
-          for (unsigned int i = 0; i < 4; ++i) {
-            if (children[i] != NULL && children[i]->_box.intersect(box)) {
+          for (auto &i : children) {
+            if (i != NULL && i->_box.intersect(box)) {
               // if children[i]!=NULL we are sure to find an elements in that branch of the tree
               // thus we do not have to explore the other branches.
-              children[i]->getElementsWithRatio(box, result, ratio);
+              i->getElementsWithRatio(box, result, ratio);
               break;
             }
           }

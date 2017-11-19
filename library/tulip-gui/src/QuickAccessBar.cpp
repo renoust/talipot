@@ -360,9 +360,9 @@ void QuickAccessBarImpl::showHideCaption(CaptionItem::CaptionType captionType) {
 
   unsigned int numberVisible = 0;
 
-  for (size_t i = 0; i < 4; i++) {
-    if (_captions[i]->captionGraphicsItem()->isVisible()) {
-      _captions[i]->captionGraphicsItem()->setPos(QPoint(numberVisible * 130, -260));
+  for (auto &_caption : _captions) {
+    if (_caption->captionGraphicsItem()->isVisible()) {
+      _caption->captionGraphicsItem()->setPos(QPoint(numberVisible * 130, -260));
       numberVisible++;
     }
   }

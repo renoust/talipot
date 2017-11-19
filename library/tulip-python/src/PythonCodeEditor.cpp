@@ -184,12 +184,12 @@ void AutoCompletionList::insertSelectedItem() {
       types.push_back(type);
       QVector<QString> baseTypes = PythonInterpreter::getInstance()->getBaseTypesForType(type);
 
-      for (int i = 0; i < baseTypes.size(); ++i) {
-        types.push_back(baseTypes[i]);
+      for (const auto &baseType : baseTypes) {
+        types.push_back(baseType);
       }
 
-      for (int i = 0; i < types.size(); ++i) {
-        QString funcName = types[i] + "." + textToInsert;
+      for (const auto &type : types) {
+        QString funcName = type + "." + textToInsert;
 
         if (APIDataBase::getInstance()->functionExists(funcName)) {
           QVector<QVector<QString>> params =
@@ -676,8 +676,8 @@ void PythonCodeEditor::paintEvent(QPaintEvent *event) {
     for (int i = 0; i < toolTipLines.size(); ++i) {
       int w = 0;
 
-      for (int j = 0; j < toolTipLines[i].length(); ++j) {
-        w += fontMetrics().width(QLatin1Char(toolTipLines[i][j].toLatin1()));
+      for (auto &&j : toolTipLines[i]) {
+        w += fontMetrics().width(QLatin1Char(j.toLatin1()));
       }
 
       width = std::max(w, width);
@@ -719,10 +719,10 @@ void PythonCodeEditor::paintEvent(QPaintEvent *event) {
       QString text = block.text();
       int indentVal = 0;
 
-      for (int i = 0; i < text.length(); ++i) {
-        if (text[i] == ' ')
+      for (const auto &i : text) {
+        if (i == ' ')
           indentVal += fontMetrics().width(QLatin1Char(' '));
-        else if (text[i] == '\t')
+        else if (i == '\t')
           indentVal += tabStopWidth();
         else
           break;
@@ -945,9 +945,9 @@ void PythonCodeEditor::createParenSelection(int pos) {
 void PythonCodeEditor::highlightErrors() {
   QList<QTextEdit::ExtraSelection> selections = extraSelections();
 
-  for (int i = 0; i < _currentErrorLines.size(); ++i) {
+  for (int _currentErrorLine : _currentErrorLines) {
     QTextEdit::ExtraSelection selection;
-    QTextBlock block = document()->findBlockByNumber(_currentErrorLines.at(i));
+    QTextBlock block = document()->findBlockByNumber(_currentErrorLine);
     selection.format = block.charFormat();
     selection.format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
     selection.format.setUnderlineColor(Qt::red);
@@ -1069,9 +1069,9 @@ void PythonCodeEditor::keyPressEvent(QKeyEvent *e) {
       if (block.isValid()) {
         QString text = block.text();
 
-        for (int i = 0; i < text.length(); ++i) {
-          if (text[i].isSpace()) {
-            textCursor().insertText(QString(text[i]));
+        for (auto &&i : text) {
+          if (i.isSpace()) {
+            textCursor().insertText(QString(i));
           } else {
             break;
           }
@@ -1134,15 +1134,15 @@ void PythonCodeEditor::keyPressEvent(QKeyEvent *e) {
         QSet<QString> toolTipTxts;
         QString toolTipTxt = "";
 
-        for (int i = 0; i < params.size(); ++i) {
+        for (auto &param : params) {
           toolTipTxt = "";
           toolTipTxt += (funcName + "(");
 
-          for (int j = 0; j < params[i].size(); ++j) {
+          for (int j = 0; j < param.size(); ++j) {
 
-            toolTipTxt += params[i][j];
+            toolTipTxt += param[j];
 
-            if (j != params[i].size() - 1) {
+            if (j != param.size() - 1) {
               toolTipTxt += ", ";
             }
           }

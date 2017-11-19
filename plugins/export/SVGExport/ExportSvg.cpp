@@ -693,8 +693,8 @@ bool ExportSvg::createEdge(const tlp::EdgeShape::EdgeShapes &type, const vector<
     case EdgeShape::Polyline: {
       points += " L";
 
-      for (vector<Coord>::const_iterator it = bends.begin(); it != bends.end(); ++it) {
-        points += " " + QString::number(it->getX()) + "," + QString::number(it->getY());
+      for (const auto &bend : bends) {
+        points += " " + QString::number(bend.getX()) + "," + QString::number(bend.getY());
       }
 
       break;

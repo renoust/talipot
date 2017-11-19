@@ -268,8 +268,8 @@ GlComplexPolygon::GlComplexPolygon(const vector<vector<Coord>> &coords, Color fc
                                    int polygonEdgesType, const string &textureName)
     : currentVector(-1), outlined(false), fillColor(fcolor), outlineSize(1),
       textureName(textureName), textureZoom(1.) {
-  for (size_t i = 0; i < coords.size(); ++i) {
-    createPolygon(coords[i], polygonEdgesType);
+  for (const auto &coord : coords) {
+    createPolygon(coord, polygonEdgesType);
   }
 
   runTesselation();
@@ -279,8 +279,8 @@ GlComplexPolygon::GlComplexPolygon(const vector<vector<Coord>> &coords, Color fc
                                    int polygonEdgesType, const string &textureName)
     : currentVector(-1), outlined(true), fillColor(fcolor), outlineColor(ocolor), outlineSize(1),
       textureName(textureName), textureZoom(1.) {
-  for (unsigned int i = 0; i < coords.size(); ++i) {
-    createPolygon(coords[i], polygonEdgesType);
+  for (const auto &coord : coords) {
+    createPolygon(coord, polygonEdgesType);
   }
 
   runTesselation();
@@ -293,8 +293,8 @@ void GlComplexPolygon::createPolygon(const vector<Coord> &coords, int polygonEdg
     vector<Coord> catmullPoints;
     computeCatmullRomPoints(coords, catmullPoints, true, coords.size() * 20);
 
-    for (size_t i = 0; i < catmullPoints.size(); ++i) {
-      addPoint(catmullPoints[i]);
+    for (const auto &catmullPoint : catmullPoints) {
+      addPoint(catmullPoint);
     }
   } else if (polygonEdgesType == 2) {
 
@@ -310,15 +310,15 @@ void GlComplexPolygon::createPolygon(const vector<Coord> &coords, int polygonEdg
       controlPoints.push_back(coords[i + 3]);
       computeBezierPoints(controlPoints, curvePoints, nbCurvePoints);
 
-      for (size_t j = 0; j < curvePoints.size(); ++j) {
-        addPoint(curvePoints[j]);
+      for (const auto &curvePoint : curvePoints) {
+        addPoint(curvePoint);
       }
     }
 
     addPoint(coords[coords.size() - 1]);
   } else {
-    for (vector<Coord>::const_iterator it = coords.begin(); it != coords.end(); ++it) {
-      addPoint(*it);
+    for (const auto &coord : coords) {
+      addPoint(coord);
     }
   }
 }
@@ -364,8 +364,8 @@ void GlComplexPolygon::runTesselation() {
   TESStesselator *tess = tessNewTess(NULL);
 
   // add contours
-  for (size_t i = 0; i < points.size(); ++i) {
-    tessAddContour(tess, 3, &points[i][0], sizeof(float) * 3, points[i].size());
+  for (auto &point : points) {
+    tessAddContour(tess, 3, &point[0], sizeof(float) * 3, point.size());
   }
 
   // the tesselation will generate a set of polygons with maximum nvp vertices
@@ -479,9 +479,9 @@ void GlComplexPolygon::draw(float, Camera *) {
     glLineWidth(lineWidth);
     setMaterial(outlineColor);
 
-    for (size_t v = 0; v < points.size(); ++v) {
-      glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &points[v][0]);
-      glDrawArrays(GL_LINE_LOOP, 0, points[v].size());
+    for (auto &point : points) {
+      glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &point[0]);
+      glDrawArrays(GL_LINE_LOOP, 0, point.size());
     }
   }
 
@@ -550,8 +550,8 @@ void GlComplexPolygon::draw(float, Camera *) {
 void GlComplexPolygon::translate(const Coord &vec) {
   boundingBox.translate(vec);
 
-  for (vector<vector<Coord>>::iterator it = points.begin(); it != points.end(); ++it) {
-    for (vector<Coord>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
+  for (auto &point : points) {
+    for (vector<Coord>::iterator it2 = point.begin(); it2 != point.end(); ++it2) {
       (*it2) += vec;
     }
   }
@@ -606,8 +606,8 @@ void GlComplexPolygon::setWithXML(const string &inString, unsigned int &currentP
   GlXMLTools::setWithXML(inString, currentPosition, "outlineSize", outlineSize);
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
 
-  for (vector<vector<Coord>>::iterator it = points.begin(); it != points.end(); ++it) {
-    for (vector<Coord>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
+  for (auto &point : points) {
+    for (vector<Coord>::iterator it2 = point.begin(); it2 != point.end(); ++it2) {
       boundingBox.expand(*it2);
     }
   }

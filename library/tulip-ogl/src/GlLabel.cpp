@@ -738,8 +738,8 @@ void GlLabel::draw(float, Camera *camera) {
     float x1, y1, z1, x2, y2, z2;
     vector<float>::iterator itW = textWidthVector.begin();
 
-    for (vector<string>::iterator it = textVector.begin(); it != textVector.end(); ++it) {
-      font->BBox((*it).c_str(), x1, y1, z1, x2, y2, z2);
+    for (auto &it : textVector) {
+      font->BBox(it.c_str(), x1, y1, z1, x2, y2, z2);
 
       FTPoint shift(-(textBoundingBox[1][0] - textBoundingBox[0][0]) / 2. - x1 +
                         ((textBoundingBox[1][0] - textBoundingBox[0][0]) - (*itW)) * xAlignFactor +
@@ -752,7 +752,7 @@ void GlLabel::draw(float, Camera *camera) {
 
       setMaterial(color);
 
-      font->Render((*it).c_str(), -1, shift);
+      font->Render(it.c_str(), -1, shift);
 
       if (!textureName.empty())
         GlTextureManager::getInst().desactivateTexture();
@@ -766,7 +766,7 @@ void GlLabel::draw(float, Camera *camera) {
 
         setMaterial(outlineColor);
 
-        borderFont->Render((*it).c_str(), -1, shift);
+        borderFont->Render(it.c_str(), -1, shift);
       }
 
       yShift -= fontSize + 5;

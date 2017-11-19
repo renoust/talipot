@@ -331,8 +331,8 @@ ConvexHullItem *GlConvexHull::buildConvexHullsFromHierarchy(Graph *graph,
 void GlConvexHull::translate(const Coord &mouvement) {
   boundingBox.translate(mouvement);
 
-  for (vector<Coord>::iterator it = _points.begin(); it != _points.end(); ++it) {
-    (*it) += mouvement;
+  for (auto &_point : _points) {
+    _point += mouvement;
   }
 }
 //====================================================

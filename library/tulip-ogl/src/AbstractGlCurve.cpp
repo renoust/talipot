@@ -511,8 +511,8 @@ AbstractGlCurve::AbstractGlCurve(const string &shaderProgramName,
   canUseGeometryShader = GlShaderProgram::geometryShaderSupported();
   initShader(shaderProgramName, curveSpecificShaderCode);
 
-  for (size_t i = 0; i < controlPoints.size(); ++i) {
-    boundingBox.expand(controlPoints[i]);
+  for (const auto &controlPoint : controlPoints) {
+    boundingBox.expand(controlPoint);
   }
 }
 
@@ -1051,8 +1051,8 @@ void AbstractGlCurve::drawCurve(std::vector<Coord> &controlPoints, const Color &
 }
 
 void AbstractGlCurve::translate(const Coord &move) {
-  for (size_t i = 0; i < controlPoints.size(); ++i) {
-    controlPoints[i] += move;
+  for (auto &controlPoint : controlPoints) {
+    controlPoint += move;
   }
 
   boundingBox.translate(move);

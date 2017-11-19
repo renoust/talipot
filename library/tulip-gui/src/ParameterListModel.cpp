@@ -41,8 +41,8 @@ ParameterListModel::ParameterListModel(const tlp::ParameterDescriptionList &para
   }
 
   // then add out parameters
-  for (unsigned int i = 0; i < outParams.size(); ++i) {
-    _params.push_back(outParams[i]);
+  for (const auto &outParam : outParams) {
+    _params.push_back(outParam);
   }
 
   // no sort, keep the predefined ordering

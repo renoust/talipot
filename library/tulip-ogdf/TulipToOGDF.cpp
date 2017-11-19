@@ -82,8 +82,8 @@ TulipToOGDF::TulipToOGDF(tlp::Graph *g, bool importEdgeBends) : tulipGraph(g) {
       const vector<tlp::Coord> &v = layoutProp->getEdgeValue(eTlp);
       ogdf::DPolyline bends;
 
-      for (vector<tlp::Coord>::const_iterator it = v.begin(); it != v.end(); ++it) {
-        bends.pushBack(ogdf::DPoint((*it).getX(), (*it).getY()));
+      for (const auto &it : v) {
+        bends.pushBack(ogdf::DPoint(it.getX(), it.getY()));
       }
 
       ogdfAttributes.bends(eogdf) = bends;

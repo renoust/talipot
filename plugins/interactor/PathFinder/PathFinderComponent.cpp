@@ -174,9 +174,8 @@ void PathFinderComponent::runHighlighters(GlMainWidget *glMainWidget, BooleanPro
   graphPopable = true;
   vector<string> activeHighlighters(parent->getActiveHighlighters());
 
-  for (vector<string>::iterator it = activeHighlighters.begin(); it != activeHighlighters.end();
-       ++it) {
-    PathHighlighter *hler = findHighlighter(*it);
+  for (auto &activeHighlighter : activeHighlighters) {
+    PathHighlighter *hler = findHighlighter(activeHighlighter);
 
     if (hler)
       hler->highlight(parent, glMainWidget, selection, src, tgt);
@@ -191,9 +190,8 @@ void PathFinderComponent::clearHighlighters(GlMainWidget *glMainWidget) {
 
   vector<string> activeHighlighters(parent->getHighlighters());
 
-  for (vector<string>::iterator it = activeHighlighters.begin(); it != activeHighlighters.end();
-       ++it) {
-    PathHighlighter *hler = findHighlighter(*it);
+  for (auto &activeHighlighter : activeHighlighters) {
+    PathHighlighter *hler = findHighlighter(activeHighlighter);
 
     if (hler)
       hler->clear();

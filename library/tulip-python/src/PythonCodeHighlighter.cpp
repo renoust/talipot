@@ -100,8 +100,8 @@ PythonCodeHighlighter::PythonCodeHighlighter(QTextDocument *parent)
         PythonInterpreter::getInstance()->getObjectDictEntries(builtinModName);
     QStringList builtinPatterns;
 
-    for (int i = 0; i < builtinDictContent.size(); ++i) {
-      builtinPatterns << "\\b" + builtinDictContent[i] + "\\b";
+    for (const auto &i : builtinDictContent) {
+      builtinPatterns << "\\b" + i + "\\b";
     }
 
     builtinPatterns << "\\bself\\b";

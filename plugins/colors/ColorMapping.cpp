@@ -271,17 +271,14 @@ public:
                                                                        : graph->numberOfEdges();
       unsigned int iter = 0;
 
-      for (std::vector<std::pair<std::string, Color>>::iterator it =
-               enumeratedMappingResultVector.begin();
-           it != enumeratedMappingResultVector.end(); ++it) {
-        std::vector<unsigned int> *elements = &mapMetricElements[(*it).first];
+      for (auto &it : enumeratedMappingResultVector) {
+        std::vector<unsigned int> *elements = &mapMetricElements[it.first];
 
-        for (std::vector<unsigned>::iterator itE = elements->begin(); itE != elements->end();
-             ++itE) {
+        for (unsigned int &element : *elements) {
           if (targetType.getCurrent() == NODES_TARGET)
-            result->setNodeValue(node(*itE), (*it).second);
+            result->setNodeValue(node(element), it.second);
           else
-            result->setEdgeValue(edge(*itE), (*it).second);
+            result->setEdgeValue(edge(element), it.second);
 
           if ((iter % 100 == 0) && (pluginProgress->progress(iter, maxIter) != TLP_CONTINUE)) {
             return pluginProgress->state() != TLP_CANCEL;
@@ -347,19 +344,17 @@ public:
 
       std::vector<std::string> enumeratedValues;
 
-      for (std::map<std::string, std::vector<unsigned int>>::iterator it =
-               mapMetricElements.begin();
-           it != mapMetricElements.end(); ++it) {
-        enumeratedValues.push_back(it->first);
+      for (auto &mapMetricElement : mapMetricElements) {
+        enumeratedValues.push_back(mapMetricElement.first);
       }
 
       std::map<float, Color> colorMap = colorScale.getColorMap();
 
       std::vector<Color> enumeratedColors;
 
-      for (std::map<float, Color>::iterator it = colorMap.begin(); it != colorMap.end(); ++it) {
-        if (enumeratedColors.empty() || it->second != enumeratedColors.back())
-          enumeratedColors.push_back(it->second);
+      for (auto &it : colorMap) {
+        if (enumeratedColors.empty() || it.second != enumeratedColors.back())
+          enumeratedColors.push_back(it.second);
       }
 
       DoubleStringsListRelationDialog dialog(enumeratedValues, enumeratedColors);

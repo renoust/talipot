@@ -542,8 +542,8 @@ void GraphImpl::push(bool unpopAllowed, std::vector<PropertyInterface *> *propsT
 
   if (propsToPreserve) {
     // the properties to preserve do not have to be observed
-    for (unsigned int i = 0; i < propsToPreserve->size(); ++i)
-      recorder->dontObserveProperty((*propsToPreserve)[i]);
+    for (auto &i : *propsToPreserve)
+      recorder->dontObserveProperty(i);
   }
 }
 //----------------------------------------------------------------

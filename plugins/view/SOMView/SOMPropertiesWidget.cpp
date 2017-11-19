@@ -222,8 +222,8 @@ DataSet SOMPropertiesWidget::getData() const {
     // Use QStringList class to store a list in a string
     QStringList stringlist;
 
-    for (vector<string>::iterator it = properties.begin(); it != properties.end(); ++it) {
-      stringlist.push_back(tlpStringToQString(*it));
+    for (auto &propertie : properties) {
+      stringlist.push_back(tlpStringToQString(propertie));
     }
 
     data.set("properties", QStringToTlpString(stringlist.join(";")));
@@ -237,8 +237,8 @@ DataSet SOMPropertiesWidget::getData() const {
   map<float, Color> colorScaleMap = defaultScale->getColorMap();
   QStringList colorsList;
 
-  for (map<float, Color>::iterator it = colorScaleMap.begin(); it != colorScaleMap.end(); ++it) {
-    colorsList.push_back(tlpStringToQString(ColorType::toString(it->second)));
+  for (auto &it : colorScaleMap) {
+    colorsList.push_back(tlpStringToQString(ColorType::toString(it.second)));
   }
 
   colorScaleDataSet.set("colorList", QStringToTlpString(colorsList.join(";")));
@@ -324,10 +324,10 @@ void SOMPropertiesWidget::setData(const DataSet &data) {
   QStringList colorStringList = colorListQString.split(";");
   vector<Color> colors;
 
-  for (QStringList::iterator it = colorStringList.begin(); it != colorStringList.end(); ++it) {
+  for (auto &it : colorStringList) {
     Color c;
 
-    if (ColorType::fromString(c, QStringToTlpString(*it))) {
+    if (ColorType::fromString(c, QStringToTlpString(it))) {
       colors.push_back(c);
     }
   }

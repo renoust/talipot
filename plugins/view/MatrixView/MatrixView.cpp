@@ -162,9 +162,8 @@ void MatrixView::setOriented(bool flag) {
 
         // layout and shape will be updated in updataLayout method
         // but other view properties must be set now
-        for (set<string>::iterator it = _sourceToTargetProperties.begin();
-             it != _sourceToTargetProperties.end(); ++it) {
-          PropertyInterface *prop = _matrixGraph->getProperty(*it);
+        for (const auto &_sourceToTargetPropertie : _sourceToTargetProperties) {
+          PropertyInterface *prop = _matrixGraph->getProperty(_sourceToTargetPropertie);
           prop->setNodeStringValue(node(edgeNodes[1]),
                                    prop->getNodeStringValue(node(edgeNodes[0])));
         }
@@ -448,8 +447,8 @@ void MatrixView::delNode(tlp::Graph *, const tlp::node n) {
 
   vector<int> vect = _graphEntitiesToDisplayedNodes->getNodeValue(n);
 
-  for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
-    _matrixGraph->delNode(node(*it));
+  for (int &it : vect)
+    _matrixGraph->delNode(node(it));
 }
 
 void MatrixView::delEdge(tlp::Graph *, const tlp::edge e) {
@@ -458,8 +457,8 @@ void MatrixView::delEdge(tlp::Graph *, const tlp::edge e) {
 
   vector<int> vect = _graphEntitiesToDisplayedNodes->getEdgeValue(e);
 
-  for (vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
-    _matrixGraph->delNode(node(*it));
+  for (int &it : vect)
+    _matrixGraph->delNode(node(it));
 
   _matrixGraph->delEdge(_edgesMap[e]);
   _edgesMap.remove(e);
@@ -542,8 +541,8 @@ void MatrixView::updateLayout() {
                                   ->getInputData()
                                   ->getElementLabelPosition();
 
-  for (vector<node>::iterator it = _orderedNodes.begin(); it != _orderedNodes.end(); ++it) {
-    vector<int> dispNodes = _graphEntitiesToDisplayedNodes->getNodeValue(node(*it));
+  for (auto &_orderedNode : _orderedNodes) {
+    vector<int> dispNodes = _graphEntitiesToDisplayedNodes->getNodeValue(node(_orderedNode));
     layout->setNodeValue(node(dispNodes[0]), horiz);
     position->setNodeValue(node(dispNodes[0]), LabelPosition::Top);
     layout->setNodeValue(node(dispNodes[1]), vert);
