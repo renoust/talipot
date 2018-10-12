@@ -20,11 +20,8 @@ bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qhull"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-freetype"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-glew"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-libpng"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-pcre2"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qt5"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-quazip"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qtwebkit"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-cppunit"
+bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-libjpeg-turbo"
+bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qt4"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-ccache"
 
 rem Invoke subsequent bash in the build tree
@@ -35,31 +32,33 @@ rem Build/test scripting
 bash -lc "set pwd"
 bash -lc "env"
 
-rem Install Inetc plugin for NSIS
-bash -lc "unzip bundlers/win/Inetc.zip -d\"C:\Program Files (x86)\NSIS\""
+rem Install needed wheel module for Python 2
+set PATH=%PYTHON2_HOME%;%PYTHON2_HOME%/Scripts;%PATH%
+pip install wheel
 
-rem Build Tulip with Python 3, run its unit tests and package it
+rem Build tulip-python wheels for Python 2
 bash -lc "mkdir build"
-bash -lc "cd build && cmake -G \"MSYS Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_NEED_RESPONSE=ON -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/build/install -DTULIP_BUILD_DOC=OFF -DTULIP_BUILD_TESTS=ON -DTULIP_USE_QT5=ON -DTULIP_USE_CCACHE=ON -DPYTHON_EXECUTABLE=%PYTHON3_HOME%/python.exe .."
+bash -lc "cd build && cmake -G \"MSYS Makefiles\" -DTULIP_ACTIVATE_PYTHON_WHEELS_TARGETS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_NEED_RESPONSE=ON -DTULIP_USE_CCACHE=ON -DPYTHON_EXECUTABLE=%PYTHON2_HOME%/python.exe .."
 if %errorlevel% neq 0 exit /b %errorlevel%
-bash -lc "cd build && make -j4 install"
+bash -lc "cd build && make -j4 wheels"
 if %errorlevel% neq 0 exit /b %errorlevel%
-bash -lc "cd build && make runTests"
+
+rem Check that the produced wheels can be correctly imported
+bash -lc "cd ./build/library/tulip-python/bindings/tulip-core/tulip_module/dist && pip install $(ls -t | head -1)"
+bash -lc "cd ./build/library/tulip-python/bindings/tulip-gui/tulipgui_module/dist && pip install $(ls -t | head -1)"
+python -c "import tulip; import tulipgui"
 if %errorlevel% neq 0 exit /b %errorlevel%
-bash -lc "cd build && make bundle"
 
-rem if %errorlevel% neq 0 exit /b %errorlevel%
+rem Install needed wheel module for Python 3
+set PATH=%PYTHON3_HOME%;%PYTHON3_HOME%/Scripts;%PATH%
+pip install wheel
 
-rem rem Install sphinx for Python 2
-rem set PATH=%PYTHON2_HOME%;%PYTHON2_HOME%/Scripts;%PATH%
-rem pip install sphinx
+rem Build tulip-python wheels for Python 3
+bash -lc "cd build && cmake -G \"MSYS Makefiles\" -DTULIP_ACTIVATE_PYTHON_WHEELS_TARGETS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_NEED_RESPONSE=ON -DTULIP_USE_CCACHE=ON -DPYTHON_EXECUTABLE=%PYTHON3_HOME%/python.exe .."
+if %errorlevel% neq 0 exit /b %errorlevel%
+bash -lc "cd build && make -j4 wheels"
 
-rem rem Build Tulip with Python 2, run its unit tests and package it
-rem bash -lc "mkdir build"
-rem bash -lc "cd build && cmake -G \"MSYS Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_NEED_RESPONSE=ON -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/build/install -DTULIP_BUILD_DOC=OFF -DTULIP_BUILD_TESTS=ON -DTULIP_USE_QT5=ON -DTULIP_USE_CCACHE=ON -DPYTHON_EXECUTABLE=%PYTHON2_HOME%/python.exe .."
-rem if %errorlevel% neq 0 exit /b %errorlevel%
-rem bash -lc "cd build && make -j4 install"
-rem if %errorlevel% neq 0 exit /b %errorlevel%
-rem bash -lc "cd build && make runTests"
-rem if %errorlevel% neq 0 exit /b %errorlevel%
-rem bash -lc "cd build && make bundle"
+rem Check that the produced wheels can be correctly imported
+bash -lc "cd ./build/library/tulip-python/bindings/tulip-core/tulip_module/dist && pip install $(ls -t | head -1)"
+bash -lc "cd ./build/library/tulip-python/bindings/tulip-gui/tulipgui_module/dist && pip install $(ls -t | head -1)"
+python -c "import tulip; import tulipgui"
