@@ -29,6 +29,8 @@
 
 #include "../../utils/PluginNames.h"
 
+class QOpenGLTexture;
+
 namespace tlp {
 
 /*@{*/
@@ -193,7 +195,7 @@ private:
 
   bool initialized;
 
-  static GLuint backgroundTextureId;
+  static QOpenGLTexture *backgroundTexture;
   static unsigned int scatterplotViewInstancesCount;
 
   ElementType dataLocation;

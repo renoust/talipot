@@ -30,7 +30,7 @@
 
 using namespace std;
 
-const string BIN_RECT_TEXTURE = tlp::TulipBitmapDir + "histo_texture.png";
+static const string BIN_RECT_TEXTURE = "histo_texture";
 
 const float DEFAULT_AXIS_LENGTH = 1000.;
 
@@ -665,7 +665,7 @@ void Histogram::update() {
 
       GlPolyQuad *binRect =
           new GlPolyQuad(polyQuadCoords, quadColor, BIN_RECT_TEXTURE, true, 1, quadColor);
-      binRect->setStencil(1);
+      binRect->setStencil(2);
       oss.str("");
       oss << "bin rect " << ++rectCpt;
       histoBinsComposite->addGlEntity(binRect, oss.str());

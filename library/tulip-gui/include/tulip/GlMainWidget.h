@@ -20,14 +20,16 @@
 #ifndef Tulip_GLMAINWIDGET_H
 #define Tulip_GLMAINWIDGET_H
 
-#include <QGLWidget>
+#include <QOpenGLWidget>
 #include <QWindow>
+#include <QMainWindow>
 
 #include <tulip/tulipconf.h>
 #include <tulip/GlScene.h>
 #include <tulip/Graph.h>
 
 class QOpenGLFramebufferObject;
+class QOffscreenSurface;
 
 namespace tlp {
 
@@ -59,9 +61,9 @@ class GlCompositeHierarchyManager;
  * - Selection with doSelect() and selectGlEntities()
  * - Image output with getImage(), createPicture(), outputSVG() and outputEPS()
  * - Texture output with createTexture()
- * - others operation on GlScene and QGlWidget
+ * - others operation on GlScene
  */
-class TLP_QT_SCOPE GlMainWidget : public QGLWidget {
+class TLP_QT_SCOPE GlMainWidget : public QOpenGLWidget {
   Q_OBJECT
 
 public:
@@ -146,7 +148,7 @@ public:
    * @return the converted measure in viewport coordinates as an integer
    */
   int screenToViewport(int l) {
-    return l * windowHandle()->devicePixelRatio();
+    return l * devicePixelRatio();
   }
 
   /**
@@ -155,7 +157,7 @@ public:
    * @return the converted measure in viewport coordinates as a double
    */
   double screenToViewport(double l) {
-    return l * windowHandle()->devicePixelRatio();
+    return l * devicePixelRatio();
   }
 
   /**
@@ -164,7 +166,7 @@ public:
    * @return the converted point in viewport coordinates
    */
   Coord screenToViewport(const Coord &point) {
-    qreal dpr = windowHandle()->devicePixelRatio();
+    qreal dpr = devicePixelRatio();
     return Coord(point.x() * dpr, point.y() * dpr);
   }
 
@@ -174,7 +176,7 @@ public:
    * @return the converted measure in screen coordinates as a double
    */
   double viewportToScreen(double l) {
-    return l / windowHandle()->devicePixelRatio();
+    return l / devicePixelRatio();
   }
 
   /**
@@ -183,7 +185,7 @@ public:
    * @return the converted point in screen coordinates
    */
   Coord viewportToScreen(const Coord &point) {
-    qreal dpr = windowHandle()->devicePixelRatio();
+    qreal dpr = devicePixelRatio();
     return Coord(point.x() / dpr, point.y() / dpr);
   }
 
@@ -291,11 +293,8 @@ public:
     return foundEntity;
   }
 
-  /**
-   * Extend makeCurrent function of QGLWidget to inform TextureManager and DisplayListManager of
-   * context changement
-   */
-  virtual void makeCurrent();
+  void makeCurrent();
+  void doneCurrent();
 
   /**
    * Resize openGL view
@@ -357,18 +356,16 @@ public:
   }
 
 private:
-  void setupOpenGlContext();
-  void createRenderingStore(int width, int height);
-  void deleteRenderingStore();
+
+  void createFrameBuffers(int width, int height);
+  void deleteFrameBuffers();
 
   tlp::GlScene scene;
   QRegion _visibleArea;
   View *view;
   int widthStored;
   int heightStored;
-  unsigned char *renderingStore;
   bool frameBufferStored;
-  bool useFramebufferObject;
   QOpenGLFramebufferObject *glFrameBuf, *glFrameBuf2;
   static bool inRendering;
   bool keepPointOfViewOnSubgraphChanging;
@@ -405,6 +402,7 @@ public slots:
   void emitGraphChanged();
 
 protected slots:
+
   void paintEvent(QPaintEvent *) override;
 
 signals:
@@ -426,17 +424,6 @@ signals:
 
   void graphChanged();
 
-public:
-  /**
-   * This function return the first QGLWidget created
-   * This function is use to share OpenGL context
-   */
-  static QGLWidget *getFirstQGLWidget();
-
-  static void clearFirstQGLWidget();
-
-private:
-  static QGLWidget *firstQGLWidget;
 };
 } // namespace tlp
 

@@ -92,7 +92,7 @@ QGraphicsView *ViewWidget::graphicsView() const {
 void ViewWidget::setupUi() {
   _graphicsView = new MyGraphicsView();
   _graphicsView->setFrameStyle(QFrame::NoFrame);
-  _graphicsView->scene()->setBackgroundBrush(Qt::green);
+  _graphicsView->scene()->setBackgroundBrush(Qt::white);
   setupWidget();
   assert(_centralWidget);
 }
@@ -123,7 +123,6 @@ void ViewWidget::setCentralWidget(QWidget *w, bool deleteOldCentralWidget) {
   if (glMainWidget) {
     _graphicsView->setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing |
                                   QPainter::TextAntialiasing);
-    _graphicsView->setViewport(new GlMainWidget());
     _graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 
     GlMainWidgetGraphicsItem *glMainWidgetItem =

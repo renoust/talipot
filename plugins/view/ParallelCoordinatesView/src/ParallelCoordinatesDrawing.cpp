@@ -76,7 +76,7 @@ ParallelCoordinatesDrawing::~ParallelCoordinatesDrawing() {}
 
 void ParallelCoordinatesDrawing::createAxis(GlMainWidget *glWidget, GlProgressBar *progressBar) {
 
-  GlMainWidget::getFirstQGLWidget()->makeCurrent();
+  glWidget->makeCurrent();
 
   unsigned int pos = 0;
   vector<string> selectedProperties(graphProxy->getSelectedProperties());

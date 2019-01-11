@@ -67,6 +67,7 @@
 #include <tulip/PythonVersionChecker.h>
 #include <tulip/FileDownloader.h>
 #include <tulip/TulipItemEditorCreators.h>
+#include <tulip/GlOffscreenRenderer.h>
 
 /**
  * For openDataSetDialog function : see OpenDataSet.cpp
@@ -284,8 +285,7 @@ public:
     glTexture.spriteNumber = spriteNumber;
     glTexture.id = new GLuint[spriteNumber];
 
-    glGenTextures(spriteNumber,
-                  textureNum); // FIXME: handle case where no memory is available to load texture
+    glGenTextures(spriteNumber, textureNum);
 
     glEnable(GL_TEXTURE_2D);
 
@@ -430,6 +430,10 @@ void initTulipSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins) {
   tlp::InteractorLister::initInteractorsDependencies();
   tlp::GlyphManager::getInst().loadGlyphPlugins();
   tlp::EdgeExtremityGlyphManager::getInst().loadGlyphPlugins();
+
+  // Explicitely create a shared OpenGL context to
+  // ensure it is initialized before using it
+  GlOffscreenRenderer::getInstance()->getOpenGLContext();
 }
 
 // tlp::debug redirection

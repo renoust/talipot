@@ -33,7 +33,7 @@ SET(SRCS
   Perspective.cpp
   PluginManager.cpp
   PropertyCreationDialog.cpp
-  QGlBufferManager.cpp
+  QOpenGLFramebufferManager.cpp
   QtGlSceneZoomAndPanAnimator.cpp
   QuaZIPFacade.cpp
   RenamePropertyDialog.cpp

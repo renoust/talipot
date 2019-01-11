@@ -40,7 +40,8 @@
 #include <tulip/Interactor.h>
 #include <tulip/GlyphManager.h>
 #include <tulip/EdgeExtremityGlyphManager.h>
-#include <tulip/QGlBufferManager.h>
+#include <tulip/QOpenGLFramebufferManager.h>
+#include <tulip/GlOffscreenRenderer.h>
 #include <tulip/TlpQtTools.h>
 #include <tulip/TulipSettings.h>
 #include <tulip/WorkspacePanel.h>
@@ -351,9 +352,9 @@ int main(int argc, char **argv) {
   delete perspective;
   delete mainWindow;
 
-  // We need to clear allocated Qt buffers and QGlWidget to remove a segfault when we close tulip
-  QGlBufferManager::clearBuffers();
-  GlMainWidget::clearFirstQGLWidget();
+  // Explicitely clear allocated OpenGL resources to remove a segfault when closing Tulip
+  QOpenGLFramebufferManager::clearBuffers();
+  GlOffscreenRenderer::getInstance()->cleanOpenGLResources();
 
   return result;
 }

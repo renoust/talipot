@@ -17,25 +17,17 @@
  *
  */
 
-#include <tulip/GlDisplayListManager.h>
-#include <tulip/GlTextureManager.h>
 #include <tulip/GlMainWidget.h>
-#include <tulip/Camera.h>
-#include <tulip/GlTools.h>
-#include <tulip/Interactor.h>
 #include <tulip/DataSet.h>
-#include <tulip/GlVertexArrayManager.h>
 #include <tulip/GlComplexPolygon.h>
+#include <tulip/GlVertexArrayManager.h>
 #include <tulip/TlpQtTools.h>
-#include <tulip/OpenGlConfigManager.h>
 
 #include <QMenu>
 #include <QThread>
 #include <QComboBox>
 #include <QTimeLine>
 #include <QApplication>
-#include <QOpenGLFramebufferObject>
-#include <QOpenGLPaintDevice>
 #include <QMessageBox>
 #include <QTimer>
 
@@ -52,8 +44,8 @@ GeographicView::GeographicView(PluginContext *)
       sceneLayersConfigurationWidget(nullptr), centerViewAction(nullptr),
       showConfPanelAction(nullptr), useSharedLayoutProperty(true), useSharedSizeProperty(true),
       useSharedShapeProperty(true), mapCenterLatitudeInit(0), mapCenterLongitudeInit(0),
-      mapZoomInit(0), _viewActionsManager(nullptr) {
-  _viewType = OpenStreetMap;
+      mapZoomInit(0), viewActionsManager(nullptr) {
+  viewType = OpenStreetMap;
 }
 
 GeographicView::~GeographicView() {
@@ -61,7 +53,7 @@ GeographicView::~GeographicView() {
   delete geoViewConfigWidget;
   delete sceneConfigurationWidget;
   delete sceneLayersConfigurationWidget;
-  delete _viewActionsManager;
+  delete viewActionsManager;
 }
 
 void GeographicView::setupUi() {
@@ -83,7 +75,7 @@ void GeographicView::setupUi() {
   connect(centerViewAction, SIGNAL(triggered()), this, SLOT(centerView()));
 
   activateTooltipAndUrlManager(geoViewGraphicsView->getGlMainWidget());
-  _viewActionsManager =
+  viewActionsManager =
       new ViewActionsManager(this, geoViewGraphicsView->getGlMainWidget(), true, false);
 }
 
@@ -96,17 +88,17 @@ void GeographicView::viewTypeChanged(QString viewTypeName) {
   disconnect(comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(viewTypeChanged(QString)));
 
   if (viewTypeName == "Open Street Map (Leaflet)") {
-    _viewType = OpenStreetMap;
+    viewType = OpenStreetMap;
   } else if (viewTypeName == "Esri Satellite (Leaflet)") {
-    _viewType = EsriSatellite;
+    viewType = EsriSatellite;
   } else if (viewTypeName == "Esri Terrain (Leaflet)") {
-    _viewType = EsriTerrain;
+    viewType = EsriTerrain;
   } else if (viewTypeName == "Esri Gray Canvas (Leaflet)") {
-    _viewType = EsriGrayCanvas;
+    viewType = EsriGrayCanvas;
   } else if (viewTypeName == "Polygon") {
-    _viewType = Polygon;
+    viewType = Polygon;
   } else if (viewTypeName == "Globe") {
-    _viewType = Globe;
+    viewType = Globe;
   }
 
   geoViewGraphicsView->switchViewType();
@@ -119,7 +111,7 @@ void GeographicView::viewTypeChanged(QString viewTypeName) {
 }
 
 void GeographicView::fillContextMenu(QMenu *menu, const QPointF &pf) {
-  _viewActionsManager->fillContextMenu(menu);
+  viewActionsManager->fillContextMenu(menu);
   QAction *action = menu->addAction("Zoom +");
   action->setToolTip(QString("Increase zoom level"));
   connect(action, SIGNAL(triggered()), this, SLOT(zoomIn()));
@@ -151,20 +143,20 @@ void GeographicView::setState(const DataSet &dataSet) {
   if (dataSet.exists("viewType")) {
     int viewType = 0;
     dataSet.get("viewType", viewType);
-    _viewType = static_cast<ViewType>(viewType);
+    viewType = static_cast<ViewType>(viewType);
   }
 
   string viewTypeName = "Open Street Map (Leaflet)";
 
-  if (_viewType == EsriSatellite) {
+  if (viewType == EsriSatellite) {
     viewTypeName = "Esri Satellite (Leaflet)";
-  } else if (_viewType == EsriTerrain) {
+  } else if (viewType == EsriTerrain) {
     viewTypeName = "Esri Terrain (Leaflet)";
-  } else if (_viewType == EsriGrayCanvas) {
+  } else if (viewType == EsriGrayCanvas) {
     viewTypeName = "Esri Gray Canvas (Leaflet)";
-  } else if (_viewType == Polygon) {
+  } else if (viewType == Polygon) {
     viewTypeName = "Polygon";
-  } else if (_viewType == Globe) {
+  } else if (viewType == Globe) {
     viewTypeName = "Globe";
   }
 
@@ -230,7 +222,7 @@ DataSet GeographicView::state() const {
   DataSet dataSet = View::state();
   DataSet configurationWidget = geoViewConfigWidget->state();
   dataSet.set("configurationWidget", configurationWidget);
-  dataSet.set("viewType", int(_viewType));
+  dataSet.set("viewType", int(viewType));
   pair<double, double> mapCenter = geoViewGraphicsView->getLeafletMapsPage()->getCurrentMapCenter();
   dataSet.set("mapCenterLatitude", mapCenter.first);
   dataSet.set("mapCenterLongitude", mapCenter.second);
@@ -485,30 +477,19 @@ QPixmap GeographicView::snapshot(const QSize &size) const {
   int width = geoViewGraphicsView->width();
   int height = geoViewGraphicsView->height();
 
-  QOpenGLFramebufferObjectFormat fboFormat;
-  fboFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-  fboFormat.setSamples(OpenGlConfigManager::getInst().maxNumberOfSamples());
-
-  QOpenGLFramebufferObject fbo(width, height, fboFormat);
-  QOpenGLFramebufferObject fbo2(width, height);
-
-  fbo.bind();
-  QOpenGLPaintDevice device(QSize(width, height));
-  QPainter fboPainter(&device);
+  QImage snapshotImage(width, height, QImage::Format_ARGB32);
+  QPainter fboPainter;
+  fboPainter.begin(&snapshotImage);
   fboPainter.setRenderHint(QPainter::Antialiasing);
   fboPainter.setRenderHint(QPainter::HighQualityAntialiasing);
   geoViewGraphicsView->scene()->render(&fboPainter);
-  QRect fboRect(0, 0, width, height);
-  fbo.release();
+  fboPainter.end();
 
   // restore the graphics widgets previously hidden
   for (int i = 0; i < gWidgetsToRestore.size(); ++i) {
     gWidgetsToRestore.at(i)->show();
   }
 
-  QOpenGLFramebufferObject::blitFramebuffer(&fbo2, fboRect, &fbo, fboRect);
-
-  QImage snapshotImage = fbo2.toImage();
   snapshotImage = QImage(snapshotImage.bits(), snapshotImage.width(), snapshotImage.height(),
                          QImage::Format_ARGB32)
                       .convertToFormat(QImage::Format_RGB32);

@@ -103,8 +103,8 @@ public:
 
   void registerTriggers();
 
-  ViewType viewType() {
-    return _viewType;
+  ViewType getViewType() {
+    return viewType;
   }
 
   // inherited from View
@@ -180,7 +180,7 @@ private:
   QAction *centerViewAction;
   QAction *showConfPanelAction;
 
-  ViewType _viewType;
+  ViewType viewType;
 
   bool useSharedLayoutProperty;
   bool useSharedSizeProperty;
@@ -188,7 +188,7 @@ private:
 
   double mapCenterLatitudeInit, mapCenterLongitudeInit;
   int mapZoomInit;
-  ViewActionsManager *_viewActionsManager;
+  ViewActionsManager *viewActionsManager;
 };
 } // namespace tlp
 

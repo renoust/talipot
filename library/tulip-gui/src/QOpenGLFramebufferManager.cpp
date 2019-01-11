@@ -16,7 +16,9 @@
  * See the GNU General Public License for more details.
  *
  */
-#include "tulip/QGlBufferManager.h"
+#include "tulip/QOpenGLFramebufferManager.h"
+
+#include <QOpenGLFramebufferObject>
 
 #include <tulip/GlMainWidget.h>
 #include <tulip/OpenGlConfigManager.h>
@@ -24,34 +26,41 @@
 #include <iostream>
 
 //====================================================
+tlp::QOpenGLFramebufferManager *tlp::QOpenGLFramebufferManager::inst = nullptr;
+
 using namespace std;
 
 namespace tlp {
 
-std::map<std::pair<int, int>, QOpenGLFramebufferObject *>
-    QGlBufferManager::widthHeightToFramebuffer;
-std::map<QOpenGLFramebufferObject *, std::pair<int, int>>
-    QGlBufferManager::framebufferToWidthHeight;
-
-void QGlBufferManager::clearBuffers() {
-  for (std::map<std::pair<int, int>, QOpenGLFramebufferObject *>::iterator it =
-           widthHeightToFramebuffer.begin();
-       it != widthHeightToFramebuffer.end(); ++it)
-    delete (*it).second;
-
-  widthHeightToFramebuffer.clear();
-  framebufferToWidthHeight.clear();
+QOpenGLFramebufferManager::QOpenGLFramebufferManager() {
+  QOpenGLFramebufferObject *glFramebufferObject = new QOpenGLFramebufferObject(2, 2);
+  framebufferObjectWork = glFramebufferObject->isValid();
+  delete glFramebufferObject;
 }
 
-QOpenGLFramebufferObject *QGlBufferManager::getFramebufferObject(int width, int height) {
-  map<pair<int, int>, QOpenGLFramebufferObject *>::iterator it =
-      widthHeightToFramebuffer.find(pair<int, int>(width, height));
+void QOpenGLFramebufferManager::clearBuffers() {
+  if (!inst)
+    return;
+
+  for (auto it = inst->widthHeightToFramebuffer.begin();
+       it != inst->widthHeightToFramebuffer.end(); ++it)
+    delete (*it).second;
+
+  inst->widthHeightToFramebuffer.clear();
+  inst->framebufferToWidthHeight.clear();
+}
+
+QOpenGLFramebufferObject *QOpenGLFramebufferManager::getFramebufferObject(int width, int height) {
+  auto it = widthHeightToFramebuffer.find(pair<int, int>(width, height));
 
   if (it != widthHeightToFramebuffer.end())
     return (*it).second;
 
-  QOpenGLFramebufferObject *glFramebufferObject = new QOpenGLFramebufferObject(
-      width, height /*,QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, GL_RGBA32F_ARB*/);
+  QOpenGLFramebufferObjectFormat fboFmt;
+  fboFmt.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+  fboFmt.setSamples(OpenGlConfigManager::getInst().maxNumberOfSamples());
+
+  QOpenGLFramebufferObject *glFramebufferObject = new QOpenGLFramebufferObject(width, height, fboFmt);
 
   if (!glFramebufferObject->isValid()) {
     while (!glFramebufferObject->isValid() && !framebufferToWidthHeight.empty()) {
@@ -72,8 +81,7 @@ QOpenGLFramebufferObject *QGlBufferManager::getFramebufferObject(int width, int 
       framebufferToWidthHeight.erase(bufferToRemove);
 
       delete glFramebufferObject;
-      glFramebufferObject = new QOpenGLFramebufferObject(
-          width, height /*,QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, GL_RGBA32F_ARB*/);
+      glFramebufferObject = new QOpenGLFramebufferObject(width, height);
     }
 
     while (!glFramebufferObject->isValid() && width > 0 && height > 0) {
@@ -81,8 +89,7 @@ QOpenGLFramebufferObject *QGlBufferManager::getFramebufferObject(int width, int 
       height = height / 2;
 
       delete glFramebufferObject;
-      glFramebufferObject = new QOpenGLFramebufferObject(
-          width, height /*,QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, GL_RGBA32F_ARB*/);
+      glFramebufferObject = new QOpenGLFramebufferObject(width, height);
     }
   }
 

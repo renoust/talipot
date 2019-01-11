@@ -31,6 +31,7 @@
 #include <QTime>
 #include <QGraphicsView>
 #include <QApplication>
+#include <QOpenGLTexture>
 
 #include "ScatterPlot2DView.h"
 #include "ScatterPlot2DOptionsWidget.h"
@@ -47,7 +48,7 @@ const float OFFSET_BETWEEN_PREVIEWS = 16;
 
 namespace tlp {
 
-GLuint ScatterPlot2DView::backgroundTextureId(0);
+QOpenGLTexture *ScatterPlot2DView::backgroundTexture(nullptr);
 unsigned int ScatterPlot2DView::scatterplotViewInstancesCount(0);
 
 PLUGIN(ScatterPlot2DView)
@@ -88,8 +89,8 @@ ScatterPlot2DView::~ScatterPlot2DView() {
     --scatterplotViewInstancesCount;
 
   if (scatterplotViewInstancesCount == 0) {
-    GlTextureManager::getInst().deleteTexture("gaussian_text_back");
-    backgroundTextureId = 0;
+    delete backgroundTexture;
+    backgroundTexture = nullptr;
   }
 
   delete propertiesSelectionWidget;
@@ -170,11 +171,12 @@ void ScatterPlot2DView::setState(const DataSet &dataSet) {
     needQuickAccessBar = true;
   }
 
-  if (backgroundTextureId == 0) {
-    getGlMainWidget()->getFirstQGLWidget()->makeCurrent();
-    backgroundTextureId = getGlMainWidget()->getFirstQGLWidget()->bindTexture(
-        QPixmap(":/background_texture.png").transformed(QTransform().rotate(90)), GL_TEXTURE_2D);
-    GlTextureManager::getInst().registerExternalTexture("gaussian_tex_back", backgroundTextureId);
+  if (!backgroundTexture) {
+    getGlMainWidget()->makeCurrent();
+    backgroundTexture =
+    new QOpenGLTexture(QImage(":/background_texture.png").transformed(QTransform().rotate(90)));
+    GlTextureManager::getInst().registerExternalTexture("gaussian_tex_back",
+                                                        backgroundTexture->textureId());
   }
 
   Graph *lastGraph = scatterPlotGraph;

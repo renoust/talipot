@@ -31,6 +31,7 @@
 #include <tulip/Coord.h>
 
 #include <QMutex>
+#include <QOpenGLTexture>
 
 namespace tlp {
 
@@ -137,7 +138,7 @@ protected:
   void performSelection(SOMView *somView, Iterator<node> *it);
   void buildSliders(SOMView *somView);
   void clearSliders();
-  void generateSliderTexture();
+  void generateSliderTexture(tlp::GlMainWidget *glWidget);
 
   tlp::GlLayer *layer;
 
@@ -150,7 +151,7 @@ protected:
 
   QMutex lock;
   std::string textureName;
-  GLuint textureId;
+  QOpenGLTexture *texture;
 };
 } // namespace tlp
 #endif /* THRESHOLDINTERACTOR_H_ */

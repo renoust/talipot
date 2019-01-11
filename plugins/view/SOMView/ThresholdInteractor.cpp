@@ -34,8 +34,8 @@
 
 #include <QToolTip>
 #include <QMouseEvent>
-#include <QGLPixelBuffer>
 #include <QPicture>
+#include <QOpenGLTexture>
 
 #include <cstdint>
 
@@ -287,12 +287,11 @@ void SliderBar::draw(float lod, tlp::Camera *camera) {
 
 ThresholdInteractor::ThresholdInteractor()
     : layer(new GlLayer("Threshold")), mouvingSlider(nullptr), rSlider(nullptr), lSlider(nullptr),
-      bar(nullptr), startDrag(false), XPosCursor(0), textureName("") {}
+      bar(nullptr), startDrag(false), XPosCursor(0), textureName(""), texture(nullptr) {}
 
 ThresholdInteractor::~ThresholdInteractor() {
   if (!textureName.empty()) {
-    GlMainWidget::getFirstQGLWidget()->deleteTexture(textureId);
-    GlTextureManager::getInst().deleteTexture(textureName);
+    delete texture;
   }
 
   layer->getComposite()->reset(true);
@@ -534,7 +533,7 @@ void ThresholdInteractor::buildSliders(SOMView *somView) {
   unsigned int propertyIndex = inputSample.findIndexForProperty(somView->getSelectedProperty());
 
   if (textureName.empty())
-    generateSliderTexture();
+    generateSliderTexture(somView->getMapWidget());
 
   lSlider = new ColorScaleSlider(ColorScaleSlider::ToRight, sliderSize, colorScale, textureName);
 
@@ -575,12 +574,12 @@ void ThresholdInteractor::clearSliders() {
   bar = nullptr;
 }
 
-void ThresholdInteractor::generateSliderTexture() {
+void ThresholdInteractor::generateSliderTexture(GlMainWidget *glWidget) {
   uintptr_t id = reinterpret_cast<uintptr_t>(this);
   ostringstream oss;
   oss << "ThresholdInteractorSliderTexture" << id;
-  GlMainWidget::getFirstQGLWidget()->makeCurrent();
-  textureId = GlMainWidget::getFirstQGLWidget()->bindTexture(QPixmap(":/sliderTexture.png"));
+  glWidget->makeCurrent();
+  texture = new QOpenGLTexture(QImage(":/sliderTexture.png"));
   textureName = oss.str();
-  GlTextureManager::getInst().registerExternalTexture(textureName, textureId);
+  GlTextureManager::getInst().registerExternalTexture(textureName, texture->textureId());
 }

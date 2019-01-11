@@ -207,7 +207,7 @@ void SOMView::setState(const DataSet &dataSet) {
   isDetailledMode = false;
   assignNewGlMainWidget(previewWidget, false);
 
-  GlMainWidget::getFirstQGLWidget()->makeCurrent();
+  previewWidget->makeCurrent();
 
   //  clearObservers();
   cleanSOMMap();

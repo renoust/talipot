@@ -30,9 +30,13 @@
 #include <QGraphicsView>
 #include <QComboBox>
 
+class QOpenGLTexture;
+class QOpenGLFramebufferObject;
+
 namespace tlp {
 
 class GeographicView;
+class Gl2DRect;
 
 class GeographicViewGraphicsView : public QGraphicsView, public Observable {
 
@@ -112,7 +116,7 @@ public:
   }
 
   QGraphicsRectItem *getPlaceHolderItem() const {
-    return _placeholderItem;
+    return placeHolderItem;
   }
 
   void switchViewType();
@@ -141,6 +145,7 @@ public slots:
   void queueMapRefresh();
 #endif
   void refreshMap();
+  void updateMapTexture();
 
 protected:
   void cleanup();
@@ -151,8 +156,8 @@ protected:
 #endif
 
 private:
-  GeographicView *_geoView;
-  GlMainWidget *glWidget;
+  GeographicView *geoView;
+  GlMainWidget *glMainWidget;
   Graph *graph;
   LeafletMaps *leafletMaps;
   std::map<node, std::pair<double, double>> nodeLatLng;
@@ -173,7 +178,6 @@ private:
   bool geocodingActive;
   bool cancelGeocoding;
 
-  GlMainWidget *glMainWidget;
   GlMainWidgetGraphicsItem *glWidgetItem;
   QComboBox *viewTypeComboBox;
   QPushButton *zoomOutButton;
@@ -186,15 +190,18 @@ private:
   QGraphicsProxyWidget *addressSelectionProxy;
   ProgressWidgetGraphicsProxy *progressWidget;
   QGraphicsProxyWidget *noLayoutMsgBox;
+  QGraphicsRectItem *placeHolderItem;
 
   bool firstGlobeSwitch;
-
-  QGraphicsRectItem *_placeholderItem;
-
   bool geoLayoutComputed;
 
-  static unsigned int planisphereTextureId;
+  QOpenGLFramebufferObject *mapFbo;
+  std::string mapTextureName;
+  Gl2DRect *backgroundRect;
+
+  static QOpenGLTexture *planisphereTexture;
+
 };
-} // namespace tlp
+}
 
 #endif // GEOGRAPHIC_VIEW_GRAPHICSVIEW_H

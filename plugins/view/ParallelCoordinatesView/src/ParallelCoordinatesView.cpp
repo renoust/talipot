@@ -31,6 +31,7 @@
 #include <QDir>
 #include <QGraphicsView>
 #include <QKeyEvent>
+#include <QOpenGLTexture>
 
 #include <tulip/GlTools.h>
 #include <tulip/GlLabel.h>
@@ -51,8 +52,8 @@ const vector<string> propertiesTypesFilter(propertiesTypes, propertiesTypes + nb
 
 namespace tlp {
 
-GLuint ParallelCoordinatesView::linesTextureId(0);
-GLuint ParallelCoordinatesView::slidersTextureId(0);
+QOpenGLTexture *ParallelCoordinatesView::linesTexture(nullptr);
+QOpenGLTexture *ParallelCoordinatesView::slidersTexture(nullptr);
 unsigned int ParallelCoordinatesView::parallelViewInstancesCount(0);
 
 static void toggleGraphView(GlGraphComposite *glGraph, bool displayNodes) {
@@ -86,10 +87,10 @@ ParallelCoordinatesView::~ParallelCoordinatesView() {
   --parallelViewInstancesCount;
 
   if (parallelViewInstancesCount == 0) {
-    GlTextureManager::getInst().deleteTexture(DEFAULT_TEXTURE_FILE);
-    GlTextureManager::getInst().deleteTexture(SLIDER_TEXTURE_NAME);
-    linesTextureId = 0;
-    slidersTextureId = 0;
+    delete linesTexture;
+    delete slidersTexture;
+    linesTexture = nullptr;
+    slidersTexture = nullptr;
   }
 
   delete axisPointsGraph;
@@ -153,16 +154,14 @@ void ParallelCoordinatesView::setState(const DataSet &dataSet) {
     dataConfigWidget = new ViewGraphPropertiesSelectionWidget();
     drawConfigWidget = new ParallelCoordsDrawConfigWidget();
 
-    if (linesTextureId == 0) {
-      GlMainWidget::getFirstQGLWidget()->makeCurrent();
-      linesTextureId = GlMainWidget::getFirstQGLWidget()->bindTexture(
-          QPixmap(":/parallel_texture.png"), GL_TEXTURE_2D, GL_RGBA,
-          QGLContext::LinearFilteringBindOption);
-      slidersTextureId = GlMainWidget::getFirstQGLWidget()->bindTexture(
-          QPixmap(":/parallel_sliders_texture.png"), GL_TEXTURE_2D, GL_RGBA,
-          QGLContext::LinearFilteringBindOption);
-      GlTextureManager::getInst().registerExternalTexture(DEFAULT_TEXTURE_FILE, linesTextureId);
-      GlTextureManager::getInst().registerExternalTexture(SLIDER_TEXTURE_NAME, slidersTextureId);
+    if (!linesTexture) {
+      getGlMainWidget()->makeCurrent();
+      linesTexture = new QOpenGLTexture(QImage(":/parallel_texture.png"));
+      slidersTexture = new QOpenGLTexture(QImage(":/parallel_sliders_texture.png"));
+      GlTextureManager::getInst().registerExternalTexture(DEFAULT_TEXTURE_FILE,
+                                                          linesTexture->textureId());
+      GlTextureManager::getInst().registerExternalTexture(SLIDER_TEXTURE_NAME,
+                                                          slidersTexture->textureId());
     }
 
     isConstruct = true;

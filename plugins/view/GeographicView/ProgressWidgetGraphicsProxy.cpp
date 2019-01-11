@@ -28,11 +28,6 @@ ProgressWidget::ProgressWidget(QWidget *parent)
     : QWidget(parent), _ui(new Ui::ProgressWidgetData), cancelClicked(true) {
   _ui->setupUi(this);
   connect(_ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelButtonClicked()));
-// workaround to get rid of Qt5 warnings : QMacCGContext:: Unsupported painter devtype type 1
-// see https://bugreports.qt.io/browse/QTBUG-32639
-#if defined(__APPLE__)
-  setWindowOpacity(0.99);
-#endif
 }
 
 ProgressWidget::~ProgressWidget() {

@@ -32,6 +32,7 @@
 #include <tulip/GlMainView.h>
 
 class QMenu;
+class QOpenGLTexture;
 
 namespace tlp {
 
@@ -241,8 +242,10 @@ private:
   bool dontCenterViewAfterConfLoaded;
   bool needDraw;
 
-  static GLuint linesTextureId;
-  static GLuint slidersTextureId;
+  std::set<unsigned int> mappedData;
+
+  static QOpenGLTexture *linesTexture;
+  static QOpenGLTexture *slidersTexture;
   static unsigned int parallelViewInstancesCount;
 };
 } // namespace tlp

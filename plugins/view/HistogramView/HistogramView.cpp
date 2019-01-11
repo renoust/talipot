@@ -31,6 +31,8 @@
 #include <QHelpEvent>
 #include <QApplication>
 #include <QToolTip>
+#include <QMenu>
+#include <QOpenGLTexture>
 
 #include "HistogramView.h"
 #include "HistogramInteractors.h"
@@ -57,7 +59,7 @@ namespace tlp {
 
 PLUGIN(HistogramView)
 
-GLuint HistogramView::binTextureId(0);
+QOpenGLTexture *HistogramView::binTexture(nullptr);
 unsigned int HistogramView::histoViewInstancesCount(0);
 
 HistogramView::HistogramView(const PluginContext *)
@@ -80,8 +82,8 @@ HistogramView::~HistogramView() {
     --histoViewInstancesCount;
 
     if (histoViewInstancesCount == 0) {
-      GlTextureManager::getInst().deleteTexture(BIN_RECT_TEXTURE);
-      binTextureId = 0;
+      delete binTexture;
+      binTexture = nullptr;
     }
 
     delete propertiesSelectionWidget;
@@ -177,11 +179,10 @@ void HistogramView::setState(const DataSet &dataSet) {
     histoOptionsWidget->setWidgetEnabled(false);
   }
 
-  if (binTextureId == 0) {
-    gl->getFirstQGLWidget()->makeCurrent();
-    binTextureId = gl->getFirstQGLWidget()->bindTexture(
-        QImage(":/histo_texture.png").transformed(QTransform().rotate(90)), GL_TEXTURE_2D);
-    GlTextureManager::getInst().registerExternalTexture(BIN_RECT_TEXTURE, binTextureId);
+  if (!binTexture) {
+    gl->makeCurrent();
+    binTexture = new QOpenGLTexture(QImage(":/histo_texture.png").transformed(QTransform().rotate(90)));
+    GlTextureManager::getInst().registerExternalTexture(BIN_RECT_TEXTURE, binTexture->textureId());
   }
 
   GlMainView::setState(dataSet);
@@ -623,8 +624,6 @@ void HistogramView::graphChanged(Graph *) {
 }
 
 void HistogramView::buildHistograms() {
-
-  GlMainWidget::getFirstQGLWidget()->makeCurrent();
 
   histogramsComposite->reset(false);
   labelsComposite->reset(true);

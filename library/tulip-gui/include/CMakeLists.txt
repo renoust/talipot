@@ -36,7 +36,7 @@ INSTALL(FILES
   tulip/NodeLinkDiagramComponentInteractor.h
   tulip/Perspective.h
   tulip/PropertyCreationDialog.h
-  tulip/QGlBufferManager.h
+  tulip/QOpenGLFramebufferManager.h
   tulip/QtGlSceneZoomAndPanAnimator.h
   tulip/RenamePropertyDialog.h
   tulip/SimplePluginProgressWidget.h

@@ -156,12 +156,12 @@ bool GeographicViewNavigator::eventFilter(QObject *widget, QEvent *e) {
   QMouseEvent *qMouseEv = dynamic_cast<QMouseEvent *>(e);
   QWheelEvent *qWheelEv = dynamic_cast<QWheelEvent *>(e);
 
-  if (geoView->viewType() == GeographicView::OpenStreetMap ||
-      geoView->viewType() == GeographicView::EsriSatellite ||
-      geoView->viewType() == GeographicView::EsriTerrain ||
-      geoView->viewType() == GeographicView::EsriGrayCanvas) {
+  if (geoView->getViewType() == GeographicView::OpenStreetMap ||
+      geoView->getViewType() == GeographicView::EsriSatellite ||
+      geoView->getViewType() == GeographicView::EsriTerrain ||
+      geoView->getViewType() == GeographicView::EsriGrayCanvas) {
     return false;
-  } else if (geoView->viewType() == GeographicView::Globe) {
+  } else if (geoView->getViewType() == GeographicView::Globe) {
     if (e->type() == QEvent::Wheel && qWheelEv->orientation() == Qt::Vertical) {
 #define WHEEL_DELTA 120
       g->getScene()->zoomXY(qWheelEv->delta() / WHEEL_DELTA, g->width() / 2., g->height() / 2.);

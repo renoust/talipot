@@ -30,6 +30,9 @@
 
 #include <tulip/OpenGlIncludes.h>
 
+class QMenu;
+class QOpenGLTexture;
+
 namespace tlp {
 
 class Graph;
@@ -195,7 +198,9 @@ private:
   GlRect *emptyRect;
   GlRect *emptyRect2;
 
-  static GLuint binTextureId;
+  bool interactorsActivated;
+
+  static QOpenGLTexture *binTexture;
   static unsigned int histoViewInstancesCount;
 
   bool isConstruct;
