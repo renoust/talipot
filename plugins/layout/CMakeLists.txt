@@ -1,17 +1,16 @@
 ADD_CORE_FILES(.)
 
 ADD_SUBDIRECTORY(OGDF)
-ADD_SUBDIRECTORY(FastOverlapRemoval)
 ADD_SUBDIRECTORY(Grip)
 ADD_SUBDIRECTORY(LinLog)
 
 INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude})
 
 IF(UNIX)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 ENDIF(UNIX)
 
-SET(LayoutUtils_SRCS 
+SET(LayoutUtils_SRCS
   DatasetTools.cpp
   OrientableCoord.cpp
   OrientableLayout.cpp
@@ -21,10 +20,10 @@ SET(LayoutUtils_SRCS
 )
 
 IF(NOT EMSCRIPTEN)
-SET(LayoutUtilsLibraryName LayoutUtils)
-ADD_LIBRARY(${LayoutUtilsLibraryName} STATIC ${LayoutUtils_SRCS})
+  SET(LayoutUtilsLibraryName LayoutUtils)
+  ADD_LIBRARY(${LayoutUtilsLibraryName} STATIC ${LayoutUtils_SRCS})
 ELSE(NOT EMSCRIPTEN)
-SET(LayoutUtilsLibraryName "")
+  SET(LayoutUtilsLibraryName "")
 ENDIF(NOT EMSCRIPTEN)
 
 ##----------------------------------------------------------------------------------------------------------------------------
@@ -32,12 +31,12 @@ ADD_LIBRARY(MixedModel-${TulipVersion} SHARED MixedModel.cpp)
 TARGET_LINK_LIBRARIES(MixedModel-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-SET(ConnectedComponentPacking_SRCS 
-  ConnectedComponentPacking.cpp
-  Number.cpp
-  RectanglePacking.cpp
-  rectanglePackingFonctions.cpp
-  RectangleRelativePositionList.cpp
+SET(ConnectedComponentPacking_SRCS
+    ConnectedComponentPacking.cpp
+    Number.cpp
+    RectanglePacking.cpp
+    rectanglePackingFonctions.cpp
+    RectangleRelativePositionList.cpp
 )
 ADD_LIBRARY(ConnectedComponentPacking-${TulipVersion} SHARED ${ConnectedComponentPacking_SRCS})
 TARGET_LINK_LIBRARIES(ConnectedComponentPacking-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
@@ -110,6 +109,13 @@ TARGET_LINK_LIBRARIES(OrthoTree-${TulipVersion} ${LibTulipCoreName})
 ADD_LIBRARY(PolyominoPacking-${TulipVersion} SHARED PolyominoPacking.cpp)
 TARGET_LINK_LIBRARIES(PolyominoPacking-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
 TULIP_INSTALL_PLUGIN(PolyominoPacking-${TulipVersion} ${TulipPluginsInstallDir})
+
+##----------------------------------------------------------------------------------------------------------------------------
+INCLUDE_DIRECTORIES(${VPSCIncludeDir})
+
+ADD_LIBRARY(FastOverlapRemoval-${TulipVersion} SHARED FastOverlapRemoval.cpp)
+TARGET_LINK_LIBRARIES(FastOverlapRemoval-${TulipVersion} ${LibTulipCoreName} ${VPSCLibrary})
+TULIP_INSTALL_PLUGIN(FastOverlapRemoval-${TulipVersion} ${TulipPluginsInstallDir})
 
 ##----------------------------------------------------------------------------------------------------------------------------
 TULIP_INSTALL_PLUGIN(MixedModel-${TulipVersion} ${TulipPluginsInstallDir})

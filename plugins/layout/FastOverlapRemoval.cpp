@@ -16,13 +16,21 @@
  * See the GNU General Public License for more details.
  *
  */
+
+#include <iostream>
+#include <cassert>
+#include <vector>
+
+#include <libvpsc/solve_VPSC.h>
+#include <libvpsc/variable.h>
+#include <libvpsc/constraint.h>
+#include <libvpsc/rectangle.h>
+
 #include <tulip/SizeProperty.h>
 #include <tulip/StringCollection.h>
 #include <tulip/GraphParallelTools.h>
 
 #include "FastOverlapRemoval.h"
-#include "generate-constraints.h"
-#include "remove_rectangle_overlap.h"
 
 using namespace std;
 using namespace tlp;
@@ -30,8 +38,6 @@ using namespace tlp;
 PLUGIN(FastOverlapRemoval)
 
 static const char *paramHelp[] = {
-    // overlap removal type
-    "Overlap removal type.",
 
     // layout
     "The property used for the input layout of nodes and edges.",
@@ -52,25 +58,17 @@ static const char *paramHelp[] = {
 
     // y border
     "The minimal y border value that will separate the graph nodes after application of the "
-    "algorithm."};
-
-#define OVERLAP_TYPE "X-Y;X;Y"
-
-static const char *overlapRemovalTypeValuesDescription =
-    "X-Y <i>(Remove overlaps in both X and Y directions)</i><br>"
-    "X <i>(Remove overlaps only in X direction)</i><br>"
-    "Y <i>(Remove overlaps only in Y direction)</i>";
+    "algorithm."
+};
 
 FastOverlapRemoval::FastOverlapRemoval(const tlp::PluginContext *context)
     : tlp::LayoutAlgorithm(context) {
-  addInParameter<StringCollection>("overlap removal type", paramHelp[0], OVERLAP_TYPE, true,
-                                   overlapRemovalTypeValuesDescription);
-  addInParameter<LayoutProperty>("layout", paramHelp[1], "viewLayout");
-  addInParameter<SizeProperty>("bounding box", paramHelp[2], "viewSize");
-  addInParameter<DoubleProperty>("rotation", paramHelp[3], "viewRotation");
-  addInParameter<int>("number of passes", paramHelp[4], "5");
-  addInParameter<double>("x border", paramHelp[5], "0.0");
-  addInParameter<double>("y border", paramHelp[6], "0.0");
+  addInParameter<LayoutProperty>("layout", paramHelp[0], "viewLayout");
+  addInParameter<SizeProperty>("bounding box", paramHelp[1], "viewSize");
+  addInParameter<DoubleProperty>("rotation", paramHelp[2], "viewRotation");
+  addInParameter<int>("number of passes", paramHelp[3], "5");
+  addInParameter<double>("x border", paramHelp[4], "0.0");
+  addInParameter<double>("y border", paramHelp[5], "0.0");
 }
 
 /**
@@ -79,8 +77,6 @@ FastOverlapRemoval::FastOverlapRemoval(const tlp::PluginContext *context)
  * used in the InkScape Open Source Software.
  */
 bool FastOverlapRemoval::run() {
-  tlp::StringCollection stringCollection(OVERLAP_TYPE);
-  stringCollection.setCurrent(0);
   LayoutProperty *viewLayout = nullptr;
   SizeProperty *viewSize = nullptr;
   DoubleProperty *viewRot = nullptr;
@@ -89,11 +85,6 @@ bool FastOverlapRemoval::run() {
   int nbPasses = 5;
 
   if (dataSet != nullptr) {
-
-    if (dataSet->exists("overlaps removal type"))
-      dataSet->get("overlaps removal type", stringCollection);
-    else
-      dataSet->get("overlap removal type", stringCollection);
 
     dataSet->get("layout", viewLayout);
 
@@ -124,7 +115,7 @@ bool FastOverlapRemoval::run() {
   size_t nbNodes = graph->numberOfNodes();
   const std::vector<node> &nodes = graph->nodes();
 
-  vector<vpsc::Rectangle> nodeRectangles(nbNodes);
+  vpsc::Rectangles nodeRectangles(nbNodes);
 
   for (float passIndex = 1; passIndex <= nbPasses; ++passIndex) {
     // initialization
@@ -142,22 +133,23 @@ bool FastOverlapRemoval::run() {
       double minX = pos.getX() - rotSize.getW() / 2.0;
       double minY = pos.getY() - rotSize.getH() / 2.0;
 
-      nodeRectangles[i] = vpsc::Rectangle(minX, maxX, minY, maxY, xBorder, yBorder);
+      nodeRectangles[i] = new vpsc::Rectangle(minX, maxX, minY, maxY);
+      nodeRectangles[i]->setXBorder(xBorder);
+      nodeRectangles[i]->setYBorder(yBorder);
     });
 
     // actually apply fast overlap removal
-    if (stringCollection.getCurrentString() == "X-Y") {
-      removeRectangleOverlap(nbNodes, nodeRectangles.data(), xBorder, yBorder);
-    } else if (stringCollection.getCurrentString() == "X") {
-      removeRectangleOverlapX(nbNodes, nodeRectangles.data(), xBorder, yBorder);
-    } else {
-      removeRectangleOverlapY(nbNodes, nodeRectangles.data(), yBorder);
-    }
+    vpsc::removeRectangleOverlaps(nodeRectangles);
 
     for (unsigned int i = 0; i < nbNodes; ++i) {
-      Coord newPos(nodeRectangles[i].getCentreX(), nodeRectangles[i].getCentreY(), 0.0);
+      Coord newPos(nodeRectangles[i]->getCentreX(), nodeRectangles[i]->getCentreY(), 0.0);
       LayoutAlgorithm::result->setNodeValue(nodes[i], newPos);
     }
+
+    for (vpsc::Rectangle *rect : nodeRectangles) {
+      delete rect;
+    }
+
   }
 
   return true;

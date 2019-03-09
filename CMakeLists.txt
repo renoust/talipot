@@ -446,6 +446,9 @@ ENDIF(YAJL_FOUND)
 
 SET(UTF8CppInclude ${PROJECT_SOURCE_DIR}/thirdparty/utf8-cpp/source)
 
+SET(VPSCIncludeDir ${PROJECT_SOURCE_DIR}/thirdparty/)
+SET(VPSCLibrary vpsc)
+
 SET(TulipCoreInclude ${PROJECT_SOURCE_DIR}/library/tulip-core/include/)
 SET(TulipCoreBuildInclude ${PROJECT_BINARY_DIR}/library/tulip-core/include/)
 SET(TulipOGLInclude ${PROJECT_SOURCE_DIR}/library/tulip-ogl/include/)
