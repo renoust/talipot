@@ -28,7 +28,7 @@ environment:
       PYTHON2_HOME: "C:/Python27-x64"
       PYTHON3_HOME: "C:/Python37-x64"
 
-    # 64 bits GCC complete build
+   # 64 bits GCC complete build
     - MSYS2_ARCH: x86_64
       MSYSTEM: MINGW64
       PYTHON2_HOME: "C:/Python27-x64"
@@ -80,19 +80,23 @@ build_script:
 
 # get the Tulip version for deployment
 after_build:
-  - ps: "$env:TULIP_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/tulip-core/include/tulip/TulipRelease.h') | %{ if ($_ -match '^#   define TULIP_VERSION.*$') { $_; } }) -replace '#   define TULIP_VERSION ', '') -replace '\"', '')"
+  - ps: "$env:TULIP_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/tulip-core/include/tulip/TulipRelease.h') | %{ if ($_ -match '^#   define TULIP_VERSION.*$') { $_; } }) -replace '#   define TULIP_VERSION ', '') -replace '\"', '' -replace '_', '.')"
 
 # set generated installers as artifacts to deploy
 artifacts:
   - path: build\*.exe
     name: tulip_installers
 
-# no deployment
-deploy: off
-
-# send build status notifications to tulipdev mailing list
-notifications:
-  - provider: Email
-    to:
-      - tulipdev@labri.fr
-    on_build_success: false
+# deploy Tulip installers on bintray
+deploy:
+  - provider: BinTray
+    username: anlambert
+    api_key:
+      secure: uL6yGLvWIQkeqyYKFzshycul9WpaBj5P4SYUvtAnlcpxaDhL3Ek+sxm+XRYFfH7n
+    subject: tulip-dev
+    repo: tulip_binaries
+    package: Tulip
+    version: $(TULIP_VERSION)
+    publish: true
+    override: true
+    artifact: tulip_installers

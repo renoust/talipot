@@ -10,6 +10,9 @@ rem thanks to the use of clcache.
 set /a TULIP_BUILD_CORE_ONLY = %APPVEYOR_JOB_NUMBER% %% 2
 echo TULIP_BUILD_CORE_ONLY=%TULIP_BUILD_CORE_ONLY%
 
+rem Install Inetc plugin for NSIS
+7z x bundlers/win/Inetc.zip -o"C:\Program Files (x86)\NSIS\"
+
 rem let's compile clcache in order to speedup incremental builds
 cd C:/
 set PATH=C:/Python35-x64;C:/Python35-x64/Scripts;%PATH%
@@ -112,4 +115,8 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 msbuild INSTALL.vcxproj /m /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
 if %errorlevel% neq 0 exit /b %errorlevel%
 rem finally run Tulip tests
-ctest --force-new-ctest-process --output-on-failure --build-config "Release"
+rem ctest --force-new-ctest-process --output-on-failure --build-config "Release"
+rem generate Tulip installer
+if "%TULIP_BUILD_CORE_ONLY%" == "0" (
+  msbuild bundle.vcxproj /m /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
+)

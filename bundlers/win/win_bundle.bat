@@ -1,4 +1,3 @@
-@echo off
 set NSIS_PATH=%1
 set TULIP_DIR=%2
 set DEST_DIR=%3
@@ -21,7 +20,7 @@ if EXIST "%DEST_DIR%\\files" (
 ) else ( mkdir "%DEST_DIR%\\files" )
 
 echo 'Copying Tulip files'
-xcopy "%TULIP_DIR%" "%DEST_DIR%\\files" /E /Q
+xcopy %TULIP_DIR% "%DEST_DIR%\\files" /E /Q
 
 if NOT "%DEBUG_MODE%" == "TRUE" (
 echo 'Removing debug libs'
