@@ -36,9 +36,7 @@ namespace tlp {
 template <typename Obj, typename OTYPE>
 struct Circle : public Vector<Obj, 2, OTYPE> {
   Circle() {}
-  Circle(const Vector<Obj, 2, OTYPE> &pos, Obj radius)
-      : Vector<Obj, 2, OTYPE>(pos), radius(radius) {}
-  Circle(const Circle &c) : Vector<Obj, 2, OTYPE>(c), radius(c.radius) {}
+
   Circle(Obj x, Obj y, Obj radius) : radius(radius) {
     (*this)[0] = x;
     (*this)[1] = y;

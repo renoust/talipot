@@ -68,9 +68,6 @@ public:
   inline VECTOR() {
     memset(this->data(), 0, SIZE * sizeof(TYPE));
   }
-  inline VECTOR(const Vector<TYPE, SIZE, OTYPE> &v) {
-    set(v);
-  }
   inline VECTOR(const Vector<TYPE, SIZE + 1, OTYPE> &v) {
     set(v);
   }
