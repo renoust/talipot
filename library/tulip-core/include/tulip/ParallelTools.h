@@ -28,6 +28,13 @@
 #ifndef TLP_NO_THREADS
 
 #ifdef _OPENMP
+#include <omp.h>
+#ifdef LLVM_CLANG
+// we need this reference to the libomp runtime from llvm to workaround
+// a odd MacOS phenomenon when an application shutdows
+// https://www.imagemagick.org/discourse-server/viewtopic.php?f=3&t=29031&start=15#p129707
+extern volatile int __kmp_init_user_locks;
+#endif
 // _OPENMP is supposed to be defined as an integer
 //  representing the year/month of the supported version
 #if _OPENMP < 200805
@@ -39,10 +46,8 @@ typedef size_t OMP_ITER_TYPE;
 #endif
 #ifndef _MSC_VER
 #define OMP(x) _Pragma(STRINGIFY(omp x))
-#define OMP_CRITICAL_SECTION(x) _Pragma(STRINGIFY(omp critical(x)))
 #else
 #define OMP(x) __pragma(omp x)
-#define OMP_CRITICAL_SECTION(x) __pragma(omp critical(x))
 #endif
 
 #else
@@ -183,17 +188,50 @@ public:
 
 #ifdef _OPENMP
 
-#define TLP_LOCK_SECTION(mtx) OMP_CRITICAL_SECTION(mtx)
-#define TLP_UNLOCK_SECTION(mtx)
-#define TLP_DECLARE_GLOBAL_LOCK(mtx) extern void mtx()
-#define TLP_DEFINE_GLOBAL_LOCK(mtx) extern void mtx()
-#define TLP_GLOBALLY_LOCK_SECTION(mtx) OMP_CRITICAL_SECTION(mtx)
-#define TLP_GLOBALLY_UNLOCK_SECTION(mtx)
+class OpenMPLock {
+  public:
+    OpenMPLock() {
+      omp_init_lock(&_lock);
+    }
+    ~OpenMPLock() {
+      if (canUseLock()) {
+        omp_destroy_lock(&_lock);
+      }
+    }
+    inline void lock() {
+      if (canUseLock()) {
+        omp_set_lock(&_lock);
+      }
+    }
+    inline void unlock() {
+      if (canUseLock()) {
+        omp_unset_lock(&_lock);
+      }
+    }
+    inline bool canUseLock() const {
+      #ifdef LLVM_CLANG
+        return __kmp_init_user_locks;
+      #else
+        return true;
+      #endif
+    }
+  private:
+    omp_lock_t _lock;
+};
+
+#define TLP_LOCK_SECTION(mtx) \
+  static tlp::OpenMPLock mtx; \
+  mtx.lock();
+#define TLP_UNLOCK_SECTION(mtx) mtx.unlock();
+#define TLP_DECLARE_GLOBAL_LOCK(mtx) extern tlp::OpenMPLock mtx
+#define TLP_DEFINE_GLOBAL_LOCK(mtx) tlp::OpenMPLock mtx
+#define TLP_GLOBALLY_LOCK_SECTION(mtx) mtx.lock();
+#define TLP_GLOBALLY_UNLOCK_SECTION(mtx) mtx.unlock()
 
 #else
 
-#define TLP_LOCK_SECTION(mtx)                                                                      \
-  static std::mutex mtx;                                                                           \
+#define TLP_LOCK_SECTION(mtx) \
+  static std::mutex mtx; \
   mtx.lock();
 #define TLP_UNLOCK_SECTION(mtx) mtx.unlock()
 #define TLP_DECLARE_GLOBAL_LOCK(mtx) extern std::mutex mtx
