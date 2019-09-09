@@ -216,12 +216,15 @@ IF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
     # in order for the tulip modules to be successfully imported and loaded on every computer.
     # The 'auditwheel' tool (see https://github.com/pypa/auditwheel) has been developed
     # in order to ease that patching task.
-    # We use our patched version of the auditwheel tool
-    # as the official one does not repair tulip-gui wheel correctly
-    IF(NOT IS_DIRECTORY /tmp/auditwheel)
-      EXECUTE_PROCESS(COMMAND bash -c "echo $(dirname $(readlink /usr/local/bin/auditwheel))" OUTPUT_VARIABLE PYBIN OUTPUT_STRIP_TRAILING_WHITESPACE)
-      EXECUTE_PROCESS(COMMAND bash -c "${PYBIN}/pip uninstall -y auditwheel; cd /tmp; curl -LO http://tulip.labri.fr/code/auditwheel.tar.gz; tar zxvf auditwheel.tar.gz; ${PYBIN}/pip install /tmp/auditwheel")
-    ENDIF(NOT IS_DIRECTORY /tmp/auditwheel)
+
+    # We use a patched version of the auditwheel tool
+    # as the upstream one does not repair Tulip-Python wheels correctly
+    EXECUTE_PROCESS(COMMAND bash -c "echo $(dirname $(readlink /usr/local/bin/auditwheel))"
+                    OUTPUT_VARIABLE PYBIN OUTPUT_STRIP_TRAILING_WHITESPACE)
+    EXECUTE_PROCESS(COMMAND bash -c "${PYBIN}/pip uninstall -y auditwheel
+                                     git clone -b purelib_fixes https://github.com/anlambert/auditwheel.git /tmp/auditwheel
+                                     ${PYBIN}/pip install /tmp/auditwheel
+                                     rm -rf /tmp/auditwheel")
 
     ADD_CUSTOM_COMMAND(TARGET wheel POST_BUILD
       COMMAND bash -c "auditwheel repair -L native -w ./dist ./dist/$(ls -t ./dist/ | head -1)"
