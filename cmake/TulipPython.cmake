@@ -222,7 +222,7 @@ IF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
     EXECUTE_PROCESS(COMMAND bash -c "echo $(dirname $(readlink /usr/local/bin/auditwheel))"
                     OUTPUT_VARIABLE PYBIN OUTPUT_STRIP_TRAILING_WHITESPACE)
     EXECUTE_PROCESS(COMMAND bash -c "${PYBIN}/pip uninstall -y auditwheel
-                                     git clone -b purelib_fixes https://github.com/anlambert/auditwheel.git /tmp/auditwheel
+                                     git clone -b wheel_abi_fixes https://github.com/anlambert/auditwheel.git /tmp/auditwheel
                                      ${PYBIN}/pip install /tmp/auditwheel
                                      rm -rf /tmp/auditwheel")
 

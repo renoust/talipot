@@ -1,21 +1,3 @@
-# Tulip continuous integration on Linux and Mac OS platforms through TravisCI.
-# Two type of builds are performed by os:
-#  - a "legacy" Tulip build using :
-#     * default system compiler (GCC 5.4 on Linux, clang from Xcode7.3 on Mac OS)
-#     * Qt 5.5 on Linux, Qt 5.9 on MacOS
-#     * Python 2.7
-#  - a "modern" Tulip build using:
-#     * recent compiler (GCC 8.1 on Linux, clang 7.0 from MacPorts or Homebrew on Mac OS)
-#     * Qt 5.11 on Linux, Qt 5.12 on MacOS
-#     * Python 3.7 on Linux, Python 2.7 on MacOS
-# As TravisCI limits build job times to 45 minutes, Tulip is built in two successive stages
-# to avoid timeouts (which happened often with MacOs builds):
-#  - a core build with no Tulip OpenGL and Qt components
-#  - a complete build including OpenGL and Qt components
-# The trick is to use travis build cache and ccache to cache already compiled object
-# files between stages and thus not exceeding Travis build timeout limits
-
-# inform travis that we are building a cpp project
 language: cpp
 
 # define build jobs
@@ -39,15 +21,29 @@ jobs:
         - docker
 
       before_install:
-        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock
+            -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
         - sudo service docker restart
         - sleep 5
         - sudo docker pull ${DOCKER_IMAGE}
         - sudo docker create -v $HOME/ccache:/ccache --name ccache ${DOCKER_IMAGE}
 
-      script:
-        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN -v `pwd`:/tulip:rw ${DOCKER_IMAGE} /bin/bash -c "bash -xe /tulip/bundlers/linux/tulip_python_wheels_manylinux_build.sh"
+      script: |
+        LAST_VERSION=$(curl -s 'https://test.pypi.org/pypi/tulipe-python/json' | \
+          python -c "import sys, json; print(json.load(sys.stdin)['info']['version'])" 2>/dev/null)
+        if [ "$?" != "0" ]
+        then
+          DEV_VERSION=0
+        else
+          DEV_VERSION=$(echo $LAST_VERSION | cut -f4 -d '.' | sed 's/dev//')
+          let DEV_VERSION+=1
+        fi
+        sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache \
+          --cap-add SYS_ADMIN -v `pwd`:/tulip:rw ${DOCKER_IMAGE} /bin/bash -c \
+          "bash -xe /tulip/bundlers/linux/tulip_python_wheels_manylinux_build.sh \
+            dev$DEV_VERSION $TEST_PYPI_API_TOKEN"
 
+    # Tulip-Python wheels build on manylinux2010
     -
       os: linux
       dist: trusty
@@ -64,11 +60,62 @@ jobs:
         - docker
 
       before_install:
-        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock
+            -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
         - sudo service docker restart
         - sleep 5
         - sudo docker pull ${DOCKER_IMAGE}
         - sudo docker create -v $HOME/ccache:/ccache --name ccache ${DOCKER_IMAGE}
 
+      script: |
+        LAST_VERSION=$(curl -s 'https://test.pypi.org/pypi/tulipe-python/json' | \
+          python -c "import sys, json; print(json.load(sys.stdin)['info']['version'])" 2>/dev/null)
+        if [ "$?" != "0" ]
+        then
+          DEV_VERSION=0
+        else
+          DEV_VERSION=$(echo $LAST_VERSION | cut -f4 -d '.' | sed 's/dev//')
+          let DEV_VERSION+=1
+        fi
+        sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache \
+          --cap-add SYS_ADMIN -v `pwd`:/tulip:rw ${DOCKER_IMAGE} /bin/bash -c \
+          "bash -xe /tulip/bundlers/linux/tulip_python_wheels_manylinux_build.sh \
+            dev$DEV_VERSION $TEST_PYPI_API_TOKEN"
+
+    - stage: Tulip-Python wheels deployment test (manylinux1, manylinux2010)
+      # Python 2.7 on trusty
+      os: linux
+      dist: trusty
+      addons:
+        apt:
+          packages:
+            - python-pip
+      env:
+        # use Python 2.7
+        - PYTHON_EXECUTABLE=/usr/bin/python2.7
       script:
-        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN -v `pwd`:/tulip:rw ${DOCKER_IMAGE} /bin/bash -c "bash -xe /tulip/bundlers/linux/tulip_python_wheels_manylinux_build.sh"
+        - pip install --index-url https://test.pypi.org/simple/ tulipe-python --user
+        - python -c "from tulip import tlp; print(tlp.getLayoutAlgorithmPluginsList())"
+        - cd tests/python
+        - TULIP_BUILD_DIR= python -m unittest discover
+
+    -
+      # Python 3.7 on xenial
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          sources:
+            - deadsnakes
+          packages:
+            - python3.7
+      env:
+        # use Python 2.7
+        - PYTHON_EXECUTABLE=/usr/bin/python3.7
+      script:
+        - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        - python3.7 get-pip.py --user
+        - pip3.7 install --index-url https://test.pypi.org/simple/ tulipe-python --user
+        - python3.7 -c "from tulip import tlp; print(tlp.getLayoutAlgorithmPluginsList())"
+        - cd tests/python
+        - TULIP_BUILD_DIR= python3.7 -m unittest discover

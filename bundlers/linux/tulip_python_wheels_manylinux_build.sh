@@ -36,6 +36,16 @@ else
   TULIP_SRC=/tmp/tulip
 fi
 
+cat > ~/.pypirc << EOF
+[distutils]
+index-servers=
+    testpypi
+[testpypi]
+repository: https://test.pypi.org/legacy/
+username: __token__
+password: $2
+EOF
+
 # build tulip
 if [ -d /tulip_build ]
 then
@@ -46,6 +56,7 @@ fi
 # iterate on available Python versions
 for CPYBIN in /opt/python/cp*/bin
 do
+  ${CPYBIN}/pip install twine
   # configure and build python wheel with specific Python version
   cmake ${TULIP_SRC} -DCMAKE_BUILD_TYPE=Release \
                      -DCMAKE_INSTALL_PREFIX=/tmp/tulip_install \
@@ -57,6 +68,7 @@ do
   if [ -n "$TULIP_PYTHON_TEST_WHEEL_SUFFIX" ]
   then
     make test-wheel
+    make test-wheel-upload
   else
     make wheel
   fi
@@ -85,18 +97,18 @@ print('Tulip %s successfully imported in Python %s' %
     ${CPYBIN}/pip uninstall -y tulip-python
   fi
 
-  # check the tulip-core wheel
-  pushd ./library/tulip-python/bindings/tulip-core/tulip_module/dist
-  ${CPYBIN}/pip install $(ls -t | head -1)
-  ${CPYBIN}/python -c "
-from tulip import tlp
-from platform import python_version
-print('Tulip %s successfully imported in Python %s' %
-      (tlp.getTulipRelease(), python_version()))
-"
-  if [ $? -ne 0 ]
-  then
-     break
-  fi
-  popd
+#   # check the tulip-core wheel
+#   pushd ./library/tulip-python/bindings/tulip-core/tulip_module/dist
+#   ${CPYBIN}/pip install $(ls -t | head -1)
+#   ${CPYBIN}/python -c "
+# from tulip import tlp
+# from platform import python_version
+# print('Tulip %s successfully imported in Python %s' %
+#       (tlp.getTulipRelease(), python_version()))
+# "
+#   if [ $? -ne 0 ]
+#   then
+#      break
+#   fi
+#   popd
 done
