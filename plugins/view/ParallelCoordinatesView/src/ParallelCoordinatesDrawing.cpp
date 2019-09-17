@@ -13,26 +13,26 @@
 
 #include <QApplication>
 
-#include <tulip/BooleanProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/Iterator.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/GlPolyQuad.h>
-#include <tulip/GlCatmullRomCurve.h>
-#include <tulip/GlCubicBSplineInterpolation.h>
-#include <tulip/GlLine.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/GlScene.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/Iterator.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlPolyQuad.h>
+#include <talipot/GlCatmullRomCurve.h>
+#include <talipot/GlCubicBSplineInterpolation.h>
+#include <talipot/GlLine.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/GlScene.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/TlpQtTools.h>
 
 #include "ParallelCoordinatesDrawing.h"
 #include "NominalParallelAxis.h"

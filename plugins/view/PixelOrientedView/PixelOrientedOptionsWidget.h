@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef PIXELORIENTEDOPTIONSWIDGET_H_
-#define PIXELORIENTEDOPTIONSWIDGET_H_
+#ifndef PIXEL_ORIENTED_OPTIONS_WIDGET_H
+#define PIXEL_ORIENTED_OPTIONS_WIDGET_H
 
 #include <QWidget>
 
-#include <tulip/Color.h>
+#include <talipot/Color.h>
 
 namespace Ui {
 class PixelOrientedOptionsWidgetData;
@@ -48,4 +48,4 @@ private:
   std::string oldLayoutType;
 };
 } // namespace tlp
-#endif /* PIXELORIENTEDOPTIONSWIDGET_H_ */
+#endif // PIXEL_ORIENTED_OPTIONS_WIDGET_H

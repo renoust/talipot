@@ -26,14 +26,14 @@
 #include <QGraphicsView>
 #include <QKeyEvent>
 
-#include <tulip/GlTools.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/Interactor.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/PropertyInterface.h>
+#include <talipot/GlTools.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Interactor.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/PropertyInterface.h>
 
 #include "../utils/ViewGraphPropertiesSelectionWidget.h"
 

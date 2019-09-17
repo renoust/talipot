@@ -16,13 +16,13 @@
 
 #include <QMouseEvent>
 
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlEntity.h>
-#include <tulip/GlColorScale.h>
-#include <tulip/ColorScaleConfigDialog.h>
-#include <tulip/Camera.h>
-#include <tulip/GlLayer.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlEntity.h>
+#include <talipot/GlColorScale.h>
+#include <talipot/ColorScaleConfigDialog.h>
+#include <talipot/Camera.h>
+#include <talipot/GlLayer.h>
+#include <talipot/DoubleProperty.h>
 
 #include "SOMView.h"
 #include <SOMMap.h>

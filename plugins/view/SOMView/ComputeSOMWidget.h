@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef COMPUTESOMWIDGET_H_
-#define COMPUTESOMWIDGET_H_
+#ifndef COMPUTE_SOM_WIDGET_H
+#define COMPUTE_SOM_WIDGET_H
 
 #include <QWidget>
 
@@ -44,4 +44,4 @@ public:
   void setOutputPropertiesList(std::vector<std::string> &properties);
 };
 } // namespace tlp
-#endif /* COMPUTESOMWIDGET_H_ */
+#endif // COMPUTE_SOM_WIDGET_H

@@ -10,10 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _STRENGTHMETRIC_H
-#define _STRENGTHMETRIC_H
+
+#ifndef STRENGTH_METRIC_H
+#define STRENGTH_METRIC_H
+
 #include <unordered_set>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup metric */
 
@@ -45,4 +47,4 @@ private:
   double s(const std::unordered_set<tlp::node> &U);
 };
 
-#endif
+#endif // STRENGTH_METRIC_H

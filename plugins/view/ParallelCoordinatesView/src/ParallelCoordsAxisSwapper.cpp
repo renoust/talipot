@@ -11,13 +11,13 @@
  *
  */
 
-#include <tulip/GlLayer.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlCircle.h>
-#include <tulip/GlQuad.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/Camera.h>
+#include <talipot/GlLayer.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlCircle.h>
+#include <talipot/GlQuad.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Camera.h>
 
 #include "ParallelTools.h"
 #include "ParallelCoordinatesView.h"

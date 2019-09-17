@@ -11,17 +11,17 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/MouseSelector.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/MouseSelector.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to select par of the graph
+/** \brief Interactor to select par of the graph
  *
  */
 class InteractorSelection : public NodeLinkDiagramComponentInteractor {
@@ -33,7 +33,7 @@ public:
    * Default constructor
    */
   InteractorSelection(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_selection.png",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_selection.png",
                                            "Select nodes/edges in a rectangle",
                                            StandardInteractorPriority::RectangleSelection) {}
 

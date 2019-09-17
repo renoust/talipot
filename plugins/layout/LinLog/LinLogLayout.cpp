@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "LinLogLayout.h"
 
 LinLogLayout::LinLogLayout(tlp::Graph *_graph, tlp::PluginProgress *_pluginProgress)

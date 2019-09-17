@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/GlLine.h>
-#include <tulip/Camera.h>
-#include <tulip/GlMainWidget.h>
+#include <talipot/GlLine.h>
+#include <talipot/Camera.h>
+#include <talipot/GlMainWidget.h>
 
 #include "ParallelCoordsAxisSpacer.h"
 #include "ParallelTools.h"

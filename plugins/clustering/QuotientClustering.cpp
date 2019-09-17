@@ -11,15 +11,15 @@
  *
  */
 
-#include <tulip/GraphProperty.h>
-#include <tulip/StringCollection.h>
-#include <tulip/Algorithm.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/GraphProperty.h>
+#include <talipot/StringCollection.h>
+#include <talipot/Algorithm.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/ViewSettings.h>
 
 using namespace std;
 using namespace tlp;

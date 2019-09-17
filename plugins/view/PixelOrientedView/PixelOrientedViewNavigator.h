@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PIXELORIENTEDOVERVIEWSELECTOR_H_
-#define PIXELORIENTEDOVERVIEWSELECTOR_H_
+#ifndef PIXEL_ORIENTED_VIEW_NAVIGATOR_H
+#define PIXEL_ORIENTED_VIEW_NAVIGATOR_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 #include "PixelOrientedOverview.h"
 #include "PixelOrientedView.h"
@@ -38,4 +38,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PIXELORIENTEDOVERVIEWSELECTOR_H_ */
+#endif // PIXEL_ORIENTED_VIEW_NAVIGATOR_H

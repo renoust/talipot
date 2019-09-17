@@ -44,7 +44,7 @@
   <customwidget>
    <class>tlp::GraphPropertiesSelectionWidget</class>
    <extends>QWidget</extends>
-   <header>tulip/GraphPropertiesSelectionWidget.h</header>
+   <header>talipot/GraphPropertiesSelectionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -11,7 +11,7 @@
  *
  */
 
-#include <tulip/ImportModule.h>
+#include <talipot/ImportModule.h>
 
 using namespace tlp;
 

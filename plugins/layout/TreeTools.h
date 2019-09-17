@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef TREETOOLS_H
-#define TREETOOLS_H
 
-#include <tulip/Node.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
+#ifndef TREE_TOOLS_H
+#define TREE_TOOLS_H
+
+#include <talipot/Node.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
 
 namespace tlp {
 class Graph;
@@ -45,4 +46,4 @@ inline float getNodeHeight(tlp::SizeProperty *size, tlp::node current) {
 inline float getNodeWidth(tlp::SizeProperty *size, tlp::node current) {
   return size->getNodeValue(current).getW();
 }
-#endif
+#endif // TREE_TOOLS_H

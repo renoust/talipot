@@ -1,6 +1,6 @@
 @echo off
 set NSIS_PATH=%1
-set TULIP_DIR=%2
+set TALIPOT_DIR=%2
 set DEST_DIR=%3
 if [%4] NEQ [] (
   if "%4" == "TRUE" (
@@ -20,8 +20,8 @@ if EXIST "%DEST_DIR%\\files" (
   robocopy "%DEST_DIR%\\empty_folder" "%DEST_DIR%\\files" /MIR >nul 2>&1
 ) else ( mkdir "%DEST_DIR%\\files" )
 
-echo 'Copying Tulip files'
-xcopy "%TULIP_DIR%" "%DEST_DIR%\\files" /E /Q
+echo 'Copying Talipot files'
+xcopy "%TALIPOT_DIR%" "%DEST_DIR%\\files" /E /Q
 
 if NOT "%DEBUG_MODE%" == "TRUE" (
 echo 'Removing debug libs'
@@ -42,16 +42,16 @@ rmdir /Q /S "%DEST_DIR%\\files\\lib\\cmake" >nul 2>&1
 
 echo 'Copying NSIS script and licence'
 
-copy "%SRC_DIR%\\Tulip.nsi" "%DEST_DIR%\\"
+copy "%SRC_DIR%\\Talipot.nsi" "%DEST_DIR%\\"
 copy "%SRC_DIR%\\LICENSE" "%DEST_DIR%\\"
 
 echo 'Running NSIS installer generator'
 cd "%DEST_DIR%"
 set PATH=%NSIS_PATH%;%PATH%
 if "%OUT_FILE%" == "" (
-  makensis /V4 Tulip.nsi
+  makensis /V4 Talipot.nsi
 ) else (
-  makensis /V4 /DOUT_FILE=%OUT_FILE% Tulip.nsi
+  makensis /V4 /DOUT_FILE=%OUT_FILE% Talipot.nsi
 )
 
 echo 'NSIS installer generator completed !'

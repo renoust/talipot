@@ -16,7 +16,7 @@ IF(POLICY CMP0042)
 ENDIF(POLICY CMP0042)
 
 # Ensure CMAKE_BUILD_WITH_INSTALL_RPATH is still honored with CMake >= 3.9
-# This is needed in order to build tulip-python wheels on MacOS
+# This is needed in order to build talipot-python wheels on MacOS
 IF(POLICY CMP0068)
   CMAKE_POLICY(SET CMP0068 OLD)
 ENDIF(POLICY CMP0068)
@@ -25,18 +25,18 @@ IF(POLICY CMP0072)
   CMAKE_POLICY(SET CMP0072 NEW)
 ENDIF(POLICY CMP0072)
 
-# enable the use of ccache for Tulip developers to speed up the build process
+# enable the use of ccache for Talipot developers to speed up the build process
 IF(NOT MSVC)
-  SET(TULIP_USE_CCACHE OFF CACHE BOOL "Do you want to use ccache to speed up the build process during Tulip development ? [OFF|ON]")
-  IF(TULIP_USE_CCACHE)
+  SET(TALIPOT_USE_CCACHE OFF CACHE BOOL "Do you want to use ccache to speed up the build process during Talipot development ? [OFF|ON]")
+  IF(TALIPOT_USE_CCACHE)
     FIND_PROGRAM(CCACHE_PROGRAM ccache)
     IF(CCACHE_PROGRAM)
       SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
     ENDIF(CCACHE_PROGRAM)
-  ENDIF(TULIP_USE_CCACHE)
+  ENDIF(TALIPOT_USE_CCACHE)
 ENDIF(NOT MSVC)
 
-PROJECT(tulip)
+PROJECT(talipot)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -93,9 +93,9 @@ ENDIF(APPLE)
 ## ========================================================
 ## AppImage build
 ## ========================================================
-IF (TULIP_BUILD_FOR_APPIMAGE)
+IF (TALIPOT_BUILD_FOR_APPIMAGE)
   ADD_DEFINITIONS("-DAPPIMAGE_BUILD")
-ENDIF (TULIP_BUILD_FOR_APPIMAGE)
+ENDIF (TALIPOT_BUILD_FOR_APPIMAGE)
 
 ## ========================================================
 ## Install paths
@@ -111,71 +111,71 @@ IF(LINUX AND CMAKE_VERSION VERSION_LESS 3.0)
   ENDIF(EXISTS "/etc/debian_version" AND NOT "${CMAKE_INSTALL_PREFIX}" MATCHES "^/usr/?$")
 ENDIF(LINUX AND CMAKE_VERSION VERSION_LESS 3.0)
 
-SET(TulipLibInstallDir ${CMAKE_INSTALL_LIBDIR})
-SET(TulipPluginsInstallDir ${TulipLibInstallDir}/tulip)
-SET(TulipGlyphPluginsInstallDir ${TulipPluginsInstallDir}/glyph)
-SET(TulipViewPluginsInstallDir ${TulipPluginsInstallDir}/view)
-SET(TulipInteractorPluginsInstallDir ${TulipPluginsInstallDir}/interactor)
-SET(TulipPerspectivePluginsInstallDir ${TulipPluginsInstallDir}/perspective)
-SET(TulipBinInstallDir ${CMAKE_INSTALL_BINDIR})
-SET(TulipIncludeInstallDir ${CMAKE_INSTALL_INCLUDEDIR})
-SET(TulipShareInstallDir ${CMAKE_INSTALL_DATADIR}/tulip)
-SET(TulipBitmapInstallDir ${TulipShareInstallDir}/bitmaps)
+SET(TalipotLibInstallDir ${CMAKE_INSTALL_LIBDIR})
+SET(TalipotPluginsInstallDir ${TalipotLibInstallDir}/talipot)
+SET(TalipotGlyphPluginsInstallDir ${TalipotPluginsInstallDir}/glyph)
+SET(TalipotViewPluginsInstallDir ${TalipotPluginsInstallDir}/view)
+SET(TalipotInteractorPluginsInstallDir ${TalipotPluginsInstallDir}/interactor)
+SET(TalipotPerspectivePluginsInstallDir ${TalipotPluginsInstallDir}/perspective)
+SET(TalipotBinInstallDir ${CMAKE_INSTALL_BINDIR})
+SET(TalipotIncludeInstallDir ${CMAKE_INSTALL_INCLUDEDIR})
+SET(TalipotShareInstallDir ${CMAKE_INSTALL_DATADIR}/talipot)
+SET(TalipotBitmapInstallDir ${TalipotShareInstallDir}/bitmaps)
 
 ## ========================================================
-## Tulip CMake macros
+## Talipot CMake macros
 ## ========================================================
-INCLUDE(cmake/TulipUseFile.cmake)
+INCLUDE(cmake/TalipotUseFile.cmake)
 
 ## ========================================================
-## Tulip version variables
+## Talipot version variables
 ## ========================================================
-SET(TulipMajorVersion 5)
-SET(TulipMinorVersion 3)
-SET(TulipReleaseVersion "1")
-SET(TulipVersionSeparator .)
+SET(TalipotMajorVersion 1)
+SET(TalipotMinorVersion 0)
+SET(TalipotReleaseVersion "0-dev")
+SET(TalipotVersionSeparator .)
 IF(MSVC) #specific options for Visual Studio
-  SET(TulipVersionSeparator _)
+  SET(TalipotVersionSeparator _)
 ENDIF()
-SET(TulipVersion "${TulipMajorVersion}${TulipVersionSeparator}${TulipMinorVersion}${TulipVersionSeparator}${TulipReleaseVersion}")
-SET(TulipMMVersion "${TulipMajorVersion}${TulipVersionSeparator}${TulipMinorVersion}")
-SET(TulipMinorVersionTwoDigits "${TulipMinorVersion}")
-# Use two digits for the minor version when generating the Tulip integer version number
-# as there was a 4.10 release that breaks preprocessor test like TULIP_INT_VERSION >= 4100 since the 5.0 release
+SET(TalipotVersion "${TalipotMajorVersion}${TalipotVersionSeparator}${TalipotMinorVersion}${TalipotVersionSeparator}${TalipotReleaseVersion}")
+SET(TalipotMMVersion "${TalipotMajorVersion}${TalipotVersionSeparator}${TalipotMinorVersion}")
+SET(TalipotMinorVersionTwoDigits "${TalipotMinorVersion}")
+# Use two digits for the minor version when generating the Talipot integer version number
+# as there was a 4.10 release that breaks preprocessor test like TALIPOT_INT_VERSION >= 4100 since the 5.0 release
 # (see https://sourceforge.net/p/auber/bugs/869/)
-STRING(LENGTH "${TulipMinorVersion}" TulipMinorVersionNbDigits)
-IF(TulipMinorVersionNbDigits LESS 2)
-  SET(TulipMinorVersionTwoDigits "0${TulipMinorVersion}")
-ENDIF(TulipMinorVersionNbDigits LESS 2)
-SET(TulipIntMMVersion "${TulipMajorVersion}${TulipMinorVersionTwoDigits}")
-IF(TulipReleaseVersion MATCHES "^[0-9]+$")
-  SET(TulipIntVersion "${TulipMajorVersion}${TulipMinorVersionTwoDigits}${TulipReleaseVersion}")
-ELSE(TulipReleaseVersion MATCHES "^[0-9]+$")
-  # just a hack to force the display of the full Tulip version in window title bar
+STRING(LENGTH "${TalipotMinorVersion}" TalipotMinorVersionNbDigits)
+IF(TalipotMinorVersionNbDigits LESS 2)
+  SET(TalipotMinorVersionTwoDigits "0${TalipotMinorVersion}")
+ENDIF(TalipotMinorVersionNbDigits LESS 2)
+SET(TalipotIntMMVersion "${TalipotMajorVersion}${TalipotMinorVersionTwoDigits}")
+IF(TalipotReleaseVersion MATCHES "^[0-9]+$")
+  SET(TalipotIntVersion "${TalipotMajorVersion}${TalipotMinorVersionTwoDigits}${TalipotReleaseVersion}")
+ELSE(TalipotReleaseVersion MATCHES "^[0-9]+$")
+  # just a hack to force the display of the full Talipot version in window title bar
   # when it contains non digit characters (like alpha, beta, dev, ...)
-  SET(TulipIntVersion "${TulipMajorVersion}${TulipMinorVersion}1")
+  SET(TalipotIntVersion "${TalipotMajorVersion}${TalipotMinorVersion}1")
   INCLUDE(cmake/GetGitRevisionDescription.cmake)
-  IF(EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT TULIP_BUILD_FOR_APPIMAGE)
-    SET(TULIP_SOURCE_DIR ${PROJECT_SOURCE_DIR})
-    GET_GIT_HEAD_REVISION(TULIP_REFSPEC TULIP_GIT_REVISION)
+  IF(EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT TALIPOT_BUILD_FOR_APPIMAGE)
+    SET(TALIPOT_SOURCE_DIR ${PROJECT_SOURCE_DIR})
+    GET_GIT_HEAD_REVISION(TALIPOT_REFSPEC TALIPOT_GIT_REVISION)
     CONFIGURE_FILE(utils/cmake-templates/GIT_COMMIT.in ${CMAKE_CURRENT_BINARY_DIR}/GIT_COMMIT)
     INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/GIT_COMMIT
-            DESTINATION ${TulipShareInstallDir})
-  ENDIF(EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT TULIP_BUILD_FOR_APPIMAGE)
-ENDIF(TulipReleaseVersion MATCHES "^[0-9]+$")
+            DESTINATION ${TalipotShareInstallDir})
+  ENDIF(EXISTS ${PROJECT_SOURCE_DIR}/.git AND NOT TALIPOT_BUILD_FOR_APPIMAGE)
+ENDIF(TalipotReleaseVersion MATCHES "^[0-9]+$")
 
 ## ========================================================
-## Tulip libraries names
+## Talipot libraries names
 ## ========================================================
-SET(LibTulipCoreName "tulip-core-${TulipMMVersion}")
-SET(LibTulipOGLName "tulip-ogl-${TulipMMVersion}")
-SET(LibTulipGUIName "tulip-gui-${TulipMMVersion}")
-SET(LibTulipPythonName "tulip-python-${TulipMMVersion}")
-SET(LibTulipOGDFName "tulip-ogdf-${TulipMMVersion}")
+SET(LibTalipotCoreName "talipot-core-${TalipotMMVersion}")
+SET(LibTalipotOGLName "talipot-ogl-${TalipotMMVersion}")
+SET(LibTalipotGUIName "talipot-gui-${TalipotMMVersion}")
+SET(LibTalipotPythonName "talipot-python-${TalipotMMVersion}")
+SET(LibTalipotOGDFName "talipot-ogdf-${TalipotMMVersion}")
 SET(LibStlPythonBindingsName "stl-python-bindings")
-SET(LibTulipCorePythonBindingsName "tulip-core-python-bindings")
-SET(LibTulipGUIPythonBindingsName "tulip-gui-python-bindings")
-SET(TulipLibs ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName} ${LibTulipOGDFName})
+SET(LibTalipotCorePythonBindingsName "talipot-core-python-bindings")
+SET(LibTalipotGUIPythonBindingsName "talipot-gui-python-bindings")
+SET(TalipotLibs ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${LibTalipotOGDFName})
 
 ## ========================================================
 ## Current year (used in documentation config files)
@@ -186,23 +186,23 @@ STRING(TIMESTAMP CurrentYear "%Y")
 ## Compiler-specific options
 ## ========================================================
 
-TULIP_SET_COMPILER_OPTIONS()
+TALIPOT_SET_COMPILER_OPTIONS()
 
 ## ========================================================
 ## CORE ONLY
-## this used to have a minimal build of Tulip without
+## this used to have a minimal build of Talipot without
 ## any of the opengl, qt or python components
 ## ========================================================
 IF(NOT EXISTS ${PROJECT_SOURCE_DIR}/cmake/FindQtX.cmake OR EMSCRIPTEN)
-  SET(TULIP_BUILD_CORE_ONLY ON)
-  MESSAGE("You can only configure a core build of Tulip.")
+  SET(TALIPOT_BUILD_CORE_ONLY ON)
+  MESSAGE("You can only configure a core build of Talipot.")
 ELSE()
-  SET(TULIP_BUILD_CORE_ONLY OFF CACHE BOOL "Do you want a minimal build of Tulip (no OpenGL rendering, no Qt gui, no documentation) ? [ON|OFF]")
+  SET(TALIPOT_BUILD_CORE_ONLY OFF CACHE BOOL "Do you want a minimal build of Talipot (no OpenGL rendering, no Qt gui, no documentation) ? [ON|OFF]")
 ENDIF()
 
-IF(TULIP_BUILD_CORE_ONLY AND LINUX)
+IF(TALIPOT_BUILD_CORE_ONLY AND LINUX)
 # the macro ADD_CORE_FILES will be used
-# to collect the files needed to build a minimal Tulip
+# to collect the files needed to build a minimal Talipot
 # in the directory pointed by CMAKE_CURRENT_SOURCE_DIR
   MACRO(ADD_CORE_FILES files)
     SET(CURRENT_SOURCE_DIR ".")
@@ -219,9 +219,9 @@ IF(TULIP_BUILD_CORE_ONLY AND LINUX)
       ENDFOREACH()
     ENDIF()
   ENDMACRO()
-  ADD_CORE_FILES(CMakeLists.txt cmake/cmake_uninstall.cmake.in cmake/TulipUseFile.cmake cmake/FindCppUnit.cmake cmake/FindTulip.cmake)
+  ADD_CORE_FILES(CMakeLists.txt cmake/cmake_uninstall.cmake.in cmake/TalipotUseFile.cmake cmake/FindCppUnit.cmake cmake/FindTalipot.cmake)
 # the macro ADD_CORE_DIRECTORY_EXCEPT will be used
-# to exclude the files not needed to build a minimal Tulip
+# to exclude the files not needed to build a minimal Talipot
 # in the directory pointed by CMAKE_CURRENT_SOURCE_DIR
   MACRO(ADD_CORE_DIRECTORY_EXCEPT files)
     SET(CURRENT_SOURCE_DIR ".")
@@ -243,19 +243,19 @@ ELSE()
   ENDMACRO()
 ENDIF()
 
-SET(TULIP_BUILD_PYTHON_COMPONENTS ON CACHE BOOL "Do you want to build Tulip Python components ? [ON|OFF]")
-IF(TULIP_BUILD_PYTHON_COMPONENTS)
-  SET(TULIP_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/tulip-python/bindings/tulip-core/tulip_module)
-  SET(TULIP_PYTHON_FOLDER ${TULIP_PYTHON_ROOT_FOLDER}/tulip)
-  SET(TULIPGUI_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/tulip-python/bindings/tulip-gui/tulipgui_module)
-  SET(TULIPGUI_PYTHON_FOLDER ${TULIPGUI_PYTHON_ROOT_FOLDER}/tulipgui)
-  SET(TULIP_PYTHON_NATIVE_FOLDER ${TULIP_PYTHON_FOLDER}/native)
-  SET(TULIPGUI_PYTHON_NATIVE_FOLDER ${TULIPGUI_PYTHON_FOLDER}/native)
-  SET(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET OFF CACHE BOOL "Add a wheel make target for generating Python tulip-core module wheel ? [ON|OFF]")
-  IF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
-    SET(TULIP_BUILD_CORE_ONLY ON)
+SET(TALIPOT_BUILD_PYTHON_COMPONENTS ON CACHE BOOL "Do you want to build Talipot Python components ? [ON|OFF]")
+IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+  SET(TALIPOT_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-core/talipot_module)
+  SET(TALIPOT_PYTHON_FOLDER ${TALIPOT_PYTHON_ROOT_FOLDER}/talipot)
+  SET(TALIPOTGUI_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-gui/talipotgui_module)
+  SET(TALIPOTGUI_PYTHON_FOLDER ${TALIPOTGUI_PYTHON_ROOT_FOLDER}/talipotgui)
+  SET(TALIPOT_PYTHON_NATIVE_FOLDER ${TALIPOT_PYTHON_FOLDER}/native)
+  SET(TALIPOTGUI_PYTHON_NATIVE_FOLDER ${TALIPOTGUI_PYTHON_FOLDER}/native)
+  SET(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET OFF CACHE BOOL "Add a wheel make target for generating Python talipot-core module wheel ? [ON|OFF]")
+  IF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
+    SET(TALIPOT_BUILD_CORE_ONLY ON)
     IF(APPLE)
-      # build binaries with install rpath when generating Tulip Python wheels
+      # build binaries with install rpath when generating Talipot Python wheels
       # for MacOs as we don't install the project in that case
       SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
     ELSEIF(LINUX)
@@ -263,12 +263,12 @@ IF(TULIP_BUILD_PYTHON_COMPONENTS)
       IF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
         MESSAGE(FATAL_ERROR "Python binary wheels for Linux platform must be compiled using the CentOS 5.11 docker image provided by the manylinux project from the Python Packaging Authority.\nSee https://github.com/pypa/manylinux for more details.")
       ENDIF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
-      # build binaries with install rpath when generating Tulip Python wheels for Linux
+      # build binaries with install rpath when generating Talipot Python wheels for Linux
       # as we don't install the project in that case
       SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
     ENDIF(APPLE)
-  ENDIF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
-ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
+  ENDIF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
+ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
 ## ========================================================
 ## Required packages
@@ -294,18 +294,18 @@ IF(NOT EMSCRIPTEN)
 ENDIF(NOT EMSCRIPTEN)
 
 # Qhull
-SET(TULIP_USE_THIRDPARTY_QHULL OFF CACHE BOOL "If activated, force the use of reentrant qhull library located in thirdparty instead of trying to find it on the system.")
-IF(NOT TULIP_USE_THIRDPARTY_QHULL)
+SET(TALIPOT_USE_THIRDPARTY_QHULL OFF CACHE BOOL "If activated, force the use of reentrant qhull library located in thirdparty instead of trying to find it on the system.")
+IF(NOT TALIPOT_USE_THIRDPARTY_QHULL)
   FIND_PACKAGE(Qhull)
-ELSE(NOT TULIP_USE_THIRDPARTY_QHULL)
+ELSE(NOT TALIPOT_USE_THIRDPARTY_QHULL)
   UNSET(QHULL_FOUND CACHE)
-ENDIF(NOT TULIP_USE_THIRDPARTY_QHULL)
+ENDIF(NOT TALIPOT_USE_THIRDPARTY_QHULL)
 
 
 #Yajl
 FIND_PACKAGE(Yajl)
 
-IF(NOT TULIP_BUILD_CORE_ONLY)
+IF(NOT TALIPOT_BUILD_CORE_ONLY)
   # OpenGL
   FIND_PACKAGE(OpenGL REQUIRED)
 
@@ -334,41 +334,41 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
   FIND_PACKAGE(QtX)
 
   # Quazip
-SET(TULIP_USE_THIRDPARTY_QUAZIP OFF CACHE BOOL "If activated, force the use of quazip library located in thirdparty instead of trying to find it on the system.")
-IF(NOT TULIP_USE_THIRDPARTY_QUAZIP)
+SET(TALIPOT_USE_THIRDPARTY_QUAZIP OFF CACHE BOOL "If activated, force the use of quazip library located in thirdparty instead of trying to find it on the system.")
+IF(NOT TALIPOT_USE_THIRDPARTY_QUAZIP)
   FIND_PACKAGE(QuaZip)
-ELSE(NOT TULIP_USE_THIRDPARTY_QUAZIP)
+ELSE(NOT TALIPOT_USE_THIRDPARTY_QUAZIP)
   UNSET(QUAZIP_FOUND CACHE)
-ENDIF(NOT TULIP_USE_THIRDPARTY_QUAZIP)
-ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+ENDIF(NOT TALIPOT_USE_THIRDPARTY_QUAZIP)
+ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)
 
 # Python
-IF(TULIP_BUILD_PYTHON_COMPONENTS)
-  INCLUDE(cmake/TulipPython.cmake)
-ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
+IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+  INCLUDE(cmake/TalipotPython.cmake)
+ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
 ## ========================================================
 ## Include and library paths
 ## ========================================================
 SET(GZStreamInclude ${PROJECT_SOURCE_DIR}/thirdparty/gzstream/)
-SET(GZStreamLibrary gzstream-tulip-${TulipMMVersion})
-IF(NOT TULIP_BUILD_CORE_ONLY)
+SET(GZStreamLibrary gzstream-talipot-${TalipotMMVersion})
+IF(NOT TALIPOT_BUILD_CORE_ONLY)
   IF(QUAZIP_FOUND)
     SET(QuazipInclude ${QUAZIP_INCLUDE_DIRS})
     SET(QuazipLibrary ${QUAZIP_LIBRARIES})
   ELSE(QUAZIP_FOUND)
     SET(QuazipInclude ${PROJECT_SOURCE_DIR}/thirdparty/quazip/)
-    SET(QuazipLibrary quazip-tulip-${TulipMMVersion})
+    SET(QuazipLibrary quazip-talipot-${TalipotMMVersion})
   ENDIF(QUAZIP_FOUND)
 
   SET(FTGLInclude ${PROJECT_SOURCE_DIR}/thirdparty/ftgl/)
-  SET(FTGLLibrary ftgl-tulip-${TulipMMVersion})
+  SET(FTGLLibrary ftgl-talipot-${TalipotMMVersion})
   SET(Tess2Include ${PROJECT_SOURCE_DIR}/thirdparty/libtess2/Include)
-  SET(Tess2Library tess2-tulip-${TulipMMVersion})
-ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+  SET(Tess2Library tess2-talipot-${TalipotMMVersion})
+ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)
 
 SET(OGDFInclude ${PROJECT_SOURCE_DIR}/thirdparty/OGDF/include)
-SET(OGDFLibrary OGDF-tulip-${TulipMMVersion})
+SET(OGDFLibrary OGDF-talipot-${TalipotMMVersion})
 
 IF(QHULL_FOUND)
   SET(QhullInclude ${QHULL_INCLUDE_DIRS})
@@ -384,19 +384,19 @@ IF(YAJL_FOUND)
   SET(YajlLibrary ${YAJL_LIBRARIES})
 ELSE(YAJL_FOUND)
   SET(YajlInclude ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/yajl/src/api ${CMAKE_CURRENT_BINARY_DIR}/thirdparty/yajl/yajl-2.1.0/include)
-  SET(YajlLibrary yajl-tulip-${TulipMMVersion})
+  SET(YajlLibrary yajl-talipot-${TalipotMMVersion})
 ENDIF(YAJL_FOUND)
 
 SET(UTF8CppInclude ${PROJECT_SOURCE_DIR}/thirdparty/utf8-cpp/source)
 
-SET(TulipCoreInclude ${PROJECT_SOURCE_DIR}/library/tulip-core/include/)
-SET(TulipCoreBuildInclude ${PROJECT_BINARY_DIR}/library/tulip-core/include/)
-SET(TulipOGLInclude ${PROJECT_SOURCE_DIR}/library/tulip-ogl/include/)
-SET(TulipOGDFInclude ${PROJECT_SOURCE_DIR}/library/tulip-ogdf/)
-SET(TulipGUIInclude ${PROJECT_SOURCE_DIR}/library/tulip-gui/include/)
-SET(TulipUIGUIInclude ${PROJECT_BINARY_DIR}/library/tulip-gui/src/)
-SET(TulipGUIBuildInclude ${PROJECT_BINARY_DIR}/library/tulip-gui/include/)
-SET(TulipPythonInclude ${PROJECT_SOURCE_DIR}/library/tulip-python/include)
+SET(TalipotCoreInclude ${PROJECT_SOURCE_DIR}/library/talipot-core/include/)
+SET(TalipotCoreBuildInclude ${PROJECT_BINARY_DIR}/library/talipot-core/include/)
+SET(TalipotOGLInclude ${PROJECT_SOURCE_DIR}/library/talipot-ogl/include/)
+SET(TalipotOGDFInclude ${PROJECT_SOURCE_DIR}/library/talipot-ogdf/)
+SET(TalipotGUIInclude ${PROJECT_SOURCE_DIR}/library/talipot-gui/include/)
+SET(TalipotUIGUIInclude ${PROJECT_BINARY_DIR}/library/talipot-gui/src/)
+SET(TalipotGUIBuildInclude ${PROJECT_BINARY_DIR}/library/talipot-gui/include/)
+SET(TalipotPythonInclude ${PROJECT_SOURCE_DIR}/library/talipot-python/include)
 
 ## ========================================================
 ## Point RPATH to lib folder
@@ -407,12 +407,12 @@ SET(CMAKE_MACOSX_RPATH ON)
 FUNCTION(ADD_LIBRARY name)
   _ADD_LIBRARY(${name} ${ARGN})
   IF(APPLE)
-    # relative locations of Tulip dylibs dependencies are not the sames when generating Python wheel
-    IF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
+    # relative locations of Talipot dylibs dependencies are not the sames when generating Python wheel
+    IF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
       SET_TARGET_PROPERTIES(${name} PROPERTIES INSTALL_RPATH "@loader_path/;@loader_path/../")
-    ELSE(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
+    ELSE(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
       SET_TARGET_PROPERTIES(${name} PROPERTIES INSTALL_RPATH "@loader_path/../lib;@loader_path/../Frameworks;${QT_FRAMEWORKS_DIR}")
-    ENDIF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
+    ENDIF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
   ELSE(APPLE)
     # CMake >= 3.1.0 does not allow to set the INSTALL_RPATH property on INTERFACE_LIBRARY target type
     GET_TARGET_PROPERTY(TARGET_TYPE ${name} TYPE)
@@ -429,15 +429,15 @@ FUNCTION(ADD_LIBRARY name)
           SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_NAME_RELWITHDEBINFO "${name}")
           SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_BINARY_DIR}")
           SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_CURRENT_BINARY_DIR}")
-          INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TulipShareInstallDir}/pdb CONFIGURATIONS Debug)
-          INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TulipShareInstallDir}/pdb CONFIGURATIONS RelWithDebInfo)
+          INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TalipotShareInstallDir}/pdb CONFIGURATIONS Debug)
+          INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TalipotShareInstallDir}/pdb CONFIGURATIONS RelWithDebInfo)
         ENDIF("${ARGV1}" STREQUAL "SHARED")
       ENDIF(MSVC)
     ENDIF(NOT "${TARGET_TYPE}" STREQUAL "INTERFACE_LIBRARY")
   ENDIF(APPLE)
-  IF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
+  IF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
     ADD_DEPENDENCIES(wheel ${name})
-  ENDIF(TULIP_ACTIVATE_PYTHON_WHEEL_TARGET)
+  ENDIF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
 ENDFUNCTION()
 
 FUNCTION(ADD_EXECUTABLE name)
@@ -458,8 +458,8 @@ FUNCTION(ADD_EXECUTABLE name)
     SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_NAME_RELWITHDEBINFO "${name}")
     SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_BINARY_DIR}")
     SET_TARGET_PROPERTIES(${name} PROPERTIES PDB_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_CURRENT_BINARY_DIR}")
-    INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TulipShareInstallDir}/pdb CONFIGURATIONS Debug)
-    INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TulipShareInstallDir}/pdb CONFIGURATIONS RelWithDebInfo)
+    INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TalipotShareInstallDir}/pdb CONFIGURATIONS Debug)
+    INSTALL(FILES $<TARGET_PDB_FILE:${name}> DESTINATION ${TalipotShareInstallDir}/pdb CONFIGURATIONS RelWithDebInfo)
   ENDIF(MSVC)
 ENDFUNCTION()
 
@@ -467,22 +467,22 @@ ENDFUNCTION()
 ## Tests
 ## ========================================================
 IF(EXISTS ${CMAKE_SOURCE_DIR}/tests/CMakeLists.txt)
-  SET(TULIP_BUILD_TESTS OFF CACHE BOOL "Do you want to build the tests ? [OFF|ON]")
+  SET(TALIPOT_BUILD_TESTS OFF CACHE BOOL "Do you want to build the tests ? [OFF|ON]")
 ELSE()
-  SET(TULIP_BUILD_TESTS OFF)
+  SET(TALIPOT_BUILD_TESTS OFF)
 ENDIF()
 
 ## ========================================================
-## Create library/tulip/include/tulip/TulipRelease.h base on TulipRelease.h.in
+## Create library/talipot/include/talipot/Release.h base on Release.h.in
 ## ========================================================
 STRING(COMPARE EQUAL "${CMAKE_BUILD_TYPE}" "Release" result1)
 STRING(COMPARE EQUAL "${CMAKE_BUILD_TYPE}" "RelWithDebInfo" result2)
 IF(${result1} OR ${result2})
-  SET(TulipBuildIsRelease 1)
+  SET(TalipotBuildIsRelease 1)
 ELSE()
-  SET(TulipBuildIsRelease 0)
+  SET(TalipotBuildIsRelease 0)
 ENDIF()
-CONFIGURE_FILE("library/tulip-core/include/tulip/TulipRelease.h.in" "library/tulip-core/include/tulip/TulipRelease.h")
+CONFIGURE_FILE("library/talipot-core/include/talipot/Release.h.in" "library/talipot-core/include/talipot/Release.h")
 
 ## ========================================================
 ## Configure file for uninstall target
@@ -502,15 +502,15 @@ ADD_CUSTOM_TARGET(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_D
 ADD_SUBDIRECTORY(thirdparty)
 ADD_SUBDIRECTORY(library)
 ADD_SUBDIRECTORY(plugins)
-IF(NOT TULIP_BUILD_CORE_ONLY)
+IF(NOT TALIPOT_BUILD_CORE_ONLY)
   ADD_SUBDIRECTORY(doc)
   ADD_SUBDIRECTORY(textures)
   ADD_SUBDIRECTORY(externalplugins)
   ADD_SUBDIRECTORY(demos)
   ADD_SUBDIRECTORY(software)
-ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)
 
-IF(TULIP_BUILD_TESTS)
+IF(TALIPOT_BUILD_TESTS)
   INCLUDE(CTest)
   ENABLE_TESTING()
   IF(CMAKE_CONFIGURATION_TYPES)
@@ -519,32 +519,32 @@ IF(TULIP_BUILD_TESTS)
     ADD_CUSTOM_TARGET(runTests COMMAND ${CMAKE_CTEST_COMMAND} --force-new-ctest-process --output-on-failure)
   ENDIF(CMAKE_CONFIGURATION_TYPES)
   ADD_SUBDIRECTORY(tests)
-ENDIF(TULIP_BUILD_TESTS)
+ENDIF(TALIPOT_BUILD_TESTS)
 
 INSTALL(FILES AUTHORS
               LICENSE
-        DESTINATION ${TulipShareInstallDir})
+        DESTINATION ${TalipotShareInstallDir})
 
-INSTALL(FILES cmake/FindTULIP.cmake
-        RENAME TULIPConfig.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TULIP/)
+INSTALL(FILES cmake/FindTalipot.cmake
+        RENAME TalipotConfig.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Talipot/)
 
-CONFIGURE_FILE(cmake/TULIPConfigVersion.cmake.in ${CMAKE_BINARY_DIR}/cmake/TULIPConfigVersion.cmake @ONLY)
+CONFIGURE_FILE(cmake/TalipotConfigVersion.cmake.in ${CMAKE_BINARY_DIR}/cmake/TalipotConfigVersion.cmake @ONLY)
 
-INSTALL(FILES cmake/TulipUseFile.cmake
-              ${CMAKE_BINARY_DIR}/cmake/TULIPConfigVersion.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TULIP/)
+INSTALL(FILES cmake/TalipotUseFile.cmake
+              ${CMAKE_BINARY_DIR}/cmake/TalipotConfigVersion.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Talipot/)
 
 ## ========================================================
-## tulip-config script
+## talipot-config script
 ## ========================================================
 SET(prefix "${CMAKE_INSTALL_PREFIX}")
 SET(exec_prefix "\${prefix}")
-SET(includedir "\${prefix}/${TulipIncludeInstallDir}")
-SET(libdir "\${prefix}/${TulipLibInstallDir}")
-SET(libversion "${TulipMMVersion}")
-SET(VERSION "${TulipVersion}")
-SET(WIN_VERSION "${TulipMajorVersion}.${TulipMinorVersion}")
+SET(includedir "\${prefix}/${TalipotIncludeInstallDir}")
+SET(libdir "\${prefix}/${TalipotLibInstallDir}")
+SET(libversion "${TalipotMMVersion}")
+SET(VERSION "${TalipotVersion}")
+SET(WIN_VERSION "${TalipotMajorVersion}.${TalipotMinorVersion}")
 SET(QT_CPPFLAGS "-DQT_MINOR_REL=${QT_VERSION_MINOR}")
 IF("${OPENGL_INCLUDE_DIR}" STRGREATER "")
   SET(GL_INCLUDES "-I${OPENGL_INCLUDE_DIR}")
@@ -556,10 +556,10 @@ ELSE(WIN32)
 ENDIF(WIN32)
 SET(QT_LDFLAGS "${QT_QTCORE_LIBRARY_RELEASE} ${QT_QTGUI_LIBRARY_RELEASE} ${QT_QTOPENGL_LIBRARY_RELEASE} ${QT_QTXML_LIBRARY_RELEASE} ${QT_QTNETWORK_LIBRARY_RELEASE} ${QT_QTWEBKIT_LIBRARY_RELEASE}")
 
-CONFIGURE_FILE("tulip-config.in" "tulip-config" @ONLY)
-INSTALL(PROGRAMS ${PROJECT_BINARY_DIR}/tulip-config DESTINATION ${TulipBinInstallDir})
+CONFIGURE_FILE("talipot-config.in" "talipot-config" @ONLY)
+INSTALL(PROGRAMS ${PROJECT_BINARY_DIR}/talipot-config DESTINATION ${TalipotBinInstallDir})
 
-IF(NOT TULIP_BUILD_CORE_ONLY)
+IF(NOT TALIPOT_BUILD_CORE_ONLY)
 
   ADD_SUBDIRECTORY(bundlers)
   # ADD_SUBDIRECTORY(deploy)
@@ -568,24 +568,24 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
     INCLUDE(InstallRequiredSystemLibraries)
     IF(OPENMP_FOUND)
       IF(MSVC90)
-        INSTALL(PROGRAMS "${MSVC90_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC90.OPENMP/vcomp90.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC90_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC90.OPENMP/vcomp90.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF(MSVC90)
       IF(MSVC10)
-        INSTALL(PROGRAMS "${MSVC10_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC100.OPENMP/vcomp100.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC10_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC100.OPENMP/vcomp100.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF(MSVC10)
       IF(MSVC11)
-        INSTALL(PROGRAMS "${MSVC11_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC110.OPENMP/vcomp110.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC11_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC110.OPENMP/vcomp110.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF(MSVC11)
       IF(MSVC12)
-        INSTALL(PROGRAMS "${MSVC12_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC120.OPENMP/vcomp120.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC12_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC120.OPENMP/vcomp120.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF(MSVC12)
       IF(MSVC14 AND MSVC_VERSION EQUAL 1900)
-        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC140.OPENMP/vcomp140.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC140.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
       # for Visual Studio 15.0 2017
       ELSEIF(MSVC14 AND MSVC_VERSION EQUAL 1910)
-        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC150.OPENMP/vcomp140.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC150.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
       ELSEIF(MSVC14 AND MSVC_VERSION EQUAL 1912)
-        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC141.OPENMP/vcomp140.dll" DESTINATION ${TulipBinInstallDir})
+        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC141.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF()
     ENDIF(OPENMP_FOUND)
   ENDIF(MSVC)
@@ -593,7 +593,7 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
   IF(WIN32)
     # initialize the list of bundle libs (second arg of FIXUP_BUNDLE),
     # updated in plugins/view/GeographicView,
-    # and finally used in software/tulip_perpective/CMakeLists.txt
+    # and finally used in software/talipot_perpective/CMakeLists.txt
     SET_PROPERTY(GLOBAL PROPERTY FIXUP_BUNDLE_LIBS "")
 
     GET_FILENAME_COMPONENT(NSIS_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\NSIS]" ABSOLUTE)
@@ -605,18 +605,18 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
 
     IF(NOT NSIS_PATH_EMPTY)
 
-      IF(NOT TULIP_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      IF(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
         STRING(REPLACE "/" "\\" NSIS_PATH "${NSIS_PATH}")
         STRING(REPLACE "/" "\\" BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
         STRING(REPLACE "/" "\\" TLP_DIR "${CMAKE_INSTALL_PREFIX}")
         STRING(REPLACE "/" "\\" QTX_PLUGINS_DIR "${QT_PLUGINS_DIR}")
 
-        IF(TulipBuildIsRelease OR MSVC)
+        IF(TalipotBuildIsRelease OR MSVC)
           SET(DEBUG_MODE "FALSE")
-        ELSE(TulipBuildIsRelease OR MSVC)
+        ELSE(TalipotBuildIsRelease OR MSVC)
           SET(DEBUG_MODE "TRUE")
-        ENDIF(TulipBuildIsRelease OR MSVC)
+        ENDIF(TalipotBuildIsRelease OR MSVC)
 
         ADD_CUSTOM_TARGET(bundle
                           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake
@@ -626,17 +626,17 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
                           COMMAND cmd //C win_bundle.bat \"${NSIS_PATH}\" \"${TLP_DIR}\" \"${BINARY_DIR}\" ${DEBUG_MODE}
                           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bundlers/win)
 
-      ELSE(NOT TULIP_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      ELSE(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
-        MESSAGE("NSIS Inetc plugin is required to build the Tulip installer.")
+        MESSAGE("NSIS Inetc plugin is required to build the Talipot installer.")
         MESSAGE("Extract ${CMAKE_CURRENT_SOURCE_DIR}/bundlers/win/Inetc.zip in ${NSIS_PATH}.")
 
-      ENDIF(NOT TULIP_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      ENDIF(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
     ELSE(NOT NSIS_PATH_EMPTY)
 
       MESSAGE("Nullsoft Scriptable Install System is not installed on your system")
-      MESSAGE("Tulip installer can not be generated without Nullsoft NSIS.")
+      MESSAGE("Talipot installer can not be generated without Nullsoft NSIS.")
 
     ENDIF(NOT NSIS_PATH_EMPTY)
 
@@ -656,15 +656,15 @@ IF(NOT TULIP_BUILD_CORE_ONLY)
     CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/bundlers/linux/make_appimage_bundle.sh.in" "${CMAKE_CURRENT_BINARY_DIR}/bundlers/linux/make_appimage_bundle.sh" @ONLY)
   ENDIF(LINUX)
 
-ELSE(NOT TULIP_BUILD_CORE_ONLY)
+ELSE(NOT TALIPOT_BUILD_CORE_ONLY)
 
   IF(LINUX)
-  # generate script to make a tar archive of minimal set of tulip core files
-    SET(make_tar_file ${PROJECT_BINARY_DIR}/tar-tulip-${TulipVersion}-corefiles.sh)
+  # generate script to make a tar archive of minimal set of talipot core files
+    SET(make_tar_file ${PROJECT_BINARY_DIR}/tar-talipot-${TalipotVersion}-corefiles.sh)
     EXECUTE_PROCESS(COMMAND rm ${make_tar_file} OUTPUT_QUIET ERROR_QUIET)
     EXECUTE_PROCESS(COMMAND echo "#!/bin/sh
 if [ $# -eq 0 ]; then
-TAR_FILE=${PROJECT_BINARY_DIR}/tulip-${TulipVersion}-corefiles.tar.gz
+TAR_FILE=${PROJECT_BINARY_DIR}/talipot-${TalipotVersion}-corefiles.tar.gz
 else
 TAR_FILE=$1
 fi
@@ -675,4 +675,4 @@ echo archive \${TAR_FILE} successfully generated" OUTPUT_FILE ${make_tar_file})
     MESSAGE(STATUS "${make_tar_file} successfully generated")
   ENDIF(LINUX)
 
-ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)

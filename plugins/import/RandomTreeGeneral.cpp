@@ -10,7 +10,8 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/TulipPluginHeaders.h>
+
+#include <talipot/PluginHeaders.h>
 
 using namespace std;
 using namespace tlp;

@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef PROPERTIESEDITOR_H
-#define PROPERTIESEDITOR_H
+#ifndef PROPERTIES_EDITOR_H
+#define PROPERTIES_EDITOR_H
 
 #include <QWidget>
 #include <QModelIndex>
 #include <QLineEdit>
 
-#include <tulip/GraphPropertiesModel.h>
-#include <tulip/PropertyInterface.h>
+#include <talipot/GraphPropertiesModel.h>
+#include <talipot/PropertyInterface.h>
 
 namespace Ui {
 class PropertiesEditor;
@@ -27,7 +27,7 @@ class PropertiesEditor;
 
 namespace tlp {
 class Graph;
-class TulipItemDelegate;
+class ItemDelegate;
 } // namespace tlp
 
 #define OF_PROPERTY QString(" of the graph owning the property")
@@ -40,7 +40,7 @@ class PropertiesEditor : public QWidget {
   tlp::PropertyInterface *_contextProperty;
   QList<tlp::PropertyInterface *> _contextPropertyList;
   tlp::Graph *_graph;
-  tlp::TulipItemDelegate *_delegate;
+  tlp::ItemDelegate *_delegate;
   tlp::GraphPropertiesModel<tlp::PropertyInterface> *_sourceModel;
   bool filteringProperties;
   QWidget *editorParent;
@@ -95,4 +95,4 @@ protected slots:
   void setPropertiesFilter(QString filter);
 };
 
-#endif // PROPERTIESEDITOR_H
+#endif // PROPERTIES_EDITOR_H

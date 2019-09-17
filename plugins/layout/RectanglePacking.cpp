@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "RectanglePacking.h"
 #include <cfloat>  //FLT_MAX
 #include <climits> //INT_MAX

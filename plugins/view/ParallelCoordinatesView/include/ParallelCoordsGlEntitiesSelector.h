@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef PARALLELCOORDSGLENTITIESSELECTOR_H_
-#define PARALLELCOORDSGLENTITIESSELECTOR_H_
+#ifndef PARALLEL_COORDS_GL_ENTITIES_SELECTOR_H
+#define PARALLEL_COORDS_GL_ENTITIES_SELECTOR_H
 
 #include <QMouseEvent>
 
-#include <tulip/MouseSelector.h>
+#include <talipot/MouseSelector.h>
 
 namespace tlp {
 
@@ -37,4 +37,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSGLENTITIESSELECTOR_H_ */
+#endif // PARALLEL_COORDS_GL_ENTITIES_SELECTOR_H

@@ -11,17 +11,17 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/MouseBoxZoomer.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/MouseBoxZoomer.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to do a rectangle zoom
+/** \brief Interactor to do a rectangle zoom
  *
  */
 class InteractorRectangleZoom : public NodeLinkDiagramComponentInteractor {
@@ -33,7 +33,7 @@ public:
    * Default constructor
    */
   InteractorRectangleZoom(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_zoom.png", "Zoom on rectangle",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_zoom.png", "Zoom on rectangle",
                                            StandardInteractorPriority::ZoomOnRectangle) {}
 
   /**

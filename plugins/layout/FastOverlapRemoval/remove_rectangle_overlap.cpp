@@ -13,8 +13,8 @@
 #include <cassert>
 #include <vector>
 
-#include <tulip/tulipconf.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/config.h>
+#include <talipot/ParallelTools.h>
 
 #include "generate-constraints.h"
 #include "solve_VPSC.h"

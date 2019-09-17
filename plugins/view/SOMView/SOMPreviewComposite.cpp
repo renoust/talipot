@@ -13,9 +13,9 @@
 
 #include "SOMPreviewComposite.h"
 
-#include <tulip/ColorProperty.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
 
 using namespace tlp;
 using namespace std;

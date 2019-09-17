@@ -10,19 +10,16 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _DEGREEMETRIC_H
-#define _DEGREEMETRIC_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef DEGREE_METRIC_H
+#define DEGREE_METRIC_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
-/** This plugin compute the degree of each node
- *
- *  \note This plug-in exists to obtain a uniform interface in the
- *  Tulip graph visualization software. To access to the degree
- *  of a node it is recommended to use directly the degree function
- *  available in each graph.
+/**
+ * This plugin compute the degree of each node
  *
  */
 class DegreeMetric : public tlp::DoubleAlgorithm {
@@ -34,4 +31,4 @@ public:
   bool check(std::string &errorMsg) override;
 };
 
-#endif
+#endif // DEGREE_METRIC_H

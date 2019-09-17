@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>:/tulip/gui/icons/logo32x32.png</normaloff>:/tulip/gui/icons/logo32x32.png</iconset>
+    <normaloff>:/talipot/gui/icons/logo32x32.png</normaloff>:/talipot/gui/icons/logo32x32.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWizard {
@@ -36,7 +36,7 @@ background-color: white;
 }
 
 #categoryLabel,#parametersLabel,#algorithmLabel {
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1,
 stop:1 rgba(0,0,0,0),
 stop:0 #F0F0F0);
 border: 0px;
@@ -59,7 +59,7 @@ border: 0px;
   </property>
   <widget class="QWizardPage" name="choosePluginPage">
    <property name="title">
-    <string>&lt;img src=&quot;:/tulip/gui/icons/64/document-export.png&quot; width=32 height=32/&gt; Graph exporting Wizard</string>
+    <string>&lt;img src=&quot;:/talipot/gui/icons/64/document-export.png&quot; width=32 height=32/&gt; Graph exporting Wizard</string>
    </property>
    <attribute name="pageId">
     <string notr="true">0</string>
@@ -104,7 +104,7 @@ border: 0px;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/tulip/graphperspective/icons/16/document-open.png</normaloff>:/tulip/graphperspective/icons/16/document-open.png</iconset>
+          <normaloff>:/talipot/graphperspective/icons/16/document-open.png</normaloff>:/talipot/graphperspective/icons/16/document-open.png</iconset>
         </property>
 	<property name="toolTip">
 	  <string>Choose the export file location</string>
@@ -169,13 +169,13 @@ border: 0px;
  QTreeView::branch:has-children:!has-siblings:closed,
  QTreeView::branch:closed:has-children:has-siblings {
          border-image: none;
-         image: url(:/tulip/gui/ui/right_arrow-black.png);
+         image: url(:/talipot/gui/ui/right_arrow-black.png);
  }
 
  QTreeView::branch:open:has-children:!has-siblings,
  QTreeView::branch:open:has-children:has-siblings  {
          border-image: none;
-         image: url(:/tulip/gui/ui/down_arrow-black.png);
+         image: url(:/talipot/gui/ui/down_arrow-black.png);
  }</string>
             </property>
             <property name="frameShadow">
@@ -330,7 +330,7 @@ font: 12px;
   <customwidget>
    <class>ClearableLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">tulip/ClearableLineEdit.h</header>
+   <header location="global">talipot/ClearableLineEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

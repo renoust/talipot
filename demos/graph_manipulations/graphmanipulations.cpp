@@ -1,10 +1,10 @@
-#include <tulip/Graph.h>
-#include <tulip/TlpTools.h>
-#include <tulip/PluginLoaderTxt.h>
-#include <tulip/PluginLibraryLoader.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpTools.h>
+#include <talipot/PluginLoaderTxt.h>
+#include <talipot/PluginLibraryLoader.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace std;
 using namespace tlp;
@@ -24,7 +24,7 @@ int main(int, char **) {
   /*
    Initialize the library and load all plugins
    */
-  tlp::initTulipLib();
+  tlp::initTalipotLib();
   PluginLoaderTxt loadertxt;
   PluginLibraryLoader::loadPlugins(&loadertxt);
 
@@ -43,9 +43,8 @@ int main(int, char **) {
   myGraph->addEdge(c, e);
   myGraph->addEdge(d, e);
 
-  // now in color. 'viewColor' is the Tulip GUI's default color property, so when we load it we will
-  // see the color immediately
-  // If 'viewColor' did not exist before, this creates it.
+  // now in color. 'viewColor' is the Talipot GUI's default color property, so when we load it we
+  // will see the color immediately If 'viewColor' did not exist before, this creates it.
   ColorProperty *color = myGraph->getProperty<ColorProperty>("viewColor");
   color->setNodeValue(a, Color(255, 0, 0));
   color->setNodeValue(b, Color(0, 255, 0));
@@ -54,7 +53,7 @@ int main(int, char **) {
   color->setNodeValue(e, Color(0, 255, 0));
   // hey look, this is a 3-coloration :)
 
-  // set the label of the nodes (again, with Tulip's default label property)
+  // set the label of the nodes (again, with Talipot's default label property)
   StringProperty *label = myGraph->getProperty<StringProperty>("viewLabel");
   label->setNodeValue(a, "A");
   label->setNodeValue(b, "B");
@@ -68,7 +67,7 @@ int main(int, char **) {
   if (tlp::PluginLister::pluginExists("Degree")) {
     // now compute the degree of the nodes.
     string errorMessage;
-    // this calls the Tulip plugin 'Degree'.
+    // this calls the Talipot plugin 'Degree'.
     bool success = myGraph->applyPropertyAlgorithm("Degree", metric, errorMessage);
 
     if (!success) {

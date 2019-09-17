@@ -5,7 +5,7 @@
 Plug-ins development
 ********************
 
-Tulip has been built to be easily extensible. Therefore a mechanism of plug-ins has been set up. It enables to directly add new features into the Tulip kernel. One must keeps in mind that a plug-in have access to all the parts of Tulip. Thus, plug-ins have to be written very carefully to prevent memory leak, errors and "core dump".
+Talipot has been built to be easily extensible. Therefore a mechanism of plug-ins has been set up. It enables to directly add new features into the Talipot kernel. One must keeps in mind that a plug-in have access to all the parts of Talipot. Thus, plug-ins have to be written very carefully to prevent memory leak, errors and "core dump".
 
 To enable the use of plug-ins, a program must call the initialization functions of the plug-ins. This function loads dynamically all the plug-ins and register them into a factory that will enable to direct access to it.
 
@@ -22,15 +22,15 @@ To develop a plug-in, you need to create a new class that will inherits from a s
 Plug-ins build setup
 ====================
 
-Tulip provides two ways to easily setup the build configuration for a C++ plug-in:
+Talipot provides two ways to easily setup the build configuration for a C++ plug-in:
 
   * using the CMake tool to generate the build files (recommended way)
 
-  * using a simple Makefile and the ``tulip-config`` script
+  * using a simple Makefile and the ``talipot-config`` script
 
 In the sub-sections below, we will consider that your plug-in implementation
-is contained in a file named ``MyTulipPlugin.cpp`` and that ``<tulip_install_dir>``
-corresponds to the root directory of your Tulip local installation.
+is contained in a file named ``MyTalipotPlugin.cpp`` and that ``<talipot_install_dir>``
+corresponds to the root directory of your Talipot local installation.
 
 Using CMake to build a plugin
 -----------------------------
@@ -45,19 +45,19 @@ the ``CMakeLists.txt`` file below is sufficient:
 
   CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-  FIND_PACKAGE(TULIP REQUIRED)
+  FIND_PACKAGE(Talipot REQUIRED)
 
-  TULIP_SET_COMPILER_OPTIONS()
+  TALIPOT_SET_COMPILER_OPTIONS()
 
-  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} ${TULIP_INCLUDE_DIR})
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} ${TALIPOT_INCLUDE_DIR})
 
-  SET(PLUGIN_NAME MyTulipPlugin-${TULIP_VERSION})
-  SET(PLUGIN_SRCS MyTulipPlugin.cpp)
+  SET(PLUGIN_NAME MyTalipotPlugin-${TALIPOT_VERSION})
+  SET(PLUGIN_SRCS MyTalipotPlugin.cpp)
 
   ADD_LIBRARY(${PLUGIN_NAME} SHARED ${PLUGIN_SRCS})
-  TARGET_LINK_LIBRARIES(${PLUGIN_NAME} ${TULIP_CORE_LIBRARY})
+  TARGET_LINK_LIBRARIES(${PLUGIN_NAME} ${TALIPOT_CORE_LIBRARY})
 
-  TULIP_INSTALL_PLUGIN(${PLUGIN_NAME} ${TULIP_PLUGINS_DIR})
+  TALIPOT_INSTALL_PLUGIN(${PLUGIN_NAME} ${TALIPOT_PLUGINS_DIR})
 
 You need to place it in the same folder containing your plugin source file(s).
 To generate the build files then compile and install the plugin, execute the
@@ -65,32 +65,32 @@ following commands inside the plugin source folder:
 
 .. code-block:: bash
 
-  $ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH=<tulip_install_dir>/lib/cmake .
+  $ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH=<talipot_install_dir>/lib/cmake .
   $ make
   $ make install
 
-Using ``tulip-config`` in a Makefile
+Using ``talipot-config`` in a Makefile
 ------------------------------------
 
-The legacy way for building a plug-in using a Makefile and the ``tulip-config``
+The legacy way for building a plug-in using a Makefile and the ``talipot-config``
 script can also still be used on Unix based systems.
 
-You will need the following Makefile and ensures that the path ``<tulip_install_dir>/bin``
+You will need the following Makefile and ensures that the path ``<talipot_install_dir>/bin``
 is contained in your ``PATH`` environment variable.
 
 .. code-block:: makefile
 
   CXX = g++
-  CXXFLAGS = $(shell tulip-config --cxxflags --plugincxxflags)
-  LDFLAGS = $(shell tulip-config --lib_tulip --pluginldflags)
+  CXXFLAGS = $(shell talipot-config --cxxflags --plugincxxflags)
+  LDFLAGS = $(shell talipot-config --lib_talipot --pluginldflags)
 
-  PLUGIN_NAME = MyTulipPlugin
-  TULIP_VERSION = $(shell tulip-config --version)
-  LIB_EXTENSION = $(shell tulip-config --pluginextension)
+  PLUGIN_NAME = MyTalipotPlugin
+  TALIPOT_VERSION = $(shell talipot-config --version)
+  LIB_EXTENSION = $(shell talipot-config --pluginextension)
 
-  TARGET_LIB = lib${PLUGIN_NAME}-${TULIP_VERSION}.${LIB_EXTENSION}
+  TARGET_LIB = lib${PLUGIN_NAME}-${TALIPOT_VERSION}.${LIB_EXTENSION}
 
-  SRCS = MyTulipPlugin.cpp
+  SRCS = MyTalipotPlugin.cpp
   OBJS = $(SRCS:.cpp=.o)
 
   .PHONY: all
@@ -110,7 +110,7 @@ is contained in your ``PATH`` environment variable.
 
   .PHONY: install
   install:
-    cp ${TARGET_LIB} $(shell tulip-config --pluginpath)
+    cp ${TARGET_LIB} $(shell talipot-config --pluginpath)
 
 Put that Makefile inside your plug-in source folder, then use the classical make
 commands to build and install the plug-in:
@@ -144,7 +144,7 @@ Each one of classes presented above has a public member::
 
   *TypeName*Property result;
 
-which is the data member that have to be computed by your plug-in. After a successful run Tulip will automatically copy this data member into the corresponding property of the graph.
+which is the data member that have to be computed by your plug-in. After a successful run Talipot will automatically copy this data member into the corresponding property of the graph.
 
 
 Note that at anytime, if the user clicks on the "cancel" button (see :ref:`the Plugin Progress class <plugins_pluginprogress>` for more details ), none of your algorithm's actions will changes the graph since the *result* data member is not copied in the corresponding property.
@@ -386,7 +386,7 @@ Example of a PropertyAlgorithm skeleton
 
 Following is an example of a dummy color algorithm::
 
-  #include <tulip/TulipPluginHeaders.h>
+  #include <talipot/PluginHeaders.h>
   #include <string>
 
   using namespace std;
@@ -435,7 +435,7 @@ Following is an example of a dummy color algorithm::
       return true;
     }
   };
-  // This second line will be used to register your algorithm in tulip using the information given above.
+  // This second line will be used to register your algorithm in talipot using the information given above.
   PLUGIN(MyColorAlgorithm)
 
 The *wizards* directory in the sources also proposes a more dense skeleton in the *tlpalgorithm* folder without all the comments and ready to be transformed into a brand new plugin.
@@ -554,7 +554,7 @@ Skeleton an ImportModule derived class
 
 Code example::
 
-  #include <tulip/TulipPluginHeaders.h>
+  #include <talipot/PluginHeaders.h>
   #include <string>
 
   using namespace std;
@@ -593,7 +593,7 @@ Code example::
       return true;
     }
   };
-  // This second line will be used to register your algorithm in tulip using the information given above.
+  // This second line will be used to register your algorithm in talipot using the information given above.
   PLUGIN(MyImportModule)
 
 Just like the *PropertyAlgorithm*, you can find a lighten skeleton in the *tlpimport* folder in the sources, under the *wizards* directory.
@@ -656,7 +656,7 @@ Skeleton of an ExportModule derived class
 
 Code example::
 
-  #include <tulip/TulipPluginHeaders.h>
+  #include <talipot/PluginHeaders.h>
   #include <string>
   #include <iostream>
 
@@ -703,7 +703,7 @@ Code example::
     }
 
   };
-  // This second line will be used to register your algorithm in tulip
+  // This second line will be used to register your algorithm in talipot
   // using the information given above.
   PLUGIN(MyExportModule)
 

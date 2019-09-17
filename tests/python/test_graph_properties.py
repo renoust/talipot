@@ -13,7 +13,7 @@ import string
 import sys
 import unittest
 
-from tulip import tlp
+from talipot import tlp
 
 int_max = 32767
 flt_max = 3.40282347e+38
@@ -124,8 +124,8 @@ def random_string_list():
 class TestGraphProperties(unittest.TestCase):
 
     def setUp(self):
-        tlp.loadTulipPluginsFromDir(
-            os.environ['TULIP_BUILD_DIR'] + '/plugins/import')
+        tlp.loadTalipotPluginsFromDir(
+            os.environ['TALIPOT_BUILD_DIR'] + '/plugins/import')
         self.prop_name = 'test_prop'
         self.prop = None
         self.graph = tlp.importGraph('Grid')

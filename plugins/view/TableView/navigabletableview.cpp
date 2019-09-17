@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "navigabletableview.h"
 
 #include <QKeyEvent>

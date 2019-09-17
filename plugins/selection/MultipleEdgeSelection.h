@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_ParaSelection_H
-#define Tulip_ParaSelection_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef MULTIPLE_EDGE_SELECTION_H
+#define MULTIPLE_EDGE_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -39,4 +40,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // MULTIPLE_EDGE_SELECTION_H

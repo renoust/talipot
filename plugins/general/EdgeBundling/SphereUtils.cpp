@@ -13,9 +13,9 @@
 
 #include "SphereUtils.h"
 
-#include <tulip/DrawingTools.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace tlp;
 using namespace std;

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_REACHABLESUBGRAPHELECTION_H
-#define Tulip_REACHABLESUBGRAPHELECTION_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef REACHABLE_SUB_GRAPH_SELECTION_H
+#define REACHABLE_SUB_GRAPH_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -41,4 +42,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // REACHABLE_SUB_GRAPH_SELECTION_H

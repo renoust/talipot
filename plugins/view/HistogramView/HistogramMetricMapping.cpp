@@ -11,15 +11,15 @@
  *
  */
 
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/GlLines.h>
-#include <tulip/GlLine.h>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/tulipconf.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlNode.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/ColorScalesManager.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/GlLines.h>
+#include <talipot/GlLine.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/config.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlNode.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/ColorScalesManager.h>
 
 #include <QToolTip>
 #include <QMenu>

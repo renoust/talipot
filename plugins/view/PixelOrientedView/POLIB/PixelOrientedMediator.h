@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef PIXELORIENTEDALGORITHMS_H_
-#define PIXELORIENTEDALGORITHMS_H_
+#ifndef PIXEL_ORIENTED_MEDIATOR_H
+#define PIXEL_ORIENTED_MEDIATOR_H
 
 #include "UniformDeformationScreen.h"
 #include "FishEyesScreen.h"
@@ -111,4 +111,4 @@ private:
 };
 } // namespace pocore
 
-#endif /* PIXELORIENTEDALGORITHMS_H_ */
+#endif // PIXEL_ORIENTED_MEDIATOR_H

@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef CONVOLUTIONCLUSTERINGSETUP_H
-#define CONVOLUTIONCLUSTERINGSETUP_H
+
+#ifndef CONVOLUTION_CLUSTERING_SETUP_H
+#define CONVOLUTION_CLUSTERING_SETUP_H
 
 #include <QDialog>
 
@@ -54,4 +55,4 @@ private:
   bool useLogarithmicScale;
 };
 } // namespace tlp
-#endif // CONVOLUTIONCLUSTERINGSETUP_H
+#endif // CONVOLUTION_CLUSTERING_SETUP_H

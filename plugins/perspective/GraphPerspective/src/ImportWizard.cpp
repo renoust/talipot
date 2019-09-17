@@ -10,18 +10,19 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ImportWizard.h"
 #include "ui_ImportWizard.h"
 
 #include <QAbstractButton>
 
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/ParameterListModel.h>
-#include <tulip/ImportModule.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/ParameterListModel.h>
+#include <talipot/ImportModule.h>
 
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/PluginModel.h>
-#include <tulip/TulipSettings.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/PluginModel.h>
+#include <talipot/Settings.h>
 
 using namespace tlp;
 using namespace std;
@@ -37,7 +38,7 @@ ImportWizard::ImportWizard(QWidget *parent) : QWizard(parent), _ui(new Ui::Impor
   connect(_ui->importModules->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
           this, SLOT(algorithmSelected(QModelIndex)));
 
-  _ui->parametersList->setItemDelegate(new TulipItemDelegate(_ui->parametersList));
+  _ui->parametersList->setItemDelegate(new ItemDelegate(_ui->parametersList));
   _ui->parametersList->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
   connect(_ui->importModules, SIGNAL(doubleClicked(QModelIndex)), button(QWizard::FinishButton),
           SLOT(click()));
@@ -50,10 +51,10 @@ ImportWizard::ImportWizard(QWidget *parent) : QWizard(parent), _ui(new Ui::Impor
                       "needed.<br/>Click <b>Ok</b> to import your graph, then visualize it using "
                       "the ");
 
-  if (TulipSettings::instance().displayDefaultViews())
+  if (Settings::instance().displayDefaultViews())
     importLabel += "<b>Node Link Diagram</b> and <b>Spreadsheet</b> (automatically opened) views.";
   else
-    importLabel += "<img src=\":/tulip/gui/icons/16/list-add.png\"/>&nbsp;<b>Add "
+    importLabel += "<img src=\":/talipot/gui/icons/16/list-add.png\"/>&nbsp;<b>Add "
                    "panel</b> button to open specific views on it.";
 
   importLabel += "<br/><br/>See <b>Edit</b> menu, then <b>Preferences</b> for more options when "

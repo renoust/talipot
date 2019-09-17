@@ -11,13 +11,13 @@
  *
  */
 
-#ifndef PARALLELCOORDSDRAWCONFIGWIDGET_H_
-#define PARALLELCOORDSDRAWCONFIGWIDGET_H_
+#ifndef PARALLEL_COORDS_DRAW_CONFIG_WIDGET_H
+#define PARALLEL_COORDS_DRAW_CONFIG_WIDGET_H
 
 #include <QWidget>
 
-#include <tulip/Size.h>
-#include <tulip/Color.h>
+#include <talipot/Size.h>
+#include <talipot/Color.h>
 
 namespace Ui {
 class ParallelCoordsDrawConfigWidgetData;
@@ -75,4 +75,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSDRAWCONFIGWIDGET_H_ */
+#endif // PARALLEL_COORDS_DRAW_CONFIG_WIDGET_H

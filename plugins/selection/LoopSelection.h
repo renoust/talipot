@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_LoopSelection_H
-#define Tulip_LoopSelection_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef LOOP_SELECTION_H
+#define LOOP_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -35,4 +36,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // LOOP_SELECTION_H

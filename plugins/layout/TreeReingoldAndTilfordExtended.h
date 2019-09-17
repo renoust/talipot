@@ -10,12 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _TreeReingoldAndTilfordExtended_H
-#define _TreeReingoldAndTilfordExtended_H
+
+#ifndef TREE_REINGOLD_AND_TILFORD_EXTENDED_H
+#define TREE_REINGOLD_AND_TILFORD_EXTENDED_H
+
 #include <string>
 #include <cmath>
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 struct LR {
   double L;
@@ -74,4 +76,4 @@ private:
   bool compactLayout;
 };
 
-#endif
+#endif // TREE_REINGOLD_AND_TILFORD_EXTENDED_H

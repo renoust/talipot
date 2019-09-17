@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef _PATHLENGTHMETRIC_H
-#define _PATHLENGTHMETRIC_H
+#ifndef PATH_LENGTH_METRIC_H
+#define PATH_LENGTH_METRIC_H
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 class PathLengthMetric : public tlp::DoubleAlgorithm {
 public:
@@ -30,4 +30,4 @@ private:
   double getNodeValue(const tlp::node n, tlp::DoubleProperty *leafMetric);
 };
 
-#endif
+#endif // PATH_LENGTH_METRIC_H

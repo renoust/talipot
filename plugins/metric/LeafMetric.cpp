@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <stack>
 
-#include <tulip/AcyclicTest.h>
+#include <talipot/AcyclicTest.h>
 
 #include "LeafMetric.h"
 

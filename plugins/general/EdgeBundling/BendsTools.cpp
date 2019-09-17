@@ -12,7 +12,7 @@
  */
 
 #include "BendsTools.h"
-#include <tulip/Vector.h>
+#include <talipot/Vector.h>
 
 using namespace tlp;
 using namespace std;

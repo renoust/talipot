@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "Random.h"
 
-#include <tulip/StringCollection.h>
-#include <tulip/TlpTools.h>
+#include <talipot/StringCollection.h>
+#include <talipot/TlpTools.h>
 
 PLUGIN(RandomMetric)
 

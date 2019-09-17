@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef HISTODATACONFIGWIDGET_H_
-#define HISTODATACONFIGWIDGET_H_
+#ifndef VIEW_GRAPH_PROPERTIES_SELECTION_WIDGET_H
+#define VIEW_GRAPH_PROPERTIES_SELECTION_WIDGET_H
 
 #include <vector>
 #include <string>
 
 #include <QWidget>
 
-#include <tulip/Graph.h>
+#include <talipot/Graph.h>
 
 namespace Ui {
 class ViewGraphPropertiesSelectionWidgetData;
@@ -57,4 +57,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* HISTODATACONFIGWIDGET_H_ */
+#endif // VIEW_GRAPH_PROPERTIES_SELECTION_WIDGET_H

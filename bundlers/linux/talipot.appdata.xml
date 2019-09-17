@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>talipot</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0</project_license>
+	<name>Talipot</name>
+	<summary>Display, analyze and edit relational data</summary>
+	<description>
+		<p>Talipot is an information visualization framework dedicated to the analysis and visualization of relational data.</p>
+	</description>
+	<icon type="cached">Talipot.png</icon>
+	<launchable type="desktop-id">talipot.desktop</launchable>
+	<url type="homepage">https://github.com/anlambert/talipot</url>
+	<provides>
+		<id>talipot.desktop</id>
+	</provides>
+</component>

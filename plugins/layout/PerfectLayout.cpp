@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/PropertyAlgorithm.h>
-#include <tulip/LayoutProperty.h>
+#include <talipot/PropertyAlgorithm.h>
+#include <talipot/LayoutProperty.h>
 
 static const char *paramHelp[] = {
     // layout

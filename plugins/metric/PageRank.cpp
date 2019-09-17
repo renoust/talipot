@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/GraphParallelTools.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/GraphParallelTools.h>
 
 using namespace std;
 using namespace tlp;

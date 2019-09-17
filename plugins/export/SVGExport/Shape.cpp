@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "Shape.h"
 
-#include <tulip/TulipIconicFont.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/IconicFont.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace std;
 using namespace tlp;
@@ -227,7 +228,7 @@ void ExtremityShape::Icon(QXmlStreamWriter &res, const QString &color, const str
                           bool tgt) {
   res.writeStartElement("text");
 
-  res.writeAttribute("font-family", tlpStringToQString(TulipIconicFont::getIconFamily(iconName)));
+  res.writeAttribute("font-family", tlpStringToQString(IconicFont::getIconFamily(iconName)));
 
   res.writeAttribute("transform", "scale(1,-1)");
   res.writeAttribute("font-size", "2");
@@ -239,8 +240,7 @@ void ExtremityShape::Icon(QXmlStreamWriter &res, const QString &color, const str
   res.writeCharacters("");
   res.device()->write("&"); // do not escape the character
 
-  res.writeCharacters("#x" + QString::number(TulipIconicFont::getIconCodePoint(iconName), 16) +
-                      ";");
+  res.writeCharacters("#x" + QString::number(IconicFont::getIconCodePoint(iconName), 16) + ";");
 }
 
 void ExtremityShape::GlowSphere(QXmlStreamWriter &res, const tlp::Color &color, bool tgt,

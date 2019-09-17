@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef IMPROVEDWALKER_H
-#define IMPROVEDWALKER_H
+
+#ifndef IMPROVED_WALKER_H
+#define IMPROVED_WALKER_H
 
 #include <unordered_map>
 #include <vector>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 #include "TreeTools.h"
 
 class OrientableLayout;
@@ -186,4 +187,4 @@ inline tlp::node ImprovedWalker::findCommonAncestor(tlp::node left, tlp::node ri
     return defaultAncestor;
 }
 
-#endif
+#endif // IMPROVED_WALKER_H

@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "AlgorithmRunner.h"
 
 #include "AlgorithmRunnerItem.h"
@@ -20,8 +21,8 @@
 #include <QToolButton>
 #include <QMenu>
 
-#include <tulip/TulipMimes.h>
-#include <tulip/TulipSettings.h>
+#include <talipot/Mimes.h>
+#include <talipot/Settings.h>
 
 struct FavoriteBox : public ExpandableGroupBox {
   bool _droppingFavorite;
@@ -33,8 +34,8 @@ protected:
   void paintEvent(QPaintEvent *event) override {
     ExpandableGroupBox::paintEvent(event);
     QPainter painter(this);
-    QPixmap px((_droppingFavorite ? ":/tulip/graphperspective/icons/16/favorite.png"
-                                  : ":/tulip/graphperspective/icons/16/favorite-empty.png"));
+    QPixmap px((_droppingFavorite ? ":/talipot/graphperspective/icons/16/favorite.png"
+                                  : ":/talipot/graphperspective/icons/16/favorite-empty.png"));
     painter.drawPixmap(20, 0, px);
   }
 };
@@ -185,7 +186,8 @@ AlgorithmRunner::AlgorithmRunner(QWidget *parent)
   _storeResultAsLocalButton = new QToolButton(_ui->header);
   _storeResultAsLocalButton->setMaximumSize(25, 25);
   _storeResultAsLocalButton->setMinimumSize(25, 25);
-  _storeResultAsLocalButton->setIcon(QIcon(":/tulip/graphperspective/icons/16/hierarchy_add.png"));
+  _storeResultAsLocalButton->setIcon(
+      QIcon(":/talipot/graphperspective/icons/16/hierarchy_add.png"));
   _storeResultAsLocalButton->setIconSize(QSize(22, 22));
   _storeResultAsLocalButton->setToolTip(
       "Choose the storage policy for the result of property algorithms\nWhen they are "
@@ -195,12 +197,12 @@ AlgorithmRunner::AlgorithmRunner(QWidget *parent)
   _ui->header->mainFrame()->layout()->addWidget(_storeResultAsLocalButton);
   QMenu *resultMenu = new QMenu(this);
   _resultAsLocalPropAction =
-      resultMenu->addAction(QIcon(":/tulip/graphperspective/icons/16/hierarchy_add.png"),
+      resultMenu->addAction(QIcon(":/talipot/graphperspective/icons/16/hierarchy_add.png"),
                             QString("Always store result in a local property of the graph"));
   _resultAsLocalPropAction->setIconVisibleInMenu(true);
   _resultAsLocalPropAction->setCheckable(true);
   QAction *resultAsPredefinedPropAction = resultMenu->addAction(
-      QIcon(":/tulip/graphperspective/icons/16/no_hierarchy_add.png"),
+      QIcon(":/talipot/graphperspective/icons/16/no_hierarchy_add.png"),
       QString("Store result in an existing property of the graphs hierarchy"));
   resultAsPredefinedPropAction->setIconVisibleInMenu(true);
   resultAsPredefinedPropAction->setCheckable(true);
@@ -221,7 +223,7 @@ AlgorithmRunner::AlgorithmRunner(QWidget *parent)
     connect(i, SIGNAL(favorized(bool)), this, SLOT(favorized(bool)));
   }
 
-  for (const QString &a : TulipSettings::instance().favoriteAlgorithms()) {
+  for (const QString &a : Settings::instance().favoriteAlgorithms()) {
     addFavorite(a);
   }
 
@@ -327,8 +329,8 @@ bool AlgorithmRunner::eventFilter(QObject *obj, QEvent *ev) {
     if (obj == _ui->favoritesBox->widget() && _favorites.empty()) {
       QPainter painter(_ui->favoritesBox->widget());
       QPixmap px((_ui->favoritesBox->_droppingFavorite
-                      ? ":/tulip/graphperspective/icons/32/favorite.png"
-                      : ":/tulip/graphperspective/icons/32/favorite-empty.png"));
+                      ? ":/talipot/graphperspective/icons/32/favorite.png"
+                      : ":/talipot/graphperspective/icons/32/favorite-empty.png"));
       painter.drawPixmap(_ui->favoritesBox->widget()->width() - px.width() - 8, 8, px);
       QFont f;
       f.setItalic(true);
@@ -382,7 +384,7 @@ void AlgorithmRunner::removeFavorite(const QString &algName) {
     }
   }
 
-  TulipSettings::instance().removeFavoriteAlgorithm(algName);
+  Settings::instance().removeFavoriteAlgorithm(algName);
 
   if (_favorites.isEmpty())
     _ui->favoritesBox->widget()->setMinimumHeight(45);
@@ -392,7 +394,7 @@ void AlgorithmRunner::addFavorite(const QString &algName, const DataSet &data) {
   if (!PluginLister::pluginExists(QStringToTlpString(algName)))
     return;
 
-  TulipSettings::instance().addFavoriteAlgorithm(algName);
+  Settings::instance().addFavoriteAlgorithm(algName);
 
   for (auto i : _favorites) {
     if (i->name() == algName)

@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef LINEARMAPPINGCOLOR_H
-#define LINEARMAPPINGCOLOR_H
+#ifndef LINEAR_MAPPING_COLOR_H
+#define LINEAR_MAPPING_COLOR_H
 
 #include "potypes.h"
 #include "ColorFunction.h"
@@ -30,4 +30,4 @@ private:
   RGBA endColor;
 };
 } // namespace pocore
-#endif // LINEARMAPPINGCOLOR_H
+#endif // LINEAR_MAPPING_COLOR_H

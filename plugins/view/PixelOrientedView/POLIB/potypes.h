@@ -14,7 +14,7 @@
 #ifndef POTYPES_H
 #define POTYPES_H
 
-#include <tulip/Vector.h>
+#include <talipot/Vector.h>
 
 namespace pocore {
 

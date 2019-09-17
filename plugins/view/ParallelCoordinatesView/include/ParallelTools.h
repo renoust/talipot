@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELTOOLS_H_
-#define PARALLELTOOLS_H_
+#ifndef PARALLEL_TOOLS_H
+#define PARALLEL_TOOLS_H
 
-#include <tulip/Coord.h>
+#include <talipot/Coord.h>
 
 #include <string>
 #include <sstream>
@@ -64,4 +64,4 @@ void rotateVector(Coord &vec, float alpha, int rot);
 Coord *computeStraightLineIntersection(const Coord line1[2], const Coord line2[2]);
 } // namespace tlp
 
-#endif /* !PARALLELTOOLS_H_ */
+#endif // PARALLEL_TOOLS_H

@@ -12,10 +12,10 @@
  */
 
 #include <set>
-#include <tulip/DoubleProperty.h>
-#include <tulip/vectorgraph.h>
-#include <tulip/vectorgraphproperty.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/VectorGraph.h>
+#include <talipot/VectorGraphProperty.h>
+#include <talipot/ParallelTools.h>
 
 using namespace std;
 using namespace tlp;

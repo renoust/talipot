@@ -8,7 +8,7 @@ Algorithms
 
 Algorithms can modify the layout, the set of selected elements, the size and color of elements, or compute a metric. As explained in the :ref:`quick presentation of the GUI <algo_window>`, algorithms are accessed through the *Algorithm* list, located in the left panel.
 
-The standard Tulip tool contains a lot of frequently updated and improved algorithms. With its plugin manager system, you can also search among databases to import or even implement your own algorithms and integrate them in Tulip.
+The standard Talipot tool contains a lot of frequently updated and improved algorithms. With its plugin manager system, you can also search among databases to import or even implement your own algorithms and integrate them in Talipot.
 
 
 .. _algo_algorithm:
@@ -56,7 +56,7 @@ You can use this operation to copy the values of an existing property as string 
 Layout
 ======
 
-Tulip allows the visualization of information, and thus, provides several layout algorithms to display information and data in a neat fashion.
+Talipot allows the visualization of information, and thus, provides several layout algorithms to display information and data in a neat fashion.
 
 * Basic:
 
@@ -84,7 +84,7 @@ Tulip allows the visualization of information, and thus, provides several layout
 
 * Tree:
 
-  According to the sub group name, these layouts are particularly adapted to represent trees or hierarchical data. 
+  According to the sub group name, these layouts are particularly adapted to represent trees or hierarchical data.
 
 
 .. _algo_measure:
@@ -97,7 +97,7 @@ Measure algorithms are used to compute different metrics (on edges or nodes). Th
 * Clustering
 
   One can use those tools to compute useful information to identify clusters and linked elements.
- 
+
 * Component
 
   The algorithms here are just what you need if you want to find and decompose your graph in connected components.
@@ -119,7 +119,7 @@ Measure algorithms are used to compute different metrics (on edges or nodes). Th
 Resizing
 ========
 
-Tulip provides two resizing algorithms. Those tools can be used to set the *viewSize* property (by default) according to some parameters and another property. Several additional options allows you to control the visualization transformations through the minimum and maximum size allowed, the type of element to modify (edge or node) or the proportion to preserve.
+Talipot provides two resizing algorithms. Those tools can be used to set the *viewSize* property (by default) according to some parameters and another property. Several additional options allows you to control the visualization transformations through the minimum and maximum size allowed, the type of element to modify (edge or node) or the proportion to preserve.
 
 
 .. _algo_select:
@@ -128,4 +128,4 @@ Selection
 =========
 
 Those algorithms simply select a subset of the nodes and/or edges (i.e. they modify the *viewSelection* property). You can use them to select loops, minimum spanning tree, dag or forest, connected components...
- 
+

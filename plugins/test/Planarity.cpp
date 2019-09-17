@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/PlanarityTest.h>
-#include <tulip/GraphTest.h>
+#include <talipot/PlanarityTest.h>
+#include <talipot/GraphTest.h>
 
 class PlanarityTest : public tlp::GraphTest {
 public:

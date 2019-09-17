@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "PropertyValuesDispatcher.h"
 
-#include <tulip/Graph.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/BooleanProperty.h>
 
 #include <typeinfo>
 

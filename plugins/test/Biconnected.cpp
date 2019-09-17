@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/BiconnectedTest.h>
-#include <tulip/GraphTest.h>
-#include <tulip/Edge.h>
+#include <talipot/BiconnectedTest.h>
+#include <talipot/GraphTest.h>
+#include <talipot/Edge.h>
 
 class BiconnectedTest : public tlp::GraphTest {
 public:

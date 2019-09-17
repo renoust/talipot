@@ -11,13 +11,13 @@
  *
  */
 
-#include <tulip/GlTextureManager.h>
-#include <tulip/Gl2DRect.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlOffscreenRenderer.h>
-#include <tulip/GlGraphComposite.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/Gl2DRect.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlOffscreenRenderer.h>
+#include <talipot/GlGraphComposite.h>
 
 #include "PixelOrientedOverview.h"
 
@@ -49,7 +49,7 @@ namespace tlp {
 
 int PixelOrientedOverview::overviewCpt(0);
 
-PixelOrientedOverview::PixelOrientedOverview(TulipGraphDimension *data,
+PixelOrientedOverview::PixelOrientedOverview(GraphDimension *data,
                                              PixelOrientedMediator *pixelOrientedMediator,
                                              Coord blCornerPos, const std::string &dimName,
                                              const Color &backgroundColor, const Color &textColor)
@@ -70,7 +70,7 @@ PixelOrientedOverview::PixelOrientedOverview(TulipGraphDimension *data,
 
   unsigned int labelHeight = height / 4;
 
-  Graph *graph = data->getTulipGraph();
+  Graph *graph = data->getGraph();
   pixelLayout = new LayoutProperty(graph);
   pixelSize = new SizeProperty(graph);
   graphComposite = new GlGraphComposite(graph);
@@ -147,7 +147,7 @@ void PixelOrientedOverview::computePixelView(GlMainWidget *glWidget) {
     frame2 = nullptr;
   }
 
-  Graph *graph = data->getTulipGraph();
+  Graph *graph = data->getGraph();
 
   unsigned int width = pixelOrientedMediator->getImageWidth();
   unsigned int height = pixelOrientedMediator->getImageHeight();

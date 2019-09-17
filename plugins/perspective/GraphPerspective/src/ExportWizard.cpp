@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ExportWizard.h"
 #include "ui_ExportWizard.h"
 
@@ -17,12 +18,12 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/ParameterListModel.h>
-#include <tulip/ExportModule.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/ParameterListModel.h>
+#include <talipot/ExportModule.h>
 
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/PluginModel.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/PluginModel.h>
 
 using namespace tlp;
 using namespace std;
@@ -40,7 +41,7 @@ ExportWizard::ExportWizard(Graph *g, const QString &exportFile, QWidget *parent)
   connect(_ui->exportModules->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
           this, SLOT(algorithmSelected(QModelIndex)));
 
-  _ui->parametersList->setItemDelegate(new TulipItemDelegate(_ui->parametersList));
+  _ui->parametersList->setItemDelegate(new ItemDelegate(_ui->parametersList));
   _ui->parametersList->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
   connect(_ui->exportModules, SIGNAL(doubleClicked(QModelIndex)), button(QWizard::FinishButton),
           SLOT(click()));

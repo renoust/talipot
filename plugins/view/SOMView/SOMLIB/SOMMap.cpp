@@ -12,12 +12,12 @@
  */
 
 #include "SOMMap.h"
-#include <tulip/DoubleProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/GlyphManager.h>
-#include <tulip/tulipconf.h>
-#include <tulip/StringCollection.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/config.h>
+#include <talipot/StringCollection.h>
+#include <talipot/ViewSettings.h>
 
 using namespace std;
 using namespace tlp;

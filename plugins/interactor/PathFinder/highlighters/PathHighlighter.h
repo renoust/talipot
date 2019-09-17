@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef PATHHIGHLIGHTER_H_
-#define PATHHIGHLIGHTER_H_
+#ifndef PATH_HIGHLIGHTER_H
+#define PATH_HIGHLIGHTER_H
 
 #include <string>
 #include <unordered_map>
 
-#include <tulip/Node.h>
-#include <tulip/Observable.h>
+#include <talipot/Node.h>
+#include <talipot/Observable.h>
 
 class QWidget;
 
@@ -61,4 +61,4 @@ private:
   int entityId;
 };
 } // namespace tlp
-#endif /* PATHHIGHLIGHTER_H_ */
+#endif // PATH_HIGHLIGHTER_H

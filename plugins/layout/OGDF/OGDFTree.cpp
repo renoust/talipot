@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/tree/TreeLayout.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 // comments below have been extracted from OGDF/src/tree/TreeLayout.cpp
 /** \addtogroup layout */

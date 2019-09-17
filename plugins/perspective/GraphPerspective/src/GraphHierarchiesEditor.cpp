@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <vector>
 #include "GraphHierarchiesEditor.h"
 
@@ -24,12 +25,12 @@
 #include <QMessageBox>
 #include <QMainWindow>
 
-#include <tulip/Perspective.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/TulipMetaTypes.h>
+#include <talipot/Perspective.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/MetaTypes.h>
 
 #include "GraphPerspective.h"
-#include <tulip/GraphHierarchiesModel.h>
+#include <talipot/GraphHierarchiesModel.h>
 #include "ui_GraphHierarchiesEditor.h"
 
 using namespace tlp;
@@ -115,7 +116,7 @@ GraphHierarchiesEditor::GraphHierarchiesEditor(QWidget *parent)
 
   QToolButton *linkButton = new QToolButton();
   linkButton->setObjectName("linkButton");
-  linkButton->setIcon(QIcon(":/tulip/gui/icons/16/link.png"));
+  linkButton->setIcon(QIcon(":/talipot/gui/icons/16/link.png"));
   linkButton->setToolTip("Click here to disable the synchronization with workspace active "
                          "panel.\nWhen synchronization is enabled, the graph currently "
                          "displayed\nin the active panel, becomes the current one in the Graphs "
@@ -206,7 +207,7 @@ void GraphHierarchiesEditor::clicked(const QModelIndex &index) {
   if (!index.isValid() || index.internalPointer() == nullptr)
     return;
 
-  _contextGraph = index.data(tlp::TulipModel::GraphRole).value<tlp::Graph *>();
+  _contextGraph = index.data(tlp::Model::GraphRole).value<tlp::Graph *>();
   _model->setCurrentGraph(_contextGraph);
   _contextGraph = nullptr;
 }
@@ -215,7 +216,7 @@ void GraphHierarchiesEditor::doubleClicked(const QModelIndex &index) {
   if (!index.isValid() || index.internalPointer() == nullptr)
     return;
 
-  _contextGraph = index.data(tlp::TulipModel::GraphRole).value<tlp::Graph *>();
+  _contextGraph = index.data(tlp::Model::GraphRole).value<tlp::Graph *>();
   _model->setCurrentGraph(_contextGraph);
   createPanel();
   _contextGraph = nullptr;
@@ -226,7 +227,7 @@ void GraphHierarchiesEditor::currentChanged(const QModelIndex &index, const QMod
     if (index == previous)
       return;
 
-    _contextGraph = index.data(tlp::TulipModel::GraphRole).value<tlp::Graph *>();
+    _contextGraph = index.data(tlp::Model::GraphRole).value<tlp::Graph *>();
     disconnect(_ui->hierarchiesTree->selectionModel(),
                SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)), this,
                SLOT(currentChanged(const QModelIndex &, const QModelIndex &)));
@@ -286,7 +287,7 @@ void GraphHierarchiesEditor::delGraph() {
       !_ui->hierarchiesTree->selectionModel()->selectedRows(0).empty()) {
     _contextGraph = _ui->hierarchiesTree->selectionModel()
                         ->selectedRows(0)[0]
-                        .data(tlp::TulipModel::GraphRole)
+                        .data(tlp::Model::GraphRole)
                         .value<tlp::Graph *>();
   }
 
@@ -313,7 +314,7 @@ void GraphHierarchiesEditor::delAllGraph() {
       !_ui->hierarchiesTree->selectionModel()->selectedRows(0).empty()) {
     _contextGraph = _ui->hierarchiesTree->selectionModel()
                         ->selectedRows(0)[0]
-                        .data(tlp::TulipModel::GraphRole)
+                        .data(tlp::Model::GraphRole)
                         .value<tlp::Graph *>();
   }
 
@@ -433,13 +434,13 @@ void GraphHierarchiesEditor::saveGraphHierarchyInTlpFile() {
 
 void GraphHierarchiesEditor::toggleSynchronization(bool f) {
   if (f) {
-    _linkButton->setIcon(QIcon(":/tulip/gui/icons/16/link.png"));
+    _linkButton->setIcon(QIcon(":/talipot/gui/icons/16/link.png"));
     _linkButton->setToolTip("Click here to disable the synchronization with workspace active "
                             "panel.\nWhen synchronization is enabled, the graph currently "
                             "displayed\nin the active panel, becomes the current one in the Graphs "
                             "panel.");
   } else {
-    _linkButton->setIcon(QIcon(":/tulip/gui/icons/16/unlink.png"));
+    _linkButton->setIcon(QIcon(":/talipot/gui/icons/16/unlink.png"));
     _linkButton->setToolTip("Click here to enable the synchronization with workspace active "
                             "panel.\nWhen synchronization is enabled, the graph currently "
                             "displayed\nin the active panel, becomes the current one in the Graphs "

@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef MATRIXVIEWCONFIGURATIONWIDGET_H
-#define MATRIXVIEWCONFIGURATIONWIDGET_H
+#ifndef MATRIX_VIEW_CONFIGURATION_WIDGET_H
+#define MATRIX_VIEW_CONFIGURATION_WIDGET_H
 
 #include <QWidget>
 
-#include <tulip/Color.h>
+#include <talipot/Color.h>
 
 namespace Ui {
 class MatrixViewConfigurationWidget;
@@ -67,4 +67,4 @@ private:
   bool _modifyingMetricList;
 };
 } // namespace tlp
-#endif // MATRIXVIEWCONFIGURATIONWIDGET_H
+#endif // MATRIX_VIEW_CONFIGURATION_WIDGET_H

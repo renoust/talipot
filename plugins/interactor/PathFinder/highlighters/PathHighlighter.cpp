@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "PathHighlighter.h"
 
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlGraphComposite.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlGraphComposite.h>
 
 using namespace tlp;
 using namespace std;

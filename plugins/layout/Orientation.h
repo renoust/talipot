@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef ORIENTATION_H
 #define ORIENTATION_H
 
@@ -19,4 +20,4 @@
 #include "OrientableSize.h"
 #include "OrientableSizeProxy.h"
 
-#endif
+#endif // ORIENTATION_H

@@ -17,13 +17,13 @@
 #include <vector>
 #include <set>
 #include <climits>
-#include <tulip/Graph.h>
-#include <tulip/MutableContainer.h>
-#include <tulip/Vector.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/vectorgraph.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/Graph.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/Vector.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/VectorGraph.h>
+#include <talipot/ParallelTools.h>
 
 using namespace std;
 

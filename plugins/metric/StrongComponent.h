@@ -11,11 +11,12 @@
  *
  */
 
-#ifndef _StrongComponent_H
-#define _StrongComponent_H
+#ifndef STRONG_COMPONENT_H
+#define STRONG_COMPONENT_H
+
 #include <stack>
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 struct NodeInfo {
   NodeInfo(int stra = 0, int sta = 0) : prefixOrder(stra), minAttach(sta) {}
   int prefixOrder;
@@ -45,4 +46,4 @@ private:
                          int &);
 };
 
-#endif
+#endif // STRONG_COMPONENT_H

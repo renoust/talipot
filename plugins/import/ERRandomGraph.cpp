@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/ImportModule.h>
-#include <tulip/Graph.h>
-#include <tulip/TlpTools.h>
+
+#include <talipot/ImportModule.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpTools.h>
 
 using namespace std;
 using namespace tlp;

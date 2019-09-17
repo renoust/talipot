@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef CONNECTEDCOMPONNENTPACKING_H
-#define CONNECTEDCOMPONNENTPACKING_H
 
-#include <tulip/LayoutProperty.h>
+#ifndef CONNECTED_COMPONENT_PACKING_H
+#define CONNECTED_COMPONENT_PACKING_H
+
+#include <talipot/LayoutProperty.h>
 
 class ConnectedComponentPacking : public tlp::LayoutAlgorithm {
 public:
@@ -26,4 +27,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // CONNECTED_COMPONENT_PACKING_H

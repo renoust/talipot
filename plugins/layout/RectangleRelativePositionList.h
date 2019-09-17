@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef RECTANGLERELATIVEPOSITIONLIST_H
-#define RECTANGLERELATIVEPOSITIONLIST_H
+
+#ifndef RECTANGLE_RELATIVE_POSITION_LIST_H
+#define RECTANGLE_RELATIVE_POSITION_LIST_H
 
 #include <vector>
 #include <list>
-#include <tulip/Rectangle.h>
+#include <talipot/Rectangle.h>
 
 /**
  *This structure enables the stocking of the datas corresponding to the search
@@ -74,4 +75,4 @@ public:
   void stockOfTemporaryBestCoordinates(int bestPlaceInFirstSequence);
 };
 
-#endif
+#endif // RECTANGLE_RELATIVE_POSITION_LIST_H

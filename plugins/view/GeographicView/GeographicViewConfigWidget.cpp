@@ -18,7 +18,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include <tulip/TlpQtTools.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace std;
 using namespace tlp;

@@ -13,7 +13,7 @@
 
 #include <stack>
 
-#include <tulip/DoubleProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace std;
 using namespace tlp;

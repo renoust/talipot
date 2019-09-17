@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLESIZEPROXY_H
-#define ORIENTABLESIZEPROXY_H
+
+#ifndef ORIENTABLE_SIZE_PROXY_H
+#define ORIENTABLE_SIZE_PROXY_H
 
 #include <vector>
-#include <tulip/SizeProperty.h>
+#include <talipot/SizeProperty.h>
 #include "OrientableConstants.h"
 #include "OrientableSize.h"
 
@@ -56,4 +57,4 @@ private:
   void (tlp::Size::*writeD)(float);
 };
 
-#endif
+#endif // ORIENTABLE_SIZE_PROXY_H

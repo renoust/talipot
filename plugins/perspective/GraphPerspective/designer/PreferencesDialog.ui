@@ -23,15 +23,15 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Tulip preferences</string>
+   <string>Talipot preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-    <normaloff>:/tulip/gui/icons/logo32x32.png</normaloff>:/tulip/gui/icons/logo32x32.png</iconset>
+   <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+    <normaloff>:/talipot/gui/icons/logo32x32.png</normaloff>:/talipot/gui/icons/logo32x32.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton, QComboBox {
-border-image: url(:/tulip/gui/ui/btn_26.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26.png) 4;
 border-width: 4;
 padding: 0px 6px;
 font-size: 12px;
@@ -47,13 +47,13 @@ QPushButton, QComboBox, QLabel {
 color: black;
 }
 QPushButton:hover, QComboBox:hover {
-border-image: url(:/tulip/gui/ui/btn_26_hover.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_hover.png) 4;
 }
 QPushButton:disabled, QComboBox::disabled {
 color:gray;
 }
 QPushButton:pressed{
-border-image: url(:/tulip/gui/ui/btn_26_pressed.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_pressed.png) 4;
 }
 QPushButton::menu-indicator{
 subcontrol-origin: margin;
@@ -65,12 +65,12 @@ outline: none;
 margin: 2
 }
 QComboBox::down-arrow {
-image: url(:/tulip/gui/ui/combobox_arrow.png);
+image: url(:/talipot/gui/ui/combobox_arrow.png);
 }
 QComboBox:drop-down {
 subcontrol-origin: padding;
 subcontrol-position: top right;
-border-left-style: none; 
+border-left-style: none;
 border-top-right-radius: 1px;
 border-bottom-right-radius: 1px;
 }
@@ -188,10 +188,10 @@ background-color: #F4F4F4;
          <item>
           <widget class="QCheckBox" name="usetlpbformat">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the Tulip binary graph file format (tlpb) instead of the tlp plain text file format. The use of the tlpb format makes loading/saving of Tulip project file much faster but you will lose compatibility with older version of Tulip.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the Talipot binary graph file format (tlpb) instead of the tlp plain text file format. The use of the tlpb format makes loading/saving of Talipot project file much faster but you will lose compatibility with older version of Talipot.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string>Use Tulip binary graph file format when saving a Tulip project</string>
+            <string>Use Talipot binary graph file format when saving a Talipot project</string>
            </property>
           </widget>
          </item>
@@ -477,7 +477,7 @@ font: 12px;
          <item>
           <widget class="QPushButton" name="resetAllDrawingDefaultsButton">
            <property name="toolTip">
-            <string>&lt;p&gt;Reset all drawing defaults to their Tulip predefined values.&lt;br/&gt;You can also reset row specific default values in using a contextual menu displayed by a left click on the title of the corresponding row.&lt;/p&gt;</string>
+            <string>&lt;p&gt;Reset all drawing defaults to their Talipot predefined values.&lt;br/&gt;You can also reset row specific default values in using a contextual menu displayed by a left click on the title of the corresponding row.&lt;/p&gt;</string>
            </property>
            <property name="text">
             <string>Reset all defaults</string>
@@ -683,7 +683,7 @@ font: 12px;
   </layout>
  </widget>
  <resources>
-  <include location="../../../../library/tulip-gui/resources/TulipGUIResource.qrc"/>
+  <include location="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <unordered_map>
 #include <GL/glew.h>
 
@@ -23,17 +24,17 @@
 #pragma GCC diagnostic pop
 #endif
 
-#include <tulip/BoundingBox.h>
-#include <tulip/Glyph.h>
-#include <tulip/EdgeExtremityGlyph.h>
-#include <tulip/TlpTools.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/TulipIconicFont.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/GlTools.h>
-#include <tulip/OpenGlConfigManager.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/Glyph.h>
+#include <talipot/EdgeExtremityGlyph.h>
+#include <talipot/TlpTools.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/IconicFont.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/GlTools.h>
+#include <talipot/OpenGlConfigManager.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/ViewSettings.h>
 
 #define ushort_cast(x) static_cast<unsigned short>((x))
 
@@ -61,8 +62,8 @@ public:
         nbOutlineIndices(0) {}
 
   FontIcon(const std::string &iconName)
-      : fontFile(TulipIconicFont::getTTFLocation(iconName)),
-        iconCodePoint(TulipIconicFont::getIconCodePoint(iconName)), renderingDataBuffer(0),
+      : fontFile(IconicFont::getTTFLocation(iconName)),
+        iconCodePoint(IconicFont::getIconCodePoint(iconName)), renderingDataBuffer(0),
         indicesBuffer(0), nbVertices(0), nbIndices(0), nbOutlineIndices(0) {}
 
   ~FontIcon() {
@@ -253,12 +254,12 @@ static FontIcon defaultFontIcon;
 static unordered_map<string, FontIcon> fontIcons;
 
 static FontIcon &getFontIcon(const string &iconName) {
-  if (iconName.empty() || !TulipIconicFont::isIconSupported(iconName)) {
+  if (iconName.empty() || !IconicFont::isIconSupported(iconName)) {
     // initialization of defaultFontIcon is delayed
     if (defaultFontIcon.iconCodePoint == 0) {
       static const std::string defaultIconName = "fa-question-circle";
-      defaultFontIcon.iconCodePoint = TulipIconicFont::getIconCodePoint(defaultIconName);
-      defaultFontIcon.fontFile = TulipIconicFont::getTTFLocation(defaultIconName);
+      defaultFontIcon.iconCodePoint = IconicFont::getIconCodePoint(defaultIconName);
+      defaultFontIcon.fontFile = IconicFont::getTTFLocation(defaultIconName);
     }
     return defaultFontIcon;
   }

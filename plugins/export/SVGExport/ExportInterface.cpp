@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ExportInterface.h"
 
 ExportInterface::ExportInterface(tlp::PluginProgress *prg, std::ostream &os) : _os(os), _prg(prg) {}

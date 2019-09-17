@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef PYTHONPANEL_H
-#define PYTHONPANEL_H
+#ifndef PYTHON_PANEL_H
+#define PYTHON_PANEL_H
 
 #include <QWidget>
 
@@ -45,4 +45,4 @@ private slots:
   void endCurrentLinesExecution();
 };
 
-#endif // PYTHONPANEL_H
+#endif // PYTHON_PANEL_H

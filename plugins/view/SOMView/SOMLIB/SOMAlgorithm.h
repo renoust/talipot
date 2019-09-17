@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef SOMALGORITHM_H_
-#define SOMALGORITHM_H_
+#ifndef SOM_ALGORITHM_H
+#define SOM_ALGORITHM_H
 
 #include <unordered_map>
 #include <vector>
-#include <tulip/Graph.h>
+#include <talipot/Graph.h>
 
 #include "DynamicVector.h"
 
@@ -150,4 +150,4 @@ protected:
   DiffusionRateFunction *diffusionRateFunction;
 };
 } // namespace tlp
-#endif /* SOMALGORITHM_H_ */
+#endif // SOM_ALGORITHM_H

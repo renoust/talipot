@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef ZORDERLAYOUT_H
-#define ZORDERLAYOUT_H
+#ifndef Z_ORDER_LAYOUT_H
+#define Z_ORDER_LAYOUT_H
 
 #include "LayoutFunction.h"
 
@@ -28,4 +28,4 @@ private:
   int shift;
 };
 } // namespace pocore
-#endif // ZORDERLAYOUT_H
+#endif // Z_ORDER_LAYOUT_H

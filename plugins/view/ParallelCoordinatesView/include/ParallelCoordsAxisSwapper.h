@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef PARALLELCOORDSAXISSWAPPER_H_
-#define PARALLELCOORDSAXISSWAPPER_H_
+#ifndef PARALLEL_COORDS_AXIS_SWAPPER_H
+#define PARALLEL_COORDS_AXIS_SWAPPER_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/Coord.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Coord.h>
 
 namespace tlp {
 
@@ -44,4 +44,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSAXISSWAPPER_H_ */
+#endif // PARALLEL_COORDS_AXIS_SWAPPER_H

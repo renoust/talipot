@@ -1,5 +1,6 @@
-#ifndef EXPORTSVG_H
-#define EXPORTSVG_H
+
+#ifndef EXPORT_SVG_H
+#define EXPORT_SVG_H
 
 /**
  *
@@ -13,6 +14,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ExportInterface.h"
 #include <set>
 
@@ -81,4 +83,4 @@ public:
   bool writeEnd() override;
 };
 
-#endif // EXPORTSVG_H
+#endif // EXPORT_SVG_H

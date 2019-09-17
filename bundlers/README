@@ -1,4 +1,4 @@
-This directory contains bundlers for Tulip releases vor various target plateforms.
+This directory contains bundlers for Talipot releases vor various target plateforms.
 
 When writing a new bundler, you should stick to the following rules:
 
@@ -7,7 +7,7 @@ When writing a new bundler, you should stick to the following rules:
 
 As a consequence, running a bundler should be achieved by respecting those steps:
 
- . Run CMake and compile tulip
+ . Run CMake and compile talipot
  . Run a make install
  . Run the bundler_script <CMAKE_INSTALL_PREFIX> <dest_dir>
 

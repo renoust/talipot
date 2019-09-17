@@ -11,12 +11,12 @@
  *
  */
 
-#include <tulip/Algorithm.h>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/Delaunay.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/Algorithm.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/Delaunay.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/ParallelTools.h>
 
 using namespace std;
 

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _KRUSKAL_H
-#define _KRUSKAL_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef KRUSKAL_H
+#define KRUSKAL_H
+
+#include <talipot/BooleanProperty.h>
 
 /** \addtogroup selection */
 
@@ -43,4 +44,4 @@ public:
   bool check(std::string &) override;
 };
 
-#endif
+#endif // KRUSKAL_H

@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef EXPANDABLEGROUPBOX_H
-#define EXPANDABLEGROUPBOX_H
+
+#ifndef EXPANDABLE_GROUP_BOX_H
+#define EXPANDABLE_GROUP_BOX_H
 
 #include <QGroupBox>
 #include <QMap>
@@ -42,4 +43,4 @@ public slots:
   void setWidget(QWidget *);
 };
 
-#endif // EXPANDABLEGROUPBOX_H
+#endif // EXPANDABLE_GROUP_BOX_H

@@ -38,13 +38,13 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tulip User Handbook'
-copyright = u'@CurrentYear@, Tulip Team'
+project = u'Talipot User Handbook'
+copyright = u'@CurrentYear@, The Talipot developers'
 
 # The short X.Y version.
-version = '@TulipMMVersion@'
+version = '@TalipotMMVersion@'
 # The full version, including alpha/beta/rc tags.
-release = '@TulipVersion@'
+release = '@TalipotVersion@'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -81,44 +81,7 @@ html_show_sourcelink = False
 html_show_sphinx = False
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'TulipUserHandbookdoc'
-
-# -- Options for LaTeX output -------------------------------------------------
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass).
-latex_documents = [
-  ('index', 'TulipUserHandbook.tex', u'Tulip User Documentation',
-   u'Tulip Team', 'manual'),
-]
-
-# -- Options for manual page output -------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'TulipUserHandbook', u'Tulip User Documentation',
-     [u'Tulip Team'], 1)
-]
-
-# -- Options for Texinfo output -----------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-  ('index', 'TulipUserHandbook', u'Tulip User Documentation',
-   u'Tulip Team', 'TulipUserHandbook', 'One line description of project.',
-   'Miscellaneous'),
-]
-
-# -- Options for Epub output --------------------------------------------------
-
-# Bibliographic Dublin Core info.
-epub_title = u'TulipUserHandbook'
-epub_author = u'Tulip Team'
-epub_publisher = u'Tulip Team'
-epub_copyright = u'@CurrentYear@, Tulip Team'
+htmlhelp_basename = 'TalipotUserHandbookdoc'
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}

@@ -11,8 +11,9 @@
  *
  */
 
-#ifndef DYNAMICVECTOR_H_
-#define DYNAMICVECTOR_H_
+#ifndef DYNAMIC_VECTOR_H
+#define DYNAMIC_VECTOR_H
+
 template <class T>
 class DynamicVector {
 public:
@@ -81,4 +82,4 @@ template <class T>
 std::istream &operator>>(std::istream &is, DynamicVector<T> &);
 
 #include "DynamicVector.cxx"
-#endif /* DYNAMICVECTOR_H_ */
+#endif // DYNAMIC_VECTOR_H

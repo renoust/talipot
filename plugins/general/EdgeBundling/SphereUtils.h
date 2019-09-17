@@ -14,8 +14,8 @@
 #ifndef SPHERE_UTILS_H
 #define SPHERE_UTILS_H
 
-#include <tulip/Graph.h>
-#include <tulip/LayoutProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/LayoutProperty.h>
 
 float centerOnOriginAndScale(tlp::Graph *graph, tlp::LayoutProperty *layout, float dist);
 

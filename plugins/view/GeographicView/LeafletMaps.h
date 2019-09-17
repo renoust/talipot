@@ -21,8 +21,8 @@
 #include <QWebEngineView>
 #include <QEventLoop>
 #endif
-#include <tulip/Coord.h>
-#include <tulip/Graph.h>
+#include <talipot/Coord.h>
+#include <talipot/Graph.h>
 
 #include "ProgressWidgetGraphicsProxy.h"
 #include "AddressSelectionDialog.h"

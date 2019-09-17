@@ -11,18 +11,18 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/MouseSelector.h>
-#include <tulip/MouseSelectionEditor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/MouseSelector.h>
+#include <talipot/MouseSelectionEditor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to move/reshape
+/** \brief Interactor to move/reshape
  *
  */
 class InteractorSelectionModifier : public NodeLinkDiagramComponentInteractor {
@@ -34,7 +34,7 @@ public:
    * Default constructor
    */
   InteractorSelectionModifier(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_move.png",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_move.png",
                                            "Move/Reshape rectangle selection",
                                            StandardInteractorPriority::RectangleSelectionModifier) {
   }

@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ConvolutionClusteringSetup.h"
 #include "ui_ConvolutionClusteringSetup.h"
 #include "ConvolutionClustering.h"

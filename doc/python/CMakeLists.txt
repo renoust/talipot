@@ -5,7 +5,7 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in ${CMAKE_CURRENT_BINARY_DIR
 # On windows, it is required that the paths to the dll dependencies (e.g. zlib, libpng, ...) are contained
 # in the CMAKE_LIBRARY_PATH variable (especially with Visual Studio).
 # Some warnings will be output when configuring the whole project if it is not the case.
-# Otherwise, the Python API documentation will not be generated as the import of the tulip modules will fail.
+# Otherwise, the Python API documentation will not be generated as the import of the talipot modules will fail.
 
 # Turn CMAKE_LIBRARY_PATH list into a string in order to pass all its contents to the CMake command generating the doc,
 # only the first list entry is transferred otherwise.
@@ -14,7 +14,7 @@ STRING(REPLACE ";" "," CMAKE_LIBRARY_PATH_STR "${CMAKE_LIBRARY_PATH}")
 # Ensure that libraries paths are in MSYS format when using MSYS Makefiles,
 # otherwise the documentation fails to build
 IF("${CMAKE_GENERATOR}" MATCHES ".*MSYS.*")
-  TULIP_WINDOWS_TO_MSYS_PATH(${CMAKE_LIBRARY_PATH_STR} CMAKE_LIBRARY_PATH_STR)
+  TALIPOT_WINDOWS_TO_MSYS_PATH(${CMAKE_LIBRARY_PATH_STR} CMAKE_LIBRARY_PATH_STR)
 ENDIF("${CMAKE_GENERATOR}" MATCHES ".*MSYS.*")
 
 # copy .py files in CMAKE_CURRENT_BINARY_DIR
@@ -26,25 +26,25 @@ ADD_CUSTOM_TARGET(pythonBindingsDoc ALL ${CMAKE_COMMAND} -DSPHINX_EXECUTABLE=${S
                                                          -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
                                                          -DSRC_DIR=${CMAKE_CURRENT_SOURCE_DIR}
                                                          -DBIN_DIR=${CMAKE_CURRENT_BINARY_DIR}
-                                                         -DTULIP_SOURCE_DIR=${CMAKE_SOURCE_DIR}
-                                                         -DTULIP_BUILD_DIR=${CMAKE_BINARY_DIR}
+                                                         -DTALIPOT_SOURCE_DIR=${CMAKE_SOURCE_DIR}
+                                                         -DTALIPOT_BUILD_DIR=${CMAKE_BINARY_DIR}
                                                          -DSYSTEM_SIP=${SYSTEM_SIP} -DSIP_VERSION=${SIP_VERSION_STR}
                                                          -DQT_BIN_DIR=${QT_BINARY_DIR}
                                                          -DAPPLE=${APPLE} -DWIN32=${WIN32}
                                                          -DCMAKE_LIBRARY_PATH=${CMAKE_LIBRARY_PATH_STR}
                                                          -P ${CMAKE_CURRENT_SOURCE_DIR}/genSphinxDoc.cmake
-                                    DEPENDS ${LibTulipCorePythonBindingsName}
-                                            ${LibTulipGUIPythonBindingsName}
+                                    DEPENDS ${LibTalipotCorePythonBindingsName}
+                                            ${LibTalipotGUIPythonBindingsName}
                                             ${LibStlPythonBindingsName}
-                                            ${TULIP_PLUGIN_TARGETS}
-                                            copyTulipPythonPlugins
-					    copyTulipPluginsPyInBuild
+                                            ${TALIPOT_PLUGIN_TARGETS}
+                                            copyTalipotPythonPlugins
+					                                  copyTalipotPluginsPyInBuild
                                     VERBATIM)
 
-SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "doc;doctrees") 
+SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "doc;doctrees")
 
-INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html 
-        DESTINATION ${CMAKE_INSTALL_DOCDIR}/tulip-python
-        COMPONENT tulip_python_doc)
+INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
+        DESTINATION ${CMAKE_INSTALL_DOCDIR}/talipot-python
+        COMPONENT talipot_python_doc)
 
 ENDIF(PYTHONINTERP_FOUND AND SIP_OK)

@@ -14,8 +14,8 @@
 #include "PixelOrientedViewQuickAccessBar.h"
 #include "PixelOrientedOptionsWidget.h"
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/ColorButton.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/ColorButton.h>
 
 #include <QPushButton>
 
@@ -34,7 +34,7 @@ PixelOrientedViewQuickAccessBar::PixelOrientedViewQuickAccessBar(PixelOrientedOp
 
 void PixelOrientedViewQuickAccessBar::reset() {
   QuickAccessBarImpl::reset();
-  backgroundColorButton()->setTulipColor(_optionsWidget->getBackgroundColor());
+  backgroundColorButton()->setColor(_optionsWidget->getBackgroundColor());
 }
 
 void PixelOrientedViewQuickAccessBar::setBackgroundColor(const QColor &col) {

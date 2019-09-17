@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef ENCLOSINGCIRCLEHIGHLIGHTER_H_
-#define ENCLOSINGCIRCLEHIGHLIGHTER_H_
+#ifndef ENCLOSING_CIRCLE_HIGHLIGHTER_H
+#define ENCLOSING_CIRCLE_HIGHLIGHTER_H
 
 #include "PathHighlighter.h"
 
-#include <tulip/Color.h>
+#include <talipot/Color.h>
 
 #include <QWidget>
 #include <QObject>
@@ -76,4 +76,4 @@ private:
   EnclosingCircleConfigurationWidget *configurationWidget;
 };
 } // namespace tlp
-#endif /* ENCLOSINGCIRCLEHIGHLIGHTER_H_ */
+#endif // ENCLOSING_CIRCLE_HIGHLIGHTER_H

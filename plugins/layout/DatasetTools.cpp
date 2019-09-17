@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "DatasetTools.h"
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 #define ORTHOGONAL "orthogonal"
 #define ORIENTATION "up to down;down to up;right to left;left to right;"

@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/Glyph.h>
-#include <tulip/Iterator.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/Glyph.h>
+#include <talipot/Iterator.h>
+#include <talipot/TlpQtTools.h>
 
 #include <QComboBox>
 #include <QPushButton>

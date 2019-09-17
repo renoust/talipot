@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_GEMLayout_H
-#define Tulip_GEMLayout_H
+
+#ifndef GEM_LAYOUT_H
+#define GEM_LAYOUT_H
 
 #include <vector>
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup layout */
 
@@ -162,4 +163,4 @@ private:
   unsigned int max_iter;            // the max number of iterations
 };
 
-#endif
+#endif // GEM_LAYOUT_H

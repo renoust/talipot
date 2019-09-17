@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef EDITCOLORSCALEINTERACTOR_H_
-#define EDITCOLORSCALEINTERACTOR_H_
+#ifndef EDIT_COLOR_SCALE_INTERACTOR_H
+#define EDIT_COLOR_SCALE_INTERACTOR_H
 
-#include <tulip/GLInteractor.h>
-//#include <tulip/GlColorScale.h>
-//#include <tulip/DoubleProperty.h>
+#include <talipot/GLInteractor.h>
+//#include <talipot/GlColorScale.h>
+//#include <talipot/DoubleProperty.h>
 
 //#include "SOMView.h"
 
@@ -52,4 +52,4 @@ protected:
   GlLayer *selectionLayer;
 };
 } // namespace tlp
-#endif /* EDITCOLORSCALEINTERACTOR_H_ */
+#endif // EDIT_COLOR_SCALE_INTERACTOR_H

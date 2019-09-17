@@ -11,12 +11,12 @@
  *
  */
 
-#include <tulip/TlpTools.h>
-#include <tulip/GlPolygon.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlQuad.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/GlMainWidget.h>
+#include <talipot/TlpTools.h>
+#include <talipot/GlPolygon.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlQuad.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlMainWidget.h>
 
 #include "ParallelCoordinatesView.h"
 #include "ParallelTools.h"

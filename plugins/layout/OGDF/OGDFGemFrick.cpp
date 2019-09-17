@@ -13,9 +13,9 @@
 
 #include <ogdf/energybased/GEMLayout.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 // comments below have been extracted from OGDF/src/energybased/GEMLayout.cpp
 /** \addtogroup layout */

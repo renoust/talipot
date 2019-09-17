@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef MAKESELECTIONGRAPH_H
-#define MAKESELECTIONGRAPH_H
+#ifndef MAKE_SELECTION_GRAPH_H
+#define MAKE_SELECTION_GRAPH_H
 
-#include <tulip/BooleanProperty.h>
-#include <tulip/GraphTest.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/GraphTest.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -49,4 +49,4 @@ public:
   bool test() override;
 };
 
-#endif // MAKESELECTIONGRAPH_H
+#endif // MAKE_SELECTION_GRAPH_H

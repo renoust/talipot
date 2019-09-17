@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef FISHEYECONFIGWIDGET_H_
-#define FISHEYECONFIGWIDGET_H_
+#ifndef FISH_EYE_CONFIG_WIDGET_H
+#define FISH_EYE_CONFIG_WIDGET_H
 
 #include <QWidget>
 
@@ -42,4 +42,4 @@ public:
   float getFishEyeHeightIncrementStep() const;
 };
 } // namespace tlp
-#endif /* FISHEYECONFIGWIDGET_H_ */
+#endif // FISH_EYE_CONFIG_WIDGET_H

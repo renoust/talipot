@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef BFDWRAPPER_H_
-#define BFDWRAPPER_H_
+#ifndef BFD_WRAPPER_H
+#define BFD_WRAPPER_H
 
 #ifdef __MINGW32__
 #include <windows.h>
@@ -85,4 +85,4 @@ private:
   int64_t relocationOffset; // deduced later
 };
 
-#endif /* BFDWRAPPER_H_ */
+#endif // BFD_WRAPPER_H

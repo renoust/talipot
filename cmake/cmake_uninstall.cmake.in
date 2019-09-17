@@ -23,16 +23,16 @@ FOREACH(file ${files})
     REMOVE_FILE($ENV{DESTDIR}${file})
 ENDFOREACH(file)
 
-# remove tulip dedicated folders
+# remove talipot dedicated folders
 EXECUTE_PROCESS(
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/tulip"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/tulip"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/tulip2ogdf"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/cmake/TULIP"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_DATADIR@/tulip"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/talipot"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/talipot"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/talipot2ogdf"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/cmake/Talipot"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_DATADIR@/talipot"
     COMMAND @CMAKE_COMMAND@ -E remove_directory "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_DOCDIR@"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@TulipPythonModulesInstallDir@/tulip"
-    COMMAND @CMAKE_COMMAND@ -E remove_directory "@TulipPythonModulesInstallDir@/tulipgui"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@TalipotPythonModulesInstallDir@/talipot"
+    COMMAND @CMAKE_COMMAND@ -E remove_directory "@TalipotPythonModulesInstallDir@/talipotgui"
     OUTPUT_QUIET ERROR_QUIET
 )
 

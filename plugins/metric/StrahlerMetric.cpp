@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/StringProperty.h>
-#include <tulip/StringCollection.h>
+#include <talipot/StringProperty.h>
+#include <talipot/StringCollection.h>
 
 #include "StrahlerMetric.h"
 

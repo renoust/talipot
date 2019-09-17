@@ -10,12 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef EDGE_BUNDLING_H
 #define EDGE_BUNDLING_H
+
 #include <climits>
 #include <vector>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/LayoutProperty.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/LayoutProperty.h>
 
 /** \addtogroup selection */
 /*@{*/
@@ -69,4 +71,4 @@ private:
 };
 /*@}*/
 
-#endif // EDGE_BUNDLING
+#endif // EDGE_BUNDLING_H

@@ -16,14 +16,14 @@
 #include "MouseMagnifyingGlass.h"
 #include "../../utils/PluginNames.h"
 
-#include <tulip/GlRect.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/MouseInteractors.h>
-#include <tulip/GlTools.h>
-#include <tulip/NodeLinkDiagramComponent.h>
-#include <tulip/GlCircle.h>
-#include <tulip/OpenGlConfigManager.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/GlTools.h>
+#include <talipot/NodeLinkDiagramComponent.h>
+#include <talipot/GlCircle.h>
+#include <talipot/OpenGlConfigManager.h>
 
 #include <QOpenGLFramebufferObject>
 #include <QEvent>

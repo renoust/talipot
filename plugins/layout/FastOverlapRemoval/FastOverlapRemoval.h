@@ -1,6 +1,7 @@
 //-*-c++-*-
-#ifndef _RESOLVE_OVERLAP_H
-#define _RESOLVE_OVERLAP_H
+
+#ifndef FAST_OVERLAP_REMOVAL_H
+#define FAST_OVERLAP_REMOVAL_H
 
 /** \addtogroup layout */
 /*@{*/
@@ -36,8 +37,8 @@
  *
  */
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/MutableContainer.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/MutableContainer.h>
 
 class FastOverlapRemoval : public tlp::LayoutAlgorithm {
 public:
@@ -53,4 +54,4 @@ public:
   bool run() override;
 };
 /*@}*/
-#endif
+#endif // FAST_OVERLAP_REMOVAL_H

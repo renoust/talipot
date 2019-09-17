@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef DISTANCES_H
 #define DISTANCES_H
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 unsigned int getDist(tlp::Graph *, tlp::node, tlp::node);
 
-#endif
+#endif // DISTANCES_H

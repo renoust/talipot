@@ -11,16 +11,16 @@
  *
  */
 
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/TlpTools.h>
-#include <tulip/Interactor.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/QuickAccessBar.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Interactor.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/QuickAccessBar.h>
+#include <talipot/ViewSettings.h>
 
 #include <QHelpEvent>
 #include <QApplication>

@@ -11,12 +11,12 @@
  *
  */
 
-#include <tulip/IntegerProperty.h>
-#include <tulip/GlLine.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlLabel.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/GlLine.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlLabel.h>
 
 #include <QEvent>
 

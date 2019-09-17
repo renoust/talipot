@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef REACHABLESUBGRAPHVIEW_H_
-#define REACHABLESUBGRAPHVIEW_H_
+#ifndef NODE_NEIGHBORHOOD_VIEW_H
+#define NODE_NEIGHBORHOOD_VIEW_H
 
 #include <unordered_map>
-#include <tulip/GraphDecorator.h>
+#include <talipot/GraphDecorator.h>
 
 namespace tlp {
 class DoubleProperty;
@@ -89,4 +89,4 @@ private:
   tlp::DoubleProperty *property;
 };
 
-#endif /* REACHABLESUBGRAPHVIEW_H_ */
+#endif // NODE_NEIGHBORHOOD_VIEW_H

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _LEAFMETRIC_H
-#define _LEAFMETRIC_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef LEAF_METRIC_H
+#define LEAF_METRIC_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
@@ -35,4 +36,4 @@ private:
   double getNodeValue(const tlp::node n);
 };
 
-#endif
+#endif // LEAF_METRIC_H

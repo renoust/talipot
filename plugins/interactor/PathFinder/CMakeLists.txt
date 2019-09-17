@@ -1,5 +1,5 @@
-INCLUDE_DIRECTORIES(BEFORE ${TulipCoreBuildInclude})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}  ${CMAKE_CURRENT_SOURCE_DIR} ${OPENGL_INCLUDE_DIR} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude})
+INCLUDE_DIRECTORIES(BEFORE ${TalipotCoreBuildInclude})
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}  ${CMAKE_CURRENT_SOURCE_DIR} ${OPENGL_INCLUDE_DIR} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude})
 
 SET(LIB_SRCS
     PathFinder.cpp
@@ -28,7 +28,7 @@ QTX_ADD_RESOURCES(LIB_RCC_SRCS
 	designer/resources.qrc
 )
 
-ADD_LIBRARY(PathFinder-${TulipVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
-TARGET_LINK_LIBRARIES(PathFinder-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(PathFinder-${TalipotVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
+TARGET_LINK_LIBRARIES(PathFinder-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
-TULIP_INSTALL_PLUGIN(PathFinder-${TulipVersion} ${TulipInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(PathFinder-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})

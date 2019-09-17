@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} ${TulipCoreBuildInclude} ${TulipCoreInclude} ${OGDFInclude} ${TulipOGDFInclude})
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} ${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${OGDFInclude} ${TalipotOGDFInclude})
 
 SET(PLUGINS_SRCS
 OGDFFm3.cpp
@@ -33,8 +33,8 @@ DISABLE_COMPILER_WARNINGS()
 FOREACH(OGDFPlugin ${PLUGINS_SRCS})
   STRING(REGEX REPLACE ".cpp" "" PLUGIN_NAME ${OGDFPlugin})
   STRING(REGEX REPLACE ".*/" "" PLUGIN_NAME ${PLUGIN_NAME})
-  ADD_LIBRARY(${PLUGIN_NAME}-${TulipVersion} SHARED ${OGDFPlugin})
-  TARGET_LINK_LIBRARIES(${PLUGIN_NAME}-${TulipVersion} ${TulipLibName} ${LibTulipOGDFName} ${OGDF_LIBRARY})
+  ADD_LIBRARY(${PLUGIN_NAME}-${TalipotVersion} SHARED ${OGDFPlugin})
+  TARGET_LINK_LIBRARIES(${PLUGIN_NAME}-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGDFName} ${OGDF_LIBRARY})
 
-  TULIP_INSTALL_PLUGIN(${PLUGIN_NAME}-${TulipVersion} ${TulipPluginsInstallDir})
+  TALIPOT_INSTALL_PLUGIN(${PLUGIN_NAME}-${TalipotVersion} ${TalipotPluginsInstallDir})
 ENDFOREACH()

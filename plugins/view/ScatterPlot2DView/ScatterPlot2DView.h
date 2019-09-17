@@ -11,17 +11,17 @@
  *
  */
 
-#ifndef SCATTERPLOT2DVIEW_H_
-#define SCATTERPLOT2DVIEW_H_
+#ifndef SCATTER_PLOT2D_VIEW_H
+#define SCATTER_PLOT2D_VIEW_H
 
 #include <unordered_map>
 
-#include <tulip/Graph.h>
-#include <tulip/GlMainView.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/Coord.h>
+#include <talipot/Graph.h>
+#include <talipot/GlMainView.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/Coord.h>
 
-#include <tulip/OpenGlIncludes.h>
+#include <talipot/OpenGlIncludes.h>
 
 #include "../../utils/PluginNames.h"
 
@@ -29,7 +29,7 @@ namespace tlp {
 
 /*@{*/
 /** \file
- *  \brief  Tulip Scatter Plot view
+ *  \brief  Scatter Plot view
 
  * This view plugin allows to create 2D scatter plots with numerical properties attached to graph
  nodes or edges.
@@ -199,4 +199,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOT2DVIEW_H_ */
+#endif // SCATTER_PLOT2D_VIEW_H

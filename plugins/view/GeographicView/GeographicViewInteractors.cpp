@@ -12,11 +12,11 @@
  */
 
 #include <QApplication>
-#include <tulip/MouseNodeBuilder.h>
-#include <tulip/MouseEdgeBuilder.h>
-#include <tulip/MouseSelector.h>
-#include <tulip/MouseSelectionEditor.h>
-#include <tulip/MouseEdgeBendEditor.h>
+#include <talipot/MouseNodeBuilder.h>
+#include <talipot/MouseEdgeBuilder.h>
+#include <talipot/MouseSelector.h>
+#include <talipot/MouseSelectionEditor.h>
+#include <talipot/MouseEdgeBendEditor.h>
 
 #include "GeographicViewInteractors.h"
 
@@ -33,7 +33,7 @@ bool GeographicViewInteractor::isCompatible(const std::string &viewName) const {
 }
 
 GeographicViewInteractorNavigation::GeographicViewInteractorNavigation(const PluginContext *)
-    : GeographicViewInteractor(":/tulip/gui/icons/i_navigation.png", "Navigate in view") {}
+    : GeographicViewInteractor(":/talipot/gui/icons/i_navigation.png", "Navigate in view") {}
 
 unsigned int GeographicViewInteractorNavigation::priority() const {
   return StandardInteractorPriority::Navigation;
@@ -48,7 +48,7 @@ QWidget *GeographicViewInteractorNavigation::configurationWidget() const {
 }
 
 GeographicViewInteractorSelection::GeographicViewInteractorSelection(const PluginContext *)
-    : GeographicViewInteractor(":/tulip/gui/icons/i_selection.png", "selection in view") {}
+    : GeographicViewInteractor(":/talipot/gui/icons/i_selection.png", "selection in view") {}
 
 void GeographicViewInteractorSelection::construct() {
   push_back(new GeographicViewNavigator);
@@ -71,7 +71,7 @@ PLUGIN(GeographicViewInteractorSelection)
 
 GeographicViewInteractorSelectionEditor::GeographicViewInteractorSelectionEditor(
     const PluginContext *)
-    : GeographicViewInteractor(":/tulip/gui/icons/i_move.png", "selection edition in view") {}
+    : GeographicViewInteractor(":/talipot/gui/icons/i_move.png", "selection edition in view") {}
 
 void GeographicViewInteractorSelectionEditor::construct() {
   push_back(new GeographicViewNavigator);
@@ -242,7 +242,7 @@ bool GeographicViewNavigator::eventFilter(QObject *widget, QEvent *e) {
 PLUGIN(GeographicViewInteractorNavigation)
 
 GeographicViewInteractorAddEdges::GeographicViewInteractorAddEdges(const PluginContext *)
-    : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_addedge.png", "Add nodes/edges",
+    : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_addedge.png", "Add nodes/edges",
                                          StandardInteractorPriority::AddNodesOrEdges) {}
 
 void GeographicViewInteractorAddEdges::construct() {
@@ -268,7 +268,7 @@ bool GeographicViewInteractorAddEdges::isCompatible(const std::string &viewName)
 PLUGIN(GeographicViewInteractorAddEdges)
 
 GeographicViewInteractorEditEdgeBends::GeographicViewInteractorEditEdgeBends(const PluginContext *)
-    : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_bends", "Edit edge bends",
+    : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_bends", "Edit edge bends",
                                          StandardInteractorPriority::EditEdgeBends) {}
 
 void GeographicViewInteractorEditEdgeBends::construct() {

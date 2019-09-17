@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _EqualValueClustering_H
-#define _EqualValueClustering_H
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/NumericProperty.h>
+#ifndef EQUAL_VALUE_CLUSTERING_H
+#define EQUAL_VALUE_CLUSTERING_H
+
+#include <talipot/PluginHeaders.h>
+#include <talipot/NumericProperty.h>
 
 class EqualValueClustering : public tlp::Algorithm {
 public:
@@ -28,4 +29,4 @@ public:
   bool computeClusters(tlp::PropertyInterface *prop, bool onNodes, bool connected);
 };
 
-#endif
+#endif // EQUAL_VALUE_CLUSTERING_H

@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef MATRIXVIEW_H
-#define MATRIXVIEW_H
+#ifndef MATRIX_VIEW_H
+#define MATRIX_VIEW_H
 
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 #include <set>
 #include "MatrixViewConfigurationWidget.h"
 
@@ -142,4 +142,4 @@ private:
   void updateLayout();
 };
 } // namespace tlp
-#endif // MATRIXVIEW_H
+#endif // MATRIX_VIEW_H

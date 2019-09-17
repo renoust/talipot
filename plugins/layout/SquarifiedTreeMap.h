@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef SQUARIFIEDTREEMAP_H
-#define SQUARIFIEDTREEMAP_H
+
+#ifndef SQUARIFIED_TREE_MAP_H
+#define SQUARIFIED_TREE_MAP_H
 
 #include <vector>
 #include <utility>
 #include <unordered_map>
-#include "tulip/TulipPluginHeaders.h"
-#include "tulip/Rectangle.h"
+#include "talipot/PluginHeaders.h"
+#include "talipot/Rectangle.h"
 
 typedef std::vector<tlp::node> VecNode;
 typedef std::unordered_map<tlp::node, double> MapNode;
@@ -100,4 +101,4 @@ private:
   void computeNodesSize(tlp::node n);
 };
 
-#endif
+#endif // SQUARIFIED_TREE_MAP_H

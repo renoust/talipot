@@ -11,17 +11,17 @@
  *
  */
 
-#ifndef GEOGRAPHIC_VIEW_GRAPHICSVIEW_H
-#define GEOGRAPHIC_VIEW_GRAPHICSVIEW_H
+#ifndef GEOGRAPHIC_VIEW_GRAPHICS_VIEW_H
+#define GEOGRAPHIC_VIEW_GRAPHICS_VIEW_H
 
 #include <unordered_map>
 
 #include "LeafletMaps.h"
 
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlMainWidgetGraphicsItem.h>
-#include <tulip/Camera.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlMainWidgetGraphicsItem.h>
+#include <talipot/Camera.h>
 
 #include <QGraphicsView>
 #include <QComboBox>
@@ -193,4 +193,4 @@ private:
 };
 } // namespace tlp
 
-#endif // GEOGRAPHIC_VIEW_GRAPHICSVIEW_H
+#endif // GEOGRAPHIC_VIEW_GRAPHICS_VIEW_H

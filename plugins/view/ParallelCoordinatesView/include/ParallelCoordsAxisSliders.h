@@ -11,13 +11,13 @@
  *
  */
 
-#ifndef PARALLELCOORDSAXISSLIDERS_H_
-#define PARALLELCOORDSAXISSLIDERS_H_
+#ifndef PARALLEL_COORDS_AXIS_SLIDERS_H
+#define PARALLEL_COORDS_AXIS_SLIDERS_H
 
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GLInteractor.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlPolygon.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlPolygon.h>
 
 #include "ParallelCoordinatesDrawing.h"
 
@@ -114,4 +114,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSAXISSLIDERS_H_ */
+#endif // PARALLEL_COORDS_AXIS_SLIDERS_H

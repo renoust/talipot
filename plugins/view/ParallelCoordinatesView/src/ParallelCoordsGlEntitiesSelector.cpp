@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
 
 #include "ParallelCoordsGlEntitiesSelector.h"
 #include "ParallelCoordinatesView.h"

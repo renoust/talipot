@@ -14,8 +14,8 @@
 #include <QColorDialog>
 #include <QMainWindow>
 
-#include <tulip/Perspective.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/Perspective.h>
+#include <talipot/TlpQtTools.h>
 
 #include "PixelOrientedOptionsWidget.h"
 #include "ui_PixelOrientedOptionsWidget.h"
@@ -36,11 +36,11 @@ PixelOrientedOptionsWidget::~PixelOrientedOptionsWidget() {
 }
 
 Color PixelOrientedOptionsWidget::getBackgroundColor() const {
-  return _ui->backColorButton->tulipColor();
+  return _ui->backColorButton->talipotColor();
 }
 
 void PixelOrientedOptionsWidget::setBackgroundColor(const Color &color) {
-  _ui->backColorButton->setTulipColor(color);
+  _ui->backColorButton->setColor(color);
 }
 
 string PixelOrientedOptionsWidget::getLayoutType() const {

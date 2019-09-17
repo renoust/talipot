@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef GRADIENTMANAGER_H_
-#define GRADIENTMANAGER_H_
+#ifndef GRADIENT_MANAGER_H
+#define GRADIENT_MANAGER_H
 
 #include <map>
 #include <string>
 #include <vector>
-#include <tulip/Color.h>
-#include <tulip/ColorScale.h>
+#include <talipot/Color.h>
+#include <talipot/ColorScale.h>
 
 /**
  * @brief Object used to store ColorScale for different properties.
@@ -44,4 +44,4 @@ protected:
   int minSVal;
 };
 } // namespace tlp
-#endif /* GRADIENTMANAGER_H_ */
+#endif // GRADIENT_MANAGER_H

@@ -13,12 +13,12 @@
 
 #include "PathAlgorithm.h"
 
-#include <tulip/BooleanProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/MutableContainer.h>
-#include <tulip/Graph.h>
-#include <tulip/GraphParallelTools.h>
-#include <tulip/GraphTools.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/Graph.h>
+#include <talipot/GraphParallelTools.h>
+#include <talipot/GraphTools.h>
 
 #include "DFS/DFS.h"
 

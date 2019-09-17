@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef PREFERENCESDIALOG_H
-#define PREFERENCESDIALOG_H
+#ifndef PREFERENCES_DIALOG_H
+#define PREFERENCES_DIALOG_H
 
 #include <QDialog>
 
@@ -37,8 +37,7 @@ public slots:
   void showGraphDefaultsContextMenu(const QPoint &);
 
 private slots:
-  void usetlpbformat(int state);
-  void resetToTulipDefaults(int row = -1, int updateMode = 0);
+  void resetToTalipotDefaults(int row = -1, int updateMode = 0);
 };
 
-#endif // PREFERENCESDIALOG_H
+#endif // PREFERENCES_DIALOG_H

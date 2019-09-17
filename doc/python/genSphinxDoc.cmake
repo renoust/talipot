@@ -1,14 +1,14 @@
 # Turn back the CMAKE_LIBRARY_PATH string into a list
 STRING(REPLACE "," ";" CMAKE_LIBRARY_PATH "${CMAKE_LIBRARY_PATH}")
 
-# On windows, we need to add the paths to all the dll dependencies of the tulip Python modules
-# in the PATH environment variable, otherwise the import of the tulip modules will fail
+# On windows, we need to add the paths to all the dll dependencies of the Talipot Python modules
+# in the PATH environment variable, otherwise the import of the talipot modules will fail
 IF(WIN32)
-  SET(DEPENDENCIES_PATHS "${BIN_DIR}/../../library/tulip-core/src"
-                         "${BIN_DIR}/../../library/tulip-gui/src"
-                         "${BIN_DIR}/../../library/tulip-ogl/src"
-                         "${BIN_DIR}/../../library/tulip-ogdf/src/"
-                         "${BIN_DIR}/../../library/tulip-python/src/"
+  SET(DEPENDENCIES_PATHS "${BIN_DIR}/../../library/talipot-core/src"
+                         "${BIN_DIR}/../../library/talipot-gui/src"
+                         "${BIN_DIR}/../../library/talipot-ogl/src"
+                         "${BIN_DIR}/../../library/talipot-ogdf/src/"
+                         "${BIN_DIR}/../../library/talipot-python/src/"
                          "${BIN_DIR}/../../thirdparty/gzstream"
                          "${BIN_DIR}/../../thirdparty/quazip"
                          "${BIN_DIR}/../../thirdparty/ftgl"
@@ -23,15 +23,15 @@ IF(WIN32)
 
 ENDIF(WIN32)
 
-# Add the paths of the tulip Python modules in the PYTHONPATH environement variable
+# Add the paths of the talipot Python modules in the PYTHONPATH environement variable
 # in order for the interpreter to import them
-SET(PYTHON_PATHS "${BIN_DIR}/../../library/tulip-python/bindings/tulip-core/tulip_module"
-                 "${BIN_DIR}/../../library/tulip-python/bindings/tulip-gui/tulipgui_module"
-                 "${BIN_DIR}/../../library/tulip-python/modules"
+SET(PYTHON_PATHS "${BIN_DIR}/../../library/talipot-python/bindings/talipot-core/talipot_module"
+                 "${BIN_DIR}/../../library/talipot-python/bindings/talipot-gui/talipotgui_module"
+                 "${BIN_DIR}/../../library/talipot-python/modules"
                  "${SRC_DIR}")
 
 # Add the path of the sip Python module if we compile it from thirdparty as
-# the tulip modules depend on it
+# the talipot modules depend on it
 IF(NOT SYSTEM_SIP)
   SET(PYTHON_PATHS "${BIN_DIR}/../../thirdparty/sip-${SIP_VERSION}/siplib"
                    "${PYTHON_PATHS}")
@@ -46,17 +46,17 @@ ENDIF(NOT WIN32)
 
 SET(ENV{PYTHONPATH} "${PYTHON_PATHS}")
 
-SET(ENV{TULIP_BUILD_DIR} "${TULIP_BUILD_DIR}")
-SET(ENV{TULIP_SOURCE_DIR} "${TULIP_SOURCE_DIR}")
-SET(ENV{TULIP_PYTHON_PLUGINS_DIR} "${BIN_DIR}/../../library/tulip-python/bindings/tulip-core/tulip_module/tulip/plugins")
-SET(ENV{TULIPGUI_PYTHON_PLUGINS_DIR} "${BIN_DIR}/../../library/tulip-python/bindings/tulip-gui/tulipgui_module/tulipgui/plugins")
+SET(ENV{TALIPOT_BUILD_DIR} "${TALIPOT_BUILD_DIR}")
+SET(ENV{TALIPOT_SOURCE_DIR} "${TALIPOT_SOURCE_DIR}")
+SET(ENV{TALIPOT_PYTHON_PLUGINS_DIR} "${BIN_DIR}/../../library/talipot-python/bindings/talipot-core/talipot_module/talipot/plugins")
+SET(ENV{TalipotGUI_PYTHON_PLUGINS_DIR} "${BIN_DIR}/../../library/talipot-python/bindings/talipot-gui/talipotgui_module/talipotgui/plugins")
 
 # Fix an encoding issue on Mac OS
 IF(APPLE)
   SET(ENV{LC_ALL} "en_EN.UTF-8")
 ENDIF(APPLE)
 
-# Generate Tulip plugins documentation file from embedded plugins metadata
+# Generate Talipot plugins documentation file from embedded plugins metadata
 EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${BIN_DIR}/gen_plugins_doc.py WORKING_DIRECTORY ${BIN_DIR})
 
 # Everything is now set up, we can generate the documentation

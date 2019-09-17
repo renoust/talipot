@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/QtGlSceneZoomAndPanAnimator.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/Camera.h>
+#include <talipot/QtGlSceneZoomAndPanAnimator.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Camera.h>
 
 #include <QMouseEvent>
 

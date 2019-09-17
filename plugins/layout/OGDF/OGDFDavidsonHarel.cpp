@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/energybased/DavidsonHarelLayout.h>
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 /** \addtogroup layout */
 // comments below have been extracted from OGDF/src/energybased/DavidsonHarelLayout.cpp

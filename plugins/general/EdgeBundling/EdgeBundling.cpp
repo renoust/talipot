@@ -11,17 +11,17 @@
  *
  */
 
-#include <tulip/TulipException.h>
-#include <tulip/GraphTools.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/StableIterator.h>
-#include <tulip/MutableContainer.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/Rectangle.h>
-#include <tulip/SimpleTest.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/Exception.h>
+#include <talipot/GraphTools.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/StableIterator.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/Rectangle.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/ParallelTools.h>
 
 #include "EdgeBundling.h"
 #include "QuadTree.h"
@@ -315,7 +315,7 @@ bool EdgeBundling::run() {
       // workGraph is no longer needed
       graph->delSubGraph(workGraph);
     }
-  } catch (tlp::TulipException &e) {
+  } catch (tlp::Exception &e) {
     string errorMsg(e.what());
     pluginProgress->setError(errorMsg);
     return false;

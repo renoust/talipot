@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _DEPTHMETRIC_H
-#define _DEPTHMETRIC_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef DEPTH_METRIC_H
+#define DEPTH_METRIC_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
@@ -39,4 +40,4 @@ private:
   tlp::NumericProperty *edgeWeight;
 };
 
-#endif
+#endif // DEPTH_METRIC_H

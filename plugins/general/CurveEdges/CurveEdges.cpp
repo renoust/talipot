@@ -29,11 +29,11 @@
 #ifndef CURVEEDGES_H
 #define CURVEEDGES_H
 
-#include <tulip/Algorithm.h>
-#include <tulip/StringCollection.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/Algorithm.h>
+#include <talipot/StringCollection.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/ViewSettings.h>
 
 #include <climits>
 

@@ -36,10 +36,10 @@ padding: 0 3px;
 spacing: 24px;
 }
 ExpandableGroupBox::indicator:unchecked {
-image: url(:/tulip/gui/ui/right_arrow-black.png);
+image: url(:/talipot/gui/ui/right_arrow-black.png);
 }
 ExpandableGroupBox::indicator:checked {
-image: url(:/tulip/gui/ui/down_arrow-black.png);
+image: url(:/talipot/gui/ui/down_arrow-black.png);
 }
 ExpandableGroupBox {
 background-color: &quot;#FDFDFD&quot;;
@@ -61,7 +61,7 @@ ExpandableGroupBox[root = &quot;false&quot; ][expanded = &quot;true&quot; ] {
 margin-left: 1ex;
 }
 QToolButton, QComboBox {
-border-image: url(:/tulip/gui/ui/btn_26.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26.png) 4;
 border-width: 4;
 padding: 0px 6px;
 font-size: 12px;
@@ -222,7 +222,7 @@ border: 0px;
   <customwidget>
    <class>ClearableLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">tulip/ClearableLineEdit.h</header>
+   <header location="global">talipot/ClearableLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>FavoriteBox</class>

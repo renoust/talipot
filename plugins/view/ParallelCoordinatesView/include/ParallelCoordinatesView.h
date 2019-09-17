@@ -11,20 +11,20 @@
  *
  */
 
-#ifndef Tulip_PARALLELVIEW_H
-#define Tulip_PARALLELVIEW_H
+#ifndef PARALLEL_COORDINATES_VIEW_H
+#define PARALLEL_COORDINATES_VIEW_H
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <tulip/OpenGlIncludes.h>
+#include <talipot/OpenGlIncludes.h>
 
 #include "ParallelCoordinatesDrawing.h"
 #include "ParallelCoordinatesGraphProxy.h"
 
 #include "../../utils/PluginNames.h"
 
-#include <tulip/GlMainView.h>
-#include <tulip/Graph.h>
+#include <talipot/GlMainView.h>
+#include <talipot/Graph.h>
 
 class QMenu;
 
@@ -39,7 +39,7 @@ class QuantitativeParallelAxis;
 
 /*@{*/
 /** \file
- *  \brief  Tulip Parallel Coordinates view
+ *  \brief Parallel Coordinates view
 
  * This view plugin allows to create a parallel coordinates visualization
  * from graph elements.
@@ -244,4 +244,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif // Tulip_PARALLELVIEW_H
+#endif // PARALLEL_COORDINATES_VIEW_H

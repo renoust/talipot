@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef TIMEDECREASINGFUNCTIONSIMPLE_H_
-#define TIMEDECREASINGFUNCTIONSIMPLE_H_
+#ifndef TIME_DECREASING_FUNCTION_SIMPLE_H
+#define TIME_DECREASING_FUNCTION_SIMPLE_H
 
 #include "TimeDecreasingFunction.h"
 
@@ -35,4 +35,4 @@ protected:
   double initialCoef;
 };
 
-#endif /* TIMEDECREASINGFUNCTIONSIMPLE_H_ */
+#endif // TIME_DECREASING_FUNCTION_SIMPLE_H

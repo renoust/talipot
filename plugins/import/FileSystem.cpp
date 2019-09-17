@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/ViewSettings.h>
 
 #include <QStack>
 #include <QPair>

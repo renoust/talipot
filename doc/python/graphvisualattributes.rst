@@ -1,10 +1,10 @@
-.. py:currentmodule:: tulip
+.. py:currentmodule:: talipot
 
 Modifying the visual attributes of a graph
 ==========================================
 
-A Tulip graph contains a lot of visual attributes that can be freely
-modified from Python. These attributes are used by the Tulip software
+A Talipot graph contains a lot of visual attributes that can be freely
+modified from Python. These attributes are used by the Talipot software
 when rendering the graph. Below is an exhaustive list of these attributes :
 
     * nodes and edges layout
@@ -64,7 +64,7 @@ The sample code below rotates of 90 degrees the nodes whose degree is greater th
 Selection
 ----------
 
-Elements of the graph can be marked in a selected state. These elements will be highlighted in the Tulip viusalizations.
+Elements of the graph can be marked in a selected state. These elements will be highlighted in the Talipot viusalizations.
 The current selection is stored in the **"viewSelection"** graph property (of type :class:`tlp.BooleanProperty`).
 
 The sample code below select nodes whose degree is greater than 3 and the edges between the selected nodes::
@@ -210,7 +210,7 @@ Shapes of graph elements
 -------------------------
 
 The shape of nodes and edges can be modified through the use of the **"viewShape"** graph property (of type :class:`tlp.IntegerProperty`).
-Some predefined constants are available for code readability (shapes are defined by integers in Tulip).
+Some predefined constants are available for code readability (shapes are defined by integers in Talipot).
 
 Below is the exhaustive list of the constants for nodes shapes:
 
@@ -235,7 +235,7 @@ Below is the exhaustive list of the constants for nodes shapes:
     * :const:`tlp.NodeShape.Star`
     * :const:`tlp.NodeShape.Triangle`
     * :const:`tlp.NodeShape.Window`
-    * :const:`tlp.NodeShape.Icon` (see :class:`tlp.TulipFontAwesome` and :class:`tlp.TulipMaterialDesignIcons`)
+    * :const:`tlp.NodeShape.Icon` (see :class:`tlp.FontAwesome` and :class:`tlp.MaterialDesignIcons`)
 
 Below is the exhaustive list of the constants for edges shapes:
 
@@ -264,7 +264,7 @@ Constants are also available for code readability, here is the exhaustive list :
     * :const:`tlp.EdgeExtremityShape.Sphere`
     * :const:`tlp.EdgeExtremityShape.Square`
     * :const:`tlp.EdgeExtremityShape.Star`
-    * :const:`tlp.EdgeExtremityShape.FontAwesomeIcon` (see :class:`tlp.TulipFontAwesome`)
+    * :const:`tlp.EdgeExtremityShape.FontAwesomeIcon` (see :class:`tlp.FontAwesome`)
 
 The sample code below set the shape of the selected nodes to a circle::
 
@@ -315,7 +315,7 @@ The width is defined by a floating point value.
 Applying a texture to nodes or edges
 -------------------------------------
 
-A texture can be applied when Tulip renders the graph elements. Setting a texture to graph elements can be done through
+A texture can be applied when Talipot renders the graph elements. Setting a texture to graph elements can be done through
 the **"viewTexture"** graph property (of type :class:`tlp.StringProperty`).
 A texture is described by a path to an image file. Note that the image must have the same width and height for
 correct texture loading.

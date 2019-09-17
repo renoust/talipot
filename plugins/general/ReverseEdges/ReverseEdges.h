@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef REVERSEEDGES_H
-#define REVERSEEDGES_H
+#ifndef REVERSE_EDGES_H
+#define REVERSE_EDGES_H
 
-#include <tulip/Algorithm.h>
+#include <talipot/Algorithm.h>
 
 class ReverseEdges : public tlp::Algorithm {
 public:
@@ -28,4 +28,4 @@ public:
   bool run() override;
 };
 
-#endif // REVERSEEDGES_H
+#endif // REVERSE_EDGES_H

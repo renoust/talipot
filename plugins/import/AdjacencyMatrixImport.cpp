@@ -16,8 +16,8 @@
 #include <sstream>
 #include <vector>
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/TlpTools.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/TlpTools.h>
 
 using namespace std;
 using namespace tlp;
@@ -106,7 +106,7 @@ Defines a graph with 3 nodes and 3 edges, the edge between A and C is named E an
   vector<node> nodes;
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_adj_mat.png";
+    return ":/talipot/graphperspective/icons/32/import_adj_mat.png";
   }
 
   bool formatError(const char *s, int curLine) {

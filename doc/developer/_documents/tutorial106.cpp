@@ -1,7 +1,7 @@
-#include <tulip/TlpQtTools.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/TulipProject.h>
-#include <tulip/MouseInteractors.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Project.h>
+#include <talipot/MouseInteractors.h>
 #include <QApplication>
 #include <qstring.h>
 #include <iostream>
@@ -9,8 +9,8 @@ using namespace tlp;
 
 int main(int argc, char **argv) {
   /*
-  A QApplication must always be declared at the beginning of the main function in order for Tulip to work.
-  This must be done before calling tlp::initTulipSoftware()
+  A QApplication must always be declared at the beginning of the main function in order for Talipot to work.
+  This must be done before calling tlp::initTalipotSoftware()
   */
   QApplication app(argc, argv);
   /*
@@ -18,15 +18,15 @@ int main(int argc, char **argv) {
   operating system
   This method should always be called if you intend to use plugins in your application.
   */
-  tlp::initTulipSoftware();
+  tlp::initTalipotSoftware();
   /*
   Load the file passed as first argument into a graph.
-  This method will select the default Tulip algorithm plugin (TLP)
+  This method will select the default Talipot algorithm plugin (TLP)
   */
   // Graph* g = tlp::loadGraph(argv[1]);
   Graph *g = newGraph();
 
-  TulipProject *_project = TulipProject::openProject(QString::fromLatin1(argv[1]));
+  Project *_project = Project::openProject(QString::fromLatin1(argv[1]));
 
   // std::cout << QString::fromLatin1(argv[1]) << std::endl;
 

@@ -10,23 +10,24 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <GL/glew.h>
 
-#include <tulip/OpenGlConfigManager.h>
+#include <talipot/OpenGlConfigManager.h>
 
 #include <iostream>
 
-#include <tulip/StringProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/Graph.h>
-#include <tulip/Glyph.h>
-#include <tulip/EdgeExtremityGlyph.h>
-#include <tulip/GlTools.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/GlSphere.h>
+#include <talipot/StringProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/Graph.h>
+#include <talipot/Glyph.h>
+#include <talipot/EdgeExtremityGlyph.h>
+#include <talipot/GlTools.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/GlSphere.h>
 
 using namespace std;
 using namespace tlp;

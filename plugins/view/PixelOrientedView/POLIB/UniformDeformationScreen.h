@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef UNIFORMDEFORMATIONSCREEN_H
-#define UNIFORMDEFORMATIONSCREEN_H
+#ifndef UNIFORM_DEFORMATION_SCREEN_H
+#define UNIFORM_DEFORMATION_SCREEN_H
 
-#include <tulip/Matrix.h>
+#include <talipot/Matrix.h>
 #include "ScreenFunction.h"
 
 namespace pocore {
@@ -39,4 +39,4 @@ private:
   tlp::Matrix<double, 3> _invMat;
 };
 } // namespace pocore
-#endif // UNIFORMDEFORMATIONSCREEN_H
+#endif // UNIFORM_DEFORMATION_SCREEN_H

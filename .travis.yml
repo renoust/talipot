@@ -1,16 +1,16 @@
-# Tulip continuous integration on Linux and Mac OS platforms through TravisCI.
+# Talipot continuous integration on Linux and Mac OS platforms through TravisCI.
 # Two type of builds are performed by os:
-#  - a "legacy" Tulip build using :
+#  - a "legacy" Talipot build using :
 #     * default system compiler (GCC 5.4 on Linux, clang from Xcode7.3 on Mac OS)
 #     * Qt 5.5 on Linux, Qt 5.9 on MacOS
 #     * Python 2.7
-#  - a "modern" Tulip build using:
+#  - a "modern" Talipot build using:
 #     * recent compiler (GCC 8.1 on Linux, clang 7.0 from MacPorts or Homebrew on Mac OS)
 #     * Qt 5.11 on Linux, Qt 5.12 on MacOS
 #     * Python 3.7 on Linux, Python 2.7 on MacOS
-# As TravisCI limits build job times to 45 minutes, Tulip is built in two successive stages
+# As TravisCI limits build job times to 45 minutes, Talipot is built in two successive stages
 # to avoid timeouts (which happened often with MacOs builds):
-#  - a core build with no Tulip OpenGL and Qt components
+#  - a core build with no Talipot OpenGL and Qt components
 #  - a complete build including OpenGL and Qt components
 # The trick is to use travis build cache and ccache to cache already compiled object
 # files between stages and thus not exceeding Travis build timeout limits
@@ -18,25 +18,20 @@
 # inform travis that we are building a cpp project
 language: cpp
 
-# send build status notifications to tulipdev mailing list
-notifications:
-  email:
-    - tulipdev@labri.fr
-
 # define build jobs
 jobs:
   include:
   #==============================================================================================================================================================
-    # Tulip core build stage on Linux
-    - stage: Tulip core build (Linux)
-    # legacy Tulip core build on Linux
+    # Talipot core build stage on Linux
+    - stage: Talipot core build (Linux)
+    # legacy Talipot core build on Linux
       os: linux
       dist: xenial
       compiler: gcc
       cache: ccache
       addons:
         apt:
-          # install Tulip build dependencies
+          # install Talipot build dependencies
           packages:
             - cmake
             - ccache
@@ -54,16 +49,16 @@ jobs:
       script:
         # create build directory
         - mkdir build && cd build
-        # configure Tulip core build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON -DTULIP_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot core build with cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # modern Tulip core build on Linux
+    # modern Talipot core build on Linux
     -
       os: linux
       dist: xenial
@@ -75,7 +70,7 @@ jobs:
           sources:
             - ubuntu-toolchain-r-test
             - deadsnakes
-          # install Tulip build dependencies
+          # install Talipot build dependencies
           packages:
             - g++-8
             - cmake
@@ -98,18 +93,18 @@ jobs:
       script:
         # create build directory
         - mkdir build && cd build
-        # configure Tulip core build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON -DTULIP_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot core build with cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4  || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
   #==============================================================================================================================================================
-    # Tulip complete build stage on Linux
-    - stage: Tulip complete build (Linux)
-      # legacy Tulip complete build on Linux, we also build the documentation in this one
+    # Talipot complete build stage on Linux
+    - stage: Talipot complete build (Linux)
+      # legacy Talipot complete build on Linux, we also build the documentation in this one
       os: linux
       dist: xenial
       compiler: gcc
@@ -118,7 +113,7 @@ jobs:
         - xvfb
       addons:
         apt:
-          # install Tulip build dependencies
+          # install Talipot build dependencies
           packages:
             - cmake
             - ccache
@@ -148,16 +143,16 @@ jobs:
       script:
         # create build directory
         - mkdir build && cd build
-        # configure Tulip complete build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=ON -DTULIP_USE_CCACHE=ON -DTULIP_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot complete build with cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_BUILD_DOC=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # modern Tulip complete build on Linux
+    # modern Talipot complete build on Linux
     -
       os: linux
       dist: xenial
@@ -173,7 +168,7 @@ jobs:
             - deadsnakes
             - sourceline: 'deb http://archive.neon.kde.org/user/ xenial main'
               key_url: 'http://archive.neon.kde.org/public.key'
-          # install Tulip build dependencies
+          # install Talipot build dependencies
           packages:
             - g++-8
             - cmake
@@ -204,18 +199,18 @@ jobs:
       script:
         # create build directoty
         - mkdir build && cd build
-        # configure Tulip complete build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTULIP_BUILD_TESTS=ON -DTULIP_BUILD_DOC=OFF -DTULIP_USE_CCACHE=ON -DTULIP_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot complete build using cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_BUILD_DOC=OFF -DTALIPOT_USE_CCACHE=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4  || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
   #==============================================================================================================================================================
-    # Tulip AppImage build on CentOS
-    - stage: Tulip AppImage build (CentOS)
-      # Tulip x86_64 AppImage build on CentOS 6
+    # Talipot AppImage build on CentOS
+    - stage: Talipot AppImage build (CentOS)
+      # Talipot x86_64 AppImage build on CentOS 6
       os: linux
       dist: trusty
       cache:
@@ -243,12 +238,12 @@ jobs:
         - sleep 3
 
       script:
-        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/tulip:rw -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ${DOCKER_IMAGE} /bin/bash -c "bash -xe /tulip/bundlers/linux/tulip_appimage_centos6_build.sh CCACHE RUN_TESTS"
+        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ${DOCKER_IMAGE} /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE RUN_TESTS"
 
   #==============================================================================================================================================================
-    # Tulip core build stage on Mac OS
-    - stage: Tulip core build (Mac OS)
-    # Tulip core build on Mac OS (MacPorts)
+    # Talipot core build stage on Mac OS
+    - stage: Talipot core build (Mac OS)
+    # Talipot core build on Mac OS (MacPorts)
       os: osx
       osx_image: xcode10.2
       compiler: clang
@@ -256,12 +251,12 @@ jobs:
       install:
         # set columns in terminal, required for curl to work correctly:
         - export COLUMNS=80
-        # install MacPorts in order to easily retrieve Tulip dependencies
+        # install MacPorts in order to easily retrieve Talipot dependencies
         - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
         - chmod +x ./macports-ci
         - travis_wait ./macports-ci install
         - export PATH=/opt/local/bin:$PATH
-        # install Tulip core build dependencies
+        # install Talipot core build dependencies
         - sudo port -N install cmake
         - sudo port -N install clang-8.0
         - sudo port -N install ccache
@@ -276,16 +271,16 @@ jobs:
       script:
         # create build directory
         - mkdir build && cd build
-        # configure Tulip core build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-8.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-8.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DTULIP_BUILD_CORE_ONLY=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot core build using cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-8.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-8.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Tulip core build on Mac OS (Homebrew)
+    # Talipot core build on Mac OS (Homebrew)
     -
       os: osx
       osx_image: xcode10.2
@@ -293,7 +288,7 @@ jobs:
       cache: ccache
       addons:
         homebrew:
-          # install Tulip core build dependencies
+          # install Talipot core build dependencies
           packages:
             - ccache
             - cmake
@@ -311,18 +306,18 @@ jobs:
         - sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
         # create build directory
         - mkdir build && cd build
-        # configure Tulip core build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTULIP_BUILD_CORE_ONLY=ON -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot core build using cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
 
   #==============================================================================================================================================================
-    # Tulip complete build stage on Mac OS
-    - stage: Tulip complete build (Mac OS)
-    # Tulip complete build on Mac OS (MacPorts)
+    # Talipot complete build stage on Mac OS
+    - stage: Talipot complete build (Mac OS)
+    # Talipot complete build on Mac OS (MacPorts)
       os: osx
       osx_image: xcode10.2
       compiler: clang
@@ -330,12 +325,12 @@ jobs:
       install:
         # set columns in terminal, required for curl to work correctly:
         - export COLUMNS=80
-        # install MacPorts in order to easily retrieve Tulip dependencies
+        # install MacPorts in order to easily retrieve Talipot dependencies
         - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
         - chmod +x ./macports-ci
         - travis_wait ./macports-ci install
         - export PATH=/opt/local/bin:$PATH
-        # install Tulip complete build dependencies
+        # install Talipot complete build dependencies
         - sudo port -N install cmake
         - sudo port -N install clang-8.0
         - sudo port -N install ccache
@@ -361,18 +356,18 @@ jobs:
       script:
         # create build directory
         - mkdir build && cd build
-        # configure Tulip complete build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-8.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-8.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON -DZLIB_INCLUDE_DIR=/opt/local/include -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib -DPNG_INCLUDE_DIR=/opt/local/include -DPNG_LIBRARY_RELEASE=/opt/local/lib/libpng.dylib -DJPEG_INCLUDE_DIR=/opt/local/include -DJPEG_LIBRARY=/opt/local/lib/libjpeg.dylib -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
-        # compile Tulip using ninja for faster builds
+        # configure Talipot complete build using cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-8.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-8.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DZLIB_INCLUDE_DIR=/opt/local/include -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib -DPNG_INCLUDE_DIR=/opt/local/include -DPNG_LIBRARY_RELEASE=/opt/local/lib/libpng.dylib -DJPEG_INCLUDE_DIR=/opt/local/include -DJPEG_LIBRARY=/opt/local/lib/libjpeg.dylib -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
+        # compile Talipot using ninja for faster builds
         - ninja -j4
         - ninja -j4 install
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests
-        # build Tulip bundle
+        # build Talipot bundle
         - ninja bundle
 
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Tulip complete build on Mac OS (Homebrew)
+    # Talipot complete build on Mac OS (Homebrew)
     -
       os: osx
       osx_image: xcode10.2
@@ -380,7 +375,7 @@ jobs:
       cache: ccache
       addons:
         homebrew:
-          # install Tulip complete build dependencies
+          # install Talipot complete build dependencies
           packages:
             - ccache
             - cmake
@@ -414,10 +409,10 @@ jobs:
         - sudo ln -s /Applications/Xcode.app /Applications/Xcode-beta.app
         # create build directory
         - mkdir build && cd build
-        # configure Tulip build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DSPHINX_EXECUTABLE=$HOME/Library/Python/2.7/bin/sphinx-build -DTULIP_BUILD_TESTS=ON -DTULIP_USE_CCACHE=ON || travis_terminate 1
-        # compile Tulip using ninja for faster builds
+        # configure Talipot build using cmake
+        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DSPHINX_EXECUTABLE=$HOME/Library/Python/2.7/bin/sphinx-build -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
+        # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
-        # run Tulip unit tests
+        # run Talipot unit tests
         - ninja runTests

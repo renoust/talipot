@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/energybased/multilevelmixer/MMMExampleNiceLayout.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 // comments below have been extracted from
 // OGDF/src/energybased/multilevelmixer/MMEExampleNiceLayout.cpp

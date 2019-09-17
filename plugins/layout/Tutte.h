@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _TutteLAYOUT_H
-#define _TutteLAYOUT_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef TUTTE_H
+#define TUTTE_H
+
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup layout */
 
@@ -41,4 +42,4 @@ public:
   bool check(std::string &) override;
 };
 
-#endif
+#endif // TUTTE_H

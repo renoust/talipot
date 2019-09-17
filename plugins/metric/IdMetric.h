@@ -11,22 +11,22 @@
  *
  */
 
-#ifndef _IDMETRIC_H
-#define _IDMETRIC_H
+#ifndef ID_METRIC_H
+#define ID_METRIC_H
 
-#include <tulip/DoubleProperty.h>
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
-/** This plugins assigns id to nodes/edges or both. The ids are those used internally by Tulip.
+/** This plugins assigns id to nodes/edges or both. The ids are those used internally by Talipot.
  *
  */
 class IdMetric : public tlp::DoubleAlgorithm {
 public:
-  PLUGININFORMATION("Id", "David Auber", "06/04/2000", "Assigns their Tulip id to nodes and edges.",
+  PLUGININFORMATION("Id", "David Auber", "06/04/2000", "Assigns their id to nodes and edges.",
                     "1.1", "Misc")
   IdMetric(const tlp::PluginContext *context);
   bool run() override;
 };
 
-#endif
+#endif // ID_METRIC_H

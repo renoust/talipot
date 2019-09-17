@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef GRAPHHIERARCHIESEDITOR_H
-#define GRAPHHIERARCHIESEDITOR_H
 
-#include <tulip/TreeViewComboBox.h>
+#ifndef GRAPH_HIERARCHIES_EDITOR_H
+#define GRAPH_HIERARCHIES_EDITOR_H
+
+#include <talipot/TreeViewComboBox.h>
 
 #include <QWidget>
 #include <QModelIndex>
@@ -94,4 +95,4 @@ protected slots:
   void toggleSynchronization(bool);
 };
 
-#endif // GRAPHHIERARCHIESEDITOR_H
+#endif // GRAPH_HIERARCHIES_EDITOR_H

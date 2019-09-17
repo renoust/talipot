@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/DrawingTools.h>
-#include <tulip/StringCollection.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/StringCollection.h>
 
 #include "ConnectedComponentPacking.h"
 #include "rectanglePackingFonctions.h"

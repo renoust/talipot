@@ -11,18 +11,18 @@
  *
  */
 
-#ifndef PIXELORIENTEDDRAWING_H_
-#define PIXELORIENTEDDRAWING_H_
+#ifndef PIXEL_ORIENTED_OVERVIEW_H
+#define PIXEL_ORIENTED_OVERVIEW_H
 
-#include "POLIB/TulipGraphDimension.h"
+#include "POLIB/GraphDimension.h"
 #include "POLIB/PixelOrientedMediator.h"
 
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/Graph.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlLabel.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/Graph.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlLabel.h>
 
 #include <string>
 
@@ -34,14 +34,14 @@ class LayoutProperty;
 class PixelOrientedOverview : public GlComposite {
 
 public:
-  PixelOrientedOverview(pocore::TulipGraphDimension *data,
+  PixelOrientedOverview(pocore::GraphDimension *data,
                         pocore::PixelOrientedMediator *pixelOrientedMediator, Coord blCornerPos,
                         const std::string &dimName, const Color &backgroundColor,
                         const Color &textColor);
 
   ~PixelOrientedOverview() override;
 
-  pocore::TulipGraphDimension *getData() const {
+  pocore::GraphDimension *getData() const {
     return data;
   }
   std::string getDimensionName() const {
@@ -76,7 +76,7 @@ private:
     boundingBox = glBBSV.getBoundingBox();
   }
 
-  pocore::TulipGraphDimension *data;
+  pocore::GraphDimension *data;
   pocore::PixelOrientedMediator *pixelOrientedMediator;
 
   GlGraphComposite *graphComposite;
@@ -101,4 +101,4 @@ private:
   Color backgroundColor, textColor;
 };
 } // namespace tlp
-#endif /* PIXELORIENTEDDRAWING_H_ */
+#endif // PIXEL_ORIENTED_OVERVIEW_H

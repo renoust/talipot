@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef ZOOMANDPANHIGHLIGHTER_H_
-#define ZOOMANDPANHIGHLIGHTER_H_
+#ifndef ZOOM_AND_PAN_HIGHLIGHTER_H
+#define ZOOM_AND_PAN_HIGHLIGHTER_H
 
 #include "PathHighlighter.h"
 
@@ -30,4 +30,4 @@ public:
   QWidget *getConfigurationWidget() override;
 };
 } // namespace tlp
-#endif /* ZOOMANDPANHIGHLIGHTER_H_ */
+#endif // ZOOM_AND_PAN_HIGHLIGHTER_H

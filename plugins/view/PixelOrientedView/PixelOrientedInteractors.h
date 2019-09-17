@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PIXELORIENTEDVIEWINTERACTORS_H_
-#define PIXELORIENTEDVIEWINTERACTORS_H_
+#ifndef PIXEL_ORIENTED_INTERACTORS_H
+#define PIXEL_ORIENTED_INTERACTORS_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include "../../utils/PluginNames.h"
 
 namespace tlp {
@@ -40,4 +40,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* PIXELORIENTEDVIEWINTERACTORS_H_ */
+#endif // PIXEL_ORIENTED_INTERACTORS_H

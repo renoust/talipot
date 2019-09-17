@@ -11,16 +11,16 @@
  *
  */
 
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlLine.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/GraphProperty.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlLine.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/GraphProperty.h>
+#include <talipot/ViewSettings.h>
 
 #include <QTime>
 #include <QGraphicsView>

@@ -11,10 +11,10 @@
  *
  */
 
-#include <tulip/GlRect.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/QtGlSceneZoomAndPanAnimator.h>
+#include <talipot/GlRect.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/QtGlSceneZoomAndPanAnimator.h>
 
 #include "PixelOrientedViewNavigator.h"
 

@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef CRASHHANDLING_H_
-#define CRASHHANDLING_H_
+#ifndef CRASH_HANDLING_H
+#define CRASH_HANDLING_H
 
 #include <string>
 
@@ -39,4 +39,4 @@ public:
 #endif
 };
 
-#endif /* CRASHHANDLING_H_ */
+#endif // CRASH_HANDLING_H

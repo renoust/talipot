@@ -23,16 +23,16 @@
 #include <QMessageBox>
 #include <QTimer>
 
-#include <tulip/Perspective.h>
-#include <tulip/GraphModel.h>
-#include <tulip/TulipItemEditorCreators.h>
-#include <tulip/CopyPropertyDialog.h>
-#include <tulip/PropertyCreationDialog.h>
-#include <tulip/RenamePropertyDialog.h>
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/StringProperty.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/TulipMetaTypes.h>
+#include <talipot/Perspective.h>
+#include <talipot/GraphModel.h>
+#include <talipot/ItemEditorCreators.h>
+#include <talipot/CopyPropertyDialog.h>
+#include <talipot/PropertyCreationDialog.h>
+#include <talipot/RenamePropertyDialog.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/StringProperty.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/MetaTypes.h>
 
 Q_DECLARE_METATYPE(Qt::CheckState)
 
@@ -40,7 +40,7 @@ using namespace tlp;
 
 PropertiesEditor::PropertiesEditor(QWidget *parent)
     : QWidget(parent), _ui(new Ui::PropertiesEditor), _contextProperty(nullptr), _graph(nullptr),
-      _delegate(new tlp::TulipItemDelegate), _sourceModel(nullptr), filteringProperties(false),
+      _delegate(new tlp::ItemDelegate), _sourceModel(nullptr), filteringProperties(false),
       editorParent(parent), _caseSensitiveSearch(Qt::CaseSensitive) {
   _ui->setupUi(this);
   connect(_ui->newButton, SIGNAL(clicked()), this, SLOT(newProperty()));
@@ -93,11 +93,11 @@ QLineEdit *PropertiesEditor::getPropertiesFilterEdit() {
 
 void PropertiesEditor::showCustomContextMenu(const QPoint &p) {
   _contextProperty =
-      _ui->tableView->indexAt(p).data(TulipModel::PropertyRole).value<PropertyInterface *>();
+      _ui->tableView->indexAt(p).data(Model::PropertyRole).value<PropertyInterface *>();
   _contextPropertyList.clear();
 
   for (const QModelIndex &sidx : _ui->tableView->selectionModel()->selectedRows()) {
-    _contextPropertyList += sidx.data(TulipModel::PropertyRole).value<PropertyInterface *>();
+    _contextPropertyList += sidx.data(Model::PropertyRole).value<PropertyInterface *>();
   }
 
   if (_contextProperty == nullptr)
@@ -150,7 +150,7 @@ void PropertiesEditor::showCustomContextMenu(const QPoint &p) {
     connect(action, SIGNAL(triggered()), this, SLOT(setPropsNotVisibleExcept()));
     menu.addSeparator();
 
-    action = menu.addAction(QIcon(":/tulip/gui/icons/64/list-add.png"), "Add new property");
+    action = menu.addAction(QIcon(":/talipot/gui/icons/64/list-add.png"), "Add new property");
     action->setToolTip("Display a dialog to create a new property belonging to the current graph");
     connect(action, SIGNAL(triggered()), this, SLOT(newProperty()));
     connect(menu.addAction("Copy"), SIGNAL(triggered()), this, SLOT(copyProperty()));
@@ -335,7 +335,7 @@ void PropertiesEditor::displayedPropertiesInserted(const QModelIndex &parent, in
   for (; start <= end; ++start) {
     QModelIndex sIndex = model->mapToSource(model->index(start, 0, parent));
     PropertyInterface *pi =
-        _sourceModel->data(sIndex, TulipModel::PropertyRole).value<PropertyInterface *>();
+        _sourceModel->data(sIndex, Model::PropertyRole).value<PropertyInterface *>();
 
     if (filteringProperties == false)
       _sourceModel->setData(sIndex, Qt::Checked, Qt::CheckStateRole);
@@ -352,8 +352,7 @@ void PropertiesEditor::displayedPropertiesRemoved(const QModelIndex &parent, int
 
   for (; start <= end; ++start) {
     PropertyInterface *pi =
-        _sourceModel
-            ->data(model->mapToSource(model->index(start, 0, parent)), TulipModel::PropertyRole)
+        _sourceModel->data(model->mapToSource(model->index(start, 0, parent)), Model::PropertyRole)
             .value<PropertyInterface *>();
     emit propertyVisibilityChanged(pi, false);
   }
@@ -361,8 +360,8 @@ void PropertiesEditor::displayedPropertiesRemoved(const QModelIndex &parent, int
 
 bool PropertiesEditor::setAllValues(PropertyInterface *prop, bool nodes, bool selectedOnly,
                                     bool graphOnly) {
-  QVariant val = TulipItemDelegate::showEditorDialog(
-      nodes ? NODE : EDGE, prop, _graph, static_cast<TulipItemDelegate *>(_delegate), editorParent);
+  QVariant val = ItemDelegate::showEditorDialog(
+      nodes ? NODE : EDGE, prop, _graph, static_cast<ItemDelegate *>(_delegate), editorParent);
 
   // Check if edition has been cancelled
   if (!val.isValid())
@@ -395,8 +394,8 @@ bool PropertiesEditor::setAllValues(PropertyInterface *prop, bool nodes, bool se
 }
 
 void PropertiesEditor::setDefaultValue(tlp::PropertyInterface *prop, bool nodes) {
-  QVariant val = TulipItemDelegate::showEditorDialog(
-      nodes ? NODE : EDGE, prop, _graph, static_cast<TulipItemDelegate *>(_delegate), editorParent);
+  QVariant val = ItemDelegate::showEditorDialog(
+      nodes ? NODE : EDGE, prop, _graph, static_cast<ItemDelegate *>(_delegate), editorParent);
 
   // Check if edition has been cancelled
   if (!val.isValid())
@@ -493,7 +492,7 @@ void PropertiesEditor::toLabels(PropertyInterface *prop, bool nodes, bool edges,
 
 void PropertiesEditor::checkStateChanged(QModelIndex index, Qt::CheckState state) {
   PropertyInterface *pi =
-      _sourceModel->data(index, TulipModel::PropertyRole).value<PropertyInterface *>();
+      _sourceModel->data(index, Model::PropertyRole).value<PropertyInterface *>();
   emit propertyVisibilityChanged(pi, state == Qt::Checked);
 }
 

@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef SCATTERPLOTQUICKACCESSBAR_H
-#define SCATTERPLOTQUICKACCESSBAR_H
+#ifndef SCATTER_PLOT_QUICK_ACCESS_BAR_H
+#define SCATTER_PLOT_QUICK_ACCESS_BAR_H
 
-#include <tulip/QuickAccessBar.h>
+#include <talipot/QuickAccessBar.h>
 
 namespace tlp {
 
@@ -36,4 +36,4 @@ public slots:
   void setLabelsScaled(bool) override;
 };
 } // namespace tlp
-#endif // SCATTERPLOTQUICKACCESSBAR_H
+#endif // SCATTER_PLOT_QUICK_ACCESS_BAR_H

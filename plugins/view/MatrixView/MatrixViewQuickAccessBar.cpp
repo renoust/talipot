@@ -14,8 +14,8 @@
 #include "MatrixViewQuickAccessBar.h"
 #include "MatrixViewConfigurationWidget.h"
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/ColorButton.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/ColorButton.h>
 
 #include <QPushButton>
 
@@ -35,8 +35,8 @@ MatrixViewQuickAccessBar::MatrixViewQuickAccessBar(MatrixViewConfigurationWidget
 
 void MatrixViewQuickAccessBar::setEdgesVisible(bool visible) {
   _optionsWidget->setDisplayEdges(visible);
-  showEdgesButton()->setIcon((visible ? QIcon(":/tulip/gui/icons/20/edges_enabled.png")
-                                      : QIcon(":/tulip/gui/icons/20/edges_disabled.png")));
+  showEdgesButton()->setIcon((visible ? QIcon(":/talipot/gui/icons/20/edges_enabled.png")
+                                      : QIcon(":/talipot/gui/icons/20/edges_disabled.png")));
   emit settingsChanged();
 }
 
@@ -44,14 +44,14 @@ void MatrixViewQuickAccessBar::reset() {
   QuickAccessBarImpl::reset();
   showEdgesButton()->setChecked(_optionsWidget->displayGraphEdges());
   showEdgesButton()->setIcon((_optionsWidget->displayGraphEdges()
-                                  ? QIcon(":/tulip/gui/icons/20/edges_enabled.png")
-                                  : QIcon(":/tulip/gui/icons/20/edges_disabled.png")));
-  backgroundColorButton()->setTulipColor(_optionsWidget->getBackgroundColor());
+                                  ? QIcon(":/talipot/gui/icons/20/edges_enabled.png")
+                                  : QIcon(":/talipot/gui/icons/20/edges_disabled.png")));
+  backgroundColorButton()->setColor(_optionsWidget->getBackgroundColor());
   showColorInterpolation()->setChecked(_optionsWidget->isEdgeColorInterpolation());
   showColorInterpolation()->setIcon(
       (_optionsWidget->isEdgeColorInterpolation()
-           ? QIcon(":/tulip/gui/icons/20/color_interpolation_enabled.png")
-           : QIcon(":/tulip/gui/icons/20/color_interpolation_disabled.png")));
+           ? QIcon(":/talipot/gui/icons/20/color_interpolation_enabled.png")
+           : QIcon(":/talipot/gui/icons/20/color_interpolation_disabled.png")));
 }
 
 void MatrixViewQuickAccessBar::setBackgroundColor(const QColor &col) {
@@ -62,8 +62,8 @@ void MatrixViewQuickAccessBar::setBackgroundColor(const QColor &col) {
 void MatrixViewQuickAccessBar::setColorInterpolation(bool state) {
   _optionsWidget->setEdgeColorInterpolation(state);
   showColorInterpolation()->setIcon(
-      (state ? QIcon(":/tulip/gui/icons/20/color_interpolation_enabled.png")
-             : QIcon(":/tulip/gui/icons/20/color_interpolation_disabled.png")));
+      (state ? QIcon(":/talipot/gui/icons/20/color_interpolation_enabled.png")
+             : QIcon(":/talipot/gui/icons/20/color_interpolation_disabled.png")));
   emit settingsChanged();
 }
 } // namespace tlp

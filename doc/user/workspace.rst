@@ -4,7 +4,7 @@
 The Workspace in Detail
 ***********************
 
-As it has been seen in :ref:`gui`, the workspace is where all the visualization views, or panels, take place. 
+As it has been seen in :ref:`gui`, the workspace is where all the visualization views, or panels, take place.
 
 
 .. _workspace_panel:
@@ -21,7 +21,7 @@ Manage the panels
 .. |icon_link| image:: _images/i_link.png
 .. |icon_unlink| image:: _images/i_unlink.png
 
-When working on Tulip, you will need several panels to see all the information you need. In order to easily compare or sort your results, you can find at the bottom of the workspace a toolbar containing three groups of buttons :
+When working on Talipot, you will need several panels to see all the information you need. In order to easily compare or sort your results, you can find at the bottom of the workspace a toolbar containing three groups of buttons :
 
 * |icon_workspace_macros|: here, only the first button, *Expose*, requires our attention. Clicking on it allows us to see icons representing every panel currently open.
 
@@ -47,7 +47,7 @@ In the title bar of a workspace panel, you will find different buttons:
 
 * |icon_link|: When this icon is displayed, it indicates that the selection of the current graph in this workspace panel, is synchronized with the selection of the active graph in the Graphs panel. This means that when selecting a graph in the Graphs panel, it will be automatically the current one in this workspace panel if it is the active panel. Clicking on the button displaying this icon will disable the synchronization.
 
-* |icon_move_panel|: When using the tiled display, you can press on this icon to move a panel and exchange its place with the one of another displayed panel. 
+* |icon_move_panel|: When using the tiled display, you can press on this icon to move a panel and exchange its place with the one of another displayed panel.
 
 * |icon_close_panel|: Clicking on this icon will delete the current panel.
 
@@ -73,7 +73,7 @@ The Node Link Diagram
 .. |l_blu| image:: _images/legend_blue.png
     :width: 32
 
-This panel gives you the main visualization view of Tulip, displaying graphs and offering you navigation tools to observe your data under different angle.
+This panel gives you the main visualization view of Talipot, displaying graphs and offering you navigation tools to observe your data under different angle.
 
 The view contains three distinctive elements colored differently in the following screen capture:
 
@@ -82,7 +82,7 @@ The view contains three distinctive elements colored differently in the followin
 
 |l_blu| the main window;
 
-|l_red| the toolbar; 
+|l_red| the toolbar;
 
 |l_yel| the scene and layer subpanels.
 
@@ -91,57 +91,57 @@ The view contains three distinctive elements colored differently in the followin
 Main window
 -----------
 
-.. |icon_wsm_map_node_color| image:: ../../library/tulip-gui/resources/icons/20/node_color_interpolation.png
+.. |icon_wsm_map_node_color| image:: ../../library/talipot-gui/resources/icons/20/node_color_interpolation.png
     :width: 20
-.. |icon_wsm_map_edge_color| image:: ../../library/tulip-gui/resources/icons/20/edge_color_interpolation.png
+.. |icon_wsm_map_edge_color| image:: ../../library/talipot-gui/resources/icons/20/edge_color_interpolation.png
     :width: 20
-.. |icon_wsm_map_node_size| image:: ../../library/tulip-gui/resources/icons/20/node_size_interpolation.png
+.. |icon_wsm_map_node_size| image:: ../../library/talipot-gui/resources/icons/20/node_size_interpolation.png
     :width: 20
-.. |icon_wsm_map_edge_size| image:: ../../library/tulip-gui/resources/icons/20/edge_size_interpolation.png
+.. |icon_wsm_map_edge_size| image:: ../../library/talipot-gui/resources/icons/20/edge_size_interpolation.png
     :width: 20
-.. |icon_wsm_screenshot| image:: ../../library/tulip-gui/resources/icons/20/camera-photo.png
+.. |icon_wsm_screenshot| image:: ../../library/talipot-gui/resources/icons/20/camera-photo.png
     :width: 20
 .. |icon_wsm_back_color| image:: _images/icon_wsm_back_color.png
     :width: 20
-.. |icon_wsm_edge_color_interpol_dis| image:: ../../library/tulip-gui/resources/icons/20/color_interpolation_disabled.png
+.. |icon_wsm_edge_color_interpol_dis| image:: ../../library/talipot-gui/resources/icons/20/color_interpolation_disabled.png
     :width: 20
-.. |icon_wsm_edge_color_interpol_en| image:: ../../library/tulip-gui/resources/icons/20/color_interpolation_enabled.png
+.. |icon_wsm_edge_color_interpol_en| image:: ../../library/talipot-gui/resources/icons/20/color_interpolation_enabled.png
     :width: 20
-.. |icon_wsm_edge_size_interpol_dis| image:: ../../library/tulip-gui/resources/icons/20/size_interpolation_disabled.png
+.. |icon_wsm_edge_size_interpol_dis| image:: ../../library/talipot-gui/resources/icons/20/size_interpolation_disabled.png
     :width: 20
-.. |icon_wsm_edge_size_interpol_en| image:: ../../library/tulip-gui/resources/icons/20/size_interpolation_enabled.png
+.. |icon_wsm_edge_size_interpol_en| image:: ../../library/talipot-gui/resources/icons/20/size_interpolation_enabled.png
     :width: 20
-.. |icon_wsm_edge_visible_dis| image:: ../../library/tulip-gui/resources/icons/20/edges_disabled.png
+.. |icon_wsm_edge_visible_dis| image:: ../../library/talipot-gui/resources/icons/20/edges_disabled.png
     :width: 20
-.. |icon_wsm_edge_visible_en| image:: ../../library/tulip-gui/resources/icons/20/edges_enabled.png
+.. |icon_wsm_edge_visible_en| image:: ../../library/talipot-gui/resources/icons/20/edges_enabled.png
     :width: 20
-.. |icon_wsm_label_visible_dis| image:: ../../library/tulip-gui/resources/icons/20/labels_disabled.png
+.. |icon_wsm_label_visible_dis| image:: ../../library/talipot-gui/resources/icons/20/labels_disabled.png
     :width: 20
-.. |icon_wsm_label_visible_en| image:: ../../library/tulip-gui/resources/icons/20/labels_enabled.png
+.. |icon_wsm_label_visible_en| image:: ../../library/talipot-gui/resources/icons/20/labels_enabled.png
     :width: 20
-.. |icon_wsm_label_size_fit_dis| image:: ../../library/tulip-gui/resources/icons/20/labels_scaled_disabled.png
+.. |icon_wsm_label_size_fit_dis| image:: ../../library/talipot-gui/resources/icons/20/labels_scaled_disabled.png
     :width: 20
-.. |icon_wsm_label_size_fit_en| image:: ../../library/tulip-gui/resources/icons/20/labels_scaled_enabled.png
+.. |icon_wsm_label_size_fit_en| image:: ../../library/talipot-gui/resources/icons/20/labels_scaled_enabled.png
     :width: 20
-.. |icon_wsm_node_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_color.png
+.. |icon_wsm_node_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_color.png
     :width: 20
-.. |icon_wsm_edge_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_edge_color.png
+.. |icon_wsm_edge_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_edge_color.png
     :width: 20
-.. |icon_wsm_node_border_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_border_color.png
+.. |icon_wsm_node_border_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_border_color.png
     :width: 20
-.. |icon_wsm_edge_border_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_edge_border_color.png
+.. |icon_wsm_edge_border_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_edge_border_color.png
     :width: 20
-.. |icon_wsm_node_shape_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_shape.png
+.. |icon_wsm_node_shape_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_shape.png
     :width: 20
-.. |icon_wsm_edge_shape_set| image:: ../../library/tulip-gui/resources/icons/20/set_edge_shape.png
+.. |icon_wsm_edge_shape_set| image:: ../../library/talipot-gui/resources/icons/20/set_edge_shape.png
     :width: 20
-.. |icon_wsm_node_size_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_size.png
+.. |icon_wsm_node_size_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_size.png
     :width: 20
-.. |icon_wsm_edge_size_set| image:: ../../library/tulip-gui/resources/icons/20/set_edge_size.png
+.. |icon_wsm_edge_size_set| image:: ../../library/talipot-gui/resources/icons/20/set_edge_size.png
     :width: 20
-.. |icon_wsm_label_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_label_color.png
+.. |icon_wsm_label_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_label_color.png
     :width: 20
-.. |icon_wsm_label_position_set| image:: ../../library/tulip-gui/resources/icons/20/set_label_position.png
+.. |icon_wsm_label_position_set| image:: ../../library/talipot-gui/resources/icons/20/set_label_position.png
     :width: 20
 .. |icon_wsm_label_font_set| image:: _images/icon_wsm_label_font_set.png
     :width: 40
@@ -209,7 +209,7 @@ This part of the panel shows the graph. From here, the user can exploit two elem
   .. image:: _images/i_workspace_rclick.png
 
 By default, the options are divided in two parts: *View* et *Augmented display*.
-	    
+
 **View**
   * *Force redraw*: update the graph displayed.
 
@@ -249,25 +249,25 @@ When right clicking on an edge or a node, a different menu appears, displaying t
 Toolbar
 -------
 
-.. |icon_wst_navigate_graph| image:: ../../library/tulip-gui/resources/icons/i_navigation.png
+.. |icon_wst_navigate_graph| image:: ../../library/talipot-gui/resources/icons/i_navigation.png
     :width: 20
-.. |icon_wst_get_edit_info| image:: ../../library/tulip-gui/resources/icons/i_select.png
+.. |icon_wst_get_edit_info| image:: ../../library/talipot-gui/resources/icons/i_select.png
     :width: 20
-.. |icon_wst_select_rect| image:: ../../library/tulip-gui/resources/icons/i_selection.png
+.. |icon_wst_select_rect| image:: ../../library/talipot-gui/resources/icons/i_selection.png
     :width: 20
-.. |icon_wst_move_reshape| image:: ../../library/tulip-gui/resources/icons/i_move.png
+.. |icon_wst_move_reshape| image:: ../../library/talipot-gui/resources/icons/i_move.png
     :width: 20
 .. |icon_wst_select_free| image:: ../../plugins/interactor/MouseLassoNodesSelector/i_lasso.png
     :width: 20
 .. |icon_wst_select_short_path| image:: ../../plugins/interactor/PathFinder/designer/pathfinder.png
     :width: 20
-.. |icon_wst_add_nodes_edges| image:: ../../library/tulip-gui/resources/icons/i_addedge.png
+.. |icon_wst_add_nodes_edges| image:: ../../library/talipot-gui/resources/icons/i_addedge.png
     :width: 20
-.. |icon_wst_edit_edge_bends| image:: ../../library/tulip-gui/resources/icons/i_bends.png
+.. |icon_wst_edit_edge_bends| image:: ../../library/talipot-gui/resources/icons/i_bends.png
     :width: 20
-.. |icon_wst_delete_nodes_edges| image:: ../../library/tulip-gui/resources/icons/i_del.png
+.. |icon_wst_delete_nodes_edges| image:: ../../library/talipot-gui/resources/icons/i_del.png
     :width: 20
-.. |icon_wst_zoom_rect| image:: ../../library/tulip-gui/resources/icons/i_zoom.png
+.. |icon_wst_zoom_rect| image:: ../../library/talipot-gui/resources/icons/i_zoom.png
     :width: 20
 .. |icon_wst_highlight_neighbor| image:: ../../plugins/interactor/NeighborhoodHighlighter/i_neighborhood_highlighter.png
     :width: 20
@@ -285,7 +285,7 @@ Before clicking:
 .. image:: _images/i_workspace_toolbar_configuration.png
 
 After clicking:
-	   
+
 .. image:: _images/i_workspace_toolbar_configuration_clicked.png
 
 The second part contains the tools icons:
@@ -342,9 +342,9 @@ The scene rendering settings can be opened by clicking on the **Scene** tab, in 
 
 * **Edges**: manage the edge display by enabling the 3D edges, showing the arrows, enabling the color or the size interpolations.
 
-* **Elements ordering**: manage the display of the graph nodes/edges and their labels by ordering them according to a given metric. 
+* **Elements ordering**: manage the display of the graph nodes/edges and their labels by ordering them according to a given metric.
 
-* **Labels**: manage the labels display by adapting their size so they can fit into their respective nodes, choosing the number of labels simultaneously displayed and setting the size limits of the used font. 
+* **Labels**: manage the labels display by adapting their size so they can fit into their respective nodes, choosing the number of labels simultaneously displayed and setting the size limits of the used font.
 
 * **Graph changing**: specify if the scene point of view must change when switching the graph to display.
 
@@ -353,7 +353,7 @@ The scene rendering settings can be opened by clicking on the **Scene** tab, in 
 Note that some of the settings mentioned above can be modified through the quick access bar or with the right click menu in the main window.
 
 The tab can be closed by clicking on the cross near the tab's name.
-	
+
 
 .. _workspace_diagram_layers:
 
@@ -378,15 +378,15 @@ The Node-Link Diagram being one of the mostly used view, it is also the one we a
 
 * *Why are some of the labels not displayed ?*
 
-  Because we want to allow people working with large graphs to use Tulip too, displaying each and every label is a poor choice.
-  The rendering becomes demanding and the visibility is not really at its best. 
-  By default, the density of labels displayed is set in order to forbid any overlap. 
+  Because we want to allow people working with large graphs to use Talipot too, displaying each and every label is a poor choice.
+  The rendering becomes demanding and the visibility is not really at its best.
+  By default, the density of labels displayed is set in order to forbid any overlap.
   This option can be customized in the Scene Rendering Settings (see :ref:`workspace_diagram_scene`).
 
 
 * *The size of the labels is not adapted. Even when I try to augment it for each node, nothing happens; what should I do?*
 
-  By default, the label size is set to a certain interval. The size appreciation in Tulip can be deceptive so we have decided to implement a dynamic font size, scaling the font according to your view. However, some people may need more control upon the label size. You will find in the Scene Rendering Settings (see :ref:`workspace_diagram_scene`) options to manage the font size interval or to use a fixed value. Checking the *Fit labels size to nodes size* option also adapts the labels to the corresponding nodes according to their size.
+  By default, the label size is set to a certain interval. The size appreciation in Talipot can be deceptive so we have decided to implement a dynamic font size, scaling the font according to your view. However, some people may need more control upon the label size. You will find in the Scene Rendering Settings (see :ref:`workspace_diagram_scene`) options to manage the font size interval or to use a fixed value. Checking the *Fit labels size to nodes size* option also adapts the labels to the corresponding nodes according to their size.
 
 * *I have set a few label for some edges but I can not see them. The label density is set to* Show all *and I am sure the labels are not hidden. How can I fix this?*
 
@@ -396,11 +396,11 @@ The Node-Link Diagram being one of the mostly used view, it is also the one we a
 
 * *I am sure my graph is oriented, but I do not see any arrow displayed, did I forget something?*
 
-  By default, the arrows are not displayed in Tulip. You can address this issue by checking the option *Show arrows* in the scene rendering settings (see :ref:`workspace_diagram_scene`). If your graph is quite large, they may also be too small, in that case, you should try to enlarge them using the |icon_wst_get_edit_info| interactor.
+  By default, the arrows are not displayed in Talipot. You can address this issue by checking the option *Show arrows* in the scene rendering settings (see :ref:`workspace_diagram_scene`). If your graph is quite large, they may also be too small, in that case, you should try to enlarge them using the |icon_wst_get_edit_info| interactor.
 
 * *I have change the source/target anchor shape/size but I still do not see them, what is the problem?*
 
-  Do not forget to check the *Show arrows* option as explained above to indicate to Tulip you want them to be displayed.
+  Do not forget to check the *Show arrows* option as explained above to indicate to Talipot you want them to be displayed.
 
 * *When I change the size of my edges, the layout stays identical, how should I proceed to modify that?*
 
@@ -416,12 +416,12 @@ The Node-Link Diagram being one of the mostly used view, it is also the one we a
 
 * *I have changed the edge color but nothing happens, what is the problem?*
 
-  Tulip provides an option to colorize the edges using an interpolation. When this option is selected, the edge color is set to match its in and out nodes colors. You can activate/deactivate this option by clicking on |icon_wsm_edge_color_interpol_en| in the quick access bar (see :ref:`workspace_diagram_main`) or by checking/unchecking the option in the Scene Rendering Settings (see :ref:`workspace_diagram_scene`).
+  Talipot provides an option to colorize the edges using an interpolation. When this option is selected, the edge color is set to match its in and out nodes colors. You can activate/deactivate this option by clicking on |icon_wsm_edge_color_interpol_en| in the quick access bar (see :ref:`workspace_diagram_main`) or by checking/unchecking the option in the Scene Rendering Settings (see :ref:`workspace_diagram_scene`).
 
 * *I do not like the selection color or the default node color, any suggestion ?*
 
   The selection and default color can be customized in the *Preferences* window. To open it, go through the *Edit* menu and the *Preferences* element. More information in :ref:`preferences`.
-  
+
 
 
 .. _workspace_spreadsheet:
@@ -440,7 +440,7 @@ This panel displays the properties of the nodes and edges of the graph.
 Main window
 -----------
 
-Properties are an important concept in Tulip, they are used to store information about each node and edge. By convention, the properties used by the rendering engine begin with the “view” prefix but it is possible to define an unlimited number of additional properties to your convenience. 
+Properties are an important concept in Talipot, they are used to store information about each node and edge. By convention, the properties used by the rendering engine begin with the “view” prefix but it is possible to define an unlimited number of additional properties to your convenience.
 
 Here is the list of all the rendering properties (e: used with edges, n: used with nodes):
 
@@ -468,7 +468,7 @@ Here is the list of all the rendering properties (e: used with edges, n: used wi
 
 * *viewSelection*: true if the element is selected, false if not (e/n).
 
-* *viewShape*: shape of a node (circle, square, cube, sphere...) or an edge (Bezier curve, polyline...) (e/n). 
+* *viewShape*: shape of a node (circle, square, cube, sphere...) or an edge (Bezier curve, polyline...) (e/n).
 
 * *viewSize*: size of a node (height, width, depth) and for an edge, the width at source, width at end, and arrow size. The edge size interpolation must be disabled for this property to be consider (e/n).
 
@@ -508,7 +508,7 @@ In the top right of the panel, you can find the tab *Properties*.
 
 
 Here you can manage the properties. The eye-shaped check boxes make visible/not visible the properties in the table in the main window. The [+ Add new] button allows to create new properties.
-	   
+
 A right click will open a contextual menu :
 
 .. image:: _images/i_workspace_rclick_properties.png
@@ -734,11 +734,11 @@ The view provides two exclusive tools, only available when viewing a sole histog
   .. image:: _images/i_histogram_statistics.png
       :width: 280
 
-  * **Mean and standard deviation**: Tulip computes the mean and the standard deviation and displays these values on the histogram.
+  * **Mean and standard deviation**: Talipot computes the mean and the standard deviation and displays these values on the histogram.
 
   * **Select nodes in range**: choose the lower and upper bound and select the nodes in between.
 
-  * **Density estimation**: Tulip will display a curve representing the distribution according to a given function (Uniform, Gaussian, Triangle, Epanechnikov, Quartic, Cubic or Cosine).
+  * **Density estimation**: Talipot will display a curve representing the distribution according to a given function (Uniform, Gaussian, Triangle, Epanechnikov, Quartic, Cubic or Cosine).
 
   Do not forget to click on *Apply* to commit your changes.
 
@@ -754,7 +754,7 @@ The view provides two exclusive tools, only available when viewing a sole histog
 Parallel coordinates view
 =========================
 
-To present this view, we will use a dataset containing car specifications such as the city and highway autonomy, the engine displacement, the retail price, the physical dimensions... This document can be opened in Tulip as a project, available :download:`here <./_documents/Cars_data.tlpx>`, or can be imported with the :download:`original CSV file <./_documents/04cars_data.csv>`. The original file can be found on `this site <http://igva2012.wikispaces.asu.edu/file/detail/04cars.csv>`_.
+To present this view, we will use a dataset containing car specifications such as the city and highway autonomy, the engine displacement, the retail price, the physical dimensions... This document can be opened in Talipot as a project, available :download:`here <./_documents/Cars_data.tlpx>`, or can be imported with the :download:`original CSV file <./_documents/04cars_data.csv>`. The original file can be found on `this site <http://igva2012.wikispaces.asu.edu/file/detail/04cars.csv>`_.
 
 More information about the CSV import tool and mechanism can be found in the section :ref:`csv`.
 
@@ -830,7 +830,7 @@ Special menus
 
 A right click anywhere but on the axis in the view will display the standard contextual menu seen before but with additional options related to the current view. Two items, *View Setup* and *Options*, are available:
 
-* *View Setup*: 
+* *View Setup*:
 
   .. image:: _images/i_parallel_main_rightclick.png
 
@@ -840,7 +840,7 @@ A right click anywhere but on the axis in the view will display the standard con
 
 * *Options*: the sole option *Tooltips* allows to display directly some information like the id of the hovered node.
 
-When you perform a right click on one of the axis, Tulip proposes to either *Remove  [the] axis* or to enter a configuration panel:
+When you perform a right click on one of the axis, Talipot proposes to either *Remove  [the] axis* or to enter a configuration panel:
 
 .. image:: _images/i_parallel_main_axis_conf.png
 
@@ -852,7 +852,7 @@ Here you will be able to specify, among others, the number of tick marks, the ax
 Pixel oriented view
 ===================
 
-The pixel oriented view gives you four different solutions to sort your nodes depending of the values on a given property. To illustrate its use and its capabilities, we will use the dataset introduced previously, which can be downloaded :download:`here <./_documents/Cars_data.tlpx>` in its Tulip project form, or :download:`here<./_documents/04cars_data.csv>`, in its CSV form.
+The pixel oriented view gives you four different solutions to sort your nodes depending of the values on a given property. To illustrate its use and its capabilities, we will use the dataset introduced previously, which can be downloaded :download:`here <./_documents/Cars_data.tlpx>` in its Talipot project form, or :download:`here<./_documents/04cars_data.csv>`, in its CSV form.
 
 .. image:: _images/i_pixel_main.png
     :width: 600
@@ -950,7 +950,7 @@ Self Organizing Map view
 
 As explain in the scatterplot view, we are blocked by the number of perceptible dimensions and the existing mapping when we are looking for a correlation between several properties.
 
-This is where the SOM view comes to our help. 
+This is where the SOM view comes to our help.
 
 .. image:: _images/i_som_main.png
     :width: 600
@@ -978,11 +978,11 @@ Beside offering the capability to work on high-dimensionnal data, the self organ
 Example: Coloring a graph
 ==========================
 
-.. |icon_import| image:: ../../library/tulip-gui/resources/icons/64/document-import.png
+.. |icon_import| image:: ../../library/talipot-gui/resources/icons/64/document-import.png
     :width: 32
-.. |icon_add| image:: ../../library/tulip-gui/resources/icons/64/list-add.png
+.. |icon_add| image:: ../../library/talipot-gui/resources/icons/64/list-add.png
     :width: 40
-.. |icon_addsmall| image:: ../../library/tulip-gui/resources/icons/64/list-add.png
+.. |icon_addsmall| image:: ../../library/talipot-gui/resources/icons/64/list-add.png
     :width: 20
 .. |tutorial_color-graph_color2| image:: _images/tutorial_color-graph_color2.png
     :width: 400
@@ -1007,7 +1007,7 @@ We can apply some of these new knowledges to a small example aiming at coloring 
 
 Once those are correctly set, you can launch the algorithm.
 
-* In the spreadsheet view, you can notice that the *viewMetric* column values have changed. 
+* In the spreadsheet view, you can notice that the *viewMetric* column values have changed.
 
 * In the algorithms, under the category *Coloring*, find the *Color Mapping*. The parameters should be *viewMetric* in the input property, a *linear* progression, the *nodes* as target and any color scale. The computed colors must be sored into the *viewColor* property. Once everything is set, you can launch the color mapping.
 
@@ -1054,7 +1054,7 @@ Search
 
 .. image:: _images/i_workspace_search.png
 
-The tool **Search** can be used in parallel of any panel. It provides a way of selecting graph's elements according to specific criteria. 
+The tool **Search** can be used in parallel of any panel. It provides a way of selecting graph's elements according to specific criteria.
 
 First start by selecting the graph and the elements targeted and by choosing the selection mode. The result (respecting the criteria or not) is stored in a boolean property, *viewSelection* by default. Then choose the values to compare and hit the button *Search* to launch the tool.
 
@@ -1065,7 +1065,7 @@ If the *viewSelection* has been selected as the result property, the selected el
 
 Python REPL
 -----------
-			
+
 .. image:: _images/i_workspace_python.png
 
 The **Python REPL** console provides an interactive mean to inspect/manage your data. Consult the Python documentation for more information.

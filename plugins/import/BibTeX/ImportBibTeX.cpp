@@ -17,9 +17,9 @@
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/StringCollection.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/StringCollection.h>
 
 #include <xdkbibtex/file.h>
 #include <xdkbibtex/formatter.h>
@@ -1412,7 +1412,7 @@ public:
   }
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_bibtex.png";
+    return ":/talipot/graphperspective/icons/32/import_bibtex.png";
   }
 
   std::list<std::string> fileExtensions() const override {

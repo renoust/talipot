@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef SCATTERPLOTTRENDLINE_H_
-#define SCATTERPLOTTRENDLINE_H_
+#ifndef SCATTER_PLOT_TREND_LINE_H
+#define SCATTER_PLOT_TREND_LINE_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 namespace tlp {
 
@@ -37,4 +37,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOTTRENDLINE_H_ */
+#endif // SCATTER_PLOT_TREND_LINE_H

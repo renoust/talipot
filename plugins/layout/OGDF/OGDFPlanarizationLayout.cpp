@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/planarity/PlanarizationLayout.h>
 #include <ogdf/planarity/EmbedderMaxFace.h>
 #include <ogdf/planarity/EmbedderMaxFaceLayers.h>
@@ -20,9 +21,9 @@
 #include <ogdf/planarity/EmbedderOptimalFlexDraw.h>
 #include <ogdf/planarity/SimpleEmbedder.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 // comments below have been extracted from OGDF/src/planarity/PlanarizationLayout.cpp
 /** \addtogroup layout */

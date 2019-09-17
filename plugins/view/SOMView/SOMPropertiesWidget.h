@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef SOMPROPERTIESWIDGET_H_
-#define SOMPROPERTIESWIDGET_H_
+#ifndef SOM_PROPERTIES_WIDGET_H
+#define SOM_PROPERTIES_WIDGET_H
 
-#include <tulip/Observable.h>
-#include <tulip/DataSet.h>
+#include <talipot/Observable.h>
+#include <talipot/DataSet.h>
 
 #include <QWidget>
 #include <QList>
@@ -124,4 +124,4 @@ protected slots:
   void animationCheckBoxClicked();
 };
 } // namespace tlp
-#endif /* SOMPROPERTIESWIDGET_H_ */
+#endif // SOM_PROPERTIES_WIDGET_H

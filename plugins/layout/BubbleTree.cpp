@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
-#include <tulip/Circle.h>
+#include <talipot/Circle.h>
 #include "BubbleTree.h"
 #include "DatasetTools.h"
 

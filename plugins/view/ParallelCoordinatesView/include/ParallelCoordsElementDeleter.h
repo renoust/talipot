@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELCOORDSELEMENTDELETER_H_
-#define PARALLELCOORDSELEMENTDELETER_H_
+#ifndef PARALLEL_COORDS_ELEMENT_DELETER_H
+#define PARALLEL_COORDS_ELEMENT_DELETER_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 namespace tlp {
 
@@ -26,4 +26,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSELEMENTDELETER_H_ */
+#endif // PARALLEL_COORDS_ELEMENT_DELETER_H

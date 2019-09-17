@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
-#include <tulip/TreeTest.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/TreeTest.h>
+#include <talipot/ViewSettings.h>
 
 #include "SquarifiedTreeMap.h"
 #include "TreeTools.h"

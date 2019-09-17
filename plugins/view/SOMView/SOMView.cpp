@@ -22,18 +22,18 @@
 #include "SOMViewInteractor.h"
 #include "SOMPropertiesWidget.h"
 
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/NumericProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/Interactor.h>
-#include <tulip/ImportModule.h>
-#include <tulip/GlLODCalculator.h>
-#include <tulip/GlLabel.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/NumericProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/Interactor.h>
+#include <talipot/ImportModule.h>
+#include <talipot/GlLODCalculator.h>
+#include <talipot/GlLabel.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
 
 #include <QMenu>
 #include <QToolTip>

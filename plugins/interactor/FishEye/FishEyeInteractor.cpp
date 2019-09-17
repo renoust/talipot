@@ -19,13 +19,13 @@
 
 #include <QMouseEvent>
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/MouseInteractors.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/GlShaderProgram.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlShaderProgram.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 using namespace std;
 using namespace tlp;

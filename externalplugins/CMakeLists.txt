@@ -6,7 +6,7 @@ FILE(GLOB CM_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_D
 
 SET(EXTERNALPLUGINS TRUE)
 
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude})
 
 FOREACH(CM_FILE ${CM_FILES})
 STRING(REGEX REPLACE "/CMakeLists.txt" "" CM_SUBDIR ${CM_FILE})

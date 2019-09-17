@@ -9,7 +9,7 @@
 
 import unittest
 
-from tulip import tlp
+from talipot import tlp
 
 NB_NODES = 5
 NB_EDGES = 2 * (NB_NODES - 1)

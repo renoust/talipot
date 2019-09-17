@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _NODEMETRIC_H
-#define _NODEMETRIC_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef NODE_METRIC_H
+#define NODE_METRIC_H
+
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup metric */
 
@@ -39,4 +40,4 @@ private:
   double getNodeValue(const tlp::node n);
 };
 
-#endif
+#endif // NODE_METRIC_H

@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef SCATTERPLOTCORELCOEFFSELECTOR_H_
-#define SCATTERPLOTCORELCOEFFSELECTOR_H_
+#ifndef SCATTER_PLOT_CORREL_COEFF_SELECTOR_H
+#define SCATTER_PLOT_CORREL_COEFF_SELECTOR_H
 
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GlCircle.h>
-#include <tulip/GLInteractor.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlCircle.h>
+#include <talipot/GLInteractor.h>
 
 namespace tlp {
 
@@ -103,4 +103,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOTCORELCOEFFSELECTOR_H_ */
+#endif // SCATTER_PLOT_CORREL_COEFF_SELECTOR_H

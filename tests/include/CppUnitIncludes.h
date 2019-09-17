@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef CPPUNITINCLUDES_H
-#define CPPUNITINCLUDES_H
+#ifndef CPP_UNIT_INCLUDES_H
+#define CPP_UNIT_INCLUDES_H
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -26,4 +26,4 @@
 #pragma GCC diagnostic pop
 #endif
 
-#endif // CPPUNITINCLUDES_H
+#endif // CPP_UNIT_INCLUDES_H

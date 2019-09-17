@@ -10,19 +10,20 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
 
 #include "ReadGraph.h"
 #include "ExportInterface.h"
 
-#include <tulip/GlyphManager.h>
-#include <tulip/EdgeExtremityGlyphManager.h>
-#include <tulip/GlGraphStaticData.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/StringProperty.h>
-#include <tulip/GlEdge.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/GlGraphRenderingParameters.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/EdgeExtremityGlyphManager.h>
+#include <talipot/GlGraphStaticData.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/StringProperty.h>
+#include <talipot/GlEdge.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/GlGraphRenderingParameters.h>
 
 using namespace std;
 using namespace tlp;

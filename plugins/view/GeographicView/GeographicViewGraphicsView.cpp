@@ -15,15 +15,15 @@
 #include "GeographicView.h"
 #include "NominatimGeocoder.h"
 
-#include <tulip/GlCPULODCalculator.h>
-#include <tulip/GlComplexPolygon.h>
-#include <tulip/GlSphere.h>
-#include <tulip/GlLine.h>
-#include <tulip/GlSceneZoomAndPan.h>
-#include <tulip/GlyphManager.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/GlCPULODCalculator.h>
+#include <talipot/GlComplexPolygon.h>
+#include <talipot/GlSphere.h>
+#include <talipot/GlLine.h>
+#include <talipot/GlSceneZoomAndPan.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/TlpQtTools.h>
 
 #include <QPushButton>
 #include <QTextStream>
@@ -462,7 +462,7 @@ GeographicViewGraphicsView::GeographicViewGraphicsView(GeographicView *geoView,
 
   // 2 push buttons
   // zoom +
-  zoomInButton = new QPushButton(QIcon(":/tulip/geoview/zoom+.png"), "");
+  zoomInButton = new QPushButton(QIcon(":/talipot/geoview/zoom+.png"), "");
 // workaround to get rid of Qt5 warnings: QMacCGContext:: Unsupported painter devtype type 1
 // see https://bugreports.qt.io/browse/QTBUG-32639
 #if defined(__APPLE__)
@@ -476,7 +476,7 @@ GeographicViewGraphicsView::GeographicViewGraphicsView(GeographicView *geoView,
   buttonProxy->setPos(20, 50);
 
   // zoom -
-  zoomOutButton = new QPushButton(QIcon(":/tulip/geoview/zoom-.png"), "");
+  zoomOutButton = new QPushButton(QIcon(":/talipot/geoview/zoom-.png"), "");
 // workaround to get rid of Qt5 warnings : QMacCGContext:: Unsupported painter devtype type 1
 // see https://bugreports.qt.io/browse/QTBUG-32639
 #if defined(__APPLE__)
@@ -608,7 +608,7 @@ void GeographicViewGraphicsView::loadDefaultMap() {
     delete polygonEntity;
   }
 
-  polygonEntity = readCsvFile(":/tulip/geoview/MAPAGR4.txt");
+  polygonEntity = readCsvFile(":/talipot/geoview/MAPAGR4.txt");
   polygonEntity->setVisible(oldPolyVisible);
 
   GlScene *scene = glMainWidget->getScene();
@@ -1179,7 +1179,7 @@ void GeographicViewGraphicsView::switchViewType() {
       if (planisphereTextureId == 0) {
         GlMainWidget::getFirstQGLWidget()->makeCurrent();
         planisphereTextureId = GlMainWidget::getFirstQGLWidget()->bindTexture(
-            QPixmap(":/tulip/geoview/planisphere.jpg").transformed(QTransform().scale(1, -1)),
+            QPixmap(":/talipot/geoview/planisphere.jpg").transformed(QTransform().scale(1, -1)),
             GL_TEXTURE_2D, GL_RGBA, QGLContext::LinearFilteringBindOption);
         GlTextureManager::registerExternalTexture("Planisphere", planisphereTextureId);
       }

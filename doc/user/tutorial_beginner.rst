@@ -1,7 +1,7 @@
 .. _first_steps:
 
 ************************
-First Steps in Tulip
+First Steps in Talipot
 ************************
 
 The goal of this part is to follow a small tutorial by creating a graph, saving it, and apply on it the most common analysis operations.
@@ -42,7 +42,7 @@ A graph with nodes and edges is now displayed. You can manipulate the camera wit
 
 * To reset the view, just right-click anywhere in the workspace and select *Center view* (*Ctrl+Shift+C*).
 
-**A few precisions towards the Mac users:** Tulip is multi-platform, however, significant changes can be spotted from one OS to another. In addition to the different fonts and window systems, the key combinations can also slightly vary. Most of the time in the mouse key combinations, the use of the *Ctrl* key is replaced by *Alt* and in the keyboard shortcuts it is replaced by *⌘*.
+**A few precisions towards the Mac users:** Talipot is multi-platform, however, significant changes can be spotted from one OS to another. In addition to the different fonts and window systems, the key combinations can also slightly vary. Most of the time in the mouse key combinations, the use of the *Ctrl* key is replaced by *Alt* and in the keyboard shortcuts it is replaced by *⌘*.
 
 
 .. _first_create:
@@ -62,9 +62,9 @@ Build a Graph
 Save or Export your Work
 ========================
 
-Tulip allows you to save your whole project (all opened graphs and displayed views) with its own file format (\*.tlpx). To do so, select *File → Save* or *File → Save as*.
+Talipot allows you to save your whole project (all opened graphs and displayed views) with its own file format (\*.tlpx). To do so, select *File → Save* or *File → Save as*.
 
-If you are interested to only save one graph, Tulip proposes to save it in its own TLP or TLPB formats (which used the tlp and tlpb file extensions but can also be compressed in indicating the tlpz or tlpbz file extensions); do a right click on the graph's name in the graph list and select *Save* in the contextual menu then displayed. You can also export it in the GML format (other plugins can offer more possibilities) by selecting *Export* in the same contextual menu.
+If you are interested to only save one graph, Talipot proposes to save it in its own TLP or TLPB formats (which used the tlp and tlpb file extensions but can also be compressed in indicating the tlpz or tlpbz file extensions); do a right click on the graph's name in the graph list and select *Save* in the contextual menu then displayed. You can also export it in the GML format (other plugins can offer more possibilities) by selecting *Export* in the same contextual menu.
 
 
 .. _first_algo:
@@ -72,7 +72,7 @@ If you are interested to only save one graph, Tulip proposes to save it in its o
 Apply an Algorithm
 ==================
 
-As a visualization tool, Tulip offers several algorithms to adapt your graph layout. You can use them very simply.
+As a visualization tool, Talipot offers several algorithms to adapt your graph layout. You can use them very simply.
 
 * Following the steps mentioned above, let us generate a *Random General Graph* (*[File →] Import → Random General Graph* in the *Graph* category). We will specify here the *nodes* and *edges* parameters (*Random General Graph* specific fields displayed in the import wizard) by typing *50* in both of the fields.
 
@@ -80,7 +80,7 @@ As a visualization tool, Tulip offers several algorithms to adapt your graph lay
      :width: 600
 
 * Once the button *OK* is pressed, you can see a graph similar to this one :
-   
+
 .. image:: _images/tutorial_beginner-graph_tangled.png
      :width: 600
 
@@ -95,7 +95,7 @@ Some *layout* algorithms can only be applied to graphs belonging to a specific g
 
 There are many algorithms for testing, coloring, resizing... more information on them can be found in :ref:`the Algorithm section <algo>`.
 
-.. |icon_import| image:: ../../library/tulip-gui/resources/icons/64/document-import.png
+.. |icon_import| image:: ../../library/talipot-gui/resources/icons/64/document-import.png
      :width: 32
-.. |icon_wst_add_nodes_edges| image:: ../../library/tulip-gui/resources/icons/i_addedge.png
-.. |icon_wst_delete_nodes_edges| image:: ../../library/tulip-gui/resources/icons/i_del.png
+.. |icon_wst_add_nodes_edges| image:: ../../library/talipot-gui/resources/icons/i_addedge.png
+.. |icon_wst_delete_nodes_edges| image:: ../../library/talipot-gui/resources/icons/i_del.png

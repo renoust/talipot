@@ -13,8 +13,8 @@
 
 #include "GlLabelledColorScale.h"
 
-#include <tulip/GlRect.h>
-#include <tulip/GlPolyQuad.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlPolyQuad.h>
 
 #include <sstream>
 

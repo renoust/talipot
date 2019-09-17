@@ -27,13 +27,13 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/Vector.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/ConnectedTest.h>
-#include <tulip/ParametricCurves.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/Vector.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/ConnectedTest.h>
+#include <talipot/ParametricCurves.h>
+#include <talipot/ViewSettings.h>
 
 #include "DatasetTools.h"
 

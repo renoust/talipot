@@ -59,7 +59,7 @@ struct ShapeAttr
 };
 
 ShapeAttr ShapeAttrA[] = {
-  // tulip shapes
+  // talipot shapes
   {"box", 0},
   {"boxoutlined", 1},
   {"sphere", 2},
@@ -68,7 +68,7 @@ ShapeAttr ShapeAttrA[] = {
   {"teapot", 5},
   {"cyclinder", 6},
   {"billboard", 7},
-  
+
   // dot shapes
   {"circle", 2}, // as a sphere
   {"ellipse", 2}, // as a sphere
@@ -239,11 +239,11 @@ struct DOT_YYType {
   std::string s;
   bool created;
   bool subg;
-  
+
   NodeA nodeA; // stmt node set
   EdgeA edgeA; // stmt edge set
   DOT_ATTR attr; // stmt accumulated attributes
-  
+
   void clear() {
     s.resize(0);
     created = false;
@@ -253,7 +253,7 @@ struct DOT_YYType {
     attr.clear();
   }
 };
- 
+
 
 //
 // Global data needed by the parser

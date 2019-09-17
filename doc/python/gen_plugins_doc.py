@@ -1,13 +1,13 @@
-# automatically generates the file tulippluginsdocumentation.rst
-# by dynamically introspecting the Tulip plugins metadata
+# automatically generates the file talipotpluginsdocumentation.rst
+# by dynamically introspecting the Talipot plugins metadata
 
 from __future__ import print_function
 import sys
 if sys.version_info[0] == 2:
     reload(sys) # noqa
     sys.setdefaultencoding('utf8')
-from tulip import tlp # noqa
-import tulipgui # noqa
+from talipot import tlp # noqa
+import talipotgui # noqa
 import tabulate # noqa
 import re # noqa
 import os # noqa
@@ -30,22 +30,22 @@ def utf8len(s):
         return len(s.encode('utf8'))
 
 
-tulip_build_dir = os.environ['TULIP_BUILD_DIR']
-tlp.loadTulipPluginsFromDir('%s/plugins/clustering' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/colors' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/export' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/general' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/import' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/layout' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/metric' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/selection' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/sizes' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/string' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir('%s/plugins/test' % tulip_build_dir)
-tlp.loadTulipPluginsFromDir(os.environ['TULIP_PYTHON_PLUGINS_DIR'])
-tlp.loadTulipPluginsFromDir(os.environ['TULIPGUI_PYTHON_PLUGINS_DIR'])
+talipot_build_dir = os.environ['TALIPOT_BUILD_DIR']
+tlp.loadTalipotPluginsFromDir('%s/plugins/clustering' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/colors' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/export' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/general' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/import' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/layout' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/metric' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/selection' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/sizes' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/string' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir('%s/plugins/test' % talipot_build_dir)
+tlp.loadTalipotPluginsFromDir(os.environ['TALIPOT_PYTHON_PLUGINS_DIR'])
+tlp.loadTalipotPluginsFromDir(os.environ['TalipotGUI_PYTHON_PLUGINS_DIR'])
 
-f = open('tulippluginsdocumentation.rst', 'w')
+f = open('talipotpluginsdocumentation.rst', 'w')
 
 safeprint("""
 .. |br| raw:: html
@@ -94,9 +94,9 @@ safeprint("""
 
 """, file=f)
 
-safeprint('.. py:currentmodule:: tulip\n', file=f)
+safeprint('.. py:currentmodule:: talipot\n', file=f)
 
-safeprint('.. _tulippluginsdoc:\n', file=f)
+safeprint('.. _talipotpluginsdoc:\n', file=f)
 
 
 def writeSection(title, sectionChar):
@@ -141,58 +141,58 @@ def formatSphinxDoc(doc):
     return doc
 
 
-def getTulipPythonType(tulipType):
-    if tulipType == 'BooleanProperty':
+def getTalipotPythonType(talipotType):
+    if talipotType == 'BooleanProperty':
         return ':class:`tlp.BooleanProperty`'
-    elif tulipType == 'ColorProperty':
+    elif talipotType == 'ColorProperty':
         return ':class:`tlp.ColorProperty`'
-    elif tulipType == 'DoubleProperty':
+    elif talipotType == 'DoubleProperty':
         return ':class:`tlp.DoubleProperty`'
-    elif tulipType == 'IntegerProperty':
+    elif talipotType == 'IntegerProperty':
         return ':class:`tlp.IntegerProperty`'
-    elif tulipType == 'LayoutProperty':
+    elif talipotType == 'LayoutProperty':
         return ':class:`tlp.LayoutProperty`'
-    elif tulipType == 'SizeProperty':
+    elif talipotType == 'SizeProperty':
         return ':class:`tlp.SizeProperty`'
-    elif tulipType == 'StringProperty':
+    elif talipotType == 'StringProperty':
         return ':class:`tlp.StringProperty`'
-    elif tulipType == 'NumericProperty':
+    elif talipotType == 'NumericProperty':
         return ':class:`tlp.NumericProperty`'
-    elif tulipType == 'PropertyInterface':
+    elif talipotType == 'PropertyInterface':
         return ':class:`tlp.PropertyInterface`'
-    elif tulipType == 'StringCollection':
+    elif talipotType == 'StringCollection':
         return ':class:`tlp.StringCollection`'
-    elif tulipType == 'ColorScale':
+    elif talipotType == 'ColorScale':
         return ':class:`tlp.ColorScale`'
-    elif tulipType == 'Color':
+    elif talipotType == 'Color':
         return ':class:`tlp.Color`'
-    elif tulipType == 'Boolean':
+    elif talipotType == 'Boolean':
         return ':const:`bool`'
-    elif tulipType.startswith('float'):
+    elif talipotType.startswith('float'):
         return ':const:`float`'
-    elif 'integer' in tulipType:
+    elif 'integer' in talipotType:
         return ':const:`int`'
-    elif tulipType == 'string':
+    elif talipotType == 'string':
         return ':const:`str`'
     else:
-        return tulipType
+        return talipotType
 
 
-writeSection('Tulip plugins documentation', '=')
+writeSection('Talipot plugins documentation', '=')
 
 safeprint("""
 In this section, you can find some documentation regarding the C++ algorithm
-plugins bundled in the Tulip software but also with the Tulip Python modules
+plugins bundled in the Talipot software but also with the Talipot Python modules
 installable through the pip tool. In particular, an exhaustive description of
 the input and output parameters for each plugin is given.
 To learn how to call all these algorithms in Python, you can refer to the
 :ref:`Applying an algorithm on a graph <applyGraphAlgorithm>` section.
 The plugins documentation is ordered according to their type.
 
-.. warning:: If you use the Tulip Python bindings trough the classical Python
+.. warning:: If you use the Talipot Python bindings trough the classical Python
              interpreter, some plugins (Color Mapping, Convolution Clustering,
              File System Directory, GEXF, SVG Export, Website) require the
-             :mod:`tulipgui` module to be imported before they can be called
+             :mod:`talipotgui` module to be imported before they can be called
              as they use Qt under the hood.
 """ + '\n', file=f)
 
@@ -318,7 +318,7 @@ for cat in sorted(plugins.keys()):
             paramName = param.getName().replace(
                 'file::', '').replace('dir::', '')
             paramName = paramName.replace(' ', nonBreakingSpace)
-            paramType = getTulipPythonType(
+            paramType = getTalipotPythonType(
                 paramType.replace(' ', nonBreakingSpace))
             paramDir = paramDir.replace(' ', nonBreakingSpace)
             if sys.version_info[0] == 2:
@@ -366,7 +366,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyLayoutAlgorithm(\'%s\', '
                        'resultLayout, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the'
-                       ' default Tulip layout property named \'viewLayout\''),
+                       ' default Talipot layout property named \'viewLayout\''),
                       file=f)
             safeprint(('  success = graph.applyLayoutAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
@@ -378,7 +378,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyDoubleAlgorithm(\'%s\''
                        ', resultMetric, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the'
-                       ' default Tulip metric property named \'viewMetric\''),
+                       ' default Talipot metric property named \'viewMetric\''),
                       file=f)
             safeprint(('  success = graph.applyDoubleAlgorithm(\'%s\','
                        ' params)\n') % p.name(), file=f)
@@ -390,7 +390,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyColorAlgorithm(\'%s\','
                        ' resultColor, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the'
-                       ' default Tulip color property named \'viewColor\''),
+                       ' default Talipot color property named \'viewColor\''),
                       file=f)
             safeprint(('  success = graph.applyColorAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
@@ -402,7 +402,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applySizeAlgorithm(\'%s\','
                        ' resultSize, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the'
-                       ' default Tulip size property named \'viewSize\''),
+                       ' default Talipot size property named \'viewSize\''),
                       file=f)
             safeprint(('  success = graph.applySizeAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
@@ -414,7 +414,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyBooleanAlgorithm(\'%s\', '
                        'resultSelection, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the '
-                       'default Tulip boolean property named '
+                       'default Talipot boolean property named '
                        '\'viewSelection\''), file=f)
             safeprint(('  success = graph.applyBooleanAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
@@ -426,7 +426,7 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyStringAlgorithm(\'%s\', '
                        'resultString, params)\n') % p.name(), file=f)
             safeprint(('  # or store the result of the algorithm in the '
-                       'default Tulip string property named \'viewLabel\''),
+                       'default Talipot string property named \'viewLabel\''),
                       file=f)
             safeprint(('  success = graph.applyStringAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)

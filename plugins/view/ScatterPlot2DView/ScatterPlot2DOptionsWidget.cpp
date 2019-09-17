@@ -18,7 +18,7 @@
 #include "ScatterPlot2DOptionsWidget.h"
 #include "ui_ScatterPlot2DOptionsWidget.h"
 
-#include <tulip/Perspective.h>
+#include <talipot/Perspective.h>
 
 namespace tlp {
 
@@ -59,27 +59,27 @@ void ScatterPlot2DOptionsWidget::setWidgetEnabled(const bool enabled) {
 }
 
 Color ScatterPlot2DOptionsWidget::getMinusOneColor() const {
-  return _ui->minusOneColorButton->tulipColor();
+  return _ui->minusOneColorButton->talipotColor();
 }
 
 Color ScatterPlot2DOptionsWidget::getZeroColor() const {
-  return _ui->zeroColorButton->tulipColor();
+  return _ui->zeroColorButton->talipotColor();
 }
 
 Color ScatterPlot2DOptionsWidget::getOneColor() const {
-  return _ui->oneColorButton->tulipColor();
+  return _ui->oneColorButton->talipotColor();
 }
 
 Color ScatterPlot2DOptionsWidget::getBackgroundColor() const {
-  return _ui->backColorButton->tulipColor();
+  return _ui->backColorButton->talipotColor();
 }
 
 void ScatterPlot2DOptionsWidget::setBackgroundColor(const Color &color) {
-  _ui->backColorButton->setTulipColor(color);
+  _ui->backColorButton->setColor(color);
 }
 
 void ScatterPlot2DOptionsWidget::setButtonColor(ColorButton *button, const Color &color) {
-  button->setTulipColor(color);
+  button->setColor(color);
 }
 
 Size ScatterPlot2DOptionsWidget::getMinSizeMapping() const {

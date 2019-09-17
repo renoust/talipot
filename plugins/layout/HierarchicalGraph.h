@@ -10,10 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_HierarchicalGraph_H
-#define Tulip_HierarchicalGraph_H
+
+#ifndef HIERARCHICAL_GRAPH_H
+#define HIERARCHICAL_GRAPH_H
+
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 class LessThanNode2 {
 public:
@@ -72,4 +74,4 @@ private:
   float nodeSpacing;
 };
 
-#endif
+#endif // HIERARCHICAL_GRAPH_H

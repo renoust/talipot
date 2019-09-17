@@ -20,16 +20,16 @@
 #include <QApplication>
 #include <QDateTime>
 
-#include <tulip/SystemDefinition.h>
-#include <tulip/PluginLister.h>
-#include <tulip/PluginLibraryLoader.h>
-#include <tulip/PluginLoaderTxt.h>
-#include <tulip/QuaZIPFacade.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/TlpTools.h>
-#include <tulip/Interactor.h>
-#include <tulip/GlyphManager.h>
-#include <tulip/EdgeExtremityGlyphManager.h>
+#include <talipot/SystemDefinition.h>
+#include <talipot/PluginLister.h>
+#include <talipot/PluginLibraryLoader.h>
+#include <talipot/PluginLoaderTxt.h>
+#include <talipot/QuaZIPFacade.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Interactor.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/EdgeExtremityGlyphManager.h>
 
 #include <fcntl.h>
 
@@ -69,8 +69,8 @@ int main(int argc, char **argv) {
   QFileInfo destInfo(destinationDir);
   QDir::home().mkpath(destInfo.absoluteFilePath());
 
-  // First we initialize Tulip with basic plugins to ensure dependencies consistency
-  tlp::initTulipLib(tlp::QStringToTlpString(QApplication::applicationDirPath()).c_str());
+  // First we initialize Talipot with basic plugins to ensure dependencies consistency
+  tlp::initTalipotLib(tlp::QStringToTlpString(QApplication::applicationDirPath()).c_str());
   tlp::PluginLibraryLoader::loadPlugins();
   tlp::PluginLister::checkLoadedPluginsDependencies(nullptr);
   tlp::InteractorLister::initInteractorsDependencies();
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
     }
 
     pluginDir.cd("lib");
-    pluginDir.cd("tulip");
+    pluginDir.cd("talipot");
 
     for (const QFileInfo &pluginFile : pluginDir.entryInfoList(QDir::Files | QDir::NoSymLinks)) {
       if (QLibrary::isLibrary(pluginFile.absoluteFilePath())) {
@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
   stream.writeStartElement("server");
   stream.writeAttribute("serverName", destinationDir);
   stream.writeAttribute("lastUpdate", QDateTime::currentDateTime().toString(Qt::ISODate));
-  stream.writeAttribute("release", TULIP_VERSION);
+  stream.writeAttribute("release", TALIPOT_VERSION);
   stream.writeStartElement("plugins");
 
   for (const QString &component : collector._directoryPlugins.keys()) {
@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
       stream.writeAttribute("date", info.date().c_str());
       stream.writeAttribute("desc", tlp::tlpStringToQString(info.info()));
       stream.writeAttribute("release", info.release().c_str());
-      stream.writeAttribute("tulip", (info.tulipMajor() + '.' + info.tulipMinor()).c_str());
+      stream.writeAttribute("talipot", (info.talipotMajor() + '.' + info.talipotMinor()).c_str());
       stream.writeStartElement("dependencies");
       const std::list<Dependency> &deps = PluginLister::getPluginDependencies(info.name());
 
@@ -151,7 +151,8 @@ int main(int argc, char **argv) {
   stream.writeEndDocument();
   outputXML.close();
 
-  for (const QFileInfo &phpFile : QDir(":/tulip/pluginpackager/php/").entryInfoList(QDir::Files)) {
+  for (const QFileInfo &phpFile :
+       QDir(":/talipot/pluginpackager/php/").entryInfoList(QDir::Files)) {
     QFile::copy(phpFile.absoluteFilePath(), QDir(destinationDir).filePath(phpFile.fileName()));
   }
 

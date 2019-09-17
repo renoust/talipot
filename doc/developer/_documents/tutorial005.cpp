@@ -1,10 +1,10 @@
 #include <iostream>
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/ForEach.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/ForEach.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/DoubleProperty.h>
 
 /**
  *
@@ -30,8 +30,8 @@ void buildGraph(Graph *graph) {
 }
 
 int main() {
-  // initialize the Tulip libs
-  initTulipLib();
+  // initialize the Talipot libs
+  initTalipotLib();
 
   // create an empty graph
   Graph *graph = tlp::newGraph();

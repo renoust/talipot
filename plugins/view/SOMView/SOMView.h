@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef SOMVIEW_H_
-#define SOMVIEW_H_
+#ifndef SOM_VIEW_H
+#define SOM_VIEW_H
 
-#include <tulip/GlMainView.h>
-#include <tulip/MouseInteractors.h>
+#include <talipot/GlMainView.h>
+#include <talipot/MouseInteractors.h>
 
 #include <SOMAlgorithm.h>
 #include <InputSample.h>
@@ -37,7 +37,7 @@ class SOMPropertiesWidget;
 
 /*@{*/
 /** \file
- *  \brief  Tulip self organizing map view
+ *  \brief  Self organizing map view
 
  * This view plug-in allows users to generate self organizing map (sometimes called Kohonen map)
  from graph data.
@@ -420,4 +420,4 @@ private slots:
   void toggleInteractors(const bool activate);
 };
 } // namespace tlp
-#endif /* SOMVIEW_H_ */
+#endif // SOM_VIEW_H

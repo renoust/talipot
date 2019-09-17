@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "BasicLayoutTest.h"
 
-#include <tulip/Graph.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace std;
 using namespace tlp;

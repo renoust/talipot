@@ -1,5 +1,6 @@
-#ifndef READGRAPH_H
-#define READGRAPH_H
+
+#ifndef READ_GRAPH_H
+#define READ_GRAPH_H
 
 /**
  *
@@ -28,4 +29,4 @@ struct ReadGraph {
                         ExportInterface &exportint);
 };
 
-#endif // READGRAPH_H
+#endif // READ_GRAPH_H

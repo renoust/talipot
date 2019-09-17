@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef IMPORTWIZARD_H
-#define IMPORTWIZARD_H
+
+#ifndef IMPORT_WIZARD_H
+#define IMPORT_WIZARD_H
 
 #include <QWizard>
 #include <QModelIndex>
-#include <tulip/WithParameter.h>
+#include <talipot/WithParameter.h>
 
 namespace Ui {
 class ImportWizard;
@@ -42,4 +43,4 @@ protected slots:
   void updateFinishButton();
 };
 
-#endif // IMPORTWIZARD_H
+#endif // IMPORT_WIZARD_H

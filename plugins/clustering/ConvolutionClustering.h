@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _ConvolutionClustering_H
-#define _ConvolutionClustering_H
+
+#ifndef CONVOLUTION_CLUSTERING_H
+#define CONVOLUTION_CLUSTERING_H
 
 #include <vector>
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** This plugin allow the discretization and the filtering of the distribution of
  * a node metric using convolution.
@@ -55,4 +56,4 @@ private:
 };
 } // namespace tlp
 
-#endif
+#endif // CONVOLUTION_CLUSTERING_H

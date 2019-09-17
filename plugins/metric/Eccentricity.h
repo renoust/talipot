@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _ECCENTRICITYMETRIC_H
-#define _ECCENTRICITYMETRIC_H
 
-#include <tulip/DoubleProperty.h>
-#include <tulip/NumericProperty.h>
+#ifndef ECCENTRICITY_H
+#define ECCENTRICITY_H
+
+#include <talipot/DoubleProperty.h>
+#include <talipot/NumericProperty.h>
 
 /** \addtogroup metric */
 
@@ -71,4 +72,4 @@ private:
   tlp::NumericProperty *weight;
 };
 
-#endif
+#endif // ECCENTRICITY_H

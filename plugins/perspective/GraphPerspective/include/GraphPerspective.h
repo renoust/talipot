@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef GRAPHPERSPECTIVE_H
-#define GRAPHPERSPECTIVE_H
+
+#ifndef GRAPH_PERSPECTIVE_H
+#define GRAPH_PERSPECTIVE_H
 
 #include <QModelIndex>
 #include <QPoint>
-#include <tulip/Perspective.h>
-#include <tulip/Observable.h>
+#include <talipot/Perspective.h>
+#include <talipot/Observable.h>
 
 class QAction;
 class QHeaderView;
@@ -36,7 +37,7 @@ namespace Ui {
 class GraphPerspectiveMainWindowData;
 }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 class PythonPanel;
 namespace tlp {
 class PythonIDE;
@@ -62,12 +63,12 @@ class GraphPerspective : public tlp::Perspective, tlp::Observable {
 public:
   GraphPerspectiveLogger *_logger;
 
-  PLUGININFORMATION("Tulip", "Tulip Team", "2011/07/11",
+  PLUGININFORMATION("Talipot", "", "2011/07/11",
                     "Analyze several graphs/subgraphs hierarchies\n(designed to import/explore "
                     "data from various graph or csv file formats)",
                     "1.0", "")
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/desktop.png";
+    return ":/talipot/graphperspective/icons/32/desktop.png";
   }
 
   GraphPerspective(const tlp::PluginContext *c);
@@ -120,7 +121,7 @@ public slots:
 
   void displayColorScalesDialog();
 
-  void showAboutTulipPage();
+  void showAboutPage();
 
 protected slots:
   void currentGraphChanged(tlp::Graph *graph);
@@ -158,11 +159,10 @@ protected slots:
   void showHideSideBar();
   void showHideStatusBar();
   void workspaceButtonClicked();
-  void showStartMessage();
   void resetLoggerDialogPosition();
   void showHideLogger();
   void showHideMenuBar();
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   void initPythonIDE();
 #endif
 
@@ -172,11 +172,11 @@ protected:
   void updateLogIconsAndCounters();
   void destroyWorkspace();
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   PythonPanel *_pythonPanel;
   tlp::PythonIDE *_pythonIDE;
   QDialog *_pythonIDEDialog;
 #endif
 };
 
-#endif // GRAPHPERSPECTIVE_H
+#endif // GRAPH_PERSPECTIVE_H

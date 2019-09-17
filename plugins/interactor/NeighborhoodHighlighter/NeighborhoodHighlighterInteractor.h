@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef NEIGHBOURHOODHIGHLIGHTERINTERACTOR_H_
-#define NEIGHBOURHOODHIGHLIGHTERINTERACTOR_H_
+#ifndef NEIGHBORHOOD_HIGHLIGHTER_INTERACTOR_H
+#define NEIGHBORHOOD_HIGHLIGHTER_INTERACTOR_H
 
 #include "NeighborhoodHighlighterConfigWidget.h"
 #include "NodeNeighborhoodView.h"
@@ -20,10 +20,10 @@
 
 #include <QObject>
 
-#include <tulip/GLInteractor.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlLayer.h>
-#include <tulip/GlScene.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlLayer.h>
+#include <talipot/GlScene.h>
 
 namespace tlp {
 
@@ -31,7 +31,7 @@ class AdditionalGlSceneAnimation;
 
 /*@{*/
 /** \file
- *  \brief  Tulip Node Neighbourhood Highlighter
+ *  \brief Node Neighbourhood Highlighter
 
  * This interactor plugin allow to get information regarding the neighbourhood of a node by
  highlighting
@@ -146,4 +146,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* NEIGHBOURHOODHIGHLIGHTERINTERACTOR_H_ */
+#endif // NEIGHBORHOOD_HIGHLIGHTER_INTERACTOR_H

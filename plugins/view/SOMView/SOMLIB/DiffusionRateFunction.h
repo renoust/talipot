@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef NEIGHBORHOODDECREASINGFUNCTION_H_
-#define NEIGHBORHOODDECREASINGFUNCTION_H_
+#ifndef DIFFUSION_RATE_FUNCTION_H
+#define DIFFUSION_RATE_FUNCTION_H
 
 #include "TimeDecreasingFunction.h"
 
@@ -46,4 +46,4 @@ protected:
   TimeDecreasingFunction *timeFunction;
 };
 
-#endif /* NEIGHBORHOODDECREASINGFUNCTION_H_ */
+#endif // DIFFUSION_RATE_FUNCTION_H

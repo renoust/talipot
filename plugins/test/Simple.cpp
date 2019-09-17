@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/SimpleTest.h>
-#include <tulip/GraphTest.h>
-#include <tulip/Edge.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/GraphTest.h>
+#include <talipot/Edge.h>
 
 class SimpleTest : public tlp::GraphTest {
 public:

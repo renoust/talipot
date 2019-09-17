@@ -11,7 +11,7 @@
  *
  */
 
-#include <tulip/StableIterator.h>
+#include <talipot/StableIterator.h>
 
 #include "InducedSubGraphSelection.h"
 

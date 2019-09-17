@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _MixedModel_H
-#define _MixedModel_H
+
+#ifndef MIXED_MODEL_H
+#define MIXED_MODEL_H
 
 #include <unordered_map>
 
@@ -95,4 +96,4 @@ private:
   tlp::IntegerProperty *shapeResult;
 };
 
-#endif
+#endif // MIXED_MODEL_H

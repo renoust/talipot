@@ -1,16 +1,16 @@
-#include <tulip/PluginLoaderTxt.h>
-#include <tulip/PluginLibraryLoader.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/MouseInteractors.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlGraphRenderingParameters.h>
+#include <talipot/PluginLoaderTxt.h>
+#include <talipot/PluginLibraryLoader.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlGraphRenderingParameters.h>
 
 #include <QApplication>
 #include <QString>
@@ -107,17 +107,17 @@ void setGraphRenderingParameters(GlGraphComposite *glGraphComposite) {
 int main(int argc, char **argv) {
 
   // A QApplication must always be declared at the beginning of the main function if you intend to
-  // use the tulip-gui library
-  // This must be done before calling tlp::initTulipSoftware()
+  // use the talipot-gui library
+  // This must be done before calling tlp::initTalipotSoftware()
   QApplication app(argc, argv);
 
   // Initialize the library and load all plugins
-  tlp::initTulipSoftware();
+  tlp::initTalipotSoftware();
 
   Graph *g = nullptr;
   if (QApplication::arguments().size() == 2) {
     // Load the file passed as first argument into a graph.
-    // This method will select the default Tulip algorithm plugin (TLP)
+    // This method will select the default Talipot algorithm plugin (TLP)
     QString filename = QApplication::arguments()[1];
     if (!((filename.endsWith(".tlp")) || (filename.endsWith(".tlp.gz")))) {
       cout << "File " << QStringToTlpString(filename)

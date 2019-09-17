@@ -1,10 +1,10 @@
 ADD_CORE_FILES(CMakeLists.txt ColorMapping.cpp)
 
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} .)
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} .)
 
 ##----------------------------------------------------------------------------------------------------------------------------
 
-IF(NOT TULIP_BUILD_CORE_ONLY)
+IF(NOT TALIPOT_BUILD_CORE_ONLY)
 
 QTX_SET_INCLUDES_AND_DEFINITIONS()
 
@@ -21,22 +21,22 @@ QTX_WRAP_CPP(ColorMapping_MOC_SRCS
   DoubleStringsListRelationDialog.h
 )
 
-ADD_LIBRARY(ColorMapping-${TulipVersion} SHARED ${ColorMapping_SRCS} ${ColorMapping_UI_SRCS} ${ColorMapping_MOC_SRCS})
-TARGET_LINK_LIBRARIES(ColorMapping-${TulipVersion} ${LibTulipCoreName} ${LibTulipGUIName})
+ADD_LIBRARY(ColorMapping-${TalipotVersion} SHARED ${ColorMapping_SRCS} ${ColorMapping_UI_SRCS} ${ColorMapping_MOC_SRCS})
+TARGET_LINK_LIBRARIES(ColorMapping-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotGUIName})
 
-ELSE(NOT TULIP_BUILD_CORE_ONLY)
+ELSE(NOT TALIPOT_BUILD_CORE_ONLY)
 
 SET(ColorMapping_SRCS
   ColorMapping.cpp
 )
 
 SET_SOURCE_FILES_PROPERTIES(ColorMapping.cpp
-                            PROPERTIES COMPILE_DEFINITIONS TULIP_BUILD_CORE_ONLY)
+                            PROPERTIES COMPILE_DEFINITIONS TALIPOT_BUILD_CORE_ONLY)
 
-ADD_LIBRARY(ColorMapping-${TulipVersion} SHARED ${ColorMapping_SRCS})
-TARGET_LINK_LIBRARIES(ColorMapping-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(ColorMapping-${TalipotVersion} SHARED ${ColorMapping_SRCS})
+TARGET_LINK_LIBRARIES(ColorMapping-${TalipotVersion} ${LibTalipotCoreName})
 
-ENDIF(NOT TULIP_BUILD_CORE_ONLY)
+ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)
 
 ##----------------------------------------------------------------------------------------------------------------------------
-TULIP_INSTALL_PLUGIN(ColorMapping-${TulipVersion} ${TulipPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ColorMapping-${TalipotVersion} ${TalipotPluginsInstallDir})

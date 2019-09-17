@@ -127,7 +127,7 @@ struct ShapeAttr {
 };
 
 ShapeAttr ShapeAttrA[] = {
-    // tulip shapes
+    // talipot shapes
     {"box", 0},
     {"boxoutlined", 1},
     {"sphere", 2},

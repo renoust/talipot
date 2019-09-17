@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef HISTOGRAMVIEW_H_
-#define HISTOGRAMVIEW_H_
+#ifndef HISTOGRAM_VIEW_H
+#define HISTOGRAM_VIEW_H
 
-#include <tulip/GlMainView.h>
+#include <talipot/GlMainView.h>
 
 #include <vector>
 #include <unordered_map>
@@ -22,7 +22,7 @@
 #include "../../utils/PluginNames.h"
 #include "Histogram.h"
 
-#include <tulip/OpenGlIncludes.h>
+#include <talipot/OpenGlIncludes.h>
 
 namespace tlp {
 
@@ -37,7 +37,7 @@ class QuickAccessBarImpl;
 
 /*@{*/
 /** \file
- *  \brief  Tulip Histogram view
+ *  \brief Histogram view
 
  * This view plugin allows to create frequency histograms from graph properties (supported types are
  Double and Integer).
@@ -204,4 +204,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMVIEW_H_ */
+#endif // HISTOGRAM_VIEW_H

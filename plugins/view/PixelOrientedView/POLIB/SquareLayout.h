@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SQUARELAYOUT_H
-#define SQUARELAYOUT_H
+#ifndef SQUARE_LAYOUT_H
+#define SQUARE_LAYOUT_H
 
 #include "LayoutFunction.h"
 
@@ -27,4 +27,4 @@ private:
   unsigned int _width;
 };
 } // namespace pocore
-#endif // SQUARELAYOUT_H
+#endif // SQUARE_LAYOUT_H

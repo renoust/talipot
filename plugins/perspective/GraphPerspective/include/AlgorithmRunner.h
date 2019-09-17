@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ALGORITHMRUNNER_H
-#define ALGORITHMRUNNER_H
+
+#ifndef ALGORITHM_RUNNER_H
+#define ALGORITHM_RUNNER_H
 
 #include <QWidget>
 
-#include <tulip/PluginModel.h>
-#include <tulip/Algorithm.h>
+#include <talipot/PluginModel.h>
+#include <talipot/Algorithm.h>
 
 #include "AlgorithmRunnerItem.h"
 
@@ -71,4 +72,4 @@ protected:
   bool eventFilter(QObject *, QEvent *) override;
 };
 
-#endif // ALGORITHMRUNNER_H
+#endif // ALGORITHM_RUNNER_H

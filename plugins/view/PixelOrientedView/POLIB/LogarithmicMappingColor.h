@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef LOGARITHMICMAPPINGCOLOR_H
-#define LOGARITHMICMAPPINGCOLOR_H
+#ifndef LOGARITHMIC_MAPPING_COLOR_H
+#define LOGARITHMIC_MAPPING_COLOR_H
 
 #include "potypes.h"
 #include "LinearMappingColor.h"
@@ -24,4 +24,4 @@ public:
   RGBA getColor(const double &value, const unsigned int) const override;
 };
 } // namespace pocore
-#endif // LOGARITHMICMAPPINGCOLOR_H
+#endif // LOGARITHMIC_MAPPING_COLOR_H

@@ -11,10 +11,10 @@
  *
  */
 
-#include <tulip/OpenGlConfigManager.h>
-#include <tulip/GlLines.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/Camera.h>
+#include <talipot/OpenGlConfigManager.h>
+#include <talipot/GlLines.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Camera.h>
 
 #include <QEvent>
 

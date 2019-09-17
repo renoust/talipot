@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef SOMPREVIEWCOMPOSITE_H_
-#define SOMPREVIEWCOMPOSITE_H_
+#ifndef SOM_PREVIEW_COMPOSITE_H
+#define SOM_PREVIEW_COMPOSITE_H
 
-#include <tulip/GlComposite.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlRect.h>
+#include <talipot/GlComposite.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlRect.h>
 #include "GlLabelledColorScale.h"
 #include <SOMMap.h>
 #include "SOMMapElement.h"
@@ -80,4 +80,4 @@ protected:
   tlp::Coord currentPosition;
 };
 } // namespace tlp
-#endif /* SOMPREVIEWCOMPOSITE_H_ */
+#endif // SOM_PREVIEW_COMPOSITE_H

@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef BASICMETRICTEST_H
-#define BASICMETRICTEST_H
+
+#ifndef BASIC_METRIC_TEST_H
+#define BASIC_METRIC_TEST_H
 
 #include "CppUnitIncludes.h"
 
@@ -67,4 +68,4 @@ public:
   void testStrongComponent();
 };
 
-#endif // BASICMETRICTEST_H
+#endif // BASIC_METRIC_TEST_H

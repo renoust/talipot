@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef SCATTERPLOTOVERVIEW_H_
-#define SCATTERPLOTOVERVIEW_H_
+#ifndef SCATTER_PLOT2D_H
+#define SCATTER_PLOT2D_H
 
-#include <tulip/GlComposite.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/Graph.h>
+#include <talipot/GlComposite.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/Graph.h>
 
 namespace tlp {
 
@@ -183,4 +183,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOTOVERVIEW_H_ */
+#endif // SCATTER_PLOT2D_H

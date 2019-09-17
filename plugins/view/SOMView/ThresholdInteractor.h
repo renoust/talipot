@@ -11,18 +11,18 @@
  *
  */
 
-#ifndef THRESHOLDINTERACTOR_H_
-#define THRESHOLDINTERACTOR_H_
+#ifndef THRESHOLD_INTERACTOR_H
+#define THRESHOLD_INTERACTOR_H
 
-#include <tulip/OpenGlIncludes.h>
+#include <talipot/OpenGlIncludes.h>
 
 #include "EditColorScaleInteractor.h"
 
-#include <tulip/GlComposite.h>
-#include <tulip/Observable.h>
-#include <tulip/Size.h>
-#include <tulip/Color.h>
-#include <tulip/Coord.h>
+#include <talipot/GlComposite.h>
+#include <talipot/Observable.h>
+#include <talipot/Size.h>
+#include <talipot/Color.h>
+#include <talipot/Coord.h>
 
 #include <QMutex>
 
@@ -147,4 +147,4 @@ protected:
   GLuint textureId;
 };
 } // namespace tlp
-#endif /* THRESHOLDINTERACTOR_H_ */
+#endif // THRESHOLD_INTERACTOR_H

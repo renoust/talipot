@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef QUANTITATIVE_PARALLEL_AXIS
-#define QUANTITATIVE_PARALLEL_AXIS
+#ifndef QUANTITATIVE_PARALLEL_AXIS_H
+#define QUANTITATIVE_PARALLEL_AXIS_H
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
 #include "ParallelAxis.h"
 
-#include <tulip/GlQuantitativeAxis.h>
+#include <talipot/GlQuantitativeAxis.h>
 
 const unsigned int DEFAULT_NB_AXIS_GRAD = 20;
 
@@ -162,4 +162,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif
+#endif // QUANTITATIVE_PARALLEL_AXIS_H

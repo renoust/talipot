@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/TulipViewSettings.h>
-#include <tulip/Glyph.h>
-#include <tulip/EdgeExtremityGlyph.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/OpenGlIncludes.h>
-#include <tulip/AroundTexturedSphere.h>
+
+#include <talipot/ViewSettings.h>
+#include <talipot/Glyph.h>
+#include <talipot/EdgeExtremityGlyph.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/OpenGlIncludes.h>
+#include <talipot/AroundTexturedSphere.h>
 
 using namespace std;
 using namespace tlp;

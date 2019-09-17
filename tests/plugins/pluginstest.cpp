@@ -19,40 +19,40 @@
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
-#include <tulip/TlpTools.h>
+#include <talipot/TlpTools.h>
 #ifndef NDEBUG
-#include <tulip/PluginLoaderTxt.h>
+#include <talipot/PluginLoaderTxt.h>
 #endif
-#include <tulip/PluginLibraryLoader.h>
+#include <talipot/PluginLibraryLoader.h>
 
-static void loadTulipPluginsFromDir(const std::string &pluginsDir,
-                                    tlp::PluginLoader *pluginLoader = nullptr) {
-  std::string oldTlpPluginsPath = tlp::TulipPluginsPath;
-  tlp::TulipPluginsPath = pluginsDir;
+static void loadTalipotPluginsFromDir(const std::string &pluginsDir,
+                                      tlp::PluginLoader *pluginLoader = nullptr) {
+  std::string oldTlpPluginsPath = tlp::TalipotPluginsPath;
+  tlp::TalipotPluginsPath = pluginsDir;
   tlp::PluginLibraryLoader::loadPlugins(pluginLoader);
-  tlp::TulipPluginsPath = oldTlpPluginsPath;
+  tlp::TalipotPluginsPath = oldTlpPluginsPath;
 }
 
 int main(int /* arg */, char ** /* argv */) {
 
-  std::string tulipBuildDir = TULIP_BUILD_DIR;
+  std::string talipotBuildDir = TALIPOT_BUILD_DIR;
 
-  tlp::initTulipLib();
+  tlp::initTalipotLib();
   tlp::PluginLoader *pLoader = nullptr;
 #ifndef NDEBUG
   tlp::PluginLoaderTxt loader;
   pLoader = &loader;
 #endif
 
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/clustering", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/colors", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/export", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/import", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/layout", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/layout/FastOverlapRemoval", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/metric", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/selection", pLoader);
-  loadTulipPluginsFromDir(tulipBuildDir + "/plugins/sizes", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/clustering", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/colors", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/export", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/import", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/layout", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/layout/FastOverlapRemoval", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/metric", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/selection", pLoader);
+  loadTalipotPluginsFromDir(talipotBuildDir + "/plugins/sizes", pLoader);
 
   // CPPUNIT_NS::QtUi::TestRunner runner;
   CPPUNIT_NS::TestResult controller;

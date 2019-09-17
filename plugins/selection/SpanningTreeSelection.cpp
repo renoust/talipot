@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "SpanningTreeSelection.h"
 
-#include <tulip/GraphTools.h>
+#include <talipot/GraphTools.h>
 
 PLUGIN(SpanningTreeSelection)
 

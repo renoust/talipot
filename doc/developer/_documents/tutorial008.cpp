@@ -1,12 +1,12 @@
 #include <iostream>
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/AcyclicTest.h>
-#include <tulip/ConnectedTest.h>
-#include <tulip/PlanarityTest.h>
-#include <tulip/OuterPlanarTest.h>
-#include <tulip/SimpleTest.h>
-#include <tulip/TreeTest.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/AcyclicTest.h>
+#include <talipot/ConnectedTest.h>
+#include <talipot/PlanarityTest.h>
+#include <talipot/OuterPlanarTest.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/TreeTest.h>
 
 /**
  * Tutorial 008
@@ -19,8 +19,8 @@ using namespace std;
 using namespace tlp;
 
 int main() {
-  // initialize the Tulip libs
-  initTulipLib();
+  // initialize the Talipot libs
+  initTalipotLib();
 
   // create an empty graph
   Graph *graph = newGraph();

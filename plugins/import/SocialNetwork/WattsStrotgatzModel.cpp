@@ -12,10 +12,10 @@
  */
 
 #include <cmath>
-#include <tulip/ImportModule.h>
-#include <tulip/PluginProgress.h>
-#include <tulip/Graph.h>
-#include <tulip/TlpTools.h>
+#include <talipot/ImportModule.h>
+#include <talipot/PluginProgress.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpTools.h>
 #include <string>
 
 using namespace std;

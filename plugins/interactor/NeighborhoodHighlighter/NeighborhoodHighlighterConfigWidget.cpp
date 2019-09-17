@@ -14,7 +14,7 @@
 #include "NeighborhoodHighlighterConfigWidget.h"
 #include "ui_NeighborhoodHighlighterConfigWidget.h"
 
-#include <tulip/TlpQtTools.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace tlp;
 

@@ -10,16 +10,17 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <QMenu>
 #include "PreferencesDialog.h"
 
 #include "ui_PreferencesDialog.h"
 
-#include <tulip/Perspective.h>
-#include <tulip/TlpTools.h>
-#include <tulip/TulipSettings.h>
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/TulipMetaTypes.h>
+#include <talipot/Perspective.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Settings.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/MetaTypes.h>
 
 #include <QMessageBox>
 
@@ -28,7 +29,7 @@ using namespace tlp;
 PreferencesDialog::PreferencesDialog(QWidget *parent)
     : QDialog(parent), _ui(new Ui::PreferencesDialog) {
   _ui->setupUi(this);
-  _ui->graphDefaultsTable->setItemDelegate(new tlp::TulipItemDelegate(_ui->graphDefaultsTable));
+  _ui->graphDefaultsTable->setItemDelegate(new tlp::ItemDelegate(_ui->graphDefaultsTable));
   connect(_ui->graphDefaultsTable, SIGNAL(cellChanged(int, int)), this,
           SLOT(cellChanged(int, int)));
   _ui->graphDefaultsTable->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -36,7 +37,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
           SLOT(showGraphDefaultsContextMenu(const QPoint &)));
   connect(_ui->randomSeedCheck, SIGNAL(stateChanged(int)), this, SLOT(randomSeedCheckChanged(int)));
   connect(_ui->resetAllDrawingDefaultsButton, SIGNAL(released()), this,
-          SLOT(resetToTulipDefaults()));
+          SLOT(resetToTalipotDefaults()));
 
   // disable edition for title items (in column 0)
   for (int i = 0; i < _ui->graphDefaultsTable->rowCount(); ++i) {
@@ -52,16 +53,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
 PreferencesDialog::~PreferencesDialog() {
   delete _ui;
-}
-
-void PreferencesDialog::usetlpbformat(int state) {
-  if (state == Qt::Checked) {
-    QMessageBox::warning(this, "Use tlpb file format",
-                         "Be careful: using the tlpb file format "
-                         "means faster Tulip project loading/saving "
-                         "but you will lose compatibility with "
-                         "previous versions of Tulip (<4.10).");
-  }
 }
 
 template <typename PROP, typename TYPE>
@@ -121,121 +112,120 @@ inline void setDefaultEdgeValueInProperty(const std::string &propertyName, const
 }
 
 void PreferencesDialog::writeSettings() {
-  TulipSettings::instance().setProxyEnabled(_ui->proxyCheck->isChecked());
+  Settings::instance().setProxyEnabled(_ui->proxyCheck->isChecked());
 
   switch (_ui->proxyType->currentIndex()) {
   case 0:
-    TulipSettings::instance().setProxyType(QNetworkProxy::Socks5Proxy);
+    Settings::instance().setProxyType(QNetworkProxy::Socks5Proxy);
     break;
 
   case 1:
-    TulipSettings::instance().setProxyType(QNetworkProxy::HttpProxy);
+    Settings::instance().setProxyType(QNetworkProxy::HttpProxy);
     break;
 
   case 2:
-    TulipSettings::instance().setProxyType(QNetworkProxy::HttpCachingProxy);
+    Settings::instance().setProxyType(QNetworkProxy::HttpCachingProxy);
     break;
 
   case 3:
-    TulipSettings::instance().setProxyType(QNetworkProxy::FtpCachingProxy);
+    Settings::instance().setProxyType(QNetworkProxy::FtpCachingProxy);
     break;
 
   default:
     break;
   }
 
-  TulipSettings::instance().setProxyHost(_ui->proxyAddr->text());
-  TulipSettings::instance().setProxyPort(_ui->proxyPort->value());
-  TulipSettings::instance().setUseProxyAuthentification(_ui->proxyAuthCheck->isChecked());
-  TulipSettings::instance().setProxyUsername(_ui->proxyUser->text());
-  TulipSettings::instance().setProxyPassword(_ui->proxyPassword->text());
+  Settings::instance().setProxyHost(_ui->proxyAddr->text());
+  Settings::instance().setProxyPort(_ui->proxyPort->value());
+  Settings::instance().setUseProxyAuthentification(_ui->proxyAuthCheck->isChecked());
+  Settings::instance().setProxyUsername(_ui->proxyUser->text());
+  Settings::instance().setProxyPassword(_ui->proxyPassword->text());
 
   QAbstractItemModel *model = _ui->graphDefaultsTable->model();
   bool applyDrawingDefaults = _ui->applyDrawingDefaultsCheck->isChecked();
   bool graphPush = true;
 
-  if (TulipSettings::instance().defaultColor(tlp::NODE) !=
+  if (Settings::instance().defaultColor(tlp::NODE) !=
       model->data(model->index(0, 1)).value<tlp::Color>()) {
-    TulipSettings::instance().setDefaultColor(tlp::NODE,
-                                              model->data(model->index(0, 1)).value<tlp::Color>());
+    Settings::instance().setDefaultColor(tlp::NODE,
+                                         model->data(model->index(0, 1)).value<tlp::Color>());
 
     if (applyDrawingDefaults)
       setDefaultNodeValueInProperty<ColorProperty>(
-          "viewColor", TulipSettings::instance().defaultColor(tlp::NODE), graphPush);
+          "viewColor", Settings::instance().defaultColor(tlp::NODE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultColor(tlp::EDGE) !=
+  if (Settings::instance().defaultColor(tlp::EDGE) !=
       model->data(model->index(0, 2)).value<tlp::Color>()) {
-    TulipSettings::instance().setDefaultColor(tlp::EDGE,
-                                              model->data(model->index(0, 2)).value<tlp::Color>());
+    Settings::instance().setDefaultColor(tlp::EDGE,
+                                         model->data(model->index(0, 2)).value<tlp::Color>());
 
     if (applyDrawingDefaults)
       setDefaultEdgeValueInProperty<ColorProperty>(
-          "viewColor", TulipSettings::instance().defaultColor(tlp::EDGE), graphPush);
+          "viewColor", Settings::instance().defaultColor(tlp::EDGE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultSize(tlp::NODE) !=
+  if (Settings::instance().defaultSize(tlp::NODE) !=
       model->data(model->index(1, 1)).value<tlp::Size>()) {
-    TulipSettings::instance().setDefaultSize(tlp::NODE,
-                                             model->data(model->index(1, 1)).value<tlp::Size>());
+    Settings::instance().setDefaultSize(tlp::NODE,
+                                        model->data(model->index(1, 1)).value<tlp::Size>());
     setDefaultNodeValueInProperty<SizeProperty>(
-        "viewSize", TulipSettings::instance().defaultSize(tlp::NODE), graphPush);
+        "viewSize", Settings::instance().defaultSize(tlp::NODE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultSize(tlp::EDGE) !=
+  if (Settings::instance().defaultSize(tlp::EDGE) !=
       model->data(model->index(1, 2)).value<tlp::Size>()) {
-    TulipSettings::instance().setDefaultSize(tlp::EDGE,
-                                             model->data(model->index(1, 2)).value<tlp::Size>());
+    Settings::instance().setDefaultSize(tlp::EDGE,
+                                        model->data(model->index(1, 2)).value<tlp::Size>());
 
     if (applyDrawingDefaults)
       setDefaultEdgeValueInProperty<SizeProperty>(
-          "viewSize", TulipSettings::instance().defaultSize(tlp::EDGE), graphPush);
+          "viewSize", Settings::instance().defaultSize(tlp::EDGE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultShape(tlp::NODE) !=
+  if (Settings::instance().defaultShape(tlp::NODE) !=
       model->data(model->index(2, 1)).value<NodeShape::NodeShapes>()) {
-    TulipSettings::instance().setDefaultShape(
+    Settings::instance().setDefaultShape(
         tlp::NODE, model->data(model->index(2, 1)).value<NodeShape::NodeShapes>());
 
     if (applyDrawingDefaults)
       setDefaultNodeValueInProperty<IntegerProperty>(
-          "viewShape", TulipSettings::instance().defaultShape(tlp::NODE), graphPush);
+          "viewShape", Settings::instance().defaultShape(tlp::NODE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultShape(tlp::EDGE) !=
+  if (Settings::instance().defaultShape(tlp::EDGE) !=
       int(model->data(model->index(2, 2)).value<EdgeShape::EdgeShapes>())) {
-    TulipSettings::instance().setDefaultShape(
+    Settings::instance().setDefaultShape(
         tlp::EDGE, int(model->data(model->index(2, 2)).value<EdgeShape::EdgeShapes>()));
     setDefaultEdgeValueInProperty<IntegerProperty>(
-        "viewShape", TulipSettings::instance().defaultShape(tlp::EDGE), graphPush);
+        "viewShape", Settings::instance().defaultShape(tlp::EDGE), graphPush);
   }
 
-  if (TulipSettings::instance().defaultLabelColor() !=
+  if (Settings::instance().defaultLabelColor() !=
       model->data(model->index(4, 1)).value<tlp::Color>()) {
-    TulipSettings::instance().setDefaultLabelColor(
-        model->data(model->index(4, 1)).value<tlp::Color>());
+    Settings::instance().setDefaultLabelColor(model->data(model->index(4, 1)).value<tlp::Color>());
 
     if (applyDrawingDefaults) {
       setDefaultNodeValueInProperty<ColorProperty>(
-          "viewLabelColor", TulipSettings::instance().defaultLabelColor(), graphPush);
+          "viewLabelColor", Settings::instance().defaultLabelColor(), graphPush);
       setDefaultEdgeValueInProperty<ColorProperty>(
-          "viewLabelColor", TulipSettings::instance().defaultLabelColor(), graphPush);
+          "viewLabelColor", Settings::instance().defaultLabelColor(), graphPush);
     }
   }
 
-  TulipSettings::instance().setDefaultSelectionColor(
+  Settings::instance().setDefaultSelectionColor(
       model->data(model->index(3, 1)).value<tlp::Color>());
 
-  TulipSettings::instance().applyProxySettings();
+  Settings::instance().applyProxySettings();
 
-  TulipSettings::instance().setDisplayDefaultViews(_ui->displayDefaultViews->isChecked());
-  TulipSettings::instance().setAutomaticMapMetric(_ui->colorMappingCheck->isChecked());
-  TulipSettings::instance().setAutomaticRatio(_ui->aspectRatioCheck->isChecked());
-  TulipSettings::instance().setAutomaticCentering(_ui->centerViewCheck->isChecked());
-  TulipSettings::instance().setViewOrtho(_ui->viewOrthoCheck->isChecked());
-  TulipSettings::instance().setResultPropertyStored(_ui->resultPropertyStoredCheck->isChecked());
-  TulipSettings::instance().setLogPluginCall(_ui->logCombo->currentIndex());
-  TulipSettings::instance().setUseTlpbFileFormat(_ui->usetlpbformat->isChecked());
+  Settings::instance().setDisplayDefaultViews(_ui->displayDefaultViews->isChecked());
+  Settings::instance().setAutomaticMapMetric(_ui->colorMappingCheck->isChecked());
+  Settings::instance().setAutomaticRatio(_ui->aspectRatioCheck->isChecked());
+  Settings::instance().setAutomaticCentering(_ui->centerViewCheck->isChecked());
+  Settings::instance().setViewOrtho(_ui->viewOrthoCheck->isChecked());
+  Settings::instance().setResultPropertyStored(_ui->resultPropertyStoredCheck->isChecked());
+  Settings::instance().setLogPluginCall(_ui->logCombo->currentIndex());
+  Settings::instance().setUseTlpbFileFormat(_ui->usetlpbformat->isChecked());
 
   if (_ui->randomSeedCheck->isChecked()) {
     bool ok = true;
@@ -244,19 +234,19 @@ void PreferencesDialog::writeSettings() {
   } else
     tlp::setSeedOfRandomSequence();
 
-  TulipSettings::instance().setSeedOfRandomSequence(tlp::getSeedOfRandomSequence());
+  Settings::instance().setSeedOfRandomSequence(tlp::getSeedOfRandomSequence());
 }
 
 void PreferencesDialog::readSettings() {
-  _ui->proxyCheck->setChecked(TulipSettings::instance().isProxyEnabled());
+  _ui->proxyCheck->setChecked(Settings::instance().isProxyEnabled());
 
-  if (TulipSettings::instance().isProxyEnabled()) {
+  if (Settings::instance().isProxyEnabled()) {
     _ui->networkFrame1->setEnabled(true);
     _ui->networkFrame2->setEnabled(true);
     _ui->networkFrame3->setEnabled(true);
   }
 
-  switch (TulipSettings::instance().proxyType()) {
+  switch (Settings::instance().proxyType()) {
   case QNetworkProxy::Socks5Proxy:
     _ui->proxyType->setCurrentIndex(0);
     break;
@@ -277,62 +267,61 @@ void PreferencesDialog::readSettings() {
     break;
   }
 
-  _ui->proxyAddr->setText(TulipSettings::instance().proxyHost());
-  _ui->proxyPort->setValue(TulipSettings::instance().proxyPort());
-  _ui->proxyAuthCheck->setChecked(TulipSettings::instance().isUseProxyAuthentification());
+  _ui->proxyAddr->setText(Settings::instance().proxyHost());
+  _ui->proxyPort->setValue(Settings::instance().proxyPort());
+  _ui->proxyAuthCheck->setChecked(Settings::instance().isUseProxyAuthentification());
 
-  if (TulipSettings::instance().isUseProxyAuthentification()) {
+  if (Settings::instance().isUseProxyAuthentification()) {
     _ui->proxyUser->setEnabled(true);
     _ui->proxyPassword->setEnabled(true);
   }
 
-  _ui->proxyUser->setText(TulipSettings::instance().proxyUsername());
-  _ui->proxyPassword->setText(TulipSettings::instance().proxyPassword());
+  _ui->proxyUser->setText(Settings::instance().proxyUsername());
+  _ui->proxyPassword->setText(Settings::instance().proxyPassword());
 
   QAbstractItemModel *model = _ui->graphDefaultsTable->model();
-  model->setData(model->index(0, 1), QVariant::fromValue<tlp::Color>(
-                                         TulipSettings::instance().defaultColor(tlp::NODE)));
-  model->setData(model->index(0, 2), QVariant::fromValue<tlp::Color>(
-                                         TulipSettings::instance().defaultColor(tlp::EDGE)));
+  model->setData(model->index(0, 1),
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultColor(tlp::NODE)));
+  model->setData(model->index(0, 2),
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultColor(tlp::EDGE)));
   model->setData(model->index(1, 1),
-                 QVariant::fromValue<tlp::Size>(TulipSettings::instance().defaultSize(tlp::NODE)));
+                 QVariant::fromValue<tlp::Size>(Settings::instance().defaultSize(tlp::NODE)));
   model->setData(model->index(1, 2),
-                 QVariant::fromValue<tlp::Size>(TulipSettings::instance().defaultSize(tlp::EDGE)));
+                 QVariant::fromValue<tlp::Size>(Settings::instance().defaultSize(tlp::EDGE)));
   model->setData(model->index(2, 1),
                  QVariant::fromValue<NodeShape::NodeShapes>(static_cast<NodeShape::NodeShapes>(
-                     TulipSettings::instance().defaultShape(tlp::NODE))));
+                     Settings::instance().defaultShape(tlp::NODE))));
   model->setData(model->index(2, 2),
                  QVariant::fromValue<EdgeShape::EdgeShapes>(static_cast<EdgeShape::EdgeShapes>(
-                     TulipSettings::instance().defaultShape(tlp::EDGE))));
-  model->setData(model->index(3, 1), QVariant::fromValue<tlp::Color>(
-                                         TulipSettings::instance().defaultSelectionColor()));
-  model->setData(model->index(3, 2), QVariant::fromValue<tlp::Color>(
-                                         TulipSettings::instance().defaultSelectionColor()));
+                     Settings::instance().defaultShape(tlp::EDGE))));
+  model->setData(model->index(3, 1),
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultSelectionColor()));
+  model->setData(model->index(3, 2),
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultSelectionColor()));
   model->setData(model->index(4, 1),
-                 QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultLabelColor()));
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor()));
   model->setData(model->index(4, 2),
-                 QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultLabelColor()));
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor()));
   // edges selection color is not editable
   //_ui->graphDefaultsTable->item(3,2)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
   _ui->applyDrawingDefaultsCheck->setChecked(false);
   _ui->applyDrawingDefaultsCheck->setEnabled(!iteratorEmpty(tlp::getRootGraphs()));
 
-  _ui->displayDefaultViews->setChecked(TulipSettings::instance().displayDefaultViews());
-  _ui->aspectRatioCheck->setChecked(TulipSettings::instance().isAutomaticRatio());
-  _ui->centerViewCheck->setChecked(TulipSettings::instance().isAutomaticCentering());
-  _ui->viewOrthoCheck->setChecked(TulipSettings::instance().isViewOrtho());
-  _ui->resultPropertyStoredCheck->setChecked(TulipSettings::instance().isResultPropertyStored());
-  _ui->colorMappingCheck->setChecked(TulipSettings::instance().isAutomaticMapMetric());
-  _ui->logCombo->setCurrentIndex(TulipSettings::instance().logPluginCall());
+  _ui->displayDefaultViews->setChecked(Settings::instance().displayDefaultViews());
+  _ui->aspectRatioCheck->setChecked(Settings::instance().isAutomaticRatio());
+  _ui->centerViewCheck->setChecked(Settings::instance().isAutomaticCentering());
+  _ui->viewOrthoCheck->setChecked(Settings::instance().isViewOrtho());
+  _ui->resultPropertyStoredCheck->setChecked(Settings::instance().isResultPropertyStored());
+  _ui->colorMappingCheck->setChecked(Settings::instance().isAutomaticMapMetric());
+  _ui->logCombo->setCurrentIndex(Settings::instance().logPluginCall());
 
-  if (TulipSettings::instance().isUseTlpbFileFormat()) {
+  if (Settings::instance().isUseTlpbFileFormat()) {
     _ui->usetlpbformat->setChecked(true);
-  } else
-    connect(_ui->usetlpbformat, SIGNAL(stateChanged(int)), this, SLOT(usetlpbformat(int)));
+  }
 
   // initialize seed according to settings
   unsigned int seed;
-  tlp::setSeedOfRandomSequence(seed = TulipSettings::instance().seedOfRandomSequence());
+  tlp::setSeedOfRandomSequence(seed = Settings::instance().seedOfRandomSequence());
   // UINT_MAX seed value means the seed is random
   bool isSeedRandom = (seed == UINT_MAX);
   _ui->randomSeedCheck->setChecked(!isSeedRandom);
@@ -356,48 +345,44 @@ void PreferencesDialog::randomSeedCheckChanged(int state) {
 #define RESET_NODE 0
 #define RESET_EDGE 1
 #define RESET_BOTH 2
-void PreferencesDialog::resetToTulipDefaults(int row, int updateMode) {
+void PreferencesDialog::resetToTalipotDefaults(int row, int updateMode) {
   if (updateMode == RESET_BOTH) {
-    resetToTulipDefaults(row, RESET_NODE);
-    resetToTulipDefaults(row, RESET_EDGE);
+    resetToTalipotDefaults(row, RESET_NODE);
+    resetToTalipotDefaults(row, RESET_EDGE);
     return;
   }
 
   if (row == -1) {
     for (row = 0; row < _ui->graphDefaultsTable->rowCount(); ++row)
-      resetToTulipDefaults(row, RESET_BOTH);
+      resetToTalipotDefaults(row, RESET_BOTH);
 
     return;
   }
 
   QAbstractItemModel *model = _ui->graphDefaultsTable->model();
   model->setData(model->index(4, 1),
-                 QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultLabelColor()));
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor()));
   model->setData(model->index(4, 2),
-                 QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultLabelColor()));
+                 QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor()));
 
   switch (row) {
   case 0: // default color
     if (updateMode == RESET_NODE)
-      model->setData(
-          model->index(0, 1),
-          QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultColor(tlp::NODE, true)));
+      model->setData(model->index(0, 1), QVariant::fromValue<tlp::Color>(
+                                             Settings::instance().defaultColor(tlp::NODE, true)));
     else
-      model->setData(
-          model->index(0, 2),
-          QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultColor(tlp::EDGE, true)));
+      model->setData(model->index(0, 2), QVariant::fromValue<tlp::Color>(
+                                             Settings::instance().defaultColor(tlp::EDGE, true)));
 
     break;
 
   case 1: // default size
     if (updateMode == RESET_NODE)
-      model->setData(
-          model->index(1, 1),
-          QVariant::fromValue<tlp::Size>(TulipSettings::instance().defaultSize(tlp::NODE, true)));
+      model->setData(model->index(1, 1), QVariant::fromValue<tlp::Size>(
+                                             Settings::instance().defaultSize(tlp::NODE, true)));
     else
-      model->setData(
-          model->index(1, 2),
-          QVariant::fromValue<tlp::Size>(TulipSettings::instance().defaultSize(tlp::EDGE, true)));
+      model->setData(model->index(1, 2), QVariant::fromValue<tlp::Size>(
+                                             Settings::instance().defaultSize(tlp::EDGE, true)));
 
     break;
 
@@ -405,33 +390,31 @@ void PreferencesDialog::resetToTulipDefaults(int row, int updateMode) {
     if (updateMode == RESET_NODE)
       model->setData(model->index(2, 1),
                      QVariant::fromValue<NodeShape::NodeShapes>(static_cast<NodeShape::NodeShapes>(
-                         TulipSettings::instance().defaultShape(tlp::NODE, true))));
+                         Settings::instance().defaultShape(tlp::NODE, true))));
     else
       model->setData(model->index(2, 2),
                      QVariant::fromValue<EdgeShape::EdgeShapes>(static_cast<EdgeShape::EdgeShapes>(
-                         TulipSettings::instance().defaultShape(tlp::EDGE, true))));
+                         Settings::instance().defaultShape(tlp::EDGE, true))));
 
     break;
 
   case 3: // default selection color
     if (updateMode == RESET_NODE)
-      model->setData(
-          model->index(3, 1),
-          QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultSelectionColor(true)));
+      model->setData(model->index(3, 1), QVariant::fromValue<tlp::Color>(
+                                             Settings::instance().defaultSelectionColor(true)));
     else
-      model->setData(
-          model->index(3, 2),
-          QVariant::fromValue<tlp::Color>(TulipSettings::instance().defaultSelectionColor(true)));
+      model->setData(model->index(3, 2), QVariant::fromValue<tlp::Color>(
+                                             Settings::instance().defaultSelectionColor(true)));
 
     break;
 
   case 4: // default label color
     if (updateMode == RESET_NODE)
-      model->setData(model->index(4, 1), QVariant::fromValue<tlp::Color>(
-                                             TulipSettings::instance().defaultLabelColor(true)));
+      model->setData(model->index(4, 1),
+                     QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor(true)));
     else
-      model->setData(model->index(4, 2), QVariant::fromValue<tlp::Color>(
-                                             TulipSettings::instance().defaultLabelColor(true)));
+      model->setData(model->index(4, 2),
+                     QVariant::fromValue<tlp::Color>(Settings::instance().defaultLabelColor(true)));
 
   default:
     break;
@@ -459,30 +442,30 @@ void PreferencesDialog::showGraphDefaultsContextMenu(const QPoint &p) {
     contextMenu.addSeparator();
 
     if (row < 3) {
-      QMenu *subMenu = contextMenu.addMenu(QString("Reset to Tulip predefined"));
+      QMenu *subMenu = contextMenu.addMenu(QString("Reset to Talipot predefined"));
       subMenu->setToolTip(
           QString("Choose the type of elements for which the default value will be reset"));
       action = subMenu->addAction(QString("Node default value"));
       action->setToolTip(QString("Reset the node ") + defaultProp +
-                         " to the Tulip predefined value");
+                         " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_NODE)));
       action = subMenu->addAction(QString("Edge default value"));
       action->setToolTip(QString("Reset the edge ") + defaultProp +
-                         " to the Tulip predefined value");
+                         " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_EDGE)));
       action = subMenu->addAction(QString("Node/Edge default values"));
       action->setToolTip(QString("Reset the node/edge ") + defaultProp +
-                         " to the Tulip predefined value");
+                         " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_BOTH)));
     } else {
-      action = contextMenu.addAction(QString("Reset to Tulip predefined value"));
+      action = contextMenu.addAction(QString("Reset to Talipot predefined value"));
       action->setData(QVariant(int(RESET_BOTH)));
-      action->setToolTip(QString("Reset ") + defaultProp + " to the Tulip predefined value");
+      action->setToolTip(QString("Reset ") + defaultProp + " to the Talipot predefined value");
     }
 
     action = contextMenu.exec(QCursor::pos() - QPoint(5, 5));
 
     if (action)
-      resetToTulipDefaults(row, action->data().toInt());
+      resetToTalipotDefaults(row, action->data().toInt());
   }
 }

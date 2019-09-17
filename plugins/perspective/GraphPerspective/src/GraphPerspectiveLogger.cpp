@@ -23,8 +23,8 @@
 #include <QShowEvent>
 #include <QHideEvent>
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/TulipSettings.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Settings.h>
 
 GraphPerspectiveLogger::GraphPerspectiveLogger(QWidget *parent)
     : QDialog(parent), _logType(QtDebugMsg), _ui(new Ui::GraphPerspectiveLogger),
@@ -33,7 +33,7 @@ GraphPerspectiveLogger::GraphPerspectiveLogger(QWidget *parent)
   _ui->listWidget->installEventFilter(this);
   _ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
   QPushButton *copybutton =
-      new QPushButton(QIcon(":/tulip/gui/icons/16/clipboard.png"), "&Copy selection", this);
+      new QPushButton(QIcon(":/talipot/gui/icons/16/clipboard.png"), "&Copy selection", this);
   copybutton->setToolTip("Copy the selected lines into the clipboard");
   _ui->buttonBox->addButton(copybutton, QDialogButtonBox::ActionRole);
   QPushButton *clearbutton = new QPushButton("Clear", this);
@@ -49,7 +49,7 @@ GraphPerspectiveLogger::GraphPerspectiveLogger(QWidget *parent)
   connect(resetb, SIGNAL(clicked()), this, SLOT(clear()));
   connect(resetb, SIGNAL(clicked()), this, SLOT(hide()));
   connect(_ui->anchoredCB, SIGNAL(toggled(bool)), this, SLOT(setAnchored(bool)));
-  _ui->anchoredCB->setChecked(tlp::TulipSettings::instance().loggerAnchored());
+  _ui->anchoredCB->setChecked(tlp::Settings::instance().loggerAnchored());
 }
 
 GraphPerspectiveLogger::~GraphPerspectiveLogger() {
@@ -127,11 +127,11 @@ void GraphPerspectiveLogger::logImpl(QtMsgType type, const QString &msg) {
 }
 
 QPixmap GraphPerspectiveLogger::icon(LogType logType) const {
-  QString pxUrl(":/tulip/graphperspective/icons/16/logger-");
+  QString pxUrl(":/talipot/graphperspective/icons/16/logger-");
 
   switch (logType) {
   case Python:
-    return QPixmap(":/tulip/graphperspective/icons/16/python.png");
+    return QPixmap(":/talipot/graphperspective/icons/16/python.png");
 
   case Info:
     pxUrl += "info";
@@ -238,7 +238,7 @@ void GraphPerspectiveLogger::setAnchored(bool anchored) {
     setMaximumSize(QSize(16777215, 16777215));
   }
 
-  tlp::TulipSettings::instance().setLoggerAnchored(anchored);
+  tlp::Settings::instance().setLoggerAnchored(anchored);
 
   // force the update of the window after modifying its flags
   if (visible) {

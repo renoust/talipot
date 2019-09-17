@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELCOORDINATESVIEWQUICKACCESSBAR_H
-#define PARALLELCOORDINATESVIEWQUICKACCESSBAR_H
+#ifndef PARALLEL_COORDINATES_VIEW_QUICK_ACCESSBAR_H
+#define PARALLEL_COORDINATES_VIEW_QUICK_ACCESSBAR_H
 
-#include <tulip/QuickAccessBar.h>
+#include <talipot/QuickAccessBar.h>
 
 namespace tlp {
 
@@ -36,4 +36,4 @@ public slots:
   void setLabelsVisible(bool) override;
 };
 } // namespace tlp
-#endif
+#endif // PARALLEL_COORDINATES_VIEW_QUICK_ACCESSBAR_H

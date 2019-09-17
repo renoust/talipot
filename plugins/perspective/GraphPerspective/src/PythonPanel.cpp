@@ -11,14 +11,14 @@
  *
  */
 
-#include <tulip/PythonInterpreter.h>
+#include <talipot/PythonInterpreter.h>
 
 #include "PythonPanel.h"
 #include "ui_PythonPanel.h"
 
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/TulipMimes.h>
-#include <tulip/TulipMetaTypes.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/Mimes.h>
+#include <talipot/MetaTypes.h>
 
 static const QString setCurrentGraphFunction = "graph = None\n"
                                                "def setCurrentGraph(g):\n"
@@ -45,7 +45,7 @@ void PythonPanel::setModel(tlp::GraphHierarchiesModel *model) {
 
 void PythonPanel::graphComboIndexChanged() {
   tlp::Graph *g = _ui->graphCombo->model()
-                      ->data(_ui->graphCombo->selectedIndex(), tlp::TulipModel::GraphRole)
+                      ->data(_ui->graphCombo->selectedIndex(), tlp::Model::GraphRole)
                       .value<tlp::Graph *>();
   tlp::PythonInterpreter::getInstance()->runGraphScript("__main__", "setCurrentGraph", g);
   _ui->pythonShellWidget->getAutoCompletionDb()->setGraph(g);
@@ -77,7 +77,7 @@ void PythonPanel::dropEvent(QDropEvent *dropEv) {
 
 void PythonPanel::beginCurrentLinesExecution() {
   tlp::Graph *g = _ui->graphCombo->model()
-                      ->data(_ui->graphCombo->selectedIndex(), tlp::TulipModel::GraphRole)
+                      ->data(_ui->graphCombo->selectedIndex(), tlp::Model::GraphRole)
                       .value<tlp::Graph *>();
 
   // undo/redo management
@@ -87,7 +87,7 @@ void PythonPanel::beginCurrentLinesExecution() {
 
 void PythonPanel::endCurrentLinesExecution() {
   tlp::Graph *g = _ui->graphCombo->model()
-                      ->data(_ui->graphCombo->selectedIndex(), tlp::TulipModel::GraphRole)
+                      ->data(_ui->graphCombo->selectedIndex(), tlp::Model::GraphRole)
                       .value<tlp::Graph *>();
   // undo/redo management
   g->popIfNoUpdates();

@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef HILBERTLAYOUT_H
-#define HILBERTLAYOUT_H
+#ifndef HILBERT_LAYOUT_H
+#define HILBERT_LAYOUT_H
 
 #include <string>
 
@@ -30,4 +30,4 @@ private:
   int shift;
 };
 } // namespace pocore
-#endif // HILBERTLAYOUT_H
+#endif // HILBERT_LAYOUT_H

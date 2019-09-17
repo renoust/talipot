@@ -1,4 +1,4 @@
-#include <tulip/Observable.h>
+#include <talipot/Observable.h>
 
 namespace tlp {
 class Graph;

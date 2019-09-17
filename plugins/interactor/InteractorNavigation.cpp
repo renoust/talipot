@@ -11,16 +11,16 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to navigate on the graph
+/** \brief Interactor to navigate on the graph
  *
  */
 class InteractorNavigation : public NodeLinkDiagramComponentInteractor {
@@ -32,7 +32,7 @@ public:
    * Default constructor
    */
   InteractorNavigation(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_navigation.png",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_navigation.png",
                                            "Navigate in graph",
                                            StandardInteractorPriority::Navigation) {}
 

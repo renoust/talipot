@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef PANELSELECTIONWIZARD_H
-#define PANELSELECTIONWIZARD_H
+
+#ifndef PANEL_SELECTION_WIZARD_H
+#define PANEL_SELECTION_WIZARD_H
 
 #include <QModelIndex>
 #include <QWizard>
@@ -56,4 +57,4 @@ protected:
   void done(int result) override;
 };
 
-#endif // PANELSELECTIONWIZARD_H
+#endif // PANEL_SELECTION_WIZARD_H

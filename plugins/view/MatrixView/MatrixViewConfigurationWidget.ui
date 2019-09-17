@@ -21,7 +21,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton, QComboBox {
-border-image: url(:/tulip/gui/ui/btn_26.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26.png) 4;
 border-width: 4;
 padding: 0px 6px;
 font-size: 12px;
@@ -37,13 +37,13 @@ QPushButton, QComboBox, QLabel {
 color: black;
 }
 QPushButton:hover, QComboBox:hover {
-border-image: url(:/tulip/gui/ui/btn_26_hover.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_hover.png) 4;
 }
 QPushButton:disabled, QComboBox::disabled {
 color:gray;
 }
 QPushButton:pressed{
-border-image: url(:/tulip/gui/ui/btn_26_pressed.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_pressed.png) 4;
 }
 QPushButton::menu-indicator{
 subcontrol-origin: margin;
@@ -55,12 +55,12 @@ outline: none;
 margin: 2
 }
 QComboBox::down-arrow {
-image: url(:/tulip/gui/ui/combobox_arrow.png);
+image: url(:/talipot/gui/ui/combobox_arrow.png);
 }
 QComboBox:drop-down {
 subcontrol-origin: padding;
 subcontrol-position: top right;
-border-left-style: none; 
+border-left-style: none;
 border-top-right-radius: 1px;
 border-bottom-right-radius: 1px;
 }
@@ -554,7 +554,7 @@ background-color: rgb(160, 160, 160);</string>
   <customwidget>
    <class>tlp::ColorButton</class>
    <extends>QPushButton</extends>
-   <header location="global">tulip/ColorButton.h</header>
+   <header location="global">talipot/ColorButton.h</header>
    <slots>
     <signal>colorChanged(QColor)</signal>
    </slots>

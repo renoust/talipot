@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef HEADERFRAME_H
-#define HEADERFRAME_H
+
+#ifndef HEADER_FRAME_H
+#define HEADER_FRAME_H
 
 #include <QWidget>
 
@@ -66,4 +67,4 @@ protected slots:
   void setExpanded(bool e);
 };
 
-#endif // HEADERFRAME_H
+#endif // HEADER_FRAME_H

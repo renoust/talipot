@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "Distances.h"
 
-#include <tulip/MutableContainer.h>
+#include <talipot/MutableContainer.h>
 
 using namespace tlp;
 using namespace std;

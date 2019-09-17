@@ -1,0 +1,62 @@
+/**
+ *
+ * Copyright (C) 2019  The Talipot developers
+ *
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
+ *
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
+ *
+ */
+
+#include <talipot/StringEditor.h>
+#include <talipot/TlpQtTools.h>
+#include <QVBoxLayout>
+#include <QDialogButtonBox>
+
+using namespace tlp;
+
+StringEditor::StringEditor(QWidget *parent) : QDialog(parent) {
+  QVBoxLayout *layout = new QVBoxLayout;
+  setLayout(layout);
+  edit = new QTextEdit(this);
+  layout->addWidget(edit);
+  QDialogButtonBox *buttonBox =
+      new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok, Qt::Horizontal);
+  layout->addWidget(buttonBox);
+  QWidget::setTabOrder(edit, buttonBox);
+  QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  setString(QString());
+  setModal(true);
+  setWindowTitle("Set string value");
+}
+
+QString StringEditor::getString() const {
+  return currentString;
+}
+
+void StringEditor::setString(const QString &qstr) {
+  currentString = qstr;
+  blockSignals(true);
+  edit->setPlainText(qstr);
+  blockSignals(false);
+}
+
+void StringEditor::done(int r) {
+  if (r == QDialog::Accepted)
+    currentString = edit->toPlainText();
+
+  QDialog::done(r);
+}
+
+// to ensure it is shown in the center of its parent
+void StringEditor::showEvent(QShowEvent *ev) {
+  QDialog::showEvent(ev);
+
+  if (parentWidget())
+    move(parentWidget()->window()->frameGeometry().topLeft() +
+         parentWidget()->window()->rect().center() - rect().center());
+}

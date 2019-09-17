@@ -5,13 +5,13 @@ ADD_SUBDIRECTORY(FastOverlapRemoval)
 ADD_SUBDIRECTORY(Grip)
 ADD_SUBDIRECTORY(LinLog)
 
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 
 IF(UNIX)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 ENDIF(UNIX)
 
-SET(LayoutUtils_SRCS 
+SET(LayoutUtils_SRCS
   DatasetTools.cpp
   OrientableCoord.cpp
   OrientableLayout.cpp
@@ -28,105 +28,105 @@ SET(LayoutUtilsLibraryName "")
 ENDIF(NOT EMSCRIPTEN)
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(MixedModel-${TulipVersion} SHARED MixedModel.cpp)
-TARGET_LINK_LIBRARIES(MixedModel-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(MixedModel-${TalipotVersion} SHARED MixedModel.cpp)
+TARGET_LINK_LIBRARIES(MixedModel-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-SET(ConnectedComponentPacking_SRCS 
+SET(ConnectedComponentPacking_SRCS
   ConnectedComponentPacking.cpp
   Number.cpp
   RectanglePacking.cpp
   rectanglePackingFonctions.cpp
   RectangleRelativePositionList.cpp
 )
-ADD_LIBRARY(ConnectedComponentPacking-${TulipVersion} SHARED ${ConnectedComponentPacking_SRCS})
-TARGET_LINK_LIBRARIES(ConnectedComponentPacking-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(ConnectedComponentPacking-${TalipotVersion} SHARED ${ConnectedComponentPacking_SRCS})
+TARGET_LINK_LIBRARIES(ConnectedComponentPacking-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(Random-${TulipVersion} SHARED Random.cpp)
-TARGET_LINK_LIBRARIES(Random-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(Random-${TalipotVersion} SHARED Random.cpp)
+TARGET_LINK_LIBRARIES(Random-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(GemLayout-${TulipVersion} SHARED GEMLayout.cpp)
-TARGET_LINK_LIBRARIES(GemLayout-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(GemLayout-${TalipotVersion} SHARED GEMLayout.cpp)
+TARGET_LINK_LIBRARIES(GemLayout-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(TreeReingoldAndTilforExtended-${TulipVersion} SHARED TreeReingoldAndTilfordExtended.cpp)
-TARGET_LINK_LIBRARIES(TreeReingoldAndTilforExtended-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(TreeReingoldAndTilforExtended-${TalipotVersion} SHARED TreeReingoldAndTilfordExtended.cpp)
+TARGET_LINK_LIBRARIES(TreeReingoldAndTilforExtended-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(ConeTreeExtended-${TulipVersion} SHARED ConeTreeExtended.cpp)
-TARGET_LINK_LIBRARIES(ConeTreeExtended-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(ConeTreeExtended-${TalipotVersion} SHARED ConeTreeExtended.cpp)
+TARGET_LINK_LIBRARIES(ConeTreeExtended-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(TreeRadial-${TulipVersion} SHARED TreeRadial.cpp)
-TARGET_LINK_LIBRARIES(TreeRadial-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(TreeRadial-${TalipotVersion} SHARED TreeRadial.cpp)
+TARGET_LINK_LIBRARIES(TreeRadial-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(TreeLeaf-${TulipVersion} SHARED TreeLeaf.cpp)
-TARGET_LINK_LIBRARIES(TreeLeaf-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(TreeLeaf-${TalipotVersion} SHARED TreeLeaf.cpp)
+TARGET_LINK_LIBRARIES(TreeLeaf-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(BubblePack-${TulipVersion} SHARED BubblePack.cpp)
-TARGET_LINK_LIBRARIES(BubblePack-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(BubblePack-${TalipotVersion} SHARED BubblePack.cpp)
+TARGET_LINK_LIBRARIES(BubblePack-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(BubbleTree-${TulipVersion} SHARED BubbleTree.cpp)
-TARGET_LINK_LIBRARIES(BubbleTree-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(BubbleTree-${TalipotVersion} SHARED BubbleTree.cpp)
+TARGET_LINK_LIBRARIES(BubbleTree-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(Circular-${TulipVersion} SHARED Circular.cpp)
-TARGET_LINK_LIBRARIES(Circular-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(Circular-${TalipotVersion} SHARED Circular.cpp)
+TARGET_LINK_LIBRARIES(Circular-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(HierarchicalGraph-${TulipVersion} SHARED HierarchicalGraph.cpp)
-TARGET_LINK_LIBRARIES(HierarchicalGraph-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(HierarchicalGraph-${TalipotVersion} SHARED HierarchicalGraph.cpp)
+TARGET_LINK_LIBRARIES(HierarchicalGraph-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(Tutte-${TulipVersion} SHARED Tutte.cpp)
-TARGET_LINK_LIBRARIES(Tutte-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(Tutte-${TalipotVersion} SHARED Tutte.cpp)
+TARGET_LINK_LIBRARIES(Tutte-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(Dendrogram-${TulipVersion} SHARED Dendrogram.cpp)
-TARGET_LINK_LIBRARIES(Dendrogram-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(Dendrogram-${TalipotVersion} SHARED Dendrogram.cpp)
+TARGET_LINK_LIBRARIES(Dendrogram-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(ImprovedWalker-${TulipVersion} SHARED ImprovedWalker.cpp)
-TARGET_LINK_LIBRARIES(ImprovedWalker-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
+ADD_LIBRARY(ImprovedWalker-${TalipotVersion} SHARED ImprovedWalker.cpp)
+TARGET_LINK_LIBRARIES(ImprovedWalker-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(SquarifiedTreeMap-${TulipVersion} SHARED SquarifiedTreeMap.cpp)
-TARGET_LINK_LIBRARIES(SquarifiedTreeMap-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(SquarifiedTreeMap-${TalipotVersion} SHARED SquarifiedTreeMap.cpp)
+TARGET_LINK_LIBRARIES(SquarifiedTreeMap-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(PerfectLayout-${TulipVersion} SHARED PerfectLayout.cpp)
-TARGET_LINK_LIBRARIES(PerfectLayout-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(PerfectLayout-${TalipotVersion} SHARED PerfectLayout.cpp)
+TARGET_LINK_LIBRARIES(PerfectLayout-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(OrthoTree-${TulipVersion} SHARED OrthoTree.cpp)
-TARGET_LINK_LIBRARIES(OrthoTree-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(OrthoTree-${TalipotVersion} SHARED OrthoTree.cpp)
+TARGET_LINK_LIBRARIES(OrthoTree-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(PolyominoPacking-${TulipVersion} SHARED PolyominoPacking.cpp)
-TARGET_LINK_LIBRARIES(PolyominoPacking-${TulipVersion} ${LayoutUtilsLibraryName} ${LibTulipCoreName})
-TULIP_INSTALL_PLUGIN(PolyominoPacking-${TulipVersion} ${TulipPluginsInstallDir})
+ADD_LIBRARY(PolyominoPacking-${TalipotVersion} SHARED PolyominoPacking.cpp)
+TARGET_LINK_LIBRARIES(PolyominoPacking-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
+TALIPOT_INSTALL_PLUGIN(PolyominoPacking-${TalipotVersion} ${TalipotPluginsInstallDir})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-TULIP_INSTALL_PLUGIN(MixedModel-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(ConnectedComponentPacking-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(Random-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(GemLayout-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(TreeReingoldAndTilforExtended-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(ConeTreeExtended-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(TreeRadial-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(TreeLeaf-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(BubblePack-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(BubbleTree-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(Circular-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(HierarchicalGraph-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(Tutte-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(Dendrogram-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(ImprovedWalker-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(SquarifiedTreeMap-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(OrthoTree-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(PerfectLayout-${TulipVersion} ${TulipPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(MixedModel-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ConnectedComponentPacking-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Random-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(GemLayout-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(TreeReingoldAndTilforExtended-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ConeTreeExtended-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(TreeRadial-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(TreeLeaf-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(BubblePack-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(BubbleTree-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Circular-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(HierarchicalGraph-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Tutte-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Dendrogram-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ImprovedWalker-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(SquarifiedTreeMap-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(OrthoTree-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(PerfectLayout-${TalipotVersion} ${TalipotPluginsInstallDir})

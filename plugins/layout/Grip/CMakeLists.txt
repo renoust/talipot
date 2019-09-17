@@ -1,7 +1,7 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 FILE(GLOB LIB_SRCS "*.cpp")
 
-ADD_LIBRARY(Grip-${TulipVersion} SHARED ${LIB_SRCS})
-TARGET_LINK_LIBRARIES(Grip-${TulipVersion}  ${LibTulipCoreName})
+ADD_LIBRARY(Grip-${TalipotVersion} SHARED ${LIB_SRCS})
+TARGET_LINK_LIBRARIES(Grip-${TalipotVersion}  ${LibTalipotCoreName})
 
-TULIP_INSTALL_PLUGIN(Grip-${TulipVersion} ${TulipPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Grip-${TalipotVersion} ${TalipotPluginsInstallDir})

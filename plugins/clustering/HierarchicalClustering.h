@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _HierarchicalClustering_H
-#define _HierarchicalClustering_H
+
+#ifndef HIERARCHICAL_CLUSTERING_H
+#define HIERARCHICAL_CLUSTERING_H
 
 #include <list>
 #include <string>
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup clustering */
 
@@ -37,4 +38,4 @@ private:
   bool split(tlp::DoubleProperty *, std::list<tlp::node> &);
 };
 
-#endif
+#endif // HIERARCHICAL_CLUSTERING_H

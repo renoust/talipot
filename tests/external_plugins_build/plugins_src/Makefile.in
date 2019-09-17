@@ -1,12 +1,12 @@
 CXX = @CMAKE_CXX_COMPILER@
-CXXFLAGS = $(shell tulip-config --cxxflags --plugincxxflags)
-LDFLAGS = $(shell tulip-config --lib_tulip --pluginldflags)
+CXXFLAGS = $(shell talipot-config --cxxflags --plugincxxflags)
+LDFLAGS = $(shell talipot-config --lib_talipot --pluginldflags)
 
 PLUGIN_NAME = TestPlugins
-TULIP_VERSION = $(shell tulip-config --version)
-LIB_EXTENSION = $(shell tulip-config --pluginextension)
+TALIPOT_VERSION = $(shell talipot-config --version)
+LIB_EXTENSION = $(shell talipot-config --pluginextension)
 
-TARGET_LIB = lib${PLUGIN_NAME}-${TULIP_VERSION}.${LIB_EXTENSION}
+TARGET_LIB = lib${PLUGIN_NAME}-${TALIPOT_VERSION}.${LIB_EXTENSION}
 
 SRCS = TestPlugins.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -28,4 +28,4 @@ clean:
 
 .PHONY: install
 install:
-	cp ${TARGET_LIB} $(shell tulip-config --pluginpath)/test
+	cp ${TARGET_LIB} $(shell talipot-config --pluginpath)/test

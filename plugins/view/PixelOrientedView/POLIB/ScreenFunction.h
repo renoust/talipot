@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SCREENFUNCTION_H
-#define SCREENFUNCTION_H
+#ifndef SCREEN_FUNCTION_H
+#define SCREEN_FUNCTION_H
 
 #include "potypes.h"
 
@@ -25,4 +25,4 @@ public:
   virtual Vec2f unproject(const Vec2f &) const = 0;
 };
 } // namespace pocore
-#endif // SCREENFUNCTION_H
+#endif // SCREEN_FUNCTION_H

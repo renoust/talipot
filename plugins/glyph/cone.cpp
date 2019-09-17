@@ -13,18 +13,18 @@
 
 #include <GL/glew.h>
 
-#include <tulip/StringProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/Graph.h>
-#include <tulip/Glyph.h>
-#include <tulip/EdgeExtremityGlyph.h>
-#include <tulip/GlTools.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/OpenGlConfigManager.h>
+#include <talipot/StringProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/Graph.h>
+#include <talipot/Glyph.h>
+#include <talipot/EdgeExtremityGlyph.h>
+#include <talipot/GlTools.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/OpenGlConfigManager.h>
 
 using namespace std;
 using namespace tlp;

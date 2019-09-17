@@ -13,7 +13,7 @@
 
 #include "ReverseEdges.h"
 
-#include <tulip/BooleanProperty.h>
+#include <talipot/BooleanProperty.h>
 
 using namespace tlp;
 

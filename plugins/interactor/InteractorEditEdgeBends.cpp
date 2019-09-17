@@ -11,18 +11,18 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseSelector.h>
-#include <tulip/MouseEdgeBendEditor.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseSelector.h>
+#include <talipot/MouseEdgeBendEditor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to edit edge bends
+/** \brief Interactor to edit edge bends
  *
  */
 class InteractorEditEdgeBends : public NodeLinkDiagramComponentInteractor {
@@ -34,7 +34,7 @@ public:
    * Default constructor
    */
   InteractorEditEdgeBends(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_bends.png", "Edit edge bends",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_bends.png", "Edit edge bends",
                                            StandardInteractorPriority::EditEdgeBends) {}
 
   /**

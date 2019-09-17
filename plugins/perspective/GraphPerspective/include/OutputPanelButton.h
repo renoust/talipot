@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef OUTPUTPANELBUTTON_H
-#define OUTPUTPANELBUTTON_H
+#ifndef OUTPUT_PANEL_BUTTON_H
+#define OUTPUT_PANEL_BUTTON_H
 
 #include <QPushButton>
 
@@ -62,4 +62,4 @@ public slots:
   void resetBackgroundColor();
 };
 
-#endif // OUTPUTPANELBUTTON_H
+#endif // OUTPUT_PANEL_BUTTON_H

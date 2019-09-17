@@ -10,16 +10,17 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ReadGraph.h"
 #include "ExportSvg.h"
 
-#include <tulip/ExportModule.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StringProperty.h>
+#include <talipot/ExportModule.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StringProperty.h>
 
 using namespace std;
 using namespace tlp;
@@ -68,7 +69,7 @@ public:
                     "1.9", "File")
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/export_svg.png";
+    return ":/talipot/graphperspective/icons/32/export_svg.png";
   }
 
   string fileExtension() const override {

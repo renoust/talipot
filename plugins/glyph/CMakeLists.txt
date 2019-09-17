@@ -1,15 +1,15 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${GLEW_INCLUDE_DIR} ${FTGLInclude} ${FREETYPE_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${GLEW_INCLUDE_DIR} ${FTGLInclude} ${FREETYPE_INCLUDE_DIRS})
 
 MACRO(GLYPH name source)
-  ADD_LIBRARY(${name}-${TulipVersion} SHARED ${source})
-  TARGET_LINK_LIBRARIES(${name}-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName})
-  TULIP_INSTALL_PLUGIN(${name}-${TulipVersion} ${TulipGlyphPluginsInstallDir})
+  ADD_LIBRARY(${name}-${TalipotVersion} SHARED ${source})
+  TARGET_LINK_LIBRARIES(${name}-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName})
+  TALIPOT_INSTALL_PLUGIN(${name}-${TalipotVersion} ${TalipotGlyphPluginsInstallDir})
 ENDMACRO(GLYPH)
 
 MACRO(FONTGLYPH name source)
-  ADD_LIBRARY(${name}-${TulipVersion} SHARED ${source})
-  TARGET_LINK_LIBRARIES(${name}-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${FTGLLibrary})
-  TULIP_INSTALL_PLUGIN(${name}-${TulipVersion} ${TulipGlyphPluginsInstallDir})
+  ADD_LIBRARY(${name}-${TalipotVersion} SHARED ${source})
+  TARGET_LINK_LIBRARIES(${name}-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${FTGLLibrary})
+  TALIPOT_INSTALL_PLUGIN(${name}-${TalipotVersion} ${TalipotGlyphPluginsInstallDir})
 ENDMACRO(FONTGLYPH)
 
 GLYPH(Cone cone.cpp)
@@ -38,5 +38,5 @@ GLYPH(Star star.cpp)
 FONTGLYPH(FontIcon fonticon.cpp)
 
 INSTALL(FILES radialGradientTexture.png bottomShadowTexture.png leftBottomShadowTexture.png rightBottomShadowTexture.png
-        DESTINATION ${TulipBitmapInstallDir}
-        COMPONENT tulip_plugins)
+        DESTINATION ${TalipotBitmapInstallDir}
+        COMPONENT talipot_plugins)

@@ -13,7 +13,7 @@
 
 #include <QMainWindow>
 
-#include <tulip/Perspective.h>
+#include <talipot/Perspective.h>
 
 #include "HistoOptionsWidget.h"
 #include "ui_HistoOptionsWidget.h"
@@ -155,11 +155,11 @@ void HistoOptionsWidget::setBinWidth(const double width) {
 }
 
 Color HistoOptionsWidget::getBackgroundColor() const {
-  return _ui->backColorButton->tulipColor();
+  return _ui->backColorButton->talipotColor();
 }
 
 void HistoOptionsWidget::setBackgroundColor(const Color &color) {
-  _ui->backColorButton->setTulipColor(color);
+  _ui->backColorButton->setColor(color);
 }
 
 bool HistoOptionsWidget::showGraphEdges() const {

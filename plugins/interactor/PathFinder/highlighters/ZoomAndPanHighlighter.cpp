@@ -13,16 +13,16 @@
 
 #include "ZoomAndPanHighlighter.h"
 
-#include <tulip/Graph.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/Coord.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/DrawingTools.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/QtGlSceneZoomAndPanAnimator.h>
+#include <talipot/Graph.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/Coord.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/DrawingTools.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/QtGlSceneZoomAndPanAnimator.h>
 
 using namespace std;
 using namespace tlp;

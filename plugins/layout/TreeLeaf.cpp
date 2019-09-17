@@ -10,7 +10,8 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/GraphTools.h>
+
+#include <talipot/GraphTools.h>
 #include "TreeLeaf.h"
 #include "DatasetTools.h"
 #include "Orientation.h"

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_SpanningDagSelection_H
-#define Tulip_SpanningDagSelection_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef SPANNING_DAG_SELECTION_H
+#define SPANNING_DAG_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -33,4 +34,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // SPANNING_DAG_SELECTION_H

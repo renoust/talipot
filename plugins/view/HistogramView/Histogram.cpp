@@ -11,20 +11,20 @@
  *
  */
 
-#include <tulip/DoubleProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/GlPolyQuad.h>
-#include <tulip/Gl2DRect.h>
-#include <tulip/GlOffscreenRenderer.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/TlpTools.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/GlPolyQuad.h>
+#include <talipot/Gl2DRect.h>
+#include <talipot/GlOffscreenRenderer.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/TlpTools.h>
+#include <talipot/ViewSettings.h>
 
 #include "Histogram.h"
 
 using namespace std;
 
-const string BIN_RECT_TEXTURE = tlp::TulipBitmapDir + "histo_texture.png";
+const string BIN_RECT_TEXTURE = tlp::TalipotBitmapDir + "histo_texture.png";
 
 const float DEFAULT_AXIS_LENGTH = 1000.;
 

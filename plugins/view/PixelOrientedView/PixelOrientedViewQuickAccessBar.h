@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PIXELORIENTEDVIEWQUICKACCESSBAR_H
-#define PIXELORIENTEDVIEWQUICKACCESSBAR_H
+#ifndef PIXEL_ORIENTED_VIEW_QUICK_ACCESS_BAR_H
+#define PIXEL_ORIENTED_VIEW_QUICK_ACCESS_BAR_H
 
-#include <tulip/QuickAccessBar.h>
+#include <talipot/QuickAccessBar.h>
 
 namespace tlp {
 
@@ -33,4 +33,4 @@ public slots:
   void setBackgroundColor(const QColor &) override;
 };
 } // namespace tlp
-#endif
+#endif // PIXEL_ORIENTED_VIEW_QUICK_ACCESS_BAR_H

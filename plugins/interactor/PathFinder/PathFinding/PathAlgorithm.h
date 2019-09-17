@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PATHALGORITHM_H_
-#define PATHALGORITHM_H_
+#ifndef PATH_ALGORITHM_H
+#define PATH_ALGORITHM_H
 
-#include <tulip/Node.h>
+#include <talipot/Node.h>
 #include <cfloat>
 
 namespace tlp {
@@ -62,4 +62,4 @@ public:
                           tlp::DoubleProperty *weights = nullptr, double tolerance = DBL_MAX);
 };
 } // namespace tlp
-#endif /* PATHALGORITHM_H_ */
+#endif // PATH_ALGORITHM_H

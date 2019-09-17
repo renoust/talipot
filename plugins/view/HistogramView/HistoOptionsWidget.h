@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef HISTOOPTIONSWIDGET_H_
-#define HISTOOPTIONSWIDGET_H_
+#ifndef HISTO_OPTIONS_WIDGET_H
+#define HISTO_OPTIONS_WIDGET_H
 
 #include <QWidget>
 
-#include <tulip/Color.h>
+#include <talipot/Color.h>
 
 namespace Ui {
 class HistoOptionsWidgetData;
@@ -109,4 +109,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* HISTOOPTIONSWIDGET_H_ */
+#endif // HISTO_OPTIONS_WIDGET_H

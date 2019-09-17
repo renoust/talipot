@@ -22,7 +22,7 @@ background-color: white;
 }
 
 QTabWidget:pane {
-border: 0px; 
+border: 0px;
 }
 
 QTabBar::tab {
@@ -84,7 +84,7 @@ QTabBar::tab:selected {
       <string/>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTabWidget::pane { 
+      <string notr="true">QTabWidget::pane {
      border-top: none;
  }</string>
      </property>
@@ -181,13 +181,13 @@ QTabBar::tab:selected {
   <customwidget>
    <class>TreeViewComboBox</class>
    <extends>QComboBox</extends>
-   <header>tulip/TreeViewComboBox.h</header>
+   <header>talipot/TreeViewComboBox.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>tlp::PythonShellWidget</class>
    <extends>QWidget</extends>
-   <header location="global">tulip/PythonShellWidget.h</header>
+   <header location="global">talipot/PythonShellWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

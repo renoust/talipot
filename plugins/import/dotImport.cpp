@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <cstring>
 #include <cerrno>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 #include "dotImportCLUT.h"
 
 using namespace std;
@@ -71,7 +72,7 @@ public:
   ~DotImport() override {}
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_graphviz.png";
+    return ":/talipot/graphperspective/icons/32/import_graphviz.png";
   }
 
   bool importGraph() override {

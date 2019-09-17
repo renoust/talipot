@@ -13,10 +13,10 @@
 
 #include <algorithm>
 #include <cmath>
-#include <tulip/ImportModule.h>
-#include <tulip/TlpTools.h>
-#include <tulip/PluginProgress.h>
-#include <tulip/Graph.h>
+#include <talipot/ImportModule.h>
+#include <talipot/TlpTools.h>
+#include <talipot/PluginProgress.h>
+#include <talipot/Graph.h>
 
 using namespace std;
 using namespace tlp;

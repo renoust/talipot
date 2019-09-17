@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef STACKWALKER_H_
-#define STACKWALKER_H_
+#ifndef STACK_WALKER_H
+#define STACK_WALKER_H
 
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <cstdint>
 
-#include <tulip/ConsoleUtils.h>
+#include <talipot/ConsoleUtils.h>
 
 #ifndef _MSC_VER
 #ifdef HAVE_BFD
@@ -147,4 +147,4 @@ private:
 
 #endif
 
-#endif /* STACKWALKER_H_ */
+#endif // STACK_WALKER_H
