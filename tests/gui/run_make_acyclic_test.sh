@@ -1,1 +1,0 @@
-sh tulip_run_test.sh make_acyclic multiple_edges_and_loops.tlp

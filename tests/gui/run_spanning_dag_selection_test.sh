@@ -1,1 +1,0 @@
-sh tulip_run_test.sh spanning_dag_selection import_gexf_file.tlp

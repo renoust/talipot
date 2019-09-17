@@ -1,1 +1,0 @@
-sh tulip_run_test.sh layout_connected_components_packing import_pajek_file.tlp

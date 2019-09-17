@@ -1,1 +1,0 @@
-sh tulip_run_test.sh loop_selection multiple_edges_and_loops.tlp
