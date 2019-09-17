@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/Circle.h>
-#include <tulip/StringCollection.h>
+
+#include <talipot/Circle.h>
+#include <talipot/StringCollection.h>
 
 #include "ConeTreeExtended.h"
 #include "DatasetTools.h"
@@ -228,7 +229,7 @@ bool ConeTreeExtended::run() {
   // rotate layout and size
   if (orientation == "horizontal") {
     for (auto n : graph->nodes()) {
-      // if not in tulip gui, ensure cleanup
+      // if not in talipot gui, ensure cleanup
       LayoutProperty *elementLayout;
 
       if (!graph->getAttribute("viewLayout", elementLayout)) {

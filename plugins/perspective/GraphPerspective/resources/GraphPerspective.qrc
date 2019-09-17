@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/tulip/graphperspective">
+    <qresource prefix="/talipot/graphperspective">
         <file>icons/16/archive.png</file>
         <file>icons/16/archive-new.png</file>
         <file>icons/16/cancel-select.png</file>

@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ConnectedComponent.h"
-#include <tulip/ConnectedTest.h>
+#include <talipot/ConnectedTest.h>
 
 PLUGIN(ConnectedComponent)
 

@@ -1220,7 +1220,7 @@
 (node 199 "(229,40,0,200)")
 )
 (property  0 string "viewFont"
-(default "TulipBitmapDir/font.ttf" "TulipBitmapDir/font.ttf")
+(default "TalipotBitmapDir/font.ttf" "TalipotBitmapDir/font.ttf")
 )
 (property  0 int "viewFontSize"
 (default "18" "18")
@@ -3006,58 +3006,58 @@
 (property  0 size "viewTgtAnchorSize"
 (default "(1,1,0)" "(1,1,0)")
 )
-(graph_attributes 0 
+(graph_attributes 0
 (string "name" "Grid Approximation - 'nodes'=200 'degree'=10 'long edge'=false ")
 )
-(graph_attributes 1 
+(graph_attributes 1
 (string "name" "viewMetric: 8")
 )
-(graph_attributes 2 
+(graph_attributes 2
 (string "name" "viewMetric: 4")
 )
-(graph_attributes 3 
+(graph_attributes 3
 (string "name" "viewMetric: 10")
 )
-(graph_attributes 4 
+(graph_attributes 4
 (string "name" "viewMetric: 9")
 )
-(graph_attributes 5 
+(graph_attributes 5
 (string "name" "viewMetric: 7")
 )
-(graph_attributes 6 
+(graph_attributes 6
 (string "name" "viewMetric: 15")
 )
-(graph_attributes 7 
+(graph_attributes 7
 (string "name" "viewMetric: 5")
 )
-(graph_attributes 8 
+(graph_attributes 8
 (string "name" "viewMetric: 6")
 )
-(graph_attributes 9 
+(graph_attributes 9
 (string "name" "viewMetric: 12")
 )
-(graph_attributes 10 
+(graph_attributes 10
 (string "name" "viewMetric: 13")
 )
-(graph_attributes 11 
+(graph_attributes 11
 (string "name" "viewMetric: 14")
 )
-(graph_attributes 12 
+(graph_attributes 12
 (string "name" "viewMetric: 17")
 )
-(graph_attributes 13 
+(graph_attributes 13
 (string "name" "viewMetric: 16")
 )
-(graph_attributes 14 
+(graph_attributes 14
 (string "name" "viewMetric: 1")
 )
-(graph_attributes 15 
+(graph_attributes 15
 (string "name" "viewMetric: 11")
 )
-(graph_attributes 16 
+(graph_attributes 16
 (string "name" "viewMetric: 2")
 )
-(graph_attributes 17 
+(graph_attributes 17
 (string "name" "viewMetric: 3")
 )
 )

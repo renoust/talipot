@@ -15,9 +15,9 @@
 #include <fstream>
 #include <unordered_map>
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/AbstractProperty.h>
-#include <tulip/TlpTools.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/AbstractProperty.h>
+#include <talipot/TlpTools.h>
 
 #include "GMLParser.h"
 

@@ -14,17 +14,17 @@
 #include "SearchWidget.h"
 #include "ui_SearchWidget.h"
 
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/GraphPropertiesModel.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/GraphTableItemDelegate.h>
-#include <tulip/GraphModel.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/TulipMimes.h>
-#include <tulip/StringProperty.h>
-#include <tulip/TulipMetaTypes.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/Perspective.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/GraphPropertiesModel.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/GraphTableItemDelegate.h>
+#include <talipot/GraphModel.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/Mimes.h>
+#include <talipot/StringProperty.h>
+#include <talipot/MetaTypes.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Perspective.h>
 
 #include <QDebug>
 #include <QStandardItemModel>
@@ -146,7 +146,7 @@ SearchWidget::SearchWidget(QWidget *parent)
     : QWidget(parent), _ui(new Ui::SearchWidget), _graph(nullptr) {
   _ui->setupUi(this);
   _ui->tableWidget->hide();
-  _ui->tableWidget->setItemDelegate(new TulipItemDelegate(_ui->tableWidget));
+  _ui->tableWidget->setItemDelegate(new ItemDelegate(_ui->tableWidget));
 
   NUMERIC_OPERATORS << new DoubleEqualsOperator << new DoubleDifferentOperator
                     << new GreaterOperator << new GreaterEqualOperator << new LesserOperator
@@ -295,10 +295,10 @@ void SearchWidget::search() {
       b = doubleProp;
     } else {
       StringProperty *stringProp = new StringProperty(_graph);
-      DataType *tulipData =
-          TulipMetaTypes::qVariantToDataType(_ui->tableWidget->item(0, 0)->data(Qt::DisplayRole));
+      DataType *talipotData =
+          MetaTypes::qVariantToDataType(_ui->tableWidget->item(0, 0)->data(Qt::DisplayRole));
 
-      if (tulipData == nullptr) {
+      if (talipotData == nullptr) {
         qCritical() << "could not convert this type correctly "
                     << _ui->tableWidget->item(0, 0)->data(Qt::DisplayRole)
                     << ", please report this as a bug";
@@ -308,10 +308,10 @@ void SearchWidget::search() {
 #endif
       }
 
-      DataTypeSerializer *serializer = DataSet::typenameToSerializer(tulipData->getTypeName());
+      DataTypeSerializer *serializer = DataSet::typenameToSerializer(talipotData->getTypeName());
 
       if (serializer == nullptr) {
-        qCritical() << "no type serializer found for \"" << tulipData->getTypeName().c_str()
+        qCritical() << "no type serializer found for \"" << talipotData->getTypeName().c_str()
                     << "\", please report this as a bug";
 #ifdef NDEBUG
         delete stringProp;
@@ -320,7 +320,7 @@ void SearchWidget::search() {
       }
 
       stringstream temp;
-      serializer->writeData(temp, tulipData);
+      serializer->writeData(temp, talipotData);
       QString serializedValue = temp.str().c_str();
 
       // Tulip serializers add quotes around the serialized value, remove them for comparison
@@ -345,7 +345,7 @@ void SearchWidget::search() {
   PropertyInterface *outputInterface = _ui->resultsStorageCombo->model()
                                            ->data(_ui->resultsStorageCombo->model()->index(
                                                       _ui->resultsStorageCombo->currentIndex(), 0),
-                                                  TulipModel::PropertyRole)
+                                                  Model::PropertyRole)
                                            .value<PropertyInterface *>();
   BooleanProperty *output = static_cast<BooleanProperty *>(outputInterface);
 
@@ -428,7 +428,7 @@ void SearchWidget::search() {
 
 void SearchWidget::graphIndexChanged() {
   tlp::Graph *g = _ui->graphCombo->model()
-                      ->data(_ui->graphCombo->selectedIndex(), TulipModel::GraphRole)
+                      ->data(_ui->graphCombo->selectedIndex(), Model::GraphRole)
                       .value<tlp::Graph *>();
   setGraph(g);
 }
@@ -525,7 +525,7 @@ void SearchWidget::dropEvent(QDropEvent *dropEv) {
 PropertyInterface *SearchWidget::term(QComboBox *combo) {
   GraphPropertiesModel<PropertyInterface> *model =
       static_cast<GraphPropertiesModel<PropertyInterface> *>(combo->model());
-  return model->data(model->index(combo->currentIndex(), 0), TulipModel::PropertyRole)
+  return model->data(model->index(combo->currentIndex(), 0), Model::PropertyRole)
       .value<PropertyInterface *>();
 }
 

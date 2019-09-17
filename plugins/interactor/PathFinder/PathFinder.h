@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PATHFINDER_H_
-#define PATHFINDER_H_
+#ifndef PATH_FINDER_H
+#define PATH_FINDER_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 #include "../../utils/StandardInteractorPriority.h"
 #include "PathFinding/PathAlgorithm.h"
@@ -140,4 +140,4 @@ private:
   QPushButton *configureHighlighterBtn;
 };
 } // namespace tlp
-#endif /* PATHFINDER_H_ */
+#endif // PATH_FINDER_H

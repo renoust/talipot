@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef INPUTSAMPLE_H_
-#define INPUTSAMPLE_H_
+#ifndef INPUT_SAMPLE_H
+#define INPUT_SAMPLE_H
 
 #include <unordered_map>
 #include <vector>
-#include <tulip/Graph.h>
-#include <tulip/Observable.h>
-#include <tulip/NumericProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/Observable.h>
+#include <talipot/NumericProperty.h>
 #include "DynamicVector.h"
 
 /**
@@ -134,4 +134,4 @@ protected:
   bool usingNormalizedValues;
 };
 } // namespace tlp
-#endif /* INPUTSAMPLE_H_ */
+#endif // INPUT_SAMPLE_H

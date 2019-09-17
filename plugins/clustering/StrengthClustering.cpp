@@ -13,7 +13,7 @@
 
 #include "StrengthClustering.h"
 
-#include <tulip/StableIterator.h>
+#include <talipot/StableIterator.h>
 
 using namespace std;
 using namespace tlp;

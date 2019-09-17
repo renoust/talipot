@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef DFS_H_
-#define DFS_H_
+#ifndef DFS_H
+#define DFS_H
 
 #include <cfloat>
 #include <vector>
 
-#include <tulip/Node.h>
-#include <tulip/Edge.h>
-#include <tulip/StaticProperty.h>
+#include <talipot/Node.h>
+#include <talipot/Edge.h>
+#include <talipot/StaticProperty.h>
 
 #include "../PathAlgorithm.h"
 
@@ -70,4 +70,4 @@ private:
                           tlp::DoubleProperty *dists);
 };
 } // namespace tlp
-#endif /* DFS_H_ */
+#endif // DFS_H

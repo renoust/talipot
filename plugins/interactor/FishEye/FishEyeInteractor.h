@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef FISHEYEINTERACTOR_H_
-#define FISHEYEINTERACTOR_H_
+#ifndef FISH_EYE_INTERACTOR_H
+#define FISH_EYE_INTERACTOR_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/Coord.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Coord.h>
 
 #include "../../utils/StandardInteractorPriority.h"
 
@@ -49,9 +49,9 @@ private:
 
 /*@{*/
 /** \file
- *  \brief  Tulip Fisheye Interactor
+ *  \brief Fisheye Interactor
 
- * This interactor plugin allow to perform a fisheye distortion effect on Tulip views.
+ * This interactor plugin allow to perform a fisheye distortion effect on OpenGL views.
  * It allows to gain focus on a certain area of a visualization by magnifying it without losing
  * the context.
  *
@@ -85,4 +85,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* FISHEYEINTERACTOR_H_ */
+#endif // FISH_EYE_INTERACTOR_H

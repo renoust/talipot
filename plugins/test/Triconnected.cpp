@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/TriconnectedTest.h>
-#include <tulip/GraphTest.h>
+#include <talipot/TriconnectedTest.h>
+#include <talipot/GraphTest.h>
 
 class TriconnectedTest : public tlp::GraphTest {
 public:

@@ -1,15 +1,15 @@
 #include <iostream>
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/ForEach.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/GraphProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StringProperty.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/ForEach.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/GraphProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StringProperty.h>
 
 /**
  * Tutorial 003
@@ -34,8 +34,8 @@ void buildGraph(Graph *graph) {
 }
 
 int main() {
-  // initialize the Tulip libs
-  initTulipLib();
+  // initialize the Talipot libs
+  initTalipotLib();
 
   // create an empty graph
   Graph *graph = newGraph();

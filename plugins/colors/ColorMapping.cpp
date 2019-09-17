@@ -10,16 +10,17 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <cmath>
 #include <limits>
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/Color.h>
-#include <tulip/Vector.h>
-#include <tulip/ColorScale.h>
-#include <tulip/StringCollection.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/Color.h>
+#include <talipot/Vector.h>
+#include <talipot/ColorScale.h>
+#include <talipot/StringCollection.h>
 
-#ifndef TULIP_BUILD_CORE_ONLY
+#ifndef TALIPOT_BUILD_CORE_ONLY
 #include "DoubleStringsListRelationDialog.h"
 #endif
 
@@ -307,7 +308,7 @@ public:
       metric = graph->getProperty<DoubleProperty>("viewMetric");
 
     if (eltTypes.getCurrent() == ENUMERATED_ELT) {
-#ifndef TULIP_BUILD_CORE_ONLY
+#ifndef TALIPOT_BUILD_CORE_ONLY
 
       if (targetType.getCurrent() == NODES_TARGET) {
 

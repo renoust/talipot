@@ -10,23 +10,24 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <cctype>
 #include <unordered_map>
 
-#include <tulip/ImportModule.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/StableIterator.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/ImportModule.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/StableIterator.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/BooleanProperty.h>
 
 #include <QXmlStreamReader>
 #include <QFile>
@@ -75,7 +76,7 @@ public:
   ~GEXFImport() override {}
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_gephi.png";
+    return ":/talipot/graphperspective/icons/32/import_gephi.png";
   }
 
   std::list<std::string> fileExtensions() const override {
@@ -99,7 +100,7 @@ public:
       return false;
     }
 
-    // get Tulip visual attributes properties associated to the empty graph we want to fill
+    // get Talipot visual attributes properties associated to the empty graph we want to fill
     viewLayout = graph->getProperty<LayoutProperty>("viewLayout");
     viewLabel = graph->getProperty<StringProperty>("viewLabel");
     viewSize = graph->getProperty<SizeProperty>("viewSize");
@@ -132,7 +133,7 @@ public:
             return false;
           }
         }
-        // create Tulip Properties from Gephi attributes
+        // create Talipot Properties from Gephi attributes
         else if (xmlReader.name() == "attributes") {
           createPropertiesFromAttributes(xmlReader);
         }
@@ -176,7 +177,7 @@ public:
     return true;
   }
 
-  // Create a set of Tulip Properties from the attributes declared in the GEXF file
+  // Create a set of Talipot Properties from the attributes declared in the GEXF file
   // according to data types
   void createPropertiesFromAttributes(QXmlStreamReader &xmlReader) {
     bool nodeProperties = xmlReader.attributes().value("class") == "node";
@@ -186,7 +187,7 @@ public:
     while (!(xmlReader.isEndElement() && xmlReader.name() == "attributes")) {
       xmlReader.readNext();
 
-      // create a Tulip property and store mapping between attribute id and property
+      // create a Talipot property and store mapping between attribute id and property
       if (xmlReader.isStartElement() && xmlReader.name() == "attribute") {
         string attributeId = QStringToTlpString(xmlReader.attributes().value("id").toString());
         string attributeName = QStringToTlpString(xmlReader.attributes().value("title").toString());
@@ -265,7 +266,7 @@ public:
     if (nodesMap.find(nodeId) == nodesMap.end()) {
       // if needed, add a node in the graph we are building
       n = g->addNode();
-      // save mapping between gexf node id and created Tulip node
+      // save mapping between gexf node id and created Talipot node
       nodesMap[nodeId] = n;
     } else
       n = nodesMap[nodeId];
@@ -553,11 +554,11 @@ public:
   }
 
 private:
-  // maps associating attribute id to Tulip property
+  // maps associating attribute id to Talipot property
   unordered_map<string, PropertyInterface *> nodePropertiesMap;
   unordered_map<string, PropertyInterface *> edgePropertiesMap;
 
-  // map associating GEXF node id to Tulip node
+  // map associating GEXF node id to Talipot node
   unordered_map<string, node> nodesMap;
 
   // vector to store edge information in case edges are declared before nodes in GEXF file
@@ -576,6 +577,6 @@ private:
   bool nodesHaveCoordinates;
 };
 
-// Macro for declaring import plugin in Tulip, it will then be accessible since the File -> Import
-// -> File menu entry in Tulip
+// Macro for declaring import plugin in Talipot, it will then be accessible since the File -> Import
+// -> File menu entry in Talipot
 PLUGIN(GEXFImport)

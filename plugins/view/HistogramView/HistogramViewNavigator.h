@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef HISTOGRAMVIEWNAVIGATOR_H_
-#define HISTOGRAMVIEWNAVIGATOR_H_
+#ifndef HISTOGRAM_VIEW_NAVIGATOR_H
+#define HISTOGRAM_VIEW_NAVIGATOR_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 namespace tlp {
 
@@ -44,4 +44,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMVIEWNAVIGATOR_H_ */
+#endif // HISTOGRAM_VIEW_NAVIGATOR_H

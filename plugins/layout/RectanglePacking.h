@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef RECTANGLEPACKING_H
-#define RECTANGLEPACKING_H
+
+#ifndef RECTANGLE_PACKING_H
+#define RECTANGLE_PACKING_H
 
 #include <vector>
 #include "Number.h"
@@ -246,4 +247,4 @@ public:
   int calculNumberOfTestedPositions(const char *quality);
 };
 
-#endif
+#endif // RECTANGLE_PACKING_H

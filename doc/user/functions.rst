@@ -10,7 +10,7 @@ Features
 Hierarchy
 =========
 
-Tulip supports graphs hierarchies. The navigation in the tree of subgraphs can be performed in the graph list view.
+Talipot supports graphs hierarchies. The navigation in the tree of subgraphs can be performed in the graph list view.
 
 
 .. _hierarchy_definition:
@@ -18,7 +18,7 @@ Tulip supports graphs hierarchies. The navigation in the tree of subgraphs can b
 Definitions
 -----------
 
-As an example to illustrate our explanations, we will use the following graph (roughly representing the Orion constellation). The corresponding Tulip project can be downloaded with :download:`this link <./_documents/Orion.tlpx>`.
+As an example to illustrate our explanations, we will use the following graph (roughly representing the Orion constellation). The corresponding Talipot project can be downloaded with :download:`this link <./_documents/Orion.tlpx>`.
 
 .. image:: _images/hierarchy_orion_simple.png
     :width: 600
@@ -75,12 +75,12 @@ The meta-nodes can also be embedded into other meta-nodes, creating nested meta-
     :width: 600
 
 
-.. _meta-graph: 
+.. _meta-graph:
 
 Meta-graph creation
 ^^^^^^^^^^^^^^^^^^^
 
-When meta-nodes are created, Tulip follows a specific behaviour. With the clustering of nodes, new subgraphs are created in order to improve the visualization. If the action is done from the root level of the hierarchy, a meta-graph, named by default *groups*, will display the whole graph with the appropriate meta-nodes and a subgraph, named in the form *grp_vwxyz*, will only contains the clustered nodes. Otherwise, if the action is realized from a lower level in the hierarchy, only the second subgraph graph will be created at the same level in the hierarchy.
+When meta-nodes are created, Talipot follows a specific behaviour. With the clustering of nodes, new subgraphs are created in order to improve the visualization. If the action is done from the root level of the hierarchy, a meta-graph, named by default *groups*, will display the whole graph with the appropriate meta-nodes and a subgraph, named in the form *grp_vwxyz*, will only contains the clustered nodes. Otherwise, if the action is realized from a lower level in the hierarchy, only the second subgraph graph will be created at the same level in the hierarchy.
 
 The creation of meta-graph modifies the root graph (here Orion) which represents all nodes (including the meta-nodes and the representation of the subgraph inside it) and all edges (including the meta-edges). So much information overlapping can be displayed unclearly:
 
@@ -99,7 +99,7 @@ You can simply create a subgraph by selecting the nodes and edges you want to is
 
 From those menus you will also be able to create empty subgraphs. You can add here new nodes and edges, which will be directly added into the subgraphs above the current one in the hierarchy. The *Create clone subgraph* action will duplicate the target graph in a subgraph just beneath it in the hierchical scale.
 
-To create a meta-node, you can proceed in a fashion similar to the one followed to create subgraph from selection. Once you have picked the nodes, click on the option *Group elements* in the *Edit* menu. 
+To create a meta-node, you can proceed in a fashion similar to the one followed to create subgraph from selection. Once you have picked the nodes, click on the option *Group elements* in the *Edit* menu.
 
 Optionally, the edge selection for the subgraph creation can be realized with the "Induced Sub-graph" algorithm.
 
@@ -133,7 +133,7 @@ You can also note that, because of the hierachy, some actions (delete, rename...
 CSV Import
 ==========
 
-Tulip proposes an import wizard for CSV files. Comma-separated values files are very common to store statistical data. The internal file structure is rather simple, consisting of records (one per line usually) containing several fields, separated with a special character (such as a comma, a semi-colon, an hash...).
+Talipot proposes an import wizard for CSV files. Comma-separated values files are very common to store statistical data. The internal file structure is rather simple, consisting of records (one per line usually) containing several fields, separated with a special character (such as a comma, a semi-colon, an hash...).
 
 
 .. _csv_files:
@@ -155,7 +155,7 @@ In this part, we will present the functionnality with an example. To this end, t
   6;0;1;223;2006;169;3523;1
   7;0;1;208;2007;169;2780;1
   8;0;2;205;2006;170;5477;1
-  9;0;1;228;0;0;23675;1	
+  9;0;1;228;0;0;23675;1
 
 and :download:`edges.csv <./_documents/edges.csv>`::
 
@@ -191,7 +191,7 @@ Import the nodes
 
 Click on the |icon_csv| **CSV** icon to open the CSV Import Wizard (also available through the menu *Edit →	Import CSV*).
 
-The import data process in Tulip is composed of three dialog panels with configuration options.
+The import data process in Talipot is composed of three dialog panels with configuration options.
 
 
 Source file settings
@@ -212,7 +212,7 @@ The purpose of each labeled component is explained below:
 
 4. The separator selector: this field allows the user to define the characters used to separate data value fields within each row. Select a separator in the list or input a custom separator. For the nodes file, the separator is ";". If a duplication of the separators is possible, you can check the "merge consecutive separators" box.
 
-5. The text delimiter selector: this field allows the user to define the characters used as start and end delimiter for data value fields. Select a delimiter in the list or input a custom one and press the [Enter] key to validate your input. Separated value files often additionally define a character used to indicate the start and end of a data element which should be considered as a single text entry. This strategy allows the inclusion of text entries which include the value separator. 
+5. The text delimiter selector: this field allows the user to define the characters used as start and end delimiter for data value fields. Select a delimiter in the list or input a custom one and press the [Enter] key to validate your input. Separated value files often additionally define a character used to indicate the start and end of a data element which should be considered as a single text entry. This strategy allows the inclusion of text entries which include the value separator.
 
   For example, a file, which is structured as a comma separated value file, could use the double quotation mark to delimit text values and would then be able to include text values such as: 	'Zoe, Mark, Sally'.
 
@@ -236,7 +236,7 @@ The purpose of each labeled component is explained below:
 
 2. The line range spinbuttons : these two spin buttons allow the user to select the start and end rows for the data to import. The spin boxes can be used either by typing a new value in the text entry area where the numbers are displayed, or by using the mouse button to click on the upwards arrow to increase the number and the downwards arrow to decrease the number. For instance, if the text file contained a large header area with meta information, this header could be excluded from the data imported by increasing the number of the starting, "From", line.
 
-3. The columns configuration area : this area allows the user to configure each column detected in the file. Any single column can be excluded from the data imported by clicking in the checkbox under its name to remove the check mark. User can configure a column by clicking on the button containing it's original name. The name, data type and other configuration options of a column can be changed using the configuration dialog displayed when clicking on the button. The name and data type of a column can be used to create a new Tulip property or identify an existing one. You cannot input the same name as another column, but you can use the name of an already existing property (viewLabel for example) to fill the nodes or edges corresponding values with the column contents. Details about the copy of the contents of a property into another property can be found in the :ref:`workspace_spreadsheet` documentation. 
+3. The columns configuration area : this area allows the user to configure each column detected in the file. Any single column can be excluded from the data imported by clicking in the checkbox under its name to remove the check mark. User can configure a column by clicking on the button containing it's original name. The name, data type and other configuration options of a column can be changed using the configuration dialog displayed when clicking on the button. The name and data type of a column can be used to create a new Talipot property or identify an existing one. You cannot input the same name as another column, but you can use the name of an already existing property (viewLabel for example) to fill the nodes or edges corresponding values with the column contents. Details about the copy of the contents of a property into another property can be found in the :ref:`workspace_spreadsheet` documentation.
 
 4. The preview area : this area displays a preview of the file as it will be interpreted with these settings. If a column isn't selected it will not appear in the preview.
 
@@ -244,7 +244,7 @@ The purpose of each labeled component is explained below:
 
 In our example, all the default choices are ok, so you can click on "Next" to access to the final panel.
 
-			
+
 Import method panel
 ^^^^^^^^^^^^^^^^^^^
 
@@ -296,7 +296,7 @@ For each row we compare the destination relation id to graph relations ids. If t
 
 
 The node import is very straightforward. Very few changes must be made during the process. Is the end, you will obtain a graph containing only the nodes randomly placed in the node link diagram view.
-	
+
 
 .. _csv_import_edges:
 
@@ -322,12 +322,12 @@ Same here. You can try to change the import starting position or to view the ent
 
 .. image:: _images/csv_data_selection_edges.png
     :width: 600
-			
+
 
 Import method panel
 ^^^^^^^^^^^^^^^^^^^
 
-In the  current application, we want to import the edges on new relations (or edges). 
+In the  current application, we want to import the edges on new relations (or edges).
 
 .. image:: _images/csv_import_new_edges.png
     :width: 600
@@ -346,5 +346,5 @@ With all of the steps above completed, you can now observe your newly created gr
 
 .. image:: _images/csv_import_final.png
     :width: 600
-	  		
+
 

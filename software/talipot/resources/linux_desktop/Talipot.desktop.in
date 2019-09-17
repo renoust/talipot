@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Talipot @TalipotVersion@
+Exec=@CMAKE_INSTALL_PREFIX@/bin/talipot --no-show-agent %U
+MimeType=application/x-talipot-tlpx;application/x-talipot-tlp;application/x-talipot-tlpgz;application/x-talipot-tlpz;application/x-talipot-tlpb;application/x-talipot-tlpbgz;application/x-talipot-tlpbz
+Icon=talipot
+Terminal=false
+Type=Application
+Categories=Science
+Comment=Large graphs analysis and visualization

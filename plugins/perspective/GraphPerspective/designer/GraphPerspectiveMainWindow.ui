@@ -17,12 +17,12 @@
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-    <normaloff>:/tulip/gui/icons/logo32x32.png</normaloff>:/tulip/gui/icons/logo32x32.png</iconset>
+   <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+    <normaloff>:/talipot/gui/icons/logo32x32.png</normaloff>:/talipot/gui/icons/logo32x32.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton, QComboBox {
-border-image: url(:/tulip/gui/ui/btn_26.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26.png) 4;
 border-width: 4;
 padding: 0px 6px;
 font-size: 12px;
@@ -45,7 +45,7 @@ color: black;
 }
 
 QPushButton:hover, QComboBox:hover, QToolButton:hover {
-border-image: url(:/tulip/gui/ui/btn_26_hover.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_hover.png) 4;
 }
 
 QPushButton:disabled, QComboBox::disabled, QToolButton::disabled {
@@ -53,7 +53,7 @@ color:gray;
 }
 
 QPushButton:pressed, QToolButton:pressed{
-border-image: url(:/tulip/gui/ui/btn_26_pressed.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_pressed.png) 4;
 }
 
 QPushButton::menu-indicator{
@@ -68,13 +68,13 @@ margin: 2
 }
 
 QComboBox::down-arrow {
-image: url(:/tulip/gui/ui/combobox_arrow.png);
+image: url(:/talipot/gui/ui/combobox_arrow.png);
 }
 
 QComboBox:drop-down {
 subcontrol-origin: padding;
 subcontrol-position: top right;
-border-left-style: none; 
+border-left-style: none;
 border-top-right-radius: 1px;
 border-bottom-right-radius: 1px;
 }
@@ -93,14 +93,14 @@ border-top: 1px solid black;
 border-bottom: 1px solid rgba(117,117,117,255);
 border-right: 1px solid rgba(117,117,117,255);
 border-left: 0px;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1,
 stop:0 rgb(75,75,75),
 stop:1 rgb(60, 60, 60));
 }
 
 QStatusBar {
 color: white;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1,
 stop:0 rgb(85,85,85),
 stop:1 rgb(70, 70, 70));
 font-size: 12px;
@@ -118,7 +118,7 @@ border-image: none;
 QFrame[ bottomFrame = &quot;true&quot; ] QPushButton:hover {
 border: 0px;
 border-image: none;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1,
 stop:0 rgb(85,85,85),
 stop:1 rgb(70, 70, 70));
 }
@@ -126,7 +126,7 @@ stop:1 rgb(70, 70, 70));
 QFrame[ bottomFrame = &quot;true&quot; ] QPushButton:pressed, QFrame[ bottomFrame = &quot;true&quot; ] .QPushButton:checked {
 border: 0px;
 border-image: none;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:, y2:1,
 stop:0 rgb(105,105,105),
 stop:1 rgb(90, 90, 90));
 }
@@ -179,8 +179,8 @@ QToolButton {
 
 QToolButton:hover {
 	border-image:none;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
-    stop:0 rgba(93, 93, 93, 255), 
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,
+    stop:0 rgba(93, 93, 93, 255),
     stop:1 rgba(150, 150, 150, 255));
 	border-top: 1px solid qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
 	stop: 0.0 rgba(0,0,0,0),
@@ -197,8 +197,8 @@ QToolButton:hover {
 QToolButton:checked, QToolButton:checked:pressed, QToolButton:pressed {
 	border-image:none;
 	color: black;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, 
-    stop:0 rgba(198, 198, 198, 255), 
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0,
+    stop:0 rgba(198, 198, 198, 255),
     stop:1 rgba(255, 255, 255, 255));
 	border-top: 1px solid rgba(70,70,70);
 	border-bottom: 1px solid rgba(70,70,70);
@@ -260,7 +260,7 @@ QToolButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/32/undo.png</normaloff>:/tulip/graphperspective/icons/32/undo.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/32/undo.png</normaloff>:/talipot/graphperspective/icons/32/undo.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -292,7 +292,7 @@ QToolButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/32/redo.png</normaloff>:/tulip/graphperspective/icons/32/redo.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/32/redo.png</normaloff>:/talipot/graphperspective/icons/32/redo.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -344,7 +344,7 @@ QToolButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/48/desktop.png</normaloff>:/tulip/graphperspective/icons/48/desktop.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/48/desktop.png</normaloff>:/talipot/graphperspective/icons/48/desktop.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -385,7 +385,7 @@ QToolButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/48/python.png</normaloff>:/tulip/graphperspective/icons/48/python.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/48/python.png</normaloff>:/talipot/graphperspective/icons/48/python.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -680,8 +680,8 @@ color: white;
           <string>Export</string>
          </property>
          <property name="icon">
-          <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-           <normaloff>:/tulip/gui/icons/64/document-export.png</normaloff>:/tulip/gui/icons/64/document-export.png</iconset>
+          <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+           <normaloff>:/talipot/gui/icons/64/document-export.png</normaloff>:/talipot/gui/icons/64/document-export.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -713,7 +713,7 @@ color: white;
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/32/spreadsheet.png</normaloff>:/tulip/graphperspective/icons/32/spreadsheet.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/32/spreadsheet.png</normaloff>:/talipot/graphperspective/icons/32/spreadsheet.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -744,8 +744,8 @@ color: white;
           <string>Import</string>
          </property>
          <property name="icon">
-          <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-           <normaloff>:/tulip/gui/icons/64/document-import.png</normaloff>:/tulip/gui/icons/64/document-import.png</iconset>
+          <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+           <normaloff>:/talipot/gui/icons/64/document-import.png</normaloff>:/talipot/gui/icons/64/document-import.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -777,7 +777,7 @@ color: white;
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>:/tulip/graphperspective/icons/32/system-software-install.png</normaloff>:/tulip/graphperspective/icons/32/system-software-install.png</iconset>
+           <normaloff>:/talipot/graphperspective/icons/32/system-software-install.png</normaloff>:/talipot/graphperspective/icons/32/system-software-install.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -909,25 +909,25 @@ border: 0px;
               </property>
               <property name="styleSheet">
                <string notr="true">OutputPanelButton{
-border-image: url(:/tulip/graphperspective/ui/panel_button.png) 2 2 2 19;
+border-image: url(:/talipot/graphperspective/ui/panel_button.png) 2 2 2 19;
 border-width: 2px 2px 2px 19px;
 padding-left: -17;
 padding-right: 4;
 }
 OutputPanelButton:checked{
-border-image: url(:/tulip/graphperspective/ui/panel_button_checked.png) 2 2 2 19
+border-image: url(:/talipot/graphperspective/ui/panel_button_checked.png) 2 2 2 19
 }
 OutputPanelButton::menu-indicator{
 width:0; height:0
 }
 OutputPanelButton:checked:hover{
-border-image: url(:/tulip/graphperspective/ui/panel_button_checked_hover.png) 2 2 2 19
+border-image: url(:/talipot/graphperspective/ui/panel_button_checked_hover.png) 2 2 2 19
 }
 OutputPanelButton:pressed:hover{
-border-image: url(:/tulip/graphperspective/ui/panel_button_pressed.png) 2 2 2 19
+border-image: url(:/talipot/graphperspective/ui/panel_button_pressed.png) 2 2 2 19
 }
 OutputPanelButton:hover{
-border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
+border-image: url(:/talipot/graphperspective/ui/panel_button_hover.png) 2 2 2 19
 }</string>
               </property>
               <property name="bottomFrame" stdset="0">
@@ -972,8 +972,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                     <normaloff>:/tulip/gui/ui/sidebar.png</normaloff>:/tulip/gui/ui/sidebar.png</iconset>
+                    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                     <normaloff>:/talipot/gui/ui/sidebar.png</normaloff>:/talipot/gui/ui/sidebar.png</iconset>
                    </property>
                    <property name="flat">
                     <bool>true</bool>
@@ -998,8 +998,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                     <normaloff>:/tulip/gui/ui/statusbar.png</normaloff>:/tulip/gui/ui/statusbar.png</iconset>
+                    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                     <normaloff>:/talipot/gui/ui/statusbar.png</normaloff>:/talipot/gui/ui/statusbar.png</iconset>
                    </property>
                    <property name="flat">
                     <bool>true</bool>
@@ -1024,8 +1024,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                     <normaloff>:/tulip/gui/ui/menubar.png</normaloff>:/tulip/gui/ui/menubar.png</iconset>
+                    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                     <normaloff>:/talipot/gui/ui/menubar.png</normaloff>:/talipot/gui/ui/menubar.png</iconset>
                    </property>
                    <property name="flat">
                     <bool>true</bool>
@@ -1040,8 +1040,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   <string>Add panel</string>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/icons/16/list-add.png</normaloff>:/tulip/gui/icons/16/list-add.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/icons/16/list-add.png</normaloff>:/talipot/gui/icons/16/list-add.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1148,8 +1148,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/previous.png</normaloff>:/tulip/gui/ui/previous.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/previous.png</normaloff>:/talipot/gui/ui/previous.png</iconset>
                  </property>
                  <property name="shortcut">
                   <string>Shift+Left</string>
@@ -1174,8 +1174,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/next.png</normaloff>:/tulip/gui/ui/next.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/next.png</normaloff>:/talipot/gui/ui/next.png</iconset>
                  </property>
                  <property name="shortcut">
                   <string>Shift+Right</string>
@@ -1210,8 +1210,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/full_screen.png</normaloff>:/tulip/gui/ui/full_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/full_screen.png</normaloff>:/talipot/gui/ui/full_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1230,8 +1230,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/split_screen.png</normaloff>:/tulip/gui/ui/split_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/split_screen.png</normaloff>:/talipot/gui/ui/split_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1250,8 +1250,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/split_screen_horizontal.png</normaloff>:/tulip/gui/ui/split_screen_horizontal.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/split_screen_horizontal.png</normaloff>:/talipot/gui/ui/split_screen_horizontal.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1270,8 +1270,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/split3_screen.png</normaloff>:/tulip/gui/ui/split3_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/split3_screen.png</normaloff>:/talipot/gui/ui/split3_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1290,8 +1290,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/split3_2_screen.png</normaloff>:/tulip/gui/ui/split3_2_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/split3_2_screen.png</normaloff>:/talipot/gui/ui/split3_2_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1310,8 +1310,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/split3_3_screen.png</normaloff>:/tulip/gui/ui/split3_3_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/split3_3_screen.png</normaloff>:/talipot/gui/ui/split3_3_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1330,8 +1330,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/grid_screen.png</normaloff>:/tulip/gui/ui/grid_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/grid_screen.png</normaloff>:/talipot/gui/ui/grid_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1350,8 +1350,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
                   </size>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-                   <normaloff>:/tulip/gui/ui/six_screen.png</normaloff>:/tulip/gui/ui/six_screen.png</iconset>
+                  <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+                   <normaloff>:/talipot/gui/ui/six_screen.png</normaloff>:/talipot/gui/ui/six_screen.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1387,8 +1387,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
       <string>&amp;Delete</string>
      </property>
      <property name="icon">
-      <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-       <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+      <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+       <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
      </property>
      <addaction name="actionDelete"/>
      <addaction name="actionDelete_from_the_root_graph"/>
@@ -1400,7 +1400,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/tulip/graphperspective/icons/16/select-all.png</normaloff>:/tulip/graphperspective/icons/16/select-all.png</iconset>
+       <normaloff>:/talipot/graphperspective/icons/16/select-all.png</normaloff>:/talipot/graphperspective/icons/16/select-all.png</iconset>
      </property>
      <addaction name="actionSelect_All"/>
      <addaction name="actionSelect_All_Nodes"/>
@@ -1467,7 +1467,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/tulip/graphperspective/icons/16/document-open-recent.png</normaloff>:/tulip/graphperspective/icons/16/document-open-recent.png</iconset>
+       <normaloff>:/talipot/graphperspective/icons/16/document-open-recent.png</normaloff>:/talipot/graphperspective/icons/16/document-open-recent.png</iconset>
      </property>
     </widget>
     <addaction name="actionNewProject"/>
@@ -1490,7 +1490,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionNewProject">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/archive-new.png</normaloff>:/tulip/graphperspective/icons/16/archive-new.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/archive-new.png</normaloff>:/talipot/graphperspective/icons/16/archive-new.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New project</string>
@@ -1502,7 +1502,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionSave_Project">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/document-save.png</normaloff>:/tulip/graphperspective/icons/16/document-save.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-save.png</normaloff>:/talipot/graphperspective/icons/16/document-save.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -1514,7 +1514,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionSave_Project_as">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/document-save-as.png</normaloff>:/tulip/graphperspective/icons/16/document-save-as.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-save-as.png</normaloff>:/talipot/graphperspective/icons/16/document-save-as.png</iconset>
    </property>
    <property name="text">
     <string>Sa&amp;ve as</string>
@@ -1525,8 +1525,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </action>
   <action name="actionImport">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/64/document-import.png</normaloff>:/tulip/gui/icons/64/document-import.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/64/document-import.png</normaloff>:/talipot/gui/icons/64/document-import.png</iconset>
    </property>
    <property name="text">
     <string>I&amp;mport</string>
@@ -1538,7 +1538,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionExit">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/process-stop.png</normaloff>:/tulip/graphperspective/icons/16/process-stop.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/process-stop.png</normaloff>:/talipot/graphperspective/icons/16/process-stop.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Exit</string>
@@ -1553,7 +1553,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/edit-undo.png</normaloff>:/tulip/graphperspective/icons/16/edit-undo.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/edit-undo.png</normaloff>:/talipot/graphperspective/icons/16/edit-undo.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Undo</string>
@@ -1568,7 +1568,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/edit-redo.png</normaloff>:/tulip/graphperspective/icons/16/edit-redo.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/edit-redo.png</normaloff>:/talipot/graphperspective/icons/16/edit-redo.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Redo</string>
@@ -1583,7 +1583,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/cut.png</normaloff>:/tulip/graphperspective/icons/16/cut.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/cut.png</normaloff>:/talipot/graphperspective/icons/16/cut.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Cut</string>
@@ -1598,7 +1598,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/copy.png</normaloff>:/tulip/graphperspective/icons/16/copy.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/copy.png</normaloff>:/talipot/graphperspective/icons/16/copy.png</iconset>
    </property>
    <property name="text">
     <string>C&amp;opy</string>
@@ -1613,7 +1613,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/paste.png</normaloff>:/tulip/graphperspective/icons/16/paste.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/paste.png</normaloff>:/talipot/graphperspective/icons/16/paste.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Paste</string>
@@ -1627,8 +1627,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Delete selection</string>
@@ -1643,7 +1643,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/select-all.png</normaloff>:/tulip/graphperspective/icons/16/select-all.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/select-all.png</normaloff>:/talipot/graphperspective/icons/16/select-all.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Select all</string>
@@ -1658,7 +1658,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/invert-select.png</normaloff>:/tulip/graphperspective/icons/16/invert-select.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/invert-select.png</normaloff>:/talipot/graphperspective/icons/16/invert-select.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Invert selection</string>
@@ -1673,7 +1673,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/cancel-select.png</normaloff>:/tulip/graphperspective/icons/16/cancel-select.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/cancel-select.png</normaloff>:/talipot/graphperspective/icons/16/cancel-select.png</iconset>
    </property>
    <property name="text">
     <string>Ca&amp;ncel selection</string>
@@ -1688,7 +1688,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/group.png</normaloff>:/tulip/graphperspective/icons/16/group.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/group.png</normaloff>:/talipot/graphperspective/icons/16/group.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Group elements</string>
@@ -1703,7 +1703,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/22/hierarchy-select.png</normaloff>:/tulip/graphperspective/icons/22/hierarchy-select.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/hierarchy-select.png</normaloff>:/talipot/graphperspective/icons/22/hierarchy-select.png</iconset>
    </property>
    <property name="text">
     <string>Create subgraph &amp;from selection</string>
@@ -1715,7 +1715,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionPreferences">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/preferences-other.png</normaloff>:/tulip/graphperspective/icons/16/preferences-other.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/preferences-other.png</normaloff>:/talipot/graphperspective/icons/16/preferences-other.png</iconset>
    </property>
    <property name="text">
     <string>Preferences...</string>
@@ -1730,7 +1730,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/full-screen.png</normaloff>:/tulip/graphperspective/icons/16/full-screen.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/full-screen.png</normaloff>:/talipot/graphperspective/icons/16/full-screen.png</iconset>
    </property>
    <property name="text">
     <string>Full &amp;Screen</string>
@@ -1741,8 +1741,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </action>
   <action name="actionShowUserDocumentation">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/logo32x32.png</normaloff>:/tulip/gui/icons/logo32x32.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/logo32x32.png</normaloff>:/talipot/gui/icons/logo32x32.png</iconset>
    </property>
    <property name="text">
     <string>&amp;User HandBook</string>
@@ -1754,7 +1754,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionShowDevelDocumentation">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/cpp.png</normaloff>:/tulip/graphperspective/icons/16/cpp.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/cpp.png</normaloff>:/talipot/graphperspective/icons/16/cpp.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Developer HandBook</string>
@@ -1766,7 +1766,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionShowPythonDocumentation">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/python.png</normaloff>:/tulip/graphperspective/icons/16/python.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/python.png</normaloff>:/talipot/graphperspective/icons/16/python.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Python Documentation</string>
@@ -1778,10 +1778,10 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionAbout_us">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/logger-info.png</normaloff>:/tulip/graphperspective/icons/16/logger-info.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/logger-info.png</normaloff>:/talipot/graphperspective/icons/16/logger-info.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;About Tulip</string>
+    <string>&amp;About Talipot</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -1795,7 +1795,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionImport_CSV">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/32/spreadsheet.png</normaloff>:/tulip/graphperspective/icons/32/spreadsheet.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/32/spreadsheet.png</normaloff>:/talipot/graphperspective/icons/32/spreadsheet.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Import CSV</string>
@@ -1804,7 +1804,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionMessages_log">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/logger-info.png</normaloff>:/tulip/graphperspective/icons/16/logger-info.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/logger-info.png</normaloff>:/talipot/graphperspective/icons/16/logger-info.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Message log</string>
@@ -1815,8 +1815,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </action>
   <action name="actionExport">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/64/document-export.png</normaloff>:/tulip/gui/icons/64/document-export.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/64/document-export.png</normaloff>:/talipot/gui/icons/64/document-export.png</iconset>
    </property>
    <property name="text">
     <string>Export</string>
@@ -1828,7 +1828,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionOpen_Project">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/document-open.png</normaloff>:/tulip/graphperspective/icons/16/document-open.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-open.png</normaloff>:/talipot/graphperspective/icons/16/document-open.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -1840,7 +1840,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionFind_plugins">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/32/magnifying-glass.png</normaloff>:/tulip/graphperspective/icons/32/magnifying-glass.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/32/magnifying-glass.png</normaloff>:/talipot/graphperspective/icons/32/magnifying-glass.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Find algorithms</string>
@@ -1852,7 +1852,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionSave_graph_to_file">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/document-save.png</normaloff>:/tulip/graphperspective/icons/16/document-save.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-save.png</normaloff>:/talipot/graphperspective/icons/16/document-save.png</iconset>
    </property>
    <property name="text">
     <string>Save graph to file</string>
@@ -1866,7 +1866,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionClone_sub_graph">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/22/hierarchy.png</normaloff>:/tulip/graphperspective/icons/22/hierarchy.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/hierarchy.png</normaloff>:/talipot/graphperspective/icons/22/hierarchy.png</iconset>
    </property>
    <property name="text">
     <string>Create c&amp;lone subgraph</string>
@@ -1875,7 +1875,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionNew_graph">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/document-new.png</normaloff>:/tulip/graphperspective/icons/16/document-new.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-new.png</normaloff>:/talipot/graphperspective/icons/16/document-new.png</iconset>
    </property>
    <property name="text">
     <string>New &amp;graph</string>
@@ -1886,8 +1886,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </action>
   <action name="action_Close_All">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Close all views</string>
@@ -1896,7 +1896,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionColor_scales_management">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/color-scale.png</normaloff>:/tulip/graphperspective/icons/16/color-scale.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/color-scale.png</normaloff>:/talipot/graphperspective/icons/16/color-scale.png</iconset>
    </property>
    <property name="text">
     <string>Color scales &amp;management</string>
@@ -1912,8 +1912,8 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </action>
   <action name="actionDelete_from_the_root_graph">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
    </property>
    <property name="text">
     <string>Delete selection from t&amp;he root graph</string>
@@ -1948,7 +1948,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionPython_IDE">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/48/python.png</normaloff>:/tulip/graphperspective/icons/48/python.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/48/python.png</normaloff>:/talipot/graphperspective/icons/48/python.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Python IDE</string>
@@ -1960,7 +1960,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <action name="actionShowAPIDocumentation">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/cpp.png</normaloff>:/tulip/graphperspective/icons/16/cpp.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/cpp.png</normaloff>:/talipot/graphperspective/icons/16/cpp.png</iconset>
    </property>
    <property name="text">
     <string>AP&amp;I Documentation</string>
@@ -2003,7 +2003,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   <customwidget>
    <class>tlp::Workspace</class>
    <extends>QWidget</extends>
-   <header location="global">tulip/Workspace.h</header>
+   <header location="global">talipot/Workspace.h</header>
    <container>1</container>
    <slots>
     <signal>panelFocused(tlp::View*)</signal>
@@ -2033,7 +2033,7 @@ border-image: url(:/tulip/graphperspective/ui/panel_button_hover.png) 2 2 2 19
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../library/tulip-gui/resources/TulipGUIResource.qrc"/>
+  <include location="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc"/>
  </resources>
  <connections>
   <connection>

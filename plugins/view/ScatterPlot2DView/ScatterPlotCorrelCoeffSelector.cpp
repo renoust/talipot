@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/GlLines.h>
-#include <tulip/GlNode.h>
-#include <tulip/GlEdge.h>
-#include <tulip/GlComplexPolygon.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/GlLabel.h>
+
+#include <talipot/GlLines.h>
+#include <talipot/GlNode.h>
+#include <talipot/GlEdge.h>
+#include <talipot/GlComplexPolygon.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/GlLabel.h>
 
 #include <QMenu>
 #include <QEvent>

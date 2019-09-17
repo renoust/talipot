@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SPIRALLAYOUT_H
-#define SPIRALLAYOUT_H
+#ifndef SPIRAL_LAYOUT_H
+#define SPIRAL_LAYOUT_H
 
 #include <string>
 #include "LayoutFunction.h"
@@ -24,4 +24,4 @@ public:
   unsigned int unproject(const Vec2i &) const override;
 };
 } // namespace pocore
-#endif // SPIRALLAYOUT_H
+#endif // SPIRAL_LAYOUT_H

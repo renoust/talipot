@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef GLMATRIXBACKGROUNDGRID_H
-#define GLMATRIXBACKGROUNDGRID_H
+#ifndef GL_MATRIX_BACKGROUND_GRID_H
+#define GL_MATRIX_BACKGROUND_GRID_H
 
-#include <tulip/GlSimpleEntity.h>
+#include <talipot/GlSimpleEntity.h>
 namespace tlp {
 class MatrixView;
 
@@ -31,4 +31,4 @@ private:
   MatrixView *_view;
 };
 } // namespace tlp
-#endif // GLMATRIXBACKGROUNDGRID_H
+#endif // GL_MATRIX_BACKGROUND_GRID_H

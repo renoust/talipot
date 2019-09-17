@@ -11,13 +11,14 @@
  *
  */
 
-#ifndef QUADTREE_H
-#define QUADTREE_H
+#ifndef QUAD_TREE_H
+#define QUAD_TREE_H
+
 #include <unordered_map>
 #include <vector>
-#include <tulip/Graph.h>
-#include <tulip/Vector.h>
-#include <tulip/DrawingTools.h>
+#include <talipot/Graph.h>
+#include <talipot/Vector.h>
+#include <talipot/DrawingTools.h>
 
 class QuadTreeBundle {
 public:
@@ -52,4 +53,4 @@ private:
   void recQuad(const tlp::node a, const tlp::node b, const tlp::node c, const tlp::node d,
                const std::vector<tlp::node> &input);
 };
-#endif // QUADTREE_H
+#endif // QUAD_TREE_H

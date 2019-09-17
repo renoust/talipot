@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef ALGORITHMRUNNERITEM_H
-#define ALGORITHMRUNNERITEM_H
+#ifndef ALGORITHM_RUNNER_ITEM_H
+#define ALGORITHM_RUNNER_ITEM_H
 
 #include <QWidget>
 
-#include <tulip/DataSet.h>
+#include <talipot/DataSet.h>
 
 namespace Ui {
 class AlgorithmRunnerItem;
@@ -65,4 +65,4 @@ protected slots:
   void afterRun(tlp::Graph *, const tlp::DataSet &);
   void initModel();
 };
-#endif // ALGORITHMRUNNERITEM_H
+#endif // ALGORITHM_RUNNER_ITEM_H

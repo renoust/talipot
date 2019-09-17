@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef DOUBLESTRINGSLISTRELATIONDIALOG_H_
-#define DOUBLESTRINGSLISTRELATIONDIALOG_H_
+#ifndef DOUBLE_STRINGS_LIST_RELATION_DIALOG_H
+#define DOUBLE_STRINGS_LIST_RELATION_DIALOG_H
 
 #include <QDialog>
 
-#include <tulip/Color.h>
+#include <talipot/Color.h>
 
 namespace Ui {
 class DoubleStringsListRelationDialogData;
@@ -50,4 +50,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* DOUBLESTRINGSLISTRELATIONDIALOG_H_ */
+#endif // DOUBLE_STRINGS_LIST_RELATION_DIALOG_H

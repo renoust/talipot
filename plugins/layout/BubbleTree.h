@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _BUBBLETREELAYOUT_H
-#define _BUBBLETREELAYOUT_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef BUBBLE_TREE_H
+#define BUBBLE_TREE_H
+
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup layout */
 
@@ -61,4 +62,4 @@ private:
   bool nAlgo;
 };
 
-#endif
+#endif // BUBBLE_TREE_H

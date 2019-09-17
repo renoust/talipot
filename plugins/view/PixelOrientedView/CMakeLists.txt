@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLEW_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLEW_INCLUDE_DIR})
 
 SET(LIB_SRCS
     PixelOrientedView.cpp
@@ -18,9 +18,9 @@ SET(LIB_SRCS
     POLIB/PixelOrientedMediator.cpp
     POLIB/SpiralLayout.cpp
     POLIB/SquareLayout.cpp
-    POLIB/TulipGraphDimension.cpp
-    POLIB/TulipNodeColorMapping.cpp
-    POLIB/TulipNodeMetricSorter.cpp
+    POLIB/GraphDimension.cpp
+    POLIB/NodeColorMapping.cpp
+    POLIB/NodeMetricSorter.cpp
     POLIB/UniformDeformationScreen.cpp
     POLIB/ZOrderLayout.cpp
 )
@@ -39,7 +39,7 @@ QTX_WRAP_CPP(LIB_MOC_SRCS
 
 QTX_ADD_RESOURCES(RCC_SRCS PixelOrientedView.qrc)
 
-ADD_LIBRARY(PixelOrientedView-${TulipVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${RCC_SRCS})
-TARGET_LINK_LIBRARIES(PixelOrientedView-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName} ${OPENGL_gl_LIBRARY})
+ADD_LIBRARY(PixelOrientedView-${TalipotVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${RCC_SRCS})
+TARGET_LINK_LIBRARIES(PixelOrientedView-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${OPENGL_gl_LIBRARY})
 
-TULIP_INSTALL_PLUGIN(PixelOrientedView-${TulipVersion} ${TulipViewPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(PixelOrientedView-${TalipotVersion} ${TalipotViewPluginsInstallDir})

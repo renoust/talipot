@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef DIFFUSIONRATEFUNCTIONSIMPLE_H_
-#define DIFFUSIONRATEFUNCTIONSIMPLE_H_
+#ifndef DIFFUSION_RATE_FUNCTION_SIMPLE_H
+#define DIFFUSION_RATE_FUNCTION_SIMPLE_H
 
 #include "DiffusionRateFunction.h"
 
@@ -27,4 +27,4 @@ protected:
   unsigned int neighborhoodMax;
 };
 
-#endif /* DIFFUSIONRATEFUNCTIONSIMPLE_H_ */
+#endif // DIFFUSION_RATE_FUNCTION_SIMPLE_H

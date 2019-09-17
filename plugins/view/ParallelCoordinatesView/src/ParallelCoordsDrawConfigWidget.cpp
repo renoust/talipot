@@ -15,9 +15,9 @@
 #include <QColorDialog>
 #include <QMainWindow>
 
-#include <tulip/TlpTools.h>
-#include <tulip/Perspective.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Perspective.h>
+#include <talipot/TlpQtTools.h>
 
 #include "ParallelTools.h"
 #include "ParallelCoordsDrawConfigWidget.h"
@@ -83,7 +83,7 @@ void ParallelCoordsDrawConfigWidget::setLinesTextureFilename(
   if (!linesTextureFileName.empty()) {
     _ui->gBoxLineTexture->setChecked(true);
 
-    if (linesTextureFileName == string(TulipBitmapDir + DEFAULT_TEXTURE_FILE)) {
+    if (linesTextureFileName == string(TalipotBitmapDir + DEFAULT_TEXTURE_FILE)) {
       _ui->defaultTexture->setChecked(true);
     } else {
       _ui->userTexture->setChecked(true);
@@ -157,11 +157,11 @@ unsigned int ParallelCoordsDrawConfigWidget::getLinesColorAlphaValue() const {
 }
 
 void ParallelCoordsDrawConfigWidget::setBackgroundColor(const Color &color) {
-  _ui->bgColorButton->setTulipColor(color);
+  _ui->bgColorButton->setColor(color);
 }
 
 Color ParallelCoordsDrawConfigWidget::getBackgroundColor() const {
-  return _ui->bgColorButton->tulipColor();
+  return _ui->bgColorButton->talipotColor();
 }
 
 void ParallelCoordsDrawConfigWidget::setDrawPointOnAxis(const bool drawPointOnAxis) {

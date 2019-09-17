@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _StrengthClustering_H
-#define _StrengthClustering_H
+
+#ifndef STRENGTH_CLUSTERING_H
+#define STRENGTH_CLUSTERING_H
 
 #include <string>
 #include <unordered_set>
 #include <vector>
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup clustering */
 
@@ -54,4 +55,4 @@ private:
   tlp::DoubleProperty *values;
 };
 
-#endif
+#endif // STRENGTH_CLUSTERING_H

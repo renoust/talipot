@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "EqualValueClustering.h"
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 //================================================================================
 using namespace std;

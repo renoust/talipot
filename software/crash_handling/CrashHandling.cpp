@@ -16,8 +16,8 @@
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 #endif
 
-#include <tulip/SystemDefinition.h>
-#include <tulip/TulipRelease.h>
+#include <talipot/SystemDefinition.h>
+#include <talipot/Release.h>
 
 #include <iostream>
 #include <fstream>
@@ -28,10 +28,10 @@
 
 using namespace std;
 
-static std::string TULIP_DUMP_FILE = "";
+static std::string TALIPOT_DUMP_FILE = "";
 
 void CrashHandling::setDumpPath(string s) {
-  TULIP_DUMP_FILE = s;
+  TALIPOT_DUMP_FILE = s;
 }
 
 #ifdef _MSC_VER
@@ -48,21 +48,21 @@ static void dumpStackTrace(StackWalker &sw) {
   std::ostream *os = &std::cerr;
   std::ofstream ofs;
 
-  if (!TULIP_DUMP_FILE.empty()) {
-    ofs.open(TULIP_DUMP_FILE.c_str());
+  if (!TALIPOT_DUMP_FILE.empty()) {
+    ofs.open(TALIPOT_DUMP_FILE.c_str());
 
     if (!ofs.is_open()) {
-      std::cerr << "Could not open " << TULIP_DUMP_FILE << std::endl;
+      std::cerr << "Could not open " << TALIPOT_DUMP_FILE << std::endl;
     } else {
       os = &ofs;
-      std::cerr << "Writing dump stack to " << TULIP_DUMP_FILE << std::endl;
+      std::cerr << "Writing dump stack to " << TALIPOT_DUMP_FILE << std::endl;
     }
   }
 
   *os << TLP_PLATEFORM_HEADER << " " << OS_PLATFORM << std::endl
       << TLP_ARCH_HEADER << " " << OS_ARCHITECTURE << std::endl
       << TLP_COMPILER_HEADER << " " << OS_COMPILER << std::endl
-      << TLP_VERSION_HEADER << " " << TULIP_VERSION << std::endl;
+      << TLP_VERSION_HEADER << " " << TALIPOT_VERSION << std::endl;
   *os << TLP_STACK_BEGIN_HEADER << std::endl;
   sw.printCallStack(*os, 50);
   *os << TLP_STACK_END_HEADER << std::endl;

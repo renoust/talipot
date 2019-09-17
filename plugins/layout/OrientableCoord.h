@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLECOORD_H
-#define ORIENTABLECOORD_H
 
-#include <tulip/Coord.h>
+#ifndef ORIENTABLE_COORD_H
+#define ORIENTABLE_COORD_H
+
+#include <talipot/Coord.h>
 class OrientableLayout;
 
 class OrientableCoord : public tlp::Coord {
@@ -45,4 +46,4 @@ protected:
   OrientableLayout *father;
 };
 
-#endif
+#endif // ORIENTABLE_COORD_H

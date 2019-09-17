@@ -14,13 +14,13 @@
 #ifndef GEOGRAPHIC_VIEW_H
 #define GEOGRAPHIC_VIEW_H
 
-#include <tulip/OcclusionTest.h>
-#include <tulip/SceneConfigWidget.h>
-#include <tulip/SceneLayersConfigWidget.h>
-#include <tulip/Interactor.h>
-#include <tulip/View.h>
-#include <tulip/GlMainView.h>
-#include <tulip/ViewActionsManager.h>
+#include <talipot/OcclusionTest.h>
+#include <talipot/SceneConfigWidget.h>
+#include <talipot/SceneLayersConfigWidget.h>
+#include <talipot/Interactor.h>
+#include <talipot/View.h>
+#include <talipot/GlMainView.h>
+#include <talipot/ViewActionsManager.h>
 
 #include <QGraphicsScene>
 #include <QResizeEvent>
@@ -42,7 +42,7 @@ namespace tlp {
 
 /*@{*/
 /** \file
- *  \brief  Tulip Geographic View
+ *  \brief Geographic View
 
  * This view plugin allows to visualize a geolocated Tulip graph on top of maps.
  * If geographic properties are attached to graph nodes (address or latitude/longitude), this
@@ -82,7 +82,7 @@ public:
   ~GeographicView() override;
 
   std::string icon() const override {
-    return ":/tulip/geoview/geographic_view.png";
+    return ":/talipot/geoview/geographic_view.png";
   }
 
   void setupUi() override;

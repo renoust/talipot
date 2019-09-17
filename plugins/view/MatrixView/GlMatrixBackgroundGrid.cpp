@@ -13,8 +13,8 @@
 
 #include "GlMatrixBackgroundGrid.h"
 
-#include <tulip/Graph.h>
-#include <tulip/GlLine.h>
+#include <talipot/Graph.h>
+#include <talipot/GlLine.h>
 
 #include "MatrixView.h"
 

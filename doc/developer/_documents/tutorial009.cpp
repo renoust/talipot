@@ -1,8 +1,8 @@
 #include <iostream>
 #include <set>
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/Observable.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/Observable.h>
 #include "ListenerClass.h"
 
 /**
@@ -16,8 +16,8 @@ using namespace std;
 using namespace tlp;
 
 int main() {
-  // initialize the Tulip libs
-  initTulipLib();
+  // initialize the Talipot libs
+  initTalipotLib();
 
   // create an empty graph
   Graph *graph = newGraph();

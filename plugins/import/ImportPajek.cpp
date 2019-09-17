@@ -16,8 +16,8 @@
 #include <string>
 #include <cctype>
 #include <cstdlib>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/DoubleProperty.h>
 
 /** \file
  *  \brief - Import Pajek format graph file.
@@ -129,7 +129,7 @@ public:
   ~ImportPajek() override {}
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_pajek.png";
+    return ":/talipot/graphperspective/icons/32/import_pajek.png";
   }
 
   unsigned int nbNodes;

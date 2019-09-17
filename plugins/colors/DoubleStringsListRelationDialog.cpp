@@ -14,8 +14,8 @@
 #include "DoubleStringsListRelationDialog.h"
 #include "ui_DoubleStringsListRelationDialog.h"
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/ColorScale.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/ColorScale.h>
 
 #include <QScrollBar>
 

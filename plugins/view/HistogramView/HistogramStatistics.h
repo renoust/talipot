@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef HISTOGRAMSTATISTICS_H_
-#define HISTOGRAMSTATISTICS_H_
+#ifndef HISTOGRAM_STATISTICS_H
+#define HISTOGRAM_STATISTICS_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/Coord.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Coord.h>
 #include <map>
 
 #include <QString>
@@ -76,4 +76,4 @@ protected:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMSTATISTICS_H_ */
+#endif // HISTOGRAM_STATISTICS_H

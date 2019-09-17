@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLECONSTANT_H
-#define ORIENTABLECONSTANT_H
+
+#ifndef ORIENTABLE_CONSTANTS_H
+#define ORIENTABLE_CONSTANTS_H
 
 enum orientationType {
   ORI_DEFAULT = 0,
@@ -25,4 +26,4 @@ enum { UP_DOWN = 0, DOWN_UP = 1, RIGHT_LEFT = 2, LEFT_RIGHT = 3 };
 
 orientationType maskFromPanel(bool reverseOrientation, bool reverseDirection);
 
-#endif
+#endif // ORIENTABLE_CONSTANTS_H

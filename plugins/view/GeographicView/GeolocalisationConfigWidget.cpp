@@ -14,9 +14,9 @@
 #include "GeolocalisationConfigWidget.h"
 #include "ui_GeolocalisationConfigWidget.h"
 
-#include <tulip/ImportModule.h>
-#include <tulip/Graph.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/ImportModule.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace std;
 using namespace tlp;

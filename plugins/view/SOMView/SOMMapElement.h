@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef SOMMAPELEMENT_H_
-#define SOMMAPELEMENT_H_
+#ifndef SOM_MAP_ELEMENT_H
+#define SOM_MAP_ELEMENT_H
 
 #include <unordered_map>
 
-#include <tulip/GlComposite.h>
-#include <tulip/Size.h>
-#include <tulip/Coord.h>
-#include <tulip/Node.h>
+#include <talipot/GlComposite.h>
+#include <talipot/Size.h>
+#include <talipot/Coord.h>
+#include <talipot/Node.h>
 
 /**
  * @brief GlComposite used to visualize a SOM.
@@ -69,4 +69,4 @@ protected:
   Size nodeAreaSize;
 };
 } // namespace tlp
-#endif /* SOMMAPELEMENT_H_ */
+#endif // SOM_MAP_ELEMENT_H

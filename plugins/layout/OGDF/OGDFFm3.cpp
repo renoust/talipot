@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 #include <ogdf/energybased/FMMMLayout.h>
 
 using namespace std;

@@ -16,15 +16,15 @@
 #include "GlLabelledColorScale.h"
 #include <SOMMap.h>
 
-#include <tulip/GlLabel.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/ColorScale.h>
-#include <tulip/GlQuad.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlLayer.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/ColorScale.h>
+#include <talipot/GlQuad.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlLayer.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/BooleanProperty.h>
 
 #include <QToolTip>
 #include <QMouseEvent>

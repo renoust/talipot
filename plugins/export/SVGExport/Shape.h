@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <tulip/Color.h>
-#include <tulip/Coord.h>
-#include <tulip/Size.h>
+#include <talipot/Color.h>
+#include <talipot/Coord.h>
+#include <talipot/Size.h>
 
 #include <QXmlStreamWriter>
 #include <QString>

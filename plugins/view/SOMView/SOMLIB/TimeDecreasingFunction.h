@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef TIMEDECREASINGFUNCTION_H_
-#define TIMEDECREASINGFUNCTION_H_
+#ifndef TIME_DECREASING_FUNCTION_H
+#define TIME_DECREASING_FUNCTION_H
 
 /**
  * @brief Interface for building time rate function for learning coefficient computation.
@@ -35,4 +35,4 @@ public:
                                         unsigned int inputSampleSize) = 0;
 };
 
-#endif /* TIMEDECREASINGFUNCTION_H_ */
+#endif // TIME_DECREASING_FUNCTION_H

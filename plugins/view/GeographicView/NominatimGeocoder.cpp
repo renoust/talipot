@@ -17,8 +17,8 @@
 #include <QNetworkReply>
 #include <QUrl>
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/YajlFacade.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/YajlFacade.h>
 
 #include "NominatimGeocoder.h"
 

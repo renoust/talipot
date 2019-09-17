@@ -14,10 +14,10 @@
 #ifndef GEOGRAPHIC_VIEW_INTERACTORS_H
 #define GEOGRAPHIC_VIEW_INTERACTORS_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/MouseInteractors.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/MouseInteractors.h>
 #include "GeographicView.h"
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include <QCursor>
 
 using namespace tlp;

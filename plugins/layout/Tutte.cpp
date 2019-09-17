@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <set>
 #include <unordered_map>
-#include <tulip/TriconnectedTest.h>
+#include <talipot/TriconnectedTest.h>
 #include "Tutte.h"
 
 PLUGIN(Tutte)

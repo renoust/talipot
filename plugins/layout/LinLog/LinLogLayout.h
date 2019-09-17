@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef LinLogLayout_H
-#define LinLogLayout_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef LIN_LOG_LAYOUT_H
+#define LIN_LOG_LAYOUT_H
+
+#include <talipot/PluginHeaders.h>
 #include "OctTree.h"
 
 class LinLogLayout {
@@ -82,4 +83,4 @@ private:
   double getEnergy(node u, OctTree *tree);
   void getDirection(node u, double *dir, OctTree *tree);
 };
-#endif
+#endif // LIN_LOG_LAYOUT_H

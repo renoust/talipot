@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef RANDOMMETRIC_H
-#define RANDOMMETRIC_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef RANDOM_H
+#define RANDOM_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
@@ -28,4 +29,4 @@ public:
   RandomMetric(const tlp::PluginContext *context);
   bool run() override;
 };
-#endif // RANDOMMETRIC_H
+#endif // RANDOM_H

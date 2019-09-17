@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef SCATTERPLOTPREVIEWGENERATOR_H_
-#define SCATTERPLOTPREVIEWGENERATOR_H_
+#ifndef SCATTER_PLOT2D_VIEW_NAVIGATOR_H
+#define SCATTER_PLOT2D_VIEW_NAVIGATOR_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/Coord.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Coord.h>
 
 namespace tlp {
 
@@ -47,4 +47,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOTPREVIEWGENERATOR_H_ */
+#endif // SCATTER_PLOT2D_VIEW_NAVIGATOR_H

@@ -10,26 +10,27 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
 
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlLayer.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/GlLabel.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/tulipconf.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlLayer.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/GlLabel.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/config.h>
+#include <talipot/TlpQtTools.h>
 
 #include "PixelOrientedInteractors.h"
 #include "PixelOrientedView.h"
@@ -70,7 +71,7 @@ PixelOrientedView::PixelOrientedView(const PluginContext *)
       overviewsComposite(nullptr), optionsWidget(nullptr), propertiesSelectionWidget(nullptr),
       pixelOrientedMediator(nullptr), lastNbNodes(0), overviewWidth(0), overviewHeight(0),
       minWidth(0), refSize(0), hilbertLayout(nullptr), squareLayout(nullptr),
-      spiralLayout(new SpiralLayout()), zorderLayout(nullptr), tulipNodeColorMapping(nullptr),
+      spiralLayout(new SpiralLayout()), zorderLayout(nullptr), talipotNodeColorMapping(nullptr),
       smallMultiplesView(true), sceneRadiusBak(0.0), zoomFactorBak(0.0), detailViewLabel(nullptr),
       detailOverview(nullptr), newGraphSet(false), smallMultiplesNeedUpdate(false),
       lastViewWindowWidth(0), lastViewWindowHeight(0), center(false), isConstruct(false) {}
@@ -84,7 +85,7 @@ PixelOrientedView::~PixelOrientedView() {
   delete hilbertLayout;
   delete squareLayout;
   delete zorderLayout;
-  delete tulipNodeColorMapping;
+  delete talipotNodeColorMapping;
   delete pixelOrientedMediator;
   delete propertiesSelectionWidget;
   delete optionsWidget;
@@ -179,14 +180,14 @@ void PixelOrientedView::setState(const DataSet &dataSet) {
     return;
   }
 
-  if (tulipNodeColorMapping != nullptr && this->pixelOrientedGraph != graph()) {
-    delete tulipNodeColorMapping;
-    tulipNodeColorMapping = nullptr;
+  if (talipotNodeColorMapping != nullptr && this->pixelOrientedGraph != graph()) {
+    delete talipotNodeColorMapping;
+    talipotNodeColorMapping = nullptr;
   }
 
-  if (tulipNodeColorMapping == nullptr) {
-    tulipNodeColorMapping = new TulipNodeColorMapping(pixelOrientedGraph);
-    pixelOrientedMediator->setColorFunction(tulipNodeColorMapping);
+  if (talipotNodeColorMapping == nullptr) {
+    talipotNodeColorMapping = new NodeColorMapping(pixelOrientedGraph);
+    pixelOrientedMediator->setColorFunction(talipotNodeColorMapping);
   }
 
   if (lastGraph == nullptr || lastGraph != graph()) {
@@ -370,7 +371,7 @@ void PixelOrientedView::initPixelView() {
 
     if (dataMap.find(selectedGraphProperties[i]) == dataMap.end()) {
       dataMap[selectedGraphProperties[i]] =
-          new TulipGraphDimension(pixelOrientedGraph, selectedGraphProperties[i]);
+          new GraphDimension(pixelOrientedGraph, selectedGraphProperties[i]);
     } else {
       dataMap[selectedGraphProperties[i]]->updateNodesRank();
     }
@@ -436,8 +437,7 @@ void PixelOrientedView::destroyOverviewsIfNeeded() {
 }
 
 void PixelOrientedView::destroyData() {
-  for (map<string, TulipGraphDimension *>::iterator it = dataMap.begin(); it != dataMap.end();
-       ++it) {
+  for (map<string, GraphDimension *>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
     delete it->second;
   }
 

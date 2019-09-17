@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _RANDOMLAYOUT_H
-#define _RANDOMLAYOUT_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef RANDOM_H
+#define RANDOM_H
+
+#include <talipot/PluginHeaders.h>
 
 /// Random.h - An implementation of a random 3D layout.
 /** This plugin is an implementation of a random 3D layout
@@ -27,7 +28,7 @@
  *  Let n be the number of nodes, the algorithm complexity is in O(n).
  *
  *
- *  \author David Auber University Bordeaux I France, Email : auber@tulip-software.com
+ *  \author David Auber University Bordeaux I France, Email : auber@talipot-software.com
  */
 class Random : public tlp::LayoutAlgorithm {
 public:
@@ -38,4 +39,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // RANDOM_H

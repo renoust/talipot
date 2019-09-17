@@ -11,8 +11,9 @@
  *
  */
 
-#ifndef FISHEYESSCREENFURNAS_H
-#define FISHEYESSCREENFURNAS_H
+#ifndef FISH_EYES_SCREEN_FURNAS_H
+#define FISH_EYES_SCREEN_FURNAS_H
+
 #include <string>
 #include "ScreenFunction.h"
 
@@ -35,4 +36,4 @@ private:
   Vec2f fisheyesCenter;
 };
 } // namespace pocore
-#endif // FISHEYESSCREENFURNAS_H
+#endif // FISH_EYES_SCREEN_FURNAS_H

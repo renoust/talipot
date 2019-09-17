@@ -13,9 +13,9 @@
 
 #include "ReachableSubGraphSelection.h"
 
-#include <tulip/StringCollection.h>
-#include <tulip/GraphTools.h>
-#include <tulip/StableIterator.h>
+#include <talipot/StringCollection.h>
+#include <talipot/GraphTools.h>
+#include <talipot/StableIterator.h>
 
 using namespace tlp;
 

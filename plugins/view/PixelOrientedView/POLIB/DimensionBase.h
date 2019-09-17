@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef DIMENSION_BASE
-#define DIMENSION_BASE
+#ifndef DIMENSION_BASE_H
+#define DIMENSION_BASE_H
 
 #include <vector>
 #include <string>
@@ -35,4 +35,4 @@ struct DimensionBase {
 };
 } // namespace pocore
 
-#endif
+#endif // DIMENSION_BASE_H

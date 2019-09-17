@@ -16,8 +16,8 @@
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GlAxis.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlAxis.h>
 
 #include <set>
 
@@ -131,4 +131,4 @@ protected:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif
+#endif // PARALLEL_AXIS_H

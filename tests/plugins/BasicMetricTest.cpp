@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "BasicMetricTest.h"
-#include <tulip/Graph.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/Graph.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace std;
 using namespace tlp;

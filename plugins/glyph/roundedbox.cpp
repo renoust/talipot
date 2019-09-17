@@ -10,16 +10,17 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <GL/glew.h>
 
-#include <tulip/Glyph.h>
-#include <tulip/GlPolygon.h>
-#include <tulip/GlShaderProgram.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/GlTools.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/Glyph.h>
+#include <talipot/GlPolygon.h>
+#include <talipot/GlShaderProgram.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/GlTools.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/ParallelTools.h>
 
 using namespace tlp;
 using namespace std;

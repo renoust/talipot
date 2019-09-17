@@ -147,7 +147,7 @@
   <customwidget>
    <class>tlp::ColorButton</class>
    <extends>QPushButton</extends>
-   <header location="global">tulip/ColorButton.h</header>
+   <header location="global">talipot/ColorButton.h</header>
    <slots>
     <signal>colorChanged(QColor)</signal>
    </slots>

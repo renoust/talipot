@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
-#include <tulip/Circle.h>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/Circle.h>
+#include <talipot/PluginHeaders.h>
 
 class BubblePack : public tlp::LayoutAlgorithm {
 public:

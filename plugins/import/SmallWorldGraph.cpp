@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ctime>
 #include <cmath>
 #include <climits>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 using namespace std;
 using namespace tlp;

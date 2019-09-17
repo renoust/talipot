@@ -13,7 +13,7 @@
 
 #include "MakeSelectionGraph.h"
 
-#include <tulip/GraphTools.h>
+#include <talipot/GraphTools.h>
 using namespace tlp;
 
 static const char *paramHelp[] = {

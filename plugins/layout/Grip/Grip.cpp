@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "Grip.h"
 #include "MISFiltering.h"
 #include "Distances.h"
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/TreeTest.h>
-#include <tulip/Graph.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/TreeTest.h>
+#include <talipot/Graph.h>
 
 using namespace std;
 using namespace tlp;

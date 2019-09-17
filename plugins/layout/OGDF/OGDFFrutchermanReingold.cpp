@@ -12,8 +12,8 @@
  */
 
 #include <ogdf/energybased/SpringEmbedderFRExact.h>
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
-#include <tulip/StringCollection.h>
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
+#include <talipot/StringCollection.h>
 
 // comments below have been extracted from OGDF/src/energybased/SpringEmbedderFRExact.cpp
 /** \addtogroup layout */

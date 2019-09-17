@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef PROGRESS_WIDGET_GRAPHICSPROXY_H
-#define PROGRESS_WIDGET_GRAPHICSPROXY_H
+#ifndef PROGRESS_WIDGET_GRAPHICS_PROXY_H
+#define PROGRESS_WIDGET_GRAPHICS_PROXY_H
 
 #include <QGraphicsProxyWidget>
 #include <QWidget>
@@ -81,4 +81,4 @@ private:
 };
 } // namespace tlp
 
-#endif // PROGRESS_WIDGET_GRAPHICSPROXY_H
+#endif // PROGRESS_WIDGET_GRAPHICS_PROXY_H

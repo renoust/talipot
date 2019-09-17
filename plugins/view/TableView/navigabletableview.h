@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef NAVIGABLETABLEVIEW_H
 #define NAVIGABLETABLEVIEW_H
 

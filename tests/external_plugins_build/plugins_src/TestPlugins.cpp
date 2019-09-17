@@ -1,4 +1,4 @@
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 // Check base plugins implementation can be compiled
 // and successfully loaded
@@ -7,7 +7,7 @@
 class TestAlgorithmPlugin : public tlp::Algorithm {
 
 public:
-  PLUGININFORMATION("Test Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestAlgorithmPlugin(tlp::PluginContext *context) : tlp::Algorithm(context) {}
 
@@ -23,7 +23,8 @@ PLUGIN(TestAlgorithmPlugin)
 class TestBooleanAlgorithmPlugin : public tlp::BooleanAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Boolean Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Boolean Algorithm Plugin", "The Talipot developers", "2019", "", "1.0",
+                    "")
 
   TestBooleanAlgorithmPlugin(tlp::PluginContext *context) : tlp::BooleanAlgorithm(context) {}
 
@@ -40,7 +41,7 @@ PLUGIN(TestBooleanAlgorithmPlugin)
 class TestColorAlgorithmPlugin : public tlp::ColorAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Color Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Color Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestColorAlgorithmPlugin(tlp::PluginContext *context) : tlp::ColorAlgorithm(context) {}
 
@@ -57,7 +58,7 @@ PLUGIN(TestColorAlgorithmPlugin)
 class TestDoubleAlgorithmPlugin : public tlp::DoubleAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Double Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Double Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestDoubleAlgorithmPlugin(tlp::PluginContext *context) : tlp::DoubleAlgorithm(context) {}
 
@@ -74,7 +75,8 @@ PLUGIN(TestDoubleAlgorithmPlugin)
 class TestIntegerAlgorithmPlugin : public tlp::IntegerAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Integer Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Integer Algorithm Plugin", "The Talipot developers", "2019", "", "1.0",
+                    "")
 
   TestIntegerAlgorithmPlugin(tlp::PluginContext *context) : tlp::IntegerAlgorithm(context) {}
 
@@ -91,7 +93,7 @@ PLUGIN(TestIntegerAlgorithmPlugin)
 class TestLayoutAlgorithmPlugin : public tlp::LayoutAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Layout Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Layout Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestLayoutAlgorithmPlugin(tlp::PluginContext *context) : tlp::LayoutAlgorithm(context) {}
 
@@ -108,7 +110,7 @@ PLUGIN(TestLayoutAlgorithmPlugin)
 class TestSizeAlgorithmPlugin : public tlp::SizeAlgorithm {
 
 public:
-  PLUGININFORMATION("Test Size Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Size Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestSizeAlgorithmPlugin(tlp::PluginContext *context) : tlp::SizeAlgorithm(context) {}
 
@@ -125,7 +127,7 @@ PLUGIN(TestSizeAlgorithmPlugin)
 class TestStringAlgorithmPlugin : public tlp::StringAlgorithm {
 
 public:
-  PLUGININFORMATION("Test String Algorithm Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test String Algorithm Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestStringAlgorithmPlugin(tlp::PluginContext *context) : tlp::StringAlgorithm(context) {}
 
@@ -142,7 +144,7 @@ PLUGIN(TestStringAlgorithmPlugin)
 class TestImportModulePlugin : public tlp::ImportModule {
 
 public:
-  PLUGININFORMATION("Test Import Module Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Import Module Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestImportModulePlugin(tlp::PluginContext *context) : tlp::ImportModule(context) {}
 
@@ -158,7 +160,7 @@ PLUGIN(TestImportModulePlugin)
 class TestExportModulePlugin : public tlp::ExportModule {
 
 public:
-  PLUGININFORMATION("Test Export Module Plugin", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Export Module Plugin", "The Talipot developers", "2019", "", "1.0", "")
 
   TestExportModulePlugin(tlp::PluginContext *context) : tlp::ExportModule(context) {}
 
@@ -174,13 +176,13 @@ public:
 
 PLUGIN(TestExportModulePlugin)
 
-// Check there is no symbol issue due to Tulip multithreading
+// Check there is no symbol issue due to Talipot multithreading
 // implementation (either OpenMP or C++11 threads)
 // when using a static property in a plugin code
 class TestStaticPropertyPlugin : public tlp::Algorithm {
 
 public:
-  PLUGININFORMATION("Test Static Property", "Tulip-dev", "2019", "", "1.0", "")
+  PLUGININFORMATION("Test Static Property", "The Talipot developers", "2019", "", "1.0", "")
 
   TestStaticPropertyPlugin(tlp::PluginContext *context) : tlp::Algorithm(context) {}
 

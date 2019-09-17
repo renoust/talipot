@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <QGraphicsView>
 #include <QAction>
 #include <QMenu>
@@ -19,15 +20,15 @@
 #include "GlMatrixBackgroundGrid.h"
 #include "MatrixViewQuickAccessBar.h"
 
-#include <tulip/Graph.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlyphManager.h>
-#include <tulip/ParametricCurves.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/Graph.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/ParametricCurves.h>
+#include <talipot/ViewSettings.h>
 
 using namespace std;
 

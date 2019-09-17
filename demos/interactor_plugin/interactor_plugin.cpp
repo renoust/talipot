@@ -3,11 +3,11 @@
 #include <QLabel>
 #include <QGraphicsProxyWidget>
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/Interactor.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlScene.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/Interactor.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlScene.h>
 
 using namespace tlp;
 
@@ -24,7 +24,7 @@ public:
   /*
   Basic constructor
   In this constructor we create a label to display information
-  And a QGraphicsProxyWidget to show information in Tulip QGraphics system
+  And a QGraphicsProxyWidget to show information in Talipot QGraphics system
   */
   InteractorPluginComponent() {
     _informationLabel = new QLabel();
@@ -186,7 +186,7 @@ public:
 
   In this example we have two InteractorComponent
   The first one : InteractorPluginComponent is the example InteractorComponent
-  The second one : MouseNKeysNavigation is a standard Tulip InteractorComponent who activate Zoom
+  The second one : MouseNKeysNavigation is a standard Talipot InteractorComponent who activate Zoom
   and pan interaction
   */
   void construct() {
@@ -219,6 +219,6 @@ public:
 };
 
 /*
-With this macro you register your plugin in Tulip plugin engine
+With this macro you register your plugin in Talipot plugin engine
 */
 PLUGIN(InteractorPlugin)

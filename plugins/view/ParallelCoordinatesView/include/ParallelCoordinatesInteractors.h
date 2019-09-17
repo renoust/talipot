@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELCOORDINATESINTERACTORS_H_
-#define PARALLELCOORDINATESINTERACTORS_H_
+#ifndef PARALLEL_COORDINATES_INTERACTORS_H
+#define PARALLEL_COORDINATES_INTERACTORS_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 
 #include <QWidget>
 
@@ -199,4 +199,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDINATESINTERACTORS_H_ */
+#endif // PARALLEL_COORDINATES_INTERACTORS_H

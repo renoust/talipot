@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/OuterPlanarTest.h>
-#include <tulip/GraphTest.h>
+#include <talipot/OuterPlanarTest.h>
+#include <talipot/GraphTest.h>
 
 class OuterplanarTest : public tlp::GraphTest {
 public:

@@ -11,7 +11,7 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
+#include <talipot/MouseInteractors.h>
 
 #include "PixelOrientedInteractors.h"
 #include "PixelOrientedViewNavigator.h"
@@ -35,7 +35,7 @@ bool PixelOrientedInteractor::isCompatible(const std::string &viewName) const {
 PLUGIN(PixelOrientedInteractorNavigation)
 
 PixelOrientedInteractorNavigation::PixelOrientedInteractorNavigation(const PluginContext *)
-    : PixelOrientedInteractor(":/tulip/gui/icons/i_navigation.png", "Navigate in view",
+    : PixelOrientedInteractor(":/talipot/gui/icons/i_navigation.png", "Navigate in view",
                               StandardInteractorPriority::Navigation) {}
 
 void PixelOrientedInteractorNavigation::construct() {

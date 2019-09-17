@@ -4,7 +4,7 @@
 Installation instructions: Ready to compile
 ********************************************
 
-The classic installation details are specified in the *INSTALL.[linux,mac,win]* files available in the tulip source code root directory. However, if you are reading this tutorial/documentation, you may be interested in using Tulip in a more advanced fashion whether by creating new perspectives, plug-ins or algorithms. The following instructions will help you to prepare your system by installing the Tulip program ready to be compiled and modified to your convenience.
+The classic installation details are specified in the *INSTALL.[linux,mac,win]* files available in the talipot source code root directory. However, if you are reading this tutorial/documentation, you may be interested in using Talipot in a more advanced fashion whether by creating new perspectives, plug-ins or algorithms. The following instructions will help you to prepare your system by installing the Talipot program ready to be compiled and modified to your convenience.
 
 
 .. _installation_how_to:
@@ -12,29 +12,29 @@ The classic installation details are specified in the *INSTALL.[linux,mac,win]* 
 How to proceed ?
 ================
 
-The installation process is not complicated, it can however take some time depending on your computer. Before starting the Tulip set-up, as a developer, you must be aware of some of the Tulip intern behaviours. 
+The installation process is not complicated, it can however take some time depending on your computer. Before starting the Talipot set-up, as a developer, you must be aware of some of the Talipot intern behaviours.
 
 
 Foreword: Debug and Release modes
 ---------------------------------
 
-Tulip can be compiled and thus executed in two different modes. The first one, called *Release*, is the classic Tulip execution mode. The application should be executed this way when you are only using the originaly integrated tool of Tulip or the add-ons included with the plug-in library. Most users will only be interested in this mode.
+Talipot can be compiled and thus executed in two different modes. The first one, called *Release*, is the classic Talipot execution mode. The application should be executed this way when you are only using the originaly integrated tool of Talipot or the add-ons included with the plug-in library. Most users will only be interested in this mode.
 
-Nevertheless, because Tulip is a research tool, the users testing their algorithms or plug-ins may not be sure of their code source reliability. These people should be more concerned with the second mode available, the *Debug* mode. With it, the whole program will be slightly slower as the execution is monitored with sanity assertions. If an unexpected behaviour happens and one of the assertion detect it, Tulip will pop an error message expliciting the problem encounter. 
+Nevertheless, because Talipot is a research tool, the users testing their algorithms or plug-ins may not be sure of their code source reliability. These people should be more concerned with the second mode available, the *Debug* mode. With it, the whole program will be slightly slower as the execution is monitored with sanity assertions. If an unexpected behaviour happens and one of the assertion detect it, Talipot will pop an error message expliciting the problem encounter.
 
-These modes must be separated as their behaviour are entirely different. A program instance compiled in *Debug* mod can not be used to launch a *Release* version of Tulip and vice versa. For instance, a few features will need assertions only checked in debug mode to run correctly, some of these cases are presented in the :ref:`Tulip library tutorial section <tulip_library_tutorial>`.
+These modes must be separated as their behaviour are entirely different. A program instance compiled in *Debug* mod can not be used to launch a *Release* version of Talipot and vice versa. For instance, a few features will need assertions only checked in debug mode to run correctly, some of these cases are presented in the :ref:`Talipot library tutorial section <talipot_library_tutorial>`.
 
 .. _installation_how_to_setup:
 
 Setting up the system
 ---------------------
 
-If you want to be able to recompile Tulip, you have to organize the different directories which will contain the source code, the libraries and the executables. The disposition we propose here and use in the following steps is just a suggestion. It allows a clear distinction between each directory and their use and gives you the ability to have several working versions of Tulip at the same time on your computer.
+If you want to be able to recompile Talipot, you have to organize the different directories which will contain the source code, the libraries and the executables. The disposition we propose here and use in the following steps is just a suggestion. It allows a clear distinction between each directory and their use and gives you the ability to have several working versions of Talipot at the same time on your computer.
 
-First, select the directory in which you want to set the application (you must have the appropriate permissions from the OS) and create here the directory *Tulip-4.X* (where *X* is adapted to the current version number).
-Into that folder, create five subdirectories: 
+First, select the directory in which you want to set the application (you must have the appropriate permissions from the OS) and create here the directory *Talipot-4.X* (where *X* is adapted to the current version number).
+Into that folder, create five subdirectories:
 
-* *tulip-src*: the source files will be kept here
+* *talipot-src*: the source files will be kept here
 * *build-debug*: where we stock the generated build file (with the mode *Debug*)
 * *build-release*: where we stock the generated build file (with the mode *Release*)
 * *install-debug*: the program will be installed here (with the mode *Debug*)
@@ -56,7 +56,7 @@ Installation on a UNIX-like OS
 Requirements
 ------------
 
-To compile and run Tulip, you will need the following tools/libraries:
+To compile and run Talipot, you will need the following tools/libraries:
 
 * libqt4-dev
 * libfreetype6-dev
@@ -85,22 +85,22 @@ to install or update directly all the previously listed packages. This action wi
 Download the source code
 ------------------------
 
-You can obtain the Tulip source code in several ways. The easiest is to pick them directly from the Sourceforge website (by following this `link <http://sourceforge.net/projects/auber/files/tulip/>`_). This method, nevertheless, is not always the best choice. If you want to work actively with Tulip, you will need to keep your project up to date.
+You can obtain the Talipot source code in several ways. The easiest is to pick them directly from the Sourceforge website (by following this `link <http://sourceforge.net/projects/auber/files/talipot/>`_). This method, nevertheless, is not always the best choice. If you want to work actively with Talipot, you will need to keep your project up to date.
 
-The other, slightly more complicated, solution is to use the subversion development repository. This allows you to easily keep your Tulip version up to date. The Unix/Linux based systems should be able to run the `svn tool <http://subversion.apache.org/>`_ with the following commands
+The other, slightly more complicated, solution is to use the subversion development repository. This allows you to easily keep your Talipot version up to date. The Unix/Linux based systems should be able to run the `svn tool <http://subversion.apache.org/>`_ with the following commands
 
 .. code-block:: bash
 
-  $ cd [...]/Tulip-4.X/
-  $ svn checkout svn://svn.code.sf.net/p/auber/code/tulip tulip-src
+  $ cd [...]/Talipot-4.X/
+  $ svn checkout svn://svn.code.sf.net/p/auber/code/talipot talipot-src
 
-You can choose the access path and the target dir *tulip-src* according to your preference. Do not forget where the source code is located, you will need the path for completing the compilation and for specifying it to your API.
+You can choose the access path and the target dir *talipot-src* according to your preference. Do not forget where the source code is located, you will need the path for completing the compilation and for specifying it to your API.
 
 Once you have import the source code using *svn*, you can easily update it with the commands
 
 .. code-block:: bash
 
-  $ cd [...]/Tulip-4.X/tulip-src
+  $ cd [...]/Talipot-4.X/talipot-src
   $ svn update
 
 
@@ -109,7 +109,7 @@ Once you have import the source code using *svn*, you can easily update it with 
 Generate the MakeFiles
 ----------------------
 
-Tulip uses *cmake* to generate the build instructions. In the following instructions we will use *cmake-gui*, offering a compliant graphic interface, to create the appropriate package files.
+Talipot uses *cmake* to generate the build instructions. In the following instructions we will use *cmake-gui*, offering a compliant graphic interface, to create the appropriate package files.
 
 You must start by indicating the source code path and the file in which the binaries will be build:
 
@@ -123,7 +123,7 @@ Then press on the *Configure* button, select the project generator (*Unix Makefi
 .. image:: _images/install_cmakegui_build_generate.png
     :width: 600
 
-The two important fields to fill are the *CMAKE_BUILD_TYPE* and the *CMAKE_INSTALL_PREFIX*. The build type value must be set to *Release* or *Debug* (with capitals) and the install prefix indicates where the program will be installed. We do not want to use the default */user/local/* path as we may wish to exploit different versions of the application. In our case, the install directory will be in *[...]/Tulip-4.X/install-release*.
+The two important fields to fill are the *CMAKE_BUILD_TYPE* and the *CMAKE_INSTALL_PREFIX*. The build type value must be set to *Release* or *Debug* (with capitals) and the install prefix indicates where the program will be installed. We do not want to use the default */user/local/* path as we may wish to exploit different versions of the application. In our case, the install directory will be in *[...]/Talipot-4.X/install-release*.
 
 Click again on the *Configure* button to turn the red colour of the fields off. If this operation failed, ensure you have installed all the needed dependencies, filled appropriatly the fields, then try again.
 
@@ -135,7 +135,7 @@ Press the *Generate* button. If you have correctly set all the values, the two l
   Generating done
 
 You can now close *cmake-gui*.
- 
+
 
 .. _installation_linux_use_makefiles:
 
@@ -160,18 +160,18 @@ This operation can take several minutes, so here comes the time for a well deser
 Install the packages
 ~~~~~~~~~~~~~~~~~~~~
 
-Once the make instruction is finished, you can install Tulip by using the command
+Once the make instruction is finished, you can install Talipot by using the command
 
 .. code-block:: bash
 
   $ make install
 
-This operation can take a little time too. At the end, your installation path specified to *cmake-gui* will contained the binaries and the libraries of the application. You can now launch Tulip in its *Release* version by using the commands
+This operation can take a little time too. At the end, your installation path specified to *cmake-gui* will contained the binaries and the libraries of the application. You can now launch Talipot in its *Release* version by using the commands
 
 .. code-block:: bash
 
-  $ cd [...]/Tulip-4.X
-  $ ./install-release/bin/tulip
+  $ cd [...]/Talipot-4.X
+  $ ./install-release/bin/talipot
 
 You now just have to repeat the previously detailed steps while specifying to the appropriate fields the value *debug* instead of *release* to achieve the second build configuration.
 
@@ -187,7 +187,7 @@ Installation on a Windows system
 Requirements
 ------------
 
-You will need to download the following packages in order to compile Tulip.
+You will need to download the following packages in order to compile Talipot.
 
 
 For a 64-bits build :
@@ -219,7 +219,7 @@ For both builds :
 
 * **GLEW** (`Glew-1.10.0 <https://sourceforge.net/projects/glew/files/glew/1.10.0/glew-1.10.0.zip/download>`_)
 
-* the **NSIS**, for Nullsoft Scriptable Install System (`NSIS 2.46 <http://prdownloads.sourceforge.net/nsis/nsis-2.46-setup.exe?download>`_)  
+* the **NSIS**, for Nullsoft Scriptable Install System (`NSIS 2.46 <http://prdownloads.sourceforge.net/nsis/nsis-2.46-setup.exe?download>`_)
 
 .. _installation_win_setup_env:
 
@@ -244,15 +244,15 @@ Extract the **MinGW** toolchain to
 
 .. code-block:: bash
 
-  C:\mingw64 
+  C:\mingw64
 
 Open the **Qt4** archive and extract the content of the *ported64* directory to
 
 .. code-block:: bash
 
-  C:\mingw64 
+  C:\mingw64
 
-It provides some precompiled dependencies Tulip needs (zlib, freetype).
+It provides some precompiled dependencies Talipot needs (zlib, freetype).
 
 
 Qt4
@@ -277,7 +277,7 @@ with the following content
   [Paths]
   Prefix = ../
 
-It is needed by CMake to correctly setup the Tulip build.
+It is needed by CMake to correctly setup the Talipot build.
 
 Before proceeding, launch the script to reset the Qt path to its actual one.
 
@@ -289,13 +289,13 @@ Extract the content of the **Msys** archive to
 
 .. code-block:: bash
 
-  C:\mingw64 
+  C:\mingw64
 
 Edit or create the file
 
 .. code-block:: bash
 
-  C:\mingw64\msys\etc\fstab 
+  C:\mingw64\msys\etc\fstab
 
 and set its contents to
 
@@ -309,7 +309,7 @@ To launch the MSYS shell easily, we will create a new shortcut. Its target will 
 
 .. code-block:: bash
 
-  C:\mingw64\msys\msys.bat --mintty 
+  C:\mingw64\msys\msys.bat --mintty
 
 The option enables the use of MinTTY, an alternative to *rxvt*. Move the shortcut to a location where it will be easily accessible (on the desktop, in the taskbar or in the start menu) and run it.
 
@@ -317,26 +317,26 @@ The option enables the use of MinTTY, an alternative to *rxvt*. Move the shortcu
 Glew
 ~~~~
 
-Extract the **Glew** archive to your directory of choice (for instance *C:/*). 
+Extract the **Glew** archive to your directory of choice (for instance *C:/*).
 With a MSYS shell launch from the previously created shortcut, navigate to the Glew folder through the command
 
 .. code-block:: bash
 
   $ cd /c/glew-1.10.0
-  
+
 Then compile GLEW by simply entering the command
 
 .. code-block:: bash
 
   $ make
-  
+
 Once GLEW compiled, copy the *include* and *lib* directories to
 
 .. code-block:: bash
 
   C:\mingw64
 
-Everything is now set up to build Tulip.
+Everything is now set up to build Talipot.
 
 
 .. _installation_win_prepare:
@@ -344,50 +344,50 @@ Everything is now set up to build Tulip.
 Preparing the build
 -------------------
 
-Importing the Tulip source code
+Importing the Talipot source code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you have followed the recommandations given at the :ref:`top of this page <installation_how_to_setup>`, you should have created somewhere a directory called *Tulip-4.X* in which you can find the folder *tulip-src*.
+If you have followed the recommandations given at the :ref:`top of this page <installation_how_to_setup>`, you should have created somewhere a directory called *Talipot-4.X* in which you can find the folder *talipot-src*.
 
-To import the Tulip source into it, you can either get a release tarball or checkout the subversion repository with `svn <http://subversion.apache.org/>`_. The *Msys* shell can provide such tool or you may try a solution with a graphic interface, like `Tortoise SVN <http://tortoisesvn.net/>`_.
+To import the Talipot source into it, you can either get a release tarball or checkout the subversion repository with `svn <http://subversion.apache.org/>`_. The *Msys* shell can provide such tool or you may try a solution with a graphic interface, like `Tortoise SVN <http://tortoisesvn.net/>`_.
 
 With the MSYS shell, use the command
 
 .. code-block:: bash
 
-  $ cd /c/[...]/Tulip-4.X
+  $ cd /c/[...]/Talipot-4.X
 
-to navigate to the designated folder and get the Tulip files with the instruction
-
-.. code-block:: bash
-
-  $ svn checkout svn://svn.code.sf.net/p/auber/code/tulip tulip-src
-
-With *Tortoise SVN*, after a right click on *tulip-src*, select the action *SVN Checkout* a specify the checkout repository with the address
+to navigate to the designated folder and get the Talipot files with the instruction
 
 .. code-block:: bash
 
-  svn://svn.code.sf.net/p/auber/code/tulip
+  $ svn checkout svn://svn.code.sf.net/p/auber/code/talipot talipot-src
+
+With *Tortoise SVN*, after a right click on *talipot-src*, select the action *SVN Checkout* a specify the checkout repository with the address
+
+.. code-block:: bash
+
+  svn://svn.code.sf.net/p/auber/code/talipot
 
 
 CMake and the build options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As explained previously, Tulip can be build using two different modes: *Release* and *Debug*. In the current demonstration, we will use the *Release* profile. If you want to use the other one, just adapt the appropriate fields by remplacing the term *Release* with *Debug*.
+As explained previously, Talipot can be build using two different modes: *Release* and *Debug*. In the current demonstration, we will use the *Release* profile. If you want to use the other one, just adapt the appropriate fields by remplacing the term *Release* with *Debug*.
 
 With the *Msys* shell, enter the *build-release* folder
 
 .. code-block:: bash
 
-  $ cd /c/[...]/Tulip-4.X/build-release
+  $ cd /c/[...]/Talipot-4.X/build-release
 
 and launch the following command
 
 .. code-block:: bash
 
-  $ cmake-gui ../tulip-src
+  $ cmake-gui ../talipot-src
 
-You can also run *CMake-gui* with its executable (in *C:\\Program Files (x86)\\CMake 2.8*). You will, however, need to specify the source and build directories.  
+You can also run *CMake-gui* with its executable (in *C:\\Program Files (x86)\\CMake 2.8*). You will, however, need to specify the source and build directories.
 
 Once the CMake GUI appear click on *Configure* and then select "MinGW Makefiles" generator.
 
@@ -443,9 +443,9 @@ and by changing the variable *CMAKE_INSTALL_PREFIX* to your installation directo
 
 .. code-block:: bash
 
-  CMAKE_INSTALL_PREFIX = C:/[...]/Tulip-4.X/install-release
+  CMAKE_INSTALL_PREFIX = C:/[...]/Talipot-4.X/install-release
 
-The default value is incorrect as you can not write in *C:\\Program Files (x86)\\tulip* without admin privileges. Finally, add a new CMake variable (click on *Add Entry* for that) of type *PATH*
+The default value is incorrect as you can not write in *C:\\Program Files (x86)\\talipot* without admin privileges. Finally, add a new CMake variable (click on *Add Entry* for that) of type *PATH*
 
 .. code-block:: bash
 
@@ -458,10 +458,10 @@ Click on *Generate* to produce the Makefiles and exit the CMake GUI.
 
 .. _installation_win_build:
 
-Building Tulip
+Building Talipot
 --------------
 
-To build the Tulip software, return in the MSYS shell and, from the build directory, just enter the command
+To build the Talipot software, return in the MSYS shell and, from the build directory, just enter the command
 
 .. code-block:: bash
 
@@ -472,10 +472,10 @@ You can use parallel build to speed things up by adding the *-jX* option (set *X
 
 .. _installation_win_install:
 
-Installing Tulip
+Installing Talipot
 ----------------
 
-Once Tulip is fully compiled, enter the following command to install it
+Once Talipot is fully compiled, enter the following command to install it
 
 .. code-block:: bash
 
@@ -485,7 +485,7 @@ Once it is finished, you can run the executable
 
 .. code-block:: bash
 
-  tulip.exe
+  talipot.exe
 
-located in the bin folder of the Tulip installation directory to launch the software.
+located in the bin folder of the Talipot installation directory to launch the software.
 

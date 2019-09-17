@@ -30,15 +30,15 @@ IF(NOT MSVC AND NOT BSD)
 
     ELSE(BFD_FOUND)
 
-      MESSAGE("Install GNU binutils development package to get a detailed stack trace when Tulip crashes.")
+      MESSAGE("Install GNU binutils development package to get a detailed stack trace when Talipot crashes.")
 
     ENDIF(BFD_FOUND)
 
   ENDIF(LINUX OR MINGW)
 
 ENDIF(NOT MSVC AND NOT BSD)
-	
-INCLUDE_DIRECTORIES(BEFORE ${TulipCoreBuildInclude} ${TulipCoreInclude})
+
+INCLUDE_DIRECTORIES(BEFORE ${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 
 IF(UNIX)
 

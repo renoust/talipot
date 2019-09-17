@@ -16,6 +16,6 @@ INCLUDE_DIRECTORIES(${Tess2Include})
 ADD_LIBRARY(${Tess2Library} SHARED ${libtess2_SRCS})
 
 INSTALL(TARGETS ${Tess2Library}
-        RUNTIME DESTINATION ${TulipBinInstallDir}
-        LIBRARY DESTINATION ${TulipLibInstallDir}
-        ARCHIVE DESTINATION ${TulipLibInstallDir})
+        RUNTIME DESTINATION ${TalipotBinInstallDir}
+        LIBRARY DESTINATION ${TalipotLibInstallDir}
+        ARCHIVE DESTINATION ${TalipotLibInstallDir})

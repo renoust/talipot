@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELCOORDSAXISSPACER_H_
-#define PARALLELCOORDSAXISSPACER_H_
+#ifndef PARALLEL_COORDS_AXIS_SPACER_H
+#define PARALLEL_COORDS_AXIS_SPACER_H
 
-#include <tulip/GLInteractor.h>
+#include <talipot/GLInteractor.h>
 
 namespace tlp {
 
@@ -41,4 +41,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSAXISSPACER_H_ */
+#endif // PARALLEL_COORDS_AXIS_SPACER_H

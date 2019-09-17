@@ -11,8 +11,9 @@
  *
  */
 
-#ifndef LAYOUTFUNCTION_H
-#define LAYOUTFUNCTION_H
+#ifndef LAYOUT_FUNCTION_H
+#define LAYOUT_FUNCTION_H
+
 #include "potypes.h"
 
 namespace pocore {
@@ -23,4 +24,4 @@ public:
   virtual unsigned int unproject(const Vec2i &) const = 0;
 };
 } // namespace pocore
-#endif // LAYOUTFUNCTION_H
+#endif // LAYOUT_FUNCTION_H

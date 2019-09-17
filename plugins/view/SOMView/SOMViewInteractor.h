@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef SOMVIEWINTERACTOR_H_
-#define SOMVIEWINTERACTOR_H_
+#ifndef SOM_VIEW_INTERACTOR_H
+#define SOM_VIEW_INTERACTOR_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include "../../utils/PluginNames.h"
 
 namespace tlp {
@@ -70,4 +70,4 @@ public:
   void construct() override;
 };
 } // namespace tlp
-#endif /* SOMVIEWINTERACTOR_H_ */
+#endif // SOM_VIEW_INTERACTOR_H

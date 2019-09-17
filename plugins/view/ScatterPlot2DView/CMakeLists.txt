@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLEW_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLEW_INCLUDE_DIR})
 
 SET(LIB_SRCS
     ScatterPlot2DView.cpp
@@ -31,8 +31,8 @@ QTX_ADD_RESOURCES(LIB_RCC_SRCS
     ScatterPlotResource.qrc
 )
 
-ADD_LIBRARY(ScatterPlot2DView-${TulipVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
+ADD_LIBRARY(ScatterPlot2DView-${TalipotVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
 
-TARGET_LINK_LIBRARIES(ScatterPlot2DView-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName} ${OPENGL_gl_LIBRARY})
+TARGET_LINK_LIBRARIES(ScatterPlot2DView-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${OPENGL_gl_LIBRARY})
 
-TULIP_INSTALL_PLUGIN(ScatterPlot2DView-${TulipVersion} ${TulipViewPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ScatterPlot2DView-${TalipotVersion} ${TalipotViewPluginsInstallDir})

@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef COLORFUNCTION_H
-#define COLORFUNCTION_H
+#ifndef COLOR_FUNCTION_H
+#define COLOR_FUNCTION_H
 
 #include "potypes.h"
 
@@ -23,4 +23,4 @@ public:
   virtual RGBA getColor(const double &value, const unsigned int itemId) const = 0;
 };
 } // namespace pocore
-#endif // COLORFUNCTION_H
+#endif // COLOR_FUNCTION_H

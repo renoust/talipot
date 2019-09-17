@@ -11,17 +11,17 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseShowElementInfo.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseShowElementInfo.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to get information about an element of the graph
+/** \brief Interactor to get information about an element of the graph
  *
  */
 class InteractorGetInformation : public NodeLinkDiagramComponentInteractor {
@@ -33,7 +33,7 @@ public:
    * Default constructor
    */
   InteractorGetInformation(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_select.png",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_select.png",
                                            "Display node or edge properties",
                                            StandardInteractorPriority::GetInformation) {}
 

@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "rectanglePackingFonctions.h"
 #include <cstdlib>
 

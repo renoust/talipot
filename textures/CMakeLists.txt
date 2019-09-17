@@ -5,5 +5,5 @@ INSTALL(FILES arrowSprite.png
               titlebarGradient.png
               logo32x32.ico
               logolabri.jpg
-        DESTINATION ${TulipBitmapInstallDir}
-        COMPONENT tulip_textures)
+        DESTINATION ${TalipotBitmapInstallDir}
+        COMPONENT talipot_textures)

@@ -8,13 +8,13 @@ ELSE(DOXYGEN_DOT_FOUND)
   MESSAGE(AUTHOR_WARNING "dot tool not found: doxygen diagrams and graphs will not be generated")
 ENDIF(DOXYGEN_DOT_FOUND)
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/tulip.doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/tulip.doxyfile)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/talipot.doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/talipot.doxyfile)
 
 # custom css for navtree and tabs does not work anymore since the 1.8.13 release of doxygen, use default theme instead
 IF(DOXYGEN_VERSION VERSION_GREATER 1.8.13 OR DOXYGEN_VERSION VERSION_EQUAL 1.8.13)
   ADD_CUSTOM_TARGET(doxydoc ALL
     ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/html
-    COMMAND doxygen ${CMAKE_CURRENT_BINARY_DIR}/tulip.doxyfile
+    COMMAND doxygen ${CMAKE_CURRENT_BINARY_DIR}/talipot.doxyfile
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/doc/html ${CMAKE_CURRENT_BINARY_DIR}/html
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/style/doxygen.css ${CMAKE_CURRENT_BINARY_DIR}/html
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/doc/html
@@ -22,7 +22,7 @@ IF(DOXYGEN_VERSION VERSION_GREATER 1.8.13 OR DOXYGEN_VERSION VERSION_EQUAL 1.8.1
 ELSE()
   ADD_CUSTOM_TARGET(doxydoc ALL
     ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/html
-    COMMAND doxygen ${CMAKE_CURRENT_BINARY_DIR}/tulip.doxyfile
+    COMMAND doxygen ${CMAKE_CURRENT_BINARY_DIR}/talipot.doxyfile
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/doc/html ${CMAKE_CURRENT_BINARY_DIR}/html
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/style/doxygen.css ${CMAKE_CURRENT_BINARY_DIR}/html
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/style/navtree.css ${CMAKE_CURRENT_BINARY_DIR}/html
@@ -31,6 +31,6 @@ ELSE()
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} VERBATIM)
 ENDIF()
 
-INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html 
+INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
         DESTINATION ${CMAKE_INSTALL_DOCDIR}/doxygen
         COMPONENT doxygen_doc)

@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <iostream>
 #include <qapplication.h>
 #include <qtimer.h>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/DownloadManager.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/DownloadManager.h>
+#include <talipot/TlpQtTools.h>
 #include "WebImport.h"
 
 using namespace std;

@@ -11,8 +11,9 @@
  *
  */
 
-#ifndef VIEWNAMES_H
-#define VIEWNAMES_H
+#ifndef PLUGIN_NAMES_H
+#define PLUGIN_NAMES_H
+
 namespace tlp {
 namespace ViewName {
 
@@ -45,4 +46,4 @@ const static char ScatterPlot2DInteractorNavigation[] = "ScatterPlot2D Navigatio
 
 } // namespace tlp
 
-#endif // VIEWNAMES_H
+#endif // PLUGIN_NAMES_H

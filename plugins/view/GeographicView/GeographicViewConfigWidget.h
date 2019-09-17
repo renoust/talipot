@@ -16,7 +16,7 @@
 
 #include <QWidget>
 
-#include <tulip/DataSet.h>
+#include <talipot/DataSet.h>
 
 namespace Ui {
 class GeographicViewConfigWidgetData;

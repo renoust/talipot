@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SEARCHWIDGET_H
-#define SEARCHWIDGET_H
+#ifndef SEARCH_WIDGET_H
+#define SEARCH_WIDGET_H
 
 #include <QWidget>
 
@@ -72,4 +72,4 @@ protected:
   void dropEvent(QDropEvent *) override;
 };
 
-#endif // SEARCHWIDGET_H
+#endif // SEARCH_WIDGET_H

@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef LINUXSIGNALINTERPOSER_H_
-#define LINUXSIGNALINTERPOSER_H_
+#ifndef UNIX_SIGNAL_INTERPOSER_H
+#define UNIX_SIGNAL_INTERPOSER_H
 
 #include <csignal>
 
@@ -23,4 +23,4 @@ extern void installSignalHandler(int sig, SignalHandlerFunc *handler);
 
 extern void installSignalHandler(int sig, SigactionHandlerFunc *handler);
 
-#endif /* LINUXSIGNALINTERPOSER_H_ */
+#endif // UNIX_SIGNAL_INTERPOSER_H

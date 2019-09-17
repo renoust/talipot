@@ -1,13 +1,13 @@
-.. py:currentmodule:: tulip
+.. py:currentmodule:: talipot
 
-.. _tulippythonplugins:
+.. _talipotpythonplugins:
 
-Writing Tulip plugins in Python
-===============================
+Writing Talipot plugins in Python
+=================================
 
-The Tulip Python bindings offer the possibility to write Tulip plugins in pure Python.
-You can easily develop and test Python plugins from the Tulip GUI through the "Plugins editor" tab
-of the Tulip plugins editor accessible through de *Develop* button (see :ref:`Using the bindings from the Tulip Software GUI <usingBindingsInTulipGUI>`).
+The Talipot Python bindings offer the possibility to write Talipot plugins in pure Python.
+You can easily develop and test Python plugins from the Talipot GUI through the "Plugins editor" tab
+of the Talipot plugins editor accessible through de *Develop* button (see :ref:`Using the bindings from the Talipot Software GUI <usingBindingsInTalipotGUI>`).
 
 Below is the list of plugins that can be implemented in Python :
 
@@ -20,13 +20,13 @@ Below is the list of plugins that can be implemented in Python :
 	* Size algorithms
 	* Export modules
 	* Import modules
-	
-Developing a plugin consists in writing a Python module (in a specific .py file) that contains the implementation 
+
+Developing a plugin consists in writing a Python module (in a specific .py file) that contains the implementation
 of a Python class deriving from another one specific to the plugin type.
-The plugin is then registered in the plugin database through the use of 
-specific functions from the :mod:`tuliplugins` module (see :ref:`tulipplugins module API <tulippluginsref>`).
+The plugin is then registered in the plugin database through the use of
+specific functions from the :mod:`talipotlugins` module (see :ref:`talipotplugins module API <talipotpluginsref>`).
 Once the plugin written and functional, you can copy the source file(s) to the following directory :
-<tulip_install_dir>/lib/tulip/python and it will be automatically loaded at Tulip startup.
+<talipot_install_dir>/lib/talipot/python and it will be automatically loaded at Talipot startup.
 The remaining of this section illustrates how to write each type of plugin.
 
 Writing a general algorithm in Python
@@ -34,8 +34,8 @@ Writing a general algorithm in Python
 
 A general algorithm must implement the :class:`tlp.Algorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class GeneralAlgorithmExample(tlp.Algorithm):
     def __init__(self, context):
@@ -69,15 +69,15 @@ A general algorithm must implement the :class:`tlp.Algorithm` interface as illus
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("GeneralAlgorithmExample", "General Algorithm Demo", "author", "26/07/2011", "info", "1.0", "Python")
+  talipotplugins.registerPluginOfGroup("GeneralAlgorithmExample", "General Algorithm Demo", "author", "26/07/2011", "info", "1.0", "Python")
 
 Writing a selection algorithm in Python
 ----------------------------------------
 
 A selection algorithm must implement the :class:`tlp.BooleanAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class SelectionAlgorithmExample(tlp.BooleanAlgorithm):
     def __init__(self, context):
@@ -115,15 +115,15 @@ A selection algorithm must implement the :class:`tlp.BooleanAlgorithm` interface
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("SelectionAlgorithmExample", "Selection Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+  talipotplugins.registerPluginOfGroup("SelectionAlgorithmExample", "Selection Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
 
 Writing a color algorithm in Python
-----------------------------------------		
+-----------------------------------
 
 A color algorithm must implement the :class:`tlp.ColorAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class ColorAlgorithmExample(tlp.ColorAlgorithm):
     def __init__(self, context):
@@ -161,15 +161,15 @@ A color algorithm must implement the :class:`tlp.ColorAlgorithm` interface as il
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("ColorAlgorithmExample", "Color Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
-	
+  talipotplugins.registerPluginOfGroup("ColorAlgorithmExample", "Color Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+
 Writing a measure algorithm in Python
-----------------------------------------	
-		
+-------------------------------------
+
 A measure algorithm must implement the :class:`tlp.DoubleAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class MeasureAlgorithmExample(tlp.DoubleAlgorithm):
     def __init__(self, context):
@@ -207,15 +207,15 @@ A measure algorithm must implement the :class:`tlp.DoubleAlgorithm` interface as
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("MeasureAlgorithmExample", "Measure Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+  talipotplugins.registerPluginOfGroup("MeasureAlgorithmExample", "Measure Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
 
 Writing an integer algorithm in Python
-----------------------------------------	
+--------------------------------------
 
 An integer algorithm must implement the :class:`tlp.IntegerAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class IntegerAlgorithmExample(tlp.IntegerAlgorithm):
     def __init__(self, context):
@@ -253,15 +253,15 @@ An integer algorithm must implement the :class:`tlp.IntegerAlgorithm` interface 
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("IntegerAlgorithmExample", "Integer Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
-	
+  talipotplugins.registerPluginOfGroup("IntegerAlgorithmExample", "Integer Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+
 Writing a layout algorithm in Python
-----------------------------------------
+------------------------------------
 
 A layout algorithm must implement the :class:`tlp.LayoutAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class LayoutAlgorithmExample(tlp.LayoutAlgorithm):
     def __init__(self, context):
@@ -299,15 +299,15 @@ A layout algorithm must implement the :class:`tlp.LayoutAlgorithm` interface as 
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("LayoutAlgorithmExample", "Layout Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
-	
+  talipotplugins.registerPluginOfGroup("LayoutAlgorithmExample", "Layout Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+
 Writing a size algorithm in Python
-----------------------------------------
+----------------------------------
 
 A size algorithm must implement the :class:`tlp.SizeAlgorithm` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class SizeAlgorithmExample(tlp.SizeAlgorithm):
     def __init__(self, context):
@@ -345,15 +345,15 @@ A size algorithm must implement the :class:`tlp.SizeAlgorithm` interface as illu
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("SizeAlgorithmExample", "Size Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
+  talipotplugins.registerPluginOfGroup("SizeAlgorithmExample", "Size Algorithm Demo", "author", "27/07/2011", "info", "1.0", "Python")
 
 Writing an export module in Python
 -----------------------------------
 
 An export module must implement the :class:`tlp.ExportModule` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class ExportModuleExample(tlp.ExportModule):
     def __init__(self, context):
@@ -370,7 +370,7 @@ An export module must implement the :class:`tlp.ExportModule` interface as illus
       # The parameters provided by the user are stored in a dictionnary
       # that can be accessed through the "dataSet" class attribute.
 
-      # The os parameter is an output file stream (initialized by the Tulip GUI
+      # The os parameter is an output file stream (initialized by the Talipot GUI
       # or by the tlp.exportGraph function.).
       # To write data to the file, you have to use the following syntax :
 
@@ -384,15 +384,15 @@ An export module must implement the :class:`tlp.ExportModule` interface as illus
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("ExportModuleExample", "Export Module Demo", "author", "27/07/2011", "info", "1.0", "Python")
+  talipotplugins.registerPluginOfGroup("ExportModuleExample", "Export Module Demo", "author", "27/07/2011", "info", "1.0", "Python")
 
 Writing an import module in Python
------------------------------------		
+-----------------------------------
 
 An import module must implement the :class:`tlp.ImportModule` interface as illustrated below::
 
-  from tulip import tlp
-  import tulipplugins
+  from talipot import tlp
+  import talipotplugins
 
   class ImportModuleExample(tlp.ImportModule):
     def __init__(self, context):
@@ -415,5 +415,5 @@ An import module must implement the :class:`tlp.ImportModule` interface as illus
 
   # The line below does the magic to register the plugin to the plugin database
   # and updates the GUI to make it accessible through the menus.
-  tulipplugins.registerPluginOfGroup("ImportModuleExample", "Import Module Demo", "author", "27/07/2011", "info", "1.0", "Python")
-			
+  talipotplugins.registerPluginOfGroup("ImportModuleExample", "Import Module Demo", "author", "27/07/2011", "info", "1.0", "Python")
+

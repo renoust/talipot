@@ -12,9 +12,9 @@
  */
 
 #include "SOMViewInteractor.h"
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseSelector.h>
-#include <tulip/MouseShowElementInfo.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseSelector.h>
+#include <talipot/MouseShowElementInfo.h>
 #include "EditColorScaleInteractor.h"
 #include "ThresholdInteractor.h"
 
@@ -38,7 +38,7 @@ bool SOMViewInteractor::isCompatible(const std::string &viewName) const {
 }
 
 SOMViewNavigation::SOMViewNavigation(PluginContext *)
-    : SOMViewInteractor(":/tulip/gui/icons/i_navigation.png", "Navigate",
+    : SOMViewInteractor(":/talipot/gui/icons/i_navigation.png", "Navigate",
                         StandardInteractorPriority::Navigation) {}
 
 void SOMViewNavigation::construct() {
@@ -47,7 +47,7 @@ void SOMViewNavigation::construct() {
 }
 
 SOMViewSelection::SOMViewSelection(PluginContext *)
-    : SOMViewInteractor(":/tulip/gui/icons/i_selection.png", "Select",
+    : SOMViewInteractor(":/talipot/gui/icons/i_selection.png", "Select",
                         StandardInteractorPriority::RectangleSelection) {}
 
 void SOMViewSelection::construct() {
@@ -57,7 +57,7 @@ void SOMViewSelection::construct() {
 }
 
 SOMViewProperties::SOMViewProperties(PluginContext *)
-    : SOMViewInteractor(":/tulip/gui/icons/i_select.png", "Properties",
+    : SOMViewInteractor(":/talipot/gui/icons/i_select.png", "Properties",
                         StandardInteractorPriority::GetInformation) {}
 
 void SOMViewProperties::construct() {

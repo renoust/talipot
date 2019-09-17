@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/ConnectedTest.h>
-#include <tulip/GraphTest.h>
-#include <tulip/Edge.h>
+#include <talipot/ConnectedTest.h>
+#include <talipot/GraphTest.h>
+#include <talipot/Edge.h>
 
 class ConnectedTest : public tlp::GraphTest {
 public:

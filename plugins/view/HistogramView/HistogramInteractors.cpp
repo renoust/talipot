@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseShowElementInfo.h>
-#include <tulip/GraphElementModel.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseShowElementInfo.h>
+#include <talipot/GraphElementModel.h>
 
 #include "HistogramMetricMapping.h"
 #include "HistogramStatistics.h"
@@ -41,7 +41,7 @@ PLUGIN(HistogramInteractorStatistics)
 PLUGIN(HistogramInteractorGetInformation)
 
 HistogramInteractorNavigation::HistogramInteractorNavigation(const PluginContext *)
-    : HistogramInteractor(":/tulip/gui/icons/i_navigation.png", "Navigate in view",
+    : HistogramInteractor(":/talipot/gui/icons/i_navigation.png", "Navigate in view",
                           StandardInteractorPriority::Navigation) {}
 
 void HistogramInteractorNavigation::construct() {
@@ -216,7 +216,7 @@ protected:
 };
 
 HistogramInteractorGetInformation::HistogramInteractorGetInformation(const tlp::PluginContext *)
-    : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_select.png",
+    : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_select.png",
                                          "Display node or edge properties",
                                          StandardInteractorPriority::GetInformation) {}
 

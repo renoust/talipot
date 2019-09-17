@@ -1,4 +1,4 @@
-# Talipot [![license](https://img.shields.io/github/license/anlambert/tulip.svg)](https://www.gnu.org/licenses/gpl-3.0.html) [![GitHub last commit](https://img.shields.io/github/last-commit/anlambert/tulip.svg)]() [![Build Status](https://travis-ci.org/anlambert/tulip.svg?branch=master)](https://travis-ci.org/anlambert/tulip) [![Build Status](https://ci.appveyor.com/api/projects/status/github/anlambert/tulip?branch=tulip-to-talipot&svg=true)](https://ci.appveyor.com/project/anlambert/tulip)
+# Talipot [![license](https://img.shields.io/github/license/anlambert/tulip.svg)](https://www.gnu.org/licenses/gpl-3.0.html) [![GitHub last commit](https://img.shields.io/github/last-commit/anlambert/tulip.svg)]() [![Build Status](https://travis-ci.org/anlambert/tulip.svg?branch=tulip-to-talipot)](https://travis-ci.org/anlambert/tulip) [![Build Status](https://ci.appveyor.com/api/projects/status/github/anlambert/tulip?branch=tulip-to-talipot&svg=true)](https://ci.appveyor.com/project/anlambert/tulip)
 
 
 Talipot is an open source, cross-platform, data visualization framework mainly dedicated to the analysis,

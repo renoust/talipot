@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _STRAHLERGRAPH2METRIC_H
-#define _STRAHLERGRAPH2METRIC_H
+
+#ifndef STRAHLER_METRIC_H
+#define STRAHLER_METRIC_H
 
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 struct Strahler {
   Strahler(int stra = 1, int sta = 0, int used = 0)
       : strahler(stra), stacks(sta), usedStack(used) {}
@@ -73,4 +74,4 @@ private:
   bool allNodes;
 };
 
-#endif
+#endif // STRAHLER_METRIC_H

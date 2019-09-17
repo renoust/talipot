@@ -10,15 +10,16 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/planarity/PlanarizationGridLayout.h>
 #include <ogdf/planarity/FastPlanarSubgraph.h>
 #include <ogdf/planarity/MaximalPlanarSubgraphSimple.h>
 #include <ogdf/planarity/FixedEmbeddingInserter.h>
 #include <ogdf/planarity/VariableEmbeddingInserter.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
 #define ELT_PLANARSUBGRAPH "Planar subgraph module"
 #define ELT_PLANARSUBGRAPHLIST "FastPlanarSubgraph;MaximalPlanarSubgraphSimple"

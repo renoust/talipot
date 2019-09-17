@@ -14,10 +14,10 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <tulip/DoubleProperty.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/MutableContainer.h>
-#include <tulip/GraphTools.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/GraphTools.h>
 
 using namespace std;
 using namespace tlp;

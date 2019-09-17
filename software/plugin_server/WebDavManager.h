@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef WEBDAVMANAGER_H
-#define WEBDAVMANAGER_H
+#ifndef WEB_DAV_MANAGER_H
+#define WEB_DAV_MANAGER_H
 
 #include <iostream>
 
@@ -98,4 +98,4 @@ private:
   bool _displayErrors;
 };
 
-#endif // WEBDAVMANAGER_H
+#endif // WEB_DAV_MANAGER_H

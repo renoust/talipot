@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/AcyclicTest.h>
-#include <tulip/GraphTest.h>
+#include <talipot/AcyclicTest.h>
+#include <talipot/GraphTest.h>
 
 class AcyclicTest : public tlp::GraphTest {
 public:

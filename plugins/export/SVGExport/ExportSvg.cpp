@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ExportSvg.h"
 #include "Shape.h"
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/BoundingBox.h>
-#include <tulip/TulipIconicFont.h>
-#include <tulip/TlpTools.h>
-#include <tulip/ParametricCurves.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/BoundingBox.h>
+#include <talipot/IconicFont.h>
+#include <talipot/TlpTools.h>
+#include <talipot/ParametricCurves.h>
 
 #include <QFile>
 
@@ -25,7 +26,7 @@ using namespace std;
 using namespace tlp;
 
 /*TODO
- * - improve label export (try to have something close to Tulip rendering)
+ * - improve label export (try to have something close to Talipot rendering)
  * - export label position (bottom, top, right and left)
  * - handle viewTexture
  * - add a better shape for star shape
@@ -74,7 +75,7 @@ bool ExportSvg::writeGraph(const BoundingBox &bb, const Color &background, bool 
   _res.writeAttribute("height", QString::number(bb.height() + 1));
   _res.writeAttribute("fill", noBackground ? "none" : tlpColor2SvgColor(background));
   _res.writeEndElement(); // rect
-  // start to add graph. First translate from Tulip coordinates to SVG coordinates
+  // start to add graph. First translate from Talipot coordinates to SVG coordinates
   _res.writeStartElement("g");
   _res.writeAttribute("desc", "Graph");
   _res.writeAttribute("transform",
@@ -244,12 +245,12 @@ void ExportSvg::addGlowEffect() {
     if (_woff2)
       extension = "woff2";
 
-    QFile file(tlp::tlpStringToQString(tlp::TulipBitmapDir)
+    QFile file(tlp::tlpStringToQString(tlp::TalipotBitmapDir)
                    .append(fontName)
                    .append("-webfont." + extension));
 
     if (!file.open(QIODevice::ReadOnly))
-      tlp::warning() << "Cannot open " << tlp::TulipBitmapDir << QStringToTlpString(fontName)
+      tlp::warning() << "Cannot open " << tlp::TalipotBitmapDir << QStringToTlpString(fontName)
                      << "-webfont." << tlp::QStringToTlpString(extension) << endl;
 
     QByteArray byteArray(file.readAll());
@@ -265,8 +266,8 @@ void ExportSvg::addGlowEffect() {
   }*/
 
 void ExportSvg::addWebFontFromIconName(const string &iconName) {
-  std::string fontFile = _woff2 ? TulipIconicFont::getWOFF2Location(iconName)
-                                : TulipIconicFont::getWOFFLocation(iconName);
+  std::string fontFile =
+      _woff2 ? IconicFont::getWOFF2Location(iconName) : IconicFont::getWOFFLocation(iconName);
   if (_base64fontAdded.find(fontFile) == _base64fontAdded.end()) {
     _base64fontAdded.insert(fontFile);
 
@@ -279,10 +280,9 @@ void ExportSvg::addWebFontFromIconName(const string &iconName) {
     _res.writeStartElement("style");
     _res.writeAttribute("style", "text/css");
     QString base64code(QString::fromUtf8(byteArray.toBase64().data()));
-    QString header("@font-face {font-family: \"" +
-                   tlpStringToQString(TulipIconicFont::getIconFamily(iconName)) +
-                   "\";src: url(\"data:application/x-font-" + (_woff2 ? "woff2" : "woff") +
-                   ";base64,");
+    QString header(
+        "@font-face {font-family: \"" + tlpStringToQString(IconicFont::getIconFamily(iconName)) +
+        "\";src: url(\"data:application/x-font-" + (_woff2 ? "woff2" : "woff") + ";base64,");
     _res.writeCDATA(header + base64code + "\");}");
     _res.writeEndElement();
   }
@@ -572,8 +572,7 @@ bool ExportSvg::addShape(const tlp::NodeShape::NodeShapes &type, const Coord &co
     _res.writeAttribute("x", QString::number(x));
     _res.writeAttribute("y", QString::number(-y));
 
-    _res.writeAttribute("font-family",
-                        tlpStringToQString(TulipIconicFont::getIconFamily(iconName)));
+    _res.writeAttribute("font-family", tlpStringToQString(IconicFont::getIconFamily(iconName)));
 
     _res.writeAttribute("transform", "scale(1,-1) translate(0," + QString::number(h * 0.72) + ")");
     _res.writeAttribute("font-size", QString::number(w * 2));
@@ -586,8 +585,7 @@ bool ExportSvg::addShape(const tlp::NodeShape::NodeShapes &type, const Coord &co
     _res.writeCharacters("");
     _res.device()->write("&"); // do not escape the character
 
-    _res.writeCharacters("#x" + QString::number(TulipIconicFont::getIconCodePoint(iconName), 16) +
-                         ";");
+    _res.writeCharacters("#x" + QString::number(IconicFont::getIconCodePoint(iconName), 16) + ";");
   } break;
 
   // TODO!!!! Right now, just draw an ellipse

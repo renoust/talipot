@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef GLLABELLEDCOLORSCALE_H_
-#define GLLABELLEDCOLORSCALE_H_
+#ifndef GL_LABELLED_COLOR_SCALE_H
+#define GL_LABELLED_COLOR_SCALE_H
 
-#include <tulip/GlComposite.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlColorScale.h>
+#include <talipot/GlComposite.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlColorScale.h>
 namespace tlp {
 class GlLayer;
 
@@ -69,4 +69,4 @@ protected:
   bool colorScaleAtTop;
 };
 } // namespace tlp
-#endif /* GLLABELLEDCOLORSCALE_H_ */
+#endif // GL_LABELLED_COLOR_SCALE_H

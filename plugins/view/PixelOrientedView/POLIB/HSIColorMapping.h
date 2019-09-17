@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef HSICOLORMAPPING_H_
-#define HSICOLORMAPPING_H_
+#ifndef HSI_COLOR_MAPPING_H
+#define HSI_COLOR_MAPPING_H
 
 #include "HSIColorSpace.h"
 
@@ -32,4 +32,4 @@ private:
   HSIColorScale hsiColorScale;
 };
 } // namespace pocore
-#endif /* HSICOLORMAPPING_H_ */
+#endif // HSI_COLOR_MAPPING_H

@@ -11,13 +11,13 @@
  *
  */
 
-#include <tulip/GlScene.h>
-#include <tulip/Circle.h>
-#include <tulip/GlCircle.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/ColorButton.h>
+#include <talipot/GlScene.h>
+#include <talipot/Circle.h>
+#include <talipot/GlCircle.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/ColorButton.h>
 
 #include <QWidget>
 
@@ -39,7 +39,7 @@ EnclosingCircleConfigurationWidget::EnclosingCircleConfigurationWidget(Color &ci
   connect(_ui->alphaSlider, SIGNAL(valueChanged(int)), this, SIGNAL(alphaChanged(int)));
   _ui->circleColorBtn->setDialogParent(parent);
   _ui->circleColorBtn->setDialogTitle("Choose the enclosing circle color");
-  _ui->circleColorBtn->setTulipColor(circleColor);
+  _ui->circleColorBtn->setColor(circleColor);
 }
 
 EnclosingCircleConfigurationWidget::~EnclosingCircleConfigurationWidget() {
@@ -63,7 +63,7 @@ void EnclosingCircleConfigurationWidget::solidColorRadioCheck(const bool checked
 }
 
 Color EnclosingCircleConfigurationWidget::getCircleColor() const {
-  return _ui->circleColorBtn->tulipColor();
+  return _ui->circleColorBtn->talipotColor();
 }
 
 Color getInverseColor(const Color &c) {

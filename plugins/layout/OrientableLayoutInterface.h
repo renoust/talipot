@@ -10,10 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLELAYOUTINTERFACE_H
-#define ORIENTABLELAYOUTINTERFACE_H
+
+#ifndef ORIENTABLE_LAYOUT_INTERFACE_H
+#define ORIENTABLE_LAYOUT_INTERFACE_H
+
 #include <vector>
-#include <tulip/LayoutProperty.h>
+#include <talipot/LayoutProperty.h>
 #include "OrientableConstants.h"
 #include "OrientableCoord.h"
 
@@ -42,4 +44,4 @@ public:
   virtual LineType getEdgeDefaultValue() = 0;
 };
 
-#endif
+#endif // ORIENTABLE_LAYOUT_INTERFACE_H

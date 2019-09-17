@@ -10,28 +10,22 @@
   <string>True</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.TulipSoftware.tulip</string>
+  <string>org.TalipotFramework.talipot</string>
 
   <key>CFBundleExecutable</key>
-  <string>Tulip</string>
+  <string>Talipot</string>
 
   <key>CFBundleGetInfoString</key>
-  <string>Tulip from http://tulip.labri.fr</string>
+  <string>Talipot</string>
 
   <key>CFBundleIconFile</key>
-  <string>tulip.icns</string>
+  <string>talipot.icns</string>
 
   <key>CFBundlePackageType</key>
   <string>APPL</string>
 
-  <key>CFBundleSignature</key>
-  <string>tlps</string>
-
   <key>CFBundleShortVersionString</key>
-  <string>4.0</string>
-
-  <key>NOTE</key>
-  <string>Created by LaBRI Visualization Team</string>
+  <string>1.0.0</string>
 
 </dict>
 </plist>

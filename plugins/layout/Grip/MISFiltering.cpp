@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "MISFiltering.h"
 #include "Distances.h"
 #include <ctime>
 #include <cmath>
-#include <tulip/TlpTools.h>
-#include <tulip/StableIterator.h>
+#include <talipot/TlpTools.h>
+#include <talipot/StableIterator.h>
 
 using namespace tlp;
 using namespace std;

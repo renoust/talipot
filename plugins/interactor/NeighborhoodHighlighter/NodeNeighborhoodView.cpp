@@ -15,9 +15,9 @@
 #include <climits>
 #include "NodeNeighborhoodView.h"
 
-#include <tulip/Iterator.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/Iterator.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/DoubleProperty.h>
 
 #include "../../utils/PluginNames.h"
 

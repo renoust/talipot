@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/TulipViewSettings.h>
-#include <tulip/Glyph.h>
-#include <tulip/AroundTexturedSphere.h>
+
+#include <talipot/ViewSettings.h>
+#include <talipot/Glyph.h>
+#include <talipot/AroundTexturedSphere.h>
 
 using namespace std;
 using namespace tlp;

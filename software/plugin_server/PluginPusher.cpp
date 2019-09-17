@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <cstdlib>
 
 #include "WebDavManager.h"
 #include <QDir>
 #include <QDomDocument>
-#include <tulip/PluginManager.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/PluginManager.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace std;
 

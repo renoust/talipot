@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef EXPORTWIZARD_H
-#define EXPORTWIZARD_H
+
+#ifndef EXPORT_WIZARD_H
+#define EXPORT_WIZARD_H
 
 #include <QWizard>
 #include <QModelIndex>
-#include <tulip/WithParameter.h>
+#include <talipot/WithParameter.h>
 
 namespace Ui {
 class ExportWizard;
@@ -48,4 +49,4 @@ protected slots:
   bool validateCurrentPage() override;
 };
 
-#endif // EXPORTWIZARD_H
+#endif // EXPORT_WIZARD_H

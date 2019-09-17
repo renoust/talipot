@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/DoubleProperty.h>
-#include <tulip/StringCollection.h>
-#include <tulip/GraphMeasure.h>
+
+#include <talipot/DoubleProperty.h>
+#include <talipot/StringCollection.h>
+#include <talipot/GraphMeasure.h>
 
 #include <climits>
 

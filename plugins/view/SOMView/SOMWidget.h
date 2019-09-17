@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SOMWIDGET_H_
-#define SOMWIDGET_H_
+#ifndef SOM_WIDGET_H
+#define SOM_WIDGET_H
 
 #include <QWidget>
 
@@ -32,4 +32,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* SOMWIDGET_H_ */
+#endif // SOM_WIDGET_H

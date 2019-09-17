@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLELAYOUT_H
-#define ORIENTABLELAYOUT_H
+
+#ifndef ORIENTABLE_LAYOUT_H
+#define ORIENTABLE_LAYOUT_H
 
 #include "OrientableLayoutInterface.h"
 
@@ -57,4 +58,4 @@ private:
                         float interNodeDistance);
 };
 
-#endif
+#endif // ORIENTABLE_LAYOUT_H

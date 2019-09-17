@@ -13,7 +13,7 @@
 
 #include "StackWalker.h"
 
-#include <tulip/tulipconf.h>
+#include <talipot/config.h>
 
 #include <sstream>
 #include <cstring>

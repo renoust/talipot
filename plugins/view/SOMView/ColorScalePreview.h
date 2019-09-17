@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef COLORSCALEPREVIEW_H_
-#define COLORSCALEPREVIEW_H_
+#ifndef COLOR_SCALE_PREVIEW_H
+#define COLOR_SCALE_PREVIEW_H
 
 #include <QLabel>
 
@@ -49,4 +49,4 @@ protected:
   ColorScale *currentColorScale;
 };
 } // namespace tlp
-#endif /* COLORSCALEPREVIEW_H_ */
+#endif // COLOR_SCALE_PREVIEW_H

@@ -15,15 +15,15 @@
 #include "ui_TableView.h"
 #include "PropertiesEditor.h"
 
-#include <tulip/Observable.h>
-#include <tulip/GraphModel.h>
-#include <tulip/GraphTableItemDelegate.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/StringProperty.h>
-#include <tulip/TulipMetaTypes.h>
-#include <tulip/Perspective.h>
-#include <tulip/CopyPropertyDialog.h>
-#include <tulip/PropertyCreationDialog.h>
+#include <talipot/Observable.h>
+#include <talipot/GraphModel.h>
+#include <talipot/GraphTableItemDelegate.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/StringProperty.h>
+#include <talipot/MetaTypes.h>
+#include <talipot/Perspective.h>
+#include <talipot/CopyPropertyDialog.h>
+#include <talipot/PropertyCreationDialog.h>
 
 #include <QResizeEvent>
 #include <QGraphicsView>
@@ -48,10 +48,9 @@ TableView::~TableView() {
 tlp::BooleanProperty *TableView::getFilteringProperty() const {
   GraphPropertiesModel<BooleanProperty> *model =
       static_cast<GraphPropertiesModel<BooleanProperty> *>(_ui->filteringPropertyCombo->model());
-  PropertyInterface *pi = model
-                              ->data(model->index(_ui->filteringPropertyCombo->currentIndex(), 0),
-                                     TulipModel::PropertyRole)
-                              .value<PropertyInterface *>();
+  PropertyInterface *pi =
+      model->data(model->index(_ui->filteringPropertyCombo->currentIndex(), 0), Model::PropertyRole)
+          .value<PropertyInterface *>();
   return pi ? static_cast<BooleanProperty *>(pi) : nullptr;
 }
 
@@ -266,7 +265,7 @@ void TableView::readSettings() {
   QSet<tlp::PropertyInterface *> visibleProperties = propertiesEditor->visibleProperties();
 
   for (int i = 0; i < _model->columnCount(); ++i) {
-    PropertyInterface *pi = _model->headerData(i, Qt::Horizontal, TulipModel::PropertyRole)
+    PropertyInterface *pi = _model->headerData(i, Qt::Horizontal, Model::PropertyRole)
                                 .value<tlp::PropertyInterface *>();
 
     if (!visibleProperties.contains(pi))
@@ -281,9 +280,8 @@ void TableView::dataChanged(const QModelIndex &topLeft, const QModelIndex &botto
   QAbstractItemModel *model = static_cast<QAbstractItemModel *>(sender());
 
   for (int i = topLeft.row(); i <= bottomRight.row(); ++i) {
-    PropertyInterface *pi =
-        model->headerData(topLeft.column(), Qt::Horizontal, TulipModel::PropertyRole)
-            .value<PropertyInterface *>();
+    PropertyInterface *pi = model->headerData(topLeft.column(), Qt::Horizontal, Model::PropertyRole)
+                                .value<PropertyInterface *>();
 
     if (pi->getTypename() == "string" && pi->getName() != "viewTexture" &&
         pi->getName() != "viewFont")
@@ -296,7 +294,7 @@ void TableView::columnsInserted(const QModelIndex &, int start, int end) {
 
   for (int c = start; c <= end; c++) {
     PropertyInterface *pi =
-        model->headerData(c, Qt::Horizontal, TulipModel::PropertyRole).value<PropertyInterface *>();
+        model->headerData(c, Qt::Horizontal, Model::PropertyRole).value<PropertyInterface *>();
     setPropertyVisible(pi, false);
   }
 }
@@ -430,8 +428,8 @@ void TableView::filterChanged() {
   if (_ui->matchPropertyButton->text() == "Any") {
     for (int i = 0; i < _model->columnCount(); ++i) {
       if (!_ui->table->horizontalHeader()->isSectionHidden(i))
-        props += _model->headerData(i, Qt::Horizontal, TulipModel::PropertyRole)
-                     .value<PropertyInterface *>();
+        props +=
+            _model->headerData(i, Qt::Horizontal, Model::PropertyRole).value<PropertyInterface *>();
     }
   } else
     // a visible column
@@ -450,7 +448,7 @@ void TableView::mapToGraphSelection() {
     QItemSelectionModel *selectionModel = _ui->table->selectionModel();
 
     for (const QModelIndex &idx : selectionModel->selectedRows()) {
-      node n(idx.data(TulipModel::ElementIdRole).toUInt());
+      node n(idx.data(Model::ElementIdRole).toUInt());
       out->setNodeValue(n, true);
     }
   } else {
@@ -458,7 +456,7 @@ void TableView::mapToGraphSelection() {
     QItemSelectionModel *selectionModel = _ui->table->selectionModel();
 
     for (const QModelIndex &idx : selectionModel->selectedRows()) {
-      edge e(idx.data(TulipModel::ElementIdRole).toUInt());
+      edge e(idx.data(Model::ElementIdRole).toUInt());
       out->setEdgeValue(e, true);
     }
   }
@@ -470,9 +468,9 @@ void TableView::delHighlightedRows() {
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED)
-      g->delNode(node(idx.data(TulipModel::ElementIdRole).toUInt()));
+      g->delNode(node(idx.data(Model::ElementIdRole).toUInt()));
     else
-      g->delEdge(edge(idx.data(TulipModel::ElementIdRole).toUInt()));
+      g->delEdge(edge(idx.data(Model::ElementIdRole).toUInt()));
   }
 }
 
@@ -489,10 +487,10 @@ void TableView::toggleHighlightedRows() {
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED) {
-      node n(idx.data(TulipModel::ElementIdRole).toUInt());
+      node n(idx.data(Model::ElementIdRole).toUInt());
       selection->setNodeValue(n, !selection->getNodeValue(n));
     } else {
-      edge e(idx.data(TulipModel::ElementIdRole).toUInt());
+      edge e(idx.data(Model::ElementIdRole).toUInt());
       selection->setEdgeValue(e, !selection->getEdgeValue(e));
     }
   }
@@ -517,9 +515,9 @@ void TableView::selectHighlightedRows() {
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED)
-      selection->setNodeValue(node(idx.data(TulipModel::ElementIdRole).toUInt()), true);
+      selection->setNodeValue(node(idx.data(Model::ElementIdRole).toUInt()), true);
     else
-      selection->setEdgeValue(edge(idx.data(TulipModel::ElementIdRole).toUInt()), true);
+      selection->setEdgeValue(edge(idx.data(Model::ElementIdRole).toUInt()), true);
   }
 
   if (sortModel->filterProperty() == selection)
@@ -531,12 +529,12 @@ bool TableView::setAllHighlightedRows(PropertyInterface *prop) {
   QModelIndexList rows = _ui->table->selectionModel()->selectedRows();
   uint eltId = UINT_MAX;
   if (rows.size() == 1)
-    eltId = rows[0].data(TulipModel::ElementIdRole).toUInt();
+    eltId = rows[0].data(Model::ElementIdRole).toUInt();
 
-  QVariant val = TulipItemDelegate::showEditorDialog(
-      NODES_DISPLAYED ? NODE : EDGE, prop, g,
-      static_cast<TulipItemDelegate *>(_ui->table->itemDelegate()),
-      graphicsView()->viewport()->parentWidget(), eltId);
+  QVariant val =
+      ItemDelegate::showEditorDialog(NODES_DISPLAYED ? NODE : EDGE, prop, g,
+                                     static_cast<ItemDelegate *>(_ui->table->itemDelegate()),
+                                     graphicsView()->viewport()->parentWidget(), eltId);
 
   // Check if edition has been cancelled
   if (!val.isValid())
@@ -544,19 +542,19 @@ bool TableView::setAllHighlightedRows(PropertyInterface *prop) {
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED)
-      GraphModel::setNodeValue(idx.data(TulipModel::ElementIdRole).toUInt(), prop, val);
+      GraphModel::setNodeValue(idx.data(Model::ElementIdRole).toUInt(), prop, val);
     else
-      GraphModel::setEdgeValue(idx.data(TulipModel::ElementIdRole).toUInt(), prop, val);
+      GraphModel::setEdgeValue(idx.data(Model::ElementIdRole).toUInt(), prop, val);
   }
 
   return true;
 }
 
 bool TableView::setCurrentValue(PropertyInterface *prop, unsigned int eltId) {
-  QVariant val = TulipItemDelegate::showEditorDialog(
-      NODES_DISPLAYED ? NODE : EDGE, prop, graph(),
-      static_cast<TulipItemDelegate *>(_ui->table->itemDelegate()),
-      graphicsView()->viewport()->parentWidget(), eltId);
+  QVariant val =
+      ItemDelegate::showEditorDialog(NODES_DISPLAYED ? NODE : EDGE, prop, graph(),
+                                     static_cast<ItemDelegate *>(_ui->table->itemDelegate()),
+                                     graphicsView()->viewport()->parentWidget(), eltId);
 
   // Check if edition has been cancelled
   if (!val.isValid())
@@ -577,10 +575,10 @@ void TableView::setLabelsOfHighlightedRows(PropertyInterface *prop) {
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED) {
-      node n(idx.data(TulipModel::ElementIdRole).toUInt());
+      node n(idx.data(Model::ElementIdRole).toUInt());
       label->setNodeStringValue(n, prop->getNodeStringValue(n));
     } else {
-      edge e(idx.data(TulipModel::ElementIdRole).toUInt());
+      edge e(idx.data(Model::ElementIdRole).toUInt());
       label->setEdgeStringValue(e, prop->getEdgeStringValue(e));
     }
   }
@@ -594,7 +592,7 @@ bool TableView::getNodeOrEdgeAtViewportPos(int x, int y, node &n, edge &e) const
           _ui->table->mapToGlobal(QPoint(0, 0));
     if (_ui->table->rowAt(pos.y()) >= 0) {
       QModelIndex idx = _ui->table->indexAt(pos);
-      unsigned int eltId = idx.data(TulipModel::ElementIdRole).toUInt();
+      unsigned int eltId = idx.data(Model::ElementIdRole).toUInt();
       if (NODES_DISPLAYED) {
         n = node(eltId);
         return n.isValid();
@@ -612,7 +610,7 @@ void TableView::showCustomContextMenu(const QPoint &pos) {
     return;
 
   QModelIndex idx = _ui->table->indexAt(pos);
-  unsigned int eltId = idx.data(TulipModel::ElementIdRole).toUInt();
+  unsigned int eltId = idx.data(Model::ElementIdRole).toUInt();
 
   QString eltsName(NODES_DISPLAYED ? "nodes" : "edges");
   QString eltName(NODES_DISPLAYED ? "node" : "edge");
@@ -841,7 +839,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
   action->setEnabled(false);
   contextMenu.addSeparator();
   QAction *addProp =
-      contextMenu.addAction(QIcon(":/tulip/gui/icons/64/list-add.png"), "Add new property");
+      contextMenu.addAction(QIcon(":/talipot/gui/icons/64/list-add.png"), "Add new property");
   addProp->setToolTip("Display a dialog to create a new property belonging to the current graph");
   QAction *copyProp = contextMenu.addAction("Copy");
   copyProp->setToolTip(QString("Copy the values of \"") + action->text() +
@@ -897,7 +895,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
         (highlightedRows.size() > 1
              ? ""
              : QString(NODES_DISPLAYED ? " (Node #%1)" : " (Edge #%1)")
-                   .arg(highlightedRows[0].data(TulipModel::ElementIdRole).toUInt())));
+                   .arg(highlightedRows[0].data(Model::ElementIdRole).toUInt())));
     highlightedSetAll->setToolTip(QString("Choose a value to be assigned to the ") + eltsName +
                                   " displayed in the currently highlighted row(s)");
   }
@@ -940,7 +938,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
           (highlightedRows.size() > 1
                ? ""
                : QString(NODES_DISPLAYED ? " (Node #%1)" : " (Edge #%1)")
-                     .arg(highlightedRows[0].data(TulipModel::ElementIdRole).toUInt())));
+                     .arg(highlightedRows[0].data(Model::ElementIdRole).toUInt())));
       highlightedToLabels->setToolTip(
           QString("Set the values of the current property as labels of the ") + eltsName +
           " displayed in the currently highlighted row(s)");
@@ -971,7 +969,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
       QSet<tlp::PropertyInterface *> visibleProperties = propertiesEditor->visibleProperties();
 
       for (int i = 0; i < model->columnCount(); ++i) {
-        PropertyInterface *pi = _model->headerData(i, Qt::Horizontal, TulipModel::PropertyRole)
+        PropertyInterface *pi = _model->headerData(i, Qt::Horizontal, Model::PropertyRole)
                                     .value<tlp::PropertyInterface *>();
 
         if (!visibleProperties.contains(pi))

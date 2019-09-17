@@ -10,17 +10,18 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/StringProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/Size.h>
-#include <tulip/Coord.h>
-#include <tulip/Glyph.h>
-#include <tulip/Graph.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/TulipViewSettings.h>
+
+#include <talipot/StringProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/Size.h>
+#include <talipot/Coord.h>
+#include <talipot/Glyph.h>
+#include <talipot/Graph.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/ViewSettings.h>
 
 using namespace std;
 using namespace tlp;

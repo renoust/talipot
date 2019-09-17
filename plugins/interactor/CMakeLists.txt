@@ -5,46 +5,46 @@ ADD_SUBDIRECTORY(MouseLassoNodesSelector)
 ADD_SUBDIRECTORY(NeighborhoodHighlighter)
 ADD_SUBDIRECTORY(PathFinder)
 
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${OPENGL_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${OPENGL_INCLUDE_DIR})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorNavigation-${TulipVersion} SHARED InteractorNavigation.cpp)
-TARGET_LINK_LIBRARIES(InteractorNavigation-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorNavigation-${TalipotVersion} SHARED InteractorNavigation.cpp)
+TARGET_LINK_LIBRARIES(InteractorNavigation-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorGetInformation-${TulipVersion} SHARED InteractorGetInformation.cpp)
-TARGET_LINK_LIBRARIES(InteractorGetInformation-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorGetInformation-${TalipotVersion} SHARED InteractorGetInformation.cpp)
+TARGET_LINK_LIBRARIES(InteractorGetInformation-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorSelection-${TulipVersion} SHARED InteractorSelection.cpp)
-TARGET_LINK_LIBRARIES(InteractorSelection-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorSelection-${TalipotVersion} SHARED InteractorSelection.cpp)
+TARGET_LINK_LIBRARIES(InteractorSelection-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorSelectionModifier-${TulipVersion} SHARED InteractorSelectionModifier.cpp)
-TARGET_LINK_LIBRARIES(InteractorSelectionModifier-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorSelectionModifier-${TalipotVersion} SHARED InteractorSelectionModifier.cpp)
+TARGET_LINK_LIBRARIES(InteractorSelectionModifier-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorRectangleZoom-${TulipVersion} SHARED InteractorRectangleZoom.cpp)
-TARGET_LINK_LIBRARIES(InteractorRectangleZoom-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorRectangleZoom-${TalipotVersion} SHARED InteractorRectangleZoom.cpp)
+TARGET_LINK_LIBRARIES(InteractorRectangleZoom-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorAddNodeEdge-${TulipVersion} SHARED InteractorAddEdge.cpp)
-TARGET_LINK_LIBRARIES(InteractorAddNodeEdge-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorAddNodeEdge-${TalipotVersion} SHARED InteractorAddEdge.cpp)
+TARGET_LINK_LIBRARIES(InteractorAddNodeEdge-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorEditEdgeBends-${TulipVersion} SHARED InteractorEditEdgeBends.cpp)
-TARGET_LINK_LIBRARIES(InteractorEditEdgeBends-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorEditEdgeBends-${TalipotVersion} SHARED InteractorEditEdgeBends.cpp)
+TARGET_LINK_LIBRARIES(InteractorEditEdgeBends-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InteractorDeleteElement-${TulipVersion} SHARED InteractorDeleteElement.cpp)
-TARGET_LINK_LIBRARIES(InteractorDeleteElement-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(InteractorDeleteElement-${TalipotVersion} SHARED InteractorDeleteElement.cpp)
+TARGET_LINK_LIBRARIES(InteractorDeleteElement-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-TULIP_INSTALL_PLUGIN(InteractorNavigation-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorGetInformation-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorSelection-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorSelectionModifier-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorRectangleZoom-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorAddNodeEdge-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorEditEdgeBends-${TulipVersion} ${TulipInteractorPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InteractorDeleteElement-${TulipVersion} ${TulipInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorNavigation-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorGetInformation-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorSelection-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorSelectionModifier-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorRectangleZoom-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorAddNodeEdge-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorEditEdgeBends-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InteractorDeleteElement-${TalipotVersion} ${TalipotInteractorPluginsInstallDir})

@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef HISTOGRAMOVERVIEW_H_
-#define HISTOGRAMOVERVIEW_H_
+#ifndef HISTOGRAM_H
+#define HISTOGRAM_H
 
-#include <tulip/GlComposite.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlComposite.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
 
 namespace tlp {
 
@@ -229,4 +229,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMOVERVIEW_H_ */
+#endif // HISTOGRAM_H

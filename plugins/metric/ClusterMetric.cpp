@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "ClusterMetric.h"
 
-#include <tulip/StaticProperty.h>
-#include <tulip/GraphMeasure.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/GraphMeasure.h>
 
 PLUGIN(ClusterMetric)
 

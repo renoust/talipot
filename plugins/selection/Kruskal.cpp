@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "Kruskal.h"
 
-#include <tulip/GraphTools.h>
-#include <tulip/ConnectedTest.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/GraphTools.h>
+#include <talipot/ConnectedTest.h>
+#include <talipot/DoubleProperty.h>
 
 PLUGIN(Kruskal)
 

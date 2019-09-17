@@ -11,10 +11,11 @@
  *
  */
 
-#ifndef OCTREEBUNDLE_H
-#define OCTREEBUNDLE_H
-#include <tulip/Vector.h>
-#include <tulip/DrawingTools.h>
+#ifndef OCTREE_BUNDLE_H
+#define OCTREE_BUNDLE_H
+
+#include <talipot/Vector.h>
+#include <talipot/DrawingTools.h>
 
 class OctreeBundle {
 public:
@@ -51,4 +52,4 @@ private:
   std::vector<std::pair<tlp::node, tlp::node>> unvalidEdges;
 };
 
-#endif // OCTREEBUNDLE_H
+#endif // OCTREE_BUNDLE_H

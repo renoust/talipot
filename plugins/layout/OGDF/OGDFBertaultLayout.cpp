@@ -13,7 +13,7 @@
 
 #include <ogdf/misclayout/BertaultLayout.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 // comments below have been extracted from OGDF/src/misclayout/BertaultLayout.cpp
 

@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef TABLEVIEW_H
-#define TABLEVIEW_H
+#ifndef TABLE_VIEW_H
+#define TABLE_VIEW_H
 
-#include <tulip/ViewWidget.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/ViewWidget.h>
+#include <talipot/BooleanProperty.h>
 #include <QModelIndex>
 
 namespace Ui {
@@ -87,4 +87,4 @@ protected slots:
   void setZoomLevel(int);
 };
 
-#endif // TABLEVIEW_H
+#endif // TABLE_VIEW_H

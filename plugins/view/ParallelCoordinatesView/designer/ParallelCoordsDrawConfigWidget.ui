@@ -418,7 +418,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Use tulip default texture</string>
+         <string>Use talipot default texture</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -494,7 +494,7 @@
   <customwidget>
    <class>tlp::ColorButton</class>
    <extends>QPushButton</extends>
-   <header location="global">tulip/ColorButton.h</header>
+   <header location="global">talipot/ColorButton.h</header>
    <slots>
     <signal>colorChanged(QColor)</signal>
    </slots>

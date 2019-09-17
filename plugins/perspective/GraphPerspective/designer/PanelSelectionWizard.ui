@@ -14,8 +14,8 @@
    <string>Add panel</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-    <normaloff>:/tulip/gui/icons/logo32x32.png</normaloff>:/tulip/gui/icons/logo32x32.png</iconset>
+   <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+    <normaloff>:/talipot/gui/icons/logo32x32.png</normaloff>:/talipot/gui/icons/logo32x32.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWizard, #choosePanelPage {
@@ -33,7 +33,7 @@ background-color: white;
 }
 
 #panelListTitle,#panelDescriptionTitle {
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1,
 stop:1 rgba(0,0,0,0),
 stop:0 #F0F0F0);
 border: 0px;
@@ -56,7 +56,7 @@ border: 0px;
   </property>
   <widget class="QWizardPage" name="choosePanelPage">
    <property name="title">
-    <string>&lt;img src=&quot;:/tulip/graphperspective/icons/32/view-open.png&quot; width=32 height=32/&gt; Panel Creation Dialog</string>
+    <string>&lt;img src=&quot;:/talipot/graphperspective/icons/32/view-open.png&quot; width=32 height=32/&gt; Panel Creation Dialog</string>
    </property>
    <attribute name="pageId">
     <string notr="true">0</string>
@@ -284,12 +284,12 @@ background-color: white
   <customwidget>
    <class>TreeViewComboBox</class>
    <extends>QWidget</extends>
-   <header>tulip/TreeViewComboBox.h</header>
+   <header>talipot/TreeViewComboBox.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../library/tulip-gui/resources/TulipGUIResource.qrc"/>
+  <include location="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc"/>
   <include location="../resources/GraphPerspective.qrc"/>
  </resources>
  <connections/>

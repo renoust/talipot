@@ -501,7 +501,7 @@ font: bold;
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>:/tulip/graphperspective/icons/22/edit-find.png</normaloff>:/tulip/graphperspective/icons/22/edit-find.png</iconset>
+                <normaloff>:/talipot/graphperspective/icons/22/edit-find.png</normaloff>:/talipot/graphperspective/icons/22/edit-find.png</iconset>
               </property>
               <property name="shortcut">
                <string>Return</string>
@@ -571,7 +571,7 @@ font: bold;
   <customwidget>
    <class>TreeViewComboBox</class>
    <extends>QComboBox</extends>
-   <header>tulip/TreeViewComboBox.h</header>
+   <header>talipot/TreeViewComboBox.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

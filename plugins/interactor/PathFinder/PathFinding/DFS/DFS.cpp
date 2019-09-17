@@ -14,8 +14,8 @@
 #include "DFS.h"
 
 #include <stack>
-#include <tulip/BooleanProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace tlp;
 using namespace std;

@@ -13,12 +13,12 @@
 
 #include "PathFinder.h"
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/View.h>
-#include <tulip/StringsListSelectionWidget.h>
-#include <tulip/NodeLinkDiagramComponent.h>
-#include <tulip/Graph.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/View.h>
+#include <talipot/StringsListSelectionWidget.h>
+#include <talipot/NodeLinkDiagramComponent.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpQtTools.h>
 
 #include "PathFinderComponent.h"
 #include "PathFinderConfigurationWidget.h"

@@ -11,11 +11,11 @@
  *
  */
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
-#include <tulip/PythonInterpreter.h>
-#include <tulip/APIDataBase.h>
-#include <tulip/PythonIDE.h>
-#include <tulip/PythonCodeEditor.h>
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
+#include <talipot/PythonInterpreter.h>
+#include <talipot/APIDataBase.h>
+#include <talipot/PythonIDE.h>
+#include <talipot/PythonCodeEditor.h>
 #include "PythonPanel.h"
 #endif
 
@@ -38,29 +38,29 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include <tulip/TlpTools.h>
-#include <tulip/ImportModule.h>
-#include <tulip/Graph.h>
-#include <tulip/ExportModule.h>
-#include <tulip/View.h>
-#include <tulip/SimplePluginProgressWidget.h>
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/CSVImportWizard.h>
-#include <tulip/GraphModel.h>
-#include <tulip/GraphTableItemDelegate.h>
-#include <tulip/GraphPropertiesModel.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/TulipSettings.h>
-#include <tulip/PluginLister.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/TulipProject.h>
-#include <tulip/GraphTools.h>
-#include <tulip/ColorScaleConfigDialog.h>
-#include <tulip/AboutTulipPage.h>
-#include <tulip/ColorScalesManager.h>
-#include <tulip/StableIterator.h>
+#include <talipot/TlpTools.h>
+#include <talipot/ImportModule.h>
+#include <talipot/Graph.h>
+#include <talipot/ExportModule.h>
+#include <talipot/View.h>
+#include <talipot/SimplePluginProgressWidget.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/CSVImportWizard.h>
+#include <talipot/GraphModel.h>
+#include <talipot/GraphTableItemDelegate.h>
+#include <talipot/GraphPropertiesModel.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/Settings.h>
+#include <talipot/PluginLister.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Project.h>
+#include <talipot/GraphTools.h>
+#include <talipot/ColorScaleConfigDialog.h>
+#include <talipot/AboutPage.h>
+#include <talipot/ColorScalesManager.h>
+#include <talipot/StableIterator.h>
 
 #include "ui_GraphPerspectiveMainWindow.h"
 
@@ -76,9 +76,10 @@
 using namespace tlp;
 using namespace std;
 
-// checks if it exists a Tulip import plugin that can load the provided file based on its extension
-static bool tulipCanOpenFile(const QString &path) {
-  // Tulip project file does not use import / export plugin
+// checks if it exists a Talipot import plugin that can load the provided file based on its
+// extension
+static bool talipotCanOpenFile(const QString &path) {
+  // Talipot project file does not use import / export plugin
   if (path.endsWith(".tlpx")) {
     return true;
   }
@@ -115,7 +116,7 @@ GraphPerspective::GraphPerspective(const tlp::PluginContext *c)
     _lastOpenLocation = QDir::currentPath();
   }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE = nullptr;
   _pythonIDEDialog = nullptr;
 #endif
@@ -149,33 +150,33 @@ void GraphPerspective::reserveDefaultProperties() {
 void GraphPerspective::buildRecentDocumentsMenu() {
   _ui->menuOpen_recent_file->clear();
 
-  for (const QString &s : TulipSettings::instance().recentDocuments()) {
-    if (!QFileInfo(s).exists() || !tulipCanOpenFile(s))
+  for (const QString &s : Settings::instance().recentDocuments()) {
+    if (!QFileInfo(s).exists() || !talipotCanOpenFile(s))
       continue;
 
     QAction *action = _ui->menuOpen_recent_file->addAction(
-        QIcon(":/tulip/graphperspective/icons/16/archive.png"), s, this, SLOT(openRecentFile()));
+        QIcon(":/talipot/graphperspective/icons/16/archive.png"), s, this, SLOT(openRecentFile()));
     action->setData(s);
   }
 
   _ui->menuOpen_recent_file->addSeparator();
 
-  for (const QString &s :
-       TulipSettings::instance().value(_recentDocumentsSettingsKey).toStringList()) {
-    if (!QFileInfo(s).exists() || !tulipCanOpenFile(s))
+  for (const QString &s : Settings::instance().value(_recentDocumentsSettingsKey).toStringList()) {
+    if (!QFileInfo(s).exists() || !talipotCanOpenFile(s))
       continue;
 
     QAction *action = _ui->menuOpen_recent_file->addAction(
-        QIcon(":/tulip/graphperspective/icons/16/empty-file.png"), s, this, SLOT(openRecentFile()));
+        QIcon(":/talipot/graphperspective/icons/16/empty-file.png"), s, this,
+        SLOT(openRecentFile()));
     action->setData(s);
   }
   _ui->menuOpen_recent_file->setEnabled(!_ui->menuOpen_recent_file->isEmpty());
 }
 
 void GraphPerspective::addRecentDocument(const QString &path) {
-  QStringList recents = TulipSettings::instance().value(_recentDocumentsSettingsKey).toStringList();
+  QStringList recents = Settings::instance().value(_recentDocumentsSettingsKey).toStringList();
 
-  if (recents.contains(path) || !tulipCanOpenFile(path)) {
+  if (recents.contains(path) || !talipotCanOpenFile(path)) {
     return;
   }
 
@@ -184,8 +185,8 @@ void GraphPerspective::addRecentDocument(const QString &path) {
   if (recents.size() > 10)
     recents.pop_front();
 
-  TulipSettings::instance().setValue(_recentDocumentsSettingsKey, recents);
-  TulipSettings::instance().sync();
+  Settings::instance().setValue(_recentDocumentsSettingsKey, recents);
+  Settings::instance().sync();
   buildRecentDocumentsMenu();
 }
 
@@ -259,7 +260,7 @@ GraphPerspective::~GraphPerspective() {
     delete graph;
   }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   delete _pythonIDEDialog;
   if (Perspective::instance() == this) {
     PythonCodeEditor::deleteStaticResources();
@@ -275,7 +276,7 @@ void GraphPerspective::destroyWorkspace() {
              SLOT(currentGraphChanged(tlp::Graph *)));
 
   // delete the workspace, which causes views deletion, before the graphs
-  // to avoid any possible segfaults when closing Tulip
+  // to avoid any possible segfaults when closing Talipot
   if (_ui) {
     delete _ui->workspace;
     _ui->workspace = nullptr;
@@ -287,13 +288,13 @@ void GraphPerspective::destroyWorkspace() {
 
 bool GraphPerspective::terminated() {
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE->savePythonFilesAndWriteToProject(true);
   _pythonIDEDialog->hide();
 #endif
 
   if (_graphs->needsSaving() || mainWindow()->isWindowModified()) {
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
     QString message("The project has been modified (loaded graphs or Python files opened in the "
                     "IDE).\nDo you want to save your changes?");
 #else
@@ -383,7 +384,7 @@ void GraphPerspective::redrawPanels(bool center) {
   _ui->workspace->redrawPanels(center);
 }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 class PythonIDEDialog : public QDialog {
 
   QByteArray _windowGeometry;
@@ -413,7 +414,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   reserveDefaultProperties();
   _ui = new Ui::GraphPerspectiveMainWindowData;
   _ui->setupUi(_mainWindow);
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonPanel = new PythonPanel();
   QVBoxLayout *layout = new QVBoxLayout();
   layout->addWidget(_pythonPanel);
@@ -428,7 +429,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _pythonIDEDialog->setWindowIcon(_mainWindow->windowIcon());
   _pythonIDEDialog->setLayout(dialogLayout);
   _pythonIDEDialog->resize(800, 600);
-  _pythonIDEDialog->setWindowTitle("Tulip Python IDE");
+  _pythonIDEDialog->setWindowTitle("Talipot Python IDE");
 #else
   _ui->pythonButton->setVisible(false);
   _ui->developButton->setVisible(false);
@@ -444,7 +445,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
                               "Shift+P");
   SET_TIPS_WITH_CTRL_SHORTCUT(_ui->previousPageButton, "Show previous panel", "Shift+Left");
   SET_TIPS_WITH_CTRL_SHORTCUT(_ui->nextPageButton, "Show next panel", "Shift+Right");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionNewProject, "Open a new  empty Tulip perspective",
+  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionNewProject, "Open a new  empty Talipot perspective",
                                  "Shift+N");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(
       _ui->actionSave_Project,
@@ -453,7 +454,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
                                  "Shift+S");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionImport, "Display the Graph importing wizard",
                                  "Shift+O");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionExit, "Exit from Tulip perspective", "Q");
+  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionExit, "Exit from Talipot perspective", "Q");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionUndo, "Undo the latest update of the current graph",
                                  "Z");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionRedo, "Redo the latest update of the current graph",
@@ -484,13 +485,13 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(
       _ui->actionCreate_sub_graph,
       "Create a subgraph containing all selected elements of the current graph", "Shift+G");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPreferences, "Show Tulip preferences dialog", ",");
+  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPreferences, "Show Talipot preferences dialog", ",");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowUserDocumentation,
                                  "Display the User handbook in a navigator", "?");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowDevelDocumentation,
                                  "Display the Developer handbook in a navigator", "D");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowPythonDocumentation,
-                                 "Display the Tulip python documentation in a navigator", "P");
+                                 "Display the Talipot python documentation in a navigator", "P");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionMessages_log, "Show the message log", "M");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPython_IDE, "Show the Python IDE", "Alt+P");
   SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionExport, "Show the Graph exporting wizard", "E");
@@ -503,8 +504,9 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   SET_TIPS(_ui->undoButton, "Undo the latest update of the current graph");
   SET_TIPS(_ui->redoButton, "Redo the latest undone update of the current graph");
   _ui->workspaceButton->setToolTip(QString("Display the existing graph views"));
-  SET_TIPS(_ui->developButton, "Display the Tulip Python IDE for developing scripts and plugins to "
-                               "execute on the loaded graphs");
+  SET_TIPS(_ui->developButton,
+           "Display the Talipot Python IDE for developing scripts and plugins to "
+           "execute on the loaded graphs");
   _ui->loggerMessageInfo->setToolTip(QString("Show/Hide the Messages log panel"));
   _ui->loggerMessagePython->setToolTip(_ui->loggerMessageInfo->toolTip());
   _ui->loggerMessageWarning->setToolTip(_ui->loggerMessageInfo->toolTip());
@@ -529,9 +531,9 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _ui->menuOpen_recent_file->setToolTip(
       QString("Choose a file to open among the recently opened/saved graphs or projects"));
   SET_TOOLTIP(_ui->actionDelete, "Delete the selected elements from the current graph [Del]");
-  SET_TOOLTIP(_ui->actionFull_screen, "Display the Tulip perspective in full screen [F11]");
+  SET_TOOLTIP(_ui->actionFull_screen, "Display the Talipot perspective in full screen [F11]");
   SET_TOOLTIP(_ui->actionShow_Menubar, "Show/Hide the main menu bar [Ctrl+Shift+M]");
-  SET_TOOLTIP(_ui->actionAbout_us, "Display the 'About Tulip' information dialog [F1]");
+  SET_TOOLTIP(_ui->actionAbout_us, "Display the 'About Talipot' information dialog [F1]");
   SET_TOOLTIP(_ui->actionPlugins_Center, _ui->pluginsButton->toolTip());
   SET_TOOLTIP(_ui->actionImport_CSV, _ui->csvImportButton->toolTip());
   SET_TOOLTIP(_ui->actionSave_graph_to_file, "Write the current graph into a file");
@@ -539,7 +541,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   SET_TOOLTIP(_ui->actionClone_sub_graph,
               "Create a subgraph containing the same elements as the current graph");
   SET_TOOLTIP(_ui->action_Close_All, "Close all opened workspace views");
-  SET_TOOLTIP(_ui->actionColor_scales_management, "Manage Tulip color scales");
+  SET_TOOLTIP(_ui->actionColor_scales_management, "Manage Talipot color scales");
   SET_TOOLTIP(_ui->actionMake_selection_a_graph,
               "Add the non selected ends of the selected edges to the current graph selection");
   SET_TOOLTIP(_ui->actionDelete_from_the_root_graph, "Delete the selected elements from the whole "
@@ -585,7 +587,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _mainWindow->setAcceptDrops(true);
   _mainWindow->statusBar();
 
-  if (tlp::inGuiTestingMode() || !TulipSettings::instance().showStatusBar())
+  if (tlp::inGuiTestingMode() || !Settings::instance().showStatusBar())
     _mainWindow->statusBar()->hide();
 
   connect(_logger, SIGNAL(cleared()), this, SLOT(logCleared()));
@@ -605,7 +607,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   Perspective::redirectStatusTipOfMenu(_ui->menuHelp);
   Perspective::redirectStatusTipOfMenu(_ui->menuWindow);
 
-  TulipSettings::instance().synchronizeViewSettings();
+  Settings::instance().synchronizeViewSettings();
 
   qInstallMessageHandler(graphPerspectiveLogger);
 
@@ -670,15 +672,16 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   // Agent actions
   connect(_ui->actionPlugins_Center, SIGNAL(triggered()), this, SLOT(showPluginsCenter()));
   connect(_ui->actionAbout_us, SIGNAL(triggered()), this, SLOT(showAboutPage()));
-  connect(_ui->actionAbout_us, SIGNAL(triggered()), this, SLOT(showAboutTulipPage()));
+  connect(_ui->actionAbout_us, SIGNAL(triggered()), this, SLOT(showAboutPage()));
 
-  if (QFile(tlpStringToQString(tlp::TulipShareDir) + "../doc/tulip/tulip-user/html/index.html")
+  if (QFile(tlpStringToQString(tlp::TalipotShareDir) +
+            "../doc/talipot/talipot-user/html/index.html")
           .exists()) {
     connect(_ui->actionShowUserDocumentation, SIGNAL(triggered()), this,
             SLOT(showUserDocumentation()));
     connect(_ui->actionShowDevelDocumentation, SIGNAL(triggered()), this,
             SLOT(showDevelDocumentation()));
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
     connect(_ui->actionShowPythonDocumentation, SIGNAL(triggered()), this,
             SLOT(showPythonDocumentation()));
 #else
@@ -690,7 +693,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
     _ui->actionShowPythonDocumentation->setVisible(false);
   }
 
-  if (QFile(tlpStringToQString(tlp::TulipShareDir) + "../doc/tulip/doxygen/html/index.html")
+  if (QFile(tlpStringToQString(tlp::TalipotShareDir) + "../doc/talipot/doxygen/html/index.html")
           .exists()) {
     connect(_ui->actionShowAPIDocumentation, SIGNAL(triggered()), this,
             SLOT(showAPIDocumentation()));
@@ -713,7 +716,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
     if (rootIds.empty())
       QMessageBox::critical(_mainWindow,
                             QString("Error while loading project ").append(_project->projectFile()),
-                            QString("The Tulip project file is probably corrupted.<br>") +
+                            QString("The Talipot project file is probably corrupted.<br>") +
                                 tlpStringToQString(progress->getError()));
   }
 
@@ -727,7 +730,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
 
   _ui->searchPanel->setModel(_graphs);
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   connect(_ui->pythonButton, SIGNAL(clicked(bool)), this, SLOT(setPythonPanel(bool)));
   connect(_ui->developButton, SIGNAL(clicked()), this, SLOT(showPythonIDE()));
   _pythonPanel->setModel(_graphs);
@@ -753,7 +756,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _ui->pluginsButton->hide();
   _ui->menuHelp->removeAction(_ui->actionPlugins_Center);
 #else
-  // show the 'Plugins center' menu entry and button only if connected to the Tulip agent
+  // show the 'Plugins center' menu entry and button only if connected to the Talipot agent
   _ui->pluginsButton->setVisible(checkSocketConnected());
   _ui->actionPlugins_Center->setVisible(checkSocketConnected());
 #endif
@@ -763,29 +766,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
 
   showTrayMessage("GraphPerspective started");
 
-  // for 5.3 show message to ask old user
-  // if he wants to use tlpb as default graph file format
-  unsigned int mm_version = TULIP_INT_MM_VERSION;
-
-  if ((mm_version == 503) && TulipSettings::instance().isFirstTulipMMRun() &&
-      !TulipSettings::instance().isFirstRun() && !TulipSettings::instance().isUseTlpbFileFormat()) {
-    QTimer::singleShot(500, this, SLOT(showStartMessage()));
-  }
-
   logCleared();
-}
-
-void GraphPerspective::showStartMessage() {
-  if (QMessageBox::question(
-          _mainWindow, QString("About graph file format in Tulip projects"),
-          QString(
-              "<html><body><p>Since Tulip 5.0, the <b>tlpb</b> (Tulip binary) file format<br/>can "
-              "be choosed to save graphs in project files.<br/>This format speeds up the save/load "
-              "of graphs but is not human readable.<br/>The <b>Preferences</b> dialog allows to "
-              "choose this format, but you can click on <b>Apply</b>, if you want to use it as of "
-              "now for the save of graphs in your project files.</p></body></html>"),
-          QMessageBox::Apply | QMessageBox::Close, QMessageBox::Close) == QMessageBox::Apply)
-    TulipSettings::instance().setUseTlpbFileFormat(true);
 }
 
 void GraphPerspective::openExternalFile() {
@@ -844,11 +825,11 @@ void GraphPerspective::exportGraph(Graph *g) {
                               tlp::tlpStringToQString(prg->getError()) + "</b>");
   } else {
     // log export plugin call
-    if (TulipSettings::instance().logPluginCall() != TulipSettings::NoLog) {
+    if (Settings::instance().logPluginCall() != Settings::NoLog) {
       std::stringstream log;
       log << exportPluginName.c_str() << " - " << data.toString().c_str();
 
-      if (TulipSettings::instance().logPluginCall() == TulipSettings::LogCallWithExecutionTime)
+      if (Settings::instance().logPluginCall() == Settings::LogCallWithExecutionTime)
         log << ": " << start.msecsTo(QTime::currentTime()) << "ms";
 
       qDebug() << log.str().c_str();
@@ -906,11 +887,11 @@ void GraphPerspective::importGraph(const std::string &module, DataSet &data) {
     delete prg;
 
     // log import plugin call
-    if (TulipSettings::instance().logPluginCall() != TulipSettings::NoLog) {
+    if (Settings::instance().logPluginCall() != Settings::NoLog) {
       std::stringstream log;
       log << module.c_str() << " import - " << data.toString().c_str();
 
-      if (TulipSettings::instance().logPluginCall() == TulipSettings::LogCallWithExecutionTime)
+      if (Settings::instance().logPluginCall() == Settings::LogCallWithExecutionTime)
         log << ": " << start.msecsTo(QTime::currentTime()) << "ms";
 
       qDebug() << log.str().c_str();
@@ -1002,7 +983,7 @@ bool GraphPerspective::saveAs(const QString &path) {
 
   if (path.isEmpty()) {
     QString path = QFileDialog::getSaveFileName(_mainWindow, "Save project", QString(),
-                                                "Tulip Project (*.tlpx)");
+                                                "Talipot Project (*.tlpx)");
 
     if (!path.isEmpty()) {
       if (!path.endsWith(".tlpx"))
@@ -1020,13 +1001,13 @@ bool GraphPerspective::saveAs(const QString &path) {
   progress.show();
   QMap<Graph *, QString> rootIds = _graphs->writeProject(_project, &progress);
   _ui->workspace->writeProject(_project, rootIds, &progress);
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE->savePythonFilesAndWriteToProject();
 #endif
   bool ret = _project->write(path, &progress);
 
   if (ret)
-    TulipSettings::instance().addToRecentDocuments(path);
+    Settings::instance().addToRecentDocuments(path);
 
   return ret;
 }
@@ -1035,7 +1016,7 @@ void GraphPerspective::open(QString fileName) {
   QMap<std::string, std::string> modules;
   std::list<std::string> imports = PluginLister::availablePlugins<ImportModule>();
 
-  std::string filters("Tulip project (*.tlpx);;");
+  std::string filters("Talipot project (*.tlpx);;");
   std::string filterAny("Any supported format (");
 
   for (auto &import : imports) {
@@ -1086,7 +1067,7 @@ void GraphPerspective::open(QString fileName) {
     for (const std::string &extension : modules.keys()) {
       if (fileName.endsWith(".tlpx")) {
         openProjectFile(fileName);
-        TulipSettings::instance().addToRecentDocuments(fileInfo.absoluteFilePath());
+        Settings::instance().addToRecentDocuments(fileInfo.absoluteFilePath());
         break;
       } else if (fileName.endsWith(QString::fromStdString(extension))) {
         DataSet params;
@@ -1105,13 +1086,13 @@ void GraphPerspective::openProjectFile(const QString &path) {
     if (_project->openProjectFile(path, prg)) {
       QMap<QString, tlp::Graph *> rootIds = _graphs->readProject(_project, prg);
       _ui->workspace->readProject(_project, rootIds, prg);
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
       QTimer::singleShot(100, this, SLOT(initPythonIDE()));
 #endif
     } else {
       QMessageBox::critical(_mainWindow,
                             QString("Error while loading project ").append(_project->projectFile()),
-                            QString("The Tulip project file is probably corrupted:<br>") +
+                            QString("The Talipot project file is probably corrupted:<br>") +
                                 tlpStringToQString(prg->getError()));
     }
     delete prg;
@@ -1120,7 +1101,7 @@ void GraphPerspective::openProjectFile(const QString &path) {
   }
 }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 void GraphPerspective::initPythonIDE() {
   _pythonIDE->setProject(_project);
 }
@@ -1443,7 +1424,7 @@ void GraphPerspective::currentGraphChanged(Graph *graph) {
     _ui->workspace->setGraphForFocusedPanel(graph);
   }
 
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 
   if (_graphs->empty()) {
     _pythonIDE->clearPythonCodeEditors();
@@ -1539,7 +1520,7 @@ void GraphPerspective::CSVImport() {
 }
 
 void GraphPerspective::showStartPanels(Graph *g) {
-  if (TulipSettings::instance().displayDefaultViews() == false)
+  if (Settings::instance().displayDefaultViews() == false)
     return;
 
   // expose mode is not safe to add a new panel
@@ -1655,7 +1636,7 @@ void GraphPerspective::openPreferences() {
               ->getScene()
               ->getGlGraphComposite()
               ->getRenderingParametersPointer()
-              ->setSelectionColor(TulipSettings::instance().defaultSelectionColor());
+              ->setSelectionColor(Settings::instance().defaultSelectionColor());
           glMainView->redraw();
         }
       }
@@ -1693,7 +1674,7 @@ void GraphPerspective::treatEvent(const tlp::Event &ev) {
 }
 
 void GraphPerspective::showPythonIDE() {
-#ifdef TULIP_BUILD_PYTHON_COMPONENTS
+#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDEDialog->show();
   _pythonIDEDialog->raise();
 #endif
@@ -1702,7 +1683,7 @@ void GraphPerspective::showPythonIDE() {
 #ifdef APPIMAGE_BUILD
 // When running the appimage
 // the LD_LIBRARY_PATH variable must be unset to ensure a successful launch
-// of the default web browser to show the Tulip documentation
+// of the default web browser to show the Talipot documentation
 #define UNSET_LD_LIBRARY_PATH()                                                                    \
   auto ldPath = qgetenv("LD_LIBRARY_PATH");                                                        \
   qunsetenv("LD_LIBRARY_PATH")
@@ -1714,29 +1695,29 @@ void GraphPerspective::showPythonIDE() {
 
 void GraphPerspective::showUserDocumentation() {
   UNSET_LD_LIBRARY_PATH();
-  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TulipShareDir) +
-                                                "../doc/tulip/tulip-user/html/index.html"));
+  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
+                                                "../doc/talipot/talipot-user/html/index.html"));
   RESTORE_LD_LIBRARY_PATH();
 }
 
 void GraphPerspective::showDevelDocumentation() {
   UNSET_LD_LIBRARY_PATH();
-  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TulipShareDir) +
-                                                "../doc/tulip/tulip-dev/html/index.html"));
+  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
+                                                "../doc/talipot/talipot-dev/html/index.html"));
   RESTORE_LD_LIBRARY_PATH();
 }
 
 void GraphPerspective::showPythonDocumentation() {
   UNSET_LD_LIBRARY_PATH();
-  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TulipShareDir) +
-                                                "../doc/tulip/tulip-python/html/index.html"));
+  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
+                                                "../doc/talipot/talipot-python/html/index.html"));
   RESTORE_LD_LIBRARY_PATH();
 }
 
 void GraphPerspective::showAPIDocumentation() {
   UNSET_LD_LIBRARY_PATH();
-  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TulipShareDir) +
-                                                "../doc/tulip/doxygen/html/index.html"));
+  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
+                                                "../doc/talipot/doxygen/html/index.html"));
   RESTORE_LD_LIBRARY_PATH();
 }
 
@@ -1775,18 +1756,18 @@ void GraphPerspective::showHideStatusBar() {
     SET_TIPS(_ui->statusbarButton, "Hide Statusbar");
   }
 
-  TulipSettings::instance().setShowStatusBar(stsBar->isVisible());
+  Settings::instance().setShowStatusBar(stsBar->isVisible());
 }
 
 void GraphPerspective::displayColorScalesDialog() {
   _colorScalesDialog->show();
 }
 
-void GraphPerspective::showAboutTulipPage() {
+void GraphPerspective::showAboutPage() {
   if (!checkSocketConnected()) {
-    tlp::AboutTulipPage *aboutPage = new tlp::AboutTulipPage;
+    tlp::AboutPage *aboutPage = new tlp::AboutPage;
     QDialog aboutDialog(mainWindow(), Qt::Window);
-    aboutDialog.setWindowTitle("About Tulip");
+    aboutDialog.setWindowTitle("About Talipot");
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(aboutPage);
     layout->setContentsMargins(0, 0, 0, 0);

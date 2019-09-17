@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef ZOOMUTILS_H_
-#define ZOOMUTILS_H_
+#ifndef ZOOM_UTILS_H
+#define ZOOM_UTILS_H
 
 #include <cmath>
 
@@ -25,4 +25,4 @@ void zoomOnScreenRegion(GlMainWidget *glWidget, const BoundingBox &boundingBox,
                         const double p = std::sqrt(1.6));
 void zoomOnScreenRegionWithoutAnimation(GlMainWidget *glWidget, const BoundingBox &boundingBox);
 } // namespace tlp
-#endif /* ZOOMUTILS_H_ */
+#endif // ZOOM_UTILS_H

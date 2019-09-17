@@ -3,17 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-#################################################
-Welcome to the Tulip user oriented documentation!
-#################################################
+###################################################
+Welcome to the Talipot user oriented documentation!
+###################################################
 
-We suggest to run Tulip and experiment with the concepts explained while reading this Manual. In itself, the interactive part of Tulip (also called Tulip agent on Windows platform) is quite limited. The user interface proposes only three distinct tabs. The first one allow to choose among the projects or perspectives of Tulip, the second one is the :ref:`plugins center <plugin>` and the third one present additionnal information about the software and the team behind it.
-When starting the software, the **Projects** window will appear. You can then open one of the perspectives of Tulip by clicking on the corresponding green arrow icon or double clicking on their description box. The "Open Project" button also allows you to directly open one of your Tulip file, graph or project. 
+We suggest to run Talipot and experiment with the concepts explained while reading this Manual. In itself, the interactive part of Talipot (also called Talipot agent on Windows platform) is quite limited. The user interface proposes only three distinct tabs. The first one allow to choose among the projects or perspectives of Talipot, the second one is the :ref:`plugins center <plugin>` and the third one present additionnal information about the software and the team behind it.
+When starting the software, the **Projects** window will appear. You can then open one of the perspectives of Talipot by clicking on the corresponding green arrow icon or double clicking on their description box. The "Open Project" button also allows you to directly open one of your Talipot file, graph or project.
 
-.. image:: _images/tulip-screen.png
+.. image:: _images/talipot-screen.png
     :width: 600
 
-The current documentation will present in details the Tulip Perspective. If you are interested in customizing the application, you can develop your very own Tulip perspective to implement specific solutions. One example of such developement is Porgy, available through the `Progy website <http://porgy.labri.fr>`_.
+The current documentation will present in details the Talipot Perspective. If you are interested in customizing the application, you can develop your very own Talipot perspective to implement specific solutions.
 
 .. highlight:: c
 

@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/energybased/FastMultipoleEmbedder.h>
 #include <ogdf/packing/ComponentSplitterLayout.h>
 #include <ogdf/basic/simple_graph_alg.h>
 
-#include <tulip/ConnectedTest.h>
+#include <talipot/ConnectedTest.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 // comments below have been extracted from OGDF/src/energybased/FastMultipoleEmbedder.cpp
 /** \addtogroup layout */

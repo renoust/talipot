@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <atomic>
 
-#include <tulip/ConnectedTest.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/GraphMeasure.h>
-#include <tulip/GraphParallelTools.h>
+#include <talipot/ConnectedTest.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/GraphMeasure.h>
+#include <talipot/GraphParallelTools.h>
 
 #include "Eccentricity.h"
 

@@ -21,7 +21,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton, QComboBox {
-border-image: url(:/tulip/gui/ui/btn_26.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26.png) 4;
 border-width: 4;
 padding: 0px 6px;
 font-size: 12px;
@@ -30,13 +30,13 @@ QPushButton, QComboBox, QLabel {
 color: black;
 }
 QPushButton:hover, QComboBox:hover {
-border-image: url(:/tulip/gui/ui/btn_26_hover.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_hover.png) 4;
 }
 QPushButton:disabled, QComboBox::disabled {
 color:gray;
 }
 QPushButton:pressed{
-border-image: url(:/tulip/gui/ui/btn_26_pressed.png) 4;
+border-image: url(:/talipot/gui/ui/btn_26_pressed.png) 4;
 }
 QPushButton::menu-indicator{
 subcontrol-origin: margin;
@@ -50,13 +50,13 @@ margin: 2
 
 
 QComboBox::down-arrow {
-image: url(:/tulip/gui/ui/combobox_arrow.png);
+image: url(:/talipot/gui/ui/combobox_arrow.png);
 }
 
 QComboBox:drop-down {
 subcontrol-origin: padding;
 subcontrol-position: top right;
-border-left-style: none; 
+border-left-style: none;
 border-top-right-radius: 1px;
 border-bottom-right-radius: 1px;
 }
@@ -92,19 +92,19 @@ QTableView {
 font: 12px;
 }
 QTableView::indicator:checked {
-image: url(:/tulip/gui/icons/eye.png);
+image: url(:/talipot/gui/icons/eye.png);
 }
 QTableView::indicator:unchecked {
-image: url(:/tulip/gui/icons/eye_disabled.png);
+image: url(:/talipot/gui/icons/eye_disabled.png);
 }
 QCheckBox::indicator:checked {
-image: url(:/tulip/gui/icons/eye.png);
+image: url(:/talipot/gui/icons/eye.png);
 }
 #propsVisibilityCheck::indicator:indeterminate {
-image: url(:/tulip/gui/icons/eye_partially_disabled.png);
+image: url(:/talipot/gui/icons/eye_partially_disabled.png);
 }
 QCheckBox::indicator:unchecked {
-image: url(:/tulip/gui/icons/eye_disabled.png);
+image: url(:/talipot/gui/icons/eye_disabled.png);
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -192,8 +192,8 @@ color: #595959;</string>
            <string>Add new</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-            <normaloff>:/tulip/gui/icons/64/list-add.png</normaloff>:/tulip/gui/icons/64/list-add.png</iconset>
+           <iconset resource="../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+            <normaloff>:/talipot/gui/icons/64/list-add.png</normaloff>:/talipot/gui/icons/64/list-add.png</iconset>
           </property>
          </widget>
         </item>
@@ -341,11 +341,11 @@ border-bottom: 1px solid #C9C9C9;</string>
   <customwidget>
    <class>ClearableLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">tulip/ClearableLineEdit.h</header>
+   <header location="global">talipot/ClearableLineEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../library/tulip-gui/resources/TulipGUIResource.qrc"/>
+  <include location="../../../library/talipot-gui/resources/TalipotGUIResource.qrc"/>
  </resources>
  <connections>
   <connection>

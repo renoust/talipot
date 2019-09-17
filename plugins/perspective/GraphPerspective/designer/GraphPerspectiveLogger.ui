@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Tulip Message Log</string>
+   <string>Talipot Message Log</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -88,7 +88,7 @@
      <item>
       <widget class="QCheckBox" name="anchoredCB">
        <property name="toolTip">
-        <string>Anchor the Message log window to the main Tulip window</string>
+        <string>Anchor the Message log window to the main Talipot window</string>
        </property>
        <property name="text">
         <string>anchored</string>

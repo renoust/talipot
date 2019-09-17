@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_SPANNINGTREESELECTION_H
-#define Tulip_SPANNINGTREESELECTION_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef SPANNING_TREE_SELECTION_H
+#define SPANNING_TREE_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 
 /** \addtogroup selection */
 
@@ -33,4 +34,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // SPANNING_TREE_SELECTION_H

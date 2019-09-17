@@ -13,8 +13,8 @@
 
 #include "ParallelCoordinatesInteractors.h"
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/Interactor.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/Interactor.h>
 
 #include "ParallelCoordsElementHighlighter.h"
 #include "ParallelCoordsAxisSwapper.h"
@@ -28,7 +28,7 @@
 #include "../../utils/StandardInteractorPriority.h"
 #include "../../utils/PluginNames.h"
 
-#include <tulip/View.h>
+#include <talipot/View.h>
 
 #include "ui_AxisSlidersOptions.h"
 
@@ -53,7 +53,7 @@ PLUGIN(InteractorShowElementInfo)
 PLUGIN(InteractorAxisSpacer)
 
 InteractorParallelCoordsSelection::InteractorParallelCoordsSelection(const tlp::PluginContext *)
-    : ParallelCoordinatesInteractor(":/tulip/gui/icons/i_selection.png", "Select elements",
+    : ParallelCoordinatesInteractor(":/talipot/gui/icons/i_selection.png", "Select elements",
                                     StandardInteractorPriority::RectangleSelection) {}
 
 void InteractorParallelCoordsSelection::construct() {
@@ -228,7 +228,7 @@ void InteractorBoxPlot::construct() {
 }
 
 InteractorShowElementInfo::InteractorShowElementInfo(const tlp::PluginContext *)
-    : ParallelCoordinatesInteractor(":/tulip/gui/icons/i_select.png",
+    : ParallelCoordinatesInteractor(":/talipot/gui/icons/i_select.png",
                                     "Get information on nodes/edges",
                                     StandardInteractorPriority::GetInformation) {}
 

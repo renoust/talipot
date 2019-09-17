@@ -1,33 +1,32 @@
-.. py:currentmodule:: tulipgui
+.. py:currentmodule:: talipotgui
 
-Creating and manipulating Tulip visualizations with the :mod:`tulipgui` module
-===============================================================================
+Creating and manipulating Talipot visualizations with the :mod:`talipotgui` module
+==================================================================================
 
-Starting the 4.4 release of Tulip, a new module called :mod:`tulipgui` is available
-allowing to create and manipulate Tulip views (typically Node Link diagrams).
-The module can be used inside the Python Script editor integrated in the Tulip software GUI but
+A module called :mod:`talipotgui` is available allowing to create and manipulate Talipot views (typically Node Link diagrams).
+The module can be used inside the Python Script editor integrated in the Talipot software GUI but
 also through the classical Python interpreter.
 
 The main features offered by that module are :
 
-    * creation of interactive Tulip visualizations
+    * creation of interactive Talipot visualizations
     * the ability to change the data source on opened visualizations
     * the possibilty to modify the rendering parameters for node link diagram visualizations
     * the ability to save visualization snapshots to image files on disk
 
-Using the module from the main Tulip GUI
-----------------------------------------
+Using the module from the main Talipot GUI
+------------------------------------------
 
-When the :mod:`tulipgui` module is used through the Python script editor integrated in the Tulip GUI,
-it enables to add and manipulate views in the Tulip workspace.
+When the :mod:`talipotgui` module is used through the Python script editor integrated in the Talipot GUI,
+it enables to add and manipulate views in the Talipot workspace.
 
 For instance, the following script works on a geographical network. We suppose
-that we already have an opened Node Link Diagram view (plus one Python Script view) in Tulip for visualizing the whole network.
+that we already have an opened Node Link Diagram view (plus one Python Script view) in Talipot for visualizing the whole network.
 The script will extract the induced subgraph of the european nodes, create a new Node Link Diagram view for visualizing
 it and set some rendering parameters::
 
-    from tulip import tlp
-    from tulipgui import tlpgui
+    from talipot import tlp
+    from talipotgui import tlpgui
 
     def main(graph):
 
@@ -51,20 +50,20 @@ it and set some rendering parameters::
 Using the module with the classical Python interpreter
 ------------------------------------------------------
 
-The :mod:`tulipgui` module can also be used with the classical Python interpreter and shell.
-Tulip interactive visualizations will be displayed in separate windows once they have been created.
+The :mod:`talipotgui` module can also be used with the classical Python interpreter and shell.
+Talipot interactive visualizations will be displayed in separate windows once they have been created.
 
 Interactive mode
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
-When working through the Python shell, Tulip views can be created interactively.
+When working through the Python shell, Talipot views can be created interactively.
 The opened views will be updated each time the graph or its properties are modified.
 
 For instance, the following session imports a grid graph, creates a Node Link Diagram view of it
 and then changes the nodes colors. The Node Link Diagram view will be updated automatically.
 
-    >>> from tulip import tlp
-    >>> from tulipgui import tlpgui
+    >>> from talipot import tlp
+    >>> from talipotgui import tlpgui
     >>> grid = tlp.importGraph("Grid")
     >>> view = tlpgui.createNodeLinkDiagramView(grid)
     >>> viewColor = graph.getColorProperty("viewColor")
@@ -73,24 +72,24 @@ and then changes the nodes colors. The Node Link Diagram view will be updated au
     ...
 
 .. warning:: When working on Windows platforms, you have to use the Python command line utility (not the IDLE one)
-             if you want to use the :mod:`tulipgui` module interactively. In a same maneer, if you intend to launch python
+             if you want to use the :mod:`talipotgui` module interactively. In a same maneer, if you intend to launch python
              through a terminal, you have to used the basic windows console cmd.exe. Other shells like mintty or rxvt
              do not allow to process the GUI events, required for interactive use.
 
 Script execution mode
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 When executing a script from a command line through the classical python interpreter, if
-Tulip views had been created during its execution, the script will terminate once all view
+Talipot views had been created during its execution, the script will terminate once all view
 windows had been closed.
 
-Below are some samples scripts illustrating the features of the :mod:`tulipgui` module.
+Below are some samples scripts illustrating the features of the :mod:`talipotgui` module.
 The first script imports a grid approximation graph, computes some visual attributes on it
 and creates a Node Link Diagram visualization (which will remain displayed at the end of
 the script execution). :ref:`Figure 1<fig1a>` introduces a screenshot of the created view.::
 
-    from tulip import tlp
-    from tulipgui import tlpgui
+    from talipot import tlp
+    from talipotgui import tlpgui
 
     # Import a grid approximation (with default parameters)
     graph = tlp.importGraph("Grid Approximation")
@@ -154,7 +153,7 @@ the script execution). :ref:`Figure 1<fig1a>` introduces a screenshot of the cre
     nodeLinkView.setRenderingParameters(renderingParameters)
 
 .. _fig1a:
-.. figure:: tulipguiViewWindow.png
+.. figure:: talipotguiViewWindow.png
    :align: center
 
    Figure 1: Screenshot of the view created by the above script.
@@ -165,12 +164,12 @@ visual attributes on graph elements and finally it creates a node link diagram v
 (that will not be displayed) with particular rendering parameters for taking the snapshot.
 :ref:`Figure 2<fig2a>` introduces the resulting snaphot.::
 
-    from tulip import tlp
-    from tulipgui import tlpgui
-    
+    from talipot import tlp
+    from talipotgui import tlpgui
+
     import os
     from os.path import expanduser
-    
+
     # get the root directory of the Python Standard Libraries
     pythonStdLibPath = os.path.dirname(os.__file__)
 

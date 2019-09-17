@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef MOUSEFREEHANDSELECTOR_H
-#define MOUSEFREEHANDSELECTOR_H
+#ifndef MOUSE_LASSO_NODES_SELECTOR_H
+#define MOUSE_LASSO_NODES_SELECTOR_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/GlMainWidget.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/GlMainWidget.h>
 
 #include <vector>
 
@@ -23,7 +23,7 @@ namespace tlp {
 
 /*@{*/
 /** \file
- *  \brief  Tulip Lasso Selector Interactor
+ *  \brief Lasso Selector Interactor
 
  * This interactor plugin allow to select graph nodes with a lasso.
  * By defining a closed polygon with the mouse above the visualization,
@@ -65,4 +65,4 @@ private:
 };
 } // namespace tlp
 
-#endif // MOUSEFREEHANDSELECTOR_H
+#endif // MOUSE_LASSO_NODES_SELECTOR_H

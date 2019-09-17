@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef PARALLELCOORDSELEMENTSHOWINFO_H_
-#define PARALLELCOORDSELEMENTSHOWINFO_H_
+#ifndef PARALLEL_COORDS_ELEMENT_SHOW_INFO_H
+#define PARALLEL_COORDS_ELEMENT_SHOW_INFO_H
 
-#include <tulip/MouseShowElementInfo.h>
+#include <talipot/MouseShowElementInfo.h>
 
 namespace tlp {
 
@@ -23,4 +23,4 @@ public:
   bool pick(int x, int y, SelectedEntity &selectedEntity) override;
 };
 } // namespace tlp
-#endif /* PARALLELCOORDSELEMENTSHOWINFO_H_ */
+#endif // PARALLEL_COORDS_ELEMENT_SHOW_INFO_H

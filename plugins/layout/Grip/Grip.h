@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef GRIP_H
 #define GRIP_H
 
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 #include <unordered_map>
 #include "MISFiltering.h"
 
@@ -87,4 +88,4 @@ private:
   int _dim;
 };
 /*@}*/
-#endif
+#endif // GRIP_H

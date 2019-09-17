@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <vector>
-#include <tulip/SizeProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/StaticProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/StaticProperty.h>
 
 using namespace std;
 using namespace tlp;

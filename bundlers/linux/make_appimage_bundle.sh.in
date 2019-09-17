@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # This script is centos 6.8 specific:
-# it intends to create a tulip bundle suitable to build a portable app
+# it intends to create a talipot bundle suitable to build a portable app
 # (using AppImageKit) runable on most linux distributions
 
-TULIP_INSTALL_DIR=@CMAKE_INSTALL_PREFIX@
+TALIPOT_INSTALL_DIR=@CMAKE_INSTALL_PREFIX@
 OUTPUT_DIR=/tmp
-PERSPECTIVE=Tulip
+PERSPECTIVE=Talipot
 QMAKE=@QT_QMAKE_EXECUTABLE@
 
 usage()
@@ -14,8 +14,8 @@ usage()
   echo "Usage: $(basename $0) [OPTIONS]"
   cat <<EOF
 Options:
-  --appdir <dir> (indicate the directory where the Tulip.AppDir will be created, default is /tmp)
-  --perspective <name> (indicate the perspective the AppImage will launch, default is Tulip)
+  --appdir <dir> (indicate the directory where the Talipot.AppDir will be created, default is /tmp)
+  --perspective <name> (indicate the perspective the AppImage will launch, default is Talipot)
 EOF
   exit $1
 }
@@ -76,20 +76,20 @@ echo "export PYTHONHOME=\${BUNDLE_DIR}/usr" >> $APPRUN_FILE
 echo "export TLP_DIR=\${BUNDLE_DIR}/usr/lib" >> $APPRUN_FILE
 echo "if [ \"\$1\" = \"-no-output-filtering\" ]; then" >> $APPRUN_FILE
 # for debugging purpose, allow to run without filtering of console output
-echo "  \${BUNDLE_DIR}/usr/bin/tulip_perspective -p Tulip" >> $APPRUN_FILE
+echo "  \${BUNDLE_DIR}/usr/bin/talipot_perspective -p Talipot" >> $APPRUN_FILE
 echo "else" >> $APPRUN_FILE
 # run with gtk output hidden
-echo "  \${BUNDLE_DIR}/usr/bin/tulip_perspective -p Tulip 2>&1 | sed -e '/Gtk-/d'" >> $APPRUN_FILE
+echo "  \${BUNDLE_DIR}/usr/bin/talipot_perspective -p Talipot 2>&1 | sed -e '/Gtk-/d'" >> $APPRUN_FILE
 echo "fi" >> $APPRUN_FILE
 chmod 755 $APPRUN_FILE
 
 # create desktop file
-DESKTOP_FILE=$BUNDLE_DIR/tulip.desktop
+DESKTOP_FILE=$BUNDLE_DIR/talipot.desktop
 echo "[Desktop Entry]" > $DESKTOP_FILE
-echo "Name=Tulip" >> $DESKTOP_FILE
+echo "Name=Talipot" >> $DESKTOP_FILE
 echo "Type=Application" >> $DESKTOP_FILE
-echo "Exec=tulip_perspective" >> $DESKTOP_FILE
-echo "Icon=Tulip" >> $DESKTOP_FILE
+echo "Exec=talipot_perspective" >> $DESKTOP_FILE
+echo "Icon=Talipot" >> $DESKTOP_FILE
 echo "Categories=Science;" >> $DESKTOP_FILE
 
 # create qt.conf file
@@ -97,21 +97,21 @@ QTCONF_FILE=$BUNDLE_BIN_DIR/qt.conf
 echo "[Paths]" > $QTCONF_FILE
 echo "Prefix=.." >> $QTCONF_FILE
 
-# copy Tulip.png
-cp @tulip_SOURCE_DIR@/bundlers/linux/Tulip.png $BUNDLE_DIR
+# copy Talipot.png
+cp @talipot_SOURCE_DIR@/bundlers/linux/Talipot.png $BUNDLE_DIR
 
-# copy tulip.appdata.xml
-cp @tulip_SOURCE_DIR@/bundlers/linux/tulip.appdata.xml $BUNDLE_SHARE_DIR/metainfo
+# copy talipot.appdata.xml
+cp @talipot_SOURCE_DIR@/bundlers/linux/talipot.appdata.xml $BUNDLE_SHARE_DIR/metainfo
 
-# copy tulip_perspective exe
-cp -v -p $TULIP_INSTALL_DIR/bin/tulip_perspective $BUNDLE_BIN_DIR
+# copy talipot_perspective exe
+cp -v -p $TALIPOT_INSTALL_DIR/bin/talipot_perspective $BUNDLE_BIN_DIR
 # copy all lib and share installed files (no include)
-echo "copying $TULIP_INSTALL_DIR/lib files into $BUNDLE_LIB_DIR"
-cp -Rp $TULIP_INSTALL_DIR/@CMAKE_INSTALL_LIBDIR@/* $BUNDLE_LIB_DIR
+echo "copying $TALIPOT_INSTALL_DIR/lib files into $BUNDLE_LIB_DIR"
+cp -Rp $TALIPOT_INSTALL_DIR/@CMAKE_INSTALL_LIBDIR@/* $BUNDLE_LIB_DIR
 # no need of lib/cmake
 rm -rf $BUNDLE_LIB_DIR/cmake
-echo "copying $TULIP_INSTALL_DIR/share files into $BUNDLE_SHARE_DIR"
-cp -Rp $TULIP_INSTALL_DIR/share $BUNDLE_USR_DIR
+echo "copying $TALIPOT_INSTALL_DIR/share files into $BUNDLE_SHARE_DIR"
+cp -Rp $TALIPOT_INSTALL_DIR/share $BUNDLE_USR_DIR
 
 # add qt plugins directory
 mkdir $BUNDLE_USR_DIR/plugins
@@ -135,9 +135,9 @@ fi
 export QT_INSTALL_LIBS_DIR=$(${QMAKE} -query QT_INSTALL_LIBS)
 export LD_LIBRARY_PATH=${QT_INSTALL_LIBS_DIR}:${LD_LIBRARY_PATH}
 
-# copy tulip_perspective needed libs
+# copy talipot_perspective needed libs
 pushd $BUNDLE_DIR > /dev/null 2>&1
-ldd $BUNDLE_BIN_DIR/tulip_perspective | grep "=> /" | awk '{print $3}' | grep -v tulip | xargs -I '{}' cp -v '{}' ./usr/lib || true
+ldd $BUNDLE_BIN_DIR/talipot_perspective | grep "=> /" | awk '{print $3}' | grep -v talipot | xargs -I '{}' cp -v '{}' ./usr/lib || true
 popd > /dev/null 2>&1
 
 # extend LD_LIBRARY_PATH to ensure PYTHON_LIBRARY can be found
@@ -145,8 +145,8 @@ popd > /dev/null 2>&1
 export LD_LIBRARY_PATH=$(dirname @PYTHON_LIBRARY@):$LD_LIBRARY_PATH
 
 # add Python environment
-PYTHON_LIB=$(ldd $(ls $BUNDLE_LIB_DIR/libtulip-python*) | grep libpython | awk '{print $3}')
-# we need to create a symlink as the libtulip-python*.so
+PYTHON_LIB=$(ldd $(ls $BUNDLE_LIB_DIR/libtalipot-python*) | grep libpython | awk '{print $3}')
+# we need to create a symlink as the libtalipot-python*.so
 # performs a dlopen on libpythonX.Y.so when it is loaded
 if [ "$PYTHON_LIB" != "" ]; then
   cp -v --preserve=mode $PYTHON_LIB $BUNDLE_LIB_DIR
@@ -181,8 +181,8 @@ function looking_for_plugin_dependencies() {
   done;
 }
 
-# copy other common libs needed by tulip plugins
-looking_for_plugin_dependencies $BUNDLE_LIB_DIR/tulip
+# copy other common libs needed by talipot plugins
+looking_for_plugin_dependencies $BUNDLE_LIB_DIR/talipot
 
 # copy other common libs needed by qt plugins
 looking_for_plugin_dependencies $BUNDLE_USR_DIR/plugins

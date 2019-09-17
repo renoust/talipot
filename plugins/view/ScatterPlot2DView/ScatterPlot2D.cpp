@@ -12,16 +12,16 @@
  */
 
 #include <QThread>
-#include <tulip/GlOffscreenRenderer.h>
-#include <tulip/Gl2DRect.h>
-#include <tulip/GlOffscreenRenderer.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlProgressBar.h>
-#include <tulip/GlQuantitativeAxis.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlTextureManager.h>
+#include <talipot/GlOffscreenRenderer.h>
+#include <talipot/Gl2DRect.h>
+#include <talipot/GlOffscreenRenderer.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlProgressBar.h>
+#include <talipot/GlQuantitativeAxis.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlTextureManager.h>
 
 #include "ScatterPlot2D.h"
 

@@ -11,11 +11,11 @@
  *
  */
 
-#include <tulip/DoubleProperty.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/TlpTools.h>
-#include <tulip/ParallelTools.h>
-#include <tulip/vectorgraph.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/TlpTools.h>
+#include <talipot/ParallelTools.h>
+#include <talipot/VectorGraph.h>
 
 using namespace std;
 using namespace tlp;

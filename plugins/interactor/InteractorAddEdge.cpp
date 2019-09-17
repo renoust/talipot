@@ -11,18 +11,18 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseNodeBuilder.h>
-#include <tulip/MouseEdgeBuilder.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseNodeBuilder.h>
+#include <talipot/MouseEdgeBuilder.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include "../utils/StandardInteractorPriority.h"
 #include "../utils/PluginNames.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to add edges
+/** \brief Interactor to add edges
  *
  */
 class InteractorAddEdge : public NodeLinkDiagramComponentInteractor {
@@ -34,7 +34,7 @@ public:
    * Default constructor
    */
   InteractorAddEdge(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_addedge.png", "Add nodes/edges",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_addedge.png", "Add nodes/edges",
                                            StandardInteractorPriority::AddNodesOrEdges) {}
 
   /**

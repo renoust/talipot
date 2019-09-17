@@ -10,17 +10,18 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "PanelSelectionWizard.h"
 #include "ui_PanelSelectionWizard.h"
 
 #include <QAbstractButton>
 #include <QMouseEvent>
 
-#include <tulip/PluginManager.h>
-#include <tulip/View.h>
-#include <tulip/TulipMetaTypes.h>
-#include <tulip/GraphHierarchiesModel.h>
-#include <tulip/PluginModel.h>
+#include <talipot/PluginManager.h>
+#include <talipot/View.h>
+#include <talipot/MetaTypes.h>
+#include <talipot/GraphHierarchiesModel.h>
+#include <talipot/PluginModel.h>
 
 using namespace tlp;
 using namespace std;
@@ -56,8 +57,7 @@ void PanelSelectionWizard::panelSelected(const QModelIndex &index) {
 }
 
 tlp::Graph *PanelSelectionWizard::graph() const {
-  return _model->data(_ui->graphCombo->selectedIndex(), TulipModel::GraphRole)
-      .value<tlp::Graph *>();
+  return _model->data(_ui->graphCombo->selectedIndex(), Model::GraphRole).value<tlp::Graph *>();
 }
 
 void PanelSelectionWizard::setSelectedGraph(tlp::Graph *g) {

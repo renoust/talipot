@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "CliqueEnumeration.h"
 
-#include <tulip/SimpleTest.h>
-#include <tulip/Graph.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/Graph.h>
 
 #include <sstream>
 #include <algorithm>

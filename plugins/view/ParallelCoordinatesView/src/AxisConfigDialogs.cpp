@@ -15,9 +15,9 @@
 #include "QuantitativeParallelAxis.h"
 #include "NominalParallelAxis.h"
 
-#include <tulip/IntegerProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/TlpQtTools.h>
 
 #include <QGridLayout>
 #include <QVBoxLayout>
@@ -142,10 +142,10 @@ NominalAxisConfigDialog::NominalAxisConfigDialog(NominalParallelAxis *axis)
 
   okButton = new QPushButton("OK");
   axisLabelsOrder = new ItemsListWidget(this);
-  QPushButton *up = new QPushButton(QIcon(":/tulip/gui/icons/16/go-up.png"), "");
+  QPushButton *up = new QPushButton(QIcon(":/talipot/gui/icons/16/go-up.png"), "");
   QPushButton *lexOrder = new QPushButton(QString("Lexicographic") + QChar(QChar::LineSeparator) +
                                           QString("     order"));
-  QPushButton *down = new QPushButton(QIcon(":/tulip/gui/icons/16/go-down.png"), "");
+  QPushButton *down = new QPushButton(QIcon(":/talipot/gui/icons/16/go-down.png"), "");
 
   buttonsUpDownLayout->addWidget(up);
   buttonsUpDownLayout->addWidget(lexOrder);

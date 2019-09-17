@@ -11,12 +11,12 @@
  *
  */
 
-#ifndef PATHFINDERTOOLS_H_
-#define PATHFINDERTOOLS_H_
+#ifndef PATH_FINDER_TOOLS_H
+#define PATH_FINDER_TOOLS_H
 
-#include <tulip/Circle.h>
-#include <tulip/Node.h>
-#include <tulip/Edge.h>
+#include <talipot/Circle.h>
+#include <talipot/Node.h>
+#include <talipot/Edge.h>
 
 namespace tlp {
 class GlGraphInputData;
@@ -43,4 +43,4 @@ bool getNodeEnclosingCircle(Circlef &circle, GlGraphInputData *inputData, node n
  */
 bool getEdgeEnclosingCircle(Circlef &circle, GlGraphInputData *inputData, edge n);
 } // namespace tlp
-#endif /* PATHFINDERTOOLS_H_ */
+#endif // PATH_FINDER_TOOLS_H

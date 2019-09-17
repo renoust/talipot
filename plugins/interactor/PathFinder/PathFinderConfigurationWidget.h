@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef PATHFINDERCONFIGURATIONWIDGET_H_
-#define PATHFINDERCONFIGURATIONWIDGET_H_
+#ifndef PATH_FINDER_CONFIGURATION_WIDGET_H
+#define PATH_FINDER_CONFIGURATION_WIDGET_H
 
 #include <QWidget>
 
@@ -55,4 +55,4 @@ signals:
   void setTolerance(int);
 };
 } // namespace tlp
-#endif /* PATHFINDERCONFIGURATIONWIDGET_H_ */
+#endif // PATH_FINDER_CONFIGURATION_WIDGET_H

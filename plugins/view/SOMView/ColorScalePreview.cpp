@@ -13,7 +13,7 @@
 
 #include "ColorScalePreview.h"
 
-#include <tulip/ColorScaleConfigDialog.h>
+#include <talipot/ColorScaleConfigDialog.h>
 
 using namespace tlp;
 

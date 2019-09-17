@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef CLIQUEENUMERATION_H
-#define CLIQUEENUMERATION_H
+
+#ifndef CLIQUE_ENUMERATION_H
+#define CLIQUE_ENUMERATION_H
 
 #include <string>
 #include <set>
 #include <vector>
 
-#include <tulip/Algorithm.h>
+#include <talipot/Algorithm.h>
 
 /** \addtogroup algorithm */
 /*@{*/
@@ -75,4 +76,4 @@ public:
   bool check(std::string &) override;
 };
 /*@}*/
-#endif // CLIQUEENUMERATION_H
+#endif // CLIQUE_ENUMERATION_H

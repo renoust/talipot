@@ -11,22 +11,22 @@
  *
  */
 
-#ifndef HISTOGRAMCOLORMAPPING_H_
-#define HISTOGRAMCOLORMAPPING_H_
+#ifndef HISTOGRAM_METRIC_MAPPING_H
+#define HISTOGRAM_METRIC_MAPPING_H
 
 #include <QCursor>
 #include <QMouseEvent>
 
-#include <tulip/tulipconf.h>
-#include <tulip/GLInteractor.h>
-#include <tulip/TlpTools.h>
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GlCircle.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlPolyQuad.h>
-#include <tulip/ColorScale.h>
-#include <tulip/GlColorScale.h>
-#include <tulip/ColorScaleConfigDialog.h>
+#include <talipot/config.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/TlpTools.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlCircle.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlPolyQuad.h>
+#include <talipot/ColorScale.h>
+#include <talipot/GlColorScale.h>
+#include <talipot/ColorScaleConfigDialog.h>
 
 #include <map>
 
@@ -262,4 +262,4 @@ protected:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMCOLORMAPPING_H_ */
+#endif // HISTOGRAM_METRIC_MAPPING_H

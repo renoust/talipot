@@ -20,22 +20,22 @@
 #include "AlgorithmRunnerItem.h"
 #include "ui_AlgorithmRunnerItem.h"
 
-#include <tulip/GraphTest.h>
-#include <tulip/TulipMimes.h>
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/ParameterListModel.h>
-#include <tulip/TulipSettings.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/GraphProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/IntegerProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/TulipMetaTypes.h>
-#include <tulip/ColorScalesManager.h>
-#include <tulip/StableIterator.h>
+#include <talipot/GraphTest.h>
+#include <talipot/Mimes.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/ParameterListModel.h>
+#include <talipot/Settings.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/GraphProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/MetaTypes.h>
+#include <talipot/ColorScalesManager.h>
+#include <talipot/StableIterator.h>
 
 using namespace tlp;
 
@@ -65,7 +65,7 @@ AlgorithmRunnerItem::AlgorithmRunnerItem(QString pluginName, QWidget *parent)
   }
 
   if (!plugin.getParameters().empty()) {
-    _ui->parameters->setItemDelegate(new TulipItemDelegate(_ui->parameters));
+    _ui->parameters->setItemDelegate(new ItemDelegate(_ui->parameters));
   } else {
     _ui->settingsButton->setVisible(false);
   }
@@ -83,8 +83,8 @@ AlgorithmRunnerItem::AlgorithmRunnerItem(QString pluginName, QWidget *parent)
 
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 
-  static QPixmap cppPix(":/tulip/graphperspective/icons/16/cpp.png");
-  static QPixmap pythonPix(":/tulip/graphperspective/icons/16/python.png");
+  static QPixmap cppPix(":/talipot/graphperspective/icons/16/cpp.png");
+  static QPixmap pythonPix(":/talipot/graphperspective/icons/16/python.png");
 
   if (plugin.programmingLanguage() == "Python") {
     _ui->languageLabel->setPixmap(pythonPix);
@@ -109,7 +109,7 @@ void AlgorithmRunnerItem::setGraph(Graph *g) {
     ParameterListModel *model = static_cast<ParameterListModel *>(_ui->parameters->model());
     DataSet dataSet = model->parametersValues();
     for (const std::pair<std::string, tlp::DataType *> &it : stableIterator(dataSet.getValues())) {
-      if (it.second->isTulipProperty()) {
+      if (it.second->isTalipotProperty()) {
         dataSet.remove(it.first);
       }
     }
@@ -164,7 +164,7 @@ static void copyToLocal(DataSet &data, Graph *g) {
     return;
 
   DataType *d = data.getData("result");
-  QVariant var = TulipMetaTypes::dataTypeToQvariant(d, "");
+  QVariant var = MetaTypes::dataTypeToQvariant(d, "");
   asLocal<DoubleProperty>(var, data, g);
   asLocal<IntegerProperty>(var, data, g);
   asLocal<LayoutProperty>(var, data, g);
@@ -269,7 +269,7 @@ void AlgorithmRunnerItem::run(Graph *g) {
 
       std::string typeName(desc.getTypeName());
 
-      if (DataType::isTulipProperty(typeName)) {
+      if (DataType::isTalipotProperty(typeName)) {
         PropertyInterface *prop = nullptr;
         dataSet.get(desc.getName(), prop);
 
@@ -296,7 +296,7 @@ void AlgorithmRunnerItem::run(Graph *g) {
     std::string typeName(desc.getTypeName());
 
     // forget non property out param
-    if (!DataType::isTulipProperty(typeName)) {
+    if (!DataType::isTalipotProperty(typeName)) {
       if (desc.getDirection() != IN_PARAM)
         outNonPropertyParams.push_back(desc.getName());
 
@@ -410,7 +410,7 @@ void AlgorithmRunnerItem::run(Graph *g) {
       // restore it in the dataset
       dataSet.set(opp.name, opp.dest);
 
-      if (opp.name == "result" && TulipSettings::instance().isResultPropertyStored()) {
+      if (opp.name == "result" && Settings::instance().isResultPropertyStored()) {
         // store the result property values in an automatically named property
         std::string storedResultName =
             algorithm + " - " + originalDataSet.toString() + "(" + opp.dest->getName() + ")";
@@ -423,11 +423,11 @@ void AlgorithmRunnerItem::run(Graph *g) {
     }
 
     // display spentTime if needed
-    if (TulipSettings::instance().logPluginCall() != TulipSettings::NoLog) {
+    if (Settings::instance().logPluginCall() != Settings::NoLog) {
       std::stringstream log;
       log << algorithm.c_str() << " - " << dataSet.toString().c_str();
 
-      if (TulipSettings::instance().logPluginCall() == TulipSettings::LogCallWithExecutionTime)
+      if (Settings::instance().logPluginCall() == Settings::LogCallWithExecutionTime)
         log << ": " << spentTime << "ms";
 
       qDebug() << log.str().c_str();
@@ -512,7 +512,7 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
   std::string stdName = QStringToTlpString(name());
 
   if (PluginLister::pluginExists<LayoutAlgorithm>(stdName)) {
-    if (TulipSettings::instance().isAutomaticRatio()) {
+    if (Settings::instance().isAutomaticRatio()) {
       LayoutProperty *prop = nullptr;
       dataSet.get<LayoutProperty *>("result", prop);
 
@@ -520,15 +520,15 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
         prop->perfectAspectRatio(g);
     }
 
-    if (TulipSettings::instance().isAutomaticCentering())
+    if (Settings::instance().isAutomaticCentering())
       Perspective::typedInstance<GraphPerspective>()->centerPanelsForGraph(g);
-  } else if (TulipSettings::instance().isAutomaticCentering() &&
+  } else if (Settings::instance().isAutomaticCentering() &&
              PluginLister::pluginExists<Algorithm>(stdName) &&
              !PluginLister::pluginExists<PropertyAlgorithm>(stdName) &&
              !PluginLister::pluginExists<GraphTest>(stdName)) {
     Perspective::typedInstance<GraphPerspective>()->centerPanelsForGraph(g);
   } else if (PluginLister::pluginExists<DoubleAlgorithm>(stdName) &&
-             TulipSettings::instance().isAutomaticMapMetric()) {
+             Settings::instance().isAutomaticMapMetric()) {
     DoubleProperty *prop = nullptr;
     dataSet.get<DoubleProperty *>("result", prop);
 
@@ -577,10 +577,10 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
 
     if (result) {
       tlp::debug() << str << std::endl;
-      QMessageBox::information(parentWidget(), "Tulip test result", tlp::tlpStringToQString(str));
+      QMessageBox::information(parentWidget(), "Talipot test result", tlp::tlpStringToQString(str));
     } else {
       tlp::warning() << str << std::endl;
-      QMessageBox::warning(parentWidget(), "Tulip test result", tlp::tlpStringToQString(str));
+      QMessageBox::warning(parentWidget(), "Talipot test result", tlp::tlpStringToQString(str));
     }
   }
 }

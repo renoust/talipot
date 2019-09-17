@@ -17,13 +17,13 @@
 
 #include <QMouseEvent>
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/GlComplexPolygon.h>
-#include <tulip/GlMainView.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlNode.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/GlComplexPolygon.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlNode.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 using namespace std;
 using namespace tlp;

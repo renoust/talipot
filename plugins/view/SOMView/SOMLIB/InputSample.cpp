@@ -13,8 +13,8 @@
 
 #include <algorithm>
 #include "InputSample.h"
-#include <tulip/Iterator.h>
-#include <tulip/StlIterator.h>
+#include <talipot/Iterator.h>
+#include <talipot/StlIterator.h>
 
 using namespace std;
 using namespace tlp;

@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef HISTOGRAMINTERACTORS_H_
-#define HISTOGRAMINTERACTORS_H_
+#ifndef HISTOGRAM_INTERACTORS_H
+#define HISTOGRAM_INTERACTORS_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include "../../utils/PluginNames.h"
 
 using namespace std;
@@ -94,4 +94,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* HISTOGRAMINTERACTORS_H_ */
+#endif // HISTOGRAM_INTERACTORS_H

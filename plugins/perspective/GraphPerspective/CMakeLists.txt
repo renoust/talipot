@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 SET(LIB_SRCS
 src/AlgorithmRunner.cpp
@@ -34,10 +34,10 @@ designer/PreferencesDialog.ui
 designer/SearchWidget.ui
 )
 
-IF(TULIP_BUILD_PYTHON_COMPONENTS)
-  ADD_DEFINITIONS("-DTULIP_BUILD_PYTHON_COMPONENTS")
-ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
-  
+IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+  ADD_DEFINITIONS("-DTALIPOT_BUILD_PYTHON_COMPONENTS")
+ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+
 QTX_WRAP_CPP(MOC_SRCS
 include/AlgorithmRunner.h
 include/AlgorithmRunnerItem.h
@@ -54,9 +54,9 @@ include/PreferencesDialog.h
 include/SearchWidget.h
 )
 
-IF(TULIP_BUILD_PYTHON_COMPONENTS)
+IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
-INCLUDE_DIRECTORIES(${TulipPythonInclude})
+INCLUDE_DIRECTORIES(${TalipotPythonInclude})
 
 SET(LIB_SRCS
 ${LIB_SRCS}
@@ -71,15 +71,15 @@ QTX_WRAP_CPP(MOC_SRCS
 include/PythonPanel.h
 )
 
-ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
+ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
-ADD_LIBRARY(GraphPerspective-${TulipVersion} SHARED ${LIB_SRCS} ${RCC_SRCS} ${UI_SRCS} ${MOC_SRCS})
+ADD_LIBRARY(GraphPerspective-${TalipotVersion} SHARED ${LIB_SRCS} ${RCC_SRCS} ${UI_SRCS} ${MOC_SRCS})
 
-TARGET_LINK_LIBRARIES(GraphPerspective-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
-TARGET_LINK_LIBRARIES(GraphPerspective-${TulipVersion} ${QT_LIBRARIES})
-IF(TULIP_BUILD_PYTHON_COMPONENTS)
-TARGET_LINK_LIBRARIES(GraphPerspective-${TulipVersion} ${LibTulipPythonName})
-ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
+TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
+TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${QT_LIBRARIES})
+IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${LibTalipotPythonName})
+ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
-TULIP_INSTALL_PLUGIN(GraphPerspective-${TulipVersion} ${TulipPerspectivePluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(GraphPerspective-${TalipotVersion} ${TalipotPerspectivePluginsInstallDir})
 

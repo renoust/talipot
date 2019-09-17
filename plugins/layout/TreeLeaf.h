@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _TREELEAFLAYOUT_H
-#define _TREELEAFLAYOUT_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef TREE_LEAF_H
+#define TREE_LEAF_H
+
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup layout */
 
@@ -59,4 +60,4 @@ private:
                            OrientableSizeProxy *oriSize);
 };
 
-#endif
+#endif // TREE_LEAF_H

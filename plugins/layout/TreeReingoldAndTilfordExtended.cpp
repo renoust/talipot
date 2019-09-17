@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/GraphTools.h>
-#include <tulip/StringCollection.h>
+
+#include <talipot/GraphTools.h>
+#include <talipot/StringCollection.h>
 
 #include "TreeReingoldAndTilfordExtended.h"
 #include "DatasetTools.h"

@@ -10,7 +10,8 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/TulipPluginHeaders.h>
+
+#include <talipot/PluginHeaders.h>
 
 #define MAX_DENSITY_FOR_LINEAR 0.85
 

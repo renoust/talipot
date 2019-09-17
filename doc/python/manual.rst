@@ -1,12 +1,12 @@
 
 
 Manual
-========
+======
 
-Before using the bindings, you have to import the tulip module in 
+Before using the bindings, you have to import the talipot module in
 your current Python session. It is recommended to use the following directive::
 
-    from tulip import tlp
+    from talipot import tlp
 
 This manual aims to quickly introduce the following features:
 
@@ -20,6 +20,6 @@ This manual aims to quickly introduce the following features:
    graphobservation
    creatingvisualizations
 
- 
 
-  
+
+

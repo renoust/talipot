@@ -11,12 +11,12 @@
  *
  */
 
-#include <tulip/MutableContainer.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/SimpleTest.h>
-#include <tulip/TulipException.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/Exception.h>
 
 #include "OctreeBundle.h"
 
@@ -74,8 +74,8 @@ bool OctreeBundle::isIn(const Coord &p, const Coord &a, const Coord &b, const Co
 void OctreeBundle::elmentSplitting(const Coord &a, const Coord &b, const Coord &c, const Coord &d,
                                    const vector<node> &input, vector<node> &in, vector<node> &out) {
   if (!((a[0] < b[0]) && (a[1] < b[1])))
-    throw TulipException("Two nodes have the same position.\nTry to apply the \"Fast Overlap "
-                         "Removal\" algorithm first.");
+    throw Exception("Two nodes have the same position.\nTry to apply the \"Fast Overlap "
+                    "Removal\" algorithm first.");
 
   in.clear();
   out.clear();

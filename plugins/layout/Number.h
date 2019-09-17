@@ -10,6 +10,7 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef NUMBER_H
 #define NUMBER_H
 
@@ -37,4 +38,4 @@ public:
   bool operator>(float b);
 };
 
-#endif
+#endif // NUMBER_H

@@ -22,10 +22,10 @@
 #include <QPushButton>
 #include <QButtonGroup>
 
-#include <tulip/GraphPropertiesSelectionWidget.h>
-#include <tulip/ColorScalesManager.h>
-#include <tulip/PropertyTypes.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/GraphPropertiesSelectionWidget.h>
+#include <talipot/ColorScalesManager.h>
+#include <talipot/PropertyTypes.h>
+#include <talipot/TlpQtTools.h>
 
 using namespace std;
 using namespace tlp;

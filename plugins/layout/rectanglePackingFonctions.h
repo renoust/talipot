@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef RECTANGLEPACKINGFONCTIONS_H
 #define RECTANGLEPACKINGFONCTIONS_H
 
 #include <vector>
-#include <tulip/PluginProgress.h>
+#include <talipot/PluginProgress.h>
 #include "RectanglePacking.h"
 
 /**

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef Tulip_InducedSubGraphSelection_H
-#define Tulip_InducedSubGraphSelection_H
 
-#include <tulip/BooleanProperty.h>
+#ifndef INDUCED_SUB_GRAPH_SELECTION_H
+#define INDUCED_SUB_GRAPH_SELECTION_H
+
+#include <talipot/BooleanProperty.h>
 #include "../utils/PluginNames.h"
 
 /** \addtogroup selection */
@@ -37,4 +38,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // INDUCED_SUB_GRAPH_SELECTION_H

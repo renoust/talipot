@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef INTERACTORPRIORITY_H_
-#define INTERACTORPRIORITY_H_
+
+#ifndef STANDARD_INTERACTOR_PRIORITY_H
+#define STANDARD_INTERACTOR_PRIORITY_H
 
 namespace tlp {
 
@@ -45,4 +46,4 @@ public:
 };
 } // namespace tlp
 
-#endif
+#endif // STANDARD_INTERACTOR_PRIORITY_H

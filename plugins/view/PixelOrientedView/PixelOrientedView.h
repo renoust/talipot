@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef DATACUBEVIEW_H_
-#define DATACUBEVIEW_H_
+#ifndef PIXEL_ORIENTED_VIEW_H
+#define PIXEL_ORIENTED_VIEW_H
 
-#include <tulip/GlMainView.h>
+#include <talipot/GlMainView.h>
 
 #include <QWidget>
 
@@ -23,11 +23,11 @@
 #include "POLIB/SquareLayout.h"
 #include "POLIB/ZOrderLayout.h"
 #include "POLIB/HilbertLayout.h"
-#include "POLIB/TulipNodeColorMapping.h"
+#include "POLIB/NodeColorMapping.h"
 #include "POLIB/HSIColorMapping.h"
 #include "POLIB/PixelOrientedMediator.h"
 #include "POLIB/LinearMappingColor.h"
-#include "POLIB/TulipGraphDimension.h"
+#include "POLIB/GraphDimension.h"
 
 #include "../../utils/PluginNames.h"
 
@@ -41,7 +41,7 @@ class PixelOrientedViewQuickAccessBar;
 
 /*@{*/
 /** \file
- *  \brief  Tulip Pixel Oriented View
+ *  \brief Pixel Oriented View
 
  * This view plugin allows to visualize graph properties using pixel oriented visualization
  techniques.
@@ -148,7 +148,7 @@ private:
   std::vector<std::string> selectedGraphProperties;
   std::map<std::string, PixelOrientedOverview *> overviewsMap;
   std::map<std::string, bool> overviewGenMap;
-  std::map<std::string, pocore::TulipGraphDimension *> dataMap;
+  std::map<std::string, pocore::GraphDimension *> dataMap;
 
   unsigned int overviewWidth;
   unsigned int overviewHeight;
@@ -160,7 +160,7 @@ private:
   pocore::SpiralLayout *spiralLayout;
   pocore::ZorderLayout *zorderLayout;
 
-  pocore::TulipNodeColorMapping *tulipNodeColorMapping;
+  pocore::NodeColorMapping *talipotNodeColorMapping;
 
   bool smallMultiplesView;
 
@@ -183,4 +183,4 @@ private:
   bool isConstruct;
 };
 } // namespace tlp
-#endif /* DATACUBEVIEW_H_ */
+#endif // PIXEL_ORIENTED_VIEW_H

@@ -14,10 +14,10 @@
 #include "SOMMapElement.h"
 #include <SOMMap.h>
 
-#include <tulip/GlRect.h>
-#include <tulip/GlCircle.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/GlBoundingBoxSceneVisitor.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlCircle.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/GlBoundingBoxSceneVisitor.h>
 
 #define DEGTORAD(x) (M_PI / 180.f) * x
 

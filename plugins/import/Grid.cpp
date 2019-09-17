@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/StringCollection.h>
+
+#include <talipot/PluginHeaders.h>
+#include <talipot/StringCollection.h>
 
 #include <cmath>
 

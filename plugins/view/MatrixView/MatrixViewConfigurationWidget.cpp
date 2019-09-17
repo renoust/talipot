@@ -14,10 +14,10 @@
 #include "MatrixViewConfigurationWidget.h"
 #include "ui_MatrixViewConfigurationWidget.h"
 
-#include <tulip/Graph.h>
-#include <tulip/Perspective.h>
-#include <tulip/ColorButton.h>
-#include <tulip/TlpQtTools.h>
+#include <talipot/Graph.h>
+#include <talipot/Perspective.h>
+#include <talipot/ColorButton.h>
+#include <talipot/TlpQtTools.h>
 
 #include <QMainWindow>
 
@@ -51,7 +51,7 @@ void MatrixViewConfigurationWidget::setBackgroundColor(const QColor &c) {
 }
 
 Color MatrixViewConfigurationWidget::getBackgroundColor() const {
-  return _ui->backgroundColorBtn->tulipColor();
+  return _ui->backgroundColorBtn->talipotColor();
 }
 
 void MatrixViewConfigurationWidget::setDisplayEdges(const bool state) {

@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef EXPORTINT_H
-#define EXPORTINT_H
 
-#include <tulip/Coord.h>
-#include <tulip/Size.h>
-#include <tulip/TulipViewSettings.h>
+#ifndef EXPORT_INTERFACE_H
+#define EXPORT_INTERFACE_H
+
+#include <talipot/Coord.h>
+#include <talipot/Size.h>
+#include <talipot/ViewSettings.h>
 
 class QString;
 
@@ -116,4 +117,4 @@ protected:
   virtual bool addColor(const tlp::Color &nodeColor) = 0;
 };
 
-#endif
+#endif // EXPORT_INTERFACE_H

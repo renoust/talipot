@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/upward/DominanceLayout.h>
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
-#include <tulip/ConnectedTest.h>
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
+#include <talipot/ConnectedTest.h>
 
 // comments below have been extracted from OGDF/src/upward/DominanceLayout.cpp
 /** \addtogroup layout */

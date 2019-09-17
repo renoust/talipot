@@ -13,10 +13,10 @@
 
 #include <ogdf/energybased/StressMinimization.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
-#include <tulip/StringCollection.h>
-#include <tulip/NumericProperty.h>
+#include <talipot/StringCollection.h>
+#include <talipot/NumericProperty.h>
 
 // comments below have been extracted from OGDF/src/energybased/StressMajorizationSimple.cpp
 /** \addtogroup layout */

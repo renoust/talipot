@@ -16,6 +16,6 @@ SET_TARGET_PROPERTIES(${QuazipLibrary} PROPERTIES VERSION 1.0.0 SOVERSION 1)
 TARGET_LINK_LIBRARIES(${QuazipLibrary} ${QT_LIBRARIES} ${ZLIB_LIBRARIES})
 
 INSTALL(TARGETS ${QuazipLibrary}
-       RUNTIME DESTINATION ${TulipBinInstallDir} COMPONENT quazip
-       LIBRARY DESTINATION ${TulipLibInstallDir} COMPONENT quazip
-       ARCHIVE DESTINATION ${TulipLibInstallDir} COMPONENT quazip)
+       RUNTIME DESTINATION ${TalipotBinInstallDir} COMPONENT quazip
+       LIBRARY DESTINATION ${TalipotLibInstallDir} COMPONENT quazip
+       ARCHIVE DESTINATION ${TalipotLibInstallDir} COMPONENT quazip)

@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "MultipleEdgeSelection.h"
 
-#include <tulip/SimpleTest.h>
+#include <talipot/SimpleTest.h>
 
 PLUGIN(MultipleEdgeSelection)
 

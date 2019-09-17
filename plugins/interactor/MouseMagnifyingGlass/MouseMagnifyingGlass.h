@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef MOUSEMAGNIFYINGGLASS_H_
-#define MOUSEMAGNIFYINGGLASS_H_
+#ifndef MOUSE_MAGNIFYING_GLASS_H
+#define MOUSE_MAGNIFYING_GLASS_H
 
-#include <tulip/GLInteractor.h>
-#include <tulip/GlMainWidget.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/GlMainWidget.h>
 
 #include "../../utils/StandardInteractorPriority.h"
 
@@ -57,7 +57,7 @@ private:
 
 /*@{*/
 /** \file
- *  \brief  Tulip Magnifying Glass Interactor
+ *  \brief Magnifying Glass Interactor
 
  * This interactor plugin provides a magnifying glass tool for all Tulip views.
  * It allows to zoom on a particular area of a visualization with the help of a lens
@@ -85,4 +85,4 @@ public:
   bool isCompatible(const std::string &viewName) const override;
 };
 } // namespace tlp
-#endif /* MOUSEMAGNIFYINGGLASS_H_ */
+#endif // MOUSE_MAGNIFYING_GLASS_H

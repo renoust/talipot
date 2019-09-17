@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef ORIENTABLESIZE_H
-#define ORIENTABLESIZE_H
 
-#include <tulip/Size.h>
+#ifndef ORIENTABLE_SIZE_H
+#define ORIENTABLE_SIZE_H
+
+#include <talipot/Size.h>
 class OrientableSizeProxy;
 
 class OrientableSize : public tlp::Size {
@@ -39,4 +40,4 @@ protected:
   OrientableSizeProxy *father;
 };
 
-#endif
+#endif // ORIENTABLE_SIZE_H

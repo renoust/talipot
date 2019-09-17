@@ -77,7 +77,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/tulip/graphperspective/icons/16/preferences-other.png</normaloff>:/tulip/graphperspective/icons/16/preferences-other.png</iconset>
+          <normaloff>:/talipot/graphperspective/icons/16/preferences-other.png</normaloff>:/talipot/graphperspective/icons/16/preferences-other.png</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -97,7 +97,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/tulip/gui/icons/22/start.png</normaloff>:/tulip/gui/icons/22/start.png</iconset>
+          <normaloff>:/talipot/gui/icons/22/start.png</normaloff>:/talipot/gui/icons/22/start.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -164,16 +164,16 @@ width: 16px;
 height: 16px;
 }
 QCheckBox::indicator:unchecked {
-image: url(:/tulip/graphperspective/icons/16/favorite-empty.png);
+image: url(:/talipot/graphperspective/icons/16/favorite-empty.png);
 }
 QCheckBox::indicator:unchecked:hover {
-image: url(:/tulip/graphperspective/icons/16/favorite.png);
+image: url(:/talipot/graphperspective/icons/16/favorite.png);
 }
 QCheckBox::indicator:checked {
-image: url(:/tulip/graphperspective/icons/16/favorite.png);
+image: url(:/talipot/graphperspective/icons/16/favorite.png);
 }
 QCheckBox::indicator:checked:hover {
-image: url(:/tulip/graphperspective/icons/16/favorite-empty.png);
+image: url(:/talipot/graphperspective/icons/16/favorite-empty.png);
 }</string>
         </property>
        </widget>

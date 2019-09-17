@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <cassert>
 #include "WebDavManager.h"
 #include <QDomDocument>
-#include <tulip/TlpQtTools.h>
+#include <talipot/TlpQtTools.h>
 
 WebDavManager::WebDavManager(const QString &host, const QString &url,
                              const QString &base64credentials)

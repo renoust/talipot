@@ -10,20 +10,21 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/StringProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/Size.h>
-#include <tulip/Coord.h>
-#include <tulip/Glyph.h>
-#include <tulip/EdgeExtremityGlyph.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/Graph.h>
-#include <tulip/GlTools.h>
-#include <tulip/TulipViewSettings.h>
-#include <tulip/TulipIconicFont.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlGraphRenderingParameters.h>
+
+#include <talipot/StringProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/Size.h>
+#include <talipot/Coord.h>
+#include <talipot/Glyph.h>
+#include <talipot/EdgeExtremityGlyph.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/Graph.h>
+#include <talipot/GlTools.h>
+#include <talipot/ViewSettings.h>
+#include <talipot/IconicFont.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlGraphRenderingParameters.h>
 
 using namespace std;
 using namespace tlp;
@@ -31,7 +32,7 @@ using namespace tlp;
 void drawTree(const Color &color, const Color &outlineColor, const float outlineSize,
               const std::string &texture) {
   static GlLabel label;
-  label.setFontNameSizeAndColor(TulipIconicFont::getTTFLocation("fa-tree"), 18, color);
+  label.setFontNameSizeAndColor(IconicFont::getTTFLocation("fa-tree"), 18, color);
   label.setPosition(Coord(0, 0, 0));
   label.setSize(Size(1, 1, 0));
   label.setUseLODOptimisation(false);
@@ -39,7 +40,7 @@ void drawTree(const Color &color, const Color &outlineColor, const float outline
   label.setOutlineColor(outlineColor);
   label.setOutlineSize(outlineSize);
   label.setTextureName(texture);
-  label.setText(TulipIconicFont::getIconUtf8String("fa-tree"));
+  label.setText(IconicFont::getIconUtf8String("fa-tree"));
   label.draw(100);
 }
 

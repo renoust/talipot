@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} include)
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} include)
 
 SET(LIB_SRCS
     src/ParallelCoordinatesView.cpp
@@ -43,7 +43,7 @@ QTX_ADD_RESOURCES(LIB_RCC_SRCS
 resources/ParallelResource.qrc
 )
 
-ADD_LIBRARY(ParallelCoordinatesView-${TulipVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
-TARGET_LINK_LIBRARIES(ParallelCoordinatesView-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+ADD_LIBRARY(ParallelCoordinatesView-${TalipotVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${LIB_RCC_SRCS})
+TARGET_LINK_LIBRARIES(ParallelCoordinatesView-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
-TULIP_INSTALL_PLUGIN(ParallelCoordinatesView-${TulipVersion} ${TulipViewPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ParallelCoordinatesView-${TalipotVersion} ${TalipotViewPluginsInstallDir})

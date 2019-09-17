@@ -10,18 +10,19 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef CSVEXPORT_H
-#define CSVEXPORT_H
+
+#ifndef CSV_EXPORT_H
+#define CSV_EXPORT_H
 
 #include <iostream>
 
-#include <tulip/ExportModule.h>
+#include <talipot/ExportModule.h>
 
 /*@{*/
 /// Export plugin for CSV format
 /**
  * \
- * \brief This plugin enables to save the values of tulip graph properties
+ * \brief This plugin enables to save the values of talipot graph properties
  *  associated to graph elements in a CSV formatted file.
  *
  * The plugin saves one row by graph element exported
@@ -58,12 +59,12 @@
 class CsvExport : public tlp::ExportModule {
 public:
   PLUGININFORMATION("CSV Export", "David Auber, Patrick Mary", "18/01/2011",
-                    "<p>Supported extensions: csv</p><p>Exports the values of tulip graph "
+                    "<p>Supported extensions: csv</p><p>Exports the values of talipot graph "
                     "properties associated to graph elements in a CSV file.</p>",
                     "1.0", "File")
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/spreadsheet.png";
+    return ":/talipot/graphperspective/icons/32/spreadsheet.png";
   }
 
   std::string fileExtension() const override {
@@ -82,4 +83,4 @@ public:
   }
 };
 /*@}*/
-#endif // CSVEXPORT_H
+#endif // CSV_EXPORT_H

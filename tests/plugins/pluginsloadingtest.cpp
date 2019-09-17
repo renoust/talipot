@@ -14,14 +14,14 @@
 #include <iostream>
 #include <cstdlib>
 
-#ifndef TULIP_BUILD_CORE_ONLY
+#ifndef TALIPOT_BUILD_CORE_ONLY
 #include <QApplication>
 #endif
 
-#include <tulip/TlpTools.h>
-#include <tulip/PluginLoaderTxt.h>
-#include <tulip/PluginLibraryLoader.h>
-#include <tulip/PluginLister.h>
+#include <talipot/TlpTools.h>
+#include <talipot/PluginLoaderTxt.h>
+#include <talipot/PluginLibraryLoader.h>
+#include <talipot/PluginLister.h>
 
 // Custom loader to catch if there was some issues
 // when loading plugins
@@ -43,29 +43,29 @@ public:
   bool allPluginsLoaded;
 };
 
-// Simple test that will try to load all compiled plugins from the Tulip trunk
+// Simple test that will try to load all compiled plugins from the Talipot trunk
 // in order to detect possible issues.
 // The test will then try to create and destroy an instance of each plugin.
 // This can be helpfull to catch possible segfaults or memory leaks.
 int main(int argc, char **argv) {
 
-#ifndef TULIP_BUILD_CORE_ONLY
+#ifndef TALIPOT_BUILD_CORE_ONLY
   // we need to create a QApplication as some plugins (view, perspective, interactor)
   // need one to load correctly
   QApplication app(argc, argv);
 #endif
 
-  std::string tulipPluginsDir = TULIP_PLUGINS_DIR;
+  std::string talipotPluginsDir = TALIPOT_PLUGINS_DIR;
 
-  if (tulipPluginsDir.empty() && argc > 1) {
-    tulipPluginsDir = argv[1];
+  if (talipotPluginsDir.empty() && argc > 1) {
+    talipotPluginsDir = argv[1];
   }
 
-  tlp::initTulipLib();
+  tlp::initTalipotLib();
 
-  // load all plugins from the Tulip build folder
+  // load all plugins from the Talipot build folder
   PluginLoaderTest pLoader;
-  tlp::PluginLibraryLoader::loadPluginsFromDir(tulipPluginsDir, &pLoader);
+  tlp::PluginLibraryLoader::loadPluginsFromDir(talipotPluginsDir, &pLoader);
 
   // create an instance of each of them, then destroy it
   std::list<std::string> pluginNames = tlp::PluginLister::availablePlugins();

@@ -60,19 +60,19 @@ color: white;
 }
 
 #expandButton {
-image: url(&quot;:/tulip/gui/ui/arrowup.png&quot;);
+image: url(&quot;:/talipot/gui/ui/arrowup.png&quot;);
 }
 #expandButton::checked {
-image: url(&quot;:/tulip/gui/ui/arrowdown.png&quot;);
+image: url(&quot;:/talipot/gui/ui/arrowdown.png&quot;);
 }
 
 QComboBox::down-arrow {
-image: url(&quot;:/tulip/gui/ui/down_arrow-white.png&quot;);
+image: url(&quot;:/talipot/gui/ui/down_arrow-white.png&quot;);
 }
 QComboBox:drop-down {
 subcontrol-origin: padding;
 subcontrol-position: top right;
-border-left-style: none; 
+border-left-style: none;
 border-top-right-radius: 1px;
 border-bottom-right-radius: 1px;
 }

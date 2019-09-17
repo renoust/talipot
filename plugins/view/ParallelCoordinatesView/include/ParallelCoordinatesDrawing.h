@@ -11,16 +11,16 @@
  *
  */
 
-#ifndef PARALLEL_AXIS_BASE_H
-#define PARALLEL_AXIS_BASE_H
+#ifndef PARALLEL_COORDINATES_DRAWING_H
+#define PARALLEL_COORDINATES_DRAWING_H
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <tulip/GlComposite.h>
-#include <tulip/Observable.h>
-#include <tulip/Size.h>
-#include <tulip/Color.h>
-#include <tulip/Graph.h>
+#include <talipot/GlComposite.h>
+#include <talipot/Observable.h>
+#include <talipot/Size.h>
+#include <talipot/Color.h>
+#include <talipot/Graph.h>
 
 namespace tlp {
 
@@ -164,4 +164,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif
+#endif // PARALLEL_COORDINATES_DRAWING_H

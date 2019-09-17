@@ -10,20 +10,21 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef WINDOWGLYPH_H
 #define WINDOWGLYPH_H
 
-#include <tulip/Glyph.h>
-#include <tulip/GlRect.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlPolyQuad.h>
-#include <tulip/GlQuad.h>
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlGraphRenderingParameters.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/GlGraphInputData.h>
-#include <tulip/TlpTools.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/Glyph.h>
+#include <talipot/GlRect.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlPolyQuad.h>
+#include <talipot/GlQuad.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/GlGraphInputData.h>
+#include <talipot/TlpTools.h>
+#include <talipot/ViewSettings.h>
 
 using namespace tlp;
 using namespace std;
@@ -68,7 +69,7 @@ PLUGIN(Window)
 
 Window::Window(const tlp::PluginContext *context)
     : Glyph(context), _rectColor(205, 205, 205, 255), _textColor(205, 205, 205, 255),
-      _borderWidth(0.02f), _border(TulipBitmapDir + "halfCylinderTexture.png") {
+      _borderWidth(0.02f), _border(TalipotBitmapDir + "halfCylinderTexture.png") {
 
   const float textheight = 0.05f;
 
@@ -99,7 +100,7 @@ Window::Window(const tlp::PluginContext *context)
   _titleRec.setPosition(1, v[5]);
   _titleRec.setPosition(2, v[8]);
   _titleRec.setPosition(3, v[9]);
-  _titleRec.setTextureName(TulipBitmapDir + "titlebarGradient.png");
+  _titleRec.setTextureName(TalipotBitmapDir + "titlebarGradient.png");
 
   _textbb.expand(v[4]);
   _textbb.expand(v[8]);

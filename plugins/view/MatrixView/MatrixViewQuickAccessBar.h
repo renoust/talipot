@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef MATRIXVIEWQUICKACCESSBAR_H
-#define MATRIXVIEWQUICKACCESSBAR_H
+#ifndef MATRIX_VIEW_QUICK_ACCESS_BAR_H
+#define MATRIX_VIEW_QUICK_ACCESS_BAR_H
 
-#include <tulip/QuickAccessBar.h>
+#include <talipot/QuickAccessBar.h>
 
 namespace tlp {
 
@@ -35,4 +35,4 @@ public slots:
   void setColorInterpolation(bool) override;
 };
 } // namespace tlp
-#endif // SCATTERPLOTQUICKACCESSBAR_H
+#endif // MATRIX_VIEW_QUICK_ACCESS_BAR_H

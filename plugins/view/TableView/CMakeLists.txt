@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 SET(LIB_SRCS
 TableView.cpp
@@ -19,9 +19,9 @@ navigabletableview.h
 
 QTX_ADD_RESOURCES(RCC_SRCS TableView.qrc)
 
-ADD_LIBRARY(TableView-${TulipVersion} SHARED ${LIB_SRCS} ${MOC_SRCS} ${UI_SRCS} ${RCC_SRCS})
+ADD_LIBRARY(TableView-${TalipotVersion} SHARED ${LIB_SRCS} ${MOC_SRCS} ${UI_SRCS} ${RCC_SRCS})
 
-TARGET_LINK_LIBRARIES(TableView-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName})
+TARGET_LINK_LIBRARIES(TableView-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 
-TULIP_INSTALL_PLUGIN(TableView-${TulipVersion} ${TulipViewPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(TableView-${TalipotVersion} ${TalipotViewPluginsInstallDir})
 

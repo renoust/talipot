@@ -10,19 +10,20 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
 #include <sstream>
 #include <string>
 #include <queue>
-#include <tulip/MutableContainer.h>
-#include <tulip/Graph.h>
-#include <tulip/TlpTools.h>
-#include <tulip/GraphMeasure.h>
-#include <tulip/StableIterator.h>
-#include <tulip/SimpleTest.h>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/StableIterator.h>
-#include <tulip/vectorgraph.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/Graph.h>
+#include <talipot/TlpTools.h>
+#include <talipot/GraphMeasure.h>
+#include <talipot/StableIterator.h>
+#include <talipot/SimpleTest.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/StableIterator.h>
+#include <talipot/VectorGraph.h>
 
 using namespace tlp;
 using namespace std;

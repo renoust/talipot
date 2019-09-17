@@ -11,11 +11,11 @@
  *
  */
 
-#ifndef BENDSTOOLS_H
-#define BENDSTOOLS_H
+#ifndef BENDS_TOOLS_H
+#define BENDS_TOOLS_H
 
-#include <tulip/LayoutProperty.h>
-#include <tulip/Node.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/Node.h>
 #include <vector>
 
 class BendsTools {
@@ -32,4 +32,4 @@ private:
                          const tlp::node c);
 };
 
-#endif // BENDSTOOLS_H
+#endif // BENDS_TOOLS_H

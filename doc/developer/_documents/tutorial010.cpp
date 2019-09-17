@@ -1,7 +1,7 @@
 #include <iostream>
-#include <tulip/TlpTools.h>
-#include <tulip/Graph.h>
-#include <tulip/LayoutProperty.h>
+#include <talipot/TlpTools.h>
+#include <talipot/Graph.h>
+#include <talipot/LayoutProperty.h>
 
 /**
  * Tutorial 010
@@ -14,8 +14,8 @@ using namespace std;
 using namespace tlp;
 
 int main() {
-  // initialize the Tulip libs
-  initTulipLib();
+  // initialize the Talipot libs
+  initTalipotLib();
 
   // create an empty graph
   Graph *graph = newGraph();

@@ -1,36 +1,36 @@
 .. _in_practice:
 
-************************************
-Tulip in Practice: Four case studies
-************************************
+**************************************
+Talipot in Practice: Four case studies
+**************************************
 
-These tutorials are intended for users who are already familiarized with the Tulip workspace, as presented in :ref:`gui`, as well as with the basics of Tulip detailed in :ref:`first_steps`.
-Here, our purpose will be to highlight some of the possibilities offered by Tulip for data visualization and data analysis, using real-word dataset examples. 
+These tutorials are intended for users who are already familiarized with the Talipot workspace, as presented in :ref:`gui`, as well as with the basics of Talipot detailed in :ref:`first_steps`.
+Here, our purpose will be to highlight some of the possibilities offered by Talipot for data visualization and data analysis, using real-word dataset examples.
 
 Some of these files can be found on the website `idvbook.com <http://www.idvbook.com/teaching-aid/data-sets/>`__, which is associated with the book:
- 
+
 *Interactive data visualization: foundations, techniques, and applications*, by Matthew Ward, Georges Grinstein, and Daniel Keim. [#footnote1]_
 
 
-.. _tulip_directory:
+.. _talipot_directory:
 
-A Visual Representation of the Tulip Directory
-==============================================
+A Visual Representation of the Talipot Directory
+================================================
 
 .. |icon_panels| image:: _images/icon_panels.png
 
-.. |icon_import| image:: ../../library/tulip-gui/resources/icons/64/document-import.png
+.. |icon_import| image:: ../../library/talipot-gui/resources/icons/64/document-import.png
 
-.. |icon_wsm_label_visible_dis| image:: ../../library/tulip-gui/resources/icons/20/labels_enabled.png
+.. |icon_wsm_label_visible_dis| image:: ../../library/talipot-gui/resources/icons/20/labels_enabled.png
 
-.. |icon_wsm_node_shape_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_shape.png
+.. |icon_wsm_node_shape_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_shape.png
 
-This introductory tutorial will be a good opportunity to apply some of the basic features of Tulip presented in the previous sections. We will see how we can **generate a graph**, apply a **resizing algorithm**, and more.
+This introductory tutorial will be a good opportunity to apply some of the basic features of Talipot presented in the previous sections. We will see how we can **generate a graph**, apply a **resizing algorithm**, and more.
 
 Generating the graph
 --------------------
 
-Before anything else, we will need Tulip to **import** the graph:
+Before anything else, we will need Talipot to **import** the graph:
 
 * Click on the |icon_import| **Import** icon in the toolbar on the left, or in the center of the workspace if no graph is currently opened, or select *File → Import*.
 
@@ -41,7 +41,7 @@ Before anything else, we will need Tulip to **import** the graph:
 	:width: 770
 
 
-* Select a directory. Here we will simply select the *tulip* directory and let Tulip generate a tree layout automatically. By default (see `Preferences <gui.html#preferences>`_), Tulip will display the corresponding *Spreadsheet View* on the left, and a *Node Link Diagram view* on the right.
+* Select a directory. Here we will simply select the *talipot* directory and let Talipot generate a tree layout automatically. By default (see `Preferences <gui.html#preferences>`_), Talipot will display the corresponding *Spreadsheet View* on the left, and a *Node Link Diagram view* on the right.
 
 
 .. note:: The default layout algorithm applied to file system directories is the *Bubble Tree* algorithm, but other layout algorithms are available.
@@ -58,11 +58,11 @@ Improving the layout
 
 Here the goal will be to apply a few basic algorithms to greatly improve the layout:
 
-* The first thing we are going to do is switching to a one-panel view in order to focus on the *Node Link Diagram view*. In order to do that, we will use the icons situated at the bottom of the view: |icon_panels| 
+* The first thing we are going to do is switching to a one-panel view in order to focus on the *Node Link Diagram view*. In order to do that, we will use the icons situated at the bottom of the view: |icon_panels|
 
 * Using the arrows at the bottom of the view, we can then switch to the *Node Link Diagram view*.
 
-* After that, *Right click → Center view* in the *Node Link Diagram view* will center the tree. 
+* After that, *Right click → Center view* in the *Node Link Diagram view* will center the tree.
 
 * Finally, we will remove the node labels, using the |icon_wsm_label_visible_dis| icon at the bottom of the window and modify the shape of the nodes, using the |icon_wsm_node_shape_set| icon. We will use the *3D - Half-Cylinder* shape.
 
@@ -78,7 +78,7 @@ In this representation, we can notice how the number of files contained in a dir
 	:width: 770
 
 
-* First, we want the area occupied by the nodes to reflect the size of the files they represent. Naturally, the size of each file is part of the data collected by Tulip when importing the directory. Therefore, we simply have to apply a resizing algorithm on the basis of the file sizes.
+* First, we want the area occupied by the nodes to reflect the size of the files they represent. Naturally, the size of each file is part of the data collected by Talipot when importing the directory. Therefore, we simply have to apply a resizing algorithm on the basis of the file sizes.
 
 Here are the settings (the size of the files will be mapped to the area of the circles, on a scale from 1 to 10):
 
@@ -86,7 +86,7 @@ Here are the settings (the size of the files will be mapped to the area of the c
 .. image:: _images/tutorial01_05b.png
 	:align: center
 
-The result is the following layout. As we can see, the resizing algorithm has caused some overlap between nodes. 
+The result is the following layout. As we can see, the resizing algorithm has caused some overlap between nodes.
 
 
 .. image:: _images/tutorial01_06b.png
@@ -109,7 +109,7 @@ Now that the area of the nodes is dealt with, we will map the size of the files 
 .. image:: _images/tutorial01_08b.png
 	:align: center
 
-In order to observe the result of the previously applied algorithm, we will do a X-Y rotation using the current *Navigate in graph* interactor (see `Toolbar <workspace.html#toolbar>`_ for more details). And there we have it, a visual representation of the Tulip directory.
+In order to observe the result of the previously applied algorithm, we will do a X-Y rotation using the current *Navigate in graph* interactor (see `Toolbar <workspace.html#toolbar>`_ for more details). And there we have it, a visual representation of the Talipot directory.
 
 
 .. image:: _images/tutorial01_09b.png
@@ -119,7 +119,7 @@ In order to observe the result of the previously applied algorithm, we will do a
 Bonus: A Beautiful 2D Representation
 ------------------------------------
 
-Here is another way we might want to represent the Tulip directory, using some of the tools seen above, and others. We leave the reproduction of this view as an exercice for the reader curious to explore more of the possibilities offered by Tulip.
+Here is another way we might want to represent the Talipot directory, using some of the tools seen above, and others. We leave the reproduction of this view as an exercice for the reader curious to explore more of the possibilities offered by Talipot.
 
 |
 
@@ -140,13 +140,13 @@ Importing the data
 
 The data used for this visualization was downloaded from the `idvbook.com <http://www.idvbook.com/teaching-aid/data-sets/the-city-temperature-data-set/>`__ website. A *CSV* file can easily be generated from the XLS table found in the archive.
 
-The point here is to make sense of the following raw data, using some of the Tulip basic features:
+The point here is to make sense of the following raw data, using some of the Talipot basic features:
 
 .. image:: _images/tutorial02_01b.png
 
-* The first step will be to import the *CSV* file into Tulip. As the reader should be comfortable with that process by now, we will simply include a link to the relevant section: :ref:`csv`. The default import settings should work nicely, and of course these are *new entities (nodes)*.
+* The first step will be to import the *CSV* file into Talipot. As the reader should be comfortable with that process by now, we will simply include a link to the relevant section: :ref:`csv`. The default import settings should work nicely, and of course these are *new entities (nodes)*.
 
-* Here again, Tulip displays a two-panel view with the *Spreadsheet view* on the left, and a *Node Link Diagram view* on the right. Therefore, we might want to start by switching to a one-panel view. Just like we did previously, we will use the icons situated at the bottom of the view: |icon_panels|
+* Here again, Talipot displays a two-panel view with the *Spreadsheet view* on the left, and a *Node Link Diagram view* on the right. Therefore, we might want to start by switching to a one-panel view. Just like we did previously, we will use the icons situated at the bottom of the view: |icon_panels|
 
 Generating a *Geographic view*
 ------------------------------
@@ -237,22 +237,22 @@ Analysis of a Multivariate Dataset
 
 .. |icon_workspace_macros| image:: _images/icon_workspace_macros.png
 
-.. |icon_wsm_node_size_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_size.png
+.. |icon_wsm_node_size_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_size.png
 
-.. |icon_wsm_node_color_set| image:: ../../library/tulip-gui/resources/icons/20/set_node_color.png
-					       
-In this third tutorial, we will highlight some of the possibilities offered by Tulip for the analysis of multivariate datasets. The dataset may already be familiar to the reader, as it was featured in the :ref:`workspace` section. The file may be downloaded :download:`here <./_documents/04cars_data.csv>`, and is available on the website `idvbook.com <http://www.idvbook.com/teaching-aid/data-sets/2004-cars-and-trucks-data/>`_.
+.. |icon_wsm_node_color_set| image:: ../../library/talipot-gui/resources/icons/20/set_node_color.png
 
-Note that originally, data was missing for some cars, and so in order to *clean* the file and avoid having to deal with problems when importing the file into Tulip, we chose the strategy of simply discarding those vehicles. The resulting *cleaned* file consists of the vehicles for which all the information was available.
+In this third tutorial, we will highlight some of the possibilities offered by Talipot for the analysis of multivariate datasets. The dataset may already be familiar to the reader, as it was featured in the :ref:`workspace` section. The file may be downloaded :download:`here <./_documents/04cars_data.csv>`, and is available on the website `idvbook.com <http://www.idvbook.com/teaching-aid/data-sets/2004-cars-and-trucks-data/>`_.
 
-In order to achieve that, we will produce a similar analysis to the one in the book *Interactive data visualization* (see pp. 35-40). [#footnote1]_ 
+Note that originally, data was missing for some cars, and so in order to *clean* the file and avoid having to deal with problems when importing the file into Talipot, we chose the strategy of simply discarding those vehicles. The resulting *cleaned* file consists of the vehicles for which all the information was available.
+
+In order to achieve that, we will produce a similar analysis to the one in the book *Interactive data visualization* (see pp. 35-40). [#footnote1]_
 
 In this case, we will ask ourselves a somewhat naive question when dealing with cars: Does an increased dealer/retail price mean a more efficient vehicle, meaning a higher MPG?
 
 Generating a *Scatter Plot 2D view*
 -----------------------------------
 
-* The first step is of course to import the data in Tulip. Once the *Spreadsheet view* and *Node Link Diagram view* have been generated, we will close the latter, as it is not relevant to this analysis.
+* The first step is of course to import the data in Talipot. Once the *Spreadsheet view* and *Node Link Diagram view* have been generated, we will close the latter, as it is not relevant to this analysis.
 
 
 .. image:: _images/tutorial03_01b.png
@@ -300,7 +300,7 @@ After clicking on the *Search* button, the 59 nodes for which the **SUV** proper
 .. note:: It is important to cancel the selection after the coloring operation is finished, since selected nodes are also assigned a dark blue color by default. Click on *Edit* → *Cancel selection*, or press *Ctrl+Shift+A* to cancel selection.
 
 
-Here, we can recognize the color of a particular class of vehicule based on the scatter plots. In this case, the sports cars are of course in red (see **HP**), the SUVs are in dark blue (see **Weight**), etc. However, when we focus on the main group, that is apart from the extremes, it is hard to differentiate between types of vehicles. 
+Here, we can recognize the color of a particular class of vehicule based on the scatter plots. In this case, the sports cars are of course in red (see **HP**), the SUVs are in dark blue (see **Weight**), etc. However, when we focus on the main group, that is apart from the extremes, it is hard to differentiate between types of vehicles.
 
 What this tells us is that there is a lot of overlap, and that apart from the extremes, it is not easy to distinguish the types of vehicles based on the chosen properties. We could try generating a similar view for each class of vehicle.
 
@@ -341,7 +341,7 @@ Analyzing the data using highlights
 .. |icon_par_highlight_elements| image:: ../../plugins/view/ParallelCoordinatesView/resources/i_element_highlighter.png
     :width: 20
 
-Another strategy that we can rely on when analyzing a multivariate dataset, instead of creating subgraphs for every category we want to look at, is the highlighting tool featured in Tulip. To access this tool, we will focus on our *Parallel Coordinates view*, and click on the |icon_par_axis_sliders| icon.
+Another strategy that we can rely on when analyzing a multivariate dataset, instead of creating subgraphs for every category we want to look at, is the highlighting tool featured in Talipot. To access this tool, we will focus on our *Parallel Coordinates view*, and click on the |icon_par_axis_sliders| icon.
 
 Here, we will see how applying filters to one or several properties simultaneously may affect the views.
 
@@ -354,7 +354,7 @@ Here is what the four-panel view may look like when highlighting the largest veh
 	:width: 770
 
 
-.. note:: The way the highlighting works in Tulip is by reducing the *alpha* value of non-highlighted nodes. This *alpha* value can be modified in the *Draw options* tab in the *Parallel Coordinates view*. Here the alpha value of non-highlighted nodes is set at 50.
+.. note:: The way the highlighting works in Talipot is by reducing the *alpha* value of non-highlighted nodes. This *alpha* value can be modified in the *Draw options* tab in the *Parallel Coordinates view*. Here the alpha value of non-highlighted nodes is set at 50.
 
 The great advantage of highlighting a particular subset of our dataset is that we get to visualize how it relates to the rest of the vehicles, whereas this was lost when we created subgraphs.
 
@@ -365,10 +365,10 @@ The great advantage of highlighting a particular subset of our dataset is that w
 
 |
 
-Using Tulip for Network Analysis
-================================
+Using Talipot for Network Analysis
+==================================
 
-Network analysis is an important aspect of data visualization. In this last tutorial, we will see how we can use Tulip to analyze both a small or a larger network, using the same dataset. We will also have the opportunity to use some features we saw in previous tutorials, such as the *Geographic view*, as well as new features, such as the **Python IDE**.
+Network analysis is an important aspect of data visualization. In this last tutorial, we will see how we can use Talipot to analyze both a small or a larger network, using the same dataset. We will also have the opportunity to use some features we saw in previous tutorials, such as the *Geographic view*, as well as new features, such as the **Python IDE**.
 
 World Chess Champions (1948-1990)
 ---------------------------------
@@ -376,7 +376,7 @@ World Chess Champions (1948-1990)
 The dataset
 ^^^^^^^^^^^
 
-The original dataset consists of two *CSV* files. The first one corresponds to the **nodes**, and the second one to the **edges** of our graph. These files were created by the author specifically for this tutorial. They can be downloaded here: 
+The original dataset consists of two *CSV* files. The first one corresponds to the **nodes**, and the second one to the **edges** of our graph. These files were created by the author specifically for this tutorial. They can be downloaded here:
 
 * Players: :download:`chess.candidates.1948.1990.csv <./_documents/chess.candidates.1948.1990.csv>`
 * Games: :download:`wcc.games.1948.1990.csv <./_documents/wcc.games.1948.1990.csv>`
@@ -396,7 +396,7 @@ In order to import the data, follow the instructions as explained in :ref:`csv`.
 The goal
 ^^^^^^^^
 
-The idea behind this first example was to combine a network analysis and the geolocation feature in Tulip, in order to create a multi-dimensional representation of World Chess Champions between 1948 and 1990. Several things should stand out:
+The idea behind this first example was to combine a network analysis and the geolocation feature in Talipot, in order to create a multi-dimensional representation of World Chess Champions between 1948 and 1990. Several things should stand out:
 
 	1. In that period, all but one World Champion were European. The geographic representation will allow us to highlight this.
 	2. Some players have played many more games than others. The best way to convey this would probably be to map the number of games played to the size of the nodes.
@@ -495,7 +495,7 @@ Working on the layout is rarely sufficient when analyzing a network, and so in t
 	2. In the *Spreadsheet view*, create a new graph property and copy the **viewMetric** value in this new property.
 	3. Repeat until we have all the properties we need.
 
-Once this is done, we may analyze these new properties using some of the methods we have seen in previous sections. 
+Once this is done, we may analyze these new properties using some of the methods we have seen in previous sections.
 
 There are several ways to create a new graph property in the *Spreadsheet view*, and one of them is simply to *Right click* on any property name, and click on *Add new property*. We then specify a *Property type* and a *Property name* and click on *Create*.
 
@@ -517,25 +517,25 @@ We can repeat this process in order to have access simultaneously to a variety o
 	:width: 770
 
 
-Here we can see that while there is a certain degree of correlation between the **Number of Participations**, **Degree** (that is the number of games played), **Peak Rating** and **Betweenness Centrality**, each of these metric highlight a different aspect of our original dataset. A deeper analysis would be required in order to shed the light on the subtleties of this dataset, but our goal here was simply to show the reader how to produce such analyses in Tulip.
+Here we can see that while there is a certain degree of correlation between the **Number of Participations**, **Degree** (that is the number of games played), **Peak Rating** and **Betweenness Centrality**, each of these metric highlight a different aspect of our original dataset. A deeper analysis would be required in order to shed the light on the subtleties of this dataset, but our goal here was simply to show the reader how to produce such analyses in Talipot.
 
 Using the Python IDE to implement a specific algorithm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this section, we will go through how we can apply an algorithm such as the one we used to map the **degree** of the nodes to their **viewFontSize** property. This will be the opportunity to introduce the reader to the **Python IDE**, a central feature of the Tulip framework.
+In this section, we will go through how we can apply an algorithm such as the one we used to map the **degree** of the nodes to their **viewFontSize** property. This will be the opportunity to introduce the reader to the **Python IDE**, a central feature of the Talipot framework.
 
 The reason why we use the **Python IDE** in this particular case is because there is a limit to what the pre-existing algorithms allow us to do. On the other hand, using some simple Python code, we can apply any original algorithm a particular situation might require.
 
-.. note:: For more information on how to use the Python IDE or Python REPL, please consult the `Tulip Python Documentation <http://tulip.labri.fr/Documentation/current/tulip-python/html/index.html>`_.
+.. note:: For more information on how to use the Python IDE or Python REPL, please consult the `Talipot Python Documentation <http://talipot.labri.fr/Documentation/current/talipot-python/html/index.html>`_.
 
-The first step is to open the *Python IDE* window. 
+The first step is to open the *Python IDE* window.
 
 
-.. image:: _images/tulipPythonIDEButtonb.png
+.. image:: _images/talipotPythonIDEButtonb.png
   :align: center
 
 
-In this case, we will only use the **Scripts editor** tab to implement our simple algorithm. By default, when we open a new script, the code consists of a **For** loop that iterates through all the nodes of the current graph and prints their **ID**. Because we thought that it would be relevant to see the chess players' names directly in the view, we had to make their **viewFontSize** property proportionate to their **degree**. 
+In this case, we will only use the **Scripts editor** tab to implement our simple algorithm. By default, when we open a new script, the code consists of a **For** loop that iterates through all the nodes of the current graph and prints their **ID**. Because we thought that it would be relevant to see the chess players' names directly in the view, we had to make their **viewFontSize** property proportionate to their **degree**.
 
 Some experimentation was required in order to find a good factor, and in the end we went with 8. This is the code that we used in order to implement this algorithm:
 
@@ -549,9 +549,9 @@ We then need to *Run* the script, and we are done. A look at the *Node Link Diag
 Conclusion
 ----------
 
-In this last example, we have once again gone through the process of generating a graph, applying various algorithms, and we have seen how one might use the different tools available in Tulip in order to produce a relevant analysis. We have also had the opportunity to mention the **Python IDE** and to make use of this tool.
+In this last example, we have once again gone through the process of generating a graph, applying various algorithms, and we have seen how one might use the different tools available in Talipot in order to produce a relevant analysis. We have also had the opportunity to mention the **Python IDE** and to make use of this tool.
 
-Hopefully after following these tutorials, the user should have the necessary tools to get started in Tulip and to produce data visualizations and analyses based on a variety of datasets, ranging from multivariate datasets to networks as in this last tutorial.
+Hopefully after following these tutorials, the user should have the necessary tools to get started in Talipot and to produce data visualizations and analyses based on a variety of datasets, ranging from multivariate datasets to networks as in this last tutorial.
 
 |
 

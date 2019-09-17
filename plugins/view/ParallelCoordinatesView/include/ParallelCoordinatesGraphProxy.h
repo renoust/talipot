@@ -11,15 +11,15 @@
  *
  */
 
-#ifndef PARALLELCOORDINATESGRAPHPROXY_H_INCLUDE
-#define PARALLELCOORDINATESGRAPHPROXY_H_INCLUDE
+#ifndef PARALLEL_COORDINATES_GRAPH_PROXY_H
+#define PARALLEL_COORDINATES_GRAPH_PROXY_H
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <tulip/GraphDecorator.h>
-#include <tulip/Size.h>
-#include <tulip/StableIterator.h>
-#include <tulip/StoredType.h>
+#include <talipot/GraphDecorator.h>
+#include <talipot/Size.h>
+#include <talipot/StableIterator.h>
+#include <talipot/StoredType.h>
 
 namespace tlp {
 
@@ -183,4 +183,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif // PARALLELCOORDINATESGRAPHPROXY_H_INCLUDE
+#endif // PARALLEL_COORDINATES_GRAPH_PROXY_H

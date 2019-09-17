@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include "DegreeMetric.h"
 
-#include <tulip/StringCollection.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/GraphMeasure.h>
+#include <talipot/StringCollection.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/GraphMeasure.h>
 
 PLUGIN(DegreeMetric)
 

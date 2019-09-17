@@ -10,13 +10,14 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/PropertyAlgorithm.h>
-#include <tulip/StringCollection.h>
-#include <tulip/NumericProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StaticProperty.h>
-#include <tulip/ParallelTools.h>
+
+#include <talipot/PropertyAlgorithm.h>
+#include <talipot/StringCollection.h>
+#include <talipot/NumericProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StaticProperty.h>
+#include <talipot/ParallelTools.h>
 
 using namespace std;
 using namespace tlp;

@@ -18,12 +18,12 @@
 #include "../../utils/StandardInteractorPriority.h"
 #include "../../utils/PluginNames.h"
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/TulipItemDelegate.h>
-#include <tulip/GraphElementModel.h>
-#include <tulip/GlSimpleEntityItemModel.h>
-#include <tulip/GlComplexPolygon.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/ItemDelegate.h>
+#include <talipot/GraphElementModel.h>
+#include <talipot/GlSimpleEntityItemModel.h>
+#include <talipot/GlComplexPolygon.h>
 
 #include <QPropertyAnimation>
 #include <QLayout>
@@ -69,7 +69,7 @@ public:
    * Default constructor
    */
   GeographicViewInteractorGetInformation(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_select.png",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_select.png",
                                            "Get information on nodes/edges",
                                            StandardInteractorPriority::GetInformation) {}
 
@@ -95,9 +95,9 @@ GeographicViewShowElementInfo::GeographicViewShowElementInfo() : _editor(nullptr
   _informationWidget = new QWidget();
   _informationWidget->installEventFilter(this);
   ui.setupUi(_informationWidget);
-  ui.displayTulipProp->hide();
+  ui.displayTalipotProp->hide();
   connect(ui.closeButton, SIGNAL(clicked()), this, SLOT(hideInfos()));
-  tableView()->setItemDelegate(new TulipItemDelegate(tableView()));
+  tableView()->setItemDelegate(new ItemDelegate(tableView()));
   _informationWidgetItem = new QGraphicsProxyWidget();
   _informationWidgetItem->setWidget(_informationWidget);
   _informationWidgetItem->setVisible(false);

@@ -1,7 +1,7 @@
-SET(TULIP_BUILD_DOC ON CACHE BOOL "Do you want to build the documentation ? [ON|OFF]")
+SET(TALIPOT_BUILD_DOC ON CACHE BOOL "Do you want to build the documentation ? [ON|OFF]")
 
 #Only
-IF(TULIP_BUILD_DOC)
+IF(TALIPOT_BUILD_DOC)
   # Unset the previous values of the CMake cache variable SPHINX_EXECUTABLE
   # in case the value of PYTHON_EXECUTABLE CMake variable changed
   # but save it before into D_SPHINX_EXECUTABLE to be able to restore it
@@ -23,21 +23,21 @@ IF(TULIP_BUILD_DOC)
     MESSAGE("-- Found Sphinx: ${SPHINX_EXECUTABLE}")
   ENDIF(NOT SPHINX_FOUND AND (EXISTS ${D_SPHINX_EXECUTABLE}))
   IF(SPHINX_FOUND)
-    IF(TULIP_BUILD_PYTHON_COMPONENTS)
+    IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
       ADD_SUBDIRECTORY(python)
-    ENDIF(TULIP_BUILD_PYTHON_COMPONENTS)
+    ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
     ADD_SUBDIRECTORY(user)
     ADD_SUBDIRECTORY(developer)
   ELSE(SPHINX_FOUND)
     MESSAGE(AUTHOR_WARNING "Sphinx not found: unable to generate the documentation.")
   ENDIF(SPHINX_FOUND)
 
-  IF(NOT TULIP_BUILD_FOR_APPIMAGE)
+  IF(NOT TALIPOT_BUILD_FOR_APPIMAGE)
     FIND_PACKAGE(Doxygen)
     IF(DOXYGEN_FOUND)
       ADD_SUBDIRECTORY(doxygen)
     ELSE(DOXYGEN_FOUND)
-      MESSAGE(AUTHOR_WARNING "doxygen not found: unable to generate the Tulip API documentation.")
+      MESSAGE(AUTHOR_WARNING "doxygen not found: unable to generate the Talipot API documentation.")
     ENDIF(DOXYGEN_FOUND)
-  ENDIF(NOT TULIP_BUILD_FOR_APPIMAGE)
-ENDIF(TULIP_BUILD_DOC)
+  ENDIF(NOT TALIPOT_BUILD_FOR_APPIMAGE)
+ENDIF(TALIPOT_BUILD_DOC)

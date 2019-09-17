@@ -11,10 +11,10 @@
  *
  */
 
-#ifndef SCATTERPLOT2DINTERACTORS_H_
-#define SCATTERPLOT2DINTERACTORS_H_
+#ifndef SCATTER_PLOT2D_INTERACTORS_H
+#define SCATTER_PLOT2D_INTERACTORS_H
 
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include "../../utils/PluginNames.h"
 
 namespace tlp {
@@ -90,4 +90,4 @@ public:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOT2DINTERACTORS_H_ */
+#endif // SCATTER_PLOT2D_INTERACTORS_H

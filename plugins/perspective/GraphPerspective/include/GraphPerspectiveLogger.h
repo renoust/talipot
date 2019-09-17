@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef GRAPHPERSPECTIVELOGGER_H
-#define GRAPHPERSPECTIVELOGGER_H
+#ifndef GRAPH_PERSPECTIVE_LOGGER_H
+#define GRAPH_PERSPECTIVE_LOGGER_H
 
 #include <QPixmap>
 #include <QDebug>
@@ -76,4 +76,4 @@ signals:
   void resetLoggerPosition();
 };
 
-#endif // GRAPHPERSPECTIVELOGGER_H
+#endif // GRAPH_PERSPECTIVE_LOGGER_H

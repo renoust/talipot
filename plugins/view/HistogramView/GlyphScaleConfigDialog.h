@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef GLYPHSCALECONFIGDIALOG_H_
-#define GLYPHSCALECONFIGDIALOG_H_
+#ifndef GLYPH_SCALE_CONFIG_DIALOG_H
+#define GLYPH_SCALE_CONFIG_DIALOG_H
 
 #include <QDialog>
 #include <QStringList>
@@ -47,4 +47,4 @@ private:
   Ui::GlyphScaleConfigDialogData *_ui;
 };
 } // namespace tlp
-#endif /* GLYPHSCALECONFIGDIALOG_H_ */
+#endif // GLYPH_SCALE_CONFIG_DIALOG_H

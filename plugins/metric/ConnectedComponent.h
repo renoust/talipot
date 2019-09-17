@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _ConnectedComponent_H
-#define _ConnectedComponent_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef CONNECTED_COMPONENT_H
+#define CONNECTED_COMPONENT_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
@@ -36,4 +37,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // CONNECTED_COMPONENT_H

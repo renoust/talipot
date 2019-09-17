@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef TLPPLUGINSTEST
-#define TLPPLUGINSTEST
+
+#ifndef BASIC_PLUGINS_TEST_H
+#define BASIC_PLUGINS_TEST_H
 
 #include <string>
 
 #include "CppUnitIncludes.h"
 
-#include <tulip/Graph.h>
+#include <talipot/Graph.h>
 
 class BasicPluginsTest : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(BasicPluginsTest);
@@ -104,4 +105,4 @@ public:
   void testStrengthClustering();
 };
 
-#endif
+#endif // BASIC_PLUGINS_TEST_H

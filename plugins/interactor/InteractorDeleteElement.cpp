@@ -11,14 +11,14 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/NodeLinkDiagramComponentInteractor.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/NodeLinkDiagramComponentInteractor.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 #include "../utils/StandardInteractorPriority.h"
 
 using namespace tlp;
 
-/** \brief Tulip interactor to delete an element
+/** \brief Interactor to delete an element
  *
  */
 class InteractorDeleteElement : public NodeLinkDiagramComponentInteractor {
@@ -30,7 +30,7 @@ public:
    * Default constructor
    */
   InteractorDeleteElement(const tlp::PluginContext *)
-      : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_del.png", "Delete nodes or edges",
+      : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_del.png", "Delete nodes or edges",
                                            StandardInteractorPriority::DeleteElement) {}
 
   /**

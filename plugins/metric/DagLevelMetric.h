@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _DagLevelMETRIC_H
-#define _DagLevelMETRIC_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef DAG_LEVEL_METRIC_H
+#define DAG_LEVEL_METRIC_H
+
+#include <talipot/PluginHeaders.h>
 /** \addtogroup metric */
 
 /** This plugin is an implementation of a DAG layer decomposition
@@ -31,4 +32,4 @@ public:
   bool check(std::string &erreurMsg) override;
 };
 
-#endif
+#endif // DAG_LEVEL_METRIC_H

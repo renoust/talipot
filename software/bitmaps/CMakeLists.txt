@@ -1,8 +1,8 @@
 INSTALL(FILES logo.bmp welcomelogo.bmp
-        DESTINATION ${TulipBitmapInstallDir}
-        COMPONENT tulip_app)
+        DESTINATION ${TalipotBitmapInstallDir}
+        COMPONENT talipot_app)
 
 INSTALL(DIRECTORY samplePictures colorscales
-        DESTINATION ${TulipBitmapInstallDir}
-        COMPONENT tulip_app
+        DESTINATION ${TalipotBitmapInstallDir}
+        COMPONENT talipot_app
         PATTERN ".svn" EXCLUDE)

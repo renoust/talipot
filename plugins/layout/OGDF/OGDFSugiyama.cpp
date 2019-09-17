@@ -27,9 +27,9 @@
 #include <ogdf/layered/GridSifting.h>
 #include <ogdf/layered/OptimalHierarchyLayout.h>
 
-#include <tulip/StringCollection.h>
+#include <talipot/StringCollection.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 // comments below have been extracted from OGDF/src/layered/sugiyama.cpp
 /** \addtogroup layout */

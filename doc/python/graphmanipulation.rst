@@ -1,4 +1,4 @@
-.. py:currentmodule:: tulip
+.. py:currentmodule:: talipot
 
 Creating and manipulating graphs
 ================================
@@ -6,7 +6,7 @@ Creating and manipulating graphs
 Creating a new graph
 --------------------
 
-To create a new Tulip graph from Python, the :func:`tlp.newGraph()` function has to be used. 
+To create a new Talipot graph from Python, the :func:`tlp.newGraph()` function has to be used.
 It returns an empty graph which is an instance of the :class:`tlp.Graph` class. ::
 
 	graph = tlp.newGraph()
@@ -14,22 +14,22 @@ It returns an empty graph which is an instance of the :class:`tlp.Graph` class. 
 Importing / exporting a graph using the TLP file format
 --------------------------------------------------------
 
-TLP is the Tulip format to save a graph and its associated data to a file. The extension of
-the file can be .tlp or .tlp.gz (compressed version). 
+TLP is the Talipot format to save a graph and its associated data to a file. The extension of
+the file can be .tlp or .tlp.gz (compressed version).
 
 Loading a graph from a TLP file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To load a graph saved in TLP into a Python oject, the :func:`tlp.loadGraph` function has to be used. It loads 
+To load a graph saved in TLP into a Python oject, the :func:`tlp.loadGraph` function has to be used. It loads
 the graph described in the file and its associated data and returns an instance of the :class:`tlp.Graph`.
 For instance, the sample code below imports the graph saved to the file /home/foo/savedgraph.tlp::
-	
+
 	graph = tlp.loadGraph("/home/foo/savedgraph.tlp")
 
 Saving a graph to a TLP file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To save an instance of a :class:`tlp.Graph` class to a TLP file, the :func:`tlp.saveGraph` function has to be used. It saves 
+To save an instance of a :class:`tlp.Graph` class to a TLP file, the :func:`tlp.saveGraph` function has to be used. It saves
 the graph and its associated data into a file.
 For instance, the sample code below exports a graph to the file /home/foo/mygraph.tlp::
 
@@ -46,7 +46,7 @@ The graph structure can be freely modified through dedicated methods of the :cla
 Iterating over graph elements
 ------------------------------
 
-The :class:`tlp.Graph` class provides several iterators on the graph structure (see :ref:`Iterators on the graph structure <graph-class.iterators>`). 
+The :class:`tlp.Graph` class provides several iterators on the graph structure (see :ref:`Iterators on the graph structure <graph-class.iterators>`).
 The sample code below illustrates the syntax to perform an iteration over all the nodes of a graph.::
 
     for n in graph.getNodes():

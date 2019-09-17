@@ -1,45 +1,45 @@
 ADD_CORE_FILES(.)
 
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(SpanningDagSelection-${TulipVersion} SHARED SpanningDagSelection.cpp SpanningDagSelection.h)
-TARGET_LINK_LIBRARIES(SpanningDagSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(SpanningDagSelection-${TalipotVersion} SHARED SpanningDagSelection.cpp SpanningDagSelection.h)
+TARGET_LINK_LIBRARIES(SpanningDagSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(ReachableSubGraphSelection-${TulipVersion} SHARED ReachableSubGraphSelection.h ReachableSubGraphSelection.cpp)
-TARGET_LINK_LIBRARIES(ReachableSubGraphSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(ReachableSubGraphSelection-${TalipotVersion} SHARED ReachableSubGraphSelection.h ReachableSubGraphSelection.cpp)
+TARGET_LINK_LIBRARIES(ReachableSubGraphSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(SpanningTreeSelection-${TulipVersion} SHARED SpanningTreeSelection.cpp SpanningTreeSelection.h)
-TARGET_LINK_LIBRARIES(SpanningTreeSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(SpanningTreeSelection-${TalipotVersion} SHARED SpanningTreeSelection.cpp SpanningTreeSelection.h)
+TARGET_LINK_LIBRARIES(SpanningTreeSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(InducedSubGraphSelection-${TulipVersion} SHARED InducedSubGraphSelection.cpp InducedSubGraphSelection.h)
-TARGET_LINK_LIBRARIES(InducedSubGraphSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(InducedSubGraphSelection-${TalipotVersion} SHARED InducedSubGraphSelection.cpp InducedSubGraphSelection.h)
+TARGET_LINK_LIBRARIES(InducedSubGraphSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(LoopSelection-${TulipVersion} SHARED LoopSelection.cpp LoopSelection.h)
-TARGET_LINK_LIBRARIES(LoopSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(LoopSelection-${TalipotVersion} SHARED LoopSelection.cpp LoopSelection.h)
+TARGET_LINK_LIBRARIES(LoopSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(MultipleSelection-${TulipVersion} SHARED MultipleEdgeSelection.cpp MultipleEdgeSelection.h)
-TARGET_LINK_LIBRARIES(MultipleSelection-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(MultipleSelection-${TalipotVersion} SHARED MultipleEdgeSelection.cpp MultipleEdgeSelection.h)
+TARGET_LINK_LIBRARIES(MultipleSelection-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(Kruskal-${TulipVersion} SHARED Kruskal.cpp Kruskal.h)
-TARGET_LINK_LIBRARIES(Kruskal-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(Kruskal-${TalipotVersion} SHARED Kruskal.cpp Kruskal.h)
+TARGET_LINK_LIBRARIES(Kruskal-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-ADD_LIBRARY(MakeGraph-${TulipVersion} SHARED MakeSelectionGraph.cpp MakeSelectionGraph.h)
-TARGET_LINK_LIBRARIES(MakeGraph-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(MakeGraph-${TalipotVersion} SHARED MakeSelectionGraph.cpp MakeSelectionGraph.h)
+TARGET_LINK_LIBRARIES(MakeGraph-${TalipotVersion} ${LibTalipotCoreName})
 
 ##----------------------------------------------------------------------------------------------------------------------------
-TULIP_INSTALL_PLUGIN(SpanningDagSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(ReachableSubGraphSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(SpanningTreeSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(InducedSubGraphSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(LoopSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(MultipleSelection-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(Kruskal-${TulipVersion} ${TulipPluginsInstallDir})
-TULIP_INSTALL_PLUGIN(MakeGraph-${TulipVersion} ${TulipPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(SpanningDagSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(ReachableSubGraphSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(SpanningTreeSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(InducedSubGraphSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(LoopSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(MultipleSelection-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(Kruskal-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(MakeGraph-${TalipotVersion} ${TalipotPluginsInstallDir})

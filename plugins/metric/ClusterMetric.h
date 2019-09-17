@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _CLUSTERMETRIC_H
-#define _CLUSTERMETRIC_H
 
-#include <tulip/DoubleProperty.h>
+#ifndef CLUSTER_METRIC_H
+#define CLUSTER_METRIC_H
+
+#include <talipot/DoubleProperty.h>
 
 /** \addtogroup metric */
 
@@ -41,4 +42,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // CLUSTER_METRIC_H

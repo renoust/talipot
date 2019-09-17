@@ -10,16 +10,17 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <algorithm>
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/MapIterator.h>
-#include <tulip/PlanarConMap.h>
-#include <tulip/Ordering.h>
-#include <tulip/MutableContainer.h>
-#include <tulip/Bfs.h>
-#include <tulip/GraphTools.h>
-#include <tulip/StringCollection.h>
-#include <tulip/TulipViewSettings.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/MapIterator.h>
+#include <talipot/PlanarConMap.h>
+#include <talipot/Ordering.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/Bfs.h>
+#include <talipot/GraphTools.h>
+#include <talipot/StringCollection.h>
+#include <talipot/ViewSettings.h>
 
 #include "MixedModel.h"
 #include "DatasetTools.h"

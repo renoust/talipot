@@ -11,13 +11,13 @@
  *
  */
 
-#ifndef SCATTERPLOT2DOPTIONSWIDGET_H_
-#define SCATTERPLOT2DOPTIONSWIDGET_H_
+#ifndef SCATTER_PLOT2D_OPTIONS_WIDGET_H
+#define SCATTER_PLOT2D_OPTIONS_WIDGET_H
 
 #include <QWidget>
 
-#include <tulip/Color.h>
-#include <tulip/Size.h>
+#include <talipot/Color.h>
+#include <talipot/Size.h>
 
 namespace Ui {
 class ScatterPlot2DOptionsWidgetData;
@@ -108,4 +108,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* SCATTERPLOT2DOPTIONSWIDGET_H_ */
+#endif // SCATTER_PLOT2D_OPTIONS_WIDGET_H

@@ -46,19 +46,19 @@ ScatterPlotCorrelCoeffSelectorOptionsWidget::~ScatterPlotCorrelCoeffSelectorOpti
 
 void ScatterPlotCorrelCoeffSelectorOptionsWidget::setButtonColor(ColorButton *button,
                                                                  const Color &color) {
-  button->setTulipColor(color);
+  button->setColor(color);
 }
 
 Color ScatterPlotCorrelCoeffSelectorOptionsWidget::getMinusOneColor() const {
-  return _ui->minusOneColorButton->tulipColor();
+  return _ui->minusOneColorButton->talipotColor();
 }
 
 Color ScatterPlotCorrelCoeffSelectorOptionsWidget::getZeroColor() const {
-  return _ui->zeroColorButton->tulipColor();
+  return _ui->zeroColorButton->talipotColor();
 }
 
 Color ScatterPlotCorrelCoeffSelectorOptionsWidget::getOneColor() const {
-  return _ui->oneColorButton->tulipColor();
+  return _ui->oneColorButton->talipotColor();
 }
 
 void ScatterPlotCorrelCoeffSelectorOptionsWidget::updateColorScale() {

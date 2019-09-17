@@ -69,4 +69,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif
+#endif // NOMINAL_PARALLEL_AXIS_H

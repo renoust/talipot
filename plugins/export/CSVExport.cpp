@@ -13,10 +13,10 @@
 
 #include "CSVExport.h"
 
-#include <tulip/StringCollection.h>
-#include <tulip/Graph.h>
-#include <tulip/StringProperty.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/StringCollection.h>
+#include <talipot/Graph.h>
+#include <talipot/StringProperty.h>
+#include <talipot/BooleanProperty.h>
 
 PLUGIN(CsvExport)
 
@@ -33,7 +33,7 @@ static const char *paramHelp[] = {
     // export id of graph elements
     "This parameter indicates if the id of graph elements has to be exported",
     // export visual properties selection
-    "This parameter indicates if the visual properties of Tulip will be exported",
+    "This parameter indicates if the visual properties of Talipot will be exported",
     // the field separator
     "This parameter indicates the field separator (sequence of one or more characters used to "
     "specify the boundary between two consecutive fields).",
@@ -184,7 +184,7 @@ bool CsvExport::exportGraph(std::ostream &os) {
     first = false;
   }
 
-  // export non tulip defined properties
+  // export non talipot defined properties
   // use vectors for further access to exported properties
   vector<PropertyInterface *> props;
   vector<bool> propIsString;

@@ -11,16 +11,16 @@
  *
  */
 
-#ifndef PROPERTYVALUESDISPATCHER_H
-#define PROPERTYVALUESDISPATCHER_H
+#ifndef PROPERTY_VALUES_DISPATCHER_H
+#define PROPERTY_VALUES_DISPATCHER_H
 
 #include <QHash>
 
 #include <set>
 #include <string>
 
-#include <tulip/Observable.h>
-#include <tulip/Graph.h>
+#include <talipot/Observable.h>
+#include <talipot/Graph.h>
 
 namespace tlp {
 class IntegerVectorProperty;
@@ -57,4 +57,4 @@ private:
   bool _modifying;
 };
 } // namespace tlp
-#endif // PROPERTYVALUESDISPATCHER_H
+#endif // PROPERTY_VALUES_DISPATCHER_H

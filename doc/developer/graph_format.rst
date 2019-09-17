@@ -1,7 +1,7 @@
 .. _graph-format:
 
 ******************
-Tulip graph format
+Talipot graph format
 ******************
 
 
@@ -18,8 +18,8 @@ Syntax::
 Sample::
 
   (nodes 0 1 2 3 4 5 )
-        
-    
+
+
 .. _edges-def:
 
 Edges
@@ -36,15 +36,15 @@ Sample::
   (edge 2 2 1)
 
 It defines one edge with the node that has the id 2 as source and the node that has the id 1 as target.
-        
-    
+
+
 .. _clusters-def:
 
 Clusters
 ========
 
 A cluster is defined by an integer which represent the cluster id, one string which is the name of the cluster(Two clusters can have the same name). Then it is define with a list of nodes and a list of edges. To define a subcluster we use the same method. One important point is that the id zero is reserved for the root graph (thus it cannot be used).
-        
+
 Syntax::
 
   (cluster id name
@@ -66,8 +66,8 @@ Sample::
       (edges 2 )
     )
   )
-        
-    
+
+
 .. _pro-def:
 
 Definitions of properties
@@ -83,7 +83,7 @@ Syntax::
     ...
     (edge id value)
     ...
-  )        
+  )
 
 Sample::
 
@@ -96,12 +96,12 @@ Sample::
     (edge 8 "true")
   )
 
-        
+
 .. _type-pro:
 
 Property Type
 -------------
-          
+
 * layout: This type enables to store nodes position in 3D. The position of nodes is defined by a set of 3 doubles *(x_coord,y_coord,z_coord)*. The position of edges is a list of 3D points. These points are the bends of edges. *((x_coord1,y_coord1,z_coord1)(x_coord2,y_coord2,z_coord2))*
 * size: This type enables to store the size of elements. The size is defined with a sequence of three double. *(width,heigth,depth)*
 * color: This type enables to store the color of elements. The color is defined with a sequence of four integer from 0 to 255. *(red,green,blue,alpha)*
@@ -110,17 +110,17 @@ Property Type
 * bool: This type enables to store boolean on elements.
 * int: This type enables to store integers on elements.
 
-        
-        
-    
+
+
+
 .. _pro-tlp:
 
-Properties of Tulip
+Properties of Talipot
 ===================
 
 *viewSelection*
 
-  type: bool, this property is the one used for selected elements in Tulip. ::
+  type: bool, this property is the one used for selected elements in Talipot. ::
 
     (property  0 bool "viewSelection"
       (default "false" "false")
@@ -133,7 +133,7 @@ Properties of Tulip
 
 *viewLayout*
 
-  type: layout, this property is the one used for displaying graph in Tulip. ::
+  type: layout, this property is the one used for displaying graph in Talipot. ::
 
     (property  0 layout "viewLayout"
       (default "(0,0,0)" "()" )
@@ -144,7 +144,7 @@ Properties of Tulip
 
 *viewColor*
 
-  type: color, this property is the one used for coloring graphs in Tulip. ::
+  type: color, this property is the one used for coloring graphs in Talipot. ::
 
     (property  0 color "viewColor"
       (default "(235,0,23,255)" "(0,0,0,0)" )
@@ -156,7 +156,7 @@ Properties of Tulip
 
 *viewLabel*
 
-  type: string, this property is the one used for labeling the graphs in Tulip(in label mode). ::
+  type: string, this property is the one used for labeling the graphs in Talipot(in label mode). ::
 
     (property  0 string "viewLabel"
       (default "" "" )
@@ -189,5 +189,5 @@ Properties of Tulip
 *viewTexture*
 
 *viewRotation*
-        
-    
+
+

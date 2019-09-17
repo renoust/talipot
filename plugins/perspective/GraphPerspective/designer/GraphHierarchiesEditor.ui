@@ -146,7 +146,7 @@
   <action name="actionClone_subgraph">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/22/hierarchy.png</normaloff>:/tulip/graphperspective/icons/22/hierarchy.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/hierarchy.png</normaloff>:/talipot/graphperspective/icons/22/hierarchy.png</iconset>
    </property>
    <property name="text">
     <string>Create clone subgraph</string>
@@ -158,7 +158,7 @@
   <action name="actionClone_sibling">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/22/sibling-clone.png</normaloff>:/tulip/graphperspective/icons/22/sibling-clone.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/sibling-clone.png</normaloff>:/talipot/graphperspective/icons/22/sibling-clone.png</iconset>
    </property>
    <property name="text">
     <string>Create clone sibling</string>
@@ -170,7 +170,7 @@
   <action name="actionClone_sibling_with_properties">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/22/sibling-clone-props.png</normaloff>:/tulip/graphperspective/icons/22/sibling-clone-props.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/sibling-clone-props.png</normaloff>:/talipot/graphperspective/icons/22/sibling-clone-props.png</iconset>
    </property>
    <property name="text">
     <string>Create clone sibling (with properties)</string>
@@ -181,8 +181,8 @@
   </action>
   <action name="actionDelete_graph">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
    </property>
    <property name="text">
     <string>Delete graph</string>
@@ -193,8 +193,8 @@
   </action>
   <action name="actionDelete_All">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/i_del.png</normaloff>:/tulip/gui/icons/i_del.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/i_del.png</normaloff>:/talipot/gui/icons/i_del.png</iconset>
    </property>
    <property name="text">
     <string>Delete all</string>
@@ -209,7 +209,7 @@
   <action name="actionCreate_panel">
    <property name="icon">
     <iconset>
-     <normaloff>:/tulip/graphperspective/icons/16/list-add.png</normaloff>:/tulip/graphperspective/icons/16/list-add.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/list-add.png</normaloff>:/talipot/graphperspective/icons/16/list-add.png</iconset>
    </property>
    <property name="text">
     <string>Add panel</string>
@@ -220,8 +220,8 @@
   </action>
   <action name="actionExport">
    <property name="icon">
-    <iconset resource="../../../../library/tulip-gui/resources/TulipGUIResource.qrc">
-     <normaloff>:/tulip/gui/icons/64/document-export.png</normaloff>:/tulip/gui/icons/64/document-export.png</iconset>
+    <iconset resource="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc">
+     <normaloff>:/talipot/gui/icons/64/document-export.png</normaloff>:/talipot/gui/icons/64/document-export.png</iconset>
    </property>
    <property name="text">
     <string>Export</string>
@@ -233,7 +233,7 @@
   <action name="actionRename">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/16/rename.png</normaloff>:/tulip/graphperspective/icons/16/rename.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/rename.png</normaloff>:/talipot/graphperspective/icons/16/rename.png</iconset>
    </property>
    <property name="text">
     <string>Rename</string>
@@ -248,7 +248,7 @@
   <action name="actionSave_to_file">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/16/document-save.png</normaloff>:/tulip/graphperspective/icons/16/document-save.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/16/document-save.png</normaloff>:/talipot/graphperspective/icons/16/document-save.png</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -260,7 +260,7 @@
   <action name="actionCreate_induced_sub_graph">
    <property name="icon">
     <iconset resource="../resources/GraphPerspective.qrc">
-     <normaloff>:/tulip/graphperspective/icons/22/hierarchy-select.png</normaloff>:/tulip/graphperspective/icons/22/hierarchy-select.png</iconset>
+     <normaloff>:/talipot/graphperspective/icons/22/hierarchy-select.png</normaloff>:/talipot/graphperspective/icons/22/hierarchy-select.png</iconset>
    </property>
    <property name="text">
     <string>Create subgraph from selection</string>
@@ -336,7 +336,7 @@
  </customwidgets>
  <resources>
   <include location="../resources/GraphPerspective.qrc"/>
-  <include location="../../../../library/tulip-gui/resources/TulipGUIResource.qrc"/>
+  <include location="../../../../library/talipot-gui/resources/TalipotGUIResource.qrc"/>
  </resources>
  <connections>
   <connection>

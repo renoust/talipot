@@ -1,7 +1,7 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 FILE(GLOB LIB_SRCS "*.cpp")
 
-ADD_LIBRARY(FastOverlapRemoval-${TulipVersion} SHARED ${LIB_SRCS})
-TARGET_LINK_LIBRARIES(FastOverlapRemoval-${TulipVersion} ${LibTulipCoreName})
+ADD_LIBRARY(FastOverlapRemoval-${TalipotVersion} SHARED ${LIB_SRCS})
+TARGET_LINK_LIBRARIES(FastOverlapRemoval-${TalipotVersion} ${LibTalipotCoreName})
 
-TULIP_INSTALL_PLUGIN(FastOverlapRemoval-${TulipVersion} ${TulipPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(FastOverlapRemoval-${TalipotVersion} ${TalipotPluginsInstallDir})

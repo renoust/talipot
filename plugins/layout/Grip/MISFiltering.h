@@ -10,14 +10,15 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef MISFILTERING_H
-#define MISFILTERING_H
+
+#ifndef MIS_FILTERING_H
+#define MIS_FILTERING_H
 
 #include <unordered_map>
 #include <unordered_set>
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/MutableContainer.h>
+#include <talipot/PluginHeaders.h>
+#include <talipot/MutableContainer.h>
 
 class MISFiltering {
 
@@ -51,4 +52,4 @@ private:
 
   std::vector<tlp::node> toVisit;
 };
-#endif
+#endif // MIS_FILTERING_H

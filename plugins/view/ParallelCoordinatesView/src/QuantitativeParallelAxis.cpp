@@ -16,8 +16,8 @@
 #include "ParallelCoordinatesGraphProxy.h"
 #include "ParallelTools.h"
 
-#include <tulip/IntegerProperty.h>
-#include <tulip/DoubleProperty.h>
+#include <talipot/IntegerProperty.h>
+#include <talipot/DoubleProperty.h>
 
 using namespace std;
 

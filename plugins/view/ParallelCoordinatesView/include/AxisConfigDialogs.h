@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef AXISCONFIGDIALOGS_H_
-#define AXISCONFIGDIALOGS_H_
+#ifndef AXIS_CONFIG_DIALOGS_H
+#define AXIS_CONFIG_DIALOGS_H
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
 #include <QDialog>
 
-#include <tulip/ItemsListWidget.h>
+#include <talipot/ItemsListWidget.h>
 
 class QSpinBox;
 class QDoubleSpinBox;
@@ -79,4 +79,4 @@ private:
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 
-#endif /* AXISCONFIGDIALOGS_H_ */
+#endif // AXIS_CONFIG_DIALOGS_H

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <ogdf/upward/VisibilityLayout.h>
 #include <ogdf/packing/ComponentSplitterLayout.h>
 
-#include "tulip2ogdf/OGDFLayoutPluginBase.h"
+#include "talipot2ogdf/OGDFLayoutPluginBase.h"
 
 // comments below have been extracted from OGDF/src/upward/VisibilityLayout.cpp
 /** \addtogroup layout */

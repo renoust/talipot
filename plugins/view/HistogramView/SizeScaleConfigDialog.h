@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef SIZESCALECONFIGDIALOG_H_
-#define SIZESCALECONFIGDIALOG_H_
+#ifndef SIZE_SCALE_CONFIG_DIALOG_H
+#define SIZE_SCALE_CONFIG_DIALOG_H
 
 #include <QDialog>
 
@@ -49,4 +49,4 @@ private slots:
   void viewSizeRadioButtonToggled(bool checked);
 };
 } // namespace tlp
-#endif /* SIZESCALECONFIGDIALOG_H_ */
+#endif // SIZE_SCALE_CONFIG_DIALOG_H

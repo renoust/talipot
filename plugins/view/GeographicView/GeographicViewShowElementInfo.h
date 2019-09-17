@@ -14,7 +14,7 @@
 #ifndef GEOGRAPHIC_VIEW_SHOW_ELEMENT_INFO_H
 #define GEOGRAPHIC_VIEW_SHOW_ELEMENT_INFO_H
 
-#include <tulip/InteractorComposite.h>
+#include <talipot/InteractorComposite.h>
 
 #include "GeographicView.h"
 

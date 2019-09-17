@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #ifndef DENDROGRAM_H
 #define DENDROGRAM_H
 
 #include <map>
 #include <vector>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 class OrientableLayout;
 class OrientableCoord;
@@ -70,4 +71,4 @@ private:
                            OrientableSizeProxy *oriSize);
 };
 
-#endif
+#endif // DENDROGRAM_H

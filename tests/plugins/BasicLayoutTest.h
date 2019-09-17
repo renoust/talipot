@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef BASICLAYOUTTEST_H
-#define BASICLAYOUTTEST_H
+
+#ifndef BASIC_LAYOUT_TEST_H
+#define BASIC_LAYOUT_TEST_H
 
 #include "CppUnitIncludes.h"
 
@@ -72,4 +73,4 @@ public:
   void testFastOverlapRemoval();
 };
 
-#endif // BASICLAYOUTTEST_H
+#endif // BASIC_LAYOUT_TEST_H

@@ -11,13 +11,13 @@
  *
  */
 
-#ifndef PATHFINDERCOMPONENT_H_
-#define PATHFINDERCOMPONENT_H_
+#ifndef PATH_FINDER_COMPONENT_H
+#define PATH_FINDER_COMPONENT_H
 
 #include <QSet>
 
-#include <tulip/GLInteractor.h>
-#include <tulip/Node.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Node.h>
 
 namespace tlp {
 class Graph;
@@ -70,4 +70,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PATHFINDERCOMPONENT_H_ */
+#endif // PATH_FINDER_COMPONENT_H

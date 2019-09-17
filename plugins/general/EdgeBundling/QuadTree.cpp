@@ -11,11 +11,11 @@
  *
  */
 
-#include <tulip/MutableContainer.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/TulipException.h>
+#include <talipot/MutableContainer.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/Exception.h>
 
 #include "QuadTree.h"
 using namespace tlp;
@@ -69,8 +69,8 @@ bool QuadTreeBundle::isIn(const Coord &p, const Coord &a, const Coord &b) {
 void QuadTreeBundle::elmentSplitting(const Coord &a, const Coord &b, const vector<node> &input,
                                      vector<node> &in, vector<node> &out) {
   if (!((a[0] < b[0]) && (a[1] < b[1])))
-    throw TulipException("2 nodes have the same position.\nTry to apply the \"Fast Overlap "
-                         "Removal\" algorithm before.");
+    throw Exception("2 nodes have the same position.\nTry to apply the \"Fast Overlap "
+                    "Removal\" algorithm before.");
 
   in.clear();
   out.clear();

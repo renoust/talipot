@@ -10,9 +10,10 @@
  * See top-level LICENSE file for more information
  *
  */
-#include <tulip/SizeProperty.h>
-#include <tulip/StringCollection.h>
-#include <tulip/GraphParallelTools.h>
+
+#include <talipot/SizeProperty.h>
+#include <talipot/StringCollection.h>
+#include <talipot/GraphParallelTools.h>
 
 #include "FastOverlapRemoval.h"
 #include "generate-constraints.h"

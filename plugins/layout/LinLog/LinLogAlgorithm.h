@@ -10,8 +10,9 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef LinLogAlgorithm_H_
-#define LinLogAlgorithm_H_
+
+#ifndef LIN_LOG_ALGORITHM_H
+#define LIN_LOG_ALGORITHM_H
 
 /// An implementation of the LinLog layout algorithm
 /** This plugin is an implementation of the LinLog
@@ -26,7 +27,7 @@
  * The code of the plugin has been translated and adapted
  * from A. Noack's java implementation of the LinLog algorithm
  */
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 class LinLogAlgorithm : public tlp::LayoutAlgorithm {
 
@@ -45,4 +46,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // LIN_LOG_ALGORITHM_H

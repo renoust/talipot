@@ -11,8 +11,8 @@
  *
  */
 
-#include <tulip/AcyclicTest.h>
-#include <tulip/StaticProperty.h>
+#include <talipot/AcyclicTest.h>
+#include <talipot/StaticProperty.h>
 
 #include "SpanningDagSelection.h"
 

@@ -17,7 +17,7 @@
  * When writing the doxygen documentation for a class, one should follow those steps:
  *
  * 1/ Remove the /// @cond DOXYGEN_HIDDEN condition on top of the header and the /// @endcond tag at the bottom.
- *   If you are adding a new class to Tulip and didn't write the documentation yet, you should add those tags until the documentation is written.
+ *   If you are adding a new class to Talipot and didn't write the documentation yet, you should add those tags until the documentation is written.
  * 2/ Every class should belong to a doxygen group. This means that a @ingroup declaration must be added before the class @brief tag.
  * 3/ A doxygen group is identified by a single-word identifier (first word after the @defgroup declaration). What follows in the  @defgroup declaration is the pretty name that will appear into the final HTML document.
  * 3/ Definitions for doxygen groups are found in this file.
@@ -28,7 +28,7 @@
 #define DOXYGEN // Used to separate licence from groups definitions
 
 /**
- * @mainpage Welcome to Tulip's documentation.
+ * @mainpage Welcome to Talipot's documentation.
  * You can jump right in with \ref graph_display/graph_display.cpp "one of our code examples", or browse the documentation by module.
  *
  * See for instance the documentation for the @ref Graph.
@@ -42,18 +42,18 @@
 
 /**
  * @defgroup Structures Data structures
- * @brief Tulip basic data structures
+ * @brief Talipot basic data structures
  */
 
 /**
  * @defgroup Graph Graph model
- * @brief Tulip graphs manipulation system
+ * @brief Talipot graphs manipulation system
  * Classes in this group are related to the core system of Graph manipulation.
  */
 
 /**
  * @defgroup Observation Observation system
- * @brief Tulip observer pattern implementation
+ * @brief Talipot observer pattern implementation
  * Classes in this group are involved in the observation system.
  */
 
@@ -65,6 +65,6 @@
 
 /**
  * @defgroup Plugins Plugins system
- * @brief Tulip plugins interfaces
- * Classes in this group are interfaces for the plugins system. You will subclass one of them when creating your own Tulip plugins.
+ * @brief Talipot plugins interfaces
+ * Classes in this group are interfaces for the plugins system. You will subclass one of them when creating your own Talipot plugins.
  */

@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef PARALLELCOORDSAXISBOXPLOT_H_
-#define PARALLELCOORDSAXISBOXPLOT_H_
+#ifndef PARALLEL_COORDS_AXIS_BOX_PLOT_H
+#define PARALLEL_COORDS_AXIS_BOX_PLOT_H
 
 #include <string>
 
-#include <tulip/GlSimpleEntity.h>
-#include <tulip/GLInteractor.h>
-#include <tulip/Color.h>
+#include <talipot/GlSimpleEntity.h>
+#include <talipot/GLInteractor.h>
+#include <talipot/Color.h>
 
 namespace tlp {
 
@@ -80,4 +80,4 @@ private:
 };
 } // namespace tlp
 
-#endif /* PARALLELCOORDSBOXPLOT_H_ */
+#endif // PARALLEL_COORDS_AXIS_BOX_PLOT_H

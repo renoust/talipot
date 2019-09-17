@@ -17,7 +17,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 
 /** \file
  *  \brief - Import UCINET DL format graph file.
@@ -215,7 +215,7 @@ public:
   ~ImportUCINET() override {}
 
   std::string icon() const override {
-    return ":/tulip/graphperspective/icons/32/import_ucinet.png";
+    return ":/talipot/graphperspective/icons/32/import_ucinet.png";
   }
 
   unsigned int nbNodes;

@@ -10,10 +10,11 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _BUBBLE_CIRCULARLAYOUT_H
-#define _BUBBLE_CIRCULARLAYOUT_H
 
-#include <tulip/TulipPluginHeaders.h>
+#ifndef CIRCULAR_H
+#define CIRCULAR_H
+
+#include <talipot/PluginHeaders.h>
 
 /** \addtogroup layout */
 
@@ -52,4 +53,4 @@ public:
   bool run() override;
 };
 
-#endif
+#endif // CIRCULAR_H

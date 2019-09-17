@@ -10,17 +10,18 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <sstream>
 
 #include "BasicPluginsTest.h"
-#include <tulip/TlpTools.h>
-#include <tulip/BooleanProperty.h>
-#include <tulip/ColorProperty.h>
-#include <tulip/DoubleProperty.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
-#include <tulip/StringProperty.h>
-#include <tulip/SimplePluginProgress.h>
+#include <talipot/TlpTools.h>
+#include <talipot/BooleanProperty.h>
+#include <talipot/ColorProperty.h>
+#include <talipot/DoubleProperty.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
+#include <talipot/StringProperty.h>
+#include <talipot/SimplePluginProgress.h>
 
 using namespace std;
 using namespace tlp;

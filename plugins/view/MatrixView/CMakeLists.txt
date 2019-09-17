@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${TulipCoreBuildInclude} ${TulipCoreInclude} ${TulipOGLInclude} ${TulipGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${OPENGL_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 SET(LIB_SRCS
     MatrixView.cpp
@@ -20,8 +20,8 @@ QTX_WRAP_CPP(LIB_MOC_SRCS
 
 QTX_ADD_RESOURCES(RCC_SRCS MatrixView.qrc)
 
-ADD_LIBRARY(MatrixView-${TulipVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${RCC_SRCS})
-TARGET_LINK_LIBRARIES(MatrixView-${TulipVersion} ${LibTulipCoreName} ${LibTulipOGLName} ${LibTulipGUIName} ${OPENGL_gl_LIBRARY})
+ADD_LIBRARY(MatrixView-${TalipotVersion} SHARED ${LIB_SRCS} ${LIB_UI_HEADERS} ${LIB_MOC_SRCS} ${RCC_SRCS})
+TARGET_LINK_LIBRARIES(MatrixView-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${OPENGL_gl_LIBRARY})
 
-TULIP_INSTALL_PLUGIN(MatrixView-${TulipVersion} ${TulipViewPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(MatrixView-${TalipotVersion} ${TalipotViewPluginsInstallDir})
 

@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef __OCTTREE_H__
-#define __OCTTREE_H__
 
-#include <tulip/Node.h>
-#include <tulip/Coord.h>
-#include <tulip/DoubleProperty.h>
+#ifndef OCT_TREE_H
+#define OCT_TREE_H
+
+#include <talipot/Node.h>
+#include <talipot/Coord.h>
+#include <talipot/DoubleProperty.h>
 #include <vector>
 
 using namespace tlp;
@@ -94,4 +95,4 @@ public:
   void printTree(unsigned int);
 };
 
-#endif // __OCTTREE_H__
+#endif // OCT_TREE_H

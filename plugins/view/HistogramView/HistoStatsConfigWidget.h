@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef HISTOSTATSCONFIGWIDGET_H_
-#define HISTOSTATSCONFIGWIDGET_H_
+#ifndef HISTO_STATS_CONFIG_WIDGET_H
+#define HISTO_STATS_CONFIG_WIDGET_H
 
 #include <QWidget>
 
@@ -53,4 +53,4 @@ signals:
 };
 } // namespace tlp
 
-#endif /* HISTOSTATSCONFIGWIDGET_H_ */
+#endif // HISTO_STATS_CONFIG_WIDGET_H

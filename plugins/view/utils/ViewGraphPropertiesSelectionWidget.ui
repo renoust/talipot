@@ -107,7 +107,7 @@
   <customwidget>
    <class>tlp::GraphPropertiesSelectionWidget</class>
    <extends>QWidget</extends>
-   <header location="global">tulip/GraphPropertiesSelectionWidget.h</header>
+   <header location="global">talipot/GraphPropertiesSelectionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

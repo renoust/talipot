@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/GlTools.h>
-#include <tulip/GlLabel.h>
-#include <tulip/GlRect.h>
+#include <talipot/GlTools.h>
+#include <talipot/GlLabel.h>
+#include <talipot/GlRect.h>
 
 #include "ParallelAxis.h"
 #include "ParallelTools.h"

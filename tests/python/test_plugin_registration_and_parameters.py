@@ -10,9 +10,9 @@
 import unittest
 import sys
 
-from tulip import tlp
+from talipot import tlp
 
-import tulipplugins
+import talipotplugins
 
 plugin_name = 'Test Algorithm'
 plugin_author = 'author'
@@ -267,7 +267,7 @@ class TestAlgorithm(tlp.Algorithm):
         return True
 
 
-tulipplugins.registerPluginOfGroup(
+talipotplugins.registerPluginOfGroup(
     'TestAlgorithm', plugin_name, plugin_author,
     plugin_date, plugin_info, plugin_version, plugin_group)
 

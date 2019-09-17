@@ -14,8 +14,8 @@
 #include "ParallelCoordinatesViewQuickAccessbar.h"
 #include "ParallelCoordsDrawConfigWidget.h"
 
-#include <tulip/TlpQtTools.h>
-#include <tulip/ColorButton.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/ColorButton.h>
 
 #include <QPushButton>
 
@@ -35,8 +35,8 @@ ParallelCoordinatesViewQuickAccessBar::ParallelCoordinatesViewQuickAccessBar(
 
 void ParallelCoordinatesViewQuickAccessBar::setNodesVisible(bool visible) {
   _optionsWidget->setDrawPointOnAxis(visible);
-  showNodesButton()->setIcon((visible ? QIcon(":/tulip/gui/icons/20/nodes_enabled.png")
-                                      : QIcon(":/tulip/gui/icons/20/nodes_disabled.png")));
+  showNodesButton()->setIcon((visible ? QIcon(":/talipot/gui/icons/20/nodes_enabled.png")
+                                      : QIcon(":/talipot/gui/icons/20/nodes_disabled.png")));
   emit settingsChanged();
 }
 
@@ -44,13 +44,13 @@ void ParallelCoordinatesViewQuickAccessBar::reset() {
   QuickAccessBarImpl::reset();
   showNodesButton()->setChecked(_optionsWidget->drawPointOnAxis());
   showNodesButton()->setIcon((_optionsWidget->drawPointOnAxis()
-                                  ? QIcon(":/tulip/gui/icons/20/nodes_enabled.png")
-                                  : QIcon(":/tulip/gui/icons/20/nodes_disabled.png")));
+                                  ? QIcon(":/talipot/gui/icons/20/nodes_enabled.png")
+                                  : QIcon(":/talipot/gui/icons/20/nodes_disabled.png")));
   showLabelsButton()->setChecked(_optionsWidget->displayNodeLabels());
   showLabelsButton()->setIcon((_optionsWidget->displayNodeLabels()
-                                   ? QIcon(":/tulip/gui/icons/20/labels_enabled.png")
-                                   : QIcon(":/tulip/gui/icons/20/labels_disabled.png")));
-  backgroundColorButton()->setTulipColor(_optionsWidget->getBackgroundColor());
+                                   ? QIcon(":/talipot/gui/icons/20/labels_enabled.png")
+                                   : QIcon(":/talipot/gui/icons/20/labels_disabled.png")));
+  backgroundColorButton()->setColor(_optionsWidget->getBackgroundColor());
 }
 
 void ParallelCoordinatesViewQuickAccessBar::setBackgroundColor(const QColor &col) {
@@ -60,8 +60,8 @@ void ParallelCoordinatesViewQuickAccessBar::setBackgroundColor(const QColor &col
 
 void ParallelCoordinatesViewQuickAccessBar::setLabelsVisible(bool visible) {
   _optionsWidget->setDisplayNodeLabels(visible);
-  showLabelsButton()->setIcon((visible ? QIcon(":/tulip/gui/icons/20/labels_enabled.png")
-                                       : QIcon(":/tulip/gui/icons/20/labels_disabled.png")));
+  showLabelsButton()->setIcon((visible ? QIcon(":/talipot/gui/icons/20/labels_enabled.png")
+                                       : QIcon(":/talipot/gui/icons/20/labels_disabled.png")));
   emit settingsChanged();
 }
 } // namespace tlp

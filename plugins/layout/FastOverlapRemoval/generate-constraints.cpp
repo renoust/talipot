@@ -15,8 +15,8 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <tulip/tulipconf.h>
-#include <tulip/ParallelTools.h>
+#include <talipot/config.h>
+#include <talipot/ParallelTools.h>
 
 #include "generate-constraints.h"
 #include "constraint.h"

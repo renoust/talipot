@@ -1,17 +1,17 @@
-.. py:currentmodule:: tulip
+.. py:currentmodule:: talipot
 
 Getting started
 ===============
 
-.. _usingBindingsInTulipGUI:
+.. _usingBindingsInTalipotGUI:
 
-Using the bindings from the Tulip Software GUI
------------------------------------------------
+Using the bindings from the Talipot Software GUI
+------------------------------------------------
 
-Tulip Python bindings were primiraly designed to add a scripting feature to the main Tulip software and thus
+Talipot Python bindings were primiraly designed to add a scripting feature to the main Talipot software and thus
 interactively manipulate the graphs loaded into it through a couple lines of Python code.
 In that purpose, several GUI components have been developed with the Qt framework and are available
-through the main Tulip interface:
+through the main Talipot interface:
 
   * a **Python REPL** (Read Eval Print Loop) panel
   * a **Python IDE** (Integrated Development Environment) window
@@ -20,54 +20,52 @@ Python REPL
 ^^^^^^^^^^^
 
 The **Python REPL** (Read Eval Print Loop) panel is accessible through the "Python REPL" button
-at the bottom of the Tulip GUI (see :ref:`Figure 1<fig1>`). It enables to execute Python statements
+at the bottom of the Talipot GUI (see :ref:`Figure 1<fig1>`). It enables to execute Python statements
 in an interactive manner. A combo box allows to select a graph from those currently loaded in the
-Tulip software. The selected graph is then bound to a global Python variable named "graph".
-Since Tulip 5.0, the undo / redo features on graph state is now handled in that component, meaning
+Talipot software. The selected graph is then bound to a global Python variable named "graph".
+The undo / redo features on graph state is now handled in that component, meaning
 every graph modification performed by the executed Python statements can be reverted.
 
 .. _fig1:
-.. figure:: tulipPythonREPL.png
+.. figure:: talipotPythonREPL.png
   :align: center
 
-Figure 1: Screenshot of the "Python REPL" panel in the Tulip GUI.
+Figure 1: Screenshot of the "Python REPL" panel in the Talipot GUI.
 
-Tulip Python IDE
-^^^^^^^^^^^^^^^^^
+Talipot Python IDE
+^^^^^^^^^^^^^^^^^^
 
-A lightweight Python IDE can be accessed through the graphical interface of Tulip. Some GUI reorganisation
-has been made in Tulip 5.0 and all Python development features (except the REPL) are now centralized in a
-separated window. It can be displayed by clicking on the "Python IDE" button located in the left part of
-the Tulip interface.
+A lightweight Python IDE can be accessed through the graphical interface of Talipot. It can be displayed by clicking on the "Python IDE" button located in the left part of
+the Talipot interface.
 
-.. image:: tulipPythonIDEButton.png
+.. image:: talipotPythonIDEButton.png
   :align: center
 
 Its interface is composed of three tabs:
 
     * A **Scripts editor** tab (see :ref:`Figure 2<fig2>`): it allows to write scripts that can be applied to the
-      graphs currently loaded in Tulip. To do so, the "main(graph)" function has to be defined in the script code
+      graphs currently loaded in Talipot. To do so, the "main(graph)" function has to be defined in the script code
       and is used as the script entry point. The graph currently selected through the combobox located in the upper
       part of the tab is wrapped as a :class:`tlp.Graph` object and provided as parameter of the "main" function.
       The currently edited script can be launched through the control panel located in the lower part of the tab interface.
-      Once started, the script execution can be stopped or paused (trigerring update of Tulip visualizations) at any time.
-      All modifications performed by a script on a graph can be cancelled / replayed through the Tulip undo / redo feature.
+      Once started, the script execution can be stopped or paused (trigerring update of Talipot visualizations) at any time.
+      All modifications performed by a script on a graph can be cancelled / replayed through the Talipot undo / redo feature.
 
 .. _fig2:
-.. figure:: tulipPythonScript.png
+.. figure:: talipotPythonScript.png
    :align: center
 
    Figure 2: Screenshot of the "Scripts editor" tab in the Python IDE.
 
-    * A **Plugins editor** tab (see :ref:`Figure 3<fig3>`): it enables to develop Tulip plugins in pure Python
-      (see :ref:`Writing Tulip plugins in Python <tulippythonplugins>`).
-      These plugins are then immediately integrated in the Tulip GUI when requesting their registration
+    * A **Plugins editor** tab (see :ref:`Figure 3<fig3>`): it enables to develop Talipot plugins in pure Python
+      (see :ref:`Writing Talipot plugins in Python <talipotpythonplugins>`).
+      These plugins are then immediately integrated in the Talipot GUI when requesting their registration
       (if their source code is valid of course). Different kinds of plugins can be developed : General Algorithms,
       Property Algorithms, Import plugins and Export plugins. When executing these plugins, standard and error output
-      will be displayed in the "Message Log" panel of the Tulip GUI.
+      will be displayed in the "Message Log" panel of the Talipot GUI.
 
 .. _fig3:
-.. figure:: tulipPythonPlugin.png
+.. figure:: talipotPythonPlugin.png
    :align: center
 
    Figure 3: Screenshot of the "Plugins editor" tab in the Python IDE.
@@ -77,38 +75,38 @@ Its interface is composed of three tabs:
       Python modules that can be easily imported in the developed scripts and plugins.
 
 .. _fig4:
-.. figure:: tulipPythonModule.png
+.. figure:: talipotPythonModule.png
    :align: center
 
    Figure 4: Screenshot of the "Modules editor" tab in the Python IDE.
 
-Backup and restore your Python code with Tulip projects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Backup and restore your Python code with Talipot projects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Tulip software uses a zipped project file format named TLPX to save and restore the state of a Tulip
+The Talipot software uses a zipped project file format named TLPX to save and restore the state of a Talipot
 work session in a portable way. Notably it contains the graphs that was loaded in the software serialized to
 files but also the configuration of the views and components that was opened in the software.
 
 When working with the Python IDE, the source code of the scripts, plugins and modules currently edited
-are automatically saved to the current Tulip project. Nevertheless, the Tulip project must be explicitely
+are automatically saved to the current Talipot project. Nevertheless, the Talipot project must be explicitely
 saved to a .tlpx file in order for the Python files to be included in the resulting archive.
 When reopening the project file, the previously edited scripts, plugins and modules will still be available
 in the Python IDE even if you open the file on a computer different from the one you write your code.
 Python plugins will also be automatically loaded when reopening the project.
 
 Using the autocompletion to code faster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Each Python code editor widget provides an autocompletion feature in order to ease
 the development of scripts. To activate it, just hit **Ctrl + Space** and the autocompletion
 list will popup. Its contents will depend on the context before the current position of the text cursor.
 
 Python objects autocompletion
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""
 
 The autocompletion list feature is really useful to get the content of the dictionary
 of Python objects. The list is filled by fetching the contents of a database according to the context.
-That database contains the API of all standard Python modules but also the tulip ones.
+That database contains the API of all standard Python modules but also the talipot ones.
 That database is also updated dynamically by performing a static analysis on the source code (in particular,
 that analysis tries to associate a typename to each variable in the source code).
 The autocompletion will also popup immediatly when hitting a dot character. If the variable before the dot
@@ -122,13 +120,13 @@ example of the contents of the autocompletion list when requesting it on the "gr
 
    Figure 5: Using the autocompletion list to get the dictionary contents of a Python object.
 
-Tulip special autocompletion features
-""""""""""""""""""""""""""""""""""""""
+Talipot special autocompletion features
+"""""""""""""""""""""""""""""""""""""""
 
-The autocompletion list is also there to ease the development of Tulip Python scripts. Some special
-features have been included to ease the use of the Tulip Python API:
+The autocompletion list is also there to ease the development of Talipot Python scripts. Some special
+features have been included to ease the use of the Talipot Python API:
 
-    * **Autocompletion for algorithms** Tulip is bundled with a lot of algorithms (plugins) that can be called through Python.
+    * **Autocompletion for algorithms** Talipot is bundled with a lot of algorithms (plugins) that can be called through Python.
       To call an algorithm (plugin), one of the following method has to be used : :meth:`tlp.Graph.applyAlgorithm`, :meth:`tlp.Graph.applyBooleanAlgorithm`,
       :meth:`tlp.Graph.applyColorAlgorithm`, :meth:`tlp.Graph.applyDoubleAlgorithm`, :meth:`tlp.Graph.applyIntegerAlgorithm`, :meth:`tlp.Graph.applyLayoutAlgorithm`,
       :meth:`tlp.Graph.applySizeAlgorithm`, :meth:`tlp.Graph.applyStringAlgorithm`, :func:`tlp.importGraph`, :func:`tlp.exportGraph`.
@@ -142,7 +140,7 @@ features have been included to ease the use of the Tulip Python API:
 
    Figure 6: Using the autocompletion list to get the algorithm names.
 
-    * **Autocompletion for algorithm parameters** Parameters can be passed to Tulip algorithms through a dictionnary. The parameters are
+    * **Autocompletion for algorithm parameters** Parameters can be passed to Talipot algorithms through a dictionnary. The parameters are
       identified by their names. The autocompletion list can be used to get the names of these parameters.
       :ref:`Figure 7<fig7>` shows an example of the autocompletion list contents when requesting the parameters
       of the layout algorithm : "FM^3 (OGDF)".
@@ -166,7 +164,7 @@ features have been included to ease the use of the Tulip Python API:
 
    Figure 8: Using the autocompletion list to get the algorithm parameters names.
 
-    * **Autocompletion for graph properties** Tulip stores the data associated to graph elements in objects called properties. To get a reference
+    * **Autocompletion for graph properties** Talipot stores the data associated to graph elements in objects called properties. To get a reference
       on those type of objects, you can either use specific methods (for instance : :meth:`tlp.Graph.getLayoutProperty`, :meth:`tlp.Graph.getSizeProperty`)
       that take the name of the property to retrieve as parameter or the following syntax : *graph["property name"]*. When requesting the autocompletion list
       for the following context : *graph.get*Property(* or *graph[*, the list will be filled with the names of the corresponding and existing properties.
@@ -178,7 +176,7 @@ features have been included to ease the use of the Tulip Python API:
 
    Figure 9: Using the autocompletion list to get the graph properties names.
 
-    * **Autocompletion list for subgraphs** Tulip allows to manipulate a large hierarchy of subgraphs. References to those subgraphs can be retrieved
+    * **Autocompletion list for subgraphs** Talipot allows to manipulate a large hierarchy of subgraphs. References to those subgraphs can be retrieved
       with their names through the use of the dedicated method :meth:`tlp.Graph.getSubGraph`. When requesting the autocompletion list for the
       following context : *graph.getSubGraph(*, the list will be filled with all the names of the graphs present in the hierarchy. :ref:`Figure 10<fig10>` shows
       an example of that use case.
@@ -194,87 +192,80 @@ features have been included to ease the use of the Tulip Python API:
 Using the bindings from the Python Interpreter
 ----------------------------------------------
 
-The Tulip Python bindings can also be used through the classical Python Interpreter in an interactive shell.
+The Talipot Python bindings can also be used through the classical Python Interpreter in an interactive shell.
 
-Since Tulip 4.8 release, the bindings modules are available on the `Python Packaging Index <https://pypi.python.org>`_.
+The bindings modules are available on the `Python Packaging Index <https://pypi.python.org>`_.
 
-The modules are also located within the Tulip software installation, but some setup has to be done before being able to import them.
+The modules are also located within the Talipot software installation, but some setup has to be done before being able to import them.
 
-Installing the Tulip-Python modules from the Python Packaging Index
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing the Talipot-Python modules from the Python Packaging Index
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Tulip-Python modules can be easily obtained by using the pip tool for Windows, MacOS and Linux users.
+Talipot-Python modules can be easily obtained by using the pip tool for Windows, MacOS and Linux users.
 
-.. important::
-
-  Please not that the ``tulipgui`` module is no more distributed on the Python
-  Packaging Index since Tulip 5.3 as its package maintenance was too complex.
-  Nevertheless, the module is still available to use from a standard Tulip
-  installation (see next section).
-
-To install the :mod:`tulip` module, issue the following command from a terminal prompt:
+To install the :mod:`talipot` module, issue the following command from a terminal prompt:
 
 .. code:: shell
 
-    $ pip install tulip-python
+    $ pip install talipot-python
 
 And you're done, you can now import the modules in your Python session.
 
-Setting up the environment from the Tulip software installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the environment from the Talipot software installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to be able to import the Tulip-Python modules bundled with the Tulip software installation,
-their path must be provided to Python. In the following, <tulip_install_dir> represents the root directory of a Tulip installation.
-The Tulip-Python modules are installed in the following directory according to your system :
+In order to be able to import the Talipot-Python modules bundled with the Talipot software installation,
+their path must be provided to Python. In the following, <talipot_install_dir> represents the root directory of a Talipot installation.
+The Talipot-Python modules are installed in the following directory according to your system :
 
-        * Linux : **<tulip_install_dir>/lib/tulip/python** (if you compiled Tulip yourself,
-          <tulip_install_dir> corresponds to the value of the CMake variable CMAKE_INSTALL_PREFIX)
+        * Linux : **<talipot_install_dir>/lib/talipot/python** (if you compiled Talipot yourself,
+          <talipot_install_dir> corresponds to the value of the CMake variable CMAKE_INSTALL_PREFIX)
 
-        * Windows : **<tulip_install_dir>/lib/tulip/python** (if you installed Tulip from an installer,
-          <tulip_install_dir> should be C:/Program Files (x86)/Tulip-X.Y/ for 32 bits Tulip and C:/Program Files/Tulip-X.Y/ for 64 bits Tulip)
+        * Windows : **<talipot_install_dir>/lib/talipot/python** (if you installed Talipot from an installer,
+          <talipot_install_dir> should be C:/Program Files (x86)/Talipot-X.Y/ for 32 bits Talipot and C:/Program Files/Talipot-X.Y/ for 64 bits Talipot)
 
-        * Mac OS : **<tulip_install_dir>/Contents/lib/tulip/python** if you installed Tulip from a bundle (<tulip_install_dir> should then be /Applications/Tulip-X.Y.Z.app/) or
-                   **<tulip_install_dir>/lib/tulip/python** if you compiled and installed Tulip yourself.
+        * Mac OS : **<talipot_install_dir>/Contents/lib/talipot/python** if you installed Talipot from a bundle (<talipot_install_dir> should then be /Applications/Talipot-X.Y.Z.app/) or
+                   **<talipot_install_dir>/lib/talipot/python** if you compiled and installed Talipot yourself.
 
 This path has to be added to the list of Python module search paths. To do so, you can add it in the **PYTHONPATH**
 environment variable prior executing the Python interpreter or add it to the :data:`sys.path` list once you launched the interpreter.
 
 .. warning::
 
-  If you installed Tulip through a bundle (.dmg) on MacOS and want to successfully import the :mod:`tulipgui` module,
-  you also need to set the following path **/Applications/Tulip-X.Y.Z.app/Contents/Frameworks/** as the value of the
+  If you installed Talipot through a bundle (.dmg) on MacOS and want to successfully import the :mod:`talipotgui` module,
+  you also need to set the following path **/Applications/Talipot-X.Y.Z.app/Contents/Frameworks/** as the value of the
   environment variables **DYLD_LIBRARY_PATH** and **DYLD_FRAMEWORK_PATH**.
 
-You should now be able to import the Tulip-Python modules through the classical Python shell. Issue the following commands
+You should now be able to import the Talipot-Python modules through the classical Python shell. Issue the following commands
 at the shell prompt to perform that task::
 
-    >>> from tulip import tlp
-    >>> from tulipgui import tlpgui
+    >>> from talipot import tlp
+    >>> from talipotgui import tlpgui
 
 .. note::
-  If you have installed Tulip from a Windows installer or a Mac OS bundle, the Tulip-Python modules were built against Python 2.7
+  If you have installed Talipot from a Windows installer or a Mac OS bundle, the Talipot-Python modules were built against Python 2.7
   and you need to use the same Python version in order to be able to import them.
 
 Customizing the Python environment
 ----------------------------------
 
-Since Tulip 4.8, it is possible to customize the Python environment the first time the :mod:`tulip` module
+It is possible to customize the Python environment the first time the :mod:`talipot` module
 is imported through the use of a startup scripts hook mechanism.
 
 For instance, that feature could be used to :
 
         * modify the list of Python import paths, in order to load modules not located in standard directories from then
 
-        * load Tulip plugins not located in default plugins folders
+        * load Talipot plugins not located in default plugins folders
 
-        * add new Python functions and classes to the environment that will be available each time the tulip module is imported
+        * add new Python functions and classes to the environment that will be available each time the talipot module is imported
 
-When the tulip module is imported from the first time in the current Python session, the content of the following directories
+When the talipot module is imported from the first time in the current Python session, the content of the following directories
 will be scan for Python files (.py extension) :
 
-        * <tulip_install_dir>/lib/tulip/python/startup
+        * <talipot_install_dir>/lib/talipot/python/startup
 
-        * <home_dir>/.Tulip-X.Y/python/startup
+        * <home_dir>/.Talipot-X.Y/python/startup
 
 Then, for each Python file found, its content will be read and executed in the context of the Python main module
 (the file will not be imported as a Python module).

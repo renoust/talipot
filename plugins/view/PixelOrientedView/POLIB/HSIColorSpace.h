@@ -15,8 +15,8 @@
 // Databases"
 // D. A. Keim, H.-P. Kriegel
 
-#ifndef HSI_H_
-#define HSI_H_
+#ifndef HSI_COLOR_SPACE_H
+#define HSI_COLOR_SPACE_H
 
 #include "potypes.h"
 
@@ -44,4 +44,4 @@ private:
   double hue_range, sat_range, int_range;
 };
 } // namespace pocore
-#endif /* HSI_H_ */
+#endif // HSI_COLOR_SPACE_H

@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef _TREE3DLAYOUT_H
-#define _TREE3DLAYOUT_H
+
+#ifndef CONE_TREE_EXTENDED_H
+#define CONE_TREE_EXTENDED_H
 
 #include <unordered_map>
-#include <tulip/TulipPluginHeaders.h>
+#include <talipot/PluginHeaders.h>
 /** \addtogroup layout */
 
 /// ConeTreeExtended.h - An implementation of the cone tree layout.
@@ -67,4 +68,4 @@ private:
   float spaceBetweenLevels;
 };
 
-#endif
+#endif // CONE_TREE_EXTENDED_H

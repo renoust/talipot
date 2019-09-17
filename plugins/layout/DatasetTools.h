@@ -10,12 +10,13 @@
  * See top-level LICENSE file for more information
  *
  */
-#ifndef DATASETTOOLS_H
-#define DATASETTOOLS_H
 
-#include <tulip/TulipPluginHeaders.h>
-#include <tulip/LayoutProperty.h>
-#include <tulip/SizeProperty.h>
+#ifndef DATASET_TOOLS_H
+#define DATASET_TOOLS_H
+
+#include <talipot/PluginHeaders.h>
+#include <talipot/LayoutProperty.h>
+#include <talipot/SizeProperty.h>
 #include "Orientation.h"
 
 void addOrientationParameters(tlp::LayoutAlgorithm *pLayout);
@@ -29,4 +30,4 @@ bool getNodeSizePropertyParameter(tlp::DataSet *dataSet, tlp::SizeProperty *&siz
 orientationType getMask(tlp::DataSet *dataSet);
 bool hasOrthogonalEdge(tlp::DataSet *dataSet);
 
-#endif
+#endif // DATASET_TOOLS_H

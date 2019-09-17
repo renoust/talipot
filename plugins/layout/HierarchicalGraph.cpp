@@ -10,11 +10,12 @@
  * See top-level LICENSE file for more information
  *
  */
+
 #include <cassert>
 #include <stack>
 
-#include <tulip/SortIterator.h>
-#include <tulip/StringCollection.h>
+#include <talipot/SortIterator.h>
+#include <talipot/StringCollection.h>
 
 #include "HierarchicalGraph.h"
 #include "DatasetTools.h"

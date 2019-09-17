@@ -13,9 +13,9 @@
 
 #include "PathFinderComponent.h"
 
-#include <tulip/GlMainWidget.h>
-#include <tulip/GlGraphComposite.h>
-#include <tulip/GlMainView.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/GlGraphComposite.h>
+#include <talipot/GlMainView.h>
 
 #include "highlighters/PathHighlighter.h"
 #include "PathFinder.h"

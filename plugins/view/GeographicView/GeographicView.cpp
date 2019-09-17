@@ -11,17 +11,17 @@
  *
  */
 
-#include <tulip/GlTextureManager.h>
-#include <tulip/GlMainWidget.h>
-#include <tulip/Camera.h>
-#include <tulip/GlTools.h>
-#include <tulip/Interactor.h>
-#include <tulip/DataSet.h>
-#include <tulip/GlVertexArrayManager.h>
-#include <tulip/GlComplexPolygon.h>
-#include <tulip/TlpQtTools.h>
-#include <tulip/OpenGlConfigManager.h>
-#include <tulip/NodeLinkDiagramComponent.h>
+#include <talipot/GlTextureManager.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/Camera.h>
+#include <talipot/GlTools.h>
+#include <talipot/Interactor.h>
+#include <talipot/DataSet.h>
+#include <talipot/GlVertexArrayManager.h>
+#include <talipot/GlComplexPolygon.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/OpenGlConfigManager.h>
+#include <talipot/NodeLinkDiagramComponent.h>
 
 #include <QMenu>
 #include <QThread>

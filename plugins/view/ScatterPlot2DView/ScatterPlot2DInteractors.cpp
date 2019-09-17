@@ -11,9 +11,9 @@
  *
  */
 
-#include <tulip/MouseInteractors.h>
-#include <tulip/MouseShowElementInfo.h>
-#include <tulip/GraphElementModel.h>
+#include <talipot/MouseInteractors.h>
+#include <talipot/MouseShowElementInfo.h>
+#include <talipot/GraphElementModel.h>
 
 #include "ScatterPlot2DInteractors.h"
 #include "ScatterPlot2DViewNavigator.h"
@@ -44,7 +44,7 @@ PLUGIN(ScatterPlot2DInteractorCorrelCoeffSelector)
 PLUGIN(ScatterPlot2DInteractorGetInformation)
 
 ScatterPlot2DInteractorNavigation::ScatterPlot2DInteractorNavigation(const tlp::PluginContext *)
-    : ScatterPlot2DInteractor(":/tulip/gui/icons/i_navigation.png", "Navigate in view",
+    : ScatterPlot2DInteractor(":/talipot/gui/icons/i_navigation.png", "Navigate in view",
                               StandardInteractorPriority::Navigation) {}
 
 void ScatterPlot2DInteractorNavigation::construct() {
@@ -79,7 +79,7 @@ void ScatterPlot2DInteractorTrendLine::construct() {
 
 ScatterPlot2DInteractorCorrelCoeffSelector::ScatterPlot2DInteractorCorrelCoeffSelector(
     const tlp::PluginContext *)
-    : ScatterPlot2DInteractor(":/tulip/gui/icons/i_magic.png", "Correlation Coefficient Selector",
+    : ScatterPlot2DInteractor(":/talipot/gui/icons/i_magic.png", "Correlation Coefficient Selector",
                               StandardInteractorPriority::ViewInteractor2),
       optionsWidget(nullptr) {}
 
@@ -148,7 +148,7 @@ protected:
 
 ScatterPlot2DInteractorGetInformation::ScatterPlot2DInteractorGetInformation(
     const tlp::PluginContext *)
-    : NodeLinkDiagramComponentInteractor(":/tulip/gui/icons/i_select.png",
+    : NodeLinkDiagramComponentInteractor(":/talipot/gui/icons/i_select.png",
                                          "Display node or edge properties",
                                          StandardInteractorPriority::GetInformation) {}
 

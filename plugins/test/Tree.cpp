@@ -11,10 +11,10 @@
  *
  */
 
-#include <tulip/TreeTest.h>
-#include <tulip/GraphTest.h>
-#include <tulip/GraphTools.h>
-#include <tulip/BooleanProperty.h>
+#include <talipot/TreeTest.h>
+#include <talipot/GraphTest.h>
+#include <talipot/GraphTools.h>
+#include <talipot/BooleanProperty.h>
 
 class DirectedTreeTest : public tlp::GraphTest {
 public:
