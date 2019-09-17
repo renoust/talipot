@@ -208,7 +208,7 @@ MACRO(QTX_ADD_RESOURCES outfiles)
   QT5_ADD_RESOURCES(${outfiles} ${ARGN})
 ENDMACRO()
 
-# With MinGW, remove the -fPIC compiler option as it is not needed ansd
+# With MinGW, remove the -fPIC compiler option as it is not needed and
 # generates a lot of warnings
 IF(MINGW)
   STRING(REPLACE "-fPIC" "" Qt5Widgets_EXECUTABLE_COMPILE_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
