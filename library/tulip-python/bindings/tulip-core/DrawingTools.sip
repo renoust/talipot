@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -27,7 +21,7 @@
 #include <tulip/DrawingTools.h>
 %End
 
-namespace tlp { 
+namespace tlp {
 
 tlp::BoundingBox computeBoundingBox(tlp::Graph *graph, tlp::BooleanProperty *selection = 0);
 %Docstring
@@ -59,7 +53,7 @@ nodes z-rotations defined in the default double property "viewRotation" and size
 %End
 
 // ================================================================================================
- 
+
 tlp::BoundingBox computeBoundingBox(tlp::Graph *graph,
                                     tlp::LayoutProperty *layout,
                                     tlp::SizeProperty *size,
@@ -103,7 +97,7 @@ nodes z-rotations and sizes of elements.
   }
 %End
 
-// ================================================================================================                             
+// ================================================================================================
 
 std::pair<tlp::Coord, tlp::Coord> computeBoundingRadius(tlp::Graph *graph, tlp::BooleanProperty *selection = 0);
 %Docstring
@@ -141,7 +135,7 @@ To get the bounding radius, you have to compute the distance between the two mem
   }
 %End
 
-// ================================================================================================                             
+// ================================================================================================
 
 std::pair<tlp::Coord, tlp::Coord> computeBoundingRadius(tlp::Graph *graph,
                                                         tlp::LayoutProperty *layout,
@@ -156,8 +150,8 @@ node z-rotation, and size of elements.
 
 Returns a tuple of :class:`tlp.Coord` whose first member is the center of the bounding sphere (circle for 2D layout)
 and second member is the farthest point from the center (computed from graph elements positions).
-To get the bounding radius, you have to compute the distance between the two members of the tuple 
-(use the :meth:`tlp.Vec3f.dist` method). 
+To get the bounding radius, you have to compute the distance between the two members of the tuple
+(use the :meth:`tlp.Vec3f.dist` method).
 
 :param graph: the graph on which to compute its bounding sphere
 :type graph: :class:`tlp.Graph`

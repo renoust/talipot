@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -42,7 +36,7 @@ public:
 %Docstring
 tlp.ConnectedTest.isConnected(graph)
 
-Returns :const:`True` if the graph is connected (ie. it exists an undirected path 
+Returns :const:`True` if the graph is connected (ie. it exists an undirected path
 between each pair of nodes), :const:`False` otherwise.
 
 :param graph: the graph on which to perform the connected test
@@ -50,8 +44,8 @@ between each pair of nodes), :const:`False` otherwise.
 :rtype: boolean
 %End
 
-//=========================================================================================== 
- 
+//===========================================================================================
+
   static void makeConnected(tlp::Graph *graph, std::vector<tlp::edge>& addedEdges /Out/);
 %Docstring
 tlp.ConnectedTest.makeConnected(graph)
@@ -64,7 +58,7 @@ connected. Returns a list of added edges.
 :rtype: list of :class:`tlp.edge`
 %End
 
-//===========================================================================================   
+//===========================================================================================
 
 
   static unsigned int numberOfConnectedComponents(const tlp::Graph *graph);
@@ -76,10 +70,10 @@ Returns the number of connected components in the graph.
 :param graph: the graph on which to compute the number of connected components
 :type graph: :class:`tlp.Graph`
 :rtype: integer
-%End 
-  
-//===========================================================================================   
-  
+%End
+
+//===========================================================================================
+
   static void computeConnectedComponents(tlp::Graph *graph, std::vector<vectorNodes>& components /Out, TypeHint="List[List[tlp.node]]"/) ;
 %Docstring
 tlp.ConnectedTest.computeConnectedComponents(graph)
@@ -90,8 +84,8 @@ Computes the sets of connected components. Returns a list of connected component
 :type graph: :class:`tlp.Graph`
 :rtype: list of list of :class:`tlp.node`
 %End
-  
-private : 
+
+private :
 
   ConnectedTest();
 };

@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -56,15 +50,15 @@ This class is the base interface for selection plugins.
 %End
 
 public:
-  
+
   tlp::BooleanProperty *result;
-    
+
   virtual std::string category() const;
-    
+
 protected:
-  
+
   BooleanAlgorithm (const tlp::PluginContext*);
-  
+
 };
 
 
@@ -86,15 +80,15 @@ This class is the base interface for color plugins.
 %End
 
 public:
-  
+
   tlp::ColorProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   ColorAlgorithm (const tlp::PluginContext*);
-  
+
 };
 
 class DoubleAlgorithm : tlp::PropertyAlgorithm {
@@ -115,15 +109,15 @@ This class is the base interface for metric plugins.
 %End
 
 public:
-  
+
   tlp::DoubleProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   DoubleAlgorithm (const tlp::PluginContext*);
-  
+
 };
 
 class IntegerAlgorithm : tlp::PropertyAlgorithm {
@@ -144,13 +138,13 @@ This class is the base interface for integer plugins.
 %End
 
 public:
-  
+
   tlp::IntegerProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   IntegerAlgorithm (const tlp::PluginContext*);
 };
 
@@ -172,15 +166,15 @@ This class is the base interface for layout plugins.
 %End
 
 public:
-  
+
   tlp::LayoutProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   LayoutAlgorithm (const tlp::PluginContext*);
-    
+
 };
 
 class SizeAlgorithm : tlp::PropertyAlgorithm {
@@ -201,13 +195,13 @@ The result of the algorithm must be stored in this :class:`tlp.SizeProperty`.
 %End
 
 public:
-  
+
   tlp::SizeProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   SizeAlgorithm (const tlp::PluginContext*);
 
 };
@@ -230,13 +224,13 @@ This class is the base interface for string plugins.
 %End
 
 public:
-  
+
   tlp::StringProperty *result;
-  
+
   virtual std::string category() const;
-  
+
 protected:
-  
+
   StringAlgorithm (const tlp::PluginContext*);
 };
 

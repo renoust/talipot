@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -60,7 +54,7 @@ It can be instantiated as illustrated in the code below: ::
   v2 = tlp.Vec3f(1.0)
 
   # Initializes a Vec3f by specifying the value of each component
-  v3 = tlp.Vec3f(1.0, 2.0, 3.0) 
+  v3 = tlp.Vec3f(1.0, 2.0, 3.0)
 
   # Initializes a Vec3f by copy
   v4 = tlp.Vec3f(v3)
@@ -143,9 +137,9 @@ public:
 %End
 
   tlp::Vec3f & operator*=(const float &);
-  
+
   tlp::Vec3f & operator*=(const tlp::Vec3f &);
-  
+
   tlp::Vec3f & operator/=(const float &);
 %MethodCode
   if (a0 != 0) {
@@ -167,27 +161,27 @@ public:
 %End
 
   tlp::Vec3f & operator+=(const float &);
-  
+
   tlp::Vec3f & operator+=(const tlp::Vec3f &);
-  
+
   tlp::Vec3f & operator-=(const float &);
-  
+
   tlp::Vec3f & operator-=(const tlp::Vec3f &);
-  
+
   tlp::Vec3f & operator^=(const tlp::Vec3f &);
 
   tlp::Vec3f operator*(const  tlp::Vec3f &) const;
-  
+
   tlp::Vec3f operator*(const float &) const;
-  
+
   tlp::Vec3f operator+(const  tlp::Vec3f &) const;
-  
+
   tlp::Vec3f operator+(const float &) const;
-  
+
   tlp::Vec3f operator-(const  tlp::Vec3f &) const;
-  
-  tlp::Vec3f operator-(const float &) const; 
-  
+
+  tlp::Vec3f operator-(const float &) const;
+
   tlp::Vec3f operator/(const  tlp::Vec3f &) const;
 %MethodCode
   if ((*a1)[0] && (*a1)[1] && (*a1)[2]) {
@@ -209,15 +203,15 @@ public:
 %End
 
   tlp::Vec3f operator^(const  tlp::Vec3f &) const;
-    
+
   bool operator>(const tlp::Vec3f &) const;
-  
+
   bool operator<(const tlp::Vec3f &) const;
-  
+
   bool operator!=(const tlp::Vec3f &) const;
-  
+
   bool operator==(const tlp::Vec3f &) const;
-    
+
   void set(const float x=0,const float y=0, const float z=0);
 %Docstring
 tlp.Vec3f.set(x, y, z)
@@ -428,7 +422,7 @@ Set the same value to each component of the vector.
 :param val: a value
 :type val: float
 %End
-    
+
   float norm () const;
 %Docstring
 tlp.Vec3f.norm()
@@ -436,8 +430,8 @@ tlp.Vec3f.norm()
 Computes and returns the euclidean norm of the vector.
 
 :rtype: float
-%End    
-    
+%End
+
   float dist (const tlp::Vec3f &) const;
 %Docstring
 tlp.Vec3f.dist(v)
@@ -447,8 +441,8 @@ Computes and returns the distance between the vector (3d point) and another one.
 :param v: a vector
 :type v: :class:`tlp.Vec3f`
 :rtype: float
-%End    
-    
+%End
+
   float dotProduct(const tlp::Vec3f &) const;
 %Docstring
 tlp.Vec3f.dotProduct(v)
@@ -459,7 +453,7 @@ Computes and returns the dot product (scalar product) of the vector with another
 :type v: :class:`tlp.Vec3f`
 :rtype: float
 %End
-   
+
   std::string __repr__() const;
 %MethodCode
   std::ostringstream oss;
@@ -475,7 +469,7 @@ class Vec4f  {
 
 %Docstring
 This class represents a vector with 4 floating point components.
-Constructors, operators and methods are similar to those from the :class:`tlp.Vec3f` class. 
+Constructors, operators and methods are similar to those from the :class:`tlp.Vec3f` class.
 %End
 
 public:
@@ -513,9 +507,9 @@ public:
 %End
 
   tlp::Vec4f & operator*=(const float &);
-  
+
   tlp::Vec4f & operator*=(const tlp::Vec4f &);
-  
+
   tlp::Vec4f & operator/=(const float &);
 %MethodCode
   if (a0 != 0) {
@@ -537,29 +531,29 @@ public:
 %End
 
   tlp::Vec4f & operator+=(const float &);
-  
+
   tlp::Vec4f & operator+=(const tlp::Vec4f &);
-  
+
   tlp::Vec4f & operator-=(const float &);
-  
+
   tlp::Vec4f & operator-=(const tlp::Vec4f &);
-  
+
   tlp::Vec4f & operator^=(const tlp::Vec4f &);
 
   tlp::Vec4f operator*(const  tlp::Vec4f &) const;
-  
+
   tlp::Vec4f operator*(const tlp::Mat4f &mat) const;
-  
+
   tlp::Vec4f operator*(const float &) const;
-  
+
   tlp::Vec4f operator+(const  tlp::Vec4f &) const;
-  
+
   tlp::Vec4f operator+(const float &) const;
-  
+
   tlp::Vec4f operator-(const  tlp::Vec4f &) const;
-  
+
   tlp::Vec4f operator-(const float &) const;
-  
+
   tlp::Vec4f operator/(const  tlp::Vec4f &) const;
 %MethodCode
   if ((*a1)[0] && (*a1)[1] && (*a1)[2] && (*a1)[3]) {
@@ -581,15 +575,15 @@ public:
 %End
 
   tlp::Vec4f operator^(const  tlp::Vec4f &) const;
-    
+
   bool operator>(const tlp::Vec4f &) const;
-  
+
   bool operator<(const tlp::Vec4f &) const;
-  
+
   bool operator!=(const tlp::Vec4f &) const;
-  
+
   bool operator==(const tlp::Vec4f &) const;
-    
+
   void set(const float x=0,const float y=0, const float z=0, const float w=0);
 
   void set(const tlp::Vec4f& v);
@@ -642,13 +636,13 @@ Convenient method. Returns the fourth component of the vector.
   void get(float & /Out/, float & /Out/, float & /Out/, float & /Out/) const /TypeHint="Tuple[float, float, float, float]"/;
 
   tlp::Vec4f & fill(const float &obj);
-  
+
   float norm () const;
-  
+
   float dist (const tlp::Vec4f &) const;
-  
+
   float dotProduct(const tlp::Vec4f &) const;
-   
+
   std::string __repr__() const;
 %MethodCode
   std::ostringstream oss;
@@ -664,7 +658,7 @@ class Vec4i  {
 
 %Docstring
 This class represents a vector with 4 integer components.
-Constructors, operators and methods are similar to those from the :class:`tlp.Vec3f` class. 
+Constructors, operators and methods are similar to those from the :class:`tlp.Vec3f` class.
 %End
 
 public:
@@ -702,51 +696,51 @@ public:
 %End
 
   tlp::Vec4i & operator*=(const int &);
-  
+
   tlp::Vec4i & operator*=(const tlp::Vec4i &);
-  
+
   tlp::Vec4i & operator/=(const int &);
-  
+
   tlp::Vec4i & operator/=(const tlp::Vec4i &);
-  
+
   tlp::Vec4i & operator+=(const int &);
-  
+
   tlp::Vec4i & operator+=(const tlp::Vec4i &);
-  
+
   tlp::Vec4i & operator-=(const int &);
-  
+
   tlp::Vec4i & operator-=(const tlp::Vec4i &);
-  
+
   tlp::Vec4i & operator^=(const tlp::Vec4i &);
 
   tlp::Vec4i operator*(const  tlp::Vec4i &) const;
-  
+
   tlp::Vec4i operator*(const int &) const;
-  
+
   tlp::Vec4i operator+(const  tlp::Vec4i &) const;
-  
+
   tlp::Vec4i operator+(const int &) const;
-  
+
   tlp::Vec4i operator-(const  tlp::Vec4i &) const;
-  
-  tlp::Vec4i operator-(const int &) const; 
-  
+
+  tlp::Vec4i operator-(const int &) const;
+
   tlp::Vec4i operator/(const  tlp::Vec4i &) const;
-  
+
   tlp::Vec4i operator/(const int &) const;
-  
+
   tlp::Vec4i operator^(const  tlp::Vec4i &) const;
-    
+
   bool operator>(const tlp::Vec4i &) const;
-  
+
   bool operator<(const tlp::Vec4i &) const;
-  
+
   bool operator!=(const tlp::Vec4i &) const;
-  
+
   bool operator==(const tlp::Vec4i &) const;
-    
+
   tlp::Vec4i & fill(const int &obj);
-    
+
   std::string __repr__() const;
 %MethodCode
   std::ostringstream oss;

@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -82,7 +76,7 @@ Stopping a process does not revert changes.
 %Docstring
 tlp.PluginProgress.isPreviewMode()
 
-Returns :const:`True` if the preview mode is enabled. 
+Returns :const:`True` if the preview mode is enabled.
 The preview mode redraws the graph while applying the algorithm, making it slower.
 
 :rtype: boolean
@@ -103,7 +97,7 @@ The preview mode redraws the graph while applying the algorithm, making it slowe
 %Docstring
 tlp.PluginProgress.showPreview(showPreview)
 
-This tells the widget associated to this PluginProgress if it should show a preview checkbox, 
+This tells the widget associated to this PluginProgress if it should show a preview checkbox,
 allowing the user to decide if the algorithm should draw a preview or not.
 
 :param showPreview: whether the progress widget should contain a preview checkbox or not.
@@ -123,7 +117,7 @@ Gets the current internal state of the PluginProgress.
 %Docstring
 tlp.PluginProgress.getError()
 
-Returns a message describing the error encountered during the process. 
+Returns a message describing the error encountered during the process.
 If no error has been encountered, an empty string is returned.
 
 :rtype: string
@@ -157,30 +151,30 @@ class SimplePluginProgress : tlp::PluginProgress {
 %End
 
   public:
-    
+
   SimplePluginProgress();
-  
+
   virtual tlp::ProgressState progress(int step, int max_step);
-  
+
   virtual void cancel();
-  
+
   virtual void stop();
-  
+
   virtual bool isPreviewMode() const;
-  
+
   virtual void setPreviewMode(bool);
-  
+
   virtual void showPreview(bool);
-  
+
   virtual tlp::ProgressState state() const;
-  
+
   virtual std::string getError();
-  
+
   virtual void setError(const std::string& error);
-  
+
   virtual void setComment(const std::string&);
-  
+
   virtual void setTitle(const std::string&);
-  
+
 };
 };

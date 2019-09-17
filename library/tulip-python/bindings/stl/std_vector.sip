@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -27,7 +21,7 @@
 // SIP generic implementation for std::vector<>
 // ****************************************************
 // This template-based generic implementation is valid only
-// if the element type is a SIP-wrapped type. 
+// if the element type is a SIP-wrapped type.
 // For basic types (int, double, etc.),
 // we are forced to provide a specialization.
 
@@ -652,7 +646,7 @@ template<TYPE*>
 
   // Convert Python list of booleans to a std::vector<bool>
   std::vector<bool> *v = new std::vector<bool>();
-  v->reserve(PyList_GET_SIZE(sipPy));	
+  v->reserve(PyList_GET_SIZE(sipPy));
   for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
     v->push_back(PyList_GET_ITEM(sipPy, i) == Py_True);
   }

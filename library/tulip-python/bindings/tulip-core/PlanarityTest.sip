@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -42,10 +36,10 @@ Returns :const:`True` if the graph is planar (i.e. the graph can be drawn in suc
 :param graph: the graph on which to perform the planarity test
 :type graph: :class:`tlp.Graph`
 :rtype: boolean
-%End  
-  
-//===========================================================================================   
-  
+%End
+
+//===========================================================================================
+
   static bool isPlanarEmbedding(tlp::Graph *graph);
 %Docstring
 tlp.PlanarityTest.isPlanarEmbedding(graph)
@@ -56,9 +50,9 @@ Returns :const:`True` if the current embedding of the graph is planar, :const:`F
 :type graph: :class:`tlp.Graph`
 :rtype: boolean
 %End
-  
-//===========================================================================================   
-  
+
+//===========================================================================================
+
   static bool planarEmbedding(tlp::Graph *graph);
 %Docstring
 tlp.PlanarityTest.planarEmbedding(graph)
@@ -70,10 +64,10 @@ Returns :const:`True` if the graph is planar, :const:`False` otherwise.
 :param graph: the graph on which to compute a planar embedding
 :type graph: :class:`tlp.Graph`
 :rtype: boolean
-%End  
-  
-//===========================================================================================   
-  
+%End
+
+//===========================================================================================
+
   static std::list<tlp::edge> getObstructionsEdges(tlp::Graph *graph);
 %Docstring
 tlp.PlanarityTest.getObstructionsEdges(graph)
@@ -85,10 +79,10 @@ Returns a list of edges that prevents to make the graph planar
 :type graph: :class:`tlp.Graph`
 :rtype: list of :class:`tlp.edge`
 %End
-    
+
 private :
 
-  PlanarityTest();  
+  PlanarityTest();
 };
 
 };

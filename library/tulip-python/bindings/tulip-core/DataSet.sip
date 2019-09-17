@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -212,25 +206,25 @@ Below is an exhaustive list of data types that can be stored in a Tulip data set
   * list of those types
 
 If you try to store an unsupported data type, an exception will be thrown.
-Each value stored in a data set is associated to a string key. Reading / Writing a value in 
+Each value stored in a data set is associated to a string key. Reading / Writing a value in
 a data set is done through the [] operator as illustrated below::
 
   # data set creation
   dataSet = tlp.DataSet()
-  
+
   # writing integer values
   dataSet["height"] = 100
   dataSet["width"] = 300
-  
+
   # reading integer values
-  area = dataSet["height"] * dataSet["width"] 
+  area = dataSet["height"] * dataSet["width"]
 
 When reading a data set value, a reference is returned not a copy.
 
 %End
 
   DataSet();
-  
+
   DataSet(const tlp::DataSet &set);
 
   bool exist(const std::string &str) const;

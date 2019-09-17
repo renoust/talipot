@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -50,7 +44,7 @@ void initTulipGlobalVars() {
 }
 
 namespace tlp {
-  
+
 void setTulipGlobalVar(const std::string &varName, const std::string &value) {
   initTulipGlobalVars();
   if (tulipGlobalVars.find(varName) != tulipGlobalVars.end()) {
@@ -134,7 +128,7 @@ The plug-ins directory can be defined in different ways, given by order of preva
       (you must dispose of a standard Tulip installation for that feature to work,
       meaning the relative path for the Tulip plugins folder to the Tulip libraries one must be ../lib/tulip/).
     * a fallback value of 'C:/Tulip/lib/' on windows, or '/usr/local/lib/' on Unix.
-   
+
 %End
 
 %MethodCode
@@ -153,7 +147,7 @@ tlp.loadPlugins()
 
 Loads C++ plugins installed in the directories listed in the tlp.TulipPluginsPath variable
 (in the form "<path1>;<path2>" on windows and "<path1>:<path2>" on unix).
-The tlp.TulipPluginsPath can be initialized with standard Tulip directories 
+The tlp.TulipPluginsPath can be initialized with standard Tulip directories
 by calling the :func:`tlp.initTulipLib` function.
 %End
 
@@ -227,7 +221,7 @@ void loadPluginsCheckDependencies(tlp::PluginLoader* loader=0);
 %Docstring
 tlp.loadPluginsCheckDependencies()
 
-Checks the dependencies of all C++ plugins loaded so far. 
+Checks the dependencies of all C++ plugins loaded so far.
 If a plugin does not have all its dependencies fulfilled,
 it is unloaded and removed from the current plugins database.
 %End
@@ -271,7 +265,7 @@ std::list<std::string> getAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getAlgorithmPluginsList()
 
 Returns a list containing the names of the algorithm plugins (written in C++ or Python) loaded so far.
-Algorithm plugins are objects implementing the tlp::Algorithm interface 
+Algorithm plugins are objects implementing the tlp::Algorithm interface
 in C++ or the :class:`tlp.Algorithm` interface in Python.
 
 :rtype: list of string
@@ -296,7 +290,7 @@ std::list<std::string> getImportPluginsList() /TypeHint="List[str]"/;
 tlp.getImportPluginsList()
 
 Returns a list containing the names of the import plugins (written in C++ or Python) loaded so far.
-Import plugins are objects implementing the tlp::ImportModule interface 
+Import plugins are objects implementing the tlp::ImportModule interface
 in C++ or the :class:`tlp.ImportModule` interface in Python.
 
 :rtype: list of string
@@ -313,7 +307,7 @@ std::list<std::string> getExportPluginsList() /TypeHint="List[str]"/;
 tlp.getExportPluginsList()
 
 Returns a list containing the names of the export plugins (written in C++ or Python) loaded so far.
-Export plugins are objects implementing the tlp::ExportModule interface 
+Export plugins are objects implementing the tlp::ExportModule interface
 in C++ or the :class:`tlp.ExportModule` interface in Python.
 
 :rtype: list of string
@@ -330,7 +324,7 @@ std::list<std::string> getBooleanAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getBooleanAlgorithmPluginsList()
 
 Returns a list containing the names of the boolean algorithm plugins (written in C++ or Python) loaded so far.
-Boolean algorithm plugins are objects implementing the tlp::BooleanAlgorithm interface in C++ or 
+Boolean algorithm plugins are objects implementing the tlp::BooleanAlgorithm interface in C++ or
 the :class:`tlp.BooleanAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -347,7 +341,7 @@ std::list<std::string> getIntegerAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getIntegerAlgorithmPluginsList()
 
 Returns a list containing the names of the integer algorithm plugins (written in C++ or Python) loaded so far.
-Integer algorithm plugins are objects implementing the tlp::IntegerAlgorithm interface in C++ or 
+Integer algorithm plugins are objects implementing the tlp::IntegerAlgorithm interface in C++ or
 the :class:`tlp.IntegerAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -364,7 +358,7 @@ std::list<std::string> getDoubleAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getDoubleAlgorithmPluginsList()
 
 Returns a list containing the names of the double algorithm plugins (written in C++ or Python) loaded so far.
-Double algorithm plugins are objects implementing the tlp::DoubleAlgorithm interface in C++ or 
+Double algorithm plugins are objects implementing the tlp::DoubleAlgorithm interface in C++ or
 the :class:`tlp.DoubleAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -380,7 +374,7 @@ std::list<std::string> getColorAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getColorAlgorithmPluginsList()
 
 Returns a list containing the names of the color algorithm plugins (written in C++ or Python) loaded so far.
-Color algorithm plugins are objects implementing the tlp::ColorAlgorithm interface in C++ or 
+Color algorithm plugins are objects implementing the tlp::ColorAlgorithm interface in C++ or
 the :class:`tlp.ColorAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -397,7 +391,7 @@ std::list<std::string> getLayoutAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getLayoutAlgorithmPluginsList()
 
 Returns a list containing the names of the layout algorithm plugins (written in C++ or Python) loaded so far.
-Layout algorithm plugins are objects implementing the tlp::LayoutAlgorithm interface in C++ or 
+Layout algorithm plugins are objects implementing the tlp::LayoutAlgorithm interface in C++ or
 the :class:`tlp.LayoutAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -414,7 +408,7 @@ std::list<std::string> getSizeAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getSizeAlgorithmPluginsList()
 
 Returns a list containing the names of the size algorithm plugins (written in C++ or Python) loaded so far.
-Size algorithm plugins are objects implementing the tlp::SizeAlgorithm interface in C++ or 
+Size algorithm plugins are objects implementing the tlp::SizeAlgorithm interface in C++ or
 the :class:`tlp.SizeAlgorithm` interface in Python.
 
 :rtype: list of string
@@ -431,7 +425,7 @@ std::list<std::string> getStringAlgorithmPluginsList() /TypeHint="List[str]"/;
 tlp.getStringAlgorithmPluginsList()
 
 Returns a list containing the names of the string algorithm plugins (written in C++ or Python) loaded so far.
-String algorithm plugins are objects implementing the tlp::StringAlgorithm interface in C++ or 
+String algorithm plugins are objects implementing the tlp::StringAlgorithm interface in C++ or
 the :class:`tlp.StringAlgorithm` interface in Python.
 
 :rtype: list of string

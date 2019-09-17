@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -48,7 +42,7 @@ template<TYPE *>
   for(std::list<TYPE *>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); iter++) {
     TYPE *cpp = *iter;
     PyObject *pobj;
-    
+
     // Get the Python wrapper for the Type instance, creating a new
     // one if necessary, and handle any ownership transfer.
     if ((pobj = sipConvertFromType(cpp, kpTypeDef, sipTransferObj)) == NULL) {
@@ -56,7 +50,7 @@ template<TYPE *>
       Py_XDECREF(l);
       return NULL;
     }
-    
+
     // Add the wrapper to the list.
     PyList_SET_ITEM(l, i++, pobj);
   }
@@ -95,16 +89,16 @@ template<TYPE *>
     int state;
     PyObject *item = PyList_GET_ITEM(sipPy, i);
     TYPE* p = static_cast<TYPE*>(sipConvertToType(item, kpTypeDef, NULL, SIP_NOT_NONE, &state, sipIsErr));
-    
+
     if (*sipIsErr) {
       sipReleaseType(p, kpTypeDef, state);
       delete l;
       return 0;
     }
-    
+
     sipTransferTo(item, item);
     l->push_back(p);
-    
+
     sipReleaseType(p, kpTypeDef, state);
   }
 
@@ -137,7 +131,7 @@ template<TYPE>
   for(std::list<TYPE>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); iter++) {
     TYPE *cpp = new TYPE(*iter);
     PyObject *pobj;
-    
+
     // Get the Python wrapper for the Type instance, creating a new
     // one if necessary, and handle any ownership transfer.
     if ((pobj = sipConvertFromNewType(cpp, kpTypeDef, sipTransferObj)) == NULL) {
@@ -145,7 +139,7 @@ template<TYPE>
       Py_XDECREF(l);
       return NULL;
     }
-    
+
     // Add the wrapper to the list.
     PyList_SET_ITEM(l, i++, pobj);
   }
@@ -182,15 +176,15 @@ template<TYPE>
   for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
     int state;
     TYPE* p = static_cast<TYPE*>(sipConvertToType(PyList_GET_ITEM(sipPy, i), kpTypeDef, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
-    
+
     if (*sipIsErr) {
       sipReleaseType(p, kpTypeDef, state);
       delete l;
       return 0;
     }
-    
+
     l->push_back(*p);
-    
+
     sipReleaseType(p, kpTypeDef, state);
   }
 
@@ -364,7 +358,7 @@ template<TYPE>
       }
       return 1;
     }
-    
+
     // Convert Python list of integers to a std::vector<int>
     std::list<int> *v = new std::list<int>();
     for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
@@ -379,7 +373,7 @@ template<TYPE>
       }
 #endif
     }
-    
+
     *sipCppPtr = v;
     return sipGetState(sipTransferObj);
 %End
@@ -434,7 +428,7 @@ template<TYPE>
       }
       return 1;
     }
-    
+
     // Convert Python list of integers to a std::vector<int>
     std::list<unsigned int> *v = new std::list<unsigned int>();
     for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
@@ -449,7 +443,7 @@ template<TYPE>
       }
 #endif
     }
-    
+
     *sipCppPtr = v;
     return sipGetState(sipTransferObj);
 %End
@@ -504,7 +498,7 @@ template<TYPE>
       }
       return 1;
     }
-    
+
     // Convert Python list of integers to a std::vector<int>
     std::list<long> *v = new std::list<long>();
     for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
@@ -519,7 +513,7 @@ template<TYPE>
       }
 #endif
     }
-    
+
     *sipCppPtr = v;
     return sipGetState(sipTransferObj);
 %End
@@ -574,7 +568,7 @@ template<TYPE>
       }
       return 1;
     }
-    
+
     // Convert Python list of integers to a std::vector<int>
     std::list<unsigned long> *v = new std::list<unsigned long>();
     for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
@@ -589,7 +583,7 @@ template<TYPE>
       }
  #endif
     }
-    
+
     *sipCppPtr = v;
     return sipGetState(sipTransferObj);
 %End
