@@ -1,1 +1,0 @@
-sh tulip_run_test.sh interactor_path_finder grid_approximation.tlp
