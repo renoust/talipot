@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -24,7 +18,7 @@
 // +-------------------------------------------------------------------------+
 
 namespace tlp {
- 
+
 class ColorScale {
 %TypeHeaderCode
 #include <tulip/ColorScale.h>
@@ -112,7 +106,7 @@ The sample code below illustrates how to create and manipulate a color scale::
 
   # Creates an empty color scale (default constructor creates a heatmap from blue to red).
   colorScale = tlp.ColorScale([])
-  
+
   # Color scale initialization : from blue to red with gradient.
   colorScale.setColorAtPos(0.0, tlp.Color.Blue)
   colorScale.setColorAtPos(1.0, tlp.Color.Red)
@@ -134,10 +128,10 @@ The sample code below illustrates how to create and manipulate a color scale::
   # Reinitializes the color scale : from blue to red without gradient.
   newColors = [tlp.Color.Blue, tlp.Color.Red]
   colorScale.setColorScale(newColors,False)
-  
+
   # Gets the color for the position 0.3, i.e. tlp.Color(0,0,255).
   color = colorScale.getColorAtPos(0.3)
-  
+
   # Gets the color for the position 0.7, i.e. tlp.Color(255,0,0).
   color = colorScale.getColorAtPos(0.7)
 
@@ -217,9 +211,9 @@ tlp.ColorScale.isGradient()
 
 Returns :const:`True` if the color scale is a gradient.
 
-:rtype: boolean 
-%End  
-  
+:rtype: boolean
+%End
+
 //==========================================================================================
 
   void setGradient(const bool gradient);
@@ -241,7 +235,7 @@ tlp.ColorScale.getColorMap()
 Returns a dictionary corresponding to the color scale.
 
 :rtype: a dictionary whose indexes are of type float and the values of type :class:`tlp.Color`
-%End  
+%End
 
 //==========================================================================================
 

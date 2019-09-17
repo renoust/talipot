@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -50,11 +44,11 @@ The list will appear as a combo box in the Plugin Parameter Dialog from the Tuli
 // ===========================================================================
 
   StringCollection();
-  
+
   StringCollection(const std::vector<std::string> &vectorParam /TypeHint="List[str]"/);
 
-  StringCollection(const std::string param);   
-  
+  StringCollection(const std::string param);
+
   StringCollection(const std::vector<std::string>& vectorParam /TypeHint="List[str]"/, int currentParam);
 
   StringCollection(const std::vector<std::string>& vectorParam /TypeHint="List[str]"/, std::string currentString);
@@ -69,9 +63,9 @@ Returns the current selected string value.
 
 :rtype: string
 %End
-  
+
 // ===========================================================================
-  
+
   bool setCurrent(unsigned int param);
 %Docstring
 tlp.StringCollection.setCurrent(index)
@@ -85,7 +79,7 @@ Returns :const:`True` if the provided index is valid.
 %End
 
 // ===========================================================================
-  
+
   bool setCurrent(std::string param);
 %Docstring
 tlp.StringCollection.setCurrent(value)
@@ -96,10 +90,10 @@ Returns :const:`True` if the string value exists in the collection.
 :param value: a string value from the collection
 :type value: string
 :rtype: boolean
-%End 
-  
-// ===========================================================================  
-  
+%End
+
+// ===========================================================================
+
   int getCurrent();
 %Docstring
 tlp.StringCollection.getCurrent()
@@ -108,9 +102,9 @@ Returns the index of the current selected string.
 
 :rtype: integer
 %End
-  
-// ===========================================================================  
-  
+
+// ===========================================================================
+
   void push_back(const std::string& element);
 %Docstring
 tlp.StringCollection.push_back(element)
@@ -122,7 +116,7 @@ Adds a string value to this string collection.
 %End
 
 // ===========================================================================
-  
+
   bool empty();
 %Docstring
 tlp.StringCollection.empty()
@@ -133,7 +127,7 @@ Returns :const:`True` if the collection is empty.
 %End
 
 // ===========================================================================
-  
+
   std::string at(const unsigned int index);
 %Docstring
 tlp.StringCollection.at(index)
@@ -146,7 +140,7 @@ Returns the string element at a certain index in the collection.
 %End
 
 // ===========================================================================
-  
+
   unsigned int size();
 %Docstring
 tlp.StringCollection.size()
@@ -157,7 +151,7 @@ Returns the number of strings in the collection.
 %End
 
 // ===========================================================================
-  
+
   std::string operator[](const unsigned int i) const;
 %MethodCode
   if (a0 < sipCpp->size()) {
@@ -167,7 +161,7 @@ Returns the number of strings in the collection.
     PyErr_SetNone(PyExc_IndexError);
   }
 %End
-  
+
   void __setitem__(int i, const std::string &value);
 %MethodCode
   (*sipCpp)[a0] = *a1;

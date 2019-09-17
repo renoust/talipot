@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -33,7 +27,7 @@ class SelfLoops {
 %Docstring
 The tlp.SelfLoops class represents a self loop that has been replaced by two nodes and three edges.
 The method :meth:`tlp.AcyclicTest.makeAcyclic` returns a list of this type.
- 
+
 It contains the following variables :
 
   * old (:class:`tlp.edge`) : the self loop edge that has been replaced
@@ -46,15 +40,15 @@ It contains the following variables :
 %End
 
 public:
-  
+
   SelfLoops(tlp::node n1, tlp::node n2, tlp::edge e1, tlp::edge e2, tlp::edge e3, tlp::edge old);
-    
+
   tlp::node n1;
   tlp::node n2;
   tlp::edge e1;
-  tlp::edge e2; 
-  tlp::edge e3; 
-  tlp::edge old;  
+  tlp::edge e2;
+  tlp::edge e3;
+  tlp::edge old;
 };
 
 class AcyclicTest {
@@ -89,23 +83,23 @@ of transformed self loops.
 :param graph: the graph to make acyclic
 :type graph: :class:`tlp.Graph`
 :rtype: (list of :class:`tlp.edge`, list of :class:`tlp.SelfLoops`)
-%End 
+%End
 
-//=========================================================================================== 
- 
+//===========================================================================================
+
    static bool acyclicTest(const tlp::Graph *graph, std::vector<tlp::edge> *obstructionEdges /Out/) /TypeHint="Tuple[bool, List[tlp.edge]]"/;
 %Docstring
 tlp.AcyclicTest.acyclicTest(graph)
 
 Returns a tuple whose first member is a boolean indicating if the graph is acyclic or not
-and second member is a list of edges that create cycle (when the graph is not acyclic). 
+and second member is a list of edges that create cycle (when the graph is not acyclic).
 
 :param graph: the graph on which to perform the acyclic test
 :type graph: :class:`tlp.Graph`
 :rtype: (boolean, list of :class:`tlp.edge`)
 %End
-  
-private : 
+
+private :
 
   AcyclicTest();
 };

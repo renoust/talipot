@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -97,7 +91,7 @@ struct WithParameter {
 
 %Docstring
 This class describes parameters for a plug-in.
-These parameters can be of multiple types, and are used to generate a GUI 
+These parameters can be of multiple types, and are used to generate a GUI
 that will be shown when the plug-in in invoked by the user.
 %End
 
@@ -121,7 +115,7 @@ Adds a string parameter to the plug-in.
 :param defaultValue: the default value the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -155,7 +149,7 @@ Adds a :class:`tlp.StringCollection` parameter to the plug-in.
 :param defaultValue: the default value (in the form "entry1;entry2;...;entryN") gives the list of the possible values of the parameter to be defined; these values are separated by the character ';' and the first value is the default one.
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -190,7 +184,7 @@ Adds an integer parameter to the plug-in.
 :param defaultValue: the default value (in the form "[0-9]+") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -260,7 +254,7 @@ Adds a floating point number parameter to the plug-in.
 :param defaultValue: the default value (in the form "[0-9]*[.][0-9]+") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -294,7 +288,7 @@ Adds a boolean parameter to the plug-in.
 :param defaultValue: the default value ("true" or "false") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -328,7 +322,7 @@ Adds a :class:`tlp.DoubleProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -364,7 +358,7 @@ Adds a :class:`tlp.DoubleVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -398,7 +392,7 @@ Adds a :class:`tlp.IntegerProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -434,7 +428,7 @@ Adds a :class:`tlp.IntegerVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -468,7 +462,7 @@ Adds a :class:`tlp.LayoutProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -504,7 +498,7 @@ Adds a :class:`tlp.CoorVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -608,7 +602,7 @@ Adds a :class:`tlp.ColorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -644,7 +638,7 @@ Adds a :class:`tlp.ColorVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -678,7 +672,7 @@ Adds a :class:`tlp.BooleanProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -714,7 +708,7 @@ Adds a :class:`tlp.BooleanVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -748,7 +742,7 @@ Adds a :class:`tlp.StringProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -784,7 +778,7 @@ Adds a :class:`tlp.StringVectorProperty` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -818,7 +812,7 @@ Adds a :class:`tlp.Color` parameter to the plug-in.
 :param defaultValue: the default value (in the form "(R, G, B, A)", e.g. for red : "(255,0,0,255)") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -852,7 +846,7 @@ Adds a :class:`tlp.ColorScale` parameter to the plug-in.
 :param defaultValue: the default value (in the form "((R, G, B, A), ..., (R, G, B, A))", e.g. gradient from black to white : "((0,0,0,255), (255,255,255,255))") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)
@@ -886,7 +880,7 @@ Adds a :class:`tlp.PropertyInterface` parameter to the plug-in.
 :param defaultValue: the default value (in the form "<property_name>") the parameter should take, to be the initial value in the GUI
 :type defaultValue: string
 :param isMandatory: specify whether this parameter requires a value or not
-:type isMandatory: boolean 
+:type isMandatory: boolean
 :param inParam: defines if the parameter is an input one (can be read by the plugin)
 :type inParam: boolean
 :param outParam: defines if the parameter is an output one (can be written by the plugin and retrieved after its execution)

@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -66,19 +60,19 @@ template<T1, T2>
   while (PyDict_Next(sipPy, &pos, &key, &val)) {
     int t1State = 0;
     int t2State = 0;
-    
+
     T1 *t1 = static_cast<T1 *>(sipConvertToType(key, kpTypeDef1, sipTransferObj, SIP_NOT_NONE, &t1State, sipIsErr));
     T2 *t2 = static_cast<T2 *>(sipConvertToType(val, kpTypeDef2, sipTransferObj, SIP_NOT_NONE, &t2State, sipIsErr));
-    
+
     if (*sipIsErr) {
       delete map;
       sipReleaseType(t1, kpTypeDef1, t1State);
       sipReleaseType(t2, kpTypeDef2, t2State);
       return 0;
     }
-    
+
     (*map)[*t1] = *t2;
-    
+
     sipReleaseType(t1, kpTypeDef1, t1State);
     sipReleaseType(t2, kpTypeDef2, t2State);
   }
@@ -112,10 +106,10 @@ template<T1, T2>
     PyObject *val = NULL;
     T1 *cppKey = new T1(it->first);
     T2 *cppVal = new T2(it->second);
-    
+
     key = sipConvertFromNewType(cppKey, kpTypeDef1, sipTransferObj);
     val = sipConvertFromNewType(cppVal, kpTypeDef2, sipTransferObj);
-    
+
     if (key == NULL || val == NULL || PyDict_SetItem(pyDict, key, val) < 0) {
       Py_DECREF(pyDict);
 
@@ -133,7 +127,7 @@ template<T1, T2>
 
       return NULL;
     }
-    
+
     Py_DECREF(key);
     Py_DECREF(val);
   }
@@ -184,21 +178,21 @@ template<T1, T2>
   while (PyDict_Next(sipPy, &pos, &key, &val)) {
     int t1State = 0;
     int t2State = 0;
-    
+
     T1 *t1 = static_cast<T1 *>(sipConvertToType(key, kpTypeDef1, sipTransferObj, SIP_NOT_NONE, &t1State, sipIsErr));
     T2 *t2 = static_cast<T2 *>(sipConvertToType(val, kpTypeDef2, NULL, SIP_NOT_NONE, &t2State, sipIsErr));
-    
+
     if (*sipIsErr) {
       delete map;
       sipReleaseType(t1, kpTypeDef1, t1State);
       sipReleaseType(t2, kpTypeDef2, t2State);
       return 0;
     }
-    
+
     sipTransferTo(val, val);
 
     (*map)[*t1] = t2;
-    
+
     sipReleaseType(t1, kpTypeDef1, t1State);
     sipReleaseType(t2, kpTypeDef2, t2State);
   }
@@ -238,17 +232,17 @@ template<T1, T2>
 
     if (key == NULL || val == NULL || PyDict_SetItem(pyDict, key, val) < 0) {
       Py_DECREF(pyDict);
-      
+
       if (key) {
         Py_DECREF(key);
       } else {
         delete cppKey;
       }
-      
+
       if (val != NULL) {
         Py_DECREF(val);
       }
-      
+
       return NULL;
     }
 
@@ -297,18 +291,18 @@ template<T2>
 
   while (PyDict_Next(sipPy, &pos, &key, &val)) {
     int t2State = 0;
-    
+
     float t1 = PyFloat_AsDouble(key);
     T2 *t2 = static_cast<T2 *>(sipConvertToType(val, kpTypeDef2, sipTransferObj, SIP_NOT_NONE, &t2State, sipIsErr));
-    
+
     if (*sipIsErr) {
-      delete map;		
+      delete map;
       sipReleaseType(t2, kpTypeDef2, t2State);
       return 0;
     }
-    
+
     (*map)[t1] = *t2;
-    
+
     sipReleaseType(t2, kpTypeDef2, t2State);
   }
 
@@ -335,26 +329,26 @@ template<T2>
     PyObject *val = NULL;
     float cppKey = it->first;
     T2 *cppVal = new T2(it->second);
-    
+
     key = PyFloat_FromDouble(cppKey);
     val = sipConvertFromNewType(cppVal, kpTypeDef2, sipTransferObj);
-    
+
     if (key == NULL || val == NULL || PyDict_SetItem(pyDict, key, val) < 0) {
       Py_DECREF(pyDict);
-      
+
       if (key) {
         Py_DECREF(key);
-      } 
-      
+      }
+
       if (val != NULL) {
         Py_DECREF(val);
       } else {
         delete cppVal;
       }
-      
+
       return NULL;
     }
-    
+
     Py_DECREF(key);
     Py_DECREF(val);
   }

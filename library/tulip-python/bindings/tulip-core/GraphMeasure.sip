@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -66,7 +60,7 @@ as the average of the local clustering coefficients
 //===========================================================================================
 
   void clusteringCoefficient(const tlp::Graph *g, tlp::DoubleProperty *result, unsigned int maxDepth = 1);
-%Docstring 
+%Docstring
 tlp.clusteringCoefficient(graph, result, maxDepth=1)
 
 Assigns to each node its local clustering coefficient
@@ -80,14 +74,14 @@ This quantifies how close its neighbors are to being a clique.
 :type result: :class:`tlp.DoubleProperty`
 :param maxDepth: the maximum distance between each node and its neighbours.
 :type maxDepth: integer
-%End 
+%End
 
 %MethodCode
   tlp::NodeStaticProperty<double> result(a0);
   tlp::clusteringCoefficient(a0, result, a2);
   result.copyToProperty(a1);
 %End
- 
+
 //===========================================================================================
 
   void dagLevel(const tlp::Graph *graph, tlp::IntegerProperty* result);
@@ -95,7 +89,7 @@ This quantifies how close its neighbors are to being a clique.
 tlp.dagLevel(graph, result)
 
 Assigns to each node of a Directed Acyclic Graph a level such that
-if the edge e(u,v) exists level(u) < level(v). 
+if the edge e(u,v) exists level(u) < level(v).
 The algorithm ensures that the number of level used is minimal.
 
 :param graph: the graph on which to compute the dag level
@@ -111,8 +105,8 @@ The algorithm ensures that the number of level used is minimal.
   tlp::NodeStaticProperty<unsigned int> result(a0);
   tlp::dagLevel(a0, result);
   result.copyToProperty(a1);
-%End  
-  
+%End
+
 //===========================================================================================
 
   unsigned int maxDegree(const tlp::Graph *graph);
@@ -124,8 +118,8 @@ Returns the maximum degree of the graph's nodes.
 :param graph: the graph on which to compute the maximum degree
 :type graph: :class:`tlp.Graph`
 :rtype: integer
-%End  
-  
+%End
+
 //===========================================================================================
 
   unsigned int minDegree(const tlp::Graph *graph);
@@ -138,13 +132,13 @@ Returns the minimum degree of the graph's nodes.
 :type graph: :class:`tlp.Graph`
 :rtype: integer
 %End
-  
+
 //===========================================================================================
 
   unsigned int maxDistance(const tlp::Graph *graph, const tlp::node node, tlp::IntegerProperty *result, tlp::EDGE_TYPE direction = tlp::UNDIRECTED);
 %Docstring
 tlp.maxDistance(graph, node, result, direction)
-  
+
 Computes the distances from a node to all the other nodes of a graph and return the maximum one.
 
 :param graph: the graph on which to compute the maximum distance
@@ -218,10 +212,10 @@ at distance less or equal to a maximum one.
 :param maxDistance: the maximum distance to reach nodes
 :type maxDistance: integer
 :param direction: specify if the graph must be directed or not
-:type direction: tlp.DIRECTED, tlp.INV_DIRECTED, tlp.UNDIRECTED  
+:type direction: tlp.DIRECTED, tlp.INV_DIRECTED, tlp.UNDIRECTED
 :rtype: set of :class:`tlp.node`
 :throws: an exception if the node does not belong to the graph
-%End 
+%End
 
 %MethodCode
   if (a0->isElement(*a1)) {

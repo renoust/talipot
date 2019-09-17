@@ -1,33 +1,29 @@
 /**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- *  This plugin is an implementation of the connected component packing
- *  algorithm published as:
- *
- *  Freivalds Karlis, Dogrusoz Ugur and Kikusts Paulis, \n
- *  "Disconnected Graph Layout and the Polyomino Packing Approach", \n
- *  In Proceeding GD '01 Revised Papers from the 9th International Symposium on Graph Drawing, \n
- *
- *  The implementation is freely inspired from the one that can be found in the GraphViz project
- * (http://www.graphviz.org/).
- *
- *  \author Antoine LAMBERT, University of Bordeaux 1, FR: Email: antoine.lambert@labri.fr
- *  Version 1.0: May 2011
  */
+
+// This plugin is an implementation of the connected component packing
+// algorithm published as:
+//
+// Freivalds Karlis, Dogrusoz Ugur and Kikusts Paulis, \n
+// "Disconnected Graph Layout and the Polyomino Packing Approach", \n
+// In Proceeding GD '01 Revised Papers from the 9th International Symposium on Graph Drawing, \n
+//
+// The implementation is freely inspired from the one that can be found in the GraphViz project
+// (http://www.graphviz.org/).
+//
+// Author: Antoine LAMBERT, University of Bordeaux 1, FR: Email: antoine.lambert@labri.fr
+// Version 1.0: May 2011
+
 #include <algorithm>
 #include <vector>
 #include <set>

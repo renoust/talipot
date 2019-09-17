@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -32,7 +26,7 @@ struct BoundingBox {
 
 %Docstring
 This class represents the 3D bounding box of an object.
-It is defined by two 3d points, the first one being the lowest point (bottom-left corner), 
+It is defined by two 3d points, the first one being the lowest point (bottom-left corner),
 the second being the highest (top-right corner).
 
 A bounding box can be instantiated and manipulated the following ways::
@@ -40,27 +34,27 @@ A bounding box can be instantiated and manipulated the following ways::
   # Initialize a non-valid bounding box.
   # The minimum is (1, 1, 1) and the maximum is (-1, -1, -1).
   bb = tlp.BoundingBox()
-  
+
   # Initialize a bounding box by specifying the lowest and highest point.
-  # The validity of the bounding box is checked in debug mode (an assertion is raised if it is not valid). 
+  # The validity of the bounding box is checked in debug mode (an assertion is raised if it is not valid).
   bb2 = tlp.BoundingBox(tlp.Vec3f(0,0,0), tlp.Vec3f(10,10,10))
-  
+
   # Reading / writing the bounding box components can be done through the [] operator
   min = bb2[0]
   max = bb2[1]
 %End
 
   BoundingBox();
-      
+
   BoundingBox(const tlp::Vec3f& min, const tlp::Vec3f& max);
-      
+
   tlp::Vec3f center() const;
 %Docstring
 tlp.BoundingBox.center()
 
 Returns the geometrical center of the bounding box.
 
-:rtype: :class:`tlp.Vec3f` 
+:rtype: :class:`tlp.Vec3f`
 %End
 
   float width() const;
@@ -70,8 +64,8 @@ tlp.BoundingBox.width()
 Returns the width of the bounding box.
 
 :rtype: float
-%End  
-  
+%End
+
   float height() const;
 %Docstring
 tlp.BoundingBox.height()
@@ -131,8 +125,8 @@ Checks whether the bounding box's lowest point is less than it's highest point.
 "Less Than" means axis-by-axis comparison, i.e. x1 < x2 && y1 < y2 && z1 < z2.
 
 :rtype: boolean
-%End      
-      
+%End
+
   bool contains(const tlp::Vec3f& coord) const;
 %Docstring
 tlp.BoundingBox.contains(point)

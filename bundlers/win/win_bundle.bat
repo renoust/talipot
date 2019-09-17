@@ -43,7 +43,7 @@ rmdir /Q /S "%DEST_DIR%\\files\\lib\\cmake" >nul 2>&1
 echo 'Copying NSIS script and licence'
 
 copy "%SRC_DIR%\\Tulip.nsi" "%DEST_DIR%\\"
-copy "%SRC_DIR%\\COPYING.LESSER" "%DEST_DIR%\\"
+copy "%SRC_DIR%\\LICENSE" "%DEST_DIR%\\"
 
 echo 'Running NSIS installer generator'
 cd "%DEST_DIR%"

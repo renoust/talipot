@@ -1,19 +1,13 @@
-/*
+/**
  *
- * This file is part of Tulip (http://tulip.labri.fr)
+ * Copyright (C) 2019  The Talipot developers
  *
- * Authors: David Auber and the Tulip development Team
- * from LaBRI, University of Bordeaux
+ * Talipot is a fork of Tulip, created by David Auber
+ * and the Tulip development Team from LaBRI, University of Bordeaux
  *
- * Tulip is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
- *
- * Tulip is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * See the AUTHORS file at the top-level directory of this distribution
+ * License: GNU General Public License version 3, or any later version
+ * See top-level LICENSE file for more information
  *
  */
 
@@ -35,9 +29,9 @@ public:
 Bases: :class:`tlp.Plugin`
 
 This abstract class describes a general algorithm plugin.
-Basic functionality consists in checking the algorithm can run on the current Graph 
+Basic functionality consists in checking the algorithm can run on the current Graph
 (e.g. is the graph simple ?) then running the algorithm.
-The algorithm can and should report progress and which task it is performing 
+The algorithm can and should report progress and which task it is performing
 if it is decomposed in multiple phases (e.g. layouting the graph, coloring it, ...).
 
 .. rubric:: class attributes
@@ -53,7 +47,7 @@ if it is decomposed in multiple phases (e.g. layouting the graph, coloring it, .
 
 .. py:attribute:: pluginProgress
 
-   A :class:`tlp.PluginProgress` to give feedback to the user. It can be :const:`None`, so use with caution. 
+   A :class:`tlp.PluginProgress` to give feedback to the user. It can be :const:`None`, so use with caution.
 
 .. rubric:: class methods
 
