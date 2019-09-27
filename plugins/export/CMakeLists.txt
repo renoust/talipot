@@ -18,9 +18,6 @@ TARGET_LINK_LIBRARIES(GMLExport-${TalipotVersion} ${LibTalipotCoreName})
 
 ADD_LIBRARY(CSVExport-${TalipotVersion} SHARED ${CSVExport_SRCS})
 TARGET_LINK_LIBRARIES(CSVExport-${TalipotVersion} ${LibTalipotCoreName})
-
-ADD_CORE_FILES(CMakeLists.txt GMLExport.cpp)
-
 ##----------------------------------------------------------------------------------------------------------------------------
 TALIPOT_INSTALL_PLUGIN(GMLExport-${TalipotVersion} ${TalipotPluginsInstallDir})
 TALIPOT_INSTALL_PLUGIN(CSVExport-${TalipotVersion} ${TalipotPluginsInstallDir})

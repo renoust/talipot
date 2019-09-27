@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${OGDFInclude})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DOGDF_DLL")

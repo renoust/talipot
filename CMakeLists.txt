@@ -200,49 +200,6 @@ ELSE()
   SET(TALIPOT_BUILD_CORE_ONLY OFF CACHE BOOL "Do you want a minimal build of Talipot (no OpenGL rendering, no Qt gui, no documentation) ? [ON|OFF]")
 ENDIF()
 
-IF(TALIPOT_BUILD_CORE_ONLY AND LINUX)
-# the macro ADD_CORE_FILES will be used
-# to collect the files needed to build a minimal Talipot
-# in the directory pointed by CMAKE_CURRENT_SOURCE_DIR
-  MACRO(ADD_CORE_FILES files)
-    SET(CURRENT_SOURCE_DIR ".")
-    IF(${CMAKE_CURRENT_SOURCE_DIR} STRGREATER ${PROJECT_SOURCE_DIR})
-      EXECUTE_PROCESS(COMMAND echo -n ${CMAKE_CURRENT_SOURCE_DIR}
-                      COMMAND sed "s,${PROJECT_SOURCE_DIR}/,,"
-                      OUTPUT_VARIABLE CURRENT_SOURCE_DIR)
-    ENDIF()
-    IF(${files} STREQUAL ".")
-      SET(ENV{CORE_FILES} "$ENV{CORE_FILES} \$(find ${CURRENT_SOURCE_DIR} -path \"*/.svn\" -prune -o -type f -print)")
-    ELSE()
-      FOREACH(core_file ${ARGV})
-        SET(ENV{CORE_FILES} "$ENV{CORE_FILES} ${CURRENT_SOURCE_DIR}/${core_file}")
-      ENDFOREACH()
-    ENDIF()
-  ENDMACRO()
-  ADD_CORE_FILES(CMakeLists.txt cmake/cmake_uninstall.cmake.in cmake/TalipotUseFile.cmake cmake/FindCppUnit.cmake cmake/FindTalipot.cmake)
-# the macro ADD_CORE_DIRECTORY_EXCEPT will be used
-# to exclude the files not needed to build a minimal Talipot
-# in the directory pointed by CMAKE_CURRENT_SOURCE_DIR
-  MACRO(ADD_CORE_DIRECTORY_EXCEPT files)
-    SET(CURRENT_SOURCE_DIR ".")
-    IF(${CMAKE_CURRENT_SOURCE_DIR} STRGREATER ${PROJECT_SOURCE_DIR})
-      EXECUTE_PROCESS(COMMAND echo -n ${CMAKE_CURRENT_SOURCE_DIR}
-                      COMMAND sed "s,${PROJECT_SOURCE_DIR}/,,"
-                      OUTPUT_VARIABLE CURRENT_SOURCE_DIR)
-    ENDIF()
-    SET(find_command "\$(find ${CURRENT_SOURCE_DIR} -path \"*/.svn\" -prune -o -type f")
-    FOREACH(exclude_file ${ARGV})
-      SET(find_command "${find_command} -a ! -name \"${exclude_file}\"")
-    ENDFOREACH()
-    SET(ENV{CORE_FILES} "$ENV{CORE_FILES} ${find_command} -print)")
-  ENDMACRO()
-ELSE()
-  MACRO(ADD_CORE_FILES files)
-  ENDMACRO()
-  MACRO(ADD_CORE_DIRECTORY_EXCEPT files)
-  ENDMACRO()
-ENDIF()
-
 SET(TALIPOT_BUILD_PYTHON_COMPONENTS ON CACHE BOOL "Do you want to build Talipot Python components ? [ON|OFF]")
 IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
   SET(TALIPOT_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-core/talipot_module)
@@ -653,25 +610,6 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
 
   IF(LINUX)
     CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/bundlers/linux/make_appimage_bundle.sh.in" "${CMAKE_CURRENT_BINARY_DIR}/bundlers/linux/make_appimage_bundle.sh" @ONLY)
-  ENDIF(LINUX)
-
-ELSE(NOT TALIPOT_BUILD_CORE_ONLY)
-
-  IF(LINUX)
-  # generate script to make a tar archive of minimal set of talipot core files
-    SET(make_tar_file ${PROJECT_BINARY_DIR}/tar-talipot-${TalipotVersion}-corefiles.sh)
-    EXECUTE_PROCESS(COMMAND rm ${make_tar_file} OUTPUT_QUIET ERROR_QUIET)
-    EXECUTE_PROCESS(COMMAND echo "#!/bin/sh
-if [ $# -eq 0 ]; then
-TAR_FILE=${PROJECT_BINARY_DIR}/talipot-${TalipotVersion}-corefiles.tar.gz
-else
-TAR_FILE=$1
-fi
-cd ${PROJECT_SOURCE_DIR}
-tar zcvf \${TAR_FILE} $ENV{CORE_FILES}
-echo archive \${TAR_FILE} successfully generated" OUTPUT_FILE ${make_tar_file})
-
-    MESSAGE(STATUS "${make_tar_file} successfully generated")
   ENDIF(LINUX)
 
 ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)

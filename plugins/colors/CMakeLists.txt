@@ -1,5 +1,3 @@
-ADD_CORE_FILES(CMakeLists.txt ColorMapping.cpp)
-
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} .)
 
 ##----------------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 SET(STL_SIP_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/std_list.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/std_map.sip

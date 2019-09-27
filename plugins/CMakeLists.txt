@@ -1,5 +1,3 @@
-ADD_CORE_FILES(CMakeLists.txt)
-
 ADD_SUBDIRECTORY(clustering)
 ADD_SUBDIRECTORY(export)
 ADD_SUBDIRECTORY(general)

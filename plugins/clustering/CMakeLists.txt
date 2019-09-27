@@ -1,5 +1,3 @@
-ADD_CORE_DIRECTORY_EXCEPT(ConvolutionClustering*.*)
-
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${CMAKE_CURRENT_BINARY_DIR})
 
 ADD_SUBDIRECTORY(Delaunay)

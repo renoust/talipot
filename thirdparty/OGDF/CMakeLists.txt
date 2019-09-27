@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 FILE(GLOB_RECURSE OGDF_SOURCES "src/*.cpp")
 LIST(REMOVE_ITEM OGDF_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/coin/Osi/OsiCpxSolverInterface.cpp"
                               "${CMAKE_CURRENT_SOURCE_DIR}/src/coin/Osi/OsiGrbSolverInterface.cpp")

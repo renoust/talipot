@@ -1,12 +1,5 @@
 DISABLE_COMPILER_WARNINGS()
 
-ADD_CORE_FILES(CMakeLists.txt
-               utf8-cpp/source/utf8.h
-               utf8-cpp/source/utf8/checked.h
-               utf8-cpp/source/utf8/core.h
-               utf8-cpp/source/utf8/unchecked.h
-)
-
 ADD_SUBDIRECTORY(gzstream)
 ADD_SUBDIRECTORY(OGDF)
 

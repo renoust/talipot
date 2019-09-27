@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 SET(QHULL_LIB_SRCS
     global_r.c
     stat_r.c

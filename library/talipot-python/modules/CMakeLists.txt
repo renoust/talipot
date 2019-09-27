@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 TALIPOT_INSTALL_PYTHON_FILES("" ${CMAKE_CURRENT_SOURCE_DIR}/talipotplugins.py)
 
 # talipotplugins.py must be found by python tests and doc

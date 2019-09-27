@@ -1,5 +1,3 @@
-ADD_CORE_FILES(CMakeLists.txt)
-
 ADD_SUBDIRECTORY(stl)
 ADD_SUBDIRECTORY(talipot-core)
 
