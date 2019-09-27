@@ -988,7 +988,7 @@ public:
   ~TLPImport() override {}
 
   std::string icon() const override {
-    return ":/talipot/gui/icons/logo32x32.png";
+    return ":/talipot/gui/icons/tlp32x32.png";
   }
 
   bool importGraph() override {

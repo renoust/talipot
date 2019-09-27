@@ -332,16 +332,6 @@ void GlMainView::sceneRectChanged(const QRectF &rect) {
     updateShowOverviewButton();
   }
 
-  GlLayer *fgLayer = getGlMainWidget()->getScene()->getLayer("Foreground");
-
-  if (fgLayer) {
-    Gl2DRect *labriLogo = static_cast<Gl2DRect *>(fgLayer->findGlEntity("labrilogo"));
-
-    if (labriLogo) {
-      labriLogo->setCoordinates((_quickAccessBar != nullptr) ? 35. : 0., 5., 50., 50.);
-      draw();
-    }
-  }
 }
 
 QPixmap GlMainView::snapshot(const QSize &outputSize) const {

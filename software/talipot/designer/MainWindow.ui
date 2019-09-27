@@ -137,7 +137,7 @@ font: bold;
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../share/talipot/bitmaps/welcomelogo.bmp</pixmap>
+          <pixmap>../share/talipot/bitmaps/welcomelogo.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

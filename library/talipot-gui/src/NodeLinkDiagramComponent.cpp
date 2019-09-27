@@ -201,11 +201,6 @@ void NodeLinkDiagramComponent::createScene(Graph *graph, DataSet dataSet) {
 
     backgroundLayer->set2DMode();
     foregroundLayer->set2DMode();
-    std::string dir = TalipotBitmapDir;
-    Gl2DRect *labri = new Gl2DRect(35., 5., 50., 50., dir + "logolabri.jpg", false, false);
-    labri->setStencil(1);
-    labri->setVisible(false);
-    foregroundLayer->addGlEntity(labri, "labrilogo");
 
     scene->addExistingLayer(backgroundLayer);
     scene->addExistingLayer(layer);
