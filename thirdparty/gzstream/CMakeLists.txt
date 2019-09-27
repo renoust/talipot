@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 SET(gzstream_SRCS
     gzstream.cpp
     gzstream.h

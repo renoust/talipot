@@ -1,7 +1,5 @@
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 
-ADD_CORE_FILES(CMakeLists.txt *.cpp)
-
 ADD_LIBRARY(AttractAndIntroduce-${TalipotVersion} SHARED AttractAndIntroduce.cpp)
 TARGET_LINK_LIBRARIES(AttractAndIntroduce-${TalipotVersion} ${LibTalipotCoreName})
 TALIPOT_INSTALL_PLUGIN(AttractAndIntroduce-${TalipotVersion} ${TalipotPluginsInstallDir})

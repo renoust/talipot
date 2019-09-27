@@ -1,5 +1,3 @@
-ADD_CORE_FILES(.)
-
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude})
 
 ##----------------------------------------------------------------------------------------------------------------------------
