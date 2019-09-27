@@ -49,7 +49,7 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
     title += "<br/>(Git commit: <a href=\"" + TalipotRepoUrl + "/commit/" + git_rev + "\">" +
              git_rev.mid(0, 7) + "</a>)";
 
-  _ui->logolabel->setPixmap(QPixmap(tlpStringToQString(TalipotBitmapDir + "/logo.bmp")));
+  _ui->logolabel->setPixmap(QPixmap(tlpStringToQString(TalipotBitmapDir + "/logo.png")));
   _ui->TalipotLabel->setText(
       "<html>"
       "  <head/>"

@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
   _pageChoosers.push_back(_ui->pluginsPageChooser);
   _pageChoosers.push_back(_ui->aboutPageChooser);
 
-  QPixmap logo(tlpStringToQString(TalipotBitmapDir + "/welcomelogo.bmp"));
+  QPixmap logo(tlpStringToQString(TalipotBitmapDir + "/welcomelogo.png"));
   // take care of the devicePixelRatio
   // before setting the logo
   logo.setDevicePixelRatio(QGuiApplication::primaryScreen()->devicePixelRatio());

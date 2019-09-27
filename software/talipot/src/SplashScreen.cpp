@@ -26,7 +26,7 @@ using namespace tlp;
 
 SplashScreen::SplashScreen() : PluginLoader(), QSplashScreen(), _fileCounter(0) {
   setPixmap(QPixmap(QDir(QApplication::applicationDirPath())
-                        .absoluteFilePath("../share/talipot/bitmaps/logo.bmp")));
+                        .absoluteFilePath("../share/talipot/bitmaps/logo.png")));
   setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
   QPropertyAnimation *fadeInAnimation = new QPropertyAnimation(this, "windowOpacity");
   fadeInAnimation->setStartValue(0);
