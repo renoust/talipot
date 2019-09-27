@@ -1,6 +1,5 @@
 SET(TALIPOT_BUILD_DOC ON CACHE BOOL "Do you want to build the documentation ? [ON|OFF]")
 
-#Only
 IF(TALIPOT_BUILD_DOC)
   # Unset the previous values of the CMake cache variable SPHINX_EXECUTABLE
   # in case the value of PYTHON_EXECUTABLE CMake variable changed
@@ -27,7 +26,6 @@ IF(TALIPOT_BUILD_DOC)
       ADD_SUBDIRECTORY(python)
     ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
     ADD_SUBDIRECTORY(user)
-    ADD_SUBDIRECTORY(developer)
   ELSE(SPHINX_FOUND)
     MESSAGE(AUTHOR_WARNING "Sphinx not found: unable to generate the documentation.")
   ENDIF(SPHINX_FOUND)
