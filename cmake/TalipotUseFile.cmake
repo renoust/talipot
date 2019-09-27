@@ -468,7 +468,7 @@ MACRO(TALIPOT_INSTALL_PYTHON_FILES install_suffix)
               RUNTIME DESTINATION ${TalipotPythonModulesInstallDir}/${install_suffix} COMPONENT talipot_python
               LIBRARY DESTINATION ${TalipotPythonModulesInstallDir}/${install_suffix} COMPONENT talipot_python)
     ELSEIF(IS_DIRECTORY ${PYTHON_FILE})
-      INSTALL(DIRECTORY ${PYTHON_FILE} DESTINATION ${TalipotPythonModulesInstallDir}/${install_suffix} COMPONENT talipot_python PATTERN ".svn" EXCLUDE)
+      INSTALL(DIRECTORY ${PYTHON_FILE} DESTINATION ${TalipotPythonModulesInstallDir}/${install_suffix} COMPONENT talipot_python)
     ELSE()
       INSTALL(FILES ${PYTHON_FILE} DESTINATION ${TalipotPythonModulesInstallDir}/${install_suffix} COMPONENT talipot_python)
     ENDIF(TARGET ${PYTHON_FILE})

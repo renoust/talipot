@@ -20,5 +20,4 @@ INSTALL(FILES fontb.ttf
 
 INSTALL(DIRECTORY fonts
         COMPONENT talipot_ogl
-        DESTINATION ${TalipotBitmapInstallDir}
-        PATTERN ".svn" EXCLUDE)
+        DESTINATION ${TalipotBitmapInstallDir})
