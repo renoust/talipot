@@ -45,12 +45,6 @@ extern TLP_SCOPE int getNumIterators();
  *   // do someting with n
  * }
  *
- * // legacy syntax using forEach macro
- * #include <talipot/ForEach.h>
- * tlp::node n;
- * forEach(n, graph->getNodes()) {
- *   // do something with n
- * }
  *
  * // no syntactic sugar syntax (needs to explicitely delete the iterator
  * // after its use)

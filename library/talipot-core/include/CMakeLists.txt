@@ -19,7 +19,6 @@ INSTALL(FILES
   talipot/DrawingTools.h
   talipot/Edge.h
   talipot/ExportModule.h
-  talipot/ForEach.h
   talipot/GraphAbstract.h
   talipot/GraphDecorator.h
   talipot/Graph.h
