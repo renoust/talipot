@@ -568,13 +568,6 @@ void bfs(const Graph *graph, node root, std::vector<tlp::node> &nodes) {
   }
 }
 
-// deprecated version
-std::vector<node> bfs(const Graph *graph, node root) {
-  std::vector<node> ret;
-  bfs(graph, root, ret);
-  return ret;
-}
-
 // cumulative bfs from every node of the graph
 void bfs(const Graph *graph, std::vector<tlp::node> &visitedNodes) {
   MutableContainer<bool> visited;
@@ -633,13 +626,6 @@ void dfs(const Graph *graph, node root, std::vector<node> &visitedNodes) {
 
     dfs(graph, root, visitedNodes, visited);
   }
-}
-
-// deprecated version
-std::vector<node> dfs(const Graph *graph, node root) {
-  std::vector<node> ret;
-  dfs(graph, root, ret);
-  return ret;
 }
 
 // cumulative dfs from every node of the graph

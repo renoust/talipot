@@ -106,7 +106,6 @@ void GlGraphInputData::reloadGraphProperties() {
     _propertiesNameMap["viewTgtAnchorShape"] = VIEW_TGTANCHORSHAPE;
     _propertiesNameMap["viewTgtAnchorSize"] = VIEW_TGTANCHORSIZE;
     _propertiesNameMap["viewAnimationFrame"] = VIEW_ANIMATIONFRAME;
-    _propertiesNameMap["viewIcon"] = VIEW_FONTAWESOMEICON;
     _propertiesNameMap["viewIcon"] = VIEW_ICON;
   }
 
@@ -156,8 +155,6 @@ void GlGraphInputData::reloadGraphProperties() {
     _properties.insert(_propertiesMap[VIEW_TGTANCHORSIZE]);
     _propertiesMap[VIEW_ANIMATIONFRAME] = new GlViewAnimationFrameProperty(graph);
     _properties.insert(_propertiesMap[VIEW_ANIMATIONFRAME]);
-    _propertiesMap[VIEW_FONTAWESOMEICON] = graph->getProperty<StringProperty>("viewIcon");
-    _properties.insert(_propertiesMap[VIEW_FONTAWESOMEICON]);
     _propertiesMap[VIEW_ICON] = graph->getProperty<StringProperty>("viewIcon");
     _properties.insert(_propertiesMap[VIEW_ICON]);
   }

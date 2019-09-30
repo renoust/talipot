@@ -92,7 +92,7 @@ and the second one can be used to provide an error message
     for (size_t i = 0 ; i < filesPrefixes.size() ; ++i) {
       if (entry.first.length() > filesPrefixes[i].length() && entry.first.substr(0, filesPrefixes[i].length()) == filesPrefixes[i]) {
         std::string paramName = entry.first.substr(filesPrefixes[i].length());
-        if (!sipCpp->dataSet->exist(paramName)) {
+        if (!sipCpp->dataSet->exists(paramName)) {
           sipCpp->dataSet->set(paramName, *(static_cast<std::string*>(entry.second->value)));
         }
       }

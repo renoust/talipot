@@ -39,13 +39,6 @@ public:
 
   unsigned int priority() const override;
 
-  /**
-   * @brief setPriority
-   * @param p The priority of the interactor (aka its place in the interactor bar)
-   * @deprecated The priority should not be changed dynamically. Use the third argument of the
-   * constructor to initialize the priority.
-   */
-  _DEPRECATED void setPriority(const unsigned int p);
 };
 } // namespace tlp
 

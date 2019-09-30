@@ -113,7 +113,7 @@ tlp::DataSet *prepareAlgorithmParameters(const std::string &algoName, tlp::Graph
         tlp::stableIterator(params->getValues())) {
       for (size_t i = 0 ; i < filesPrefixes.size() ; ++i) {
         std::string fileParamTlpName = filesPrefixes[i] + entry.first;
-        if (algoParams.exist(fileParamTlpName)) {
+        if (algoParams.exists(fileParamTlpName)) {
           std::string fileParamTlp;
           std::string fileParam;
           params->get(fileParamTlpName, fileParamTlp);
@@ -403,27 +403,6 @@ Creates and returns a subgraph of this graph (or the parent of this graph) that 
 :type addSibling: bool
 :param addSiblingProperties: if true all the local properties of this graph will be copied into its clone sibling. Defaults to false
 :type addSiblingProperties: bool
-:rtype: :class:`tlp.Graph`
-%End
-
-//===========================================================================================
-
-  tlp::Graph *inducedSubGraph(const std::set<tlp::node>& nodeSet, tlp::Graph *parentSubGraph = NULL, const std::string &name = "unnamed");
-%Docstring
-tlp.Graph.inducedSubGraph(nodeSet, parentSubGraph=None, name="unnamed")
-
-.. deprecated:: deprecated
-
-Creates and returns a new subgraph of the graph induced by a set of nodes.
-The subgraph contains all the nodes from the set and all the existing edges
-between two nodes in the set including self-loops.
-
-:param nodeSet: the set of nodes from which to build the induced subgraph
-:type nodeSet: set of :class:`tlp.node`
-:param parentSubGraph: If provided, is used as parent graph for the newly created subgraph instead of the graph this method is called on.
-:type parentSubGraph: :class:`tlp.Graph`
-:param name: The name of the newly created subgraph
-:type name: string
 :rtype: :class:`tlp.Graph`
 %End
 
@@ -3639,44 +3618,6 @@ Remove last pushed state if no updates have been recorded.
 
 //===========================================================================================
 
-  tlp::node createMetaNode(const std::set<tlp::node> &nodeSet, bool multiEdges = true, bool delAllEdge = true);
-%Docstring
-tlp.Graph.createMetaNode(nodeSet, multiEdges=True, delAllEdge=True)
-
-.. deprecated:: deprecated
-
-Closes a set of existing nodes into a metanode and returns it.
-Edges from nodes in the set to other nodes are replaced with
-edges from the metanode to the other nodes.
-
-:param nodeSet: a set of existing nodes
-:type nodeSet: set of :class:`tlp.node`
-:param multiEdges: indicates if a meta edge will be created for each underlying edge
-:type multiEdges: boolean
-:param delAllEdge: indicates if the underlying edges will be removed from the entire hierarchy
-:type delAllEdge: boolean
-:rtype: :class:`tlp.node`
-:throws: an exception if one of the provided nodes does not belong to the graph.
-
- .. warning:: This method will fail when called on the root graph.
-
-%End
-
-%MethodCode
-  std::set<tlp::node>::const_iterator it = a0->begin();
-  for (; it != a0->end() ; ++it) {
-    if (!sipCpp->isElement(*it)) {
-      sipIsErr = throwInvalidNodeException(sipCpp, *it);
-      break;
-    }
-  }
-  if (sipIsErr != -1) {
-    sipRes = new tlp::node(sipCpp->createMetaNode(*a0, a1, a2));
-  }
-%End
-
-//===========================================================================================
-
   tlp::node createMetaNode(const std::vector<tlp::node> &nodes, bool multiEdges = true, bool delAllEdge = true);
 %Docstring
 tlp.Graph.createMetaNode(nodes, multiEdges=True, delAllEdge=True)
@@ -3940,22 +3881,6 @@ Removes an attribute of the graph.
     sipIsErr = -1;
     PyErr_SetString(PyExc_AttributeError, oss.str().c_str());
   }
-%End
-
-//===========================================================================================
-
-  bool attributeExist(const std::string &name);
-%Docstring
-tlp.Graph.attributeExist(name)
-
-.. deprecated:: deprecated
-
-Checks if an attribute with a specific name exists in the graph.
-That method is now deprecated, use :meth:`tlp.Graph.existAttribute` instead.
-
-:param name: the name of the attribute to test existence.
-:type name: string
-:rtype: boolean
 %End
 
 //===========================================================================================

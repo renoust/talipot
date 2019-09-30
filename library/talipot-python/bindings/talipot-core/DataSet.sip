@@ -221,9 +221,9 @@ When reading a data set value, a reference is returned not a copy.
 
   DataSet(const tlp::DataSet &set);
 
-  bool exist(const std::string &str) const;
+  bool exists(const std::string &str) const;
 %Docstring
-tlp.DataSet.exist(key)
+tlp.DataSet.exists(key)
 
 Checks if the data set contains a value associated to a particular key.
 

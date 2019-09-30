@@ -50,7 +50,7 @@ class GlCompositeHierarchyManager;
  *
  *
  * After scene construction you can perform some operation on GlMainWidget :
- * - Selection with doSelect() and selectGlEntities()
+ * - Selection with selectGlEntities()
  * - Image output with getImage(), createPicture(), outputSVG() and outputEPS()
  * - Texture output with createTexture()
  * - others operation on GlScene and QGlWidget
@@ -120,19 +120,6 @@ public:
    */
   bool pickNodesEdges(const int x, const int y, SelectedEntity &selectedEntity,
                       tlp::GlLayer *layer = nullptr, bool pickNodes = true, bool pickEdges = true);
-
-  /**
-   * @deprecated this function should not be used anymore, use pickNodesEdges()
-   */
-  _DEPRECATED void doSelect(const int x, const int y, const int width, const int height,
-                            std::vector<tlp::node> &sNode, std::vector<tlp::edge> &sEdge,
-                            tlp::GlLayer *layer = nullptr);
-
-  /**
-   * @deprecated this function should not be used anymore, use pickNodesEdges()
-   */
-  _DEPRECATED bool doSelect(const int x, const int y, tlp::ElementType &type, tlp::node &n,
-                            tlp::edge &e, tlp::GlLayer *layer = nullptr);
 
   /**
    * @brief convert a screen measure into a viewport measure
@@ -246,46 +233,6 @@ public:
    */
   bool pickGlEntities(const int x, const int y, std::vector<SelectedEntity> &pickedEntities,
                       tlp::GlLayer *layer = nullptr);
-
-  /**
-   * @deprecated this function should not be used anymore, please use pickGlEntities() instead.
-   */
-  _DEPRECATED bool selectGlEntities(const int x, const int y, const int width, const int height,
-                                    std::vector<GlSimpleEntity *> &pickedEntities,
-                                    tlp::GlLayer *layer = nullptr) {
-    std::vector<SelectedEntity> entities;
-    pickGlEntities(x, y, width, height, entities, layer);
-    bool foundEntity = false;
-
-    for (std::vector<SelectedEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-      if ((*it).getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
-        pickedEntities.push_back((*it).getSimpleEntity());
-        foundEntity = true;
-      }
-    }
-
-    return foundEntity;
-  }
-
-  /**
-   * @deprecated this function should not be used anymore, please use pickGlEntities() instead.
-   */
-  _DEPRECATED bool selectGlEntities(const int x, const int y,
-                                    std::vector<GlSimpleEntity *> &pickedEntities,
-                                    tlp::GlLayer *layer = nullptr) {
-    std::vector<SelectedEntity> entities;
-    pickGlEntities(x, y, entities, layer);
-    bool foundEntity = false;
-
-    for (std::vector<SelectedEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-      if ((*it).getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
-        pickedEntities.push_back((*it).getSimpleEntity());
-        foundEntity = true;
-      }
-    }
-
-    return foundEntity;
-  }
 
   /**
    * Extend makeCurrent function of QGLWidget to inform TextureManager and DisplayListManager of

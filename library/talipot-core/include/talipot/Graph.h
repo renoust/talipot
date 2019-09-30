@@ -329,14 +329,6 @@ public:
                          const std::string &name = "unnamed");
 
   /**
-   * @brief deprecated, use inducedSubGraph(const std::set<node>&, Graph* = nullptr, const
-   * std::string&
-   * = "unamed") instead
-   */
-  _DEPRECATED Graph *inducedSubGraph(const std::set<node> &nodeSet, Graph *parentSubGraph = nullptr,
-                                     const std::string &name = "unnamed");
-
-  /**
    * @brief Creates and returns a new subgraph of the graph induced by a selection of nodes and
    * edges.
    *
@@ -1274,13 +1266,6 @@ public:
   }
 
   /**
-   * @brief deprecated, use existAttribute instead.
-   */
-  _DEPRECATED bool attributeExist(const std::string &name) const {
-    return existAttribute(name);
-  }
-
-  /**
    * @brief Adds a property to the graph.
    * The graph takes ownership of the property. If you want to delete it, use
    * Graph::delLocalProperty().
@@ -1450,17 +1435,6 @@ public:
                               std::string &errorMessage, DataSet *parameters = nullptr,
                               PluginProgress *progress = nullptr);
 
-  /**
-   * @brief Deprecated, use applyPropertyAlgorithm(const std::string &algorithm, PropertyInterface
-   * *result, std::string &errorMessage, DataSet *parameters = nullptr, PluginProgress *progress =
-   * nullptr) instead
-   */
-  _DEPRECATED bool applyPropertyAlgorithm(const std::string &algorithm, PropertyInterface *result,
-                                          std::string &errorMessage, PluginProgress *progress,
-                                          DataSet *parameters = nullptr) {
-    return applyPropertyAlgorithm(algorithm, result, errorMessage, parameters, progress);
-  }
-
   // updates management
   /**
    * @brief Saves the current state of the whole graph hierarchy and allows to revert to this state
@@ -1613,13 +1587,6 @@ public:
    */
   virtual node createMetaNode(const std::vector<node> &nodes, bool multiEdges = true,
                               bool delAllEdge = true);
-
-  /**
-   * @brief Deprecated, use createMetaNode(const std::vector<node>&, bool multiEdges = true, bool
-   * delAllEdge = true) instead
-   */
-  _DEPRECATED node createMetaNode(const std::set<node> &nodeSet, bool multiEdges = true,
-                                  bool delAllEdge = true);
 
   /**
    *  @brief Populates a quotient graph with one meta node

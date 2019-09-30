@@ -236,8 +236,6 @@ Creation and Modification of the subgraph hierarchy
 
 .. automethod:: talipot::tlp.Graph.inducedSubGraph
 
-.. automethod:: talipot::tlp.Graph.inducedSubGraph
-
 .. automethod:: talipot::tlp.Graph.delSubGraph
 
 .. automethod:: talipot::tlp.Graph.delAllSubGraphs
@@ -346,8 +344,6 @@ Information about the graph stucture
 .. automethod:: talipot::tlp.Graph.removeAttribute
 
 .. automethod:: talipot::tlp.Graph.existAttribute
-
-.. automethod:: talipot::tlp.Graph.attributeExist
 
 .. automethod:: talipot::tlp.Graph.isEmpty
 
@@ -528,8 +524,6 @@ Update management
 
 Meta-nodes management
 ^^^^^^^^^^^^^^^^^^^^^
-
-.. automethod:: talipot::tlp.Graph.createMetaNode
 
 .. automethod:: talipot::tlp.Graph.createMetaNode
 

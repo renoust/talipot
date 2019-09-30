@@ -288,13 +288,6 @@ public:
   std::string getTypeName(const std::string &str) const;
 
   /**
-   * @brief for compatibility only
-   */
-  _DEPRECATED bool exist(const std::string &str) const {
-    return exists(str);
-  }
-
-  /**
    * @brief Removes an element from the DataSet
    * @param str the name of the element to remove
    */
