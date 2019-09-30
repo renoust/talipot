@@ -32,7 +32,6 @@
 #include <talipot/GlTools.h>
 #include <talipot/GlyphManager.h>
 #include <talipot/OcclusionTest.h>
-#include <talipot/GlTLPFeedBackBuilder.h>
 #include <talipot/OcclusionTest.h>
 #include <talipot/GlTextureManager.h>
 #include <talipot/GlXMLTools.h>

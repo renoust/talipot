@@ -51,7 +51,7 @@ class GlCompositeHierarchyManager;
  *
  * After scene construction you can perform some operation on GlMainWidget :
  * - Selection with selectGlEntities()
- * - Image output with getImage(), createPicture(), outputSVG() and outputEPS()
+ * - Image output with getImage(), createPicture()
  * - Texture output with createTexture()
  * - others operation on GlScene and QGlWidget
  */
@@ -167,15 +167,6 @@ public:
     qreal dpr = windowHandle()->devicePixelRatio();
     return Coord(point.x() / dpr, point.y() / dpr);
   }
-
-  /**
-   * @brief EPS output of the GlMainWidget
-   */
-  bool outputEPS(int size, int doSort, const char *filename);
-  /**
-   * @brief SVG output of the GlMainWidget
-   */
-  bool outputSVG(int size, const char *filename);
 
   /**
    * @brief Compute texture size in power of two with given height and width

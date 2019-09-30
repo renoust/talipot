@@ -263,16 +263,6 @@ public:
                       std::vector<SelectedEntity> &selectedEntities);
 
   /**
-   * @brief Output the scene in SVG
-   */
-  void outputSVG(unsigned int size, const std::string &filename);
-
-  /**
-   * @brief Output the scene in EPS
-   */
-  void outputEPS(unsigned int size, const std::string &filename);
-
-  /**
    * @brief Return the RGB image of GlScene
    */
   unsigned char *getImage();

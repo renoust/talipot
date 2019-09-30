@@ -381,16 +381,6 @@ public:
   bool getEdgesMaxSizeToNodesSize() const;
 
   /**
-   * @brief if true draw graph with feedback information (very low)
-   */
-  void setFeedbackRender(bool feedback);
-
-  /**
-   * @brief return true if the graph is draw with feedback information
-   */
-  bool getFeedbackRender() const;
-
-  /**
    * @brief Change the selection color
    */
   void setSelectionColor(const Color &color);
@@ -530,7 +520,6 @@ private:
   std::string _fontsPath;
   std::string _texturePath;
   bool _edgesMaxSizeToNodesSize;
-  bool _feedbackRender;
   Color _selectionColor;
   BooleanProperty *_displayFilteringProperty;
   NumericProperty *_elementOrderingProperty;

@@ -393,18 +393,6 @@ bool GlMainWidget::pickNodesEdges(const int x, const int y, SelectedEntity &sele
   return false;
 }
 //=====================================================
-bool GlMainWidget::outputEPS(int size, int, const char *filename) {
-  makeCurrent();
-  scene.outputEPS(size, filename);
-  return true;
-}
-//=====================================================
-bool GlMainWidget::outputSVG(int size, const char *filename) {
-  makeCurrent();
-  scene.outputSVG(size, filename);
-  return true;
-}
-//=====================================================
 void GlMainWidget::getTextureRealSize(int width, int height, int &textureRealWidth,
                                       int &textureRealHeight) {
   textureRealWidth = 1;
