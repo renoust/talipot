@@ -295,7 +295,7 @@ public:
   //=======================================================
   /**
    * @brief Reconnect the edge e to have the new given ends
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified edges
    * and nodes.
    */
@@ -303,7 +303,7 @@ public:
   //=======================================================
   /**
    * @brief change the source of an edge
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified edges
    * and nodes.
    * \see setEnds
@@ -314,7 +314,7 @@ public:
   //=======================================================
   /**
    * @brief change the target of an edge
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified edges
    * and nodes.
    * \see setEnds
@@ -324,7 +324,7 @@ public:
   }
   //=======================================================
   /**
-   * @brief Reverse an edge e, source become target and target become soure
+   * @brief Reverse an edge e, source become target and target become source
    */
   void reverse(const edge e);
   //=======================================================
@@ -377,7 +377,7 @@ public:
    * @brief Delete a node and all its adjacent edges in the graph
    * @warning That operation modify the array of nodes and the array of edges
    * and thus devalidate all iterators on it.
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted edges.
    * @warning Orders of edges in the extremities of the deleted edges are affected
    * @complexity: o(1)
@@ -416,7 +416,7 @@ public:
    * @brief Delete an edge in the graph
    * @warning: That operation modify the array of edges
    * and thus devalidate all iterators on it.
-   * @warning That operation modify the array of neighboors of extremities of the edge e, thus
+   * @warning That operation modify the array of neighbours of extremities of the edge e, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted edge.
    * @warning Orders of edges in the extremities of the deleted edge are affected
    */

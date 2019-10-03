@@ -90,7 +90,7 @@ struct LiuEtAl : public ImportModule {
       }
 
       /*
-       * Preferential attachement
+       * Preferential attachment
        */
       for (j = 0; j < m / 2; ++j) {
         double pr = tlp::randomDouble();
@@ -106,7 +106,7 @@ struct LiuEtAl : public ImportModule {
 
         /*
          * Triad formation
-         * Preferential attachement with a neighbour of the fisrt node selected
+         * Preferential attachment with a neighbour of the first node selected
          */
         double k2_sum = 0;
         for (auto n : graph->getInOutNodes(nodes[rn])) {

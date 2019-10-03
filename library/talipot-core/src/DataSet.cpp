@@ -225,7 +225,7 @@ bool DataSet::readData(std::istream &is, const std::string &prop,
   DataType *dt = dts->readData(is);
 
   if (dt) {
-    // replace any prexisting value associated to prop
+    // replace any preexisting value associated to prop
     for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
          it != data.end(); ++it) {
       std::pair<std::string, tlp::DataType *> &p = *it;
@@ -239,7 +239,7 @@ bool DataSet::readData(std::istream &is, const std::string &prop,
       }
     }
 
-    // no prexisting value
+    // no preexisting value
     data.push_back(std::pair<std::string, tlp::DataType *>(prop, dt));
     return true;
   }

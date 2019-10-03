@@ -200,8 +200,8 @@ public:
    * @brief set stencil number for selected nodes
    *
    * Stencil is an OpenGl system to ensure that other entity can't be displayed above this entity.
-   * It's a "guaranted visibility" system.
-   * A small number causes a guaranted visibility
+   * It's a "guaranteed visibility" system.
+   * A small number causes a guaranteed visibility
    * Default value in Talipot is 0xFFFF (greater integer)
    * And when we have stencil on entity value is 0x2
    */
@@ -470,7 +470,7 @@ public:
 
   /**
    * @brief This property is use to filter nodes/edges display, for a node/edge if this property is
-   * false : the node/edge will not be diplayed
+   * false : the node/edge will not be displayed
    *
    * @Warning : this property will not be saved in DataSet
    */

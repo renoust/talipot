@@ -37,7 +37,7 @@ This abstract class describes an export plugin.
 
 .. py:attribute:: dataSet
 
-  A dictionnary containing parameters for this export plugin, if any
+  A dictionary containing parameters for this export plugin, if any
 
 .. py:attribute:: pluginProgress
 

@@ -169,7 +169,7 @@ public:
 public slots:
 
   /**
-   * Display the detailled mode
+   * Display the detailed mode
    */
   void switchToDetailledMode(SOMPreviewComposite *preview);
 

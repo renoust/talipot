@@ -84,11 +84,11 @@ public:
   static void activateAntiAliasing();
 
   /**
-   * Desactivates anti-aliasing
+   * deactivates anti-aliasing
    * This method has no effect if anti-aliasing has been disabled by a call to
    * setAntiAliasing(false).
    */
-  static void desactivateAntiAliasing();
+  static void deactivateAntiAliasing();
 
   /**
    * Returns a maximum number of samples for anti-aliasing based on graphics hardware capability

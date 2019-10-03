@@ -802,7 +802,7 @@ public:
             metric->setEdgeValue(e, value);
 
             if (dataFormat != DL_FM) {
-              // matrix is symetric
+              // matrix is symmetric
               e = graph->addEdge(nodes[ic], src);
               metric->setEdgeValue(e, value);
             }

@@ -298,7 +298,7 @@ public:
    * @brief Delete a node and all its adjacent edges in the graph
    * @warning That operation modify the array of nodes and the array of edges
    * and thus devalidate all iterators on it.
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted
    * edges.
    * @warning Orders of edges in the extremities of the deleted edges are affected
@@ -308,7 +308,7 @@ public:
   //=======================================================
   /**
    * @brief Add a new edge between src and tgt and return it
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted
    * edges.
    * @remark o(1)
@@ -329,7 +329,7 @@ public:
    * @brief Delete an edge in the graph
    * @warning: That operation modify the array of edges
    * and thus devalidate all iterators on it.
-   * @warning That operation modify the array of neighboors of extremities of the edge e, thus
+   * @warning That operation modify the array of neighbours of extremities of the edge e, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted
    * edge.
    * @warning Orders of edges in the extremities of the deleted edge are affected
@@ -341,7 +341,7 @@ public:
    * @brief Delete all adjacent edges (in/out) of a node
    * @warning: That operation modify the array of edges
    * and thus devalidate all iterators on it.
-   * @warning That operation modify the array of neighboors of extremities of the edge e, thus
+   * @warning That operation modify the array of neighbours of extremities of the edge e, thus
    * it devalidates iterators on adjacency for the nodes at the extremities od the deleted
    * edge.
    * @warning Orders of edges in the extremities of the deleted edge are affected
@@ -392,14 +392,14 @@ public:
   node opposite(const edge e, const node n) const;
   //=======================================================
   /**
-   * @brief Reverse an edge e, source become target and target become soure
+   * @brief Reverse an edge e, source become target and target become source
    * @remark o(1)
    */
   void reverse(const edge e);
   //=======================================================
   /**
    * @brief change the source of an edge
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified
    * edges and nodes.
    * @remark o(1)
@@ -413,7 +413,7 @@ public:
   //=======================================================
   /**
    * @brief change the target of an edge
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified
    * edges and nodes.
    * @remark o(1)
@@ -436,7 +436,7 @@ public:
   //=======================================================
   /**
    * @brief Reconnect the edeg e to have the new given extremities
-   * @warning That operation modify the array of neighboors of extrmities of edges, thus
+   * @warning That operation modify the array of neighbours of extrmities of edges, thus
    * it devalidates iterators on adjacency for the nodes at the extremities of the modified
    * edges and nodes.
    * @remark o(1)
@@ -445,13 +445,13 @@ public:
   //=======================================================
   /**
    * @brief Shuffle the array of graph nodes
-   * @remark dependant of stl::random_shuffle algorithm (should be o(N))
+   * @remark dependent of stl::random_shuffle algorithm (should be o(N))
    */
   void shuffleNodes();
   //=======================================================
   /**
    * @brief Shuffle the array of graph edges
-   * @remark dependant of stl::random_shuffle algorithm (should be o(E))
+   * @remark dependent of stl::random_shuffle algorithm (should be o(E))
    */
   void shuffleEdges();
   //=======================================================
@@ -459,7 +459,7 @@ public:
    * @brief Sort all edges according to comparison functor given in parameter
    * if stable is true a stable sort algorithm is applied
    * Comparison should be an instance of a class wihch implements operator():
-   * @remark dependant of stl::sort and stl::stable_sort algorithm (should be o(E log (E)))
+   * @remark dependent of stl::sort and stl::stable_sort algorithm (should be o(E log (E)))
    * @code
    *  class Compare {
    *  //return true if a < b
@@ -489,7 +489,7 @@ public:
    *  bool operator()(const node a, const node b);
    *  };
    * @endcode
-   * @remark dependant of stl::sort and stl::stable_sort algorithm (should be o(N log (N)))
+   * @remark dependent of stl::sort and stl::stable_sort algorithm (should be o(N log (N)))
    * \warning that function is not compatible with the Talipot Graph API
    */
   template <typename Compare>

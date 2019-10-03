@@ -36,7 +36,7 @@ namespace tlp {
  * QWidget* parent;
  * vector<string> listOfStrings; // must be initialized
  * vector<string> selectedStrings;
- * bool choosen = StringsListSelectionDialog::choose(title, parent, listOfStrings,
+ * bool chosen = StringsListSelectionDialog::choose(title, parent, listOfStrings,
  *selectedStrings);
  * @endcode
  *

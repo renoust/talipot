@@ -79,9 +79,9 @@ void PythonShellWidget::insert(const QString &txt, const bool atEnd) {
     setTextCursor(cursor);
   }
 
-  QTextCharFormat formt = textCursor().charFormat();
-  formt.setForeground(Qt::black);
-  textCursor().insertText(txt, formt);
+  QTextCharFormat format = textCursor().charFormat();
+  format.setForeground(Qt::black);
+  textCursor().insertText(txt, format);
 }
 
 void PythonShellWidget::keyPressEvent(QKeyEvent *e) {

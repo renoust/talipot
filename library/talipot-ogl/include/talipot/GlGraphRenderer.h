@@ -72,7 +72,7 @@ public:
                               int h, std::vector<SelectedEntity> &selectedEntities) = 0;
 
   /**
-   * @brief You can use this funtion if you want to inject a visitor on the graph
+   * @brief You can use this function if you want to inject a visitor on the graph
    */
   virtual void visitGraph(GlSceneVisitor *visitor, bool visitHiddenEntities = false);
 

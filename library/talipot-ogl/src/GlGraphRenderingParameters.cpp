@@ -33,7 +33,7 @@ GlGraphRenderingParameters::GlGraphRenderingParameters()
       _edgesMaxSizeToNodesSize(true),
       _selectionColor(GlDefaultSelectionColorManager::getDefaultSelectionColor()),
       _displayFilteringProperty(nullptr), _elementOrderingProperty(nullptr) {}
-// This function should rewriten completly
+// This function should rewritten completely
 DataSet GlGraphRenderingParameters::getParameters() const {
   DataSet data;
   // bool
@@ -79,7 +79,7 @@ DataSet GlGraphRenderingParameters::getParameters() const {
   return data;
 }
 
-// This function should rewriten completly
+// This function should rewritten completely
 void GlGraphRenderingParameters::setParameters(const DataSet &data) {
   bool b = false;
   Color c;

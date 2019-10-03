@@ -25,7 +25,7 @@
 namespace tlp {
 
 struct itemInfo {
-  QString attribut;
+  QString attribute;
   bool choice;
 };
 

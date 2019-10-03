@@ -146,7 +146,7 @@ static void drawGlyph(const Color &glyphColor, const string &texture, const stri
 
   drawRing();
 
-  GlTextureManager::desactivateTexture();
+  GlTextureManager::deactivateTexture();
 
   if (lod > 20 && borderWidth > 0) {
     glLineWidth(borderWidth);

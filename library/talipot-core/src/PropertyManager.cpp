@@ -220,7 +220,7 @@ void PropertyManager::setInheritedProperty(const string &str, PropertyInterface 
         static_cast<GraphAbstract *>(graph)->metaGraphProperty = static_cast<GraphProperty *>(p);
     } else {
       // no need for notification
-      // already done thru notifyBeforeDelInheritedProperty(str);
+      // already done through notifyBeforeDelInheritedProperty(str);
       // see setLocalProperty
       inheritedProperties.erase(str);
     }

@@ -393,7 +393,7 @@ void MixedModel::placeNodesEdges() {
     }
 
     // rs == rt, même partition donc pas de points intermédiaire à  calculer
-    // en cas de post-processing, il faudra pe y changer
+    // en case de post-processing, il faudra pe y changer
   }
 
   if (!planar) {
@@ -631,7 +631,7 @@ void MixedModel::assignInOutPoints() { // on considère qu'il n'y a pas d'arc do
         dl = dr = 0;
         out_l = outMoins;
         out_r = outPlus;
-      } else { // cas nbIn == 1
+      } else { // case nbIn == 1
         if (k == 0) {
           if (i == 0) { // (Z0,Z1), existe forcément par définition
             dl = 0;

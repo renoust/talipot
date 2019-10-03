@@ -308,7 +308,7 @@ public:
       Iterator<node> *itN = prop->getNonDefaultValuatedNodes(g);
 
       if (inGuiTestingMode())
-        // sort nodes to ensure a predictable ordering of the ouput
+        // sort nodes to ensure a predictable ordering of the output
         itN = new StableIterator<node>(itN, 0, true, true);
 
       for (auto n : itN) {
@@ -341,7 +341,7 @@ public:
       Iterator<edge> *itE = prop->getNonDefaultValuatedEdges(g);
 
       if (inGuiTestingMode())
-        // sort edges to ensure a predictable ordering of the ouput
+        // sort edges to ensure a predictable ordering of the output
         itE = new StableIterator<edge>(itE, 0, true, true);
 
       for (auto e : itE) {

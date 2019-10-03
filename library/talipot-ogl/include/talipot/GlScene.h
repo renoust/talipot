@@ -379,7 +379,7 @@ public:
 
   /**
    * @brief Remove the layer with name
-   * This GlLayer is automaticaly delete
+   * This GlLayer is automatically delete
    * If you want to keep this GlLayer you can put false to deleteLayer parameters
    * but after that you have the ownership of the GlLayer
    */
@@ -387,7 +387,7 @@ public:
 
   /**
    * @brief Remove the layer with name
-   * This GlLayer is automaticaly delete
+   * This GlLayer is automatically delete
    * If you want to keep this GlLayer you can put false to deleteLayer parameters
    * but after that you have the ownership of the GlLayer
    */
@@ -443,7 +443,7 @@ public:
   }
 
   /**
-   * @brief Return the bouding box of the scene (in 3D coordinates)
+   * @brief Return the bounding box of the scene (in 3D coordinates)
    * \warning This bounding box is compute in rendering, so if you add an entity in a layer the
    * bounding box include this entity if a draw is call
    */
@@ -546,14 +546,14 @@ public:
 
   /**
    * @brief You don't have to call this function
-   * This function is automaticaly call when a GlGraphComposite is added in a layer in the scene
+   * This function is automatically call when a GlGraphComposite is added in a layer in the scene
    * You don't have to call this function
    */
   void glGraphCompositeAdded(GlLayer *layer, GlGraphComposite *composite);
 
   /**
    * @brief You don't have to call this function
-   * This function is automaticaly call when a GlGraphComposite is added in a layer in the scene
+   * This function is automatically call when a GlGraphComposite is added in a layer in the scene
    * You don't have to call this function
    */
   void glGraphCompositeRemoved(GlLayer *layer, GlGraphComposite *composite);

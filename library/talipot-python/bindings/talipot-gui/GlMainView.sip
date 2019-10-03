@@ -99,7 +99,7 @@ Centers the OpenGL scene in the view window.
 %Docstring
 tlpgui.GlMainView.setViewOrtho(state)
 
-Activates/desactivate the orthogonal projection for OpenGL rendering.
+Activates/deactivate the orthogonal projection for OpenGL rendering.
 Perspective projection is used when orthogonal one is disabled.
 
 :param state: the state of the orthogonal projection

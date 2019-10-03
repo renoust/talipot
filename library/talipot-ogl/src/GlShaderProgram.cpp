@@ -274,7 +274,7 @@ void GlShaderProgram::activate() {
   }
 }
 
-void GlShaderProgram::desactivate() {
+void GlShaderProgram::deactivate() {
   glUseProgram(0);
   currentActiveShaderProgram = nullptr;
 }

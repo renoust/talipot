@@ -276,7 +276,7 @@ public:
    * That option allows to obtain a better scene antialiasing through the use of offscreen rendering
    * and sampling.
    * The result rendering will look better while the performance will be slightly altered.
-   * That option is desactivated by default. Use it with caution as it could cause crashes with some
+   * That option is deactivated by default. Use it with caution as it could cause crashes with some
    * buggy OpenGL drivers.
    */
   void setAdvancedAntiAliasing(bool advancedAntiAliasing) {
@@ -316,9 +316,9 @@ public slots:
   /**
    * This function is given for optimisation purpose only. If the hardware enable it,
    * it enables to redraw only the Augmented display and the interactors and not the graph
-   * it is really usefull for interactors such as zoom box etc..
+   * it is really useful for interactors such as zoom box etc..
    * Warning, if you change the graph or the porperties of element (Colors, size, etc...)
-   * applying that fonction will not display the change, in that case, use the draw function.
+   * applying that function will not display the change, in that case, use the draw function.
    */
   void redraw();
 

@@ -56,7 +56,7 @@ public:
    * @brief Set value for a property previously returned by propertiesNames() and properties()
    * functions
    * This function is call when we want to set value of a property
-   * this parameter is returned in list by propertiesNames() and properties funtions
+   * this parameter is returned in list by propertiesNames() and properties functions
    * If you create a class that inherits of GlSimpleEntityItemEditor : you can reimplement this
    * function to set your properties
    * For example :

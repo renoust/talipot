@@ -19,7 +19,7 @@
 // OGDF/src/energybased/multilevelmixer/MMEExampleNoTwistLayout.cpp
 /** \addtogroup layout */
 
-/// useable example of the Modular Multilevel Mixer
+/// usable example of the Modular Multilevel Mixer
 /**
  *
  * This example is tuned to reduce twists in the final drawing.

@@ -1,6 +1,6 @@
 dl n = 4, nm = 2
 labels:
-GroupA,GroupB,GroupC,GroupD
+GroupA,GroupB,GroupC,grouped
 matrix labels:
 Marriage,Business
 data:

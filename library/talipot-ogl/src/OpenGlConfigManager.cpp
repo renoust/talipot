@@ -78,7 +78,7 @@ void OpenGlConfigManager::activateAntiAliasing() {
   }
 }
 
-void OpenGlConfigManager::desactivateAntiAliasing() {
+void OpenGlConfigManager::deactivateAntiAliasing() {
   glDisable(GL_MULTISAMPLE);
 }
 

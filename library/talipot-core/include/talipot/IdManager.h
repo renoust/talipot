@@ -382,7 +382,7 @@ public:
 
     // resize the container
     this->resize(last);
-    // the elt no loger exist in the container
+    // the elt no longer exist in the container
     pos.set(elt, UINT_MAX);
   }
 

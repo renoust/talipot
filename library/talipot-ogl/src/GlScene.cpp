@@ -123,7 +123,7 @@ void GlScene::initGlParameters() {
   if (OpenGlConfigManager::antiAliasing()) {
     OpenGlConfigManager::activateAntiAliasing();
   } else {
-    OpenGlConfigManager::desactivateAntiAliasing();
+    OpenGlConfigManager::deactivateAntiAliasing();
   }
 
   if (clearBufferAtDraw) {
@@ -234,7 +234,7 @@ void GlScene::draw() {
 
   inDraw = false;
 
-  OpenGlConfigManager::desactivateAntiAliasing();
+  OpenGlConfigManager::deactivateAntiAliasing();
 }
 
 /******************************************************************************

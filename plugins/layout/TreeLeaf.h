@@ -30,7 +30,7 @@
  *
  * <b>HISTORY</b>
  *
- * - 01/12/99 Verson 0.0.1: Initial release
+ * - 01/12/99 Version 0.0.1: Initial release
  *
  *
  * \note Let n be the number of nodes, the algorithm complexity is in O(n).

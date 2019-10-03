@@ -112,7 +112,7 @@
        <item row="2" column="0">
         <widget class="QRadioButton" name="inheritedPropertyRadioButton">
          <property name="text">
-          <string>Inherited propert&amp;y</string>
+          <string>Inherited property&amp;y</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">buttonGroup</string>
@@ -129,7 +129,7 @@
        <item row="0" column="0">
         <widget class="QRadioButton" name="newPropertyRadioButton">
          <property name="text">
-          <string>New propert&amp;y</string>
+          <string>New property&amp;y</string>
          </property>
          <property name="checked">
           <bool>true</bool>

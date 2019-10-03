@@ -35,7 +35,7 @@ struct StoredType {
   inline static TYPE &get(const TYPE &val) {
     return const_cast<TYPE &>(val);
   }
-  // equallity test
+  // equality test
   inline static bool equal(const TYPE &val1, const TYPE &val2) {
     return val2 == val1;
   }

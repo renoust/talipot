@@ -77,12 +77,12 @@ void NodeLinkDiagramComponent::updateGrid() {
   Coord margins;
   Size gridSize;
   Color gridColor;
-  bool onX = true, onY = true, onZ = true;
+  bool onX = true, only = true, onZ = true;
   gridData.get<Coord>("Margins", margins);
   gridData.get<Size>("Grid size", gridSize);
   gridData.get<Color>("Grid color", gridColor);
   gridData.get<bool>("X grid", onX);
-  gridData.get<bool>("Y grid", onY);
+  gridData.get<bool>("Y grid", only);
   gridData.get<bool>("Z grid", onZ);
 
   GlGraphInputData *inputData =
@@ -100,7 +100,7 @@ void NodeLinkDiagramComponent::updateGrid() {
 
   bool displays[3];
   displays[0] = onX;
-  displays[1] = onY;
+  displays[1] = only;
   displays[2] = onZ;
 
   _grid = new GlGrid(bottomLeft, topRight, gridSize, gridColor, displays);

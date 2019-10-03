@@ -715,7 +715,7 @@ void HistogramView::buildHistograms() {
       QApplication::processEvents();
   }
 
-  // reenable user input
+  // re-enable user input
   tlp::enableQtUserInput();
 
   for (auto label : propertiesLabels) {

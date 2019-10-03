@@ -920,7 +920,7 @@ Resizes the list attached to a particular node. A default value will be assigned
 %Docstring
 tlp.@VEC_PROPERTY_TYPE@VectorProperty.resizeNodeValue(node, size, val)
 
-Resizes the list attached to a particular node. The value given in paramater will be assigned to new elements (if any).
+Resizes the list attached to a particular node. The value given in parameter will be assigned to new elements (if any).
 
 :param node: an existing node
 :type node: :class:`tlp.node`
@@ -1077,7 +1077,7 @@ Resizes the list attached to a particular edge. A default value will be assigned
 %Docstring
 tlp.@VEC_PROPERTY_TYPE@VectorProperty.resizeEdgeValue(edge, size, val)
 
-Resizes the list attached to a particular edge. The value given in paramater will be assigned to new elements (if any).
+Resizes the list attached to a particular edge. The value given in parameter will be assigned to new elements (if any).
 
 :param edge: an existing edge
 :type edge: :class:`tlp.edge`

@@ -129,7 +129,7 @@ bool PythonEditorsTabWidget::eventFilter(QObject *obj, QEvent *event) {
           return true;
         } else {
           // when there is no file associated to the Python module, its content will then be saved
-          // in the project file (.tlpx) currenty loaded in Talipot
+          // in the project file (.tlpx) currently loaded in Talipot
           if (moduleFile[moduleFile.size() - 1] == '*')
             moduleFile = moduleFile.mid(0, moduleFile.size() - 1);
 

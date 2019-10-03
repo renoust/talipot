@@ -191,7 +191,7 @@ void Cylinder::draw(node n, float) {
 
   drawCylinder();
 
-  GlTextureManager::desactivateTexture();
+  GlTextureManager::deactivateTexture();
 }
 
 Coord Cylinder::getAnchor(const Coord &vector) const {
@@ -263,7 +263,7 @@ void HalfCylinder::draw(node n, float) {
 
   drawCylinder(0.5, 0.25);
 
-  GlTextureManager::desactivateTexture();
+  GlTextureManager::deactivateTexture();
 }
 //=================================================================================================
 Coord HalfCylinder::getAnchor(const Coord &vector) const {
@@ -299,7 +299,7 @@ public:
 
     drawCylinder();
 
-    GlTextureManager::desactivateTexture();
+    GlTextureManager::deactivateTexture();
   }
 };
 

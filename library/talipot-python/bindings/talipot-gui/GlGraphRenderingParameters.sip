@@ -34,7 +34,7 @@ public:
 %Docstring
 tlpgui.GlGraphRenderingParameters.setAntiAliasing(antialiasing)
 
-Activates/desactivates antialiasing.
+Activates/deactivates antialiasing.
 
 :param antialiasing: the antialiasing state
 :type antialiasing: boolean
@@ -57,7 +57,7 @@ Returns if antialiasing rendering is activated.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setViewArrow(arrow)
 
-Activates / desactivates the displaying of arrows along the graph edges.
+Activates / deactivates the displaying of arrows along the graph edges.
 
 :param arrow: the state of the arrows rendering
 :type arrow: boolean
@@ -81,7 +81,7 @@ Returns the state of the displaying of arrows along the graph edges.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setViewNodeLabel(nodeLabel)
 
-Activates / desactivates the displaying of nodes labels.
+Activates / deactivates the displaying of nodes labels.
 
 :param nodeLabel: the state of the nodes labels rendering
 :type nodeLabel: boolean
@@ -105,7 +105,7 @@ Returns the state of the displaying of nodes labels.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setViewEdgeLabel(edgeLabel)
 
-Activates / desactivates the displaying of edges labels.
+Activates / deactivates the displaying of edges labels.
 
 :param edgeLabel: the state of the edges labels rendering
 :type edgeLabel: boolean
@@ -128,7 +128,7 @@ Returns the state of the displaying of edges labels.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setViewOutScreenLabel(outScreenLabel)
 
-Activates / desactivates the displaying of labels for elements outside the screen.
+Activates / deactivates the displaying of labels for elements outside the screen.
 
 :param outScreenLabel: the state of the labels rendering for elements outside the screen.
 :type outScreenLabel: boolean
@@ -151,7 +151,7 @@ Returns the state of the displaying of labels for elements outside the screen.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setEdgeColorInterpolate(interpolate)
 
-Activates / desactivates the interpolation of nodes colors along edges.
+Activates / deactivates the interpolation of nodes colors along edges.
 
 :param interpolate: the state of the edge color interpolation
 :type interpolate: boolean
@@ -174,7 +174,7 @@ Returns the state of the edge color interpolation.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setEdgeSizeInterpolate(interpolate)
 
-Activates / desactivates the interpolation of nodes sizes along edges.
+Activates / deactivates the interpolation of nodes sizes along edges.
 
 :param interpolate: the state of the edge size interpolation
 :type interpolate: boolean
@@ -243,7 +243,7 @@ Returns the absolute path used for fonts loading (.ttf files).
 %Docstring
 tlpgui.GlGraphRenderingParameters.setViewMetaLabel(metaLabel)
 
-Activates / desactivates the displaying of labels inside meta-nodes.
+Activates / deactivates the displaying of labels inside meta-nodes.
 
 :param metaLabel: the state of the displaying of labels inside meta-nodes.
 :type edgeLabel: boolean
@@ -266,7 +266,7 @@ Returns the state of the displaying of labels inside meta-nodes.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setDisplayEdges(displayEdges)
 
-Activates / desactivates the displaying of edges.
+Activates / deactivates the displaying of edges.
 
 :param displayEdges: the state of the displaying of edges.
 :type displayEdges: boolean
@@ -289,7 +289,7 @@ Returns the state of the displaying of edges.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setDisplayNodes(displayNodes)
 
-Activates / desactivates the displaying of nodes.
+Activates / deactivates the displaying of nodes.
 
 :param displayNodes: the state of the displaying of nodes.
 :type displayNodes: boolean
@@ -312,7 +312,7 @@ Returns the state of the displaying of nodes.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setDisplayMetaNodes(displayMetaNodes)
 
-Activates / desactivates the displaying of nodes.
+Activates / deactivates the displaying of nodes.
 
 :param displayMetaNodes: the state of the displaying of meta-nodes.
 :type displayMetaNodes: boolean
@@ -553,7 +553,7 @@ Returns the stencil value for edges labels.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setElementOrdered(elementOrdered)
 
-Activates / desactivates the ordered rendering of graph elements according
+Activates / deactivates the ordered rendering of graph elements according
 to the values in the element ordering property.
 
 :param elementsOrdered: the state of the ordered rendering
@@ -624,7 +624,7 @@ Returns the double property used for the ordered rendering of graph elements.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setElementZOrdered(zOrdering)
 
-Activates / desactivates the ordered rendering of elements according to their
+Activates / deactivates the ordered rendering of elements according to their
 distance to the camera.
 
 :param zOrdering: the state of the z-ordered rendering
@@ -648,7 +648,7 @@ Returns the state of the z-ordered rendering.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setEdge3D(edge3d)
 
-Activates / desactivates the 3d displaying of edges instead of 2d lines.
+Activates / deactivates the 3d displaying of edges instead of 2d lines.
 
 :param edge3d: the state of the 3d edge rendering
 :type edge3d: boolean
@@ -705,7 +705,7 @@ Returns the state of the scaling of labels to nodes sizes.
 %Docstring
 tlpgui.GlGraphRenderingParameters.setLabelScaled(labelScaled)
 
-Activates / desactivates the scaling of labels to nodes sizes.
+Activates / deactivates the scaling of labels to nodes sizes.
 
 :param labelScaled: the state of the scaling of labels to nodes sizes.
 :type labelScaled: boolean
@@ -728,7 +728,7 @@ Returns the state of using fixed font size with labels.
 %Docstring
 tlpgui.setLabelFixedFontSize(fixedFontSize)
 
-Activates / desactivates the use of fixed font size with labels (based on the values in the "viewFontSize" property).
+Activates / deactivates the use of fixed font size with labels (based on the values in the "viewFontSize" property).
 
 :param fixedFontSize: the state of using fixed font size with labels
 :type fixedFontSize: boolean
@@ -829,7 +829,7 @@ Returns the state of the labels billboarding (always facing the camera).
 %Docstring
 tlpgui.GlGraphRenderingParameters.setLabelsAreBillboarded(billboardLabels)
 
-Activates / desactivates labels billboarding (always facing the camera).
+Activates / deactivates labels billboarding (always facing the camera).
 
 :param billboardLabels: the state of labels billboarding
 :type billboardLabels: boolean
@@ -842,7 +842,7 @@ Activates / desactivates labels billboarding (always facing the camera).
 tlpgui.GlGraphRenderingParameters.setDisplayFilteringProperty(property)
 
 Sets the boolean property used to filter the rendering of graph elements. If sets to :const:`None`,
-the filtering is desactivated. If the value for a node / edge in that property is :const:`False`,
+the filtering is deactivated. If the value for a node / edge in that property is :const:`False`,
 it will not be displayed.
 
 :param property: the boolean property used to filter the rendering of graph elements

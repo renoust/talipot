@@ -134,7 +134,7 @@ ShapeAttr ShapeAttrA[] = {
     {"cone", 3},
     {"square", 4},
     {"teapot", 5},
-    {"cyclinder", 6},
+    {"cylinder", 6},
     {"billboard", 7},
 
     // dot shapes
@@ -144,7 +144,7 @@ ShapeAttr ShapeAttrA[] = {
 
 //
 // dot attributes
-// This object class enables the managment of various typed attributes
+// This object class enables the management of various typed attributes
 // and some operations such as merge & definition.
 // A mask (bitset) is used internally to retrieve the subset of attributes
 // which have been really defined.
@@ -656,7 +656,7 @@ struct DOT_YY {
 #define YYSTYPE DOT_YYType
 
 // Semantic value DOT_YYType is a C++ object, with constructor/destructor.
-// Dynamic stack managment should be done in futur version.
+// Dynamic stack management should be done in futur version.
 // For a purpose of simplicity, this parser uses a large and fixed array.
 // You can change theses values. Only take care to keep YYMAXDEPTH = YYINITDEPTH
 // to avoid the dynamic relocation of the stack.
@@ -1329,7 +1329,7 @@ int yyparse()
      `yyvs': related to semantic values,
      `yyls': related to locations.
 
-     Refer to the stacks thru separate pointers, to allow yyoverflow
+     Refer to the stacks through separate pointers, to allow yyoverflow
      to reallocate them elsewhere.  */
 
   /* The state stack.  */

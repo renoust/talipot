@@ -179,7 +179,7 @@ void GlGlyphRenderer::endRendering() {
                           glyphData.glyphBorderColor, glyphData.lod);
   }
 
-  _glyphShader->desactivate();
+  _glyphShader->deactivate();
 
   _renderingStarted = false;
 }

@@ -71,7 +71,7 @@ QSize ItemEditorCreator::sizeHint(const QStyleOptionViewItem &option,
 class ColorDialog : public QColorDialog {
 public:
   ColorDialog(QWidget *w) : QColorDialog(w), previousColor(), ok(QDialog::Rejected) {
-    // we dont use native dialog to ensure alpha channel can be set
+    // we don't use native dialog to ensure alpha channel can be set
     // it may not be shown when using gnome
     setOptions(QColorDialog::ShowAlphaChannel | QColorDialog::DontUseNativeDialog);
   }

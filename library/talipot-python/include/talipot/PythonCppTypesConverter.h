@@ -80,7 +80,7 @@ TLP_PYTHON_SCOPE bool setCppValueFromPyObject(PyObject *pyObj, ValueSetter &valS
                                               tlp::DataType *dataType = nullptr);
 
 template <typename T>
-class PyObjectToCppObjectConvertor {
+class PyObjectToCppObjectConverter {
 
 public:
   bool convert(PyObject *pyObject, T &cppObject) {
@@ -98,7 +98,7 @@ public:
 };
 
 template <typename T>
-class PyObjectToCppObjectConvertor<T *> {
+class PyObjectToCppObjectConverter<T *> {
 
 public:
   bool convert(PyObject *pyObject, T *&cppObject) {
@@ -116,7 +116,7 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<PyObject *> {
+class PyObjectToCppObjectConverter<PyObject *> {
 public:
   bool convert(PyObject *pyObject, PyObject *&cppObject) {
     cppObject = pyObject;
@@ -125,7 +125,7 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<bool> {
+class PyObjectToCppObjectConverter<bool> {
 public:
   bool convert(PyObject *pyObject, bool &cppObject) {
     return convertPyObjectToBool(pyObject, cppObject);
@@ -133,7 +133,7 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<double> {
+class PyObjectToCppObjectConverter<double> {
 public:
   bool convert(PyObject *pyObject, double &cppObject) {
     return convertPyObjectToDouble(pyObject, cppObject);
@@ -141,19 +141,19 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<float> {
+class PyObjectToCppObjectConverter<float> {
 public:
   bool convert(PyObject *pyObject, float &cppObject) {
     double val = 0;
-    PyObjectToCppObjectConvertor<double> convertor;
-    bool ok = convertor.convert(pyObject, val);
+    PyObjectToCppObjectConverter<double> converter;
+    bool ok = converter.convert(pyObject, val);
     cppObject = val;
     return ok;
   }
 };
 
 template <>
-class PyObjectToCppObjectConvertor<long> {
+class PyObjectToCppObjectConverter<long> {
 
 public:
   bool convert(PyObject *pyObject, long &cppObject) {
@@ -162,19 +162,19 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<int> {
+class PyObjectToCppObjectConverter<int> {
 public:
   bool convert(PyObject *pyObject, int &cppObject) {
     long val = 0;
-    PyObjectToCppObjectConvertor<long> convertor;
-    bool ok = convertor.convert(pyObject, val);
+    PyObjectToCppObjectConverter<long> converter;
+    bool ok = converter.convert(pyObject, val);
     cppObject = val;
     return ok;
   }
 };
 
 template <>
-class PyObjectToCppObjectConvertor<unsigned long> {
+class PyObjectToCppObjectConverter<unsigned long> {
 public:
   bool convert(PyObject *pyObject, unsigned long &cppObject) {
     return convertPyObjectToUnsignedLong(pyObject, cppObject);
@@ -182,19 +182,19 @@ public:
 };
 
 template <>
-class PyObjectToCppObjectConvertor<unsigned int> {
+class PyObjectToCppObjectConverter<unsigned int> {
 public:
   bool convert(PyObject *pyObject, unsigned int &cppObject) {
     unsigned long val = 0;
-    PyObjectToCppObjectConvertor<unsigned long> convertor;
-    bool ok = convertor.convert(pyObject, val);
+    PyObjectToCppObjectConverter<unsigned long> converter;
+    bool ok = converter.convert(pyObject, val);
     cppObject = val;
     return ok;
   }
 };
 
 template <typename T>
-class CppObjectToPyObjectConvertor {
+class CppObjectToPyObjectConverter {
 
 public:
   bool convert(const T &cppObject, PyObject *&pyObject) {
@@ -215,7 +215,7 @@ public:
 };
 
 template <typename T>
-class CppObjectToPyObjectConvertor<T *> {
+class CppObjectToPyObjectConverter<T *> {
 
 public:
   bool convert(T *cppObject, PyObject *&pyObject) {
@@ -233,7 +233,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<PyObject *> {
+class CppObjectToPyObjectConverter<PyObject *> {
 public:
   bool convert(const PyObject *&cppObject, PyObject *&pyObject) {
     pyObject = const_cast<PyObject *>(cppObject);
@@ -242,7 +242,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<bool> {
+class CppObjectToPyObjectConverter<bool> {
 public:
   bool convert(const bool &cppObject, PyObject *&pyObject) {
     pyObject = convertBoolToPyObject(cppObject);
@@ -251,7 +251,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<long> {
+class CppObjectToPyObjectConverter<long> {
 public:
   bool convert(const long &cppObject, PyObject *&pyObject) {
     pyObject = convertLongToPyObject(cppObject);
@@ -260,7 +260,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<int> {
+class CppObjectToPyObjectConverter<int> {
 public:
   bool convert(const int &cppObject, PyObject *&pyObject) {
     pyObject = convertLongToPyObject(cppObject);
@@ -269,7 +269,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<unsigned int> {
+class CppObjectToPyObjectConverter<unsigned int> {
 public:
   bool convert(const unsigned int &cppObject, PyObject *&pyObject) {
     pyObject = convertUnsignedLongToPyObject(cppObject);
@@ -278,7 +278,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<unsigned long> {
+class CppObjectToPyObjectConverter<unsigned long> {
 public:
   bool convert(const unsigned long &cppObject, PyObject *&pyObject) {
     pyObject = convertUnsignedLongToPyObject(cppObject);
@@ -287,7 +287,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<double> {
+class CppObjectToPyObjectConverter<double> {
 public:
   bool convert(const double &cppObject, PyObject *&pyObject) {
     pyObject = convertDoubleToPyObject(cppObject);
@@ -296,7 +296,7 @@ public:
 };
 
 template <>
-class CppObjectToPyObjectConvertor<float> {
+class CppObjectToPyObjectConverter<float> {
 public:
   bool convert(const float &cppObject, PyObject *&pyObject) {
     pyObject = convertDoubleToPyObject(cppObject);

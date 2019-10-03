@@ -31,7 +31,7 @@ namespace tlp {
  * plugins.
  * Every Talipot plugin inherits from the tlp::WithDependency interface which allows to declare that
  * another plugin should be loaded in order for this plugin to run.
- * When declaring a dependency, a plugin state the name and the version of the dependecy. This is
+ * When declaring a dependency, a plugin state the name and the version of the dependency. This is
  * done by calling tlp::WithDependency::addDependency()
  *
  * @see tlp::WithDependency

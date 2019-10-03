@@ -21,7 +21,7 @@
  *
  *  <b>HISTORY</b>
  *
- *  01/12/99 Verson 0.0.1: Initial release
+ *  01/12/99 Version 0.0.1: Initial release
  *
  *
  *  \note This algorithm works on general graphs. \n

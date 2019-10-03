@@ -566,7 +566,7 @@ void AbstractGlCurve::draw(float, Camera *) {
 
 void AbstractGlCurve::initShader(const std::string &shaderProgramName,
                                  const std::string &curveSpecificShaderCode) {
-  // restrict shaders compilation on compatible hardware, crashs can happen
+  // restrict shaders compilation on compatible hardware, crashes can happen
   // when using a software implementation of OpenGL
   static string glVendor = OpenGlConfigManager::getOpenGLVendor();
   static bool glVendorOk = (glVendor.find("NVIDIA") != string::npos) ||
@@ -771,7 +771,7 @@ void AbstractGlCurve::drawCurve(std::vector<Coord> &controlPoints, const Color &
       currentActiveShader->getUniformFloatVariableValue("radius", &fisheyeRadius);
       currentActiveShader->getUniformFloatVariableValue("height", &fisheyeHeight);
       currentActiveShader->getUniformIntVariableValue("fisheyeType", &fisheyeType);
-      currentActiveShader->desactivate();
+      currentActiveShader->deactivate();
     }
 
     static GLuint controlPointsTexId = 0;
@@ -896,18 +896,18 @@ void AbstractGlCurve::drawCurve(std::vector<Coord> &controlPoints, const Color &
 
       if (billboardCurve) {
         glActiveTexture(GL_TEXTURE1);
-        GlTextureManager::desactivateTexture();
+        GlTextureManager::deactivateTexture();
       }
 
       if (!texture.empty()) {
         glActiveTexture(GL_TEXTURE0);
-        GlTextureManager::desactivateTexture();
+        GlTextureManager::deactivateTexture();
       }
 
       if (outlined) {
 
         if (canUseGeometryShader && nbCurvePoints > 3 && geometryShaders.second) {
-          curveShaderProgram->desactivate();
+          curveShaderProgram->deactivate();
 
           if (billboardCurve) {
             curveShaderProgram = geometryBillboardShaders.second;
@@ -1002,7 +1002,7 @@ void AbstractGlCurve::drawCurve(std::vector<Coord> &controlPoints, const Color &
 
     glDisableClientState(GL_VERTEX_ARRAY);
 
-    curveShaderProgram->desactivate();
+    curveShaderProgram->deactivate();
 
     glActiveTexture(GL_TEXTURE3);
     glBindTexture(GL_TEXTURE_1D, 0);

@@ -73,7 +73,7 @@ TLP_SCOPE Graph *loadGraph(const std::string &filename, tlp::PluginProgress *pro
 /**
  * @ingroup Graph
  * @brief Saves the corresponding graph to a file (extension can be any of the Talipot supported
- *ouput graph file format)..
+ *output graph file format)..
  *
  * This function serializes the corresponding graph and all its subgraphs (depending on the format)
  *to a file
@@ -90,7 +90,7 @@ TLP_SCOPE Graph *loadGraph(const std::string &filename, tlp::PluginProgress *pro
  *Defaults to nullptr.
  * @param data Parameters to pass to the export plugin (e.g. additional data, options for the
  *format)
- * @return bool whether the export was successfull or not.
+ * @return bool whether the export was successful or not.
  **/
 TLP_SCOPE bool saveGraph(Graph *graph, const std::string &filename,
                          tlp::PluginProgress *progress = nullptr, tlp::DataSet *data = nullptr);
@@ -110,7 +110,7 @@ TLP_SCOPE bool saveGraph(Graph *graph, const std::string &filename,
  *format)
  * @param progress A PluginProgress to report the progress of the operation, as well as final state.
  *Defaults to nullptr.
- * @return bool Whether the export was successfull or not.
+ * @return bool Whether the export was successful or not.
  **/
 TLP_SCOPE bool exportGraph(Graph *graph, std::ostream &outputStream, const std::string &format,
                            DataSet &dataSet, PluginProgress *progress = nullptr);
@@ -162,7 +162,7 @@ TLP_SCOPE void copyToGraph(Graph *outG, const Graph *inG, BooleanProperty *inSel
 /**
  * @ingroup Graph
  * Removes the selected part of the graph ioG (properties values, nodes and edges).
- * If no selection is done (inSel=nullptr), the whole graph is reseted to default value.
+ * If no selection is done (inSel=nullptr), the whole graph is reset to default value.
  * \warning The selection is extended to all selected edge ends.
  */
 TLP_SCOPE void removeFromGraph(Graph *ioG, BooleanProperty *inSelection = nullptr);
@@ -1027,7 +1027,7 @@ public:
    * @brief Gets all input/output edges of a node existing in the root graph
    * @warning If the current graph is not the root, the existence of the edge
    * can be tested with isElement(edge) function.
-   * @param n The node to get the input/ouput edges from.
+   * @param n The node to get the input/output edges from.
    * @return a const reference to the vector of all edges of a node
    */
   virtual const std::vector<edge> &allEdges(const node n) const = 0;
@@ -1048,7 +1048,7 @@ public:
   virtual void sortElts() = 0;
 
   //================================================================================
-  // Graph, nodes and edges information about the graph stucture
+  // Graph, nodes and edges information about the graph structure
   //================================================================================
   /**
    * @brief Gets the unique identifier of the graph.
@@ -1220,7 +1220,7 @@ public:
    * @brief Gets an attribute on the graph.
    * @param name The name of the attribute to set.
    * @param value The value to set.
-   * @return Whether the setting of the attribute was sucessful.
+   * @return Whether the setting of the attribute was successful.
    */
   template <typename ATTRIBUTETYPE>
   bool getAttribute(const std::string &name, ATTRIBUTETYPE &value) const;

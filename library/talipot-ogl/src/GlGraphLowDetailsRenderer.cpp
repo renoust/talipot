@@ -131,7 +131,7 @@ void GlGraphLowDetailsRenderer::initNodesArray() {
 void GlGraphLowDetailsRenderer::draw(float, Camera *) {
 
   if (!inputData->renderingParameters()->isAntialiased()) {
-    OpenGlConfigManager::desactivateAntiAliasing();
+    OpenGlConfigManager::deactivateAntiAliasing();
   }
 
   if (buildVBO) {

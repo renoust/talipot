@@ -609,7 +609,7 @@ void tlp::copyToGraph(Graph *outG, const Graph *inG, BooleanProperty *inSel,
   // loop on edges
   for (auto eIn : edgeIt) {
     const pair<node, node> &eEnds = inG->ends(eIn);
-    // add outG correponding edge
+    // add outG corresponding edge
     edge eOut = outG->addEdge(nodeTrl.get(eEnds.first.id), nodeTrl.get(eEnds.second.id));
 
     // select added edge

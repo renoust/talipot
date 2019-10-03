@@ -251,7 +251,7 @@ bool GraphStorage::getEdges(const node src, const node tgt, bool directed,
 
     // loops appear twice
     // be aware that we assume that the second instance of the loop
-    // immediatly appears after the first one
+    // immediately appears after the first one
     if (e != previous) {
       const std::pair<node, node> &eEnds = edgeEnds[e.id];
 
@@ -330,7 +330,7 @@ void GraphStorage::setEnds(const edge e, const node newSrc, const node newTgt) {
 }
 //=======================================================
 /**
- * @brief Reverse an edge e, source become target and target become soure
+ * @brief Reverse an edge e, source become target and target become source
  */
 void GraphStorage::reverse(const edge e) {
   assert(isElement(e));

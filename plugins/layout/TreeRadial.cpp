@@ -178,7 +178,7 @@ public:
   };
 
   void dfsComputeAngularSpread(node n, SizeProperty *sizes, MutableContainer<double> &angles) {
-    // we dont use recursive call to avoid a possible stack overflow
+    // we don't use recursive call to avoid a possible stack overflow
     stack<dfsAngularSpreadStruct> dfsLevels;
     dfsAngularSpreadStruct dfsParams(n, 0, tree->getOutNodes(n));
     dfsLevels.push(dfsParams);
@@ -227,7 +227,7 @@ public:
   void doLayout(node n, unsigned int depth, double startAngle, double endAngle,
     DoubleProperty *angles, bool checkAngle = false) {
     double sAngle = endAngle - startAngle;
-    // this will avoid crossing between the egdes from n to its children
+    // this will avoid crossing between the edges from n to its children
     // and the edge from its ancestor to n
     if (checkAngle && sAngle > M_PI) {
       endAngle = startAngle + M_PI;
@@ -287,7 +287,7 @@ public:
       bool checkAngle = visited.get(n.id);
 
       if (!visited.get(n.id)) {
-        // this will avoid crossing between the egdes from n to its children
+        // this will avoid crossing between the edges from n to its children
         // and the edge from its ancestor to n
         if (dfsParams.checkAngle && sAngle > M_PI) {
           endAngle = startAngle + M_PI;

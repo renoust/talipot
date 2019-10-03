@@ -1362,7 +1362,7 @@ void GraphUpdatesRecorder::propertyRenamed(PropertyInterface *prop) {
 }
 
 void GraphUpdatesRecorder::beforeSetNodeValue(PropertyInterface *p, node n) {
-  // dont record the old value if the default one has been changed
+  // don't record the old value if the default one has been changed
   if (oldNodeDefaultValues.find(p) != oldNodeDefaultValues.end())
     return;
 
@@ -1416,11 +1416,11 @@ void GraphUpdatesRecorder::beforeSetAllNodeValue(PropertyInterface *p) {
 }
 
 void GraphUpdatesRecorder::beforeSetEdgeValue(PropertyInterface *p, edge e) {
-  // dont record the old value if the default one has been changed
+  // don't record the old value if the default one has been changed
   if (oldEdgeDefaultValues.find(p) != oldEdgeDefaultValues.end())
     return;
 
-  // dont record old value for newly added edge
+  // don't record old value for newly added edge
   if (addedEdgesEnds.find(e) != addedEdgesEnds.end()) {
     if (!restartAllowed)
       return;

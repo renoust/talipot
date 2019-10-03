@@ -150,7 +150,7 @@ void Cone::draw(node n, float) {
 
   drawCone();
 
-  GlTextureManager::desactivateTexture();
+  GlTextureManager::deactivateTexture();
 }
 Coord Cone::getAnchor(const Coord &vector) const {
   Coord anchor = vector;
@@ -206,7 +206,7 @@ public:
     }
 
     drawCone();
-    GlTextureManager::desactivateTexture();
+    GlTextureManager::deactivateTexture();
   }
 };
 

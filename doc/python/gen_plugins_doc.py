@@ -336,7 +336,7 @@ for cat in sorted(plugins.keys()):
         writeSection('Calling the plugin from Python', '"')
         safeprint(('To call that plugin from Python, use the following '
                    'code snippet::\n'), file=f)
-        safeprint(('  # get a dictionnary filled with the default plugin '
+        safeprint(('  # get a dictionary filled with the default plugin '
                    'parameters values'), file=f)
         if p.category() != 'Import':
             safeprint(('  # graph is an instance of the tlp.Graph class\n'
@@ -434,6 +434,6 @@ for cat in sorted(plugins.keys()):
             safeprint(('  success = graph.applyAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
         safeprint(('  # if the plugin declare any output parameter, its value'
-                   ' can now be retrieved in the \'params\' dictionnary\n'),
+                   ' can now be retrieved in the \'params\' dictionary\n'),
                   file=f)
 f.close()

@@ -359,7 +359,7 @@ static QString getTalipotPythonPluginSkeleton(const QString &pluginClassName,
     textStream << "    # the \"graph\" class attribute (see documentation of class tlp.Graph)."
                << endl
                << endl;
-    textStream << "    # The parameters provided by the user are stored in a dictionnary" << endl;
+    textStream << "    # The parameters provided by the user are stored in a dictionary" << endl;
     textStream << "    # that can be accessed through the \"dataSet\" class attribute." << endl
                << endl;
 
@@ -405,7 +405,7 @@ static QString getTalipotPythonPluginSkeleton(const QString &pluginClassName,
         << "    # An empty graph to populate is accessible through the \"graph\" class attribute"
         << endl;
     textStream << "    # (see documentation of class tlp.Graph)." << endl << endl;
-    textStream << "    # The parameters provided by the user are stored in a dictionnary" << endl;
+    textStream << "    # The parameters provided by the user are stored in a dictionary" << endl;
     textStream << "    # that can be accessed through the \"dataSet\" class attribute." << endl
                << endl;
 
@@ -418,7 +418,7 @@ static QString getTalipotPythonPluginSkeleton(const QString &pluginClassName,
     textStream << "    # The graph to export is accessible through the \"graph\" class attribute"
                << endl;
     textStream << "    # (see documentation of class tlp.Graph)." << endl << endl;
-    textStream << "    # The parameters provided by the user are stored in dictionnary" << endl;
+    textStream << "    # The parameters provided by the user are stored in dictionary" << endl;
     textStream << "    # that can be accessed through the \"dataSet\" class attribute." << endl
                << endl;
 
@@ -1449,7 +1449,7 @@ void PythonIDE::writeScriptsFilesList(int deleted) {
         // if the Python file is relatively located to the project file
         // only save a relative path for reloading the code from the file even on a different
         // computer
-        // this is usefull for instance when Talipot project and Python files are stored on a git
+        // this is useful for instance when Talipot project and Python files are stored on a git
         // repository
         QFileInfo projectFileInfo(_project->projectFile());
 

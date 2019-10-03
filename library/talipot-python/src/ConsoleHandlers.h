@@ -59,24 +59,24 @@ public slots:
     }
 
     QTextCursor cursor;
-    QTextCharFormat formt;
+    QTextCharFormat format;
 
     if (textEdit) {
-      formt = textEdit->textCursor().charFormat();
-      formt.setForeground(brush);
+      format = textEdit->textCursor().charFormat();
+      format.setForeground(brush);
       textEdit->moveCursor(QTextCursor::End);
       cursor = textEdit->textCursor();
     } else {
-      formt = textBrowser->textCursor().charFormat();
-      formt.setForeground(brush);
-      formt.setAnchor(false);
-      formt.setUnderlineStyle(QTextCharFormat::NoUnderline);
-      formt.setAnchorHref("");
+      format = textBrowser->textCursor().charFormat();
+      format.setForeground(brush);
+      format.setAnchor(false);
+      format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+      format.setAnchorHref("");
       textBrowser->moveCursor(QTextCursor::End);
       cursor = textBrowser->textCursor();
     }
 
-    cursor.insertText(output + '\n', formt);
+    cursor.insertText(output + '\n', format);
 
     if (textBrowser) {
       QRegExp rx("^.*File.*\"(.*)\".*line.*(\\d+).*$");
@@ -88,11 +88,11 @@ public slots:
         rx2.indexIn(cursor.selectedText());
 
         if (rx.cap(1) != "<string>" && rx2.cap(3) != "tlpimporthook") {
-          formt = cursor.charFormat();
-          formt.setAnchor(true);
-          formt.setUnderlineStyle(QTextCharFormat::SingleUnderline);
-          formt.setAnchorHref(QUrl::toPercentEncoding(rx.cap(1) + ":" + rx.cap(2)));
-          cursor.setCharFormat(formt);
+          format = cursor.charFormat();
+          format.setAnchor(true);
+          format.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+          format.setAnchorHref(QUrl::toPercentEncoding(rx.cap(1) + ":" + rx.cap(2)));
+          cursor.setCharFormat(format);
         }
 
         cursor = textBrowser->document()->find(rx, cursor);

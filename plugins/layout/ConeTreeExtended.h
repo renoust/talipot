@@ -35,7 +35,7 @@
  *
  *  <b> HISTORY</b>
  *
- *  - 01/04/99 Verson 0.0.1: Initial release
+ *  - 01/04/99 Version 0.0.1: Initial release
  *
  *  \note This algorithm only works on trees.
  *  Let n be the number of nodes, the algorithm complexity is in O(n).

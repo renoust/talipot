@@ -22,8 +22,8 @@ bool PythonInterpreter::evalSingleStatementAndGetValue(const QString &pythonStat
   bool ok = false;
 
   if (ret) {
-    PyObjectToCppObjectConvertor<T> convertor;
-    ok = convertor.convert(ret, value);
+    PyObjectToCppObjectConverter<T> converter;
+    ok = converter.convert(ret, value);
     decrefPyObject(ret);
   }
 
@@ -76,9 +76,9 @@ bool PythonInterpreter::callFunctionAndGetReturnValue(const QString &module,
   holdGIL();
   bool ok = false;
   PyObject *ret = callPythonFunction(module, function, parameters);
-  PyObjectToCppObjectConvertor<RETURN_TYPE> retConvertor;
+  PyObjectToCppObjectConverter<RETURN_TYPE> retConverter;
 
-  if (ret && retConvertor.convert(ret, returnValue)) {
+  if (ret && retConverter.convert(ret, returnValue)) {
     ok = true;
   }
 

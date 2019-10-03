@@ -70,7 +70,7 @@ struct edge {
   }
 
   /**
-   * @brief operator != checks if two edges are differents.
+   * @brief operator != checks if two edges are different.
    * @param n The other edge to compare this one to.
    * @return Whether or not the two edges are different.
    */

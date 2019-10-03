@@ -414,7 +414,7 @@ private:
   bool deleteMsgSent;
 
   /**
-   * @brief queuedEvent Used to prevent unecessary elements insertion in the set of events.
+   * @brief queuedEvent Used to prevent unnecessary elements insertion in the set of events.
    */
   mutable bool queuedEvent;
 
@@ -451,7 +451,7 @@ private:
   /**
    * @brief getOutObjects Retrieves Outbound objects (observing objects; i.e. Listeners and
    * Observers).
-   * @return an iterator on out objects (Listener/Observer), the iterator garantees that all objects
+   * @return an iterator on out objects (Listener/Observer), the iterator guarantees that all objects
    * are alive (not deleted during hold or notify).
    */
   tlp::Iterator<tlp::node> *getOutObjects() const;

@@ -111,7 +111,7 @@ void ItemsListWidget::changeStatus(QListWidgetItem *item) {
     temp.choice = false;
   }
 
-  temp.attribut = (hashDataBase.value(item->text())).attribut;
+  temp.attribute = (hashDataBase.value(item->text())).attribute;
   hashDataBase.remove(item->text());
   hashDataBase.insert(item->text(), temp);
 }

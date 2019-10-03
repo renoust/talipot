@@ -277,7 +277,7 @@ static void drawIcon(FontIcon &fontIcon, const Color &color, const Color &outlin
 
   fontIcon.render(color, outlineColor, outlineSize);
 
-  GlTextureManager::desactivateTexture();
+  GlTextureManager::deactivateTexture();
 }
 
 class FontIconGlyph : public Glyph {

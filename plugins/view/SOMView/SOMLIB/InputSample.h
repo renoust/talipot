@@ -76,7 +76,7 @@ public:
 
   // recover normalized value for val according to meanProperties[propNum] and sdProperties[propNum]
   double normalize(double val, unsigned propNum);
-  // convinience function
+  // convenience function
   double normalize(double val, const std::string &propertyName) {
     return normalize(val, findIndexForProperty(propertyName));
   }

@@ -147,7 +147,7 @@ void MatrixView::setOriented(bool flag) {
       }
     } else {
       for (auto e : graph()->edges()) {
-        // must add the symetric node
+        // must add the symmetric node
         vector<int> edgeNodes = _graphEntitiesToDisplayedNodes->getEdgeValue(e);
         edgeNodes.push_back(_matrixGraph->addNode().id);
         _graphEntitiesToDisplayedNodes->setEdgeValue(e, edgeNodes);

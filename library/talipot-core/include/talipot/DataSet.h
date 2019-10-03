@@ -207,7 +207,7 @@ public:
    * If there is no value associated with the given key, the input value is left untouched.
    *
    * @param key The key with which the data we want to retrieve is associated.
-   * @param value A variable wich will be overwritten with the value to retrieve.
+   * @param value A variable which will be overwritten with the value to retrieve.
    * @return bool Whether there is a value associated with given key or not.
    **/
   template <typename T>
@@ -218,7 +218,7 @@ public:
    * If no value is found, nothing is deleted.
    *
    * @param key The key with which the data we want to retrieve is associated.
-   * @param value A variable wich will be overwritten with the value to retrieve.
+   * @param value A variable which will be overwritten with the value to retrieve.
    * @return bool Whether there is a value associated with given key or not.
    **/
   template <typename T>

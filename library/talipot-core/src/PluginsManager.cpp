@@ -150,14 +150,14 @@ void PluginsManager::registerPlugin(FactoryInterface *objectFactory) {
       else if (currentLoader != nullptr) {
         std::string tmpStr;
         tmpStr += "'" + oldName + "' cannot be a deprecated name of plugin '" + pluginName + "'";
-        currentLoader->aborted(tmpStr, "multiple definitions found; check your plugin librairies.");
+        currentLoader->aborted(tmpStr, "multiple definitions found; check your plugin libraries.");
       }
     }
   } else {
     if (currentLoader != nullptr) {
       std::string tmpStr;
       tmpStr += "'" + pluginName + "' plugin";
-      currentLoader->aborted(tmpStr, "multiple definitions found; check your plugin librairies.");
+      currentLoader->aborted(tmpStr, "multiple definitions found; check your plugin libraries.");
     }
 
     delete information;

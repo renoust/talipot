@@ -197,7 +197,7 @@ jobs:
         # use GCC 7
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
       script:
-        # create build directoty
+        # create build directory
         - mkdir build && cd build
         # configure Talipot complete build using cmake
         - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_BUILD_DOC=OFF -DTALIPOT_USE_CCACHE=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1

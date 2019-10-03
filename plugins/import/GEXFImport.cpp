@@ -89,7 +89,7 @@ public:
   bool importGraph() override {
     string filename;
     bool curvedEdges = false;
-    // get the filename choosed by the user
+    // get the filename chosen by the user
     dataSet->get<string>("file::filename", filename);
     dataSet->get<bool>("Curved edges", curvedEdges);
 
@@ -109,7 +109,7 @@ public:
 
     nodesHaveCoordinates = false;
 
-    // Open the GEXF file choosed by the user
+    // Open the GEXF file chosen by the user
     QFile xmlFile(qfilename);
 
     if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
