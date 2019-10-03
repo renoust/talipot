@@ -3,6 +3,8 @@ INSTALL(FILES arrowSprite.png
               edgeBlomSprite.png
               edgeSpring.png
               titlebarGradient.png
-              logo32x32.ico
+              cylinderTexture.png
+              halfCylinderTexture.png
+              roundTexture.png
         DESTINATION ${TalipotBitmapInstallDir}
         COMPONENT talipot_textures)

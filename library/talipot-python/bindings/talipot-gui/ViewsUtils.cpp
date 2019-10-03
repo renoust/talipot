@@ -27,7 +27,7 @@ using namespace tlp;
 
 ViewMainWindow::ViewMainWindow() : QMainWindow() {
   setAttribute(Qt::WA_DeleteOnClose, true);
-  setWindowIcon(QIcon(":/logo32x32.ico"));
+  setWindowIcon(QIcon(":/software/bitmaps/logo32x32.ico"));
   resize(800, 600);
 }
 

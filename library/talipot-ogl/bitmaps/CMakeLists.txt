@@ -1,3 +1,5 @@
+ADD_SUBDIRECTORY(textures)
+
 INSTALL(FILES fontb.ttf
               font.ttf
               fa-brands-400.ttf
@@ -12,9 +14,6 @@ INSTALL(FILES fontb.ttf
               materialdesignicons-webfont.ttf
               materialdesignicons-webfont.woff
               materialdesignicons-webfont.woff2
-              halfCylinderTexture.png
-              cylinderTexture.png
-              roundTexture.png
         DESTINATION ${TalipotBitmapInstallDir}
         COMPONENT talipot_ogl)
 
