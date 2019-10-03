@@ -16,8 +16,8 @@
 
 #include "CppUnitIncludes.h"
 
-class TestPropertiesMinMaxAfterAddNode : public CppUnit::TestFixture {
-  CPPUNIT_TEST_SUITE(TestPropertiesMinMaxAfterAddNode);
+class PropertiesMinMaxAfterAddNodeTest : public CppUnit::TestFixture {
+  CPPUNIT_TEST_SUITE(PropertiesMinMaxAfterAddNodeTest);
   CPPUNIT_TEST(testDoublePropertyMinMaxAfterAddNode);
   CPPUNIT_TEST(testIntegerPropertyMinMaxAfterAddNode);
   CPPUNIT_TEST(testLayoutPropertyMinMaxAfterAddNode);

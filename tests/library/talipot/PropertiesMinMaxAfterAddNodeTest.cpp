@@ -11,25 +11,25 @@
  *
  */
 
-#include "TestPropertiesMinMaxAfterAddNode.h"
+#include "PropertiesMinMaxAfterAddNodeTest.h"
 
 #include <talipot/DoubleProperty.h>
 #include <talipot/IntegerProperty.h>
 #include <talipot/LayoutProperty.h>
 
-CPPUNIT_TEST_SUITE_REGISTRATION(TestPropertiesMinMaxAfterAddNode);
+CPPUNIT_TEST_SUITE_REGISTRATION(PropertiesMinMaxAfterAddNodeTest);
 
 using namespace tlp;
 
-void TestPropertiesMinMaxAfterAddNode::setUp() {
+void PropertiesMinMaxAfterAddNodeTest::setUp() {
   graph = tlp::newGraph();
 }
 
-void TestPropertiesMinMaxAfterAddNode::tearDown() {
+void PropertiesMinMaxAfterAddNodeTest::tearDown() {
   delete graph;
 }
 
-void TestPropertiesMinMaxAfterAddNode::testDoublePropertyMinMaxAfterAddNode() {
+void PropertiesMinMaxAfterAddNodeTest::testDoublePropertyMinMaxAfterAddNode() {
   DoubleProperty *doubleProp = graph->getProperty<DoubleProperty>("doubleProp");
 
   // add two nodes
@@ -53,7 +53,7 @@ void TestPropertiesMinMaxAfterAddNode::testDoublePropertyMinMaxAfterAddNode() {
   CPPUNIT_ASSERT_EQUAL(d2, doubleProp->getNodeMax(graph));
 }
 
-void TestPropertiesMinMaxAfterAddNode::testIntegerPropertyMinMaxAfterAddNode() {
+void PropertiesMinMaxAfterAddNodeTest::testIntegerPropertyMinMaxAfterAddNode() {
   IntegerProperty *intProp = graph->getProperty<IntegerProperty>("intProp");
 
   // add two nodes
@@ -77,7 +77,7 @@ void TestPropertiesMinMaxAfterAddNode::testIntegerPropertyMinMaxAfterAddNode() {
   CPPUNIT_ASSERT_EQUAL(i2, intProp->getNodeMax(graph));
 }
 
-void TestPropertiesMinMaxAfterAddNode::testLayoutPropertyMinMaxAfterAddNode() {
+void PropertiesMinMaxAfterAddNodeTest::testLayoutPropertyMinMaxAfterAddNode() {
   LayoutProperty *property = graph->getProperty<LayoutProperty>("testLayout");
 
   // add two nodes
