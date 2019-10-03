@@ -45,19 +45,6 @@ using namespace tlp;
 PluginsCenter::PluginsCenter(QWidget *parent)
     : QWidget(parent), _ui(new Ui::PluginsCenterData()), _currentItem(nullptr) {
   _ui->setupUi(this);
-
-  QStringList remoteLocs = Settings::instance().remoteLocations();
-  _ui->stableCheck->setChecked(remoteLocs.contains(PluginManager::STABLE_LOCATION));
-  _ui->testingCheck->setChecked(remoteLocs.contains(PluginManager::TESTING_LOCATION));
-
-  for (const QString &s : remoteLocs) {
-    if (s != PluginManager::STABLE_LOCATION && s != PluginManager::TESTING_LOCATION)
-      _ui->remoteLocationsList->addItem(s);
-  }
-#if defined(WIN32) || defined(__APPLE__)
-  _ui->repoButton->setEnabled(true);
-  _ui->homeButton->setEnabled(true);
-#endif
 }
 
 PluginsCenter::~PluginsCenter() {
@@ -83,10 +70,6 @@ void PluginsCenter::showErrorsPage() {
 
 void PluginsCenter::showWelcomePage() {
   _ui->pluginsContent->setCurrentWidget(_ui->homePage);
-}
-
-void PluginsCenter::showRepositoriesPage() {
-  _ui->pluginsContent->setCurrentWidget(_ui->reposPage);
 }
 
 void PluginsCenter::searchAll() {
@@ -211,41 +194,3 @@ void PluginsCenter::itemFocused() {
   _currentItem->focusIn();
 }
 
-void PluginsCenter::testingChecked(bool f) {
-  if (f)
-    Settings::instance().addRemoteLocation(PluginManager::TESTING_LOCATION);
-  else
-    Settings::instance().removeRemoteLocation(PluginManager::TESTING_LOCATION);
-}
-
-void PluginsCenter::stableChecked(bool f) {
-  if (f)
-    Settings::instance().addRemoteLocation(PluginManager::STABLE_LOCATION);
-  else
-    Settings::instance().removeRemoteLocation(PluginManager::STABLE_LOCATION);
-}
-
-void PluginsCenter::repoAdded() {
-  QString location = _ui->remoteLocationText->text();
-  Settings::instance().addRemoteLocation(location);
-
-  if (_ui->remoteLocationsList->findItems(location, Qt::MatchExactly).size() == 0)
-    _ui->remoteLocationsList->addItem(location);
-}
-
-void PluginsCenter::repoRemoved() {
-  QList<QListWidgetItem *> selected = _ui->remoteLocationsList->selectedItems();
-
-  if (selected.empty())
-    return;
-
-  QString location = selected.first()->text();
-  Settings::instance().removeRemoteLocation(location);
-  QList<QListWidgetItem *> lst = _ui->remoteLocationsList->findItems(location, Qt::MatchExactly);
-
-  if (lst.size() > 0) {
-    for (auto i : lst) {
-      delete i;
-    }
-  }
-}

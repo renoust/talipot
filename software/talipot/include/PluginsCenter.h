@@ -45,7 +45,6 @@ public slots:
 
   void showErrorsPage();
   void showWelcomePage();
-  void showRepositoriesPage();
 
   void searchAll();
   void searchAlgorithms();
@@ -63,11 +62,6 @@ public slots:
 protected slots:
   void sideListRowChanged(int i);
   void itemFocused();
-
-  void testingChecked(bool);
-  void stableChecked(bool);
-  void repoAdded();
-  void repoRemoved();
 };
 
 #endif // PLUGINS_CENTER_H
