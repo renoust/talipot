@@ -17,7 +17,7 @@
 #define TALIPOT_BASIC_ITERATORS_H
 
 #include <talipot/Iterator.h>
-#include <talipot/memorypool.h>
+#include <talipot/MemoryPool.h>
 #include <talipot/MutableContainer.h>
 
 namespace tlp {

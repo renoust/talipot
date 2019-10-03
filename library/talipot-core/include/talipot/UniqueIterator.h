@@ -20,7 +20,7 @@
 
 #include <talipot/Iterator.h>
 #include <talipot/StlIterator.h>
-#include <talipot/memorypool.h>
+#include <talipot/MemoryPool.h>
 
 //===============================================================================
 namespace tlp {

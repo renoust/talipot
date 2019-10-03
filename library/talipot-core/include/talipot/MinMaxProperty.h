@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef MINMAXPROPERTY_H
-#define MINMAXPROPERTY_H
+#ifndef TALIPOT_MIN_MAX_PROPERTY_H
+#define TALIPOT_MIN_MAX_PROPERTY_H
 
 #include <unordered_map>
 
@@ -142,8 +142,8 @@ protected:
   void removeListenersAndClearNodeMap();
   void removeListenersAndClearEdgeMap();
 };
-} // namespace tlp
+}
 
 #include "cxx/minmaxproperty.cxx"
 
-#endif // MINMAXPROPERTY_H
+#endif // TALIPOT_MIN_MAX_PROPERTY_H

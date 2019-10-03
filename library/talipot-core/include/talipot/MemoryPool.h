@@ -13,8 +13,9 @@
 
 ///@cond DOXYGEN_HIDDEN
 
-#ifndef MEMORYPOOL_H
-#define MEMORYPOOL_H
+#ifndef TALIPOT_MEMORY_POOL_H
+#define TALIPOT_MEMORY_POOL_H
+
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -124,6 +125,6 @@ private:
 
 template <typename TYPE>
 typename MemoryPool<TYPE>::MemoryChunkManager MemoryPool<TYPE>::_memoryChunkManager;
-} // namespace tlp
-#endif // MEMORYPOOL_H
+}
+#endif // TALIPOT_MEMORY_POOL_H
 ///@endcond

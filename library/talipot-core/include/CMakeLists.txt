@@ -32,8 +32,8 @@ INSTALL(FILES
   talipot/Iterator.h
   talipot/LayoutProperty.h
   talipot/Matrix.h
-  talipot/memorypool.h
-  talipot/minmaxproperty.h
+  talipot/MemoryPool.h
+  talipot/MinMaxProperty.h
   talipot/MutableContainer.h
   talipot/Node.h
   talipot/NumericProperty.h

@@ -17,7 +17,7 @@
 #include <talipot/PropertyTypes.h>
 #include <talipot/AbstractProperty.h>
 #include <talipot/PropertyAlgorithm.h>
-#include <talipot/minmaxproperty.h>
+#include <talipot/MinMaxProperty.h>
 #include <talipot/NumericProperty.h>
 
 namespace tlp {

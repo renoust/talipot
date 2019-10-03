@@ -13,7 +13,7 @@
 
 #include <talipot/GraphStorage.h>
 #include <talipot/Graph.h>
-#include <talipot/memorypool.h>
+#include <talipot/MemoryPool.h>
 #include <talipot/MutableContainer.h>
 
 using namespace tlp;
