@@ -19,7 +19,7 @@
 #include "talipot/PythonIncludes.h"
 #include "talipot/PythonInterpreter.h"
 
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/Perspective.h>
 
 using namespace tlp;
@@ -102,8 +102,8 @@ static PyObject *talipotutils_removePlugin(PyObject *, PyObject *args) {
   if (!PyArg_ParseTuple(args, "s", &buf))
     Py_RETURN_NONE;
 
-  if (tlp::PluginLister::pluginExists(buf)) {
-    tlp::PluginLister::removePlugin(buf);
+  if (tlp::PluginsManager::pluginExists(buf)) {
+    tlp::PluginsManager::removePlugin(buf);
   }
 
   Py_RETURN_NONE;

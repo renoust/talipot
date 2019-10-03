@@ -19,7 +19,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/TlpQtTools.h>
 #include "MainWindow.h"
 
@@ -29,7 +29,7 @@ PerspectiveItemWidget::PerspectiveItemWidget(const QString &perspectiveName, QWi
     : QWidget(parent), _perspectiveName(perspectiveName), _ui(new Ui::PerspectiveItemData) {
   _ui->setupUi(this);
   _ui->name->setText(_perspectiveName);
-  const tlp::Plugin &info = PluginLister::pluginInformation(QStringToTlpString(_perspectiveName));
+  const tlp::Plugin &info = PluginsManager::pluginInformation(QStringToTlpString(_perspectiveName));
   _ui->description->setText(info.info().c_str());
 
   QPixmap px(info.icon().c_str());

@@ -421,7 +421,7 @@ void initTalipotSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins)
       QStringToTlpString(tlp::getPluginLocalInstallationDir()) + "/lib/talipot");
   tlp::PluginLibraryLoader::loadPluginsFromDir(
       QStringToTlpString(tlp::getPluginLocalInstallationDir()), loader);
-  tlp::PluginLister::checkLoadedPluginsDependencies(loader);
+  tlp::PluginsManager::checkLoadedPluginsDependencies(loader);
   tlp::InteractorLister::initInteractorsDependencies();
   tlp::GlyphManager::loadGlyphPlugins();
   tlp::EdgeExtremityGlyphManager::loadGlyphPlugins();

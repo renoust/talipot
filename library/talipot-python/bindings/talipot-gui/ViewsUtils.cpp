@@ -15,7 +15,7 @@
 
 #include <QApplication>
 
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/WorkspacePanel.h>
 #include <talipot/GlMainView.h>
 #include <talipot/GlMainWidget.h>
@@ -33,7 +33,7 @@ ViewMainWindow::ViewMainWindow() : QMainWindow() {
 
 std::vector<std::string> ViewsManager::getViews() {
   std::vector<std::string> ret;
-  std::list<std::string> views = PluginLister::availablePlugins<View>();
+  std::list<std::string> views = PluginsManager::availablePlugins<View>();
 
   for (std::list<std::string>::iterator it = views.begin(); it != views.end(); ++it) {
     if (*it != "Python Script view") {
@@ -85,7 +85,7 @@ std::vector<tlp::View *> ViewsManager::getOpenedViewsWithName(const std::string 
 tlp::View *ViewsManager::addView(const std::string &viewName, tlp::Graph *graph,
                                  const DataSet &dataSet, bool show) {
   tlp::Workspace *workspace = tlpWorkspace();
-  tlp::View *view = PluginLister::getPluginObject<View>(viewName);
+  tlp::View *view = PluginsManager::getPluginObject<View>(viewName);
   view->setupUi();
   view->setGraph(graph);
   view->setState(dataSet);

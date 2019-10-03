@@ -64,7 +64,7 @@ int main(int, char **) {
   DoubleProperty *metric = myGraph->getProperty<DoubleProperty>("degree");
 
   // if the degree plugin is available, let's call it.
-  if (tlp::PluginLister::pluginExists("Degree")) {
+  if (tlp::PluginsManager::pluginExists("Degree")) {
     // now compute the degree of the nodes.
     string errorMessage;
     // this calls the Talipot plugin 'Degree'.

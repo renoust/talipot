@@ -196,10 +196,10 @@ The plugins documentation is ordered according to their type.
              as they use Qt under the hood.
 """ + '\n', file=f)
 
-pluginsNames = tlp.PluginLister.availablePlugins()
+pluginsNames = tlp.PluginsManager.availablePlugins()
 plugins = {}
 for pluginName in pluginsNames:
-    plugin = tlp.PluginLister.pluginInformation(pluginName)
+    plugin = tlp.PluginsManager.pluginInformation(pluginName)
     if not plugin.category() in plugins:
         plugins[plugin.category()] = []
     plugins[plugin.category()].append(plugin)
@@ -265,7 +265,7 @@ for cat in sorted(plugins.keys()):
         infos = formatSphinxDoc(p.info())
         safeprint(infos+'\n', file=f)
 
-        params = tlp.PluginLister.getPluginParameters(p.name())
+        params = tlp.PluginsManager.getPluginParameters(p.name())
         headers = ["name", "type", "default", "direction", "description"]
         paramsTable = []
         nbInParams = 0

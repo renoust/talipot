@@ -273,7 +273,7 @@ public:
     tlp::Interactor *getComponent() const {                                                        \
       if (!_component) {                                                                           \
         _component =                                                                               \
-            tlp::PluginLister::getPluginObject<Interactor>(BASE_INTERACTOR_STRING_NAME, nullptr);  \
+            tlp::PluginsManager::getPluginObject<Interactor>(BASE_INTERACTOR_STRING_NAME, nullptr);  \
         assert(_component != nullptr);                                                             \
       }                                                                                            \
       return _component;                                                                           \
@@ -361,7 +361,7 @@ public:
     tlp::Interactor *getComponent() const {                                                        \
       if (!_component) {                                                                           \
         _component =                                                                               \
-            tlp::PluginLister::getPluginObject<Interactor>(BASE_INTERACTOR_STRING_NAME, nullptr);  \
+            tlp::PluginsManager::getPluginObject<Interactor>(BASE_INTERACTOR_STRING_NAME, nullptr);  \
         assert(_component != nullptr);                                                             \
       }                                                                                            \
       return _component;                                                                           \

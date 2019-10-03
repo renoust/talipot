@@ -28,7 +28,7 @@ GlyphScaleConfigDialog::GlyphScaleConfigDialog(QWidget *parent)
     : QDialog(parent), _ui(new Ui::GlyphScaleConfigDialogData) {
   _ui->setupUi(this);
   _ui->tableWidget->setRowCount(5);
-  list<string> pluginsList = PluginLister::availablePlugins<Glyph>();
+  list<string> pluginsList = PluginsManager::availablePlugins<Glyph>();
 
   for (list<string>::iterator it = pluginsList.begin(); it != pluginsList.end(); ++it) {
     string glyphName = *it;
@@ -56,7 +56,7 @@ vector<int> GlyphScaleConfigDialog::getSelectedGlyphsId() const {
   for (int i = 0; i < _ui->tableWidget->rowCount(); ++i) {
     string glyphName = QStringToTlpString(
         static_cast<QComboBox *>(_ui->tableWidget->cellWidget(i, 0))->currentText());
-    ret.push_back(PluginLister::pluginInformation(glyphName).id());
+    ret.push_back(PluginsManager::pluginInformation(glyphName).id());
   }
 
   reverse(ret.begin(), ret.end());

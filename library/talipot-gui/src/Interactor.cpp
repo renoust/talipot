@@ -31,14 +31,14 @@ void InteractorLister::initInteractorsDependencies() {
 
   QMap<Interactor *, string> interactorToName;
 
-  std::list<std::string> interactors(PluginLister::availablePlugins<Interactor>());
+  std::list<std::string> interactors(PluginsManager::availablePlugins<Interactor>());
 
   for (const std::string &interactorName : interactors) {
-    interactorToName[PluginLister::getPluginObject<Interactor>(interactorName, nullptr)] =
+    interactorToName[PluginsManager::getPluginObject<Interactor>(interactorName, nullptr)] =
         interactorName;
   }
 
-  std::list<std::string> views(PluginLister::availablePlugins<View>());
+  std::list<std::string> views(PluginsManager::availablePlugins<View>());
 
   for (const std::string &viewName : views) {
     QList<Interactor *> compatibleInteractors;

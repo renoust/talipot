@@ -65,7 +65,7 @@ TriconnectedTest.cpp
 VectorGraph.cpp
 WithParameter.cpp
 YajlFacade.cpp
-PluginLister.cpp
+PluginsManager.cpp
 talipotconf.cpp
 Exception.cpp
 PluginProgress.cpp

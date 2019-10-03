@@ -14,7 +14,7 @@
 #include <talipot/PluginLibraryLoader.h>
 #include <talipot/Release.h>
 #include <talipot/config.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/TlpTools.h>
 
 #include <cstring>
@@ -56,7 +56,7 @@ void PluginLibraryLoader::loadPlugins(PluginLoader *loader, const std::string &f
   for (std::vector<std::string>::const_iterator it = paths.begin(); it != paths.end(); ++it) {
     std::string dir = (*it) + "/" + folder;
 
-    PluginLister::currentLoader = loader;
+    PluginsManager::currentLoader = loader;
     _pluginPath = dir;
 
     // ensure message is empty before plugins directory loading
@@ -73,7 +73,7 @@ void PluginLibraryLoader::loadPlugins(PluginLoader *loader, const std::string &f
 
 #endif
 
-    PluginLister::currentLoader = nullptr;
+    PluginsManager::currentLoader = nullptr;
   }
 
   // restore original pluginPath value
@@ -86,7 +86,7 @@ void PluginLibraryLoader::loadPluginsFromDir(const std::string &rootPath, Plugin
   // while loading a plugin that loads plugins
   std::string currentPluginPath = _pluginPath;
 
-  PluginLister::currentLoader = loader;
+  PluginsManager::currentLoader = loader;
   _pluginPath = rootPath;
 
   // ensure message is empty before plugins directory loading
@@ -103,7 +103,7 @@ void PluginLibraryLoader::loadPluginsFromDir(const std::string &rootPath, Plugin
 
 #endif
 
-  PluginLister::currentLoader = nullptr;
+  PluginsManager::currentLoader = nullptr;
 
   // restore original pluginPath value
   _pluginPath = currentPluginPath;

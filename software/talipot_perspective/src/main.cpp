@@ -24,12 +24,12 @@
 #include <talipot/Exception.h>
 #include <talipot/Release.h>
 #include <talipot/PluginLibraryLoader.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/TlpTools.h>
 #include <talipot/TlpQtTools.h>
 #include <talipot/Project.h>
 #include <talipot/SimplePluginProgressWidget.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/Perspective.h>
 #include <talipot/Interactor.h>
 #include <talipot/GlyphManager.h>
@@ -143,12 +143,12 @@ void usage(const QString &error) {
       << endl
       << "Available perspectives:" << endl;
   tlp::initTalipotSoftware();
-  list<string> perspectives = PluginLister::availablePlugins<Perspective>();
+  list<string> perspectives = PluginsManager::availablePlugins<Perspective>();
 
   for (auto &name : perspectives) {
     cout << " - " << name << endl;
     string usage_str("");
-    auto p = PluginLister::getPluginObject<Perspective>(name);
+    auto p = PluginsManager::getPluginObject<Perspective>(name);
 #if TALIPOT_INT_MM_VERSION > 503
 #error "The check talipotRelease() != 5.3.0 in non longer needed"
 #endif
@@ -320,7 +320,7 @@ int main(int argc, char **argv) {
 
   // Create perspective object
   Perspective *perspective =
-      PluginLister::getPluginObject<Perspective>(tlp::QStringToTlpString(perspectiveName), context);
+      PluginsManager::getPluginObject<Perspective>(tlp::QStringToTlpString(perspectiveName), context);
 
   if (perspective == nullptr) {
     usage("Cannot open perspective: " + perspectiveName +

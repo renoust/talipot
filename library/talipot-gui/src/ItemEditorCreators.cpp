@@ -652,7 +652,7 @@ QWidget *NodeShapeEditorCreator::createWidget(QWidget *parent) const {
   // making the scrollbars unreachable ...), we use a native
   // dialog with a QListWidget inside
   std::list<std::pair<QString, QPixmap>> shapes;
-  std::list<std::string> glyphs(PluginLister::availablePlugins<Glyph>());
+  std::list<std::string> glyphs(PluginsManager::availablePlugins<Glyph>());
 
   for (std::list<std::string>::const_iterator it = glyphs.begin(); it != glyphs.end(); ++it) {
     QString shapeName = tlpStringToQString(*it);
@@ -723,7 +723,7 @@ QWidget *EdgeExtremityShapeEditorCreator::createWidget(QWidget *parent) const {
   std::list<std::pair<QString, QPixmap>> shapes;
   shapes.push_back(std::make_pair(QString("NONE"), QPixmap()));
 
-  std::list<std::string> glyphs(PluginLister::availablePlugins<EdgeExtremityGlyph>());
+  std::list<std::string> glyphs(PluginsManager::availablePlugins<EdgeExtremityGlyph>());
 
   for (std::list<std::string>::const_iterator it = glyphs.begin(); it != glyphs.end(); ++it) {
     QString shapeName = tlpStringToQString(*it);

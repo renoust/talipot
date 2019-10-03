@@ -41,9 +41,9 @@ void ImportExportTest::setUp() {
   CppUnit::TestFixture::setUp();
 
   CPPUNIT_ASSERT_MESSAGE("Export plugin not loaded: " + exportAlgorithm,
-                         PluginLister::pluginExists(exportAlgorithm));
+                         PluginsManager::pluginExists(exportAlgorithm));
   CPPUNIT_ASSERT_MESSAGE("Import plugin not loaded: " + importAlgorithm,
-                         PluginLister::pluginExists(importAlgorithm));
+                         PluginsManager::pluginExists(importAlgorithm));
 }
 
 void ImportExportTest::testgridImportExport() {

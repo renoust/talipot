@@ -20,7 +20,7 @@
 #include <QNetworkReply>
 
 #include <talipot/Settings.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/SystemDefinition.h>
 #include <talipot/YajlFacade.h>
 #include <talipot/QuaZIPFacade.h>
@@ -162,11 +162,11 @@ PluginManager::PluginInformationList PluginManager::listPlugins(PluginLocations 
   QMap<QString, PluginInformation> nameToInfo;
 
   if (locations.testFlag(Local)) {
-    std::list<std::string> localResults = PluginLister::availablePlugins();
+    std::list<std::string> localResults = PluginsManager::availablePlugins();
 
     for (std::list<std::string>::iterator it = localResults.begin(); it != localResults.end();
          ++it) {
-      const Plugin &info = PluginLister::pluginInformation(*it);
+      const Plugin &info = PluginsManager::pluginInformation(*it);
 
       if (QString(info.category().c_str()).contains(categoryFilter) &&
           QString(info.name().c_str()).contains(nameFilter, Qt::CaseInsensitive)) {
@@ -244,8 +244,8 @@ void PluginInformation::fillLocalInfo(const Plugin &info) {
   installedVersion.date = info.date().c_str();
   installedVersion.author = tlp::tlpStringToQString(info.author());
   installedVersion.libraryLocation =
-      tlp::tlpStringToQString(PluginLister::getPluginLibrary(info.name()));
-  std::list<tlp::Dependency> dependencies = PluginLister::getPluginDependencies(info.name());
+      tlp::tlpStringToQString(PluginsManager::getPluginLibrary(info.name()));
+  std::list<tlp::Dependency> dependencies = PluginsManager::getPluginDependencies(info.name());
 
   for (std::list<tlp::Dependency>::iterator it = dependencies.begin(); it != dependencies.end();
        ++it) {

@@ -21,7 +21,7 @@
 #include <talipot/TlpTools.h>
 #include <talipot/PluginLoaderTxt.h>
 #include <talipot/PluginLibraryLoader.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 
 // Custom loader to catch if there was some issues
 // when loading plugins
@@ -68,10 +68,10 @@ int main(int argc, char **argv) {
   tlp::PluginLibraryLoader::loadPluginsFromDir(talipotPluginsDir, &pLoader);
 
   // create an instance of each of them, then destroy it
-  std::list<std::string> pluginNames = tlp::PluginLister::availablePlugins();
+  std::list<std::string> pluginNames = tlp::PluginsManager::availablePlugins();
   std::list<std::string>::const_iterator it = pluginNames.begin();
   for (; it != pluginNames.end(); ++it) {
-    tlp::Plugin *plugin = tlp::PluginLister::getPluginObject(*it);
+    tlp::Plugin *plugin = tlp::PluginsManager::getPluginObject(*it);
     delete plugin;
   }
 

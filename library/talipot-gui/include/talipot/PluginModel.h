@@ -23,7 +23,7 @@
 
 #include <talipot/Model.h>
 #include <talipot/TlpQtTools.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 
 #include <string>
 
@@ -73,11 +73,11 @@ class PluginModel : public tlp::Model {
     delete _root;
     _root = new TreeItem("root");
     QMap<QString, QMap<QString, QStringList>> pluginTree;
-    std::list<std::string> plugins = PluginLister::availablePlugins<PLUGIN>();
+    std::list<std::string> plugins = PluginsManager::availablePlugins<PLUGIN>();
 
     for (std::list<std::string>::iterator it = plugins.begin(); it != plugins.end(); ++it) {
       std::string name = *it;
-      const Plugin &plugin = PluginLister::pluginInformation(name);
+      const Plugin &plugin = PluginsManager::pluginInformation(name);
       pluginTree[tlp::tlpStringToQString(plugin.category())]
                 [tlp::tlpStringToQString(plugin.group())]
                     .append(tlp::tlpStringToQString(name));
@@ -96,7 +96,7 @@ class PluginModel : public tlp::Model {
         std::sort(pluginTree[cat][group].begin(), pluginTree[cat][group].end(), QStringCaseCmp);
 
         for (const QString &alg : pluginTree[cat][group]) {
-          const Plugin &plugin = PluginLister::pluginInformation(tlp::QStringToTlpString(alg));
+          const Plugin &plugin = PluginsManager::pluginInformation(tlp::QStringToTlpString(alg));
           std::string info = plugin.info();
 
           // set info only if they contain more than one word
@@ -188,9 +188,9 @@ public:
       f.setBold(true);
       return f;
     } else if (role == Qt::DecorationRole && item->children.isEmpty() &&
-               tlp::PluginLister::pluginExists(tlp::QStringToTlpString(item->name))) {
+               tlp::PluginsManager::pluginExists(tlp::QStringToTlpString(item->name))) {
       const tlp::Plugin &p =
-          tlp::PluginLister::pluginInformation(tlp::QStringToTlpString(item->name));
+          tlp::PluginsManager::pluginInformation(tlp::QStringToTlpString(item->name));
       QIcon icon(tlp::tlpStringToQString(p.icon()));
       return icon;
     }
@@ -204,7 +204,7 @@ public:
     if (index.isValid()) {
       TreeItem *item = static_cast<TreeItem *>(index.internalPointer());
 
-      if (!PluginLister::pluginExists<PLUGIN>(tlp::QStringToTlpString(item->name)))
+      if (!PluginsManager::pluginExists<PLUGIN>(tlp::QStringToTlpString(item->name)))
         result = Qt::ItemIsEnabled;
     }
 

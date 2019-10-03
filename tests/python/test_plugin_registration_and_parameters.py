@@ -323,7 +323,7 @@ class TestPluginParameters(unittest.TestCase):
 
     def test_plugin_is_registered(self):
         self.assertIn(plugin_name, tlp.getAlgorithmPluginsList())
-        plugin = tlp.PluginLister.pluginInformation(plugin_name)
+        plugin = tlp.PluginsManager.pluginInformation(plugin_name)
         self.assertEqual(plugin.category(), 'Algorithm')
         self.assertEqual(plugin.name(), plugin_name)
         self.assertEqual(plugin.author(), plugin_author)

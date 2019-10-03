@@ -133,7 +133,7 @@ public:
 
   void registerPlugin();
 %MethodCode
-  tlp::PluginLister::registerPlugin(sipCpp);
+  tlp::PluginsManager::registerPlugin(sipCpp);
 %End
 
 };

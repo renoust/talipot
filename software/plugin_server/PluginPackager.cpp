@@ -21,7 +21,7 @@
 #include <QDateTime>
 
 #include <talipot/SystemDefinition.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PluginLibraryLoader.h>
 #include <talipot/PluginLoaderTxt.h>
 #include <talipot/QuaZIPFacade.h>
@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
   // First we initialize Talipot with basic plugins to ensure dependencies consistency
   tlp::initTalipotLib(tlp::QStringToTlpString(QApplication::applicationDirPath()).c_str());
   tlp::PluginLibraryLoader::loadPlugins();
-  tlp::PluginLister::checkLoadedPluginsDependencies(nullptr);
+  tlp::PluginsManager::checkLoadedPluginsDependencies(nullptr);
   tlp::InteractorLister::initInteractorsDependencies();
   tlp::GlyphManager::loadGlyphPlugins();
   tlp::EdgeExtremityGlyphManager::loadGlyphPlugins();
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
   // Next: we load additional plugins from external project and ZIP data into output directory
   PluginInformationCollector collector;
   QDir pluginServerDir(argv[1]);
-  PluginLister::currentLoader = &collector;
+  PluginsManager::currentLoader = &collector;
 
   for (const QFileInfo &component :
        pluginServerDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
       stream.writeStartElement("plugin");
       stream.writeAttribute("name", plugin);
       stream.writeAttribute("path", component);
-      const Plugin &info = PluginLister::pluginInformation(tlp::QStringToTlpString(plugin));
+      const Plugin &info = PluginsManager::pluginInformation(tlp::QStringToTlpString(plugin));
       stream.writeAttribute("category", info.category().c_str());
       stream.writeAttribute("author", tlp::tlpStringToQString(info.author()));
       stream.writeAttribute("date", info.date().c_str());
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
       stream.writeAttribute("release", info.release().c_str());
       stream.writeAttribute("talipot", (info.talipotMajor() + '.' + info.talipotMinor()).c_str());
       stream.writeStartElement("dependencies");
-      const std::list<Dependency> &deps = PluginLister::getPluginDependencies(info.name());
+      const std::list<Dependency> &deps = PluginsManager::getPluginDependencies(info.name());
 
       for (std::list<Dependency>::const_iterator it = deps.begin(); it != deps.end(); ++it) {
         stream.writeStartElement("dependency");

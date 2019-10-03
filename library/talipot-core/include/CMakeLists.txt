@@ -45,7 +45,7 @@ INSTALL(FILES
   talipot/Plugin.h
   talipot/PluginContext.h
   talipot/PluginLibraryLoader.h
-  talipot/PluginLister.h
+  talipot/PluginsManager.h
   talipot/PluginLoader.h
   talipot/PluginLoaderTxt.h
   talipot/PluginProgress.h

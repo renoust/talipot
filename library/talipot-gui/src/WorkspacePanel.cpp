@@ -165,7 +165,7 @@ void WorkspacePanel::setView(tlp::View *view) {
   QList<std::string> interactorNames = InteractorLister::compatibleInteractors(view->name());
 
   for (const std::string &name : interactorNames) {
-    compatibleInteractors << PluginLister::getPluginObject<Interactor>(name);
+    compatibleInteractors << PluginsManager::getPluginObject<Interactor>(name);
   }
 
   _view->setInteractors(compatibleInteractors);

@@ -40,7 +40,7 @@
 
 %ModuleHeaderCode
 #include <talipot/Graph.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PropertyAlgorithm.h>
 #include <talipot/PythonCppTypesConverter.h>
 #include <talipot/Vector.h>
@@ -125,8 +125,8 @@ inline const std::vector<tlp::Vec3f>& getValue(const std::vector<tlp::Vec3f> *va
 template <typename T>
 bool pluginExists(std::string pluginName) {
   if (typeid(T).name() == typeid(tlp::Algorithm).name()) {
-    std::list<std::string> algoList = tlp::PluginLister::instance()->availablePlugins<tlp::Algorithm>();
-    std::list<std::string> propAlgoList = tlp::PluginLister::instance()->availablePlugins<tlp::PropertyAlgorithm>();
+    std::list<std::string> algoList = tlp::PluginsManager::instance()->availablePlugins<tlp::Algorithm>();
+    std::list<std::string> propAlgoList = tlp::PluginsManager::instance()->availablePlugins<tlp::PropertyAlgorithm>();
     std::list<std::string> realAlgoList;
     for (std::list<std::string>::iterator it = algoList.begin() ; it != algoList.end() ; ++it) {
       if (std::find(propAlgoList.begin(), propAlgoList.end(), *it) == propAlgoList.end()) {
@@ -135,7 +135,7 @@ bool pluginExists(std::string pluginName) {
     }
     return std::find(realAlgoList.begin(), realAlgoList.end(), pluginName) != realAlgoList.end();
   } else {
-    return tlp::PluginLister::instance()->pluginExists<T>(pluginName);
+    return tlp::PluginsManager::instance()->pluginExists<T>(pluginName);
   }
 }
 
@@ -408,7 +408,7 @@ bool isTupleAndCanConvertToVec3fType(PyObject *pyObj) {
 %Include ViewSettings.sip
 %Include Delaunay.sip
 %Include ConvexHull.sip
-%Include PluginLister.sip
+%Include PluginsManager.sip
 %Include ParametricCurves.sip
 
 // force generation of wrappers for specialized template classes

@@ -53,7 +53,7 @@
 #include <talipot/GlMainWidget.h>
 #include <talipot/GlGraphComposite.h>
 #include <talipot/Settings.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/TlpQtTools.h>
 #include <talipot/Project.h>
 #include <talipot/GraphTools.h>
@@ -84,10 +84,10 @@ static bool talipotCanOpenFile(const QString &path) {
     return true;
   }
 
-  std::list<std::string> imports = PluginLister::availablePlugins<ImportModule>();
+  std::list<std::string> imports = PluginsManager::availablePlugins<ImportModule>();
 
   for (auto &import : imports) {
-    ImportModule *m = PluginLister::getPluginObject<ImportModule>(import);
+    ImportModule *m = PluginsManager::getPluginObject<ImportModule>(import);
     std::list<std::string> fileExtensions(m->allFileExtensions());
 
     for (auto &ext : fileExtensions) {
@@ -735,7 +735,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   connect(_ui->developButton, SIGNAL(clicked()), this, SLOT(showPythonIDE()));
   _pythonPanel->setModel(_graphs);
   _pythonIDE->setGraphsModel(_graphs);
-  tlp::PluginLister::instance()->addListener(this);
+  tlp::PluginsManager::instance()->addListener(this);
   QTimer::singleShot(100, this, SLOT(initPythonIDE()));
 #endif
 
@@ -1014,13 +1014,13 @@ bool GraphPerspective::saveAs(const QString &path) {
 
 void GraphPerspective::open(QString fileName) {
   QMap<std::string, std::string> modules;
-  std::list<std::string> imports = PluginLister::availablePlugins<ImportModule>();
+  std::list<std::string> imports = PluginsManager::availablePlugins<ImportModule>();
 
   std::string filters("Talipot project (*.tlpx);;");
   std::string filterAny("Any supported format (");
 
   for (auto &import : imports) {
-    ImportModule *m = PluginLister::getPluginObject<ImportModule>(import);
+    ImportModule *m = PluginsManager::getPluginObject<ImportModule>(import);
     std::list<std::string> fileExtension(m->allFileExtensions());
 
     std::string currentFilter;
@@ -1529,7 +1529,7 @@ void GraphPerspective::showStartPanels(Graph *g) {
   View *firstPanel = nullptr;
 
   for (auto panelName : {"Spreadsheet view", "Node Link Diagram view"}) {
-    View *view = PluginLister::getPluginObject<View>(panelName);
+    View *view = PluginsManager::getPluginObject<View>(panelName);
 
     if (firstPanel == nullptr) {
       firstPanel = view;

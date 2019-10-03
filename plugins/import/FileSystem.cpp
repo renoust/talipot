@@ -93,7 +93,7 @@ static const std::vector<std::string> commonDevFilesExt(commonDevFilesExtArray,
 static tlp::DataSet getDefaultAlgorithmParameters(const std::string &algoName, tlp::Graph *graph) {
   tlp::DataSet result;
   const tlp::ParameterDescriptionList &parameters =
-      tlp::PluginLister::getPluginParameters(algoName);
+      tlp::PluginsManager::getPluginParameters(algoName);
   parameters.buildDefaultDataSet(result, graph);
   return result;
 }

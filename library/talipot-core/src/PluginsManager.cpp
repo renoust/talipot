@@ -12,22 +12,22 @@
  */
 
 #include <cstdlib>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PluginLoader.h>
 #include <talipot/PluginLibraryLoader.h>
 
 using namespace tlp;
 using namespace std;
 
-PluginLoader *PluginLister::currentLoader = nullptr;
+PluginLoader *PluginsManager::currentLoader = nullptr;
 
-struct PluginListerInstance : public PluginLister {
+struct PluginsManagerInstance : public PluginsManager {
   // there is only one instance of this class
-  // It is first used by PluginLister::registerPlugin
+  // It is first used by PluginsManager::registerPlugin
   // at the talipot-core library loading time while
   // it is only 'zero' initialized
   bool created;
-  PluginListerInstance() : created(true) {}
+  PluginsManagerInstance() : created(true) {}
   inline void sendPluginAddedEvent(const std::string &pluginName) {
     if (created)
       sendEvent(PluginEvent(PluginEvent::TLP_ADD_PLUGIN, pluginName));
@@ -38,13 +38,13 @@ struct PluginListerInstance : public PluginLister {
   }
 };
 
-PluginListerInstance _instance;
+PluginsManagerInstance _instance;
 
-PluginLister *PluginLister::instance() {
+PluginsManager *PluginsManager::instance() {
   return &_instance;
 }
 
-void PluginLister::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
+void PluginsManager::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
   // plugins dependencies loop
   bool depsNeedCheck;
 
@@ -52,27 +52,27 @@ void PluginLister::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
     depsNeedCheck = false;
 
     // loop over plugins
-    std::list<std::string> plugins = PluginLister::availablePlugins();
+    std::list<std::string> plugins = PluginsManager::availablePlugins();
 
     for (const string &pluginName : plugins) {
-      std::list<Dependency> dependencies = PluginLister::getPluginDependencies(pluginName);
+      std::list<Dependency> dependencies = PluginsManager::getPluginDependencies(pluginName);
 
       // loop over dependencies
       for (const Dependency &dep : dependencies) {
         std::string pluginDepName = dep.pluginName;
 
-        if (!PluginLister::pluginExists(pluginDepName)) {
+        if (!PluginsManager::pluginExists(pluginDepName)) {
           if (loader)
             loader->aborted(pluginName, " '" + pluginName +
                                             "' will be removed, it depends on missing " + "'" +
                                             pluginDepName + "'.");
 
-          PluginLister::removePlugin(pluginName);
+          PluginsManager::removePlugin(pluginName);
           depsNeedCheck = true;
           break;
         }
 
-        std::string release = PluginLister::getPluginRelease(pluginDepName);
+        std::string release = PluginsManager::getPluginRelease(pluginDepName);
         const std::string &releaseDep = dep.pluginRelease;
 
         if (tlp::getMajor(release) != tlp::getMajor(releaseDep) ||
@@ -84,7 +84,7 @@ void PluginLister::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
                                             release + " is loaded.");
           }
 
-          PluginLister::removePlugin(pluginName);
+          PluginsManager::removePlugin(pluginName);
           depsNeedCheck = true;
           break;
         }
@@ -93,7 +93,7 @@ void PluginLister::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
   } while (depsNeedCheck);
 }
 
-std::list<std::string> PluginLister::availablePlugins() {
+std::list<std::string> PluginsManager::availablePlugins() {
   std::list<std::string> keys;
 
   for (auto it = _plugins.begin(); it != _plugins.end(); ++it) {
@@ -105,27 +105,27 @@ std::list<std::string> PluginLister::availablePlugins() {
   return keys;
 }
 
-const Plugin &PluginLister::pluginInformation(const std::string &name) {
+const Plugin &PluginsManager::pluginInformation(const std::string &name) {
   return *(_plugins.find(name)->second.info);
 }
 
 // used to initialize the _plugins map
 // it is first called by registerPlugin at the library loading time
 // while _plugins is only 'zero' initialized
-std::map<std::string, PluginLister::PluginDescription> &PluginLister::getPluginsMap() {
+std::map<std::string, PluginsManager::PluginDescription> &PluginsManager::getPluginsMap() {
   static std::map<std::string, PluginDescription> plugins;
   return plugins;
 }
 
 // the _plugins map
-std::map<std::string, PluginLister::PluginDescription> &PluginLister::_plugins =
-    PluginLister::getPluginsMap();
+std::map<std::string, PluginsManager::PluginDescription> &PluginsManager::_plugins =
+    PluginsManager::getPluginsMap();
 
-void PluginLister::registerPlugin(FactoryInterface *objectFactory) {
+void PluginsManager::registerPlugin(FactoryInterface *objectFactory) {
   // because the talipot-core library contains some import/export plugins
   // we must ensure plugins map initialization at the library loading time
   // while _plugins is only 'zero' initialized
-  std::map<std::string, PluginLister::PluginDescription> &plugins = getPluginsMap();
+  std::map<std::string, PluginsManager::PluginDescription> &plugins = getPluginsMap();
 
   tlp::Plugin *information = objectFactory->createPluginObject(nullptr);
   std::string pluginName = information->name();
@@ -164,12 +164,12 @@ void PluginLister::registerPlugin(FactoryInterface *objectFactory) {
   }
 }
 
-void tlp::PluginLister::removePlugin(const std::string &name) {
+void tlp::PluginsManager::removePlugin(const std::string &name) {
   _plugins.erase(name);
   _instance.sendPluginRemovedEvent(name);
 }
 
-tlp::Plugin *PluginLister::getPluginObject(const std::string &name, PluginContext *context) {
+tlp::Plugin *PluginsManager::getPluginObject(const std::string &name, PluginContext *context) {
   auto it = _plugins.find(name);
 
   if (it != _plugins.end()) {
@@ -184,22 +184,22 @@ tlp::Plugin *PluginLister::getPluginObject(const std::string &name, PluginContex
   return nullptr;
 }
 
-const tlp::ParameterDescriptionList &PluginLister::getPluginParameters(const std::string &name) {
+const tlp::ParameterDescriptionList &PluginsManager::getPluginParameters(const std::string &name) {
   return pluginInformation(name).getParameters();
 }
 
-std::string PluginLister::getPluginRelease(const std::string &name) {
+std::string PluginsManager::getPluginRelease(const std::string &name) {
   return pluginInformation(name).release();
 }
 
-const std::list<tlp::Dependency> &PluginLister::getPluginDependencies(const std::string &name) {
+const std::list<tlp::Dependency> &PluginsManager::getPluginDependencies(const std::string &name) {
   return pluginInformation(name).dependencies();
 }
 
-std::string PluginLister::getPluginLibrary(const std::string &name) {
+std::string PluginsManager::getPluginLibrary(const std::string &name) {
   return _plugins.find(name)->second.library;
 }
 
-bool PluginLister::pluginExists(const std::string &pluginName) {
+bool PluginsManager::pluginExists(const std::string &pluginName) {
   return _plugins.find(pluginName) != _plugins.end();
 }

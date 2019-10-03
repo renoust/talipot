@@ -658,7 +658,7 @@ void Workspace::readProject(Project *project, QMap<QString, Graph *> rootIds,
         xmlFile->close();
         delete xmlFile;
 
-        View *view = PluginLister::getPluginObject<View>(QStringToTlpString(viewName));
+        View *view = PluginsManager::getPluginObject<View>(QStringToTlpString(viewName));
 
         if (view == nullptr)
           continue;

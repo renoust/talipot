@@ -272,11 +272,11 @@ Graph *tlp::loadGraph(const std::string &filename, PluginProgress *progress) {
   DataSet dataSet;
   std::string importPluginName = "TLP Import";
 
-  list<string> importPlugins = PluginLister::availablePlugins<ImportModule>();
+  list<string> importPlugins = PluginsManager::availablePlugins<ImportModule>();
 
   for (const string &pluginName : importPlugins) {
     const ImportModule &importPlugin =
-        static_cast<const ImportModule &>(PluginLister::pluginInformation(pluginName));
+        static_cast<const ImportModule &>(PluginsManager::pluginInformation(pluginName));
     list<string> extensions(importPlugin.fileExtensions());
 
     for (const string &ext : extensions)
@@ -305,10 +305,10 @@ bool tlp::saveGraph(Graph *graph, const std::string &filename, PluginProgress *p
   bool gzip = false;
 
   string exportPluginName;
-  list<string> exportPlugins = PluginLister::availablePlugins<ExportModule>();
+  list<string> exportPlugins = PluginsManager::availablePlugins<ExportModule>();
 
   for (const string &pluginName : exportPlugins) {
-    ExportModule *exportPlugin = PluginLister::getPluginObject<ExportModule>(pluginName);
+    ExportModule *exportPlugin = PluginsManager::getPluginObject<ExportModule>(pluginName);
     string ext(exportPlugin->fileExtension());
 
     if (filename.rfind(ext) != string::npos &&
@@ -369,7 +369,7 @@ bool tlp::saveGraph(Graph *graph, const std::string &filename, PluginProgress *p
 Graph *tlp::importGraph(const std::string &format, DataSet &dataSet, PluginProgress *progress,
                         Graph *graph) {
 
-  if (!PluginLister::pluginExists(format)) {
+  if (!PluginsManager::pluginExists(format)) {
     tlp::warning() << __FUNCTION__ << ": import plugin \"" << format
                    << "\" does not exist (or is not loaded)" << endl;
     return nullptr;
@@ -392,7 +392,7 @@ Graph *tlp::importGraph(const std::string &format, DataSet &dataSet, PluginProgr
     tmpProgress = progress;
 
   AlgorithmContext *tmp = new AlgorithmContext(graph, &dataSet, tmpProgress);
-  ImportModule *newImportModule = PluginLister::getPluginObject<ImportModule>(format, tmp);
+  ImportModule *newImportModule = PluginsManager::getPluginObject<ImportModule>(format, tmp);
   assert(newImportModule != nullptr);
 
   // ensure that the parsing of float or double does not depend on locale
@@ -426,7 +426,7 @@ Graph *tlp::importGraph(const std::string &format, DataSet &dataSet, PluginProgr
 //=========================================================
 bool tlp::exportGraph(Graph *graph, std::ostream &outputStream, const std::string &format,
                       DataSet &dataSet, PluginProgress *progress) {
-  if (!PluginLister::pluginExists(format)) {
+  if (!PluginsManager::pluginExists(format)) {
     tlp::warning() << __FUNCTION__ << ": export plugin \"" << format
                    << "\" does not exist (or is not loaded)" << endl;
     return false;
@@ -443,7 +443,7 @@ bool tlp::exportGraph(Graph *graph, std::ostream &outputStream, const std::strin
     tmpProgress = progress;
 
   AlgorithmContext *context = new AlgorithmContext(graph, &dataSet, tmpProgress);
-  ExportModule *newExportModule = PluginLister::getPluginObject<ExportModule>(format, context);
+  ExportModule *newExportModule = PluginsManager::getPluginObject<ExportModule>(format, context);
   assert(newExportModule != nullptr);
   std::string filename;
 
@@ -668,7 +668,7 @@ Iterator<Graph *> *tlp::getRootGraphs() {
 
 bool Graph::applyAlgorithm(const std::string &algorithm, std::string &errorMessage,
                            DataSet *parameters, PluginProgress *progress) {
-  if (!PluginLister::pluginExists(algorithm)) {
+  if (!PluginsManager::pluginExists(algorithm)) {
     tlp::warning() << __FUNCTION__ << ": algorithm plugin \"" << algorithm
                    << "\" does not exist (or is not loaded)" << endl;
     return false;
@@ -685,7 +685,7 @@ bool Graph::applyAlgorithm(const std::string &algorithm, std::string &errorMessa
     tmpProgress = progress;
 
   AlgorithmContext *context = new AlgorithmContext(this, parameters, tmpProgress);
-  Algorithm *newAlgo = PluginLister::getPluginObject<Algorithm>(algorithm, context);
+  Algorithm *newAlgo = PluginsManager::getPluginObject<Algorithm>(algorithm, context);
 
   if ((result = newAlgo->check(errorMessage))) {
     result = newAlgo->run();
@@ -768,7 +768,7 @@ bool tlp::Graph::applyPropertyAlgorithm(const std::string &algorithm, PropertyIn
 
   tlp::Observable::holdObservers();
   circularCalls[algorithm] = prop;
-  Algorithm *tmpAlgo = tlp::PluginLister::getPluginObject<PropertyAlgorithm>(algorithm, &context);
+  Algorithm *tmpAlgo = tlp::PluginsManager::getPluginObject<PropertyAlgorithm>(algorithm, &context);
 
   if (tmpAlgo != nullptr) {
     result = tmpAlgo->check(errorMessage);

@@ -25,7 +25,7 @@
 
 #include <talipot/Settings.h>
 #include <talipot/PluginManager.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/Perspective.h>
 
 #include "PerspectiveItemWidget.h"
@@ -60,7 +60,7 @@ WelcomePage::WelcomePage(QWidget *parent) : QWidget(parent), _ui(new Ui::Welcome
     _ui->recentDocumentsLabel->setText(txt);
   }
 
-  std::list<std::string> perspectives = PluginLister::availablePlugins<tlp::Perspective>();
+  std::list<std::string> perspectives = PluginsManager::availablePlugins<tlp::Perspective>();
 
   for (std::list<std::string>::iterator it = perspectives.begin(); it != perspectives.end(); ++it) {
     _ui->perspectivesFrame->layout()->addWidget(new PerspectiveItemWidget(it->c_str()));

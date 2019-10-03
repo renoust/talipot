@@ -77,7 +77,7 @@ void AlgorithmRunner::buildTreeUi(QWidget *w, PluginModel<tlp::Algorithm> *model
 
 void AlgorithmRunner::insertItem(QWidget *w, const QString &name) {
 
-  const Plugin &plugin = PluginLister::pluginInformation(QStringToTlpString(name));
+  const Plugin &plugin = PluginsManager::pluginInformation(QStringToTlpString(name));
   QString category = plugin.category().c_str();
   QString group = plugin.group().c_str();
 
@@ -148,7 +148,7 @@ void AlgorithmRunner::refreshTreeUi(QWidget *w) {
   QStringList visibleItems;
 
   for (auto i : w->findChildren<AlgorithmRunnerItem *>()) {
-    if (PluginLister::pluginExists(QStringToTlpString(i->name())))
+    if (PluginsManager::pluginExists(QStringToTlpString(i->name())))
       visibleItems.push_back(i->name());
     else {
       _favorites.removeAll(i);
@@ -162,7 +162,7 @@ void AlgorithmRunner::refreshTreeUi(QWidget *w) {
     }
   }
 
-  std::list<std::string> installedPlugins = PluginLister::availablePlugins<tlp::Algorithm>();
+  std::list<std::string> installedPlugins = PluginsManager::availablePlugins<tlp::Algorithm>();
 
   for (const auto &name : installedPlugins) {
     if (!visibleItems.contains(name.c_str())) {
@@ -391,7 +391,7 @@ void AlgorithmRunner::removeFavorite(const QString &algName) {
 }
 
 void AlgorithmRunner::addFavorite(const QString &algName, const DataSet &data) {
-  if (!PluginLister::pluginExists(QStringToTlpString(algName)))
+  if (!PluginsManager::pluginExists(QStringToTlpString(algName)))
     return;
 
   Settings::instance().addFavoriteAlgorithm(algName);

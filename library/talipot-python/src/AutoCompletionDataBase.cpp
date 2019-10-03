@@ -20,7 +20,7 @@
 #include <QStringList>
 
 #include <talipot/StringCollection.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PropertyAlgorithm.h>
 #include <talipot/ImportModule.h>
 #include <talipot/ExportModule.h>
@@ -48,7 +48,7 @@ AutoCompletionDataBase::AutoCompletionDataBase(APIDataBase *apiDb)
 
 static bool tlpPluginExists(const QString &pluginName) {
 
-  return PluginLister::pluginExists(QStringToTlpString(pluginName));
+  return PluginsManager::pluginExists(QStringToTlpString(pluginName));
 }
 
 static QString getPythonTypeName(const QString &cppTypeName) {
@@ -71,10 +71,10 @@ static QSet<QString> getParametersListForPlugin(const QString &pluginName,
                                                 const QString &prefix = "") {
   QSet<QString> ret;
 
-  if (PluginLister::pluginExists(QStringToTlpString(pluginName))) {
+  if (PluginsManager::pluginExists(QStringToTlpString(pluginName))) {
 
     const ParameterDescriptionList &parameters =
-        PluginLister::getPluginParameters(QStringToTlpString(pluginName));
+        PluginsManager::getPluginParameters(QStringToTlpString(pluginName));
 
     for (const ParameterDescription &pd : parameters.getParameters()) {
       QString param = tlpStringToQString(pd.getName());
@@ -104,9 +104,9 @@ static QSet<QString> getStringCollectionEntriesForPlugin(const QString &pluginNa
                                                          const QString &prefix = "") {
   QSet<QString> ret;
 
-  if (PluginLister::pluginExists(QStringToTlpString(pluginName))) {
+  if (PluginsManager::pluginExists(QStringToTlpString(pluginName))) {
     const ParameterDescriptionList &parameters =
-        PluginLister::getPluginParameters(QStringToTlpString(pluginName));
+        PluginsManager::getPluginParameters(QStringToTlpString(pluginName));
     DataSet dataSet;
     parameters.buildDefaultDataSet(dataSet);
     StringCollection sc;
@@ -1136,10 +1136,10 @@ AutoCompletionDataBase::getGraphPropertiesListIfContext(const QString &context,
 
 static QSet<QString> getAlgorithmPluginsListOfType(const QString &type, const QString &prefix) {
   QSet<QString> ret;
-  list<string> pluginNames = PluginLister::availablePlugins();
+  list<string> pluginNames = PluginsManager::availablePlugins();
 
   for (list<string>::iterator it = pluginNames.begin(); it != pluginNames.end(); ++it) {
-    Plugin *plugin = PluginLister::getPluginObject(*it);
+    Plugin *plugin = PluginsManager::getPluginObject(*it);
 
     if (plugin->category() != GLYPH_CATEGORY && plugin->category() != EEGLYPH_CATEGORY &&
         plugin->category() != INTERACTOR_CATEGORY && plugin->category() != VIEW_CATEGORY &&

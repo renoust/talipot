@@ -21,7 +21,7 @@
 #include <QTcpSocket>
 
 #include <talipot/Release.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PluginLibraryLoader.h>
 #include <talipot/TlpTools.h>
 #include <talipot/TlpQtTools.h>

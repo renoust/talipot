@@ -247,7 +247,7 @@ public:
    *
    * * use buildDefaultDataSet on the plugin object if you have an instance of it
    *
-   * * call getPluginParameters() with the name of the plugin on the PluginLister
+   * * call getPluginParameters() with the name of the plugin on the PluginsManager
    *
    *
    * If an error occurs, a message describing the error should be stored in errorMessage.
@@ -1428,7 +1428,7 @@ public:
    * some additional information.
    * @return Whether the plugin applied successfully or not. If not, check the error message.
    *
-   * @see PluginLister::getPluginParameters() to retrieve the list of default parameters for the
+   * @see PluginsManager::getPluginParameters() to retrieve the list of default parameters for the
    * plugin.
    */
   bool applyPropertyAlgorithm(const std::string &algorithm, PropertyInterface *result,

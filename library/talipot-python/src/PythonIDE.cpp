@@ -38,9 +38,9 @@
 #include <talipot/Algorithm.h>
 #include <talipot/ImportModule.h>
 #include <talipot/ExportModule.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/PythonCodeEditor.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/Project.h>
 #include <talipot/TlpQtTools.h>
 #include <talipot/GraphHierarchiesModel.h>
@@ -1036,8 +1036,8 @@ void PythonIDE::registerPythonPlugin(bool clear) {
 
   QString oldPluginName = _editedPluginsName[pluginFile];
 
-  if (tlp::PluginLister::pluginExists(QStringToTlpString(oldPluginName))) {
-    tlp::PluginLister::removePlugin(QStringToTlpString(oldPluginName));
+  if (tlp::PluginsManager::pluginExists(QStringToTlpString(oldPluginName))) {
+    tlp::PluginsManager::removePlugin(QStringToTlpString(oldPluginName));
   }
 
   _pythonInterpreter->setConsoleWidget(_ui->consoleWidget);
@@ -1102,8 +1102,8 @@ void PythonIDE::removePythonPlugin() {
 
   QString pluginName = _editedPluginsName[getCurrentPluginEditor()->getFileName()];
 
-  if (tlp::PluginLister::pluginExists(QStringToTlpString(pluginName))) {
-    tlp::PluginLister::removePlugin(QStringToTlpString(pluginName));
+  if (tlp::PluginsManager::pluginExists(QStringToTlpString(pluginName))) {
+    tlp::PluginsManager::removePlugin(QStringToTlpString(pluginName));
     _ui->pluginStatusLabel->setText("Plugin has been successfully removed.");
   } else {
     _ui->pluginStatusLabel->setText("Plugin is not registered in the plugin database.");

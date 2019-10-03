@@ -34,7 +34,7 @@ PanelSelectionWizard::PanelSelectionWizard(GraphHierarchiesModel *model, QWidget
   _ui->graphCombo->selectIndex(_model->indexOf(_model->currentGraph()));
 
   _ui->panelList->setModel(new SimplePluginListModel(
-      QList<string>::fromStdList(PluginLister::availablePlugins<tlp::View>()), _ui->panelList));
+      QList<string>::fromStdList(PluginsManager::availablePlugins<tlp::View>()), _ui->panelList));
   connect(_ui->panelList->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this,
           SLOT(panelSelected(QModelIndex)));
   connect(_ui->panelList, SIGNAL(doubleClicked(QModelIndex)), button(QWizard::FinishButton),
@@ -49,7 +49,7 @@ PanelSelectionWizard::~PanelSelectionWizard() {
 void PanelSelectionWizard::panelSelected(const QModelIndex &index) {
   _currentItem = index.data().toString();
   _ui->panelDescription->setHtml(
-      PluginLister::pluginInformation(QStringToTlpString(_currentItem)).info().c_str());
+      PluginsManager::pluginInformation(QStringToTlpString(_currentItem)).info().c_str());
   // NexButton is temporarily hidden
   // QWizard::HaveNextButtonOnLastPage has been removed
   // from options property in PanelSelectionWizard.ui
@@ -69,7 +69,7 @@ tlp::View *PanelSelectionWizard::panel() const {
 }
 
 void PanelSelectionWizard::createView() {
-  _view = PluginLister::getPluginObject<View>(QStringToTlpString(_currentItem));
+  _view = PluginsManager::getPluginObject<View>(QStringToTlpString(_currentItem));
   _view->setupUi();
   _view->setGraph(graph());
   _view->setState(DataSet());

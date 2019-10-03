@@ -43,7 +43,7 @@ public:
 /**
  * @ingroup Plugins
  *
- * @brief The PluginLister class is a singleton used to list plugins currently loaded into Talipot
+ * @brief The PluginsManager class is a singleton used to list plugins currently loaded into Talipot
  * and retrieve information about them.
  *
  * This class holds various methods to check information about plugins currently loaded into
@@ -57,7 +57,7 @@ public:
  * @see tlp::PluginLoader
  * @see tlp::PluginLibraryLoader
  */
-class TLP_SCOPE PluginLister : public Observable {
+class TLP_SCOPE PluginsManager : public Observable {
 private:
   struct PluginDescription {
     FactoryInterface *factory;
@@ -81,10 +81,10 @@ public:
   /**
    * @brief Gets the static instance of this class. If not already done, creates it beforehand.
    *
-   * @return PluginLister< ObjectType, Context >* The only instance of this object that exists in
+   * @return PluginsManager< ObjectType, Context >* The only instance of this object that exists in
    *the whole program.
    **/
-  static tlp::PluginLister *instance();
+  static tlp::PluginsManager *instance();
 
   /**
    * @brief Constructs a plug-in.
@@ -111,7 +111,7 @@ public:
   }
 
   /**
-   * @brief Similar to tlp::PluginLister::getPluginObject() but returns a typed instance
+   * @brief Similar to tlp::PluginsManager::getPluginObject() but returns a typed instance
    *
    * This method instantiate a plugin from its name and returns it casted into the given type.
    *
@@ -250,7 +250,7 @@ public:
 
   // constructor for node/edge events
   PluginEvent(PluginEventType pluginEvtType, const std::string &pluginName)
-      : Event(*(tlp::PluginLister::instance()), Event::TLP_MODIFICATION), evtType(pluginEvtType),
+      : Event(*(tlp::PluginsManager::instance()), Event::TLP_MODIFICATION), evtType(pluginEvtType),
         pluginName(pluginName) {}
 
   PluginEventType getType() const {

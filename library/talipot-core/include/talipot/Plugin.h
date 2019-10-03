@@ -248,9 +248,9 @@ protected:
   }
 } // namespace tlp
 
-// This include is here because the PluginLister needs to know the Plugin type, and the PLUGIN macro
-// needs to know the PluginLister.
-#include <talipot/PluginLister.h>
+// This include is here because the PluginsManager needs to know the Plugin type, and the PLUGIN macro
+// needs to know the PluginsManager.
+#include <talipot/PluginsManager.h>
 namespace tlp {
 /**
  * @ingroup Plugins
@@ -280,7 +280,7 @@ PLUGIN(MyPlugin) // Register MyPlugin into Talipot
   class C##Factory : public tlp::FactoryInterface {                                                \
   public:                                                                                          \
     C##Factory() {                                                                                 \
-      tlp::PluginLister::registerPlugin(this);                                                     \
+      tlp::PluginsManager::registerPlugin(this);                                                     \
     }                                                                                              \
     ~C##Factory() {}                                                                               \
     tlp::Plugin *createPluginObject(tlp::PluginContext *context) {                                 \

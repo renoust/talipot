@@ -13,7 +13,7 @@
 
 namespace tlp {
 
-class PluginLister {
+class PluginsManager {
 
 public:
 

@@ -59,7 +59,7 @@ PyDict_SetItemString(moduleDict, "tlpgui", tlpClass);
 
 #include <talipot/TlpTools.h>
 #include <talipot/TlpQtTools.h>
-#include <talipot/PluginLister.h>
+#include <talipot/PluginsManager.h>
 #include <talipot/GlyphManager.h>
 #include <talipot/EdgeExtremityGlyphManager.h>
 #include <talipot/Interactor.h>

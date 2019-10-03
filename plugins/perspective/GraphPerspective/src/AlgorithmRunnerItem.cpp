@@ -44,7 +44,7 @@ AlgorithmRunnerItem::AlgorithmRunnerItem(QString pluginName, QWidget *parent)
       _storeResultAsLocal(true) {
   _ui->setupUi(this);
   connect(_ui->favoriteCheck, SIGNAL(toggled(bool)), this, SIGNAL(favorized(bool)));
-  const Plugin &plugin = PluginLister::pluginInformation(QStringToTlpString(pluginName));
+  const Plugin &plugin = PluginsManager::pluginInformation(QStringToTlpString(pluginName));
   // split pluginName after the second word if needed
   QStringList words = pluginName.split(' ');
 
@@ -263,7 +263,7 @@ void AlgorithmRunnerItem::run(Graph *g) {
   // ensure each input property
   // is a local one when it exits
   std::string algorithm = QStringToTlpString(_pluginName);
-  ParameterDescriptionList paramList = PluginLister::getPluginParameters(algorithm);
+  ParameterDescriptionList paramList = PluginsManager::getPluginParameters(algorithm);
   for (const ParameterDescription &desc : paramList.getParameters()) {
     if (desc.getDirection() == IN_PARAM) {
 
@@ -478,7 +478,7 @@ void AlgorithmRunnerItem::mouseMoveEvent(QMouseEvent *ev) {
   }
 
   QDrag *drag = new QDrag(this);
-  const Plugin &p = PluginLister::pluginInformation(QStringToTlpString(_pluginName).c_str());
+  const Plugin &p = PluginsManager::pluginInformation(QStringToTlpString(_pluginName).c_str());
   QPixmap icon(QPixmap(p.icon().c_str()).scaled(64, 64));
   QFont f;
   f.setBold(true);
@@ -511,7 +511,7 @@ void AlgorithmRunnerItem::mouseMoveEvent(QMouseEvent *ev) {
 void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
   std::string stdName = QStringToTlpString(name());
 
-  if (PluginLister::pluginExists<LayoutAlgorithm>(stdName)) {
+  if (PluginsManager::pluginExists<LayoutAlgorithm>(stdName)) {
     if (Settings::instance().isAutomaticRatio()) {
       LayoutProperty *prop = nullptr;
       dataSet.get<LayoutProperty *>("result", prop);
@@ -523,11 +523,11 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
     if (Settings::instance().isAutomaticCentering())
       Perspective::typedInstance<GraphPerspective>()->centerPanelsForGraph(g);
   } else if (Settings::instance().isAutomaticCentering() &&
-             PluginLister::pluginExists<Algorithm>(stdName) &&
-             !PluginLister::pluginExists<PropertyAlgorithm>(stdName) &&
-             !PluginLister::pluginExists<GraphTest>(stdName)) {
+             PluginsManager::pluginExists<Algorithm>(stdName) &&
+             !PluginsManager::pluginExists<PropertyAlgorithm>(stdName) &&
+             !PluginsManager::pluginExists<GraphTest>(stdName)) {
     Perspective::typedInstance<GraphPerspective>()->centerPanelsForGraph(g);
-  } else if (PluginLister::pluginExists<DoubleAlgorithm>(stdName) &&
+  } else if (PluginsManager::pluginExists<DoubleAlgorithm>(stdName) &&
              Settings::instance().isAutomaticMapMetric()) {
     DoubleProperty *prop = nullptr;
     dataSet.get<DoubleProperty *>("result", prop);
@@ -569,7 +569,7 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
         g->applyPropertyAlgorithm("Color Mapping", color, errMsg, &data);
       }
     }
-  } else if (PluginLister::pluginExists<GraphTest>(stdName)) {
+  } else if (PluginsManager::pluginExists<GraphTest>(stdName)) {
     bool result = true;
     dataSet.get<bool>("result", result);
     std::string str = "\"" + stdName + "\" test " + (result ? "succeeded" : "failed") + " on:\n" +
@@ -608,7 +608,7 @@ void AlgorithmRunnerItem::initModel() {
     return;
 
   ParameterListModel *model = new ParameterListModel(
-      PluginLister::getPluginParameters(QStringToTlpString(_pluginName)), _graph, _ui->parameters);
+      PluginsManager::getPluginParameters(QStringToTlpString(_pluginName)), _graph, _ui->parameters);
 
   if (_pluginName == "Color Mapping") {
     colorMappingModel = model;

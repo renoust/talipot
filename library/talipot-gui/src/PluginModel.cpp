@@ -64,7 +64,7 @@ QVariant SimplePluginListModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
       return tlp::tlpStringToQString(name);
     } else if (role == Qt::DecorationRole) {
-      const Plugin &p = PluginLister::pluginInformation(name);
+      const Plugin &p = PluginsManager::pluginInformation(name);
       QPixmap pix(tlp::tlpStringToQString(p.icon()));
       return pix;
     }
