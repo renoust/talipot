@@ -22,57 +22,31 @@ init:
 # define build jobs
 environment:
   matrix:
-    # 64 bits GCC core build
+    # GCC core build
     - MSYS2_ARCH: x86_64
       MSYSTEM: MINGW64
       PYTHON2_HOME: "C:/Python27-x64"
       PYTHON3_HOME: "C:/Python37-x64"
 
-    # 64 bits GCC complete build
+    # GCC complete build
     - MSYS2_ARCH: x86_64
       MSYSTEM: MINGW64
       PYTHON2_HOME: "C:/Python27-x64"
       PYTHON3_HOME: "C:/Python37-x64"
 
-    # 64 bits MSVC core build
+    # MSVC core build
     - CMAKE_VS_GENERATOR: "Visual Studio 14 2015 Win64"
       MSVC_PLATFORM: "x64"
       MSVC_PLATFORM_TOOLSET: "v140"
       QT5_DIR: "C:/Qt/5.12/msvc2015_64"
       PYTHON_EXECUTABLE: "C:/Python37-x64/python.exe"
 
-    # 64 bits MSVC complete build
+    # MSVC complete build
     - CMAKE_VS_GENERATOR: "Visual Studio 14 2015 Win64"
       MSVC_PLATFORM: "x64"
       MSVC_PLATFORM_TOOLSET: "v140"
       QT5_DIR: "C:/Qt/5.12/msvc2015_64"
       PYTHON_EXECUTABLE: "C:/Python37-x64/python.exe"
-
-    ## 32 bits GCC core build
-    #- MSYS2_ARCH: i686
-      #MSYSTEM: MINGW32
-      #PYTHON2_HOME: "C:/Python27"
-      #PYTHON3_HOME: "C:/Python37"
-
-    ## 32 bits GCC complete build
-    #- MSYS2_ARCH: i686
-      #MSYSTEM: MINGW32
-      #PYTHON2_HOME: "C:/Python27"
-      #PYTHON3_HOME: "C:/Python37"
-
-    ## 32 bits MSVC core build
-    #- CMAKE_VS_GENERATOR: "Visual Studio 14 2015"
-      #MSVC_PLATFORM: "Win32"
-      #MSVC_PLATFORM_TOOLSET: "v140"
-      #QT5_DIR: "C:/Qt/5.9/msvc2015"
-      #PYTHON_EXECUTABLE: "C:/Python37/python.exe"
-
-    ## 32 bits MSVC complete build
-    #- CMAKE_VS_GENERATOR: "Visual Studio 14 2015"
-      #MSVC_PLATFORM: "Win32"
-      #MSVC_PLATFORM_TOOLSET: "v140"
-      #QT5_DIR: "C:/Qt/5.9/msvc2015"
-      #PYTHON_EXECUTABLE: "C:/Python37/python.exe"
 
 # build script that simply call the right batch script depending on the compiler used
 build_script:
@@ -80,15 +54,28 @@ build_script:
 
 # get the Talipot version for deployment
 after_build:
-  - ps: "$env:TALIPOT_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/talipot-core/include/talipot/Release.h') | %{ if ($_ -match '^#   define TALIPOT_VERSION.*$') { $_; } }) -replace '#   define TALIPOT_VERSION ', '') -replace '\"', '')"
+  - ps: "$env:TALIPOT_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/talipot-core/include/talipot/Release.h') | %{ if ($_ -match '^#   define TALIPOT_VERSION.*$') { $_; } }) -replace '#   define TALIPOT_VERSION ', '') -replace '\"', '' -replace '_', '.')"
 
 # set generated installers as artifacts to deploy
 artifacts:
   - path: build\*.exe
     name: talipot_installers
 
-# no deployment
-deploy: off
+# deploy Talipot installers on bintray
+deploy:
+  - provider: BinTray
+    on:
+      branch: master
+    username: anlambert
+    api_key:
+      secure: uL6yGLvWIQkeqyYKFzshycul9WpaBj5P4SYUvtAnlcpxaDhL3Ek+sxm+XRYFfH7n
+    subject: anlambert
+    repo: talipot_binaries
+    package: Talipot
+    version: $(TALIPOT_VERSION)
+    publish: true
+    override: true
+    artifact: talipot_installers
 
 notifications:
   - provider: Email

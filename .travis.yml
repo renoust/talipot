@@ -240,6 +240,17 @@ jobs:
       script:
         - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ${DOCKER_IMAGE} /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE RUN_TESTS"
 
+      # deploy Talipot AppImage on bintray
+      deploy:
+        provider: bintray
+        skip_cleanup: true
+        on:
+          branch: master
+        file: "build/deploy/TalipotPackagesToBintray.json"
+        user: "anlambert"
+        key:
+          secure: "${BINTRAY_API_KEY}"
+
   #==============================================================================================================================================================
     # Talipot core build stage on Mac OS
     - stage: Talipot core build (Mac OS)
@@ -365,7 +376,18 @@ jobs:
         - ninja runTests
         # build Talipot bundle
         - ninja bundle
+        - cd ..
 
+      # deploy Talipot MacOS bundle on bintray
+      deploy:
+        provider: bintray
+        skip_cleanup: true
+        on:
+          branch: master
+        file: "build/deploy/TalipotPackagesToBintray.json"
+        user: "anlambert"
+        key:
+          secure: "${BINTRAY_API_KEY}"
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Talipot complete build on Mac OS (Homebrew)
     -

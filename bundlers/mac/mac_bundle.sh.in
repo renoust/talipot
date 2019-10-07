@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function usage {
-        echo "Usage : $0 <Bundle Destination Dir> [<Application Name>=Talipot]"
+    echo "Usage : $0 <Bundle Destination Dir> [<Application Name>=Talipot]"
 }
 
 APP_NAME=Talipot
@@ -70,13 +70,6 @@ cd "${DEST_DIR}/application/Talipot.app/Contents/Frameworks/"
 cp -r "${QT_LIB_DIR}/QtGui.framework/Resources/qt_menu.nib" ../Resources 2>/dev/null
 cp "@QT_QTCLUCENE_LIBRARY@" . 2>/dev/null
 
-#echo 'Copying more libraries'
-#for lib in libGLEW libfreetype libz libstdc++; do
-#  for search_path in /usr/lib /opt/local/lib ; do
-#    [ "$(ls $search_path/$lib.*.dylib 2> /dev/null)" != "" ] && cp $search_path/$lib.*.dylib .
-#  done
-#done
-
 # use macdeployqt to configure exe & libraries
 cd ..
 # configure talipot & talipot_perspective
@@ -86,7 +79,7 @@ mv bin/talipot MacOS/Talipot
 # they are suffixed by .so instead of .dylib)
 if [ "$PYTHON_BUILD" = "ON" ]
 then
-${QT_BINARY_DIR}/macdeployqt ${DEST_DIR}/application/Talipot.app -executable=${DEST_DIR}/application/Talipot.app/Contents/bin/talipot_perspective -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipot/native/talipot.so -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipotgui/native/_talipotgui.so
+${QT_BINARY_DIR}/macdeployqt ${DEST_DIR}/application/Talipot.app -executable=${DEST_DIR}/application/Talipot.app/Contents/bin/talipot_perspective -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipot/native/_talipot.so -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipotgui/native/_talipotgui.so
 else
 ${QT_BINARY_DIR}/macdeployqt ${DEST_DIR}/application/Talipot.app -executable=${DEST_DIR}/application/Talipot.app/Contents/bin/talipot_perspective
 fi
@@ -119,9 +112,9 @@ sh "${SRC_DIR}/make_dmg.sh" ${APP_NAME} "@TalipotVersion@" "${DEST_DIR}/applicat
 # rename dmg if needed
 if [ "$PYTHON_BUILD" = "ON" ]
 then
-echo "${APP_NAME}-@TalipotVersion@_qt@QT_VERSION@.dmg has been correctly generated in ${DEST_DIR}"
-mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@_qt@QT_VERSION@.dmg
+echo "${APP_NAME}-@TalipotVersion@.dmg has been correctly generated in ${DEST_DIR}"
+mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@.dmg
 else
-echo "${APP_NAME}-@TalipotVersion@_qt@QT_VERSION@_no_python.dmg has been correctly generated in ${DEST_DIR}"
-mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@_qt@QT_VERSION@_no_python.dmg
+echo "${APP_NAME}-@TalipotVersion@_no_python.dmg has been correctly generated in ${DEST_DIR}"
+mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@_no_python.dmg
 fi

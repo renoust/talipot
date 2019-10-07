@@ -517,7 +517,7 @@ INSTALL(PROGRAMS ${PROJECT_BINARY_DIR}/talipot-config DESTINATION ${TalipotBinIn
 IF(NOT TALIPOT_BUILD_CORE_ONLY)
 
   ADD_SUBDIRECTORY(bundlers)
-  # ADD_SUBDIRECTORY(deploy)
+  ADD_SUBDIRECTORY(deploy)
 
   IF(MSVC)
     INCLUDE(InstallRequiredSystemLibraries)
