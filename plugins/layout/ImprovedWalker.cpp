@@ -92,7 +92,7 @@ bool ImprovedWalker::run() {
   SizeProperty *size;
 
   if (!getNodeSizePropertyParameter(dataSet, size))
-    size = graph->getProperty<SizeProperty>("viewSize");
+    size = graph->getSizeProperty("viewSize");
 
   getSpacingParameters(dataSet, nodeSpacing, spacing);
 

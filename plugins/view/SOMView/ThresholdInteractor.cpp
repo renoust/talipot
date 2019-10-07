@@ -437,7 +437,7 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 }
 
 void ThresholdInteractor::performSelection(SOMView *view, tlp::Iterator<node> *it) {
-  BooleanProperty *selection = view->graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *selection = view->graph()->getBooleanProperty("viewSelection");
   set<node> mask;
   unordered_map<node, set<node>> &mappingTab = view->getMappingTab();
   Observable::holdObservers();

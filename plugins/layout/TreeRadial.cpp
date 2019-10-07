@@ -359,7 +359,7 @@ public:
     SizeProperty *sizes;
 
     if (!getNodeSizePropertyParameter(dataSet, sizes))
-      sizes = graph->getProperty<SizeProperty>("viewSize");
+      sizes = graph->getSizeProperty("viewSize");
 
     getSpacingParameters(dataSet, nSpacing, lSpacing);
 

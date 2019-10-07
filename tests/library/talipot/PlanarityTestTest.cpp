@@ -59,17 +59,17 @@ void PlanarityTestTest::planarGraphs() {
  */
 void PlanarityTestTest::planarEmbeddingFromLayoutGraphs() {
   graph = tlp_loadGraph(GRAPHPATH + "planar/planar30drawnFPP.tlp.gz");
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
   layout->computeEmbedding(graph);
   CPPUNIT_ASSERT(PlanarityTest::isPlanarEmbedding(graph));
   delete graph;
   graph = tlp_loadGraph(GRAPHPATH + "planar/planar30drawnMM.tlp.gz");
-  layout = graph->getProperty<LayoutProperty>("viewLayout");
+  layout = graph->getLayoutProperty("viewLayout");
   layout->computeEmbedding(graph);
   CPPUNIT_ASSERT(PlanarityTest::isPlanarEmbedding(graph));
   delete graph;
   graph = tlp_loadGraph(GRAPHPATH + "notplanar/k33lostInGrip.tlp.gz");
-  layout = graph->getProperty<LayoutProperty>("viewLayout");
+  layout = graph->getLayoutProperty("viewLayout");
   layout->computeEmbedding(graph);
   CPPUNIT_ASSERT(!PlanarityTest::isPlanarEmbedding(graph));
   delete graph;

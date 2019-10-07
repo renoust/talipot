@@ -96,141 +96,141 @@ static void setViewPropertiesDefaults(Graph *g) {
                     texture = "viewTexture", tgtAnchorSize = "viewTgtAnchorSize";
 
   if (!g->existProperty(shapes)) {
-    g->getProperty<IntegerProperty>(shapes)->setAllNodeValue(
+    g->getIntegerProperty(shapes)->setAllNodeValue(
         ViewSettings::instance().defaultShape(NODE));
-    g->getProperty<IntegerProperty>(shapes)->setAllEdgeValue(
+    g->getIntegerProperty(shapes)->setAllEdgeValue(
         ViewSettings::instance().defaultShape(EDGE));
   }
 
   if (!g->existProperty(colors)) {
-    g->getProperty<ColorProperty>(colors)->setAllNodeValue(
+    g->getColorProperty(colors)->setAllNodeValue(
         ViewSettings::instance().defaultColor(NODE));
-    g->getProperty<ColorProperty>(colors)->setAllEdgeValue(
+    g->getColorProperty(colors)->setAllEdgeValue(
         ViewSettings::instance().defaultColor(EDGE));
   }
 
   if (!g->existProperty(sizes)) {
-    g->getProperty<SizeProperty>(sizes)->setAllNodeValue(
+    g->getSizeProperty(sizes)->setAllNodeValue(
         ViewSettings::instance().defaultSize(NODE));
-    g->getProperty<SizeProperty>(sizes)->setAllEdgeValue(
+    g->getSizeProperty(sizes)->setAllEdgeValue(
         ViewSettings::instance().defaultSize(EDGE));
   }
 
   if (!g->existProperty(metrics)) {
-    g->getProperty<DoubleProperty>(metrics)->setAllNodeValue(0);
-    g->getProperty<DoubleProperty>(metrics)->setAllEdgeValue(0);
+    g->getDoubleProperty(metrics)->setAllNodeValue(0);
+    g->getDoubleProperty(metrics)->setAllEdgeValue(0);
   }
 
   if (!g->existProperty(fonts)) {
-    g->getProperty<StringProperty>(fonts)->setAllNodeValue(
+    g->getStringProperty(fonts)->setAllNodeValue(
         ViewSettings::instance().defaultFontFile());
-    g->getProperty<StringProperty>(fonts)->setAllEdgeValue(
+    g->getStringProperty(fonts)->setAllEdgeValue(
         ViewSettings::instance().defaultFontFile());
   }
 
   if (!g->existProperty(fontSizes)) {
-    g->getProperty<IntegerProperty>(fontSizes)->setAllNodeValue(
+    g->getIntegerProperty(fontSizes)->setAllNodeValue(
         ViewSettings::instance().defaultFontSize());
-    g->getProperty<IntegerProperty>(fontSizes)->setAllEdgeValue(
+    g->getIntegerProperty(fontSizes)->setAllEdgeValue(
         ViewSettings::instance().defaultFontSize());
   }
 
   if (!g->existProperty(borderWidth)) {
-    g->getProperty<DoubleProperty>(borderWidth)
+    g->getDoubleProperty(borderWidth)
         ->setAllNodeValue(ViewSettings::instance().defaultBorderWidth(NODE));
-    g->getProperty<DoubleProperty>(borderWidth)
+    g->getDoubleProperty(borderWidth)
         ->setAllEdgeValue(ViewSettings::instance().defaultBorderWidth(EDGE));
   }
 
   if (!g->existProperty(borderColor)) {
-    g->getProperty<ColorProperty>(borderColor)
+    g->getColorProperty(borderColor)
         ->setAllNodeValue(ViewSettings::instance().defaultBorderColor(NODE));
-    g->getProperty<ColorProperty>(borderColor)
+    g->getColorProperty(borderColor)
         ->setAllEdgeValue(ViewSettings::instance().defaultBorderColor(EDGE));
   }
 
   if (!g->existProperty(tgtShape)) {
-    g->getProperty<IntegerProperty>(tgtShape)->setAllEdgeValue(
+    g->getIntegerProperty(tgtShape)->setAllEdgeValue(
         ViewSettings::instance().defaultEdgeExtremityTgtShape());
   }
 
   if (!g->existProperty(srcShape)) {
-    g->getProperty<IntegerProperty>(srcShape)->setAllEdgeValue(
+    g->getIntegerProperty(srcShape)->setAllEdgeValue(
         ViewSettings::instance().defaultEdgeExtremitySrcShape());
   }
 
   if (!g->existProperty(labelColor)) {
-    g->getProperty<ColorProperty>(labelColor)
+    g->getColorProperty(labelColor)
         ->setAllNodeValue(ViewSettings::instance().defaultLabelColor());
-    g->getProperty<ColorProperty>(labelColor)
+    g->getColorProperty(labelColor)
         ->setAllEdgeValue(ViewSettings::instance().defaultLabelColor());
   }
 
   if (!g->existProperty(labelBorderColor)) {
-    g->getProperty<ColorProperty>(labelBorderColor)
+    g->getColorProperty(labelBorderColor)
         ->setAllNodeValue(ViewSettings::instance().defaultLabelBorderColor());
-    g->getProperty<ColorProperty>(labelBorderColor)
+    g->getColorProperty(labelBorderColor)
         ->setAllEdgeValue(ViewSettings::instance().defaultLabelBorderColor());
   }
 
   if (!g->existProperty(labelBorderWidth)) {
-    g->getProperty<DoubleProperty>(labelBorderWidth)
+    g->getDoubleProperty(labelBorderWidth)
         ->setAllNodeValue(ViewSettings::instance().defaultLabelBorderWidth());
-    g->getProperty<DoubleProperty>(labelBorderWidth)
+    g->getDoubleProperty(labelBorderWidth)
         ->setAllEdgeValue(ViewSettings::instance().defaultLabelBorderWidth());
   }
 
   if (!g->existProperty(labelPosition)) {
-    g->getProperty<IntegerProperty>(labelPosition)
+    g->getIntegerProperty(labelPosition)
         ->setAllNodeValue(ViewSettings::instance().defaultLabelPosition());
-    g->getProperty<IntegerProperty>(labelPosition)
+    g->getIntegerProperty(labelPosition)
         ->setAllEdgeValue(ViewSettings::instance().defaultLabelPosition());
   }
 
   if (!g->existProperty(layout)) {
-    g->getProperty<LayoutProperty>(layout)->setAllNodeValue(Coord(0, 0, 0));
-    g->getProperty<LayoutProperty>(layout)->setAllEdgeValue(std::vector<Coord>());
+    g->getLayoutProperty(layout)->setAllNodeValue(Coord(0, 0, 0));
+    g->getLayoutProperty(layout)->setAllEdgeValue(std::vector<Coord>());
   }
 
   if (!g->existProperty(rotation)) {
-    g->getProperty<DoubleProperty>(rotation)->setAllNodeValue(0);
-    g->getProperty<DoubleProperty>(rotation)->setAllEdgeValue(0);
+    g->getDoubleProperty(rotation)->setAllNodeValue(0);
+    g->getDoubleProperty(rotation)->setAllEdgeValue(0);
   }
 
   if (!g->existProperty(srcAnchorSize)) {
-    g->getProperty<SizeProperty>(srcAnchorSize)
+    g->getSizeProperty(srcAnchorSize)
         ->setAllEdgeValue(ViewSettings::instance().defaultEdgeExtremitySrcSize());
   }
 
   if (!g->existProperty(tgtAnchorSize)) {
-    g->getProperty<SizeProperty>(tgtAnchorSize)
+    g->getSizeProperty(tgtAnchorSize)
         ->setAllEdgeValue(ViewSettings::instance().defaultEdgeExtremityTgtSize());
   }
 
   if (!g->existProperty(texture)) {
-    g->getProperty<StringProperty>(texture)->setAllNodeValue("");
-    g->getProperty<StringProperty>(texture)->setAllEdgeValue("");
+    g->getStringProperty(texture)->setAllNodeValue("");
+    g->getStringProperty(texture)->setAllEdgeValue("");
   }
 
   if (!g->existProperty(label)) {
-    g->getProperty<StringProperty>(label)->setAllNodeValue("");
-    g->getProperty<StringProperty>(label)->setAllEdgeValue("");
+    g->getStringProperty(label)->setAllNodeValue("");
+    g->getStringProperty(label)->setAllEdgeValue("");
   }
 
   if (!g->existProperty(selection)) {
-    g->getProperty<BooleanProperty>(selection)->setAllNodeValue(false);
-    g->getProperty<BooleanProperty>(selection)->setAllEdgeValue(false);
+    g->getBooleanProperty(selection)->setAllNodeValue(false);
+    g->getBooleanProperty(selection)->setAllEdgeValue(false);
   }
 
   if (!g->existProperty(icon)) {
-    g->getProperty<StringProperty>(icon)->setAllNodeValue("fa-question-circle");
-    g->getProperty<StringProperty>(icon)->setAllEdgeValue("fa-question-circle");
+    g->getStringProperty(icon)->setAllNodeValue("fa-question-circle");
+    g->getStringProperty(icon)->setAllEdgeValue("fa-question-circle");
   }
 
   // for backward compatibility with Tulip < 5.0
   if (g->existLocalProperty(fontAwesomeIcon)) {
-    StringProperty *faiProp = g->getProperty<StringProperty>(fontAwesomeIcon);
-    StringProperty *iProp = g->getProperty<StringProperty>(icon);
+    StringProperty *faiProp = g->getStringProperty(fontAwesomeIcon);
+    StringProperty *iProp = g->getStringProperty(icon);
 
     // transform old font awesome icon names to new ones and store them in the viewIcon
     // property only if the content of that property is default valuated
@@ -988,35 +988,35 @@ void Graph::notifyDestroy() {
 PropertyInterface *Graph::getLocalProperty(const std::string &propertyName,
                                            const std::string &propertyType) {
   if (propertyType.compare(DoubleProperty::propertyTypename) == 0) {
-    return getLocalProperty<DoubleProperty>(propertyName);
+    return getLocalDoubleProperty(propertyName);
   } else if (propertyType.compare(LayoutProperty::propertyTypename) == 0) {
-    return getLocalProperty<LayoutProperty>(propertyName);
+    return getLocalLayoutProperty(propertyName);
   } else if (propertyType.compare(StringProperty::propertyTypename) == 0) {
-    return getLocalProperty<StringProperty>(propertyName);
+    return getLocalStringProperty(propertyName);
   } else if (propertyType.compare(IntegerProperty::propertyTypename) == 0) {
-    return getLocalProperty<IntegerProperty>(propertyName);
+    return getLocalIntegerProperty(propertyName);
   } else if (propertyType.compare(ColorProperty::propertyTypename) == 0) {
-    return getLocalProperty<ColorProperty>(propertyName);
+    return getLocalColorProperty(propertyName);
   } else if (propertyType.compare(SizeProperty::propertyTypename) == 0) {
-    return getLocalProperty<SizeProperty>(propertyName);
+    return getLocalSizeProperty(propertyName);
   } else if (propertyType.compare(BooleanProperty::propertyTypename) == 0) {
-    return getLocalProperty<BooleanProperty>(propertyName);
+    return getLocalBooleanProperty(propertyName);
   } else if (propertyType.compare(DoubleVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<DoubleVectorProperty>(propertyName);
+    return getLocalDoubleVectorProperty(propertyName);
   } else if (propertyType.compare(StringVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<StringVectorProperty>(propertyName);
+    return getLocalStringVectorProperty(propertyName);
   } else if (propertyType.compare(IntegerVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<IntegerVectorProperty>(propertyName);
+    return getLocalIntegerVectorProperty(propertyName);
   } else if (propertyType.compare(CoordVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<CoordVectorProperty>(propertyName);
+    return getLocalCoordVectorProperty(propertyName);
   } else if (propertyType.compare(ColorVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<ColorVectorProperty>(propertyName);
+    return getLocalColorVectorProperty(propertyName);
   } else if (propertyType.compare(BooleanVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<BooleanVectorProperty>(propertyName);
+    return getLocalBooleanVectorProperty(propertyName);
   } else if (propertyType.compare(SizeVectorProperty::propertyTypename) == 0) {
-    return getLocalProperty<SizeVectorProperty>(propertyName);
+    return getLocalSizeVectorProperty(propertyName);
   } else if (propertyType.compare(GraphProperty::propertyTypename) == 0) {
-    return getLocalProperty<GraphProperty>(propertyName);
+    return getLocalGraphProperty(propertyName);
   } else {
     return nullptr;
   }
@@ -1025,35 +1025,35 @@ PropertyInterface *Graph::getLocalProperty(const std::string &propertyName,
 PropertyInterface *Graph::getProperty(const std::string &propertyName,
                                       const std::string &propertyType) {
   if (propertyType.compare(DoubleProperty::propertyTypename) == 0) {
-    return getProperty<DoubleProperty>(propertyName);
+    return getDoubleProperty(propertyName);
   } else if (propertyType.compare(LayoutProperty::propertyTypename) == 0) {
-    return getProperty<LayoutProperty>(propertyName);
+    return getLayoutProperty(propertyName);
   } else if (propertyType.compare(StringProperty::propertyTypename) == 0) {
-    return getProperty<StringProperty>(propertyName);
+    return getStringProperty(propertyName);
   } else if (propertyType.compare(IntegerProperty::propertyTypename) == 0) {
-    return getProperty<IntegerProperty>(propertyName);
+    return getIntegerProperty(propertyName);
   } else if (propertyType.compare(ColorProperty::propertyTypename) == 0) {
-    return getProperty<ColorProperty>(propertyName);
+    return getColorProperty(propertyName);
   } else if (propertyType.compare(SizeProperty::propertyTypename) == 0) {
-    return getProperty<SizeProperty>(propertyName);
+    return getSizeProperty(propertyName);
   } else if (propertyType.compare(BooleanProperty::propertyTypename) == 0) {
-    return getProperty<BooleanProperty>(propertyName);
+    return getBooleanProperty(propertyName);
   } else if (propertyType.compare(DoubleVectorProperty::propertyTypename) == 0) {
-    return getProperty<DoubleVectorProperty>(propertyName);
+    return getDoubleVectorProperty(propertyName);
   } else if (propertyType.compare(StringVectorProperty::propertyTypename) == 0) {
-    return getProperty<StringVectorProperty>(propertyName);
+    return getStringVectorProperty(propertyName);
   } else if (propertyType.compare(IntegerVectorProperty::propertyTypename) == 0) {
-    return getProperty<IntegerVectorProperty>(propertyName);
+    return getIntegerVectorProperty(propertyName);
   } else if (propertyType.compare(CoordVectorProperty::propertyTypename) == 0) {
-    return getProperty<CoordVectorProperty>(propertyName);
+    return getCoordVectorProperty(propertyName);
   } else if (propertyType.compare(ColorVectorProperty::propertyTypename) == 0) {
-    return getProperty<ColorVectorProperty>(propertyName);
+    return getColorVectorProperty(propertyName);
   } else if (propertyType.compare(BooleanVectorProperty::propertyTypename) == 0) {
-    return getProperty<BooleanVectorProperty>(propertyName);
+    return getBooleanVectorProperty(propertyName);
   } else if (propertyType.compare(SizeVectorProperty::propertyTypename) == 0) {
-    return getProperty<SizeVectorProperty>(propertyName);
+    return getSizeVectorProperty(propertyName);
   } else if (propertyType.compare(GraphProperty::propertyTypename) == 0) {
-    return getProperty<GraphProperty>(propertyName);
+    return getGraphProperty(propertyName);
   } else {
     return nullptr;
   }
@@ -1083,16 +1083,16 @@ void updatePropertiesUngroup(Graph *graph, node metanode, GraphProperty *cluster
   if (clusterInfo->getNodeValue(metanode) == nullptr)
     return; // The metanode is not a metanode.
 
-  LayoutProperty *graphLayout = graph->getProperty<LayoutProperty>(layoutProperty);
-  SizeProperty *graphSize = graph->getProperty<SizeProperty>(sizeProperty);
-  DoubleProperty *graphRot = graph->getProperty<DoubleProperty>(rotationProperty);
+  LayoutProperty *graphLayout = graph->getLayoutProperty(layoutProperty);
+  SizeProperty *graphSize = graph->getSizeProperty(sizeProperty);
+  DoubleProperty *graphRot = graph->getDoubleProperty(rotationProperty);
   const Size &size = graphSize->getNodeValue(metanode);
   const Coord &pos = graphLayout->getNodeValue(metanode);
   const double &rot = graphRot->getNodeValue(metanode);
   Graph *cluster = clusterInfo->getNodeValue(metanode);
-  LayoutProperty *clusterLayout = cluster->getProperty<LayoutProperty>(layoutProperty);
-  SizeProperty *clusterSize = cluster->getProperty<SizeProperty>(sizeProperty);
-  DoubleProperty *clusterRot = cluster->getProperty<DoubleProperty>(rotationProperty);
+  LayoutProperty *clusterLayout = cluster->getLayoutProperty(layoutProperty);
+  SizeProperty *clusterSize = cluster->getSizeProperty(sizeProperty);
+  DoubleProperty *clusterRot = cluster->getDoubleProperty(rotationProperty);
   BoundingBox &&box = tlp::computeBoundingBox(cluster, clusterLayout, clusterSize, clusterRot);
   double width = box.width();
   double height = box.height();
@@ -1450,7 +1450,7 @@ void Graph::openMetaNode(node metaNode, bool updateProperties) {
   bool hasSubEdges = super->isMetaEdge(metaEdges->next());
   delete metaEdges;
 
-  ColorProperty *graphColors = getProperty<ColorProperty>(colorProperty);
+  ColorProperty *graphColors = getColorProperty(colorProperty);
 
   if (hasSubEdges) {
     // compute mapping for neighbour nodes
@@ -1743,6 +1743,126 @@ void Graph::addEdges(const std::vector<edge> &edges) {
 void Graph::delEdges(const std::vector<edge> &edges, bool deleteInAllGraphs) {
   StlIterator<edge, vector<edge>::const_iterator> vIterator(edges.begin(), edges.end());
   delEdges(&vIterator, deleteInAllGraphs);
+}
+
+BooleanProperty *Graph::getLocalBooleanProperty(const string &propertyName) {
+  return getLocalProperty<BooleanProperty>(propertyName);
+}
+
+BooleanProperty *Graph::getBooleanProperty(const string &propertyName) {
+  return getProperty<BooleanProperty>(propertyName);
+}
+
+ColorProperty *Graph::getLocalColorProperty(const string &propertyName) {
+  return getLocalProperty<ColorProperty>(propertyName);
+}
+
+ColorProperty *Graph::getColorProperty(const string &propertyName) {
+  return getProperty<ColorProperty>(propertyName);
+}
+
+DoubleProperty *Graph::getLocalDoubleProperty(const string &propertyName) {
+  return getLocalProperty<DoubleProperty>(propertyName);
+}
+
+DoubleProperty *Graph::getDoubleProperty(const string &propertyName) {
+  return getProperty<DoubleProperty>(propertyName);
+}
+
+GraphProperty *Graph::getLocalGraphProperty(const string &propertyName) {
+  return getLocalProperty<GraphProperty>(propertyName);
+}
+
+GraphProperty *Graph::getGraphProperty(const string &propertyName) {
+  return getProperty<GraphProperty>(propertyName);
+}
+
+IntegerProperty *Graph::getLocalIntegerProperty(const string &propertyName) {
+  return getLocalProperty<IntegerProperty>(propertyName);
+}
+
+IntegerProperty *Graph::getIntegerProperty(const string &propertyName) {
+  return getProperty<IntegerProperty>(propertyName);
+}
+
+LayoutProperty *Graph::getLocalLayoutProperty(const string &propertyName) {
+  return getLocalProperty<LayoutProperty>(propertyName);
+}
+
+LayoutProperty *Graph::getLayoutProperty(const string &propertyName) {
+  return getProperty<LayoutProperty>(propertyName);
+}
+
+SizeProperty *Graph::getLocalSizeProperty(const string &propertyName) {
+  return getLocalProperty<SizeProperty>(propertyName);
+}
+
+SizeProperty *Graph::getSizeProperty(const string &propertyName) {
+  return getProperty<SizeProperty>(propertyName);
+}
+
+StringProperty *Graph::getLocalStringProperty(const string &propertyName) {
+  return getLocalProperty<StringProperty>(propertyName);
+}
+
+StringProperty *Graph::getStringProperty(const string &propertyName) {
+  return getProperty<StringProperty>(propertyName);
+}
+
+BooleanVectorProperty *Graph::getLocalBooleanVectorProperty(const string &propertyName) {
+  return getLocalProperty<BooleanVectorProperty>(propertyName);
+}
+
+BooleanVectorProperty *Graph::getBooleanVectorProperty(const string &propertyName) {
+  return getProperty<BooleanVectorProperty>(propertyName);
+}
+
+ColorVectorProperty *Graph::getLocalColorVectorProperty(const string &propertyName) {
+  return getLocalProperty<ColorVectorProperty>(propertyName);
+}
+
+ColorVectorProperty *Graph::getColorVectorProperty(const string &propertyName) {
+  return getProperty<ColorVectorProperty>(propertyName);
+}
+
+DoubleVectorProperty *Graph::getLocalDoubleVectorProperty(const string &propertyName) {
+  return getLocalProperty<DoubleVectorProperty>(propertyName);
+}
+
+DoubleVectorProperty *Graph::getDoubleVectorProperty(const string &propertyName) {
+  return getProperty<DoubleVectorProperty>(propertyName);
+}
+
+IntegerVectorProperty *Graph::getLocalIntegerVectorProperty(const string &propertyName) {
+  return getLocalProperty<IntegerVectorProperty>(propertyName);
+}
+
+IntegerVectorProperty *Graph::getIntegerVectorProperty(const string &propertyName) {
+  return getProperty<IntegerVectorProperty>(propertyName);
+}
+
+CoordVectorProperty *Graph::getLocalCoordVectorProperty(const string &propertyName) {
+  return getLocalProperty<CoordVectorProperty>(propertyName);
+}
+
+CoordVectorProperty *Graph::getCoordVectorProperty(const string &propertyName) {
+  return getProperty<CoordVectorProperty>(propertyName);
+}
+
+SizeVectorProperty *Graph::getLocalSizeVectorProperty(const string &propertyName) {
+  return getLocalProperty<SizeVectorProperty>(propertyName);
+}
+
+SizeVectorProperty *Graph::getSizeVectorProperty(const string &propertyName) {
+  return getProperty<SizeVectorProperty>(propertyName);
+}
+
+StringVectorProperty *Graph::getLocalStringVectorProperty(const string &propertyName) {
+  return getLocalProperty<StringVectorProperty>(propertyName);
+}
+
+StringVectorProperty *Graph::getStringVectorProperty(const string &propertyName) {
+  return getProperty<StringVectorProperty>(propertyName);
 }
 
 struct DescendantGraphsIterator : public Iterator<Graph *> {

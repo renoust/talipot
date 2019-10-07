@@ -165,13 +165,13 @@ void ObservablePropertyTest::setUp() {
 
   graph = tlp::newGraph();
 
-  props[0] = graph->getProperty<BooleanProperty>("boolProp");
-  props[1] = graph->getProperty<ColorProperty>("colorProp");
-  props[2] = graph->getProperty<DoubleProperty>("doubleProp");
-  props[3] = graph->getProperty<IntegerProperty>("intProp");
-  props[4] = graph->getProperty<LayoutProperty>("layoutProp");
-  props[5] = graph->getProperty<SizeProperty>("sizeProp");
-  props[6] = graph->getProperty<StringProperty>("stringProp");
+  props[0] = graph->getBooleanProperty("boolProp");
+  props[1] = graph->getColorProperty("colorProp");
+  props[2] = graph->getDoubleProperty("doubleProp");
+  props[3] = graph->getIntegerProperty("intProp");
+  props[4] = graph->getLayoutProperty("layoutProp");
+  props[5] = graph->getSizeProperty("sizeProp");
+  props[6] = graph->getStringProperty("stringProp");
 
   vector<node> nodes;
 
@@ -464,7 +464,7 @@ void ObservablePropertyTest::testObserverWhenRemoveObservable() {
 void ObservablePropertyTest::testNoPropertiesEventsAfterGraphClear() {
   // create a clone subgraph with a local property
   Graph *clone = graph->addCloneSubGraph("clone");
-  PropertyInterface *cloneProp = clone->getProperty<DoubleProperty>("cloneProp");
+  PropertyInterface *cloneProp = clone->getDoubleProperty("cloneProp");
   // listen to local property of clone subgraph
   cloneProp->addListener(pObserver);
 

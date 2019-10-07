@@ -27,7 +27,7 @@ MakeSelectionGraph::MakeSelectionGraph(const tlp::PluginContext *context)
                                 "The number of graph elements (nodes + edges) selected");
 }
 bool MakeSelectionGraph::run() {
-  BooleanProperty *sel = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *sel = graph->getBooleanProperty("viewSelection");
 
   if (dataSet != nullptr)
     dataSet->get("selection", sel);
@@ -47,7 +47,7 @@ isGraphTest::isGraphTest(const tlp::PluginContext *context) : tlp::GraphTest(con
 }
 
 bool isGraphTest::test() {
-  BooleanProperty *sel = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *sel = graph->getBooleanProperty("viewSelection");
 
   if (dataSet != nullptr)
     dataSet->get("selection", sel);

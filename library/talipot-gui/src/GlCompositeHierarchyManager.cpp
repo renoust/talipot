@@ -151,7 +151,7 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
     case GraphEvent::TLP_AFTER_DEL_LOCAL_PROPERTY: {
       if (!_layout) {
         auto propertyName = gEvt->getPropertyName();
-        _layout = graph->getProperty<LayoutProperty>(propertyName);
+        _layout = graph->getLayoutProperty(propertyName);
         _layout->addObserver(this);
         std::vector<Event> v;
         treatEvents(v);
@@ -164,7 +164,7 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
 
       if (propertyName == _layout->getName()) {
         _layout->removeObserver(this);
-        _layout = graph->getProperty<LayoutProperty>(propertyName);
+        _layout = graph->getLayoutProperty(propertyName);
         _layout->addObserver(this);
         if (_layout->hasNonDefaultValuatedNodes(graph)) {
           std::vector<Event> v;
@@ -172,7 +172,7 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
         }
       } else if (propertyName == _size->getName()) {
         _size->removeObserver(this);
-        _size = graph->getProperty<SizeProperty>(propertyName);
+        _size = graph->getSizeProperty(propertyName);
         _size->addObserver(this);
         if (_size->hasNonDefaultValuatedNodes(graph)) {
           std::vector<Event> v;
@@ -180,7 +180,7 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
         }
       } else if (propertyName == _rotation->getName()) {
         _rotation->removeObserver(this);
-        _rotation = graph->getProperty<DoubleProperty>(propertyName);
+        _rotation = graph->getDoubleProperty(propertyName);
         _rotation->addObserver(this);
         if (_rotation->hasNonDefaultValuatedNodes(graph)) {
           std::vector<Event> v;
@@ -226,19 +226,19 @@ void GlCompositeHierarchyManager::setGraph(tlp::Graph *graph) {
 void GlCompositeHierarchyManager::createComposite() {
   this->_composite->reset(true);
   _graphsComposites.clear();
-  LayoutProperty *layout = _graph->getProperty<LayoutProperty>(_layout->getName());
+  LayoutProperty *layout = _graph->getLayoutProperty(_layout->getName());
   if (layout != _layout) {
     _layout->removeObserver(this);
     _layout = layout;
     _layout->addObserver(this);
   }
-  SizeProperty *size = _graph->getProperty<SizeProperty>(_size->getName());
+  SizeProperty *size = _graph->getSizeProperty(_size->getName());
   if (size != _size) {
     _size->removeObserver(this);
     _size = size;
     _size->addObserver(this);
   }
-  DoubleProperty *rotation = _graph->getProperty<DoubleProperty>(_rotation->getName());
+  DoubleProperty *rotation = _graph->getDoubleProperty(_rotation->getName());
   if (rotation != _rotation) {
     _rotation->removeObserver(this);
     _rotation = rotation;

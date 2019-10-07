@@ -647,7 +647,7 @@ void SOMView::computeMapping() {
   float spacingCoef = 0.2f;
   float minElementSizeCoef = 0.2f;
 
-  SizeProperty *realGraphSizeProperty = graph()->getProperty<SizeProperty>("viewSize");
+  SizeProperty *realGraphSizeProperty = graph()->getSizeProperty("viewSize");
 
   Size graphMaxSize = realGraphSizeProperty->getMax(graph());
   Size graphMinSize = realGraphSizeProperty->getMin(graph());
@@ -863,7 +863,7 @@ void SOMView::hideMapping() {
 void SOMView::updateNodeColorMapping(tlp::ColorProperty *cp) {
 
   if (!mappingTab.empty() && !selection.empty()) {
-    ColorProperty *realColorProp = graph()->getProperty<ColorProperty>("viewColor");
+    ColorProperty *realColorProp = graph()->getColorProperty("viewColor");
     // Take the first color property in order to map with node
     ColorProperty *somColorProperty;
     bool deleteAfter;
@@ -980,7 +980,7 @@ void SOMView::clearMask() {
 void SOMView::copySelectionToMask() {
   if (graph()) {
     set<node> somNodes;
-    BooleanProperty *selection = graph()->getProperty<BooleanProperty>("viewSelection");
+    BooleanProperty *selection = graph()->getBooleanProperty("viewSelection");
     for (auto n : selection->getNodesEqualTo(true, graph())) {
       for (auto it = mappingTab.begin(); it != mappingTab.end(); ++it) {
         if (it->second.find(n) != it->second.end())
@@ -1012,7 +1012,7 @@ void SOMView::invertMask() {
 
 void SOMView::selectAllNodesInMask() {
   if (mask) {
-    BooleanProperty *selection = graph()->getProperty<BooleanProperty>("viewSelection");
+    BooleanProperty *selection = graph()->getBooleanProperty("viewSelection");
     Observable::holdObservers();
     selection->setAllNodeValue(false);
     for (auto n : mask->getNodesEqualTo(true, som)) {

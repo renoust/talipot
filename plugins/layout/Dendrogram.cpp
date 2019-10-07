@@ -51,7 +51,7 @@ bool Dendrogram::run() {
   SizeProperty *size;
 
   if (!getNodeSizePropertyParameter(dataSet, size))
-    size = graph->getProperty<SizeProperty>("viewSize");
+    size = graph->getSizeProperty("viewSize");
 
   OrientableSizeProxy oriSize(size, mask);
   getSpacingParameters(dataSet, nodeSpacing, spacing);

@@ -123,8 +123,8 @@ public:
     min = 1;
     max = 10;
     proportional = "Area Proportional";
-    entryMetric = graph->getProperty<DoubleProperty>("viewMetric");
-    entrySize = graph->getProperty<SizeProperty>("viewSize");
+    entryMetric = graph->getDoubleProperty("viewMetric");
+    entrySize = graph->getSizeProperty("viewSize");
     linearType = true;
     StringCollection mapping;
     StringCollection proportionalType;

@@ -236,9 +236,9 @@ ConvexHullItem *GlConvexHull::buildConvexHullsFromHierarchy(Graph *graph,
     // the convex hull will be build directly with the graph nodes and edges
     // if there is some
     if (graph->numberOfNodes()) {
-      LayoutProperty *layout = root->getProperty<LayoutProperty>("viewLayout");
-      SizeProperty *size = root->getProperty<SizeProperty>("viewSize");
-      DoubleProperty *rot = root->getProperty<DoubleProperty>("viewRotation");
+      LayoutProperty *layout = root->getLayoutProperty("viewLayout");
+      SizeProperty *size = root->getSizeProperty("viewSize");
+      DoubleProperty *rot = root->getDoubleProperty("viewRotation");
       node n;
       // the variable below will be used to compute
       // the box around the bends of edges

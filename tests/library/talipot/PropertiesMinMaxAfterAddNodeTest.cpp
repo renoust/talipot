@@ -30,7 +30,7 @@ void PropertiesMinMaxAfterAddNodeTest::tearDown() {
 }
 
 void PropertiesMinMaxAfterAddNodeTest::testDoublePropertyMinMaxAfterAddNode() {
-  DoubleProperty *doubleProp = graph->getProperty<DoubleProperty>("doubleProp");
+  DoubleProperty *doubleProp = graph->getDoubleProperty("doubleProp");
 
   // add two nodes
   node n1 = graph->addNode();
@@ -54,7 +54,7 @@ void PropertiesMinMaxAfterAddNodeTest::testDoublePropertyMinMaxAfterAddNode() {
 }
 
 void PropertiesMinMaxAfterAddNodeTest::testIntegerPropertyMinMaxAfterAddNode() {
-  IntegerProperty *intProp = graph->getProperty<IntegerProperty>("intProp");
+  IntegerProperty *intProp = graph->getIntegerProperty("intProp");
 
   // add two nodes
   node n1 = graph->addNode();
@@ -78,7 +78,7 @@ void PropertiesMinMaxAfterAddNodeTest::testIntegerPropertyMinMaxAfterAddNode() {
 }
 
 void PropertiesMinMaxAfterAddNodeTest::testLayoutPropertyMinMaxAfterAddNode() {
-  LayoutProperty *property = graph->getProperty<LayoutProperty>("testLayout");
+  LayoutProperty *property = graph->getLayoutProperty("testLayout");
 
   // add two nodes
   node n1 = graph->addNode();

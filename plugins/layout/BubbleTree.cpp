@@ -351,9 +351,9 @@ bool BubbleTree::run() {
 
   if (!getNodeSizePropertyParameter(dataSet, nodeSize)) {
     if (graph->existProperty("viewSize")) {
-      nodeSize = graph->getProperty<SizeProperty>("viewSize");
+      nodeSize = graph->getSizeProperty("viewSize");
     } else {
-      nodeSize = graph->getProperty<SizeProperty>("viewSize");
+      nodeSize = graph->getSizeProperty("viewSize");
       nodeSize->setAllNodeValue(Size(1., 1., 1.));
     }
   }

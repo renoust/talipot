@@ -52,7 +52,7 @@ bool Kruskal::run() {
   }
 
   if (edgeWeight == nullptr)
-    edgeWeight = graph->getProperty<DoubleProperty>("viewMetric");
+    edgeWeight = graph->getDoubleProperty("viewMetric");
 
   selectMinimumSpanningTree(graph, result, edgeWeight, pluginProgress);
 

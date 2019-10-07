@@ -374,7 +374,7 @@ bool GEMLayout::run() {
 
   /* Handle parameters */
   metric = nullptr;
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
 
   bool is3D = false;
   bool initLayout = false;

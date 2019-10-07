@@ -368,7 +368,7 @@ bool PropertiesEditor::setAllValues(PropertyInterface *prop, bool nodes, bool se
     return false;
 
   if (selectedOnly) {
-    BooleanProperty *selection = _graph->getProperty<BooleanProperty>("viewSelection");
+    BooleanProperty *selection = _graph->getBooleanProperty("viewSelection");
 
     if (nodes) {
       for (auto n : selection->getNonDefaultValuatedNodes(_graph)) {
@@ -481,12 +481,12 @@ void PropertiesEditor::toLabels(PropertyInterface *prop, bool nodes, bool edges,
   data.set("input", prop);
 
   if (selectedOnly)
-    data.set("selection", _graph->getProperty<BooleanProperty>("viewSelection"));
+    data.set("selection", _graph->getBooleanProperty("viewSelection"));
 
   std::string msg;
   // _graph->push() must be done outside of this method
   // to allow call from TabelView.cpp
-  StringProperty *result = _graph->getProperty<StringProperty>("viewLabel");
+  StringProperty *result = _graph->getStringProperty("viewLabel");
   _graph->applyPropertyAlgorithm("To labels", result, msg, &data);
 }
 

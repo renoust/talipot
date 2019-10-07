@@ -72,12 +72,12 @@ double GraphDimension::getNodeValue(const node n) const {
 
 std::string GraphDimension::getItemLabelAtRank(const unsigned int rank) const {
   node n = nodeSorter->getNodeAtRankForProperty(rank, dimName);
-  string label = graph->getProperty<StringProperty>("viewLabel")->getNodeValue(n);
+  string label = graph->getStringProperty("viewLabel")->getNodeValue(n);
   return label;
 }
 
 std::string GraphDimension::getItemLabel(const unsigned int itemId) const {
-  string label = graph->getProperty<StringProperty>("viewLabel")->getNodeValue(node(itemId));
+  string label = graph->getStringProperty("viewLabel")->getNodeValue(node(itemId));
   return label;
 }
 
@@ -114,9 +114,9 @@ unsigned int GraphDimension::getRankForItem(const unsigned int itemId) {
 
 double GraphDimension::minValue() const {
   if (propertyType == "double") {
-    return graph->getProperty<DoubleProperty>(dimName)->getNodeMin(graph);
+    return graph->getDoubleProperty(dimName)->getNodeMin(graph);
   } else if (propertyType == "int") {
-    return graph->getProperty<IntegerProperty>(dimName)->getNodeMin(graph);
+    return graph->getIntegerProperty(dimName)->getNodeMin(graph);
   } else {
     return 0;
   }
@@ -124,9 +124,9 @@ double GraphDimension::minValue() const {
 
 double GraphDimension::maxValue() const {
   if (propertyType == "double") {
-    return graph->getProperty<DoubleProperty>(dimName)->getNodeMax(graph);
+    return graph->getDoubleProperty(dimName)->getNodeMax(graph);
   } else if (propertyType == "int") {
-    return graph->getProperty<IntegerProperty>(dimName)->getNodeMax(graph);
+    return graph->getIntegerProperty(dimName)->getNodeMax(graph);
   } else {
     return 0;
   }

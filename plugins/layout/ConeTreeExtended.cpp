@@ -184,7 +184,7 @@ bool ConeTreeExtended::run() {
   }
 
   if (!nodeSize)
-    nodeSize = graph->getProperty<SizeProperty>("viewSize");
+    nodeSize = graph->getSizeProperty("viewSize");
 
   //=========================================================
   // rotate size if needed

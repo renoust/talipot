@@ -79,7 +79,7 @@ void SOMMap::initMap() {
   }
 
   assert(graph_component != nullptr);
-  IntegerProperty *nodeShape = graph_component->getProperty<IntegerProperty>("viewShape");
+  IntegerProperty *nodeShape = graph_component->getIntegerProperty("viewShape");
 
   switch (connectivity) {
   case four:

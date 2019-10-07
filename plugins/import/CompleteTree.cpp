@@ -85,7 +85,7 @@ public:
     if (needLayout) {
       // apply Tree Leaf
       string errMsg;
-      LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+      LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
       return graph->applyPropertyAlgorithm("Tree Leaf", layout, errMsg, nullptr, pluginProgress);
     }
 

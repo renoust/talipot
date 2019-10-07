@@ -322,7 +322,7 @@ public:
     }
 
     if (layout == nullptr) {
-      layout = graph->getProperty<tlp::LayoutProperty>("viewLayout");
+      layout = graph->getLayoutProperty("viewLayout");
     }
 
     for (auto e : graph->edges()) {
@@ -334,7 +334,7 @@ public:
     }
 
     if (bezierEdges) {
-      tlp::IntegerProperty *viewShape = graph->getProperty<tlp::IntegerProperty>("viewShape");
+      tlp::IntegerProperty *viewShape = graph->getIntegerProperty("viewShape");
       viewShape->setAllEdgeValue(tlp::EdgeShape::BezierCurve);
     }
 

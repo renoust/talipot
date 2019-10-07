@@ -271,8 +271,8 @@ public:
    * @brief This operator overload allows to copy a property using the following syntax :
    *
    * @code
-   * IntegerProperty* shape = graph->getProperty<IntegerProperty>("viewShape");
-   * IntegerProperty* backup = graph->getProperty<IntegerProperty>("shapeBackup");
+   * IntegerProperty* shape = graph->getIntegerProperty("viewShape");
+   * IntegerProperty* backup = graph->getIntegerProperty("shapeBackup");
    * *backup = *shape; // all the values from 'shape' will be copied into 'backup'.
    * @endcode
    * @param prop The property to copy the values from.

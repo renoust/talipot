@@ -83,14 +83,12 @@ public:
     os << "directed 1" << endl;
     os << "version 2" << endl;
 
-    LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
-    StringProperty *label = graph->getProperty<StringProperty>("viewLabel");
-    //    IntegerProperty *shape
-    //    =getProperty<IntegerProperty>(graph->getPropertyManager(),"viewShape");
-    ColorProperty *colors = graph->getProperty<ColorProperty>("viewColor");
-    SizeProperty *sizes = graph->getProperty<SizeProperty>("viewSize");
-    // Save Nodes
+    LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
+    StringProperty *label = graph->getStringProperty("viewLabel");
+    ColorProperty *colors = graph->getColorProperty("viewColor");
+    SizeProperty *sizes = graph->getSizeProperty("viewSize");
 
+    // Save Nodes
     for (auto n : graph->nodes()) {
       os << "node [" << endl;
       os << "id " << n.id << endl;

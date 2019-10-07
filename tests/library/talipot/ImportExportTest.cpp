@@ -194,19 +194,19 @@ void ImportExportTest::testSubGraphsImportExport() {
   original->delSubGraph(sub0);
 
   i = 0;
-  IntegerProperty *sub1id = sub1->getLocalProperty<IntegerProperty>("sub1id");
+  IntegerProperty *sub1id = sub1->getLocalIntegerProperty("sub1id");
   for (auto n : sub1->nodes()) {
     sub1id->setNodeValue(n, i++);
   }
 
   i = 0;
-  IntegerProperty *sub2id = sub2->getLocalProperty<IntegerProperty>("sub2id");
+  IntegerProperty *sub2id = sub2->getLocalIntegerProperty("sub2id");
   for (auto n : sub2->nodes()) {
     sub2id->setNodeValue(n, i++);
   }
 
   i = 0;
-  IntegerProperty *subsubid = subsub->getLocalProperty<IntegerProperty>("subsubid");
+  IntegerProperty *subsubid = subsub->getLocalIntegerProperty("subsubid");
   for (auto n : subsub->nodes()) {
     subsubid->setNodeValue(n, i++);
   }
@@ -236,7 +236,7 @@ static Size genRandomSize() {
 
 Graph *ImportExportTest::createSimpleGraph() const {
   Graph *original = tlp::newGraph();
-  LayoutProperty *layout = original->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = original->getLayoutProperty("viewLayout");
 
   for (unsigned int i = 0; i < 100; ++i) {
     node n = original->addNode();
@@ -263,25 +263,25 @@ Graph *ImportExportTest::createSimpleGraph() const {
   // create and populate any supported graph properties types in Talipot
   // to check that their serialization/deserialization is correct
 
-  BooleanProperty *booleanProp = original->getProperty<BooleanProperty>("booleanProp");
-  ColorProperty *colorProp = original->getProperty<ColorProperty>("colorProp");
-  DoubleProperty *doubleProp = original->getProperty<DoubleProperty>("doubleProp");
-  IntegerProperty *integerProp = original->getProperty<IntegerProperty>("intProp");
-  LayoutProperty *layoutProp = original->getProperty<LayoutProperty>("layoutProp");
-  SizeProperty *sizeProp = original->getProperty<SizeProperty>("sizeProp");
-  StringProperty *stringProp = original->getProperty<StringProperty>("stringProp");
+  BooleanProperty *booleanProp = original->getBooleanProperty("booleanProp");
+  ColorProperty *colorProp = original->getColorProperty("colorProp");
+  DoubleProperty *doubleProp = original->getDoubleProperty("doubleProp");
+  IntegerProperty *integerProp = original->getIntegerProperty("intProp");
+  LayoutProperty *layoutProp = original->getLayoutProperty("layoutProp");
+  SizeProperty *sizeProp = original->getSizeProperty("sizeProp");
+  StringProperty *stringProp = original->getStringProperty("stringProp");
 
   BooleanVectorProperty *booleanVecProp =
-      original->getProperty<BooleanVectorProperty>("booleanVecProp");
-  ColorVectorProperty *colorVecProp = original->getProperty<ColorVectorProperty>("colorVecProp");
+      original->getBooleanVectorProperty("booleanVecProp");
+  ColorVectorProperty *colorVecProp = original->getColorVectorProperty("colorVecProp");
   DoubleVectorProperty *doubleVecProp =
-      original->getProperty<DoubleVectorProperty>("doubleVecProp");
+      original->getDoubleVectorProperty("doubleVecProp");
   IntegerVectorProperty *integerVecProp =
-      original->getProperty<IntegerVectorProperty>("intVecProp");
-  LayoutVectorProperty *coordVecProp = original->getProperty<CoordVectorProperty>("coordVecProp");
-  SizeVectorProperty *sizeVecProp = original->getProperty<SizeVectorProperty>("sizeVecProp");
+      original->getIntegerVectorProperty("intVecProp");
+  LayoutVectorProperty *coordVecProp = original->getCoordVectorProperty("coordVecProp");
+  SizeVectorProperty *sizeVecProp = original->getSizeVectorProperty("sizeVecProp");
   StringVectorProperty *stringVecProp =
-      original->getProperty<StringVectorProperty>("stringVecProp");
+      original->getStringVectorProperty("stringVecProp");
 
   std::ostringstream oss;
   for (auto n : original->nodes()) {
@@ -371,7 +371,7 @@ Graph *ImportExportTest::createSimpleGraph() const {
 }
 
 void ImportExportTest::updateIdProperty(Graph *graph) const {
-  IntegerProperty *id = graph->getProperty<IntegerProperty>("id");
+  IntegerProperty *id = graph->getIntegerProperty("id");
   for (auto n : graph->nodes()) {
     id->setNodeValue(n, n.id);
   }
@@ -382,9 +382,9 @@ void ImportExportTest::updateIdProperty(Graph *graph) const {
 
 void ImportExportTest::testNanInfValuesImportExport() {
   Graph *original = createSimpleGraph();
-  DoubleProperty *doubleProp = original->getProperty<DoubleProperty>("doubleProp");
+  DoubleProperty *doubleProp = original->getDoubleProperty("doubleProp");
   DoubleVectorProperty *doubleVecProp =
-      original->getProperty<DoubleVectorProperty>("doubleVecProp");
+      original->getDoubleVectorProperty("doubleVecProp");
   for (auto n : original->nodes()) {
     if (n.id % 3 == 0) {
       doubleProp->setNodeValue(n, std::numeric_limits<double>::quiet_NaN());
@@ -447,7 +447,7 @@ void ImportExportTest::importExportGraph(tlp::Graph *original) {
   // tests its equality with the imported graph.
   if (original != original->getSuperGraph() && original->numberOfSubGraphs() == 0 &&
       original->existProperty("viewMetaGraph")) {
-    GraphProperty *viewMetaGraph = original->getProperty<GraphProperty>("viewMetaGraph");
+    GraphProperty *viewMetaGraph = original->getGraphProperty("viewMetaGraph");
     viewMetaGraph->setValueToGraphNodes(nullptr, original);
     viewMetaGraph->setValueToGraphEdges(set<edge>(), original);
   }
@@ -539,7 +539,7 @@ void ImportExportTest::testGraphAttributesAreEqual(tlp::Graph *first, tlp::Graph
 void ImportExportTest::testGraphPropertiesAreEqual(Graph *first, Graph *second) {
   unsigned int firstPropertiesCount = iteratorCount(first->getObjectProperties());
   unsigned int secondPropertiesCount = iteratorCount(second->getObjectProperties());
-  IntegerProperty *secondIdProperty = second->getProperty<IntegerProperty>("id");
+  IntegerProperty *secondIdProperty = second->getIntegerProperty("id");
 
   CPPUNIT_ASSERT_EQUAL_MESSAGE("Graphs have different number of properties", firstPropertiesCount,
                                secondPropertiesCount);
@@ -593,16 +593,16 @@ void ImportExportTest::testGraphsTopologiesAreEqual(tlp::Graph *first, tlp::Grap
   CPPUNIT_ASSERT_MESSAGE("id control property does not exists on imported graph",
                          second->existProperty("id"));
 
-  IntegerProperty *firstIdProperty = first->getProperty<IntegerProperty>("id");
-  IntegerProperty *secondIdProperty = second->getProperty<IntegerProperty>("id");
+  IntegerProperty *firstIdProperty = first->getIntegerProperty("id");
+  IntegerProperty *secondIdProperty = second->getIntegerProperty("id");
 
   CPPUNIT_ASSERT_MESSAGE("layout property does not exists on original graph",
                          first->existProperty("viewLayout"));
   CPPUNIT_ASSERT_MESSAGE("layout property does not exists on imported graph",
                          second->existProperty("viewLayout"));
 
-  LayoutProperty *firstLayout = first->getProperty<LayoutProperty>("viewLayout");
-  LayoutProperty *secondLayout = second->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *firstLayout = first->getLayoutProperty("viewLayout");
+  LayoutProperty *secondLayout = second->getLayoutProperty("viewLayout");
 
   std::set<unsigned int> fNodes;
   std::set<unsigned int> sNodes;

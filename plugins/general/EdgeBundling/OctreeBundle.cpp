@@ -250,9 +250,9 @@ void OctreeBundle::recQuad(const Coord fr[4], const Coord ba[4], const vector<no
 void OctreeBundle::createOctree(Graph *graph, tlp::LayoutProperty *lay, tlp::SizeProperty *siz) {
   // create the border of the Quadtree
   nbNodesInOriginalGraph = graph->numberOfNodes();
-  layout = graph->getProperty<LayoutProperty>("viewLayout");
-  size = graph->getProperty<SizeProperty>("viewSize");
-  rot = graph->getProperty<DoubleProperty>("viewRotation");
+  layout = graph->getLayoutProperty("viewLayout");
+  size = graph->getSizeProperty("viewSize");
+  rot = graph->getDoubleProperty("viewRotation");
 
   if (lay)
     layout = lay;

@@ -346,7 +346,7 @@ bool TreeReingoldAndTilfordExtended::run() {
   result->setAllEdgeValue(vector<Coord>(0));
 
   if (!getNodeSizePropertyParameter(dataSet, sizes))
-    sizes = graph->getProperty<SizeProperty>("viewSize");
+    sizes = graph->getSizeProperty("viewSize");
 
   getSpacingParameters(dataSet, nodeSpacing, spacing);
   orientation = "horizontal";

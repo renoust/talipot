@@ -225,53 +225,53 @@ struct TLPGraphBuilder : public TLPTrue {
     if (propertyType == GRAPH || propertyType == METAGRAPH) {
       // METAGRAPH was used in Tulip 2
       isGraphProperty = true;
-      return g->getLocalProperty<GraphProperty>(propertyName);
+      return g->getLocalGraphProperty(propertyName);
     }
 
     if (propertyType == DOUBLE || propertyType == METRIC)
       // METRIC was used in Tulip 2
-      return g->getLocalProperty<DoubleProperty>(propertyName);
+      return g->getLocalDoubleProperty(propertyName);
 
     if (propertyType == LAYOUT)
-      return g->getLocalProperty<LayoutProperty>(propertyName);
+      return g->getLocalLayoutProperty(propertyName);
 
     if (propertyType == SIZE)
-      return g->getLocalProperty<SizeProperty>(propertyName);
+      return g->getLocalSizeProperty(propertyName);
 
     if (propertyType == COLOR)
-      return g->getLocalProperty<ColorProperty>(propertyName);
+      return g->getLocalColorProperty(propertyName);
 
     if (propertyType == INT)
-      return g->getLocalProperty<IntegerProperty>(propertyName);
+      return g->getLocalIntegerProperty(propertyName);
 
     if (propertyType == BOOL)
-      return g->getLocalProperty<BooleanProperty>(propertyName);
+      return g->getLocalBooleanProperty(propertyName);
 
     if (propertyType == STRING) {
       isPathViewProperty = ((propertyName == "viewFont") || (propertyName == "viewTexture"));
-      return g->getLocalProperty<StringProperty>(propertyName);
+      return g->getLocalStringProperty(propertyName);
     }
 
     if (propertyType == SIZE_VECTOR)
-      return g->getLocalProperty<SizeVectorProperty>(propertyName);
+      return g->getLocalSizeVectorProperty(propertyName);
 
     if (propertyType == COLOR_VECTOR)
-      return g->getLocalProperty<ColorVectorProperty>(propertyName);
+      return g->getLocalColorVectorProperty(propertyName);
 
     if (propertyType == COORD_VECTOR)
-      return g->getLocalProperty<CoordVectorProperty>(propertyName);
+      return g->getLocalCoordVectorProperty(propertyName);
 
     if (propertyType == DOUBLE_VECTOR)
-      return g->getLocalProperty<DoubleVectorProperty>(propertyName);
+      return g->getLocalDoubleVectorProperty(propertyName);
 
     if (propertyType == INT_VECTOR)
-      return g->getLocalProperty<IntegerVectorProperty>(propertyName);
+      return g->getLocalIntegerVectorProperty(propertyName);
 
     if (propertyType == BOOL_VECTOR)
-      return g->getLocalProperty<BooleanVectorProperty>(propertyName);
+      return g->getLocalBooleanVectorProperty(propertyName);
 
     if (propertyType == STRING_VECTOR)
-      return g->getLocalProperty<StringVectorProperty>(propertyName);
+      return g->getLocalStringVectorProperty(propertyName);
 
     return nullptr;
   }

@@ -36,7 +36,7 @@ GlGraphComposite::GlGraphComposite(Graph *graph, GlGraphRenderer *graphRenderer)
   } else {
     rootGraph = graph->getRoot();
     graph->addListener(this);
-    graph->getRoot()->getProperty<GraphProperty>("viewMetaGraph")->addListener(this);
+    graph->getRoot()->getGraphProperty("viewMetaGraph")->addListener(this);
 
     for (auto n : graph->nodes()) {
       if (graph->getNodeMetaInfo(n))
@@ -54,7 +54,7 @@ GlGraphComposite::GlGraphComposite(Graph *graph, GlScene *scene)
   } else {
     rootGraph = graph->getRoot();
     graph->addListener(this);
-    graph->getRoot()->getProperty<GraphProperty>("viewMetaGraph")->addListener(this);
+    graph->getRoot()->getGraphProperty("viewMetaGraph")->addListener(this);
 
     for (auto n : graph->nodes()) {
       if (graph->getNodeMetaInfo(n))

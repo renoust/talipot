@@ -294,35 +294,35 @@ bool TLPBImport::importGraph() {
 
       // create property
       if (propType == GraphProperty::propertyTypename)
-        prop = g->getLocalProperty<GraphProperty>(propName);
+        prop = g->getLocalGraphProperty(propName);
       else if (propType == DoubleProperty::propertyTypename)
-        prop = g->getLocalProperty<DoubleProperty>(propName);
+        prop = g->getLocalDoubleProperty(propName);
       else if (propType == LayoutProperty::propertyTypename)
-        prop = g->getLocalProperty<LayoutProperty>(propName);
+        prop = g->getLocalLayoutProperty(propName);
       else if (propType == SizeProperty::propertyTypename)
-        prop = g->getLocalProperty<SizeProperty>(propName);
+        prop = g->getLocalSizeProperty(propName);
       else if (propType == ColorProperty::propertyTypename)
-        prop = g->getLocalProperty<ColorProperty>(propName);
+        prop = g->getLocalColorProperty(propName);
       else if (propType == IntegerProperty::propertyTypename)
-        prop = g->getLocalProperty<IntegerProperty>(propName);
+        prop = g->getLocalIntegerProperty(propName);
       else if (propType == BooleanProperty::propertyTypename)
-        prop = g->getLocalProperty<BooleanProperty>(propName);
+        prop = g->getLocalBooleanProperty(propName);
       else if (propType == StringProperty::propertyTypename)
-        prop = g->getLocalProperty<StringProperty>(propName);
+        prop = g->getLocalStringProperty(propName);
       else if (propType == SizeVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<SizeVectorProperty>(propName);
+        prop = g->getLocalSizeVectorProperty(propName);
       else if (propType == ColorVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<ColorVectorProperty>(propName);
+        prop = g->getLocalColorVectorProperty(propName);
       else if (propType == CoordVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<CoordVectorProperty>(propName);
+        prop = g->getLocalCoordVectorProperty(propName);
       else if (propType == DoubleVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<DoubleVectorProperty>(propName);
+        prop = g->getLocalDoubleVectorProperty(propName);
       else if (propType == IntegerVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<IntegerVectorProperty>(propName);
+        prop = g->getLocalIntegerVectorProperty(propName);
       else if (propType == BooleanVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<BooleanVectorProperty>(propName);
+        prop = g->getLocalBooleanVectorProperty(propName);
       else if (propType == StringVectorProperty::propertyTypename)
-        prop = g->getLocalProperty<StringVectorProperty>(propName);
+        prop = g->getLocalStringVectorProperty(propName);
 
       assert(prop);
 

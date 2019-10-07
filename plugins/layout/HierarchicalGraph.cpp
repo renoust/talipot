@@ -279,7 +279,7 @@ bool HierarchicalGraph::run() {
   }
 
   if (nodeSize == nullptr)
-    nodeSize = graph->getProperty<SizeProperty>("viewSize");
+    nodeSize = graph->getSizeProperty("viewSize");
 
   //=========================================================
   // use a temporary rotated size if necessary

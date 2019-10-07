@@ -61,7 +61,7 @@ public:
 
   void buildRow(const vector<node> &nodes, vector<pair<node, node>> &ends, unsigned int iRow,
                 unsigned width, int conn, bool isTore, double spacing) {
-    LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+    LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
 
     // Used for conn == 6
     double r = 0.5;

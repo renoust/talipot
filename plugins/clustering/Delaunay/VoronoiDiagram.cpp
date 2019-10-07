@@ -24,7 +24,7 @@ static bool voronoiDiagram(tlp::Graph *graph, bool voronoiCellsSubGraphs,
   tlp::node n;
   tlp::VoronoiDiagram voronoiDiag;
 
-  tlp::LayoutProperty *layout = graph->getProperty<tlp::LayoutProperty>("viewLayout");
+  tlp::LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
 
   sites.reserve(graph->numberOfNodes());
   const std::vector<tlp::node> &nodes = graph->nodes();

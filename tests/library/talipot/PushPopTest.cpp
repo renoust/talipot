@@ -230,7 +230,7 @@ void PushPopTest::testSetValue() {
 
   edge e0 = graph->addEdge(n0, n1);
 
-  DoubleProperty *prop = graph->getProperty<DoubleProperty>("prop");
+  DoubleProperty *prop = graph->getDoubleProperty("prop");
 
   prop->setNodeValue(n1, 1.0);
   prop->setEdgeValue(e0, 1.0);
@@ -317,7 +317,7 @@ void PushPopTest::testSetEltValue() {
 
   edge e0 = graph->addEdge(n0, n1);
 
-  DoubleVectorProperty *prop = graph->getProperty<DoubleVectorProperty>("prop");
+  DoubleVectorProperty *prop = graph->getDoubleVectorProperty("prop");
 
   vector<double> vv;
   vv.push_back(1.0);
@@ -424,7 +424,7 @@ void PushPopTest::testVectorValue() {
 
   edge e0 = graph->addEdge(n0, n1);
 
-  StringVectorProperty *sprop = graph->getProperty<StringVectorProperty>("sprop");
+  StringVectorProperty *sprop = graph->getStringVectorProperty("sprop");
   vector<std::string> svv;
   svv.push_back("a");
   svv.push_back("b");
@@ -438,7 +438,7 @@ void PushPopTest::testVectorValue() {
   CPPUNIT_ASSERT(sprop->getNodeEltValue(n1, 2) == "c");
   CPPUNIT_ASSERT(sprop->getEdgeEltValue(e0, 2) == "c");
 
-  DoubleVectorProperty *prop = graph->getProperty<DoubleVectorProperty>("prop");
+  DoubleVectorProperty *prop = graph->getDoubleVectorProperty("prop");
 
   vector<double> vv;
   vv.push_back(1.0);
@@ -555,7 +555,7 @@ void PushPopTest::testCopyProperty() {
   edge e0 = graph->addEdge(n0, n1);
   edge e1 = graph->addEdge(n1, n0);
 
-  DoubleProperty *prop = graph->getProperty<DoubleProperty>("prop");
+  DoubleProperty *prop = graph->getDoubleProperty("prop");
 
   prop->setNodeValue(n0, 1.0);
   prop->setEdgeValue(e0, 1.0);
@@ -968,13 +968,13 @@ void PushPopTest::testTests() {
 void PushPopTest::testAddDelProps() {
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
 
-  BooleanProperty *bProp = graph->getProperty<BooleanProperty>("boolean");
+  BooleanProperty *bProp = graph->getBooleanProperty("boolean");
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
   CPPUNIT_ASSERT(!graph->existProperty("double"));
 
   graph->push();
 
-  DoubleProperty *dProp = graph->getProperty<DoubleProperty>("double");
+  DoubleProperty *dProp = graph->getDoubleProperty("double");
   CPPUNIT_ASSERT(graph->existProperty("double"));
   node n = graph->addNode();
   dProp->setNodeValue(n, 123456789.);
@@ -986,7 +986,7 @@ void PushPopTest::testAddDelProps() {
 
   graph->unpop();
   CPPUNIT_ASSERT(graph->existProperty("double"));
-  CPPUNIT_ASSERT_EQUAL(dProp, graph->getProperty<DoubleProperty>("double"));
+  CPPUNIT_ASSERT_EQUAL(dProp, graph->getDoubleProperty("double"));
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
   CPPUNIT_ASSERT(graph->isElement(n));
   CPPUNIT_ASSERT_EQUAL(123456789., dProp->getNodeValue(n));
@@ -995,10 +995,10 @@ void PushPopTest::testAddDelProps() {
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
   graph->delLocalProperty("double");
   CPPUNIT_ASSERT(!graph->existProperty("double"));
-  graph->getProperty<DoubleProperty>("double");
+  graph->getDoubleProperty("double");
   CPPUNIT_ASSERT(graph->existProperty("double"));
   CPPUNIT_ASSERT(graph->isElement(n));
-  CPPUNIT_ASSERT(graph->getProperty<DoubleProperty>("double")->getNodeValue(n) != 123456789.);
+  CPPUNIT_ASSERT(graph->getDoubleProperty("double")->getNodeValue(n) != 123456789.);
 
   graph->push();
   CPPUNIT_ASSERT(graph->existProperty("double"));
@@ -1009,24 +1009,24 @@ void PushPopTest::testAddDelProps() {
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
   CPPUNIT_ASSERT(graph->existProperty("double"));
   CPPUNIT_ASSERT(graph->isElement(n));
-  CPPUNIT_ASSERT(graph->getProperty<DoubleProperty>("double")->getNodeValue(n) != 123456789.);
+  CPPUNIT_ASSERT(graph->getDoubleProperty("double")->getNodeValue(n) != 123456789.);
 
   graph->pop();
   CPPUNIT_ASSERT(!graph->existProperty("double"));
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
-  CPPUNIT_ASSERT_EQUAL(bProp, graph->getProperty<BooleanProperty>("boolean"));
+  CPPUNIT_ASSERT_EQUAL(bProp, graph->getBooleanProperty("boolean"));
 }
 
 void PushPopTest::testRenameProps() {
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
 
-  BooleanProperty *bProp = graph->getProperty<BooleanProperty>("boolean");
+  BooleanProperty *bProp = graph->getBooleanProperty("boolean");
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
   CPPUNIT_ASSERT(!graph->existProperty("double"));
 
   graph->push();
 
-  DoubleProperty *dProp = graph->getProperty<DoubleProperty>("double");
+  DoubleProperty *dProp = graph->getDoubleProperty("double");
   CPPUNIT_ASSERT(graph->existProperty("double"));
   node n = graph->addNode();
   dProp->setNodeValue(n, 123456789.);
@@ -1128,7 +1128,7 @@ public:
 void PushPopTest::testObserveDelProps() {
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
 
-  BooleanProperty *bProp = graph->getProperty<BooleanProperty>("boolean");
+  BooleanProperty *bProp = graph->getBooleanProperty("boolean");
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
   CPPUNIT_ASSERT(!graph->existProperty("double"));
 
@@ -1144,7 +1144,7 @@ void PushPopTest::testObserveDelProps() {
   CPPUNIT_ASSERT_EQUAL(1u, pObserver.nbProperties());
   CPPUNIT_ASSERT(pObserver.found(bProp));
 
-  DoubleProperty *dProp = graph->getProperty<DoubleProperty>("double");
+  DoubleProperty *dProp = graph->getDoubleProperty("double");
   dProp->addListener(&pObserver);
   pObserver.reset();
   CPPUNIT_ASSERT_EQUAL(0u, pObserver.nbProperties());
@@ -1157,7 +1157,7 @@ void PushPopTest::testObserveDelProps() {
 
   graph->unpop();
   CPPUNIT_ASSERT(graph->existProperty("double"));
-  CPPUNIT_ASSERT_EQUAL(dProp, graph->getProperty<DoubleProperty>("double"));
+  CPPUNIT_ASSERT_EQUAL(dProp, graph->getDoubleProperty("double"));
   CPPUNIT_ASSERT(!graph->existProperty("boolean"));
   CPPUNIT_ASSERT_EQUAL(1u, pObserver.nbProperties());
   CPPUNIT_ASSERT(pObserver.found(bProp));
@@ -1169,7 +1169,7 @@ void PushPopTest::testObserveDelProps() {
 
   graph->pop();
   CPPUNIT_ASSERT(graph->existProperty("boolean"));
-  CPPUNIT_ASSERT_EQUAL(bProp, graph->getProperty<BooleanProperty>("boolean"));
+  CPPUNIT_ASSERT_EQUAL(bProp, graph->getBooleanProperty("boolean"));
   CPPUNIT_ASSERT(!graph->existProperty("double"));
 }
 
@@ -1189,7 +1189,7 @@ void PushPopTest::testAddSubgraphProp() {
   delete it;
 
   sg->push();
-  DoubleProperty *prop = sg->getLocalProperty<DoubleProperty>("test");
+  DoubleProperty *prop = sg->getLocalDoubleProperty("test");
   CPPUNIT_ASSERT(sg->existProperty("test"));
 
   sg->pop();
@@ -1197,7 +1197,7 @@ void PushPopTest::testAddSubgraphProp() {
 
   sg->unpop();
   CPPUNIT_ASSERT(sg->existProperty("test"));
-  CPPUNIT_ASSERT_EQUAL(prop, sg->getLocalProperty<DoubleProperty>("test"));
+  CPPUNIT_ASSERT_EQUAL(prop, sg->getLocalDoubleProperty("test"));
 
   sg->pop();
   CPPUNIT_ASSERT(!sg->existProperty("test"));
@@ -1219,7 +1219,7 @@ void PushPopTest::testAddSubgraphProp() {
 
   sg->unpop();
   CPPUNIT_ASSERT(sg->existProperty("test"));
-  CPPUNIT_ASSERT_EQUAL(prop, sg->getLocalProperty<DoubleProperty>("test"));
+  CPPUNIT_ASSERT_EQUAL(prop, sg->getLocalDoubleProperty("test"));
 
   sg->pop();
   CPPUNIT_ASSERT(!sg->existProperty("test"));
@@ -1245,7 +1245,7 @@ void PushPopTest::testAddSubgraphProp() {
 
 void PushPopTest::testMetaNode() {
   node n0 = graph->addNode();
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
   Coord coord0(-1, -1, -1);
   layout->setNodeValue(n0, coord0);
 
@@ -1260,7 +1260,7 @@ void PushPopTest::testMetaNode() {
   // create meta node
   node metaNode = clone->createMetaNode(tmp);
   Color mColor(255, 255, 255, 127);
-  ColorProperty *color = graph->getProperty<ColorProperty>("viewColor");
+  ColorProperty *color = graph->getColorProperty("viewColor");
   color->setNodeValue(metaNode, mColor);
 
   CPPUNIT_ASSERT(graph->isElement(metaNode));
@@ -1309,11 +1309,11 @@ void PushPopTest::testDeletePushPopFalse() {
   graph->push();
   Graph *g1 = graph->addSubGraph("toto");
   g1->addListener(&delObserver);
-  DoubleProperty *testProp = g1->getLocalProperty<DoubleProperty>("test1");
+  DoubleProperty *testProp = g1->getLocalDoubleProperty("test1");
   testProp->addListener(&delObserver);
   Graph *g2 = g1->addSubGraph("titi");
   g2->addListener(&delObserver);
-  LayoutProperty *testProp2 = g2->getLocalProperty<LayoutProperty>("test2");
+  LayoutProperty *testProp2 = g2->getLocalLayoutProperty("test2");
   testProp2->addListener(&delObserver);
 
   // this call should delete the two created subgraphs

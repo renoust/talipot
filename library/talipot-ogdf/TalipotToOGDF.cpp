@@ -41,8 +41,8 @@ TalipotToOGDF::TalipotToOGDF(tlp::Graph *g, bool importEdgeBends)
 
   ogdfAttributes = ogdf::GraphAttributes(ogdfGraph, attributes);
 
-  tlp::SizeProperty *sizeProp = talipotGraph->getProperty<tlp::SizeProperty>("viewSize");
-  tlp::LayoutProperty *layoutProp = talipotGraph->getProperty<tlp::LayoutProperty>("viewLayout");
+  tlp::SizeProperty *sizeProp = talipotGraph->getSizeProperty("viewSize");
+  tlp::LayoutProperty *layoutProp = talipotGraph->getLayoutProperty("viewLayout");
 
   const std::vector<tlp::node> &nodes = talipotGraph->nodes();
   unsigned int nbElts = nodes.size();

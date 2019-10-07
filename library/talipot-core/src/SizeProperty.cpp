@@ -43,9 +43,9 @@ public:
 
     if (prop->getName() == "viewSize") {
       // set meta node size as the enclosed subgraph bounding box
-      BoundingBox box = tlp::computeBoundingBox(sg, sg->getProperty<LayoutProperty>("viewLayout"),
-                                                sg->getProperty<SizeProperty>("viewSize"),
-                                                sg->getProperty<DoubleProperty>("viewRotation"));
+      BoundingBox box = tlp::computeBoundingBox(sg, sg->getLayoutProperty("viewLayout"),
+                                                sg->getSizeProperty("viewSize"),
+                                                sg->getDoubleProperty("viewRotation"));
 
       prop->setNodeValue(mN, Size(box.width(), box.height(), box.depth()));
     } else
@@ -204,7 +204,7 @@ PropertyInterface *SizeProperty::clonePrototype(Graph *g, const std::string &n) 
     return nullptr;
 
   // allow to get an unregistered property (empty name)
-  SizeProperty *p = n.empty() ? new SizeProperty(g) : g->getLocalProperty<SizeProperty>(n);
+  SizeProperty *p = n.empty() ? new SizeProperty(g) : g->getLocalSizeProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;
@@ -225,7 +225,7 @@ PropertyInterface *SizeVectorProperty::clonePrototype(Graph *g, const std::strin
 
   // allow to get an unregistered property (empty name)
   SizeVectorProperty *p =
-      n.empty() ? new SizeVectorProperty(g) : g->getLocalProperty<SizeVectorProperty>(n);
+      n.empty() ? new SizeVectorProperty(g) : g->getLocalSizeVectorProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;

@@ -481,7 +481,7 @@ GraphProperty *GraphAbstract::getMetaGraphProperty() {
   if (metaGraphProperty)
     return metaGraphProperty;
 
-  return metaGraphProperty = getRoot()->getProperty<GraphProperty>(metaGraphPropertyName);
+  return metaGraphProperty = getRoot()->getGraphProperty(metaGraphPropertyName);
 }
 
 void GraphAbstract::setName(const std::string &name) {

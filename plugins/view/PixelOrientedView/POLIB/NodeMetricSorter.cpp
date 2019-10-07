@@ -76,7 +76,7 @@ unsigned int NodeMetricSorter::getNbValuesForProperty(const string &propertyName
       set<double> sd;
 
       for (auto n : graph->nodes()) {
-        sd.insert(graph->getProperty<DoubleProperty>(propertyName)->getNodeValue(n));
+        sd.insert(graph->getDoubleProperty(propertyName)->getNodeValue(n));
       }
 
       count = sd.size();
@@ -84,7 +84,7 @@ unsigned int NodeMetricSorter::getNbValuesForProperty(const string &propertyName
       set<int> si;
 
       for (auto n : graph->nodes()) {
-        si.insert(graph->getProperty<IntegerProperty>(propertyName)->getNodeValue(n));
+        si.insert(graph->getIntegerProperty(propertyName)->getNodeValue(n));
       }
 
       count = si.size();

@@ -185,8 +185,8 @@ void OGDFLayoutPluginBase::transposeLayoutVertically() {
   const vector<tlp::edge> &edges = graph->edges();
 
   tlp::BoundingBox graphBB =
-      tlp::computeBoundingBox(nodes, edges, result, graph->getProperty<SizeProperty>("viewSize"),
-                              graph->getProperty<DoubleProperty>("viewRotation"));
+      tlp::computeBoundingBox(nodes, edges, result, graph->getSizeProperty("viewSize"),
+                              graph->getDoubleProperty("viewRotation"));
   float midY = (graphBB[0][1] + graphBB[1][1]) / 2.f;
 
   for (auto n : nodes) {

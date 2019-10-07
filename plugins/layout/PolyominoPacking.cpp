@@ -160,7 +160,7 @@ bool PolyominoPacking::run() {
     return true;
   }
 
-  shape = graph->getProperty<IntegerProperty>("viewShape");
+  shape = graph->getIntegerProperty("viewShape");
 
   polyominos.reserve(connectedComponents.size());
 

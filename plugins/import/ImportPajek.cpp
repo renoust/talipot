@@ -269,7 +269,7 @@ public:
 
         expectedLine = NET_VECTOR;
         curNodeId = 0;
-        vectorProp = graph->getProperty<DoubleProperty>(lineWoFirstToken);
+        vectorProp = graph->getDoubleProperty(lineWoFirstToken);
 
         return true;
       }
@@ -488,10 +488,10 @@ public:
 
     std::istream *in = tlp::getInputFileStream(filename.c_str());
 
-    labels = graph->getProperty<StringProperty>("viewLabel");
-    weights = graph->getProperty<DoubleProperty>("weights");
-    layout = graph->getProperty<LayoutProperty>("viewLayout");
-    sizes = graph->getProperty<SizeProperty>("viewSize");
+    labels = graph->getStringProperty("viewLabel");
+    weights = graph->getDoubleProperty("weights");
+    layout = graph->getLayoutProperty("viewLayout");
+    sizes = graph->getSizeProperty("viewSize");
 
     // because when node's layout is provided
     // x,y,z coordinates are restricted to [0.0, 1.0]

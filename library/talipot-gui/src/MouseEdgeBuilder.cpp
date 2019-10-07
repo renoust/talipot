@@ -153,7 +153,7 @@ bool MouseEdgeBuilder::draw(GlMainWidget *glMainWidget) {
 void MouseEdgeBuilder::initObserver(Graph *newGraph) {
   newGraph->addListener(this);
   _graph = newGraph;
-  _layoutProperty = newGraph->getProperty<LayoutProperty>("viewLayout");
+  _layoutProperty = newGraph->getLayoutProperty("viewLayout");
   _layoutProperty->addListener(this);
 }
 

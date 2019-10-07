@@ -43,7 +43,7 @@ void GraphPropertyTest::testDestroyGraph() {
   Graph *g1 = graph->addCloneSubGraph("G1");
   Graph *g2 = graph->addCloneSubGraph("G2");
   Graph *meta1 = graph->addSubGraph("META1");
-  GraphProperty *proxy1 = meta1->getLocalProperty<GraphProperty>("viewMetaGraph");
+  GraphProperty *proxy1 = meta1->getLocalGraphProperty("viewMetaGraph");
   node mnode1 = meta1->addNode();
   node mnode2 = meta1->addNode();
   proxy1->setNodeValue(mnode1, g1);
@@ -62,7 +62,7 @@ void GraphPropertyTest::testSetGet() {
   Graph *g2 = graph->addCloneSubGraph("G2");
   Graph *g3 = graph->addCloneSubGraph("G3");
   Graph *meta1 = graph->addSubGraph("META1");
-  GraphProperty *proxy1 = meta1->getLocalProperty<GraphProperty>("viewMetaGraph");
+  GraphProperty *proxy1 = meta1->getLocalGraphProperty("viewMetaGraph");
   node mnode1 = meta1->addNode();
   node mnode2 = meta1->addNode();
   proxy1->setNodeValue(mnode1, g1);

@@ -53,7 +53,7 @@ bool CliqueImport::importGraph() {
   }
 
   // apply the circular algorithm on the clique to make it look good (at least better than 'Random')
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
   string message;
   graph->applyPropertyAlgorithm("Circular", layout, message);
 

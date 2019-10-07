@@ -101,11 +101,11 @@ public:
     }
 
     // get Talipot visual attributes properties associated to the empty graph we want to fill
-    viewLayout = graph->getProperty<LayoutProperty>("viewLayout");
-    viewLabel = graph->getProperty<StringProperty>("viewLabel");
-    viewSize = graph->getProperty<SizeProperty>("viewSize");
-    viewColor = graph->getProperty<ColorProperty>("viewColor");
-    viewShape = graph->getProperty<IntegerProperty>("viewShape");
+    viewLayout = graph->getLayoutProperty("viewLayout");
+    viewLabel = graph->getStringProperty("viewLabel");
+    viewSize = graph->getSizeProperty("viewSize");
+    viewColor = graph->getColorProperty("viewColor");
+    viewShape = graph->getIntegerProperty("viewShape");
 
     nodesHaveCoordinates = false;
 
@@ -194,13 +194,13 @@ public:
         string attributeType = QStringToTlpString(xmlReader.attributes().value("type").toString());
 
         if (attributeType == "string") {
-          propertiesMap[attributeId] = graph->getProperty<StringProperty>(attributeName);
+          propertiesMap[attributeId] = graph->getStringProperty(attributeName);
         } else if (attributeType == "float" || attributeType == "double") {
-          propertiesMap[attributeId] = graph->getProperty<DoubleProperty>(attributeName);
+          propertiesMap[attributeId] = graph->getDoubleProperty(attributeName);
         } else if (attributeType == "integer") {
-          propertiesMap[attributeId] = graph->getProperty<IntegerProperty>(attributeName);
+          propertiesMap[attributeId] = graph->getIntegerProperty(attributeName);
         } else if (attributeType == "boolean") {
-          propertiesMap[attributeId] = graph->getProperty<BooleanProperty>(attributeName);
+          propertiesMap[attributeId] = graph->getBooleanProperty(attributeName);
         }
       }
     }

@@ -151,10 +151,10 @@ public:
    * Graph* g = tlp::newGraph();
    * Graph*sub = g->addCloneSubGraph();
    *
-   * IntegerProperty* prop = g->getProperty<IntegerProperty>("test");
+   * IntegerProperty* prop = g->getIntegerProperty("test");
    * //prop->getGraph() returns g
    *
-   * IntegerProperty* prop2 = sub->getProperty<IntegerProperty>("test");
+   * IntegerProperty* prop2 = sub->getIntegerProperty("test");
    * //prop2->getGraph() returns g
    * @endcode
    *

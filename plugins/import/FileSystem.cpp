@@ -151,30 +151,30 @@ public:
       return false;
     }
 
-    _absolutePaths = graph->getProperty<tlp::StringProperty>("Absolute paths");
-    _baseNames = graph->getProperty<tlp::StringProperty>("Base name");
-    _createdDates = graph->getProperty<tlp::StringProperty>("Creation date");
-    _fileNames = graph->getProperty<tlp::StringProperty>("File name");
-    _isDir = graph->getProperty<tlp::BooleanProperty>("Is directory");
-    _isExecutable = graph->getProperty<tlp::BooleanProperty>("Is executable");
-    _isReadable = graph->getProperty<tlp::BooleanProperty>("Is readable");
-    _isSymlink = graph->getProperty<tlp::BooleanProperty>("Is symbolic link");
-    _isWritable = graph->getProperty<tlp::BooleanProperty>("Is writable");
-    _lastModifiedDates = graph->getProperty<tlp::StringProperty>("Last modification date");
-    _lastReadDates = graph->getProperty<tlp::StringProperty>("Last read date");
-    _owners = graph->getProperty<tlp::StringProperty>("Owner");
-    _permissions = graph->getProperty<tlp::IntegerProperty>("Permission ID");
-    _suffixes = graph->getProperty<tlp::StringProperty>("Suffix");
-    _sizes = graph->getProperty<tlp::DoubleProperty>("Size");
-    _fontIcon = graph->getProperty<tlp::StringProperty>("viewIcon");
+    _absolutePaths = graph->getStringProperty("Absolute paths");
+    _baseNames = graph->getStringProperty("Base name");
+    _createdDates = graph->getStringProperty("Creation date");
+    _fileNames = graph->getStringProperty("File name");
+    _isDir = graph->getBooleanProperty("Is directory");
+    _isExecutable = graph->getBooleanProperty("Is executable");
+    _isReadable = graph->getBooleanProperty("Is readable");
+    _isSymlink = graph->getBooleanProperty("Is symbolic link");
+    _isWritable = graph->getBooleanProperty("Is writable");
+    _lastModifiedDates = graph->getStringProperty("Last modification date");
+    _lastReadDates = graph->getStringProperty("Last read date");
+    _owners = graph->getStringProperty("Owner");
+    _permissions = graph->getIntegerProperty("Permission ID");
+    _suffixes = graph->getStringProperty("Suffix");
+    _sizes = graph->getDoubleProperty("Size");
+    _fontIcon = graph->getStringProperty("viewIcon");
 
     if (_useIcons) {
-      tlp::IntegerProperty *viewShape = graph->getProperty<tlp::IntegerProperty>("viewShape");
+      tlp::IntegerProperty *viewShape = graph->getIntegerProperty("viewShape");
       viewShape->setAllNodeValue(tlp::NodeShape::Icon);
       _fontIcon->setAllNodeValue("fa-file-o");
     }
 
-    tlp::ColorProperty *viewColor = graph->getProperty<tlp::ColorProperty>("viewColor");
+    tlp::ColorProperty *viewColor = graph->getColorProperty("viewColor");
     viewColor->setAllNodeValue(otherColor);
 
     tlp::node rootNode = addFileNode(rootInfo, graph);
@@ -231,14 +231,14 @@ public:
       }
     }
 
-    tlp::StringProperty *viewLabel = graph->getProperty<tlp::StringProperty>("viewLabel");
+    tlp::StringProperty *viewLabel = graph->getStringProperty("viewLabel");
     viewLabel->copy(_fileNames);
 
     if (_treeLayout) {
       const std::string algoName = "Bubble Tree";
       tlp::DataSet defaultParameters = getDefaultAlgorithmParameters(algoName, graph);
       std::string errMsg;
-      tlp::LayoutProperty *viewLayout = graph->getProperty<tlp::LayoutProperty>("viewLayout");
+      tlp::LayoutProperty *viewLayout = graph->getLayoutProperty("viewLayout");
       graph->applyPropertyAlgorithm(algoName, viewLayout, errMsg, &defaultParameters,
                                     pluginProgress);
     }
@@ -270,7 +270,7 @@ private:
 
       if (info.isDir()) {
         _fontIcon->setNodeValue(n, "fa-folder-o");
-        tlp::ColorProperty *viewColor = graph->getProperty<tlp::ColorProperty>("viewColor");
+        tlp::ColorProperty *viewColor = graph->getColorProperty("viewColor");
         viewColor->setNodeValue(n, dirColor);
       } else if (std::find(commonTextFilesExt.begin(), commonTextFilesExt.end(), extension) !=
                  commonTextFilesExt.end()) {

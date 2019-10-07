@@ -752,15 +752,15 @@ struct WebImport : public ImportModule {
     mySite.setUrl(string("/") + url);
     mySite.data = "";
 
-    labels = graph->getProperty<StringProperty>("viewLabel");
+    labels = graph->getStringProperty("viewLabel");
     labels->setAllEdgeValue(string("link"));
-    urls = graph->getProperty<StringProperty>("url");
-    colors = graph->getProperty<ColorProperty>("viewColor");
+    urls = graph->getStringProperty("url");
+    colors = graph->getColorProperty("viewColor");
     colors->setAllNodeValue(pColor);
     colors->setAllEdgeValue(lColor);
     redirectionColor = &rColor;
 
-    graph->getProperty<IntegerProperty>("viewShape")
+    graph->getIntegerProperty("viewShape")
         ->setAllNodeValue(14); // GlyphManager::glyphId("2D - Circle")
 
     if (!mySite.load()) {
@@ -790,7 +790,7 @@ struct WebImport : public ImportModule {
       pluginProgress->setComment("Layouting extracted graph using FM³...");
       string errMsg;
       // apply FM³
-      LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+      LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
       return graph->applyPropertyAlgorithm("FM^3 (OGDF)", layout, errMsg, nullptr, pluginProgress);
     }
 

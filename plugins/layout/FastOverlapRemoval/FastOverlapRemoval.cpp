@@ -109,13 +109,13 @@ bool FastOverlapRemoval::run() {
   }
 
   if (viewLayout == nullptr)
-    viewLayout = graph->getProperty<LayoutProperty>("viewLayout");
+    viewLayout = graph->getLayoutProperty("viewLayout");
 
   if (viewSize == nullptr)
-    viewSize = graph->getProperty<SizeProperty>("viewSize");
+    viewSize = graph->getSizeProperty("viewSize");
 
   if (viewRot == nullptr)
-    viewRot = graph->getProperty<DoubleProperty>("viewRotation");
+    viewRot = graph->getDoubleProperty("viewRotation");
 
   // initialize result for edges
   result->setAllEdgeValue(viewLayout->getEdgeDefaultValue());

@@ -350,7 +350,7 @@ struct DOT_YY {
     // Layout
 
     if( inAttr.mask & DOT_ATTR::LAYOUT ) {
-      LayoutProperty * layoutP = sg->getProperty<LayoutProperty>(TLP_LAYOUT_PROXY_NAME);
+      LayoutProperty * layoutP = sg->getLayoutProperty(TLP_LAYOUT_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	layoutP->setNodeValue( inA[i], inAttr.layout );
     }
@@ -358,8 +358,8 @@ struct DOT_YY {
     // Label
 
     if( (inAttr.mask & DOT_ATTR::LABEL) && inAttr.label.size() ) {
-      StringProperty * stringP = sg->getProperty<StringProperty>(TLP_LABEL_PROXY_NAME);
-      StringProperty * string2P = sg->getProperty<StringProperty>(TLP_EXTLABEL_PROXY_NAME);
+      StringProperty * stringP = sg->getStringProperty(TLP_LABEL_PROXY_NAME);
+      StringProperty * string2P = sg->getStringProperty(TLP_EXTLABEL_PROXY_NAME);
       std::string label = doStringEscaping(inAttr.label);
       for( unsigned int i = 0 ; i < inA.size() ; i++ ) {
 	stringP->setNodeValue( inA[i], label );
@@ -374,7 +374,7 @@ struct DOT_YY {
       if( inAttr.mask & DOT_ATTR::WIDTH ) s.setW( inAttr.size.getW() );
       if( inAttr.mask & DOT_ATTR::HEIGHT ) s.setH( inAttr.size.getH() );
       if( inAttr.mask & DOT_ATTR::DEPTH ) s.setD( inAttr.size.getD() );
-      SizeProperty * sizeP = sg->getProperty<SizeProperty>(TLP_SIZE_PROXY_NAME);
+      SizeProperty * sizeP = sg->getSizeProperty(TLP_SIZE_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	sizeP->setNodeValue( inA[i], s );
     }
@@ -382,24 +382,24 @@ struct DOT_YY {
     // Color
 
     if( inAttr.mask & DOT_ATTR::FILL_COLOR ) {
-      ColorProperty * colP = sg->getProperty<ColorProperty>(TLP_COLOR_PROXY_NAME);
+      ColorProperty * colP = sg->getColorProperty(TLP_COLOR_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	colP->setNodeValue( inA[i], inAttr.fillcolor );
     }
     if( inAttr.mask & DOT_ATTR::COLOR ) {
-      ColorProperty * colP = sg->getProperty<ColorProperty>(TLP_BORDERCOLOR_PROXY_NAME);
+      ColorProperty * colP = sg->getColorProperty(TLP_BORDERCOLOR_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	colP->setNodeValue( inA[i], inAttr.color );
     }
     if( inAttr.mask & DOT_ATTR::FONT_COLOR ) {
-      ColorProperty * colP = sg->getProperty<ColorProperty>(TLP_FONTCOLOR_PROXY_NAME);
+      ColorProperty * colP = sg->getColorProperty(TLP_FONTCOLOR_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	colP->setNodeValue( inA[i], inAttr.fontcolor );
     }
 
     // Shape
     {
-      IntegerProperty * shapeP = sg->getProperty<IntegerProperty>(TLP_SHAPE_PROXY_NAME);
+      IntegerProperty * shapeP = sg->getIntegerProperty(TLP_SHAPE_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	if( inAttr.mask & DOT_ATTR::SHAPE )
 	  shapeP->setNodeValue( inA[i], inAttr.shape );
@@ -410,7 +410,7 @@ struct DOT_YY {
     // Comment
 
     if( inAttr.mask & DOT_ATTR::COMMENT ) {
-      StringProperty * cmntP = sg->getProperty<StringProperty>(TLP_COMMENT_PROXY_NAME);
+      StringProperty * cmntP = sg->getStringProperty(TLP_COMMENT_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	cmntP->setNodeValue( inA[i], inAttr.comment );
     }
@@ -418,7 +418,7 @@ struct DOT_YY {
     // URL
 
     if( (inAttr.mask & DOT_ATTR::URL) && inAttr.url.size() ) {
-      StringProperty * urlP = sg->getProperty<StringProperty>(TLP_URL_PROXY_NAME);
+      StringProperty * urlP = sg->getStringProperty(TLP_URL_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	urlP->setNodeValue( inA[i], inAttr.url );
     }
@@ -431,8 +431,8 @@ struct DOT_YY {
     // Label
 
     if( (inAttr.mask & DOT_ATTR::LABEL) && inAttr.label.size() ) {
-      StringProperty * stringP = sg->getProperty<StringProperty>(TLP_LABEL_PROXY_NAME);
-      StringProperty * string2P = sg->getProperty<StringProperty>(TLP_EXTLABEL_PROXY_NAME);
+      StringProperty * stringP = sg->getStringProperty(TLP_LABEL_PROXY_NAME);
+      StringProperty * string2P = sg->getStringProperty(TLP_EXTLABEL_PROXY_NAME);
       std::string label = doStringEscaping(inAttr.label);
       for( unsigned int i = 0 ; i < inA.size() ; i++ ) {
 	stringP->setEdgeValue( inA[i], label );
@@ -443,7 +443,7 @@ struct DOT_YY {
     // Head-Label
 
     if( (inAttr.mask & DOT_ATTR::HEAD_LABEL) && inAttr.headLabel.size() ) {
-      StringProperty * labelP = sg->getProperty<StringProperty>(TLP_HEAD_LABEL_PROXY_NAME);
+      StringProperty * labelP = sg->getStringProperty(TLP_HEAD_LABEL_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	labelP->setEdgeValue( inA[i], inAttr.headLabel );
     }
@@ -451,14 +451,14 @@ struct DOT_YY {
     // Tail-Label
 
     if( (inAttr.mask & DOT_ATTR::TAIL_LABEL) && inAttr.tailLabel.size() ) {
-      StringProperty * labelP = sg->getProperty<StringProperty>(TLP_TAIL_LABEL_PROXY_NAME);
+      StringProperty * labelP = sg->getStringProperty(TLP_TAIL_LABEL_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	labelP->setEdgeValue( inA[i], inAttr.tailLabel );
     }
 
     // Color
     if( inAttr.mask & DOT_ATTR::COLOR ) {
-      ColorProperty * colP = sg->getProperty<ColorProperty>(TLP_COLOR_PROXY_NAME);
+      ColorProperty * colP = sg->getColorProperty(TLP_COLOR_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	colP->setEdgeValue( inA[i], inAttr.color );
     }
@@ -466,7 +466,7 @@ struct DOT_YY {
     // Comment
 
     if( inAttr.mask & DOT_ATTR::COMMENT ) {
-      StringProperty * cmntP = sg->getProperty<StringProperty>(TLP_COMMENT_PROXY_NAME);
+      StringProperty * cmntP = sg->getStringProperty(TLP_COMMENT_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	cmntP->setEdgeValue( inA[i], inAttr.comment );
     }
@@ -474,7 +474,7 @@ struct DOT_YY {
     // URL
 
     if( (inAttr.mask & DOT_ATTR::URL) && inAttr.url.size() ) {
-      StringProperty * urlP = sg->getProperty<StringProperty>(TLP_URL_PROXY_NAME);
+      StringProperty * urlP = sg->getStringProperty(TLP_URL_PROXY_NAME);
       for( unsigned int i = 0 ; i < inA.size() ; i++ )
 	urlP->setEdgeValue( inA[i], inAttr.url );
     }

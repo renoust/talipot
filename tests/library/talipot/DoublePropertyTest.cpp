@@ -34,18 +34,18 @@ CPPUNIT_TEST_SUITE_REGISTRATION(DoublePropertyTest);
 
 void DoublePropertyTest::setUp() {
   graph = newGraph();
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName);
+  graph->getLocalDoubleProperty(doublePropertyName);
   n1 = graph->addNode();
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n1, originalMin);
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n1, originalMin);
 
   n2 = graph->addNode();
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n2, 6);
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n2, 6);
 
   n3 = graph->addNode();
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n3, 7);
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n3, 7);
 
   n4 = graph->addNode();
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n4, originalMax);
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n4, originalMax);
 
   e1 = graph->addEdge(n1, n3);
   e2 = graph->addEdge(n2, n4);
@@ -69,53 +69,53 @@ void DoublePropertyTest::testAnonymousDoublePropertyMaxUpdate() {
 void DoublePropertyTest::testDoublePropertyMinUpdate() {
   double minNode;
 
-  minNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMin();
+  minNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMin();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty min value before update", originalMin, minNode);
 
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n1, newMin);
-  minNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMin();
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n1, newMin);
+  minNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMin();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty min value after update", newMin, minNode);
 }
 
 void DoublePropertyTest::testDoublePropertyMaxUpdate() {
   double maxNode;
 
-  maxNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMax();
+  maxNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMax();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty max value before update", originalMax, maxNode);
 
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeValue(n4, newMax);
-  maxNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMax();
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeValue(n4, newMax);
+  maxNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMax();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty max value after update", newMax, maxNode);
 }
 
 void DoublePropertyTest::testDoublePropertyMinUpdateFromString() {
   double minNode;
 
-  minNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMin();
+  minNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMin();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty min value before update", originalMin, minNode);
 
   const string newStringMin = "1";
 
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeStringValue(n1, newStringMin);
-  minNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMin();
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeStringValue(n1, newStringMin);
+  minNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMin();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty min value after update", newMin, minNode);
 }
 
 void DoublePropertyTest::testDoublePropertyMaxUpdateFromString() {
   double maxNode;
 
-  maxNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMax();
+  maxNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMax();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty max value before update", originalMax, maxNode);
 
   const string newStringMax = "15";
 
-  graph->getLocalProperty<DoubleProperty>(doublePropertyName)->setNodeStringValue(n4, newStringMax);
-  maxNode = graph->getLocalProperty<DoubleProperty>(doublePropertyName)->getNodeMax();
+  graph->getLocalDoubleProperty(doublePropertyName)->setNodeStringValue(n4, newStringMax);
+  maxNode = graph->getLocalDoubleProperty(doublePropertyName)->getNodeMax();
   CPPUNIT_ASSERT_EQUAL_MESSAGE("test DoubleProperty max value after update", newMax, maxNode);
 }
 
 void DoublePropertyTest::testDoublePropertySubGraphMin() {
-  DoubleProperty *doubleProperty = graph->getProperty<DoubleProperty>(doublePropertyName);
+  DoubleProperty *doubleProperty = graph->getDoubleProperty(doublePropertyName);
   Graph *subGraph = graph->addSubGraph();
   node n2 = subGraph->addNode();
   doubleProperty->setNodeValue(n2, 6);
@@ -133,7 +133,7 @@ void DoublePropertyTest::testDoublePropertySubGraphMin() {
 }
 
 void DoublePropertyTest::testDoublePropertySubGraphMax() {
-  DoubleProperty *doubleProperty = graph->getProperty<DoubleProperty>(doublePropertyName);
+  DoubleProperty *doubleProperty = graph->getDoubleProperty(doublePropertyName);
   Graph *subGraph = graph->addSubGraph();
   node n2 = subGraph->addNode();
   doubleProperty->setNodeValue(n2, 6.0);
@@ -159,7 +159,7 @@ void DoublePropertyTest::testDoublePropertyInfValue() {
 
   node n = graph->addNode();
 
-  DoubleProperty *prop = graph->getLocalProperty<DoubleProperty>(doublePropertyName);
+  DoubleProperty *prop = graph->getLocalDoubleProperty(doublePropertyName);
   CPPUNIT_ASSERT(prop->getNodeValue(n) == 0.0);
 
   prop->setNodeValue(n, infValue);
@@ -193,7 +193,7 @@ void DoublePropertyTest::testDoublePropertySetAllValue() {
   const double v2 = tlp::randomDouble();
 
   // create a double property and set all values for nodes and edges
-  DoubleProperty *prop = graph->getLocalProperty<DoubleProperty>(doublePropertyName);
+  DoubleProperty *prop = graph->getLocalDoubleProperty(doublePropertyName);
   prop->setAllNodeValue(v1);
   prop->setAllEdgeValue(v2);
 
@@ -252,7 +252,7 @@ void DoublePropertyTest::testDoublePropertySetDefaultValue() {
   const double v2 = tlp::randomDouble();
 
   // create a double property and set all values for nodes and edges
-  DoubleProperty *prop = graph->getLocalProperty<DoubleProperty>(doublePropertyName);
+  DoubleProperty *prop = graph->getLocalDoubleProperty(doublePropertyName);
   prop->setAllNodeValue(v1);
   prop->setAllEdgeValue(v2);
 
@@ -346,7 +346,7 @@ void DoublePropertyTest::testDoublePropertySetDefaultValue() {
 }
 
 void DoublePropertyTest::testStaticDoublePropertyCopyFrom() {
-  auto prop = graph->getLocalProperty<DoubleProperty>(doublePropertyName);
+  auto prop = graph->getLocalDoubleProperty(doublePropertyName);
   NodeStaticProperty<double> nStaticProp(graph);
   nStaticProp.copyFromProperty(prop);
   for (auto n : graph->nodes())

@@ -214,7 +214,7 @@ bool ScatterPlotCorrelCoeffSelector::eventFilter(QObject *obj, QEvent *e) {
 
   Camera &camera = glWidget->getScene()->getLayer("Main")->getCamera();
   Graph *graph = glWidget->getScene()->getGlGraphComposite()->getInputData()->getGraph();
-  BooleanProperty *viewSelection = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *viewSelection = graph->getBooleanProperty("viewSelection");
 
   if (!glWidget->hasMouseTracking()) {
     glWidget->setMouseTracking(true);

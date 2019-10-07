@@ -335,7 +335,7 @@ void GeographicView::updateSharedProperties() {
     useSharedLayoutProperty = geoViewConfigWidget->useSharedLayoutProperty();
 
     if (useSharedLayoutProperty)
-      geoViewGraphicsView->setGeoLayout(graph()->getProperty<LayoutProperty>("viewLayout"));
+      geoViewGraphicsView->setGeoLayout(graph()->getLayoutProperty("viewLayout"));
     else
       geoViewGraphicsView->setGeoLayout(new LayoutProperty(graph()));
   }
@@ -344,7 +344,7 @@ void GeographicView::updateSharedProperties() {
     useSharedShapeProperty = geoViewConfigWidget->useSharedShapeProperty();
 
     if (useSharedShapeProperty)
-      geoViewGraphicsView->setGeoShape(graph()->getProperty<IntegerProperty>("viewShape"));
+      geoViewGraphicsView->setGeoShape(graph()->getIntegerProperty("viewShape"));
     else
       geoViewGraphicsView->setGeoShape(new IntegerProperty(graph()));
   }
@@ -353,7 +353,7 @@ void GeographicView::updateSharedProperties() {
     useSharedSizeProperty = geoViewConfigWidget->useSharedSizeProperty();
 
     if (useSharedSizeProperty)
-      geoViewGraphicsView->setGeoSizes(graph()->getProperty<SizeProperty>("viewSize"));
+      geoViewGraphicsView->setGeoSizes(graph()->getSizeProperty("viewSize"));
     else
       geoViewGraphicsView->setGeoSizes(new SizeProperty(graph()));
   }

@@ -45,8 +45,8 @@ namespace tlp {
  *
  * @code
  *    // graph is a pointer to a tlp::Graph object
- *    tlp::IntegerProperty *viewShape = graph->getProperty<tlp::IntegerProperty>("viewShape");
- *    tlp::StringProperty *viewIcon = graph->getProperty<tlp::StringProperty>("viewIcon");
+ *    tlp::IntegerProperty *viewShape = graph->getIntegerProperty("viewShape");
+ *    tlp::StringProperty *viewIcon = graph->getStringProperty("viewIcon");
  *
  *    // sets the Icon glyph on all nodes
  *    viewShape->setAllNodeValue(tlp::NodeShape::Icon);

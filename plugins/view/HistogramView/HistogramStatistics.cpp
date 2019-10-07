@@ -314,19 +314,19 @@ void HistogramStatistics::computeInteractor() {
 
   if (propertyType == "double") {
     if (histoView->getDataLocation() == NODE) {
-      min = graph->getProperty<DoubleProperty>(selectedProperty)->getNodeMin();
-      max = graph->getProperty<DoubleProperty>(selectedProperty)->getNodeMax();
+      min = graph->getDoubleProperty(selectedProperty)->getNodeMin();
+      max = graph->getDoubleProperty(selectedProperty)->getNodeMax();
     } else {
-      min = graph->getProperty<DoubleProperty>(selectedProperty)->getEdgeMin();
-      max = graph->getProperty<DoubleProperty>(selectedProperty)->getEdgeMax();
+      min = graph->getDoubleProperty(selectedProperty)->getEdgeMin();
+      max = graph->getDoubleProperty(selectedProperty)->getEdgeMax();
     }
   } else {
     if (histoView->getDataLocation() == NODE) {
-      min = graph->getProperty<IntegerProperty>(selectedProperty)->getNodeMin();
-      max = graph->getProperty<IntegerProperty>(selectedProperty)->getNodeMax();
+      min = graph->getIntegerProperty(selectedProperty)->getNodeMin();
+      max = graph->getIntegerProperty(selectedProperty)->getNodeMax();
     } else {
-      min = graph->getProperty<IntegerProperty>(selectedProperty)->getEdgeMin();
-      max = graph->getProperty<IntegerProperty>(selectedProperty)->getEdgeMax();
+      min = graph->getIntegerProperty(selectedProperty)->getEdgeMin();
+      max = graph->getIntegerProperty(selectedProperty)->getEdgeMax();
     }
   }
 
@@ -338,9 +338,9 @@ void HistogramStatistics::computeInteractor() {
       double nodeVal;
 
       if (propertyType == "double") {
-        nodeVal = graph->getProperty<DoubleProperty>(selectedProperty)->getNodeValue(n);
+        nodeVal = graph->getDoubleProperty(selectedProperty)->getNodeValue(n);
       } else {
-        nodeVal = graph->getProperty<IntegerProperty>(selectedProperty)->getNodeValue(n);
+        nodeVal = graph->getIntegerProperty(selectedProperty)->getNodeValue(n);
       }
 
       graphPropertyValueSet[n.id] = nodeVal;
@@ -353,9 +353,9 @@ void HistogramStatistics::computeInteractor() {
       double edgeVal;
 
       if (propertyType == "double") {
-        edgeVal = graph->getProperty<DoubleProperty>(selectedProperty)->getEdgeValue(e);
+        edgeVal = graph->getDoubleProperty(selectedProperty)->getEdgeValue(e);
       } else {
-        edgeVal = graph->getProperty<IntegerProperty>(selectedProperty)->getEdgeValue(e);
+        edgeVal = graph->getIntegerProperty(selectedProperty)->getEdgeValue(e);
       }
 
       graphPropertyValueSet[e.id] = edgeVal;
@@ -469,7 +469,7 @@ void HistogramStatistics::computeInteractor() {
 
     if (histoStatsConfigWidget->nodesSelection()) {
       Observable::holdObservers();
-      BooleanProperty *viewSelection = graph->getProperty<BooleanProperty>("viewSelection");
+      BooleanProperty *viewSelection = graph->getBooleanProperty("viewSelection");
       viewSelection->setAllNodeValue(false);
       viewSelection->setAllEdgeValue(false);
       double lowerBound = histoStatsConfigWidget->getSelectionLowerBound();

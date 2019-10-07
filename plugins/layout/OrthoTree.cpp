@@ -99,7 +99,7 @@ bool OrthoTree::run() {
   }
 
   NodeStaticProperty<double> verticalSize(graph);
-  size = graph->getProperty<SizeProperty>("viewSize");
+  size = graph->getSizeProperty("viewSize");
 
   verticalSize.setAll(0);
 

@@ -136,19 +136,19 @@ void Histogram::computeHistogram() {
 
   if (graph->getProperty(propertyName)->getTypename() == "double") {
     if (dataLocation == NODE) {
-      min = graph->getProperty<DoubleProperty>(propertyName)->getNodeMin(graph);
-      max = graph->getProperty<DoubleProperty>(propertyName)->getNodeMax(graph);
+      min = graph->getDoubleProperty(propertyName)->getNodeMin(graph);
+      max = graph->getDoubleProperty(propertyName)->getNodeMax(graph);
     } else {
-      min = graph->getProperty<DoubleProperty>(propertyName)->getEdgeMin(graph);
-      max = graph->getProperty<DoubleProperty>(propertyName)->getEdgeMax(graph);
+      min = graph->getDoubleProperty(propertyName)->getEdgeMin(graph);
+      max = graph->getDoubleProperty(propertyName)->getEdgeMax(graph);
     }
   } else {
     if (dataLocation == NODE) {
-      min = graph->getProperty<IntegerProperty>(propertyName)->getNodeMin(graph);
-      max = graph->getProperty<IntegerProperty>(propertyName)->getNodeMax(graph);
+      min = graph->getIntegerProperty(propertyName)->getNodeMin(graph);
+      max = graph->getIntegerProperty(propertyName)->getNodeMax(graph);
     } else {
-      min = graph->getProperty<IntegerProperty>(propertyName)->getEdgeMin(graph);
-      max = graph->getProperty<IntegerProperty>(propertyName)->getEdgeMax(graph);
+      min = graph->getIntegerProperty(propertyName)->getEdgeMin(graph);
+      max = graph->getIntegerProperty(propertyName)->getEdgeMax(graph);
     }
   }
 
@@ -178,17 +178,17 @@ void Histogram::computeHistogram() {
     DoubleProperty propertyCopy(graph);
 
     if (graph->getProperty(propertyName)->getTypename() == "double") {
-      propertyCopy = *(graph->getProperty<DoubleProperty>(propertyName));
+      propertyCopy = *(graph->getDoubleProperty(propertyName));
     } else {
       if (dataLocation == NODE) {
         for (auto n : graph->nodes()) {
           propertyCopy.setNodeValue(
-              n, graph->getProperty<IntegerProperty>(propertyName)->getNodeValue(n));
+              n, graph->getIntegerProperty(propertyName)->getNodeValue(n));
         }
       } else {
         for (auto e : graph->edges()) {
           propertyCopy.setEdgeValue(
-              e, graph->getProperty<IntegerProperty>(propertyName)->getEdgeValue(e));
+              e, graph->getIntegerProperty(propertyName)->getEdgeValue(e));
         }
       }
     }
@@ -213,9 +213,9 @@ void Histogram::computeHistogram() {
         double val;
 
         if (graph->getProperty(propertyName)->getTypename() == "double") {
-          val = graph->getProperty<DoubleProperty>(propertyName)->getNodeValue(n);
+          val = graph->getDoubleProperty(propertyName)->getNodeValue(n);
         } else {
-          val = graph->getProperty<IntegerProperty>(propertyName)->getNodeValue(n);
+          val = graph->getIntegerProperty(propertyName)->getNodeValue(n);
         }
 
         if (val < binMinMaxMap[binId].first) {
@@ -240,9 +240,9 @@ void Histogram::computeHistogram() {
         double val;
 
         if (graph->getProperty(propertyName)->getTypename() == "double") {
-          val = graph->getProperty<DoubleProperty>(propertyName)->getEdgeValue(e);
+          val = graph->getDoubleProperty(propertyName)->getEdgeValue(e);
         } else {
-          val = graph->getProperty<IntegerProperty>(propertyName)->getEdgeValue(e);
+          val = graph->getIntegerProperty(propertyName)->getEdgeValue(e);
         }
 
         if (val < binMinMaxMap[binId].first) {
@@ -279,12 +279,12 @@ void Histogram::computeHistogram() {
         double value;
 
         if (graph->getProperty(propertyName)->getTypename() == "double") {
-          value = graph->getProperty<DoubleProperty>(propertyName)->getNodeValue(n);
+          value = graph->getDoubleProperty(propertyName)->getNodeValue(n);
           double intpart, fracpart;
           fracpart = modf(value, &intpart);
           integerScale = integerScale && (fracpart == 0);
         } else {
-          value = graph->getProperty<IntegerProperty>(propertyName)->getNodeValue(n);
+          value = graph->getIntegerProperty(propertyName)->getNodeValue(n);
         }
 
         if (value != max) {
@@ -310,12 +310,12 @@ void Histogram::computeHistogram() {
         double value;
 
         if (graph->getProperty(propertyName)->getTypename() == "double") {
-          value = graph->getProperty<DoubleProperty>(propertyName)->getEdgeValue(e);
+          value = graph->getDoubleProperty(propertyName)->getEdgeValue(e);
           double intpart, fracpart;
           fracpart = modf(value, &intpart);
           integerScale = integerScale && (fracpart == 0);
         } else {
-          value = graph->getProperty<IntegerProperty>(propertyName)->getEdgeValue(e);
+          value = graph->getIntegerProperty(propertyName)->getEdgeValue(e);
         }
 
         if (value != max) {
@@ -461,7 +461,7 @@ void Histogram::createAxis() {
 
   refSize = std::min(refSizeX, refSizeY);
 
-  edgeAsNodeGraph->getProperty<SizeProperty>("viewSize")
+  edgeAsNodeGraph->getSizeProperty("viewSize")
       ->setAllNodeValue(Size(refSize, refSize, 0));
 }
 
@@ -519,7 +519,7 @@ void Histogram::updateLayout() {
 }
 
 void Histogram::updateSizes() {
-  SizeProperty *viewSize = graph->getProperty<SizeProperty>("viewSize");
+  SizeProperty *viewSize = graph->getSizeProperty("viewSize");
 
   Size resizeFactor;
   const Size &eltMinSize(viewSize->getMin());
@@ -593,9 +593,9 @@ void Histogram::update() {
     updateSizes();
 
   ostringstream oss;
-  edgeAsNodeGraph->getProperty<SizeProperty>("viewSize")
+  edgeAsNodeGraph->getSizeProperty("viewSize")
       ->setAllNodeValue(Size(refSize, refSize, refSize));
-  ColorProperty *viewColor = graph->getProperty<ColorProperty>("viewColor");
+  ColorProperty *viewColor = graph->getColorProperty("viewColor");
 
   histoBinsComposite->reset(true);
 

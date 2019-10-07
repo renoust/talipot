@@ -32,7 +32,7 @@ public:
 
     node viewMetricMaxNode;
     double vMax = -DBL_MAX;
-    DoubleProperty *metric = sg->getProperty<DoubleProperty>("viewMetric");
+    DoubleProperty *metric = sg->getDoubleProperty("viewMetric");
 
     for (auto itn : sg->nodes()) {
       double value = metric->getNodeValue(itn);
@@ -63,7 +63,7 @@ PropertyInterface *StringProperty::clonePrototype(Graph *g, const std::string &n
     return nullptr;
 
   // allow to get an unregistered property (empty name)
-  StringProperty *p = n.empty() ? new StringProperty(g) : g->getLocalProperty<StringProperty>(n);
+  StringProperty *p = n.empty() ? new StringProperty(g) : g->getLocalStringProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;
@@ -83,7 +83,7 @@ PropertyInterface *StringVectorProperty::clonePrototype(Graph *g, const std::str
 
   // allow to get an unregistered property (empty name)
   StringVectorProperty *p =
-      n.empty() ? new StringVectorProperty(g) : g->getLocalProperty<StringVectorProperty>(n);
+      n.empty() ? new StringVectorProperty(g) : g->getLocalStringVectorProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;

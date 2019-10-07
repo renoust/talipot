@@ -1122,7 +1122,7 @@ void GraphPerspective::clearGraph() {
 void GraphPerspective::deleteSelectedElements(bool fromRoot) {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
 
   vector<tlp::edge> edgesToDelete = iteratorVector(selection->getEdgesEqualTo(true, graph));
   bool hasPush = !edgesToDelete.empty();
@@ -1145,7 +1145,7 @@ void GraphPerspective::deleteSelectedElements(bool fromRoot) {
 void GraphPerspective::invertSelection() {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   graph->push();
   selection->reverse(graph);
   Observable::unholdObservers();
@@ -1154,7 +1154,7 @@ void GraphPerspective::invertSelection() {
 void GraphPerspective::reverseSelectedEdges() {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   graph->push();
   selection->reverseEdgeDirection(graph);
   graph->popIfNoUpdates();
@@ -1164,7 +1164,7 @@ void GraphPerspective::reverseSelectedEdges() {
 void GraphPerspective::cancelSelection() {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   graph->push();
   selection->setValueToGraphNodes(false, graph);
   selection->setValueToGraphEdges(false, graph);
@@ -1175,7 +1175,7 @@ void GraphPerspective::cancelSelection() {
 void GraphPerspective::selectAll(bool nodes, bool edges) {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   graph->push();
   selection->setAllNodeValue(false);
   selection->setAllEdgeValue(false);
@@ -1261,7 +1261,7 @@ void GraphPerspective::copy(Graph *g, bool deleteAfter) {
   if (g == nullptr)
     return;
 
-  BooleanProperty *selection = g->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *selection = g->getBooleanProperty("viewSelection");
 
   Graph *copyGraph = tlp::newGraph();
   tlp::copyToGraph(copyGraph, g, selection);
@@ -1288,7 +1288,7 @@ void GraphPerspective::copy(Graph *g, bool deleteAfter) {
 void GraphPerspective::group() {
   Observable::holdObservers();
   tlp::Graph *graph = _graphs->currentGraph();
-  tlp::BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   std::vector<node> groupedNodes;
   for (auto n : selection->getNodesEqualTo(true, graph)) {
     groupedNodes.push_back(n);
@@ -1330,7 +1330,7 @@ void GraphPerspective::group() {
 void GraphPerspective::make_graph() {
   Graph *graph = _graphs->currentGraph();
   unsigned int added = makeSelectionGraph(_graphs->currentGraph(),
-                                          graph->getProperty<BooleanProperty>("viewSelection"));
+                                          graph->getBooleanProperty("viewSelection"));
   stringstream msg;
   msg << "Make selection a graph: " << added << " elements added to the selection.";
   Perspective::showStatusMessage(msg.str());
@@ -1342,7 +1342,7 @@ Graph *GraphPerspective::createSubGraph(Graph *graph) {
 
   graph->push();
   Observable::holdObservers();
-  BooleanProperty *selection = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *selection = graph->getBooleanProperty("viewSelection");
   makeSelectionGraph(graph, selection);
   Graph *result = graph->addSubGraph(selection, "selection subgraph");
   Observable::unholdObservers();
@@ -1547,7 +1547,7 @@ void GraphPerspective::showStartPanels(Graph *g) {
 
 void GraphPerspective::applyRandomLayout(Graph *g) {
   Observable::holdObservers();
-  LayoutProperty *viewLayout = g->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *viewLayout = g->getLayoutProperty("viewLayout");
 
   if (!viewLayout->hasNonDefaultValuatedNodes(g)) {
     std::string str;

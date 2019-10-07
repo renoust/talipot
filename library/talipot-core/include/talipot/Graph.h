@@ -32,6 +32,20 @@ namespace tlp {
 
 class PropertyInterface;
 class BooleanProperty;
+class ColorProperty;
+class DoubleProperty;
+class IntegerProperty;
+class GraphProperty;
+class LayoutProperty;
+class SizeProperty;
+class StringProperty;
+class BooleanVectorProperty;
+class ColorVectorProperty;
+class DoubleVectorProperty;
+class IntegerVectorProperty;
+class CoordVectorProperty;
+class SizeVectorProperty;
+class StringVectorProperty;
 class PluginProgress;
 template <class C>
 struct Iterator;
@@ -1416,6 +1430,336 @@ public:
   virtual Iterator<PropertyInterface *> *getObjectProperties() const = 0;
 
   /**
+   * @brief Gets a boolean property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the boolean property.
+   * @return The boolean property of given name.
+   */
+  BooleanProperty *getLocalBooleanProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a boolean property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the boolean property.
+   * @return The boolean property of given name.
+   */
+  BooleanProperty *getBooleanProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a color property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the color property.
+   * @return The color property of given name.
+   */
+  ColorProperty *getLocalColorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a color property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the color property.
+   * @return The color property of given name.
+   */
+  ColorProperty *getColorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a double property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the double property.
+   * @return The double property of given name.
+   */
+  DoubleProperty *getLocalDoubleProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a double property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the double property.
+   * @return The double property of given name.
+   */
+  DoubleProperty *getDoubleProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a graph property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the graph property.
+   * @return The graph property of given name.
+   */
+  GraphProperty *getLocalGraphProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a graph property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the graph property.
+   * @return The graph property of given name.
+   */
+  GraphProperty *getGraphProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets an integer property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the integer property.
+   * @return The integer property of given name.
+   */
+  IntegerProperty *getLocalIntegerProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets an integer property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the integer property.
+   * @return The integer property of given name.
+   */
+  IntegerProperty *getIntegerProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a layout property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the layout property.
+   * @return The layout property of given name.
+   */
+  LayoutProperty *getLocalLayoutProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a layout property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the layout property.
+   * @return The layout property of given name.
+   */
+  LayoutProperty *getLayoutProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a size property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the size property.
+   * @return The size property of given name.
+   */
+  SizeProperty *getLocalSizeProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a size property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the size property.
+   * @return The size property of given name.
+   */
+  SizeProperty *getSizeProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a string property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the string property.
+   * @return The string property of given name.
+   */
+  StringProperty *getLocalStringProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a string property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the string property.
+   * @return The string property of given name.
+   */
+  StringProperty *getStringProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a boolean vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the boolean vector property.
+   * @return The boolean vector property of given name.
+   */
+  BooleanVectorProperty *getLocalBooleanVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a boolean vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the boolean vector property.
+   * @return The boolean vector property of given name.
+   */
+  BooleanVectorProperty *getBooleanVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a color vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the color vector property.
+   * @return The color vector property of given name.
+   */
+  ColorVectorProperty *getLocalColorVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a color vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the color vector property.
+   * @return The color vector property of given name.
+   */
+  ColorVectorProperty *getColorVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a double vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the double vector property.
+   * @return The double vector property of given name.
+   */
+  DoubleVectorProperty *getLocalDoubleVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a double vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the double vector property.
+   * @return The double vector property of given name.
+   */
+  DoubleVectorProperty *getDoubleVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets an integer vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the integer vector property.
+   * @return The integer vector property of given name.
+   */
+  IntegerVectorProperty *getLocalIntegerVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets an integer vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the integer vector property.
+   * @return The integer vector property of given name.
+   */
+  IntegerVectorProperty *getIntegerVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a coord vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the coord vector property.
+   * @return The coord vector property of given name.
+   */
+  CoordVectorProperty *getLocalCoordVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a coord vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the coord vector property.
+   * @return The coord vector property of given name.
+   */
+  CoordVectorProperty *getCoordVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a size vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the size vector property.
+   * @return The size vector property of given name.
+   */
+  SizeVectorProperty *getLocalSizeVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a size vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the size vector property.
+   * @return The size vector property of given name.
+   */
+  SizeVectorProperty *getSizeVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a string vector property on this graph, and this graph only.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the string vector property.
+   * @return The string vector property of given name.
+   */
+  StringVectorProperty *getLocalStringVectorProperty(const std::string &propertyName);
+
+  /**
+   * @brief Gets a string vector property on this graph or one of its ancestors.
+   *
+   * The graph keeps ownership of the property, if you wish to remove it from the graph use
+   * Graph::delLocalProperty().
+   *
+   * @param propertyName The unique identifier of the string vector property.
+   * @return The string vector property of given name.
+   */
+  StringVectorProperty *getStringVectorProperty(const std::string &propertyName);
+
+  /**
    * @brief Runs a plugin on the graph, whose result is a property.
    *
    * @param algorithm The name of the plugin to run.
@@ -1447,11 +1791,11 @@ public:
    * For instance:
    * @code
    * Graph* graph = tlp::newGraph();
-   * DoubleProperty* prop = graph->getProperty<DoubleProperty>("metric");
+   * DoubleProperty* prop = graph->getDoubleProperty("metric");
    * string errorMessage;
    *
    * //our super metric stuff we want to kee
-   * DoubleProperty* superProperty = graph->getProperty<DoubleProperty>("superStuff");
+   * DoubleProperty* superProperty = graph->getDoubleProperty("superStuff");
    * vector<PropertyInterface*> propertiesToKeep;
    * propertiesToKeep.push_back(superProperty);
    *
@@ -1522,7 +1866,7 @@ public:
    *
    * For instance:
    * @code
-   * DoubleProperty* prop = graph->getProperty<DoubleProperty>("metric");
+   * DoubleProperty* prop = graph->getDoubleProperty("metric");
    * string errorMessage;
    *
    * //apply some metric

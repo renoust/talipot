@@ -40,7 +40,7 @@ PropertyInterface *IntegerProperty::clonePrototype(Graph *g, const std::string &
     return nullptr;
 
   // allow to get an unregistered property (empty name)
-  IntegerProperty *p = n.empty() ? new IntegerProperty(g) : g->getLocalProperty<IntegerProperty>(n);
+  IntegerProperty *p = n.empty() ? new IntegerProperty(g) : g->getLocalIntegerProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;
@@ -106,7 +106,7 @@ PropertyInterface *IntegerVectorProperty::clonePrototype(Graph *g, const std::st
 
   // allow to get an unregistered property (empty name)
   IntegerVectorProperty *p =
-      n.empty() ? new IntegerVectorProperty(g) : g->getLocalProperty<IntegerVectorProperty>(n);
+      n.empty() ? new IntegerVectorProperty(g) : g->getLocalIntegerVectorProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;

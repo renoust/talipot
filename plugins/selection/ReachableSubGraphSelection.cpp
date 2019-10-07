@@ -56,7 +56,7 @@ bool ReachableSubGraphSelection::run() {
   unsigned int maxDistance = 5;
   StringCollection edgeDirectionCollecion;
   EDGE_TYPE edgeDirection = DIRECTED;
-  BooleanProperty *startNodes = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *startNodes = graph->getBooleanProperty("viewSelection");
 
   if (dataSet != nullptr) {
     dataSet->get("distance", maxDistance);

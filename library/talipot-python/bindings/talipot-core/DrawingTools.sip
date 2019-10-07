@@ -37,9 +37,9 @@ nodes z-rotations defined in the default double property "viewRotation" and size
     sipIsErr = 1;
     PyErr_SetString(PyExc_Exception, "The provided boolean property is not attached to the graph on which to compute its bounding box.");
   } else {
-    sipRes = new tlp::BoundingBox(tlp::computeBoundingBox(a0, a0->getProperty<tlp::LayoutProperty>("viewLayout"),
-                                                          a0->getProperty<tlp::SizeProperty>("viewSize"),
-                                                          a0->getProperty<tlp::DoubleProperty>("viewRotation"),
+    sipRes = new tlp::BoundingBox(tlp::computeBoundingBox(a0, a0->getLayoutProperty("viewLayout"),
+                                                          a0->getSizeProperty("viewSize"),
+                                                          a0->getDoubleProperty("viewRotation"),
                                                           a1));
   }
 %End
@@ -118,9 +118,9 @@ To get the bounding radius, you have to compute the distance between the two mem
     sipIsErr = 1;
     PyErr_SetString(PyExc_Exception, "The provided boolean property is not attached to the graph on which to compute its bounding sphere.");
   } else {
-    sipRes = new std::pair<tlp::Coord, tlp::Coord>(tlp::computeBoundingRadius(a0, a0->getProperty<tlp::LayoutProperty>("viewLayout"),
-                                                                              a0->getProperty<tlp::SizeProperty>("viewSize"),
-                                                                              a0->getProperty<tlp::DoubleProperty>("viewRotation"),
+    sipRes = new std::pair<tlp::Coord, tlp::Coord>(tlp::computeBoundingRadius(a0, a0->getLayoutProperty("viewLayout"),
+                                                                              a0->getSizeProperty("viewSize"),
+                                                                              a0->getDoubleProperty("viewRotation"),
                                                                               a1));
   }
 %End
@@ -214,9 +214,9 @@ Returns a list of :class:`tlp.Coord` containing the vertices of the graph convex
     sipIsErr = 1;
     PyErr_SetString(PyExc_Exception, "The provided boolean property is not attached to the graph on which to compute its convex hull.");
   } else {
-    sipRes = new std::vector<tlp::Coord>(tlp::computeConvexHull(a0, a0->getProperty<tlp::LayoutProperty>("viewLayout"),
-                                                                a0->getProperty<tlp::SizeProperty>("viewSize"),
-                                                                a0->getProperty<tlp::DoubleProperty>("viewRotation"),
+    sipRes = new std::vector<tlp::Coord>(tlp::computeConvexHull(a0, a0->getLayoutProperty("viewLayout"),
+                                                                a0->getSizeProperty("viewSize"),
+                                                                a0->getDoubleProperty("viewRotation"),
                                                                 a1));
   }
 %End

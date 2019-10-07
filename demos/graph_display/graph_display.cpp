@@ -41,22 +41,22 @@ Graph *createCompleteTree(int depth, int degree) {
 void setTreeVisualProperties(Graph *tree) {
 
   // First compute a layout, we use the Bubble Tree algorithm
-  LayoutProperty *viewLayout = tree->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *viewLayout = tree->getLayoutProperty("viewLayout");
   std::string errMsg;
   tree->applyPropertyAlgorithm("Bubble Tree", viewLayout, errMsg);
 
   // Then apply Auto Sizing on the nodes
-  SizeProperty *viewSize = tree->getProperty<SizeProperty>("viewSize");
+  SizeProperty *viewSize = tree->getSizeProperty("viewSize");
   tree->applyPropertyAlgorithm("Auto Sizing", viewSize, errMsg);
 
   // Labels the node with their id
-  StringProperty *viewLabel = tree->getProperty<StringProperty>("viewLabel");
+  StringProperty *viewLabel = tree->getStringProperty("viewLabel");
   for (auto n : tree->nodes()) {
     viewLabel->setNodeValue(n, QStringToTlpString(QString::number(n.id)));
   }
 
   // Add a border to the nodes, keep the default color who is black
-  DoubleProperty *viewBorderWidth = tree->getProperty<DoubleProperty>("viewBorderWidth");
+  DoubleProperty *viewBorderWidth = tree->getDoubleProperty("viewBorderWidth");
   viewBorderWidth->setAllNodeValue(1);
 
   // Build some maps to set shapes and colors according to the dag level of a node
@@ -82,8 +82,8 @@ void setTreeVisualProperties(Graph *tree) {
   tree->applyPropertyAlgorithm("Dag Level", &dagLevel, errMsg);
 
   // Sets different shapes and colors for each layer of the tree
-  IntegerProperty *viewShape = tree->getProperty<IntegerProperty>("viewShape");
-  ColorProperty *viewColor = tree->getProperty<ColorProperty>("viewColor");
+  IntegerProperty *viewShape = tree->getIntegerProperty("viewShape");
+  ColorProperty *viewColor = tree->getColorProperty("viewColor");
   for (auto n : tree->nodes()) {
     viewShape->setNodeValue(n, glyphsMap[int(dagLevel.getNodeValue(n))]);
     viewColor->setNodeValue(n, colorsMap[int(dagLevel.getNodeValue(n))]);

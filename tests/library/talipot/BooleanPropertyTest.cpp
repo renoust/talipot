@@ -38,7 +38,7 @@ void BooleanPropertyTest::setUp() {
   tlp::initRandomSequence();
 #endif
   graph = tlp::newGraph();
-  selection = graph->getProperty<BooleanProperty>("Select Test");
+  selection = graph->getBooleanProperty("Select Test");
   buildGraph(graph);
 }
 //==========================================================

@@ -35,7 +35,7 @@ class PropertyInterface;
  * The easiest way to use this class is to use the copyProperty static function.
  * @code
  * Graph* g;
- * PropertyInterface* source = g->getLocalProperty<BooleanProperty>("viewSelection");
+ * PropertyInterface* source = g->getLocalBooleanProperty("viewSelection");
  * PropertyInterface* clonedProperty = CopyPropertyDialog::copyProperty(g, source);
  * @endcode
  *

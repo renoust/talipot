@@ -571,7 +571,7 @@ void NodeLinkDiagramComponent::fillContextMenu(QMenu *menu, const QPointF &point
 
 void NodeLinkDiagramComponent::addRemoveItemToSelection(bool pushGraph, bool toggleSelection,
                                                         bool selectValue, bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();
@@ -593,7 +593,7 @@ void NodeLinkDiagramComponent::addRemoveItemToSelection(bool pushGraph, bool tog
 
 void NodeLinkDiagramComponent::addRemoveInNodesToSelection(bool pushGraph, bool toggleSelection,
                                                            bool selectValue, bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();
@@ -616,7 +616,7 @@ void NodeLinkDiagramComponent::addRemoveInNodesToSelection(bool pushGraph, bool 
 
 void NodeLinkDiagramComponent::addRemoveOutNodesToSelection(bool pushGraph, bool toggleSelection,
                                                             bool selectValue, bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();
@@ -639,7 +639,7 @@ void NodeLinkDiagramComponent::addRemoveOutNodesToSelection(bool pushGraph, bool
 
 void NodeLinkDiagramComponent::addRemoveInEdgesToSelection(bool pushGraph, bool toggleSelection,
                                                            bool selectValue, bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();
@@ -658,7 +658,7 @@ void NodeLinkDiagramComponent::addRemoveInEdgesToSelection(bool pushGraph, bool 
 
 void NodeLinkDiagramComponent::addRemoveOutEdgesToSelection(bool pushGraph, bool toggleSelection,
                                                             bool selectValue, bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();
@@ -689,7 +689,7 @@ void NodeLinkDiagramComponent::addRemoveNodeAndAllNeighbourNodesAndEdges(bool to
 void NodeLinkDiagramComponent::addRemoveExtremitiesToSelection(bool pushGraph, bool toggleSelection,
                                                                bool selectValue,
                                                                bool resetSelection) {
-  BooleanProperty *elementSelected = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *elementSelected = graph()->getBooleanProperty("viewSelection");
 
   if (pushGraph) {
     graph()->push();

@@ -348,19 +348,19 @@ static bool treatNodes(Graph *graph, tlp::PluginProgress *pp, ExportInterface &e
 
 bool ReadGraph::readGraph(Graph *graph, tlp::DataSet *ds, tlp::PluginProgress *pp,
                           ExportInterface &exportint) {
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
-  ColorProperty *colors = graph->getProperty<ColorProperty>("viewColor");
-  IntegerProperty *shape = graph->getProperty<IntegerProperty>("viewShape");
-  IntegerProperty *srcanchorshape = graph->getProperty<IntegerProperty>("viewSrcAnchorShape");
-  IntegerProperty *tgtanchorshape = graph->getProperty<IntegerProperty>("viewTgtAnchorShape");
-  SizeProperty *sizes = graph->getProperty<SizeProperty>("viewSize");
-  StringProperty *label = graph->getProperty<StringProperty>("viewLabel");
-  ColorProperty *labelcolor = graph->getProperty<ColorProperty>("viewLabelColor");
-  ColorProperty *bordercolor = graph->getProperty<ColorProperty>("viewBorderColor");
-  DoubleProperty *borderwidth = graph->getProperty<DoubleProperty>("viewBorderWidth");
-  DoubleProperty *rotation = graph->getProperty<DoubleProperty>("viewRotation");
-  IntegerProperty *fontsize = graph->getProperty<IntegerProperty>("viewFontSize");
-  StringProperty *fontIconName = graph->getProperty<StringProperty>("viewIcon");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
+  ColorProperty *colors = graph->getColorProperty("viewColor");
+  IntegerProperty *shape = graph->getIntegerProperty("viewShape");
+  IntegerProperty *srcanchorshape = graph->getIntegerProperty("viewSrcAnchorShape");
+  IntegerProperty *tgtanchorshape = graph->getIntegerProperty("viewTgtAnchorShape");
+  SizeProperty *sizes = graph->getSizeProperty("viewSize");
+  StringProperty *label = graph->getStringProperty("viewLabel");
+  ColorProperty *labelcolor = graph->getColorProperty("viewLabelColor");
+  ColorProperty *bordercolor = graph->getColorProperty("viewBorderColor");
+  DoubleProperty *borderwidth = graph->getDoubleProperty("viewBorderWidth");
+  DoubleProperty *rotation = graph->getDoubleProperty("viewRotation");
+  IntegerProperty *fontsize = graph->getIntegerProperty("viewFontSize");
+  StringProperty *fontIconName = graph->getStringProperty("viewIcon");
   bool edge_color_interpolation = false;
   bool edge_extremities = false;
   bool edge_size_interpolation = true;

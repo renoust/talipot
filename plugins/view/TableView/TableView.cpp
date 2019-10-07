@@ -89,7 +89,7 @@ void TableView::setState(const tlp::DataSet &data) {
   int r = 0;
 
   if (!filterPropertyName.empty())
-    r = model->rowOf(model->graph()->getProperty<BooleanProperty>(filterPropertyName));
+    r = model->rowOf(model->graph()->getBooleanProperty(filterPropertyName));
 
   if (r < 0)
     r = 0;
@@ -441,7 +441,7 @@ void TableView::filterChanged() {
 }
 
 void TableView::mapToGraphSelection() {
-  BooleanProperty *out = graph()->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *out = graph()->getBooleanProperty("viewSelection");
 
   if (NODES_DISPLAYED) {
     out->setAllNodeValue(false);
@@ -476,7 +476,7 @@ void TableView::delHighlightedRows() {
 
 void TableView::toggleHighlightedRows() {
   Graph *g = graph();
-  BooleanProperty *selection = g->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *selection = g->getBooleanProperty("viewSelection");
   QModelIndexList rows = _ui->table->selectionModel()->selectedRows();
 
   GraphSortFilterProxyModel *sortModel =
@@ -501,7 +501,7 @@ void TableView::toggleHighlightedRows() {
 
 void TableView::selectHighlightedRows() {
   Graph *g = graph();
-  BooleanProperty *selection = g->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *selection = g->getBooleanProperty("viewSelection");
   QModelIndexList rows = _ui->table->selectionModel()->selectedRows();
 
   GraphSortFilterProxyModel *sortModel =
@@ -571,7 +571,7 @@ bool TableView::setCurrentValue(PropertyInterface *prop, unsigned int eltId) {
 void TableView::setLabelsOfHighlightedRows(PropertyInterface *prop) {
   QModelIndexList rows = _ui->table->selectionModel()->selectedRows();
 
-  StringProperty *label = graph()->getProperty<StringProperty>("viewLabel");
+  StringProperty *label = graph()->getStringProperty("viewLabel");
 
   for (const auto &idx : rows) {
     if (NODES_DISPLAYED) {

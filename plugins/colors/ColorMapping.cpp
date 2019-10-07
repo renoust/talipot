@@ -183,7 +183,7 @@ public:
     }
 
     if (metric == nullptr)
-      metricS = graph->getProperty<DoubleProperty>("viewMetric");
+      metricS = graph->getDoubleProperty("viewMetric");
     else
       metricS = dynamic_cast<NumericProperty *>(metric);
 
@@ -305,7 +305,7 @@ public:
     }
 
     if (metric == nullptr)
-      metric = graph->getProperty<DoubleProperty>("viewMetric");
+      metric = graph->getDoubleProperty("viewMetric");
 
     if (eltTypes.getCurrent() == ENUMERATED_ELT) {
 #ifndef TALIPOT_BUILD_CORE_ONLY

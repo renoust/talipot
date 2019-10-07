@@ -539,14 +539,14 @@ void AlgorithmRunnerItem::afterRun(Graph *g, const tlp::DataSet &dataSet) {
       ColorProperty *color;
 
       if (g->existLocalProperty("viewColor")) {
-        color = g->getLocalProperty<ColorProperty>("viewColor");
+        color = g->getLocalColorProperty("viewColor");
         if (!applyMapping && (color->numberOfNonDefaultValuatedNodes() != 0)) {
           color->setAllNodeDataMemValue(color->getNodeDefaultDataMemValue());
           color->setAllEdgeDataMemValue(color->getEdgeDefaultDataMemValue());
         }
       } else {
-        color = g->getLocalProperty<ColorProperty>("viewColor");
-        ColorProperty *ancestorColor = g->getSuperGraph()->getProperty<ColorProperty>("viewColor");
+        color = g->getLocalColorProperty("viewColor");
+        ColorProperty *ancestorColor = g->getSuperGraph()->getColorProperty("viewColor");
         if (!applyMapping && (ancestorColor->numberOfNonDefaultValuatedNodes(g) != 0)) {
           // same default values as ancestor property default values
           color->setAllNodeDataMemValue(ancestorColor->getNodeDefaultDataMemValue());

@@ -21,17 +21,17 @@ using namespace tlp;
 using namespace std;
 
 float centerOnOriginAndScale(Graph *graph, LayoutProperty *layout, float dist) {
-  graph->getProperty<SizeProperty>("viewSize")->setAllNodeValue(Size(0, 0, 0));
+  graph->getSizeProperty("viewSize")->setAllNodeValue(Size(0, 0, 0));
   BoundingBox bb =
-      tlp::computeBoundingBox(graph, graph->getProperty<LayoutProperty>("viewLayout"),
-                              graph->getProperty<SizeProperty>("viewSize"),
-                              graph->getProperty<DoubleProperty>("viewRotation"), nullptr);
+      tlp::computeBoundingBox(graph, graph->getLayoutProperty("viewLayout"),
+                              graph->getSizeProperty("viewSize"),
+                              graph->getDoubleProperty("viewRotation"), nullptr);
   Coord move_coord = Coord((bb[0] + bb[1])) / (-2.f);
   layout->translate(move_coord, graph);
   float ray = (move_coord - bb[1]).norm();
   float scaleFactor = dist / ray;
   layout->scale(Coord(scaleFactor, scaleFactor, scaleFactor), graph);
-  graph->getProperty<SizeProperty>("viewSize")->setAllNodeValue(Size(0.1f, 0.1f, 0.1f));
+  graph->getSizeProperty("viewSize")->setAllNodeValue(Size(0.1f, 0.1f, 0.1f));
   return sqrt(ray * ray / 2.);
 }
 
@@ -70,7 +70,7 @@ static Coord getCoordFromPolar(double rayon, double a1, double a2) {
 }
 
 void addSphereGraph(Graph *graph, double radius) {
-  LayoutProperty *layout = graph->getProperty<LayoutProperty>("viewLayout");
+  LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
   double rho = 0;
 
   while (rho < 360) {

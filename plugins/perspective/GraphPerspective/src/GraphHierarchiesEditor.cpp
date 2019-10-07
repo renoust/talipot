@@ -371,7 +371,7 @@ void GraphHierarchiesEditor::delAllEdges() {
 
 void GraphHierarchiesEditor::delSelection(bool fromRoot) {
   Observable::holdObservers();
-  tlp::BooleanProperty *selection = _contextGraph->getProperty<BooleanProperty>("viewSelection");
+  tlp::BooleanProperty *selection = _contextGraph->getBooleanProperty("viewSelection");
 
   std::vector<tlp::edge> edgesToDelete =
       iteratorVector(selection->getEdgesEqualTo(true, _contextGraph));

@@ -46,7 +46,7 @@ bool InducedSubGraphSelection::run() {
   }
 
   if (entrySelection == nullptr)
-    entrySelection = graph->getProperty<BooleanProperty>("viewSelection");
+    entrySelection = graph->getBooleanProperty("viewSelection");
 
   // as the input selection property and the result property can be the same one,
   // if needed, use a stable iterator to keep a copy of the input selected nodes as all values

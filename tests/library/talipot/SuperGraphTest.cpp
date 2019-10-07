@@ -569,7 +569,7 @@ void SuperGraphTest::testInheritance() {
   g2 = graph->addSubGraph();
   g3 = g2->addSubGraph();
   g4 = g2->addSubGraph();
-  graph->getProperty<DoubleProperty>("metric");
+  graph->getDoubleProperty("metric");
   CPPUNIT_ASSERT(graph->existProperty("metric"));
   CPPUNIT_ASSERT(g1->existProperty("metric"));
   CPPUNIT_ASSERT(g2->existProperty("metric"));
@@ -583,28 +583,28 @@ void SuperGraphTest::testInheritance() {
   CPPUNIT_ASSERT(!g3->existProperty("metric"));
   CPPUNIT_ASSERT(!g4->existProperty("metric"));
 
-  DoubleProperty *m2 = g2->getLocalProperty<DoubleProperty>("metric");
+  DoubleProperty *m2 = g2->getLocalDoubleProperty("metric");
   CPPUNIT_ASSERT(!graph->existProperty("metric"));
   CPPUNIT_ASSERT(!g1->existProperty("metric"));
   CPPUNIT_ASSERT(g2->existProperty("metric"));
   CPPUNIT_ASSERT(g3->existProperty("metric"));
   CPPUNIT_ASSERT(g4->existProperty("metric"));
 
-  DoubleProperty *m = graph->getProperty<DoubleProperty>("metric");
-  CPPUNIT_ASSERT_EQUAL(m, graph->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m, g1->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m2, g2->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m2, g3->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m2, g4->getProperty<DoubleProperty>("metric"));
+  DoubleProperty *m = graph->getDoubleProperty("metric");
+  CPPUNIT_ASSERT_EQUAL(m, graph->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m, g1->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m2, g2->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m2, g3->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m2, g4->getDoubleProperty("metric"));
 
   m2->rename("metric1");
-  CPPUNIT_ASSERT_EQUAL(m, graph->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m, g1->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m2, g2->getProperty<DoubleProperty>("metric1"));
-  CPPUNIT_ASSERT_EQUAL(m, g3->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m, g4->getProperty<DoubleProperty>("metric"));
-  CPPUNIT_ASSERT_EQUAL(m2, g3->getProperty<DoubleProperty>("metric1"));
-  CPPUNIT_ASSERT_EQUAL(m2, g4->getProperty<DoubleProperty>("metric1"));
+  CPPUNIT_ASSERT_EQUAL(m, graph->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m, g1->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m2, g2->getDoubleProperty("metric1"));
+  CPPUNIT_ASSERT_EQUAL(m, g3->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m, g4->getDoubleProperty("metric"));
+  CPPUNIT_ASSERT_EQUAL(m2, g3->getDoubleProperty("metric1"));
+  CPPUNIT_ASSERT_EQUAL(m2, g4->getDoubleProperty("metric1"));
 
   g2->delLocalProperty("metric1");
   CPPUNIT_ASSERT_EQUAL(g2->existLocalProperty("metric1"), false);
@@ -633,7 +633,7 @@ void SuperGraphTest::testPropertiesIteration() {
   set<string>::const_iterator it;
 
   for (it = propList1.begin(); it != propList1.end(); ++it) {
-    graph->getProperty<IntegerProperty>(*it);
+    graph->getIntegerProperty(*it);
     CPPUNIT_ASSERT(g4->existProperty(*it));
   }
 
@@ -658,7 +658,7 @@ void SuperGraphTest::testPropertiesIteration() {
   }
 
   for (it = propList2.begin(); it != propList2.end(); ++it) {
-    g2->getProperty<IntegerProperty>(*it);
+    g2->getIntegerProperty(*it);
     CPPUNIT_ASSERT(g4->existProperty(*it));
   }
 

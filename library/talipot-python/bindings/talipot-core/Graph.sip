@@ -2273,7 +2273,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::BooleanProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::BooleanProperty>(*a0);
+    sipRes = sipCpp->getBooleanProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2296,7 +2296,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::BooleanProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::BooleanProperty>(*a0);
+    sipRes = sipCpp->getLocalBooleanProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2319,7 +2319,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::BooleanVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::BooleanVectorProperty>(*a0);
+    sipRes = sipCpp->getBooleanVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2342,7 +2342,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::BooleanVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::BooleanVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalBooleanVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2365,7 +2365,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::LayoutProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::LayoutProperty>(*a0);
+    sipRes = sipCpp->getLayoutProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2388,7 +2388,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::LayoutProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::LayoutProperty>(*a0);
+    sipRes = sipCpp->getLocalLayoutProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2411,7 +2411,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::CoordVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::CoordVectorProperty>(*a0);
+    sipRes = sipCpp->getCoordVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2434,7 +2434,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::CoordVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::CoordVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalCoordVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2457,7 +2457,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::ColorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::ColorProperty>(*a0);
+    sipRes = sipCpp->getColorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2503,7 +2503,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::ColorVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::ColorVectorProperty>(*a0);
+    sipRes = sipCpp->getColorVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2526,7 +2526,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::ColorVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::ColorVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalColorVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2549,7 +2549,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::DoubleProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::DoubleProperty>(*a0);
+    sipRes = sipCpp->getDoubleProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2572,7 +2572,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::DoubleProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::DoubleProperty>(*a0);
+    sipRes = sipCpp->getLocalDoubleProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
 }
@@ -2595,7 +2595,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::DoubleVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::DoubleVectorProperty>(*a0);
+    sipRes = sipCpp->getDoubleVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2618,7 +2618,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::DoubleVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::DoubleVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalDoubleVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2641,7 +2641,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::StringProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::StringProperty>(*a0);
+    sipRes = sipCpp->getStringProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2664,7 +2664,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::StringProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::StringProperty>(*a0);
+    sipRes = sipCpp->getLocalStringProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2687,7 +2687,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::StringVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::StringVectorProperty>(*a0);
+    sipRes = sipCpp->getStringVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2710,7 +2710,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::StringVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::StringVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalStringVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2733,7 +2733,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::SizeProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::SizeProperty>(*a0);
+    sipRes = sipCpp->getSizeProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2756,7 +2756,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::SizeProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::SizeProperty>(*a0);
+    sipRes = sipCpp->getLocalSizeProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2779,7 +2779,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::SizeVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::SizeVectorProperty>(*a0);
+    sipRes = sipCpp->getSizeVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2802,7 +2802,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::SizeVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::SizeVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalSizeVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2825,7 +2825,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::IntegerProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::IntegerProperty>(*a0);
+    sipRes = sipCpp->getIntegerProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2848,7 +2848,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::IntegerProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::IntegerProperty>(*a0);
+    sipRes = sipCpp->getLocalIntegerProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2871,7 +2871,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::IntegerVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::IntegerVectorProperty>(*a0);
+    sipRes = sipCpp->getIntegerVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2894,7 +2894,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::IntegerVectorProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::IntegerVectorProperty>(*a0);
+    sipRes = sipCpp->getLocalIntegerVectorProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2917,7 +2917,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::GraphProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getProperty<tlp::GraphProperty>(*a0);
+    sipRes = sipCpp->getGraphProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -2940,7 +2940,7 @@ Using of :const:`del` on that property will cause a segmentation violation (use 
 
 %MethodCode
   if (canGetProperty<tlp::GraphProperty>(sipCpp, *a0)) {
-    sipRes = sipCpp->getLocalProperty<tlp::GraphProperty>(*a0);
+    sipRes = sipCpp->getLocalGraphProperty(*a0);
   } else {
     sipIsErr = throwPropertyNameExistsException(sipCpp, *a0);
   }
@@ -3213,7 +3213,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::DoubleAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::DoubleProperty>("viewMetric"), a2, a2Wrapper, *a1, sipIsErr, "double");
+  sipRes = callGraphPropertyAlgorithm<tlp::DoubleAlgorithm>(sipCpp, *a0, sipCpp->getDoubleProperty("viewMetric"), a2, a2Wrapper, *a1, sipIsErr, "double");
 %End
 
 //===========================================================================================
@@ -3277,7 +3277,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::LayoutAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::LayoutProperty>("viewLayout"), a2, a2Wrapper, *a1, sipIsErr, "layout");
+  sipRes = callGraphPropertyAlgorithm<tlp::LayoutAlgorithm>(sipCpp, *a0, sipCpp->getLayoutProperty("viewLayout"), a2, a2Wrapper, *a1, sipIsErr, "layout");
 %End
 
 //===========================================================================================
@@ -3341,7 +3341,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::BooleanAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::BooleanProperty>("viewSelection"), a2, a2Wrapper, *a1, sipIsErr, "boolean");
+  sipRes = callGraphPropertyAlgorithm<tlp::BooleanAlgorithm>(sipCpp, *a0, sipCpp->getBooleanProperty("viewSelection"), a2, a2Wrapper, *a1, sipIsErr, "boolean");
 %End
 
 //===========================================================================================
@@ -3405,7 +3405,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::SizeAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::SizeProperty>("viewSize"), a2, a2Wrapper, *a1, sipIsErr, "size");
+  sipRes = callGraphPropertyAlgorithm<tlp::SizeAlgorithm>(sipCpp, *a0, sipCpp->getSizeProperty("viewSize"), a2, a2Wrapper, *a1, sipIsErr, "size");
 %End
 
 //===========================================================================================
@@ -3469,7 +3469,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::ColorAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::ColorProperty>("viewColor"), a2, a2Wrapper, *a1, sipIsErr, "color");
+  sipRes = callGraphPropertyAlgorithm<tlp::ColorAlgorithm>(sipCpp, *a0, sipCpp->getColorProperty("viewColor"), a2, a2Wrapper, *a1, sipIsErr, "color");
 %End
 
 //===========================================================================================
@@ -3532,7 +3532,7 @@ This is equivalent to call::
 %End
 
 %MethodCode
-  sipRes = callGraphPropertyAlgorithm<tlp::StringAlgorithm>(sipCpp, *a0, sipCpp->getProperty<tlp::StringProperty>("viewLabel"), a2, a2Wrapper, *a1, sipIsErr, "string");
+  sipRes = callGraphPropertyAlgorithm<tlp::StringAlgorithm>(sipCpp, *a0, sipCpp->getStringProperty("viewLabel"), a2, a2Wrapper, *a1, sipIsErr, "string");
 %End
 
  //===========================================================================================

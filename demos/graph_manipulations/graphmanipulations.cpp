@@ -45,7 +45,7 @@ int main(int, char **) {
 
   // now in color. 'viewColor' is the Talipot GUI's default color property, so when we load it we
   // will see the color immediately If 'viewColor' did not exist before, this creates it.
-  ColorProperty *color = myGraph->getProperty<ColorProperty>("viewColor");
+  ColorProperty *color = myGraph->getColorProperty("viewColor");
   color->setNodeValue(a, Color(255, 0, 0));
   color->setNodeValue(b, Color(0, 255, 0));
   color->setNodeValue(c, Color(0, 0, 255));
@@ -54,14 +54,14 @@ int main(int, char **) {
   // hey look, this is a 3-coloration :)
 
   // set the label of the nodes (again, with Talipot's default label property)
-  StringProperty *label = myGraph->getProperty<StringProperty>("viewLabel");
+  StringProperty *label = myGraph->getStringProperty("viewLabel");
   label->setNodeValue(a, "A");
   label->setNodeValue(b, "B");
   label->setNodeValue(c, "C");
   label->setNodeValue(d, "D");
   label->setNodeValue(e, "E");
 
-  DoubleProperty *metric = myGraph->getProperty<DoubleProperty>("degree");
+  DoubleProperty *metric = myGraph->getDoubleProperty("degree");
 
   // if the degree plugin is available, let's call it.
   if (tlp::PluginsManager::pluginExists("Degree")) {

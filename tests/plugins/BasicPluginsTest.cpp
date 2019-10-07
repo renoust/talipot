@@ -394,7 +394,7 @@ void BasicPluginsTest::testEqualValueClustering() {
   bool result;
   const std::string algorithmName = "Equal Value";
 
-  DoubleProperty *metric = graph->getProperty<DoubleProperty>("metric");
+  DoubleProperty *metric = graph->getDoubleProperty("metric");
   ds.set("Property", metric);
 
   result = graph->applyAlgorithm(algorithmName, errorMsg, &ds);
@@ -434,7 +434,7 @@ void BasicPluginsTest::testEqualValueClustering() {
 //==========================================================
 void BasicPluginsTest::testHierarchicalClustering() {
   initializeGraph("Planar Graph");
-  DoubleProperty *metric = graph->getProperty<DoubleProperty>("viewMetric");
+  DoubleProperty *metric = graph->getDoubleProperty("viewMetric");
   string errorMsg;
   bool result = graph->applyPropertyAlgorithm("Degree", metric, errorMsg);
   CPPUNIT_ASSERT(result);

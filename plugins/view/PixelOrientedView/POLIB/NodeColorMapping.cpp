@@ -29,13 +29,13 @@ NodeColorMapping::NodeColorMapping(Graph *graph) : graph(graph) {}
 RGBA NodeColorMapping::getColor(const double &, const unsigned int itemId) const {
   RGBA ret;
 
-  if (graph->getProperty<BooleanProperty>("viewSelection")->getNodeValue(node(itemId))) {
+  if (graph->getBooleanProperty("viewSelection")->getNodeValue(node(itemId))) {
     ret[0] = COLOR_SELECT.getR();
     ret[1] = COLOR_SELECT.getG();
     ret[2] = COLOR_SELECT.getB();
     ret[3] = COLOR_SELECT.getA();
   } else {
-    Color nodeColor = graph->getProperty<ColorProperty>("viewColor")->getNodeValue(node(itemId));
+    Color nodeColor = graph->getColorProperty("viewColor")->getNodeValue(node(itemId));
     ret[0] = nodeColor.getR();
     ret[1] = nodeColor.getG();
     ret[2] = nodeColor.getB();

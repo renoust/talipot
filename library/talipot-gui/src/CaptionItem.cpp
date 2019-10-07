@@ -98,7 +98,7 @@ void CaptionItem::clearObservers() {
 
   if (!_captionGraphicsItem->usedProperty().empty()) {
     _metricProperty =
-        view->graph()->getProperty<DoubleProperty>(_captionGraphicsItem->usedProperty());
+        view->graph()->getDoubleProperty(_captionGraphicsItem->usedProperty());
     _metricProperty->addObserver(this);
   } else {
     _metricProperty = nullptr;
@@ -111,11 +111,11 @@ void CaptionItem::clearObservers() {
     if (_sizeProperty)
       _sizeProperty->removeObserver(this);
 
-    _sizeProperty = view->graph()->getProperty<SizeProperty>("viewSize");
+    _sizeProperty = view->graph()->getSizeProperty("viewSize");
     _sizeProperty->addObserver(this);
   }
 
-  _colorProperty = view->graph()->getProperty<ColorProperty>("viewColor");
+  _colorProperty = view->graph()->getColorProperty("viewColor");
 
   if (_captionType == NodesColorCaption || _captionType == EdgesColorCaption) {
     _colorProperty->addObserver(this);
@@ -318,7 +318,7 @@ void CaptionItem::applyNewFilter(float begin, float end) {
 
   Observable::holdObservers();
 
-  ColorProperty *borderColorProperty = _graph->getProperty<ColorProperty>("viewBorderColor");
+  ColorProperty *borderColorProperty = _graph->getColorProperty("viewBorderColor");
 
   if (!_backupBorderColorProperty) {
     _backupBorderColorProperty = new ColorProperty(_graph);

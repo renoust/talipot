@@ -40,7 +40,7 @@ public:
     }
 
     if (!layout)
-      layout = graph->getProperty<tlp::LayoutProperty>("viewLayout");
+      layout = graph->getLayoutProperty("viewLayout");
 
     result->copy(layout);
     result->perfectAspectRatio(subgraphOnly ? graph : nullptr);

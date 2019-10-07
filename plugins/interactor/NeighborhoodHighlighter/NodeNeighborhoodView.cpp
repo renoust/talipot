@@ -51,7 +51,7 @@ NodeNeighborhoodView::NodeNeighborhoodView(Graph *graph, node n,
       currentDist(neighborhoodDist), computeReachableSubGraph(computeReachableSubGraph),
       nbNodes(nbNodes), property(nullptr) {
   if (!propertyName.empty()) {
-    property = graph->getProperty<DoubleProperty>(propertyName);
+    property = graph->getDoubleProperty(propertyName);
   }
 
   graphViewNodes.push_back(n);

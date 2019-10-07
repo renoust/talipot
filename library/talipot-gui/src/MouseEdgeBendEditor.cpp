@@ -290,7 +290,7 @@ void MouseEdgeBendEditor::initProxies(GlMainWidget *glMainWidget) {
   _shape = inputData->getElementShape();
 
   if (_graph->existProperty("viewPolygonCoords"))
-    _coordsVectorProperty = _graph->getProperty<CoordVectorProperty>("viewPolygonCoords");
+    _coordsVectorProperty = _graph->getCoordVectorProperty("viewPolygonCoords");
   else
     _coordsVectorProperty = nullptr;
 }

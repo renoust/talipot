@@ -127,7 +127,7 @@ public:
       int ival = 0;
       bool bval = false;
       StringCollection sc;
-      tlp::NumericProperty *edgeCosts = graph->getProperty<tlp::DoubleProperty>("viewMetric");
+      tlp::NumericProperty *edgeCosts = graph->getDoubleProperty("viewMetric");
 
       if (dataSet->get("terminationCriterion", sc)) {
         if (sc.getCurrentString() == "PositionDifference") {

@@ -55,7 +55,7 @@ QPixmap GlyphRenderer::render(int glyphId) {
       for (const std::string &glyphName : PluginsManager::availablePlugins<Glyph>()) {
         auto glId = GlyphManager::glyphId(glyphName);
         // Create the glyph preview
-        graph->getProperty<IntegerProperty>("viewShape")->setNodeValue(node, glId);
+        graph->getIntegerProperty("viewShape")->setNodeValue(node, glId);
         renderer->renderScene(false, true);
         previews.emplace(std::make_pair(glId, QPixmap::fromImage(renderer->getImage())));
       }
@@ -117,7 +117,7 @@ QPixmap EdgeExtremityGlyphRenderer::render(int glyphId) {
         const tlp::Plugin &info = PluginsManager::pluginInformation(glyphName);
         int glId = info.id();
         // Create the glyph preview
-        graph->getProperty<IntegerProperty>("viewTgtAnchorShape")->setEdgeValue(e, glId);
+        graph->getIntegerProperty("viewTgtAnchorShape")->setEdgeValue(e, glId);
         renderer->renderScene(true);
         previews.emplace(std::make_pair(glId, QPixmap::fromImage(renderer->getImage())));
       }

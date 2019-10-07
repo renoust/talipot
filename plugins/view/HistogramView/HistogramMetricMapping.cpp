@@ -454,10 +454,10 @@ GlGlyphScale::GlGlyphScale(const Coord &baseCoord, const float length, Orientati
     : glyphGraph(newGraph()),
       glyphGraphInputData(new GlGraphInputData(glyphGraph, &glyphGraphRenderingParameters)),
       baseCoord(baseCoord), length(length), orientation(orientation), size(0) {
-  glyphGraphLayout = glyphGraph->getProperty<LayoutProperty>("viewLayout");
-  glyphGraphSize = glyphGraph->getProperty<SizeProperty>("viewSize");
-  glyphGraphColor = glyphGraph->getProperty<ColorProperty>("viewColor");
-  glyphGraphShape = glyphGraph->getProperty<IntegerProperty>("viewShape");
+  glyphGraphLayout = glyphGraph->getLayoutProperty("viewLayout");
+  glyphGraphSize = glyphGraph->getSizeProperty("viewSize");
+  glyphGraphColor = glyphGraph->getColorProperty("viewColor");
+  glyphGraphShape = glyphGraph->getIntegerProperty("viewShape");
 }
 
 GlGlyphScale::~GlGlyphScale() {
@@ -1040,14 +1040,14 @@ void HistogramMetricMapping::updateGraphWithMapping(Graph *graph, LayoutProperty
   ColorProperty *graphColors = nullptr;
 
   if (mappingType == VIEWCOLOR_MAPPING) {
-    graphColors = graph->getProperty<ColorProperty>("viewColor");
+    graphColors = graph->getColorProperty("viewColor");
   } else if (mappingType == VIEWBORDERCOLOR_MAPPING) {
-    graphColors = graph->getProperty<ColorProperty>("viewBorderColor");
+    graphColors = graph->getColorProperty("viewBorderColor");
   }
 
-  SizeProperty *graphSizes = graph->getProperty<SizeProperty>("viewSize");
-  DoubleProperty *graphBorderSizes = graph->getProperty<DoubleProperty>("viewBorderWidth");
-  IntegerProperty *graphShapes = graph->getProperty<IntegerProperty>("viewShape");
+  SizeProperty *graphSizes = graph->getSizeProperty("viewSize");
+  DoubleProperty *graphBorderSizes = graph->getDoubleProperty("viewBorderWidth");
+  IntegerProperty *graphShapes = graph->getIntegerProperty("viewShape");
 
   if (histoView->getDataLocation() == NODE) {
 
@@ -1165,10 +1165,10 @@ void HistogramMetricMapping::updateMapping(GlQuantitativeAxis *histoXAxis,
     }
   } else {
     glyphMappingGraph->clear();
-    IntegerProperty *glyphGraphShape = glyphMappingGraph->getProperty<IntegerProperty>("viewShape");
-    LayoutProperty *glyphGraphLayout = glyphMappingGraph->getProperty<LayoutProperty>("viewLayout");
-    SizeProperty *glyphGraphSize = glyphMappingGraph->getProperty<SizeProperty>("viewSize");
-    ColorProperty *glyphGraphColor = glyphMappingGraph->getProperty<ColorProperty>("viewColor");
+    IntegerProperty *glyphGraphShape = glyphMappingGraph->getIntegerProperty("viewShape");
+    LayoutProperty *glyphGraphLayout = glyphMappingGraph->getLayoutProperty("viewLayout");
+    SizeProperty *glyphGraphSize = glyphMappingGraph->getSizeProperty("viewSize");
+    ColorProperty *glyphGraphColor = glyphMappingGraph->getColorProperty("viewColor");
     glyphGraphSize->setAllNodeValue(Size(increment, increment, increment));
     glyphGraphColor->setAllNodeValue(Color(255, 0, 0));
 

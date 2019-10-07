@@ -31,7 +31,7 @@ const unsigned int numberOfNodes = 4;
 
 void IteratorTest::setUp() {
   graph = tlp::newGraph();
-  idMetric = graph->getProperty<tlp::DoubleProperty>("idMetric");
+  idMetric = graph->getDoubleProperty("idMetric");
   for (unsigned int i = 0; i < numberOfNodes; ++i) {
     tlp::node n = graph->addNode();
     idMetric->setNodeValue(n, n.id);

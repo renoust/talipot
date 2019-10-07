@@ -73,7 +73,7 @@ bool SquarifiedTreeMap::check(std::string &errorMsg) {
     dataSet->get("metric", metric);
 
   if (!metric && graph->existProperty("viewMetric")) {
-    metric = graph->getProperty<DoubleProperty>("viewMetric");
+    metric = graph->getDoubleProperty("viewMetric");
 
     if (metric->getNodeDoubleMin() < 0.) {
       errorMsg = "Graph's nodes must have a positive metric.";
@@ -105,10 +105,10 @@ bool SquarifiedTreeMap::run() {
   }
 
   if (sizeResult == nullptr)
-    sizeResult = graph->getProperty<SizeProperty>("viewSize");
+    sizeResult = graph->getSizeProperty("viewSize");
 
   if (glyphResult == nullptr)
-    glyphResult = graph->getLocalProperty<IntegerProperty>("viewShape");
+    glyphResult = graph->getLocalIntegerProperty("viewShape");
 
   {
     // change the glyph of all internal nodes to be a window

@@ -84,7 +84,7 @@ public:
     // initialize a random sequence according the given seed
     tlp::initRandomSequence();
 
-    LayoutProperty *newLayout = graph->getLocalProperty<LayoutProperty>("viewLayout");
+    LayoutProperty *newLayout = graph->getLocalLayoutProperty("viewLayout");
 
     pluginProgress->showPreview(false);
 

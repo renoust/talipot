@@ -1445,34 +1445,34 @@ public:
     bool createPubliNodes = toImport != IMPORT_AUTHORS;
 
     // known properties to extract
-    StringProperty *keyProp = oneEdgePerPubli ? graph->getProperty<StringProperty>("key") : nullptr;
+    StringProperty *keyProp = oneEdgePerPubli ? graph->getStringProperty("key") : nullptr;
     StringProperty *typeProp =
-        oneEdgePerPubli ? graph->getProperty<StringProperty>("type") : nullptr;
+        oneEdgePerPubli ? graph->getStringProperty("type") : nullptr;
     IntegerProperty *yearProp =
-        oneEdgePerPubli ? graph->getProperty<IntegerProperty>("year") : nullptr;
+        oneEdgePerPubli ? graph->getIntegerProperty("year") : nullptr;
     BooleanProperty *fromLabriProp =
-        createAuthNodes ? graph->getProperty<BooleanProperty>("from LaBRI") : nullptr;
+        createAuthNodes ? graph->getBooleanProperty("from LaBRI") : nullptr;
     IntegerVectorProperty *labriAuthorsProp =
-        createPubliNodes ? graph->getProperty<IntegerVectorProperty>("LaBRI authors") : nullptr;
+        createPubliNodes ? graph->getIntegerVectorProperty("LaBRI authors") : nullptr;
     StringVectorProperty *labriTeamsProp =
-        createPubliNodes ? graph->getProperty<StringVectorProperty>("LaBRI teams") : nullptr;
+        createPubliNodes ? graph->getStringVectorProperty("LaBRI teams") : nullptr;
     StringVectorProperty *authProp =
-        createPubliNodes ? graph->getProperty<StringVectorProperty>("authors") : nullptr;
+        createPubliNodes ? graph->getStringVectorProperty("authors") : nullptr;
     StringProperty *authNameProp =
-        createAuthNodes ? graph->getProperty<StringProperty>("name") : nullptr;
+        createAuthNodes ? graph->getStringProperty("name") : nullptr;
     StringProperty *labriTeamProp =
-        createAuthNodes ? graph->getProperty<StringProperty>("LaBRI team") : nullptr;
+        createAuthNodes ? graph->getStringProperty("LaBRI team") : nullptr;
     IntegerProperty *countProp =
-        createAuthNodes ? graph->getProperty<IntegerProperty>("# publications") : nullptr;
+        createAuthNodes ? graph->getIntegerProperty("# publications") : nullptr;
 
     // rendering properties
-    ColorProperty *color = graph->getProperty<ColorProperty>("viewColor");
-    StringProperty *icon = graph->getProperty<StringProperty>("viewIcon");
-    StringProperty *label = graph->getProperty<StringProperty>("viewLabel");
+    ColorProperty *color = graph->getColorProperty("viewColor");
+    StringProperty *icon = graph->getStringProperty("viewIcon");
+    StringProperty *label = graph->getStringProperty("viewLabel");
 
-    graph->getProperty<IntegerProperty>("viewLabelPosition")
+    graph->getIntegerProperty("viewLabelPosition")
         ->setAllNodeValue(LabelPosition::Bottom);
-    graph->getProperty<IntegerProperty>("viewShape")->setAllNodeValue(tlp::NodeShape::Icon);
+    graph->getIntegerProperty("viewShape")->setAllNodeValue(tlp::NodeShape::Icon);
 
     std::unordered_map<std::string, node> authorsMap;
     std::unordered_map<std::string, bool> publisMap;
@@ -1547,13 +1547,13 @@ public:
           if (createPubliNodes) {
             if (isNumber && (pName != "volume") && (pName != "number"))
               // create an IntegerProperty
-              prop = graph->getProperty<IntegerProperty>(pName);
+              prop = graph->getIntegerProperty(pName);
             else {
               if (isAuthor)
                 prop = authProp;
               else
                 // create a StringProperty
-                prop = graph->getProperty<StringProperty>(pName);
+                prop = graph->getStringProperty(pName);
             }
           }
 
@@ -2104,7 +2104,7 @@ public:
 
       string err;
       return graph->applyPropertyAlgorithm("FM^3 (OGDF)",
-                                           graph->getProperty<LayoutProperty>("viewLayout"), err,
+                                           graph->getLayoutProperty("viewLayout"), err,
                                            nullptr, pluginProgress);
     }
 

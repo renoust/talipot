@@ -28,10 +28,10 @@ namespace tlp {
 ParallelCoordinatesGraphProxy::ParallelCoordinatesGraphProxy(Graph *g, const ElementType location)
     : GraphDecorator(g), graphColorsChanged(false), dataLocation(location),
       unhighlightedEltsColorAlphaValue(20) {
-  dataColors = graph_component->getProperty<ColorProperty>("viewColor");
+  dataColors = graph_component->getColorProperty("viewColor");
   dataColors->addObserver(this);
   originalDataColors = new ColorProperty(graph_component);
-  *originalDataColors = *(graph_component->getProperty<ColorProperty>("viewColor"));
+  *originalDataColors = *(graph_component->getColorProperty("viewColor"));
 }
 
 ParallelCoordinatesGraphProxy::~ParallelCoordinatesGraphProxy() {
@@ -270,7 +270,7 @@ void ParallelCoordinatesGraphProxy::colorDataAccordingToHighlightedElts() {
 
     lastHighlightedElementsSet = true;
   } else if (lastHighlightedElementsSet) {
-    *(graph_component->getProperty<ColorProperty>("viewColor")) = *originalDataColors;
+    *(graph_component->getColorProperty("viewColor")) = *originalDataColors;
     lastHighlightedElementsSet = false;
   } else {
     *originalDataColors = *dataColors;

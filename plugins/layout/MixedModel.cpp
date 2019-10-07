@@ -84,10 +84,10 @@ bool MixedModel::run() {
   }
 
   if (sizeResult == nullptr)
-    sizeResult = graph->getProperty<SizeProperty>("viewSize");
+    sizeResult = graph->getSizeProperty("viewSize");
 
   if (shapeResult == nullptr)
-    shapeResult = graph->getLocalProperty<IntegerProperty>("viewShape");
+    shapeResult = graph->getLocalIntegerProperty("viewShape");
 
   //=========================================================
   // rotate size if necessary
@@ -342,7 +342,7 @@ void MixedModel::placeNodesEdges() {
   for (auto n : carte->nodes()) {
     Coord c = nodeSize.get(n.id);
     c[0] -= edgeNodeSpacing;
-    graph->getProperty<SizeProperty>("viewSize")->setNodeValue(n, Size(c[0], c[1], 0.3f));
+    graph->getSizeProperty("viewSize")->setNodeValue(n, Size(c[0], c[1], 0.3f));
     result->setNodeValue(n, NodeCoords[n]);
   }
 
@@ -411,8 +411,8 @@ void MixedModel::placeNodesEdges() {
       bends.push_back(Coord(-maxX + (c_n.getX() + c_v.getX()) / 2.f,
                             -maxY + (c_n.getY() + c_v.getY()) / 2.f, -z_size));
       result->setEdgeValue(e, bends);
-      graph->getProperty<IntegerProperty>("viewShape")->setEdgeValue(e, EdgeShape::BezierCurve);
-      graph->getProperty<ColorProperty>("viewColor")->setEdgeValue(e, Color(218, 218, 218));
+      graph->getIntegerProperty("viewShape")->setEdgeValue(e, EdgeShape::BezierCurve);
+      graph->getColorProperty("viewColor")->setEdgeValue(e, Color(218, 218, 218));
     }
   }
 }

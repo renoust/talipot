@@ -102,7 +102,7 @@ void IsMetaEdgeTest::testIsMetaEdge() {
   // check that the two quotient nodes are meta nodes
   CPPUNIT_ASSERT_EQUAL(2u, nbMetaNodes);
 
-  set<edge> underlyingEdgesInMetaEdge = quotientGraph->getProperty<GraphProperty>("viewMetaGraph")
+  set<edge> underlyingEdgesInMetaEdge = quotientGraph->getGraphProperty("viewMetaGraph")
                                             ->getEdgeValue(quotientGraph->getOneEdge());
 
   // check the number of underlying edges in meta edge

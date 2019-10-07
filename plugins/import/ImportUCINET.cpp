@@ -605,14 +605,14 @@ public:
 
         // set default metric
         if (nm == 0) {
-          metrics.push_back(graph->getProperty<DoubleProperty>(defaultMetric));
+          metrics.push_back(graph->getDoubleProperty(defaultMetric));
         } else {
           if (metrics.empty()) {
             // create metrics with default name
             for (unsigned int i = 0; i < nm; ++i) {
               stringstream sstr;
               sstr << defaultMetric << (i + 1);
-              DoubleProperty *metric = graph->getProperty<DoubleProperty>(sstr.str());
+              DoubleProperty *metric = graph->getDoubleProperty(sstr.str());
               metrics.push_back(metric);
             }
           }
@@ -634,7 +634,7 @@ public:
                   std::unordered_map<std::string, node> &labelsHMap, unsigned int nbLabels,
                   unsigned int offset, const vector<node> &nodes) {
     vector<std::string> labels;
-    StringProperty *label = graph->getProperty<StringProperty>("viewLabel");
+    StringProperty *label = graph->getStringProperty("viewLabel");
 
     if (!tokenize(str, labels, " \r\t,"))
       return false;
@@ -664,7 +664,7 @@ public:
   void checkColumnLabels(vector<std::string> &tokens, unsigned int &ir, unsigned int &ic,
                          unsigned int &i, const vector<node> &nodes) {
     if (ir == 0 && embedding & uint(DL_COLS)) {
-      StringProperty *label = graph->getProperty<StringProperty>("viewLabel");
+      StringProperty *label = graph->getStringProperty("viewLabel");
 
       // first nc tokens are for labels of the part 1 of the graph
       for (; ic < nc && i < tokens.size(); ++i, ++ic) {
@@ -706,7 +706,7 @@ public:
         return node();
 
       ++i;
-      graph->getProperty<StringProperty>("viewLabel")->setNodeValue(nodes[i - 1], token);
+      graph->getStringProperty("viewLabel")->setNodeValue(nodes[i - 1], token);
       return labelToNode[upcasetoken] = nodes[i - 1];
     }
 
@@ -721,7 +721,7 @@ public:
         return node();
 
       ++i;
-      graph->getProperty<StringProperty>("viewLabel")->setNodeValue(nodes[i - 1], token);
+      graph->getStringProperty("viewLabel")->setNodeValue(nodes[i - 1], token);
       return colLabelToNode[upcasetoken] = nodes[i - 1];
     } else {
       std::unordered_map<std::string, node>::iterator it = rowLabelToNode.find(upcasetoken);
@@ -734,7 +734,7 @@ public:
         return node();
 
       ++i;
-      graph->getProperty<StringProperty>("viewLabel")->setNodeValue(nodes[nc + i - 1], token);
+      graph->getStringProperty("viewLabel")->setNodeValue(nodes[nc + i - 1], token);
       return rowLabelToNode[upcasetoken] = nodes[nc + i - 1];
     }
   }
@@ -763,7 +763,7 @@ public:
 
         // check if we first have row label
         if ((embedding & DL_ROWS) && (ic == 0) && (current == 0)) {
-          graph->getProperty<StringProperty>("viewLabel")->setNodeValue(src, tokens[i]);
+          graph->getStringProperty("viewLabel")->setNodeValue(src, tokens[i]);
 
           if (ir == 0 && nc == 1 && diagonal == false)
             ++ir;
@@ -982,7 +982,7 @@ public:
 
         if (result) {
           for (; current < labels.size(); ++current)
-            metrics.push_back(graph->getProperty<DoubleProperty>(labels[current]));
+            metrics.push_back(graph->getDoubleProperty(labels[current]));
 
           // check if all matrix labels have been read
           if (current == nm)

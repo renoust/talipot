@@ -327,7 +327,7 @@ PropertyInterface *DoubleProperty::clonePrototype(Graph *g, const std::string &n
     return nullptr;
 
   // allow to get an unregistered property (empty name)
-  DoubleProperty *p = n.empty() ? new DoubleProperty(g) : g->getLocalProperty<DoubleProperty>(n);
+  DoubleProperty *p = n.empty() ? new DoubleProperty(g) : g->getLocalDoubleProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;
@@ -339,7 +339,7 @@ PropertyInterface *DoubleVectorProperty::clonePrototype(Graph *g, const std::str
 
   // allow to get an unregistered property (empty name)
   DoubleVectorProperty *p =
-      n.empty() ? new DoubleVectorProperty(g) : g->getLocalProperty<DoubleVectorProperty>(n);
+      n.empty() ? new DoubleVectorProperty(g) : g->getLocalDoubleVectorProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;

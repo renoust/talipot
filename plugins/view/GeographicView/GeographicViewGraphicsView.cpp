@@ -543,13 +543,13 @@ void GeographicViewGraphicsView::cleanup() {
     GlScene *scene = glMainWidget->getScene();
     scene->clearLayersList();
 
-    if (geoLayout != graph->getProperty<LayoutProperty>("viewLayout"))
+    if (geoLayout != graph->getLayoutProperty("viewLayout"))
       delete geoLayout;
 
-    if (geoViewSize != graph->getProperty<SizeProperty>("viewSize"))
+    if (geoViewSize != graph->getSizeProperty("viewSize"))
       delete geoViewSize;
 
-    if (geoViewShape != graph->getProperty<IntegerProperty>("viewShape"))
+    if (geoViewShape != graph->getIntegerProperty("viewShape"))
       delete geoViewShape;
 
     // those entities have been deleted by the prior call to GlScene::clearLayersList,
@@ -582,9 +582,9 @@ void GeographicViewGraphicsView::setGraph(Graph *graph) {
 
     layer->addGlEntity(graphComposite, "graph");
 
-    geoLayout = graph->getProperty<LayoutProperty>("viewLayout");
-    geoViewSize = graph->getProperty<SizeProperty>("viewSize");
-    geoViewShape = graph->getProperty<IntegerProperty>("viewShape");
+    geoLayout = graph->getLayoutProperty("viewLayout");
+    geoViewSize = graph->getSizeProperty("viewSize");
+    geoViewShape = graph->getIntegerProperty("viewShape");
     currentMapZoom = 0;
     polygonEntity = nullptr;
 
@@ -708,9 +708,9 @@ void GeographicViewGraphicsView::mapToPolygon() {
             }
 
             geoLayout->setNodeValue(n, bb.center());
-            polygon->setFillColor(graph->getProperty<ColorProperty>("viewColor")->getNodeValue(n));
+            polygon->setFillColor(graph->getColorProperty("viewColor")->getNodeValue(n));
             polygon->setOutlineColor(
-                graph->getProperty<ColorProperty>("viewBorderColor")->getNodeValue(n));
+                graph->getColorProperty("viewBorderColor")->getNodeValue(n));
             break;
           }
         }
@@ -744,13 +744,13 @@ void GeographicViewGraphicsView::createLayoutWithAddresses(const string &address
   Observable::holdObservers();
 
   if (graph->existProperty(addressPropertyName)) {
-    StringProperty *addressProperty = graph->getProperty<StringProperty>(addressPropertyName);
+    StringProperty *addressProperty = graph->getStringProperty(addressPropertyName);
     DoubleProperty *latitudeProperty = nullptr;
     DoubleProperty *longitudeProperty = nullptr;
 
     if (createLatAndLngProps) {
-      latitudeProperty = graph->getProperty<DoubleProperty>("latitude");
-      longitudeProperty = graph->getProperty<DoubleProperty>("longitude");
+      latitudeProperty = graph->getDoubleProperty("latitude");
+      longitudeProperty = graph->getDoubleProperty("longitude");
     }
 
     int nbNodes = graph->numberOfNodes();
@@ -875,8 +875,8 @@ void GeographicViewGraphicsView::createLayoutWithLatLngs(const std::string &lati
   pair<double, double> latLng;
 
   if (graph->existProperty(latitudePropertyName) && graph->existProperty(longitudePropertyName)) {
-    DoubleProperty *latitudeProperty = graph->getProperty<DoubleProperty>(latitudePropertyName);
-    DoubleProperty *longitudeProperty = graph->getProperty<DoubleProperty>(longitudePropertyName);
+    DoubleProperty *latitudeProperty = graph->getDoubleProperty(latitudePropertyName);
+    DoubleProperty *longitudeProperty = graph->getDoubleProperty(longitudePropertyName);
     for (auto n : graph->nodes()) {
       latLng.first = latitudeProperty->getNodeValue(n);
       latLng.second = longitudeProperty->getNodeValue(n);
@@ -886,7 +886,7 @@ void GeographicViewGraphicsView::createLayoutWithLatLngs(const std::string &lati
 
   if (graph->existProperty(edgesPathsPropertyName)) {
     DoubleVectorProperty *edgesPathsProperty =
-        graph->getProperty<DoubleVectorProperty>(edgesPathsPropertyName);
+        graph->getDoubleVectorProperty(edgesPathsPropertyName);
     for (auto e : graph->edges()) {
       const std::vector<double> &edgePath = edgesPathsProperty->getEdgeValue(e);
       std::vector<std::pair<double, double>> latLngs;
@@ -1125,7 +1125,7 @@ void GeographicViewGraphicsView::switchViewType() {
 
   GlLayer *layer = glMainWidget->getScene()->getLayer("Main");
 
-  if (geoLayout == graph->getProperty<LayoutProperty>("viewLayout") && geoLayoutComputed)
+  if (geoLayout == graph->getLayoutProperty("viewLayout") && geoLayoutComputed)
     graph->push();
 
   Observable::holdObservers();
@@ -1138,7 +1138,7 @@ void GeographicViewGraphicsView::switchViewType() {
   layer->setCamera(new Camera(glMainWidget->getScene()));
 
   if (viewType != GeographicView::Globe && geoLayoutComputed) {
-    SizeProperty *viewSize = graph->getProperty<SizeProperty>("viewSize");
+    SizeProperty *viewSize = graph->getSizeProperty("viewSize");
 
     for (auto n : graph->nodes()) {
       if (viewSize != geoViewSize) {
@@ -1190,7 +1190,7 @@ void GeographicViewGraphicsView::switchViewType() {
 
     if (geoLayoutComputed) {
 
-      SizeProperty *viewSize = graph->getProperty<SizeProperty>("viewSize");
+      SizeProperty *viewSize = graph->getSizeProperty("viewSize");
 
       assert(geoLayoutBackup == nullptr);
       geoLayoutBackup = new LayoutProperty(graph);

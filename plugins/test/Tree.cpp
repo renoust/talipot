@@ -55,7 +55,7 @@ public:
     }
 
     for (auto n :
-         graph->getProperty<tlp::BooleanProperty>("viewSelection")->getNodesEqualTo(true)) {
+         graph->getBooleanProperty("viewSelection")->getNodesEqualTo(true)) {
       if (root.isValid()) {
         tlp::error() << "Only one root node must be selected." << std::endl;
         return false;

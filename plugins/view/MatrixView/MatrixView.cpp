@@ -412,7 +412,7 @@ void MatrixView::addEdge(tlp::Graph *g, const tlp::edge e) {
 
   _displayedEdgesToGraphEdges->setEdgeValue(dispEdge, e.id);
 
-  ColorProperty *originalColors = graph()->getProperty<ColorProperty>("viewColor");
+  ColorProperty *originalColors = graph()->getColorProperty("viewColor");
   ColorProperty *colors =
       getGlMainWidget()->getScene()->getGlGraphComposite()->getInputData()->getElementColor();
 

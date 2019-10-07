@@ -57,8 +57,8 @@ public:
     // initialize a random sequence according the given seed
     tlp::initRandomSequence();
 
-    LayoutProperty *newLayout = graph->getLocalProperty<LayoutProperty>("viewLayout");
-    SizeProperty *newSize = graph->getLocalProperty<SizeProperty>("viewSize");
+    LayoutProperty *newLayout = graph->getLocalLayoutProperty("viewLayout");
+    SizeProperty *newSize = graph->getLocalSizeProperty("viewSize");
     newSize->setAllNodeValue(Size(1.0, 1.0, 1.0));
 
     // reserve graph needed elts

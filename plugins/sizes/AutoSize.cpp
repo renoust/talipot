@@ -46,8 +46,8 @@ public:
 
 private:
   Size getNodeValue(const node n) {
-    LayoutProperty *entryLayout = graph->getProperty<LayoutProperty>("viewLayout");
-    SizeProperty *entrySize = graph->getProperty<SizeProperty>("viewSize");
+    LayoutProperty *entryLayout = graph->getLayoutProperty("viewLayout");
+    SizeProperty *entrySize = graph->getSizeProperty("viewSize");
 
     // Compute the minimal distance to one neighbour.
     const Coord tmp1(entryLayout->getNodeValue(n));

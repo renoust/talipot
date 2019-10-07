@@ -210,8 +210,8 @@ bool EdgeBundling::run() {
   bool keepGrid = false;
   double dist = 50.0;
 
-  SizeProperty *size = graph->getProperty<SizeProperty>("viewSize");
-  layout = graph->getProperty<LayoutProperty>("viewLayout");
+  SizeProperty *size = graph->getSizeProperty("viewSize");
+  layout = graph->getLayoutProperty("viewLayout");
 
   if (dataSet != nullptr) {
     dataSet->get("long_edges", longEdges);

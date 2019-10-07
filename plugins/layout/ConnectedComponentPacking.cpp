@@ -65,13 +65,13 @@ bool ConnectedComponentPacking::run() {
   }
 
   if (layout == nullptr)
-    layout = graph->getProperty<LayoutProperty>("viewLayout");
+    layout = graph->getLayoutProperty("viewLayout");
 
   if (size == nullptr)
-    size = graph->getProperty<SizeProperty>("viewSize");
+    size = graph->getSizeProperty("viewSize");
 
   if (rotation == nullptr)
-    rotation = graph->getProperty<DoubleProperty>("viewRotation");
+    rotation = graph->getDoubleProperty("viewRotation");
 
   if (complexity == "none")
     complexity = "auto";

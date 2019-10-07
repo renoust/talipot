@@ -136,7 +136,7 @@ void PathFinderComponent::selectPath(GlMainWidget *glMainWidget, Graph *graph) {
       PropertyInterface *prop = graph->getProperty(weightsMetricName);
 
       if (prop && prop->getTypename().compare("double") == 0)
-        weights = graph->getProperty<DoubleProperty>(weightsMetricName);
+        weights = graph->getDoubleProperty(weightsMetricName);
     }
 
     bool pathFound =

@@ -233,7 +233,7 @@ bool ConvolutionClustering::run() {
     dataSet->get("metric", metric);
 
   if (metric == nullptr)
-    metric = graph->getProperty<DoubleProperty>("viewMetric");
+    metric = graph->getDoubleProperty("viewMetric");
 
   autoSetParameter();
   getHistogram();
@@ -263,7 +263,7 @@ bool ConvolutionClustering::check(std::string &errorMsg) {
     dataSet->get("metric", metric);
 
   if (metric == nullptr)
-    metric = graph->getProperty<DoubleProperty>("viewMetric");
+    metric = graph->getDoubleProperty("viewMetric");
 
   if (metric->getNodeDoubleMax() == metric->getNodeDoubleMin()) {
     errorMsg = "All metric values are the same";

@@ -70,7 +70,7 @@ bool HierarchicalClustering::split(DoubleProperty *metric, list<node> &orderedNo
 bool HierarchicalClustering::run() {
 
   string tmp1, tmp2;
-  DoubleProperty *metric = graph->getProperty<DoubleProperty>("viewMetric");
+  DoubleProperty *metric = graph->getDoubleProperty("viewMetric");
   tmp1 = "Hierar Sup";
   tmp2 = "Hierar Inf";
   bool result = false;

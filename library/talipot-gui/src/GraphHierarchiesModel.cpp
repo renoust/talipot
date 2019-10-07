@@ -115,7 +115,7 @@ static void writeTextureFilesInProject(const QList<tlp::Graph *> &graphs, tlp::P
 
   for (auto g : graphs) {
     // Process the viewTexture default node value
-    StringProperty *viewTexture = g->getProperty<StringProperty>("viewTexture");
+    StringProperty *viewTexture = g->getStringProperty("viewTexture");
     copyTextureFileInProject(tlpStringToQString(viewTexture->getNodeDefaultValue()), project,
                              projectTexturesFolders, projectTexturesFiles);
 
@@ -163,7 +163,7 @@ static void restoreTextureFilesFromProjectIfNeeded(tlp::Graph *g, tlp::Project *
   // filename> .
   QCryptographicHash hasher(QCryptographicHash::Md5);
 
-  StringProperty *viewTexture = g->getProperty<StringProperty>("viewTexture");
+  StringProperty *viewTexture = g->getStringProperty("viewTexture");
 
   // Process the nodes first
 

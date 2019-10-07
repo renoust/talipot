@@ -210,7 +210,7 @@ bool CsvExport::exportGraph(std::ostream &os) {
   os << endl;
 
   // export nodes
-  BooleanProperty *prop = graph->getProperty<BooleanProperty>("viewSelection");
+  BooleanProperty *prop = graph->getBooleanProperty("viewSelection");
 
   if (exportSelection && dataSet != nullptr) {
     dataSet->get("Export selection property", prop);

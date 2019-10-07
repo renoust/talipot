@@ -156,18 +156,18 @@ public:
 
     if (clustersLayout) {
       for (auto cluster : graph->subGraphs()) {
-        SizeProperty *viewSize = cluster->getProperty<SizeProperty>("viewSize");
+        SizeProperty *viewSize = cluster->getSizeProperty("viewSize");
         Size minSize = viewSize->getMin(cluster);
         Size maxSize = viewSize->getMax(cluster);
         layoutParams.set("Unit edge length", std::max(maxSize[0], maxSize[1]) * 5.0);
         cluster->applyPropertyAlgorithm(layoutName,
-                                        cluster->getLocalProperty<LayoutProperty>("viewLayout"),
+                                        cluster->getLocalLayoutProperty("viewLayout"),
                                         errMsg, &layoutParams);
         double border = std::min(minSize[0], minSize[1]);
         layoutParams.set("x border", border);
         layoutParams.set("y border", border);
         cluster->applyPropertyAlgorithm("Fast Overlap Removal",
-                                        cluster->getLocalProperty<LayoutProperty>("viewLayout"),
+                                        cluster->getLocalLayoutProperty("viewLayout"),
                                         errMsg, &layoutParams);
       }
     }
@@ -195,7 +195,7 @@ public:
     EdgeCardinalityCalculator cardCalc;
 
     if (edgeCardinality) {
-      cardProp = quotientGraph->getLocalProperty<IntegerProperty>("edgeCardinality");
+      cardProp = quotientGraph->getLocalIntegerProperty("edgeCardinality");
       cardProp->setMetaValueCalculator(&cardCalc);
     }
 
@@ -230,7 +230,7 @@ public:
     graph->createMetaNodes(itS, quotientGraph, mNodes);
     delete itS;
 
-    IntegerProperty *viewShape = graph->getProperty<IntegerProperty>("viewShape");
+    IntegerProperty *viewShape = graph->getIntegerProperty("viewShape");
 
     for (size_t i = 0; i < mNodes.size(); ++i) {
       viewShape->setNodeValue(mNodes[i], NodeShape::Square);
@@ -249,7 +249,7 @@ public:
       ++itC;
     }
 
-    GraphProperty *metaInfo = graph->getRoot()->getProperty<GraphProperty>("viewMetaGraph");
+    GraphProperty *metaInfo = graph->getRoot()->getGraphProperty("viewMetaGraph");
 
     // orientation
     if (!oriented) {
@@ -265,7 +265,7 @@ public:
         }
       }
       set<edge> edgesToDel;
-      DoubleProperty *viewMetric = quotientGraph->getProperty<DoubleProperty>("viewMetric");
+      DoubleProperty *viewMetric = quotientGraph->getDoubleProperty("viewMetric");
 
       for (auto mE : quotientGraph->edges()) {
         edge op(opProp->getEdgeValue(mE));
@@ -283,7 +283,7 @@ public:
               if (dynamic_cast<DoubleProperty *>(property) &&
                   // try to avoid view... properties
                   (pName.compare(0, 4, "view") != 0 || pName == "viewMetric")) {
-                DoubleProperty *metric = graph->getProperty<DoubleProperty>(pName);
+                DoubleProperty *metric = graph->getDoubleProperty(pName);
                 double value = metric->getEdgeValue(mE);
 
                 switch (edgeFn) {
@@ -364,18 +364,18 @@ public:
 
     // layouting if needed
     if (quotientLayout) {
-      SizeProperty *viewSize = quotientGraph->getProperty<SizeProperty>("viewSize");
+      SizeProperty *viewSize = quotientGraph->getSizeProperty("viewSize");
       Size minSize = viewSize->getMin(quotientGraph);
       Size maxSize = viewSize->getMax(quotientGraph);
       layoutParams.set("Unit edge length", std::max(maxSize[0], maxSize[1]) * 2.0);
       quotientGraph->applyPropertyAlgorithm(
-          layoutName, quotientGraph->getLocalProperty<LayoutProperty>("viewLayout"), errMsg,
+          layoutName, quotientGraph->getLocalLayoutProperty("viewLayout"), errMsg,
           &layoutParams);
       double border = std::min(minSize[0], minSize[1]);
       layoutParams.set("x border", border);
       layoutParams.set("y border", border);
       quotientGraph->applyPropertyAlgorithm(
-          "Fast Overlap Removal", quotientGraph->getLocalProperty<LayoutProperty>("viewLayout"),
+          "Fast Overlap Removal", quotientGraph->getLocalLayoutProperty("viewLayout"),
           errMsg, &layoutParams);
     }
 

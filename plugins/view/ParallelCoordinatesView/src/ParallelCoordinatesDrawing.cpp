@@ -53,12 +53,12 @@ ParallelCoordinatesDrawing::ParallelCoordinatesDrawing(ParallelCoordinatesGraphP
       drawPointsOnAxis(true), graphProxy(graph), backgroundColor(Color(255, 255, 255)),
       createAxisFlag(true), axisPointsGraph(axisPointsGraph), layoutType(PARALLEL),
       linesType(STRAIGHT), linesThickness(THICK), resetAxisLayout(false) {
-  axisPointsGraphLayout = axisPointsGraph->getProperty<LayoutProperty>("viewLayout");
-  axisPointsGraphSize = axisPointsGraph->getProperty<SizeProperty>("viewSize");
-  axisPointsGraphShape = axisPointsGraph->getProperty<IntegerProperty>("viewShape");
-  axisPointsGraphLabels = axisPointsGraph->getProperty<StringProperty>("viewLabel");
-  axisPointsGraphColors = axisPointsGraph->getProperty<ColorProperty>("viewColor");
-  axisPointsGraphSelection = axisPointsGraph->getProperty<BooleanProperty>("viewSelection");
+  axisPointsGraphLayout = axisPointsGraph->getLayoutProperty("viewLayout");
+  axisPointsGraphSize = axisPointsGraph->getSizeProperty("viewSize");
+  axisPointsGraphShape = axisPointsGraph->getIntegerProperty("viewShape");
+  axisPointsGraphLabels = axisPointsGraph->getStringProperty("viewLabel");
+  axisPointsGraphColors = axisPointsGraph->getColorProperty("viewColor");
+  axisPointsGraphSelection = axisPointsGraph->getBooleanProperty("viewSelection");
 
   dataPlotComposite = new GlComposite();
   axisPlotComposite = new GlComposite();
@@ -286,7 +286,7 @@ void ParallelCoordinatesDrawing::plotAllData(GlMainWidget *glWidget, GlProgressB
 
 void ParallelCoordinatesDrawing::plotData(const unsigned int dataId, const Color &color) {
 
-  Size eltMinSize(graphProxy->getProperty<SizeProperty>("viewSize")->getMin());
+  Size eltMinSize(graphProxy->getSizeProperty("viewSize")->getMin());
   Size dataViewSize(graphProxy->getDataViewSize(dataId));
   Size adjustedViewSize(axisPointMinSize + resizeFactor * (dataViewSize - eltMinSize));
   float pointRadius =
@@ -584,8 +584,8 @@ const vector<string> &ParallelCoordinatesDrawing::getAxisNames() const {
 }
 
 void ParallelCoordinatesDrawing::computeResizeFactor() {
-  Size eltMinSize(graphProxy->getProperty<SizeProperty>("viewSize")->getMin());
-  Size eltMaxSize(graphProxy->getProperty<SizeProperty>("viewSize")->getMax());
+  Size eltMinSize(graphProxy->getSizeProperty("viewSize")->getMin());
+  Size eltMaxSize(graphProxy->getSizeProperty("viewSize")->getMax());
 
   Size deltaSize(eltMaxSize - eltMinSize);
 
