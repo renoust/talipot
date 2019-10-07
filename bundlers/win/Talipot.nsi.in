@@ -61,15 +61,15 @@ RequestExecutionLevel admin
 !ifndef OUT_FILE
 !if ${CHECK_PYTHON} == "ON"
 !if ${ARCH} == "64"
-!define OUT_FILE "talipot-@TalipotVersion@_x64_python@PYTHON_VERSION_NO_DOT@_setup.exe"
+!define OUT_FILE "talipot-@TalipotVersion@_x64_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !else
-!define OUT_FILE "talipot-@TalipotVersion@_python@PYTHON_VERSION_NO_DOT@_setup.exe"
+!define OUT_FILE "talipot-@TalipotVersion@_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !endif
 !else
 !if ${ARCH} == "64"
-!define OUT_FILE "talipot-@TalipotVersion@_x64_no_python_setup.exe"
+!define OUT_FILE "talipot-@TalipotVersion@_x64_no_python@SUFFIX@_setup.exe"
 !else
-!define OUT_FILE "talipot-@TalipotVersion@_no_python_setup.exe"
+!define OUT_FILE "talipot-@TalipotVersion@_no_python@SUFFIX@_setup.exe"
 !endif
 !endif
 !endif

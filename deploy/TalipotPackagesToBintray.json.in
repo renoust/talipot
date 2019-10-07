@@ -2,7 +2,7 @@
     "package": {
         "name": "Talipot",
         "repo": "talipot_binaries",
-        "subject": "talipot-dev",
+        "subject": "anlambert",
         "desc": "Large graphs analysis, drawing and visualization framework",
         "website_url": "http://github.com/anlambert/talipot",
         "issue_tracker_url": "https://github.com/anlambert/talipot/issues",

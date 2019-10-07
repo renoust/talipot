@@ -80,15 +80,28 @@ build_script:
 
 # get the Talipot version for deployment
 after_build:
-  - ps: "$env:TALIPOT_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/talipot-core/include/talipot/Release.h') | %{ if ($_ -match '^#   define TALIPOT_VERSION.*$') { $_; } }) -replace '#   define TALIPOT_VERSION ', '') -replace '\"', '')"
+  - ps: "$env:TALIPOT_VERSION = (((Get-Content ($env:APPVEYOR_BUILD_FOLDER + '/build/library/talipot-core/include/talipot/Release.h') | %{ if ($_ -match '^#   define TALIPOT_VERSION.*$') { $_; } }) -replace '#   define TALIPOT_VERSION ', '') -replace '\"', '' -replace '_', '.')"
 
 # set generated installers as artifacts to deploy
 artifacts:
   - path: build\*.exe
     name: talipot_installers
 
-# no deployment
-deploy: off
+# deploy Talipot installers on bintray
+deploy:
+  - provider: BinTray
+    on:
+      branch: talipot-deploy-installers
+    username: anlambert
+    api_key:
+      secure: uL6yGLvWIQkeqyYKFzshycul9WpaBj5P4SYUvtAnlcpxaDhL3Ek+sxm+XRYFfH7n
+    subject: anlambert
+    repo: talipot_binaries
+    package: Talipot
+    version: $(TALIPOT_VERSION)
+    publish: true
+    override: true
+    artifact: talipot_installers
 
 notifications:
   - provider: Email

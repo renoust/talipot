@@ -21,7 +21,7 @@ if EXIST "%DEST_DIR%\\files" (
 ) else ( mkdir "%DEST_DIR%\\files" )
 
 echo 'Copying Talipot files'
-xcopy "%TALIPOT_DIR%" "%DEST_DIR%\\files" /E /Q
+xcopy %TALIPOT_DIR% "%DEST_DIR%\\files" /E /Q
 
 if NOT "%DEBUG_MODE%" == "TRUE" (
 echo 'Removing debug libs'
