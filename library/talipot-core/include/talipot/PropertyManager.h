@@ -59,7 +59,7 @@ public:
 protected:
   void setInheritedProperty(const std::string &, PropertyInterface *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PROPERTY_MANAGER_H
 

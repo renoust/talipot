@@ -73,5 +73,5 @@ public:
       : graph(graph), dataSet(dataSet), pluginProgress(progress) {}
   ~AlgorithmContext() override {}
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PLUGIN_CONTEXT_H

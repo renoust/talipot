@@ -47,5 +47,5 @@ public:
 signals:
   void updateNeighborhoodGraph();
 };
-} // namespace tlp
+}
 #endif // NEIGHBORHOOD_HIGHLIGHTER_CONFIG_WIDGET_H

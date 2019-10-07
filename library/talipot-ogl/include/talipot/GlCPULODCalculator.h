@@ -118,7 +118,7 @@ protected:
 
   LayerLODUnit *currentLayerLODUnit;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_CPU_LOD_CALCULATOR_H
 ///@endcond

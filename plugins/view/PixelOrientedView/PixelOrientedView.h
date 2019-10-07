@@ -182,5 +182,5 @@ private:
   bool center;
   bool isConstruct;
 };
-} // namespace tlp
+}
 #endif // PIXEL_ORIENTED_VIEW_H

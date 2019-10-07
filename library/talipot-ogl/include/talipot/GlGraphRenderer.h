@@ -96,6 +96,6 @@ protected:
   std::unordered_map<unsigned int, SelectedEntity> *selectionIdMap;
   unsigned int *selectionCurrentId;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_RENDERER_H

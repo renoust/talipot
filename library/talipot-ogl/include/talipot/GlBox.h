@@ -155,5 +155,5 @@ protected:
   bool generated;
   GLuint buffers[5];
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_BOX_H

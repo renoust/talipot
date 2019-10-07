@@ -67,5 +67,5 @@ protected:
 
   std::string genCurveVertexShaderSpecificCode();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_BEZIER_CURVE_H

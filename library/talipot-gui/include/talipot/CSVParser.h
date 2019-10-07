@@ -162,6 +162,6 @@ private:
   std::vector<std::vector<std::string>> columns;
   unsigned int maxLineSize;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_PARSER_H
 ///@endcond

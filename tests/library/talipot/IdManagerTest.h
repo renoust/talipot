@@ -45,5 +45,5 @@ public:
 private:
   IdManager *idManager;
 };
-} // namespace tlp
+}
 #endif // ID_MANAGER_TEST_H

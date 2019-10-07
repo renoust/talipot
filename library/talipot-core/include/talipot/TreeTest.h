@@ -95,5 +95,5 @@ public:
 private:
   static bool isFreeTree(const Graph *graph, node curRoot);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_TREE_TEST_H

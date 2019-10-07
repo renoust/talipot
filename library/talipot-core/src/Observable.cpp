@@ -638,4 +638,4 @@ unsigned int Observable::countObservers() const {
   }
   return count;
 }
-} // namespace tlp
+}

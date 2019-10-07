@@ -540,6 +540,6 @@ private:
 
 ///@endcond
 
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_RENDERING_PARAMETERS_H

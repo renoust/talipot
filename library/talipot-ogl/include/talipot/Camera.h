@@ -309,6 +309,6 @@ private:
 
   bool d3;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_CAMERA_H

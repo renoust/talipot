@@ -38,6 +38,6 @@ public:
 
   void construct() override;
 };
-} // namespace tlp
+}
 
 #endif // PIXEL_ORIENTED_INTERACTORS_H

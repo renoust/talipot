@@ -119,5 +119,5 @@ typename std::enable_if<has_const_iterator<Container>::value,
   return new MPFilterIterator<typename Container::value_type, FILTER>(stlIterator(stlContainer),
                                                                       filter);
 }
-} // namespace tlp
+}
 #endif // TALIPOT_FILTER_ITERATOR_H

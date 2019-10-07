@@ -93,6 +93,6 @@ public:
 private:
   tlp::WorkspacePanel *_panel;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MIMES_H
 ///@endcond

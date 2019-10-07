@@ -132,7 +132,7 @@ protected:
   float zoomAreaWidth, zoomAreaHeight;
   bool doZoomAndPan;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SCENE_ZOOM_AND_PAN_H
 

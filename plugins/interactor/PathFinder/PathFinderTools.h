@@ -42,5 +42,5 @@ bool getNodeEnclosingCircle(Circlef &circle, GlGraphInputData *inputData, node n
  * @return true if the circle has been successfully computed.
  */
 bool getEdgeEnclosingCircle(Circlef &circle, GlGraphInputData *inputData, edge n);
-} // namespace tlp
+}
 #endif // PATH_FINDER_TOOLS_H

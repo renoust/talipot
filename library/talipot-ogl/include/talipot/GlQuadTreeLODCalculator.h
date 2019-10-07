@@ -133,7 +133,7 @@ protected:
   int quadTreesVectorPosition;
   int simpleEntitiesVectorPosition;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_QUAD_TREE_LOD_CALCULATOR_H
 ///@endcond

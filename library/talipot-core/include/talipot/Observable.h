@@ -548,6 +548,6 @@ public:
     Observable::unholdObservers();
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_OBSERVABLE_H

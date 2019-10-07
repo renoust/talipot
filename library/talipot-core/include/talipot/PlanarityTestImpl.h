@@ -223,7 +223,7 @@ private:
   MutableContainer<bool> hasBackEdge;
   unsigned int numberOfNodesInG;
 };
-} // namespace tlp
+}
 
 // std::ostream& operator <<(std::ostream &os , node n);
 // std::ostream& operator <<(std::ostream &os , edge e);

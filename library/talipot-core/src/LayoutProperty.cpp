@@ -158,7 +158,7 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
       (minMaxNode.find(graph->getId()) == minMaxNode.end()))
     graph->addListener(this);
 }
-} // namespace tlp
+}
 
 inline double sqr(double x) {
   return (x * x);

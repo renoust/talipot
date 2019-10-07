@@ -92,7 +92,7 @@ public:
     return _dependencies;
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_WITH_DEPENDENCY_H
 
 ///@endcond

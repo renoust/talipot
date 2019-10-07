@@ -2229,7 +2229,7 @@ protected:
     std::vector<edge> *addedEdges;
   } vectInfos;
 };
-} // namespace tlp
+}
 
 /// Print the graph (only nodes and edges) in ostream, in the TLP format
 TLP_SCOPE std::ostream &operator<<(std::ostream &, const tlp::Graph *);

@@ -1054,4 +1054,4 @@ void AbstractGlCurve::translate(const Coord &move) {
 void AbstractGlCurve::getXML(string &) {}
 
 void AbstractGlCurve::setWithXML(const string &, unsigned int &) {}
-} // namespace tlp
+}

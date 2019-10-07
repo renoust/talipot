@@ -65,6 +65,6 @@ protected:
   GlMainWidget *glWidget;
   double animationDurationMsec;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_QT_GL_SCENE_ZOOM_AND_PAN_ANIMATOR_H

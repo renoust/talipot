@@ -123,6 +123,6 @@ private:
   std::vector<unsigned short> indices;
   unsigned int verticesCount;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SPHERE_H

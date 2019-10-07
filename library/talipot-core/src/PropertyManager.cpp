@@ -55,7 +55,7 @@ public:
   }
   PropertiesIterator itProp;
 };
-} // namespace tlp
+}
 
 using namespace std;
 using namespace tlp;

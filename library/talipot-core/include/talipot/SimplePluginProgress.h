@@ -53,6 +53,6 @@ private:
   bool _preview;
   std::string _error;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_SIMPLE_PLUGIN_PROGRESS_H
 ///@endcond

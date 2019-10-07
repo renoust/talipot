@@ -24,7 +24,7 @@ class QAbstractButton;
 namespace tlp {
 class GraphHierarchiesModel;
 class Graph;
-} // namespace tlp
+}
 
 namespace Ui {
 class GraphHierarchiesEditorData;

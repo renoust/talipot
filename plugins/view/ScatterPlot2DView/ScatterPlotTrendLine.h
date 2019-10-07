@@ -35,6 +35,6 @@ private:
   ScatterPlot2DView *scatterView;
   float a, b;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT_TREND_LINE_H

@@ -73,6 +73,6 @@ private:
   unsigned nbKnots;
   float stepKnots;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_OPEN_UNIFORM_CUBIC_B_SPLINE_H

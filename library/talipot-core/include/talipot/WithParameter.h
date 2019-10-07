@@ -367,7 +367,7 @@ protected:
    **/
   ParameterDescriptionList parameters;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_WITH_PARAMETER_H
 
 ///@endcond

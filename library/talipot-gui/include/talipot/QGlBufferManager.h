@@ -48,7 +48,7 @@ private:
   static std::unordered_map<QOpenGLFramebufferObject *, std::pair<int, int>>
       framebufferToWidthHeight;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_QGL_BUFFER_MANAGER_H
 ///@endcond

@@ -40,6 +40,6 @@ public:
   unsigned int priority() const override;
 
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_NODE_LINK_DIAGRAM_COMPONENT_INTERACTOR_H

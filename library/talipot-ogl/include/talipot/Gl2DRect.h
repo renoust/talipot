@@ -103,5 +103,5 @@ protected:
   bool xInv;
   bool yInv;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_2D_RECT_H

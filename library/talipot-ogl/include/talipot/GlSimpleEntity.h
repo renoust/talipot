@@ -168,6 +168,6 @@ protected:
 
   std::vector<GlComposite *> parents;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SIMPLE_ENTITY_H

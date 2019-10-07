@@ -819,4 +819,4 @@ void GlEdge::displayArrowAndAdjustAnchor(const GlGraphInputData *data, const edg
     lineAnchor = srcAnchor;
   }
 }
-} // namespace tlp
+}

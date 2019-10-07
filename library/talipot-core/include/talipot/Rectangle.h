@@ -218,6 +218,6 @@ typedef Rectangle<double, long double> Rectd;
 typedef Rectangle<float, double> Rectf;
 typedef Rectangle<int, double> Recti;
 typedef Rectangle<unsigned int, double> Rectui;
-} // namespace tlp
+}
 #endif // TALIPOT_RECTANGLE_H
 ///@endcond

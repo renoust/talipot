@@ -86,6 +86,6 @@ public:
    **/
   static bool acyclicTest(const Graph *graph, std::vector<edge> *obstructionEdges = nullptr);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_ACYCLIC_TEST_H

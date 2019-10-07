@@ -503,7 +503,7 @@ struct TLPParser {
     return true;
   }
 };
-} // namespace tlp
+}
 //=====================================================================================
 #endif // TALIPOT_TLP_PARSER_H
 

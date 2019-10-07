@@ -143,7 +143,7 @@ protected:
   bool hasHulls() const;
   void editValue(PropertyInterface *pi);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_NODE_LINK_DIAGRAM_COMPONENT_H
 

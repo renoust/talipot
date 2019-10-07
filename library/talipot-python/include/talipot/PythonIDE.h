@@ -153,6 +153,6 @@ private slots:
 
   tlp::Graph *getSelectedGraph() const;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_IDE_H

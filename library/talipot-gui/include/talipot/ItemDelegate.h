@@ -67,7 +67,7 @@ public:
 protected slots:
   void comboDataChanged();
 };
-} // namespace tlp
+}
 
 #include "cxx/ItemDelegate.cxx"
 

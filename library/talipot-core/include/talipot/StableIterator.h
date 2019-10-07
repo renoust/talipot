@@ -144,5 +144,5 @@ typename std::enable_if<has_const_iterator<Container>::value,
                             *>::type inline stableIterator(const Container &stlContainer) {
   return new StableIterator<typename Container::value_type>(stlIterator(stlContainer));
 }
-} // namespace tlp
+}
 #endif // TALIPOT_STABLE_ITERATOR_H

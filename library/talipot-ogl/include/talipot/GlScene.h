@@ -573,6 +573,6 @@ public:
 
   ///@endcond
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SCENE_H

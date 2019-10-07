@@ -524,4 +524,4 @@ void ColorScaleConfigDialog::applyGlobalAlphaToColorScale() {
     displayUserGradientPreview();
   }
 }
-} // namespace tlp
+}

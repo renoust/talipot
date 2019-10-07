@@ -116,7 +116,7 @@ public slots:
 private:
   tlp::SimplePluginProgressWidget *_progress;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SIMPLE_PLUGIN_PROGRESS_WIDGET_H
 ///@endcond

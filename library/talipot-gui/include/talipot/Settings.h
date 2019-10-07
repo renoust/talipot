@@ -185,6 +185,6 @@ private:
 
   void setFavoriteAlgorithms(const QSet<QString> &lst);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_SETTINGS_H
 ///@endcond

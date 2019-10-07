@@ -191,4 +191,4 @@ void GlLayer::glGraphCompositeRemoved(GlGraphComposite *composite) {
   assert(scene);
   scene->glGraphCompositeRemoved(this, composite);
 }
-} // namespace tlp
+}

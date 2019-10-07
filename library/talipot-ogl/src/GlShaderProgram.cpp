@@ -881,4 +881,4 @@ void GlShaderProgram::getUniformVec4BoolVariableValue(const std::string &variabl
 void GlShaderProgram::setMaxGeometryShaderOutputVertices(const int maxOutputVertices) {
   maxGeometryShaderOutputVertices = maxOutputVertices;
 }
-} // namespace tlp
+}

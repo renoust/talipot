@@ -193,7 +193,7 @@ private:
   void unobserveUpdates();
   void delPreviousRecorders();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_IMPL_H
 
 ///@endcond

@@ -191,6 +191,6 @@ private:
 
   static unsigned int planisphereTextureId;
 };
-} // namespace tlp
+}
 
 #endif // GEOGRAPHIC_VIEW_GRAPHICS_VIEW_H

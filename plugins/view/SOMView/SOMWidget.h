@@ -30,6 +30,6 @@ public:
   SOMWidget(QWidget *parent = nullptr);
   ~SOMWidget() override;
 };
-} // namespace tlp
+}
 
 #endif // SOM_WIDGET_H

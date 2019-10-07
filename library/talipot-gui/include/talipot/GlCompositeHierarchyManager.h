@@ -98,7 +98,7 @@ public:
 private:
   GlCompositeHierarchyManager *_manager;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_COMPOSITE_HIERARCHY_MANAGER_H
 ///@endcond

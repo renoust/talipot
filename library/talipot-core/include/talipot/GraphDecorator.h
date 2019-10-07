@@ -185,7 +185,7 @@ PropertyType *GraphDecorator::getProperty(const std::string &name) {
     return graph_component->getLocalProperty<PropertyType>(name);
   }
 }
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_DECORATOR_H
 ///@endcond

@@ -127,7 +127,7 @@ private:
   void mMouseDelete();
   void mMouseCreate(int, int, GlMainWidget *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_MOUSE_EDGE_BEND_EDITOR_H
 ///@endcond

@@ -100,5 +100,5 @@ private:
 
   Color backgroundColor, textColor;
 };
-} // namespace tlp
+}
 #endif // PIXEL_ORIENTED_OVERVIEW_H

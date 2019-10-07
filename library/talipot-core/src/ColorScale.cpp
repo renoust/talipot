@@ -219,4 +219,4 @@ bool ColorScale::hasRegularStops() const {
 
   return true;
 }
-} // namespace tlp
+}

@@ -243,6 +243,6 @@ private:
   NodeProperty(typename VectorGraphProperty<TYPE>::ValuesImpl *values, VectorGraph *graph)
       : VectorGraphProperty<TYPE>(values, graph) {}
 };
-} // namespace tlp
+}
 #endif // TALIPOT_VECTOR_GRAPH_PROPERTY_H
 ///@endcond

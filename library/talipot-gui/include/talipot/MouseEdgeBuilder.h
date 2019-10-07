@@ -76,6 +76,6 @@ public:
 
   void clear() override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MOUSE_EDGE_BUILDER_H
 ///@endcond

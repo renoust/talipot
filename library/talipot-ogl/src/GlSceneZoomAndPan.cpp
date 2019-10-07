@@ -152,4 +152,4 @@ void GlSceneZoomAndPan::zoomAndPanAnimationStep(int animationStep) {
     additionalAnimation->animationStep(animationStep);
   }
 }
-} // namespace tlp
+}

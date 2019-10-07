@@ -63,6 +63,6 @@ private:
   BooleanProperty *viewSelection;
   bool dragStarted;
 };
-} // namespace tlp
+}
 
 #endif // MOUSE_LASSO_NODES_SELECTOR_H

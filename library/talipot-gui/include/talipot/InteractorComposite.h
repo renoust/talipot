@@ -166,5 +166,5 @@ public slots:
   void install(QObject *target) override;
   void uninstall() override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_INTERACTOR_COMPOSITE_H

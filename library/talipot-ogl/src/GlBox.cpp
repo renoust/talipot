@@ -417,4 +417,4 @@ Coord GlBox::getAnchor(const Coord &vector) {
     return vector;
 }
 
-} // namespace tlp
+}

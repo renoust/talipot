@@ -168,7 +168,7 @@ private:
                                    EdgeExtremityGlyph *srcEdgeGlyph = nullptr,
                                    Camera *camera = nullptr);
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

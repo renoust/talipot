@@ -32,7 +32,7 @@ namespace tlp {
 extern QString getSipVersion();
 #endif
 extern QString getTalipotGitRevision();
-} // namespace tlp
+}
 
 const QString TalipotRepoUrl = "https://github.com/anlambert/talipot";
 

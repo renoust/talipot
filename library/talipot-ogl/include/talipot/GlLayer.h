@@ -245,6 +245,6 @@ private:
 
   friend class GlScene;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_LAYER_H

@@ -75,5 +75,5 @@ private:
 
   EnclosingCircleConfigurationWidget *configurationWidget;
 };
-} // namespace tlp
+}
 #endif // ENCLOSING_CIRCLE_HIGHLIGHTER_H

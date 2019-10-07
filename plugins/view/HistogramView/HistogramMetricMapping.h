@@ -260,6 +260,6 @@ protected:
 
   std::map<MappingType, std::vector<Coord>> curveShapeForMapping;
 };
-} // namespace tlp
+}
 
 #endif // HISTOGRAM_METRIC_MAPPING_H

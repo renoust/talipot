@@ -184,4 +184,4 @@ std::string FontAwesome::getIconUtf8String(const std::string &iconName) {
   utf8::append(iconCodePoint[iconName.c_str()], back_inserter(iconString));
   return iconString;
 }
-} // namespace tlp
+}

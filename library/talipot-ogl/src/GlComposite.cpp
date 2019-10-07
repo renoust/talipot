@@ -301,4 +301,4 @@ void GlComposite::setWithXML(const string &inString, unsigned int &currentPositi
 
   GlXMLTools::leaveChildNode(inString, currentPosition, "children");
 }
-} // namespace tlp
+}

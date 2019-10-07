@@ -885,7 +885,7 @@ struct TLPDefaultPropertyBuilder : public TLPFalse {
   }
 };
 
-} // namespace tlp
+}
 //=================================================================================
 bool TLPPropertyBuilder::addStruct(const std::string &structName, TLPBuilder *&newBuilder) {
   if (structName == DEFAULTVALUE) {
@@ -1059,4 +1059,4 @@ public:
   }
 };
 PLUGIN(TLPImport)
-} // namespace tlp
+}

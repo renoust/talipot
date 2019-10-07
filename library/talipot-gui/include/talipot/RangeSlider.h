@@ -114,6 +114,6 @@ public slots:
   void updateRange(int min, int max);
   void movePressedHandle();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_RANGE_SLIDER_H

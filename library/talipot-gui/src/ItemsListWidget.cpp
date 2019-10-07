@@ -115,4 +115,4 @@ void ItemsListWidget::changeStatus(QListWidgetItem *item) {
   hashDataBase.remove(item->text());
   hashDataBase.insert(item->text(), temp);
 }
-} // namespace tlp
+}

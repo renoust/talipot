@@ -80,7 +80,7 @@ private:
   QGraphicsSimpleTextItem *_nodesEdgesTextItem;
   QPushButton *_confPropertySelectionWidget;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_CAPTION_GRAPHICS_ITEM_H
 ///@endcond

@@ -368,6 +368,6 @@ public:
     }                                                                                              \
   };                                                                                               \
   PLUGIN(CLASS_NAME)
-} // namespace tlp
+}
 
 #endif // TALIPOT_INTERACTOR_H

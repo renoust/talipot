@@ -77,5 +77,5 @@ struct TLP_SCOPE PluginLoader {
    */
   virtual void finished(bool state, const std::string &msg) = 0;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PLUGIN_LOADER_H

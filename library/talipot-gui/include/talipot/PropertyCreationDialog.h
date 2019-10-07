@@ -104,7 +104,7 @@ private:
   Graph *_graph;
   PropertyInterface *_createdProperty;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PROPERTY_CREATION_DIALOG_H
 ///@endcond

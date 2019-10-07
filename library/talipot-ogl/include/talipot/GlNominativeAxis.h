@@ -90,7 +90,7 @@ private:
   std::map<std::string, Coord> labelsCoord;
   LabelPosition axisLabelsPosition;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_NOMINATIVE_AXIS_H
 ///@endcond

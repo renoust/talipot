@@ -88,7 +88,7 @@ public:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PluginManager::PluginLocations)
-} // namespace tlp
+}
 
 #endif // TALIPOT_PLUGIN_MANAGER_H
 ///@endcond

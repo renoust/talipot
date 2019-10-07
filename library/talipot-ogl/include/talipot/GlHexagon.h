@@ -35,5 +35,5 @@ public:
    */
   ~GlHexagon() override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_HEXAGON_H

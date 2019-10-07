@@ -75,6 +75,6 @@ private:
 signals:
   void parserChanged();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_PARSER_CONFIGURATION_WIDGET_H
 ///@endcond

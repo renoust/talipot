@@ -144,6 +144,6 @@ private:
   unsigned char startAlpha, endAlpha;
   int nbAnimSteps;
 };
-} // namespace tlp
+}
 
 #endif // NEIGHBORHOOD_HIGHLIGHTER_INTERACTOR_H

@@ -42,6 +42,6 @@ private:
   HistogramView *histoView;
   Histogram *selectedHistoOverview;
 };
-} // namespace tlp
+}
 
 #endif // HISTOGRAM_VIEW_NAVIGATOR_H

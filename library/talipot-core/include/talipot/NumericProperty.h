@@ -158,6 +158,6 @@ public:
   virtual Iterator<edge> *getSortedEdgesByExtremitiesValues(const Graph *sg = nullptr,
                                                             bool ascendingOrder = true);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_NUMERIC_PROPERTY_H

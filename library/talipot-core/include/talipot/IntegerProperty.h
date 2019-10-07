@@ -121,6 +121,6 @@ public:
     return propertyTypename;
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_INTEGER_PROPERTY_H
 ///@endcond

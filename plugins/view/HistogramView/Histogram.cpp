@@ -744,4 +744,4 @@ void Histogram::setSizesUpdateNeeded() {
 void Histogram::setUpdateNeeded() {
   updateNeeded = true;
 }
-} // namespace tlp
+}

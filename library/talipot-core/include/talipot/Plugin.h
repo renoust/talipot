@@ -246,7 +246,7 @@ protected:
   std::string group() const override {                                                             \
     return GROUP;                                                                                  \
   }
-} // namespace tlp
+}
 
 // This include is here because the PluginsManager needs to know the Plugin type, and the PLUGIN macro
 // needs to know the PluginsManager.
@@ -292,6 +292,6 @@ PLUGIN(MyPlugin) // Register MyPlugin into Talipot
   extern "C" {                                                                                     \
   C##Factory C##FactoryInitializer;                                                                \
   }
-} // namespace tlp
+}
 
 #endif // TALIPOT_PLUGIN_H

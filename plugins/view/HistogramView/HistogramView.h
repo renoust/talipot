@@ -202,6 +202,6 @@ private:
   std::unordered_map<edge, node> edgeToNode;
   std::unordered_map<node, edge> nodeToEdge;
 };
-} // namespace tlp
+}
 
 #endif // HISTOGRAM_VIEW_H

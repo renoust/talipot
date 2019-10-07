@@ -139,7 +139,7 @@ private:
   void notifyBeforeRenameLocalProperty(PropertyInterface *prop, const std::string &newName);
   void notifyAfterRenameLocalProperty(PropertyInterface *prop, const std::string &oldName);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_ABSTRACT_H
 
 ///@endcond

@@ -124,6 +124,6 @@ protected:
 
   QPixmap snapshot(const QSize &outputSize = QSize()) const override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_VIEW_WIDGET_H

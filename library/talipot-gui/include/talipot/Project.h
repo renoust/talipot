@@ -386,7 +386,7 @@ private:
   QString _description;
   QString _perspective;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PROJECT_H
 
 ///@endcond

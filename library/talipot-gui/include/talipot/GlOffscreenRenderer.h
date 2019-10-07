@@ -136,7 +136,7 @@ private:
   Coord cameraCenter;
   bool antialiasedFbo;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_OFFSCREEN_RENDERER_H
 ///@endcond

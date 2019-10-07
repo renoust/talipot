@@ -149,4 +149,4 @@ bool GlRect::inRect(double x, double y) {
 void GlRect::draw(float lod, Camera *camera) {
   GlPolygon::draw(lod, camera);
 }
-} // namespace tlp
+}

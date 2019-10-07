@@ -147,7 +147,7 @@ public slots:
   void selectFont();
   void setNodeLabelPosition();
 };
-} // namespace tlp
+}
 Q_DECLARE_OPERATORS_FOR_FLAGS(tlp::QuickAccessBarImpl::QuickAccessButtons)
 #endif // TALIPOT_QUICK_ACCESS_BAR_H
 ///@endcond

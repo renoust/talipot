@@ -68,5 +68,5 @@ protected:
   double maxValue;
   bool colorScaleAtTop;
 };
-} // namespace tlp
+}
 #endif // GL_LABELLED_COLOR_SCALE_H

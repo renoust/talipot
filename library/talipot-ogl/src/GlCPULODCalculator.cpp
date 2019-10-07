@@ -164,4 +164,4 @@ void GlCPULODCalculator::computeFor2DCamera(LayerLODUnit *layerLODUnit,
     it->lod = calculate2DLod(it->boundingBox, globalViewport, currentViewport);
   }
 }
-} // namespace tlp
+}

@@ -241,7 +241,7 @@ private:
   std::vector<TYPE> entities;
   tlp::Rectangle<float> _box;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_QUAD_TREE_H
 

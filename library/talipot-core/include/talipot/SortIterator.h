@@ -254,5 +254,5 @@ typename std::enable_if<has_const_iterator<Container>::value,
   return new SortIterator<typename Container::value_type, CompareFunction>(
       stlIterator(stlContainer), compFunc);
 }
-} // namespace tlp
+}
 #endif // TALIPOT_SORT_ITERATOR_H

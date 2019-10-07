@@ -50,7 +50,7 @@ public:
 signals:
   void drawNeeded(tlp::GlScene *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SCENE_LAYERS_MODEL_H
 ///@endcond

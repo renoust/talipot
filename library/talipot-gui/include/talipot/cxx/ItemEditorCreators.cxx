@@ -307,4 +307,4 @@ QString VectorEditorCreator<ElementType>::displayText(const QVariant &data) cons
 
   return QString::number(v.size()) + QObject::tr(" elements");
 }
-} // namespace tlp
+}

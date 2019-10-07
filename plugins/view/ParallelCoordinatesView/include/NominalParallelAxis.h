@@ -65,7 +65,7 @@ private:
   ParallelCoordinatesGraphProxy *graphProxy;
   std::vector<std::string> labelsOrder;
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

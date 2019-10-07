@@ -69,5 +69,5 @@ public:
 
   void construct() override;
 };
-} // namespace tlp
+}
 #endif // SOM_VIEW_INTERACTOR_H

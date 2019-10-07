@@ -394,4 +394,4 @@ bool GraphEdgeIterator::hasNext() {
   return itId->hasNext();
 }
 //===================================================================
-} // namespace tlp
+}

@@ -21,7 +21,7 @@
 namespace tlp {
 class Graph;
 class DoubleProperty;
-} // namespace tlp
+}
 
 class IteratorTest : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(IteratorTest);

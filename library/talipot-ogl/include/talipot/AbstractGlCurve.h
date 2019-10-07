@@ -149,7 +149,7 @@ protected:
   float curveQuadBordersWidth;
   bool outlineColorInterpolation;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_ABSTRACT_GL_CURVE_H
 

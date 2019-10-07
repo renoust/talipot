@@ -183,5 +183,5 @@ TLP_SCOPE bool inGuiTestingMode();
 
 TLP_SCOPE void setGuiTestingMode(bool);
 ///@endcond
-} // namespace tlp
+}
 #endif // TALIPOT_TLP_TOOLS_H

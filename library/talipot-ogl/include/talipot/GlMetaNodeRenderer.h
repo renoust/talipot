@@ -56,7 +56,7 @@ private:
   GlGraphInputData *_inputData;
   std::unordered_map<Graph *, GlScene *> _metaGraphToSceneMap;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_META_NODE_RENDERER_H
 ///@endcond

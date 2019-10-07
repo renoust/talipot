@@ -108,7 +108,7 @@ private:
   std::vector<std::string> propertiesTypes;
   bool includeViewProperties;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_PROPERTIES_SELECTION_WIDGET_H
 ///@endcond

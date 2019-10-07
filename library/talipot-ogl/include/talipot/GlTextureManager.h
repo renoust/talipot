@@ -159,7 +159,7 @@ private:
 
   static unsigned int animationFrame;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_TEXTURE_MANAGER_H
 ///@endcond

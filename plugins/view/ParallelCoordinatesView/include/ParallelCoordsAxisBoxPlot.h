@@ -78,6 +78,6 @@ private:
   ParallelAxis *selectedAxis;
   unsigned int lastNbAxis;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDS_AXIS_BOX_PLOT_H

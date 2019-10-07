@@ -50,6 +50,6 @@ public:
    */
   void getXML(std::string &outString) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_CIRCLE_H

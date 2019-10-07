@@ -100,5 +100,5 @@ public:
    */
   DataSet *dataSet;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_ALGORITHM_H

@@ -115,7 +115,7 @@ private:
   static std::string _pluginPath;
   static std::string _currentPluginLibrary;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PLUGIN_LIBRARY_LOADER_H
 

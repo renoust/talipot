@@ -86,7 +86,7 @@ protected:
 private:
   PythonCodeEditor *codeEditor;
 };
-} // namespace tlp
+}
 
 AutoCompletionList::AutoCompletionList() : QListWidget(), _codeEditor(nullptr) {
 #if defined(__APPLE__)

@@ -106,7 +106,7 @@ protected:
   void closeEvent(QCloseEvent *event) override;
 };
 
-} // namespace tlp
+}
 
 #endif // TALIPOT_WORKSPACE_PANEL_H
 ///@endcond

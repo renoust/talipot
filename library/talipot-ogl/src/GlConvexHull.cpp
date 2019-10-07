@@ -347,4 +347,4 @@ void GlConvexHull::setWithXML(const string &inString, unsigned int &currentPosit
   GlXMLTools::setWithXML(inString, currentPosition, "filled", _filled);
   GlXMLTools::setWithXML(inString, currentPosition, "outlined", _outlined);
 }
-} // namespace tlp
+}

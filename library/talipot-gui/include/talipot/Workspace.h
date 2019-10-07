@@ -149,7 +149,7 @@ protected:
 
   void setFocusedPanel(WorkspacePanel *panel);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_WORKSPACE_H
 ///@endcond

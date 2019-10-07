@@ -727,7 +727,7 @@ protected:
   PropertyEventType evtType;
   unsigned int eltId;
 };
-} // namespace tlp
+}
 
 //================================================================================
 // these functions allow to use tlp::PropertyInterface as a key in a hash-based data structure (e.g.

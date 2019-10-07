@@ -62,7 +62,7 @@ public:
    */
   float planePointValue(const Coord &pos);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PLANE_H
 
 ///@endcond

@@ -34,7 +34,7 @@ public:
   std::unordered_map<const Graph *, bool> resultsBuffer;
 };
 
-} // namespace tlp
+}
 #endif // TALIPOT_CONNECTED_TEST_LISTENER_H
 
 ///@endcond

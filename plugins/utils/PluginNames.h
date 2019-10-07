@@ -44,6 +44,6 @@ const static char SOMViewNavigation[] = "SOM Navigation Interactor";
 const static char ScatterPlot2DInteractorNavigation[] = "ScatterPlot2D Navigation Interactor";
 } // namespace InteractorName
 
-} // namespace tlp
+}
 
 #endif // PLUGIN_NAMES_H

@@ -34,5 +34,5 @@ public slots:
   void setBackgroundColor(const QColor &) override;
   void setColorInterpolation(bool) override;
 };
-} // namespace tlp
+}
 #endif // MATRIX_VIEW_QUICK_ACCESS_BAR_H

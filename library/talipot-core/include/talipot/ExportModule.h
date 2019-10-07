@@ -97,6 +97,6 @@ public:
   PluginProgress *pluginProgress;
   DataSet *dataSet;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_EXPORT_MODULE_H
 ///@endcond

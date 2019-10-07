@@ -226,6 +226,6 @@ void SimpleStringsListSelectionWidget::listItemClicked(QListWidgetItem *item) {
     }
   }
 }
-} // namespace tlp
+}
 
 #endif /* SIMPLESTRINGSLISTSELECTIONWIDGET_CPP_ */

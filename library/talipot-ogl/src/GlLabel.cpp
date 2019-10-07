@@ -790,4 +790,4 @@ void GlLabel::setWithXML(const string &inString, unsigned int &currentPosition) 
   GlXMLTools::setWithXML(inString, currentPosition, "outlineSize", outlineSize);
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
 }
-} // namespace tlp
+}

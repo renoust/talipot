@@ -46,7 +46,7 @@ public:
   BmdLink *suc;
   BmdLink(TYPE a, BmdLink<TYPE> *pre, BmdLink<TYPE> *suc);
 };
-} // namespace tlp
+}
 #include <talipot/cxx/BmdLink.cxx>
 
 #endif

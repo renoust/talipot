@@ -73,5 +73,5 @@ public:
 
   void testComputeFaces();
 };
-} // namespace tlp
+}
 #endif // PLANAR_CON_MAP_TEST_H

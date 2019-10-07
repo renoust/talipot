@@ -43,6 +43,6 @@ public:
    */
   static QPixmap render(int glyphId);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GLYPH_RENDERER_H
 ///@endcond

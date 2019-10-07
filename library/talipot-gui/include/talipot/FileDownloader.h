@@ -55,7 +55,7 @@ private:
   QNetworkAccessManager _webCtrl;
   QByteArray _downloadedData;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_FILE_DOWNLOADER_H
 

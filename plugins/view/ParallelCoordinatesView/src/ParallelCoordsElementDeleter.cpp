@@ -37,4 +37,4 @@ bool ParallelCoordsElementDeleter::eventFilter(QObject *, QEvent *e) {
 
   return false;
 }
-} // namespace tlp
+}

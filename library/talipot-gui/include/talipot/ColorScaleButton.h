@@ -42,6 +42,6 @@ public:
 public slots:
   void editColorScale();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_COLOR_SCALE_BUTTON_H
 ///@endcond

@@ -148,7 +148,7 @@ private:
   bool _edgesAdded;
   bool _edgesRemoved;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_MODEL_H
 ///@endcond

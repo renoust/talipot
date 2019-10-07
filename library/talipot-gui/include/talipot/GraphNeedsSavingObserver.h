@@ -101,7 +101,7 @@ signals:
 
   void savingNeeded();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_NEEDS_SAVING_OBSERVER_H
 
 ///@endcond

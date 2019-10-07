@@ -197,6 +197,6 @@ public:
    */
   void construct() override;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDINATES_INTERACTORS_H

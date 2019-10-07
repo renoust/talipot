@@ -266,6 +266,6 @@ protected:
   std::string pluginName;
 };
 ///@endcond
-} // namespace tlp
+}
 
 #endif // TALIPOT_PLUGIN_LISTER_H

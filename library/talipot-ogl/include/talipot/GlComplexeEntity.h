@@ -50,7 +50,7 @@ public:
    */
   virtual void drawLabel(OcclusionTest *test, const GlGraphInputData *data) = 0;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_COMPLEXE_ENTITY_H
 ///@endcond

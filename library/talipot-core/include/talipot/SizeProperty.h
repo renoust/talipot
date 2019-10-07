@@ -84,5 +84,5 @@ public:
     return propertyTypename;
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_SIZE_PROPERTY_H

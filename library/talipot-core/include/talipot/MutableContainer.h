@@ -222,7 +222,7 @@ private:
   typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::const_iterator it;
 };
 ///@endcond
-} // namespace tlp
+}
 
 ///@cond DOXYGEN_HIDDEN
 #include "cxx/MutableContainer.cxx"

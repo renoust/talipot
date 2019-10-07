@@ -230,4 +230,4 @@ int ViewSettings::defaultFontSize() const {
 void ViewSettings::setDefaultFontSize(int fontSize) {
   _defaultFontSize = fontSize;
 }
-} // namespace tlp
+}

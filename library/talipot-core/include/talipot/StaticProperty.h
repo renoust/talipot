@@ -321,6 +321,6 @@ public:
       prop->setEdgeValue(edges[i], (*this)[i]);
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STATIC_PROPERTY_H

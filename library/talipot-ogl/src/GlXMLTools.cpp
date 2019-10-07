@@ -175,4 +175,4 @@ GlSimpleEntity *GlXMLTools::createEntity(const string &name) {
 
   return nullptr;
 }
-} // namespace tlp
+}

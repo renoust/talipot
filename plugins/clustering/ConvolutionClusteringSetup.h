@@ -54,5 +54,5 @@ private:
   ConvolutionClustering *convolPlugin;
   bool useLogarithmicScale;
 };
-} // namespace tlp
+}
 #endif // CONVOLUTION_CLUSTERING_SETUP_H

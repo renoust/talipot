@@ -211,6 +211,6 @@ protected:
   std::map<float, Color> colorMap;
   bool gradient;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_COLOR_SCALE_H

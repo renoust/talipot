@@ -47,6 +47,6 @@ public:
    **/
   static bool isOuterPlanar(Graph *graph);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_OUTER_PLANAR_TEST_H

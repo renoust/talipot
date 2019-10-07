@@ -46,7 +46,7 @@ public:
 
   virtual void unselectAllStrings() = 0;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STRINGS_LIST_SELECTION_WIDGET_INTERFACE_H
 ///@endcond

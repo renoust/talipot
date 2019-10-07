@@ -188,4 +188,4 @@ void GlCatmullRomCurve::drawCurve(vector<Coord> &controlPoints, const Color &sta
                                nbCurvePoints);
   }
 }
-} // namespace tlp
+}

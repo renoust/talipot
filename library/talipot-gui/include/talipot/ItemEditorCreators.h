@@ -294,7 +294,7 @@ public:
 };
 
 TLP_QT_SCOPE void addIconToPool(const QString &iconName, const QIcon &icon);
-} // namespace tlp
+}
 
 #if defined(__clang__)
 template class tlp::StringDisplayEditorCreator<tlp::PointType>;

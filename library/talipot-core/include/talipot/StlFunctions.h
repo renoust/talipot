@@ -34,7 +34,7 @@ public:
 private:
   DoubleProperty *metric;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_STL_FUNCTIONS_H
 
 ///@endcond

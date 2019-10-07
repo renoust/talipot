@@ -68,7 +68,7 @@ protected:
 
   bool inSizeSpinBoxValueChanged;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SNAPSHOT_DIALOG_H
 

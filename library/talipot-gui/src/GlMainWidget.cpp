@@ -558,4 +558,4 @@ void GlMainWidget::setKeepScenePointOfViewOnSubgraphChanging(bool k) {
 bool GlMainWidget::keepScenePointOfViewOnSubgraphChanging() const {
   return keepPointOfViewOnSubgraphChanging;
 }
-} // namespace tlp
+}

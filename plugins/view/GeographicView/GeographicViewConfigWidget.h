@@ -70,6 +70,6 @@ protected:
   PolyFileType _oldPolyFileType;
   std::string _oldFileLoaded;
 };
-} // namespace tlp
+}
 
 #endif // GEOGRAPHIC_VIEW_CONFIG_WIDGET_H

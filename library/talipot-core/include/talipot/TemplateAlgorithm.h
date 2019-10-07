@@ -83,5 +83,5 @@ public:
     }
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_TEMPLATE_ALGORITHM_H

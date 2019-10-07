@@ -24,6 +24,6 @@ public:
   ~ParallelCoordsElementDeleter() override {}
   bool eventFilter(QObject *, QEvent *) override;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDS_ELEMENT_DELETER_H

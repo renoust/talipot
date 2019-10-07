@@ -43,6 +43,6 @@ public:
    **/
   static bool renameProperty(tlp::PropertyInterface *toRenameProp, QWidget *parent = nullptr);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_RENAME_PROPERTY_DIALOG_H
 ///@endcond

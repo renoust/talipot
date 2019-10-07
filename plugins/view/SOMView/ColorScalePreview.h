@@ -48,5 +48,5 @@ protected:
 
   ColorScale *currentColorScale;
 };
-} // namespace tlp
+}
 #endif // COLOR_SCALE_PREVIEW_H

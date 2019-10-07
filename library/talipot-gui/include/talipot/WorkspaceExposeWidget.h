@@ -98,7 +98,7 @@ protected slots:
   void resetSceneRect();
   void itemOpened();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_WORKSPACE_EXPOSE_WIDGET_H
 

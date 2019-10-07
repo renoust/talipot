@@ -77,4 +77,4 @@ void ScatterPlotQuickAccessBar::setLabelsScaled(bool scaled) {
                                      : QIcon(":/talipot/gui/icons/20/labels_scaled_disabled.png")));
   emit settingsChanged();
 }
-} // namespace tlp
+}

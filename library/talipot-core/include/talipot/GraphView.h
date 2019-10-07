@@ -203,7 +203,7 @@ private:
   void addEdgesInternal(unsigned int nbAdded, const std::vector<edge> *edges,
                         const std::vector<std::pair<node, node>> &ends);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_VIEW_H
 
 ///@endcond

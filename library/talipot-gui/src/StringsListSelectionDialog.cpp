@@ -95,4 +95,4 @@ bool StringsListSelectionDialog::choose(QString title, const std::vector<std::st
 
   return false;
 }
-} // namespace tlp
+}

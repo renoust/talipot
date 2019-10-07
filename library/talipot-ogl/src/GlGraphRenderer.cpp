@@ -76,4 +76,4 @@ void GlGraphRenderer::visitEdges(Graph *graph, GlSceneVisitor *visitor) {
   else
     TLP_MAP_EDGES_AND_INDICES(graph, fn);
 }
-} // namespace tlp
+}

@@ -59,7 +59,7 @@ public:
   static void clearGlyphList(Graph **graph, GlGraphInputData *glGraphInputData,
                              MutableContainer<Glyph *> &glyphs);
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

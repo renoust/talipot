@@ -107,4 +107,4 @@ PixelOrientedOverview *PixelOrientedViewNavigator::getOverviewUnderPointer(Coord
 
   return ret;
 }
-} // namespace tlp
+}

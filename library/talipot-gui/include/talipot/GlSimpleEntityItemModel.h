@@ -102,7 +102,7 @@ public:
 protected:
   GlSimpleEntityItemEditor *editor;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SIMPLE_ENTITY_ITEM_MODEL_H
 ///@endcond

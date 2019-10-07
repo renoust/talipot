@@ -109,7 +109,7 @@ TLP_SCOPE void computeOpenUniformBsplinePoints(const std::vector<Coord> &control
                                                std::vector<Coord> &curvePoints,
                                                const unsigned int curveDegree = 3,
                                                const unsigned int nbCurvePoints = 100);
-} // namespace tlp
+}
 
 #endif // TALIPOT_PARAMETRIC_CURVES_H
 ///@endcond

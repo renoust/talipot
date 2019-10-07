@@ -44,6 +44,6 @@ public:
     Navigation
   };
 };
-} // namespace tlp
+}
 
 #endif // STANDARD_INTERACTOR_PRIORITY_H

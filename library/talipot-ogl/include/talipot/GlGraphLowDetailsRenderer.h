@@ -79,7 +79,7 @@ protected:
   SizeProperty *observedSizeProperty;
   BooleanProperty *observedSelectionProperty;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_LOW_DETAILS_RENDERER_H
 ///@endcond

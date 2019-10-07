@@ -226,7 +226,7 @@ extern TLP_SCOPE void setErrorOutput(std::ostream &os);
  * @brief return the TALIPOT_VERSION value
  */
 extern TLP_SCOPE std::string getTalipotVersion();
-} // namespace tlp
+}
 
 #endif // TalipotCONF_H
 ///@endcond

@@ -251,4 +251,4 @@ void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float 
 
   label.drawWithStencil(lod, camera);
 }
-} // namespace tlp
+}

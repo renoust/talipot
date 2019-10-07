@@ -430,7 +430,7 @@ void inline TLP_PARALLEL_SECTIONS(const F1 &f1, const F2 &f2, const F3 &f3, cons
   f4();
 #endif
 }
-} // namespace tlp
+}
 
 #endif // TALIPOT_PARALLEL_TOOLS_H
 

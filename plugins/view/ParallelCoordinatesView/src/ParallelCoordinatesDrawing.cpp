@@ -714,4 +714,4 @@ void ParallelCoordinatesDrawing::removeHighlightedElt(const unsigned int dataId)
     }
   }
 }
-} // namespace tlp
+}

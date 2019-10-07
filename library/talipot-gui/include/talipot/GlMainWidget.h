@@ -372,6 +372,6 @@ public:
 private:
   static QGLWidget *firstQGLWidget;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_MAIN_WIDGET_H

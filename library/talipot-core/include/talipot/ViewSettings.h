@@ -203,6 +203,6 @@ private:
   Size _size;
   int _shape;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_VIEW_SETTINGS_H

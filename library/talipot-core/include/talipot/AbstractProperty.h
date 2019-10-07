@@ -696,7 +696,7 @@ public:
   void resizeEdgeValue(const edge e, size_t size,
                        typename eltType::RealType elt = eltType::defaultValue());
 };
-} // namespace tlp
+}
 #if !defined(_MSC_VER) || defined(DLL_Talipot) // When using VC++, we only want to include this when
   // we are in the Talipot dll. With any other compiler,
   // include it all the time

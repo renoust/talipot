@@ -79,7 +79,7 @@ private:
   std::stack<node> *queueNodes;
   MutableContainer<int> *numberOfPaths;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_DIJKSTRA_H
 ///@endcond

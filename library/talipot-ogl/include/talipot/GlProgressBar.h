@@ -64,6 +64,6 @@ private:
   unsigned int currentPercent;
   std::string comment;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_PROGRESS_BAR_H
 ///@endcond

@@ -81,7 +81,7 @@ private:
   DoubleProperty *_rotation;
   static int bezierValue;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_CONVEX_GRAPH_HULL_H
 ///@endcond

@@ -813,4 +813,4 @@ void PixelOrientedView::applySettings() {
     }
   }
 }
-} // namespace tlp
+}

@@ -36,6 +36,6 @@ private:
   MutableContainer<bool> selectedNodes;
   MutableContainer<bool> selectedEdges;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_BFS_H
 ///@endcond

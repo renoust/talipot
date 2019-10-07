@@ -74,6 +74,6 @@ protected:
   GlAxis *standardDeviation2PosAxis, *standardDeviation2NegAxis;
   GlAxis *standardDeviation3PosAxis, *standardDeviation3NegAxis;
 };
-} // namespace tlp
+}
 
 #endif // HISTOGRAM_STATISTICS_H

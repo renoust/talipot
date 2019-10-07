@@ -64,4 +64,4 @@ void ParallelCoordinatesViewQuickAccessBar::setLabelsVisible(bool visible) {
                                        : QIcon(":/talipot/gui/icons/20/labels_disabled.png")));
   emit settingsChanged();
 }
-} // namespace tlp
+}

@@ -308,6 +308,6 @@ private:
   bool guessFirstLineIsHeader;
   bool keepPropertyWidgets;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_IMPORT_CONFIGURATION_WIDGET_H
 ///@endcond

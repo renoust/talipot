@@ -103,4 +103,4 @@ ScatterPlot2D *ScatterPlot2DViewNavigator::getOverviewUnderPointer(const Coord &
 
   return ret;
 }
-} // namespace tlp
+}

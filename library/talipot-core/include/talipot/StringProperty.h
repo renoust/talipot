@@ -73,5 +73,5 @@ public:
   }
 };
 /*\@}*/
-} // namespace tlp
+}
 #endif // TALIPOT_STRING_PROPERTY_H

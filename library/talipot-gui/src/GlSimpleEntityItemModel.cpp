@@ -97,4 +97,4 @@ bool GlSimpleEntityItemModel::setData(const QModelIndex &index, const QVariant &
 
   return false;
 }
-} // namespace tlp
+}

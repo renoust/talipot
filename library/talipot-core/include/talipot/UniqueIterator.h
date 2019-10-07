@@ -155,7 +155,7 @@ typename std::enable_if<has_const_iterator<Container>::value,
   return new MPUniqueIterator<typename Container::value_type, CheckFunc>(stlIterator(stlContainer),
                                                                          checkFunctor);
 }
-} // namespace tlp
+}
 #endif // TALIPOT_UNIQUE_ITERATOR_H
 
 ///@endcond

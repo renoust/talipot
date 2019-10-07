@@ -216,7 +216,7 @@ private:
 
   static unsigned int indentationNumber;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_XML_TOOLS_H
 ///@endcond

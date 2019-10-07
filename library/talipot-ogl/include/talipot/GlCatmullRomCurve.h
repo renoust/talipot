@@ -88,6 +88,6 @@ private:
   float alpha;
   ParameterizationType paramType;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_CATMULL_ROM_CURVE_H

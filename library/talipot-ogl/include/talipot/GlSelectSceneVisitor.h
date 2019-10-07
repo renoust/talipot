@@ -62,7 +62,7 @@ private:
 
   GlLODCalculator *calculator;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SELECT_SCENE_VISITOR_H
 ///@endcond

@@ -78,4 +78,4 @@ void GlQuad::setWithXML(const string &inString, unsigned int &currentPosition) {
 
   GlPolygon::setWithXML(inString, currentPosition);
 }
-} // namespace tlp
+}

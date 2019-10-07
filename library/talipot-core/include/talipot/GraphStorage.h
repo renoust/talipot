@@ -480,6 +480,6 @@ private:
    */
   void removeFromEdges(const edge e, node end = node());
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_STORAGE_H
 ///@endcond

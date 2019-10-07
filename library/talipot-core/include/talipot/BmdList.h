@@ -99,7 +99,7 @@ private:
   tlp::BmdLink<TYPE> *suc;
   BmdList<TYPE> &bmdList;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_BMD_LIST_H
 
 ///@endcond

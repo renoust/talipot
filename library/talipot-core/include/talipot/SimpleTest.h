@@ -75,5 +75,5 @@ public:
   static bool simpleTest(const Graph *graph, std::vector<edge> *multipleEdges = nullptr,
                          std::vector<edge> *loops = nullptr, const bool directed = false);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_SIMPLE_TEST_H

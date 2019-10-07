@@ -402,4 +402,4 @@ void ScatterPlot2D::setForegroundColor(const Color &foregroundColor) {
     clickLabel->setColor(foregroundColor);
   }
 }
-} // namespace tlp
+}

@@ -197,6 +197,6 @@ private:
   std::unordered_map<edge, node> edgeToNode;
   std::unordered_map<node, edge> nodeToEdge;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT2D_VIEW_H

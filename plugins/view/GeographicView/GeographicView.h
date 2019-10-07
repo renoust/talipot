@@ -202,6 +202,6 @@ private:
 
   QMap<ViewType, QString> _viewTypeToName;
 };
-} // namespace tlp
+}
 
 #endif // GEOGRAPHIC_VIEW_H

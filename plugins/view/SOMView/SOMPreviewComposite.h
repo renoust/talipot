@@ -79,5 +79,5 @@ protected:
   GlLabelledColorScale *lColorScale;
   tlp::Coord currentPosition;
 };
-} // namespace tlp
+}
 #endif // SOM_PREVIEW_COMPOSITE_H

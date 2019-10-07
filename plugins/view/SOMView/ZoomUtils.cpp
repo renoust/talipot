@@ -65,4 +65,4 @@ void zoomOnScreenRegionWithoutAnimation(GlMainWidget *glWidget, const BoundingBo
     camera.setZoomFactor(zoomEnd);
   }
 }
-} // namespace tlp
+}

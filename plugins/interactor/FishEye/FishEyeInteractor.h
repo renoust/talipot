@@ -83,6 +83,6 @@ public:
 private:
   FishEyeConfigWidget *fisheyeConfigWidget;
 };
-} // namespace tlp
+}
 
 #endif // FISH_EYE_INTERACTOR_H

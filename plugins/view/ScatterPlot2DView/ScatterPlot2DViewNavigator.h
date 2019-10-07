@@ -45,6 +45,6 @@ private:
 
   GlMainWidget *glWidget;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT2D_VIEW_NAVIGATOR_H

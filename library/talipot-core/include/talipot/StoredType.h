@@ -152,6 +152,6 @@ struct StoredType {
     }                                                                                              \
   };
 #endif
-} // namespace tlp
+}
 #endif // TALIPOT_STORED_TYPE_H
 ///@endcond

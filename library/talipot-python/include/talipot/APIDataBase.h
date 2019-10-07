@@ -54,6 +54,6 @@ public:
   QString getFullTypeName(const QString &type) const;
   bool dictEntryExists(const QString &type, const QString &dictEntry) const;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_API_DATABASE_H

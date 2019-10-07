@@ -53,7 +53,7 @@ public:
     return false;
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_TYPE_INTERFACE_H
 ///@endcond

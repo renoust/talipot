@@ -75,4 +75,4 @@ const tlp::Coord &GlPolygon::point(const unsigned int i) const {
 tlp::Coord &GlPolygon::point(const unsigned int i) {
   return points[i];
 }
-} // namespace tlp
+}

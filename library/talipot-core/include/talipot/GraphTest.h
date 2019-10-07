@@ -37,6 +37,6 @@ public:
 
   virtual bool test() = 0;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_TEST_H
 ///@endcond

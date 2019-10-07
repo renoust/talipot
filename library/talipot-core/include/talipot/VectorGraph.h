@@ -774,6 +774,6 @@ bool EdgeProperty<TYPE>::isValid() const {
   return this->_graph->isEdgeAttr(this->_values);
 }
 #endif
-} // namespace tlp
+}
 #endif // TALIPOT_VECTOR_GRAPH_H
 ///@endcond

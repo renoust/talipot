@@ -45,7 +45,7 @@ private slots:
 private:
   Ui::AboutPageData *_ui;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_ABOUT_PAGE_H
 

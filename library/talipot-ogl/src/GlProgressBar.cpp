@@ -145,4 +145,4 @@ void GlProgressBar::progress_handler(int step, int max_step) {
   addGlEntity(commentLabel, COMMENT_ID);
   addGlEntity(percentLabel, PERCENT_ID);
 }
-} // namespace tlp
+}

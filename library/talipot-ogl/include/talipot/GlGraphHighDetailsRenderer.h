@@ -64,7 +64,7 @@ protected:
   GlScene *fakeScene;
   Vec4i selectionViewport;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_HIGH_DETAILS_RENDERER_H
 ///@endcond

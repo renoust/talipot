@@ -351,7 +351,7 @@ private:
 };
 
 #endif // DOXYGEN_NOTFOR_DEVEL
-} // namespace tlp
+}
 
 #ifdef _MSC_VER
 

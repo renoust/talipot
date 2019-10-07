@@ -146,5 +146,5 @@ protected:
   std::string textureName;
   GLuint textureId;
 };
-} // namespace tlp
+}
 #endif // THRESHOLD_INTERACTOR_H

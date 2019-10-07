@@ -139,7 +139,7 @@ private:
   ListType listType;
   StringsListSelectionWidgetInterface *stringsListSelectionWidget;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STRINGS_LIST_SELECTION_WIDGET_H
 ///@endcond

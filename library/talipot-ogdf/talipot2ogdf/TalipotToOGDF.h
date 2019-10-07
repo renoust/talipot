@@ -38,7 +38,7 @@ using namespace std;
 namespace tlp {
 class DoubleProperty;
 class SizeProperty;
-} // namespace tlp
+}
 
 class TLP_OGDF_SCOPE TalipotToOGDF {
 public:

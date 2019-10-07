@@ -213,4 +213,4 @@ void GlSphere::setWithXML(const string &inString, unsigned int &currentPosition)
   boundingBox[0] = Coord(position[0] - radius, position[1] - radius, position[2] - radius);
   boundingBox[1] = Coord(position[0] + radius, position[1] + radius, position[2] + radius);
 }
-} // namespace tlp
+}

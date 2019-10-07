@@ -36,4 +36,4 @@ QString getTalipotGitRevision() {
   }
   return "";
 }
-} // namespace tlp
+}

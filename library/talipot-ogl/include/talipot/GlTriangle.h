@@ -38,5 +38,5 @@ public:
    */
   ~GlTriangle() override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_TRIANGLE_H

@@ -88,7 +88,7 @@ struct node {
     return id != UINT_MAX;
   }
 };
-} // namespace tlp
+}
 
 #ifdef _MSC_VER
 #include <vector>

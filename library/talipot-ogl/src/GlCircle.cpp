@@ -41,4 +41,4 @@ void GlCircle::getXML(string &outString) {
 
   GlPolygon::getXMLOnlyData(outString);
 }
-} // namespace tlp
+}

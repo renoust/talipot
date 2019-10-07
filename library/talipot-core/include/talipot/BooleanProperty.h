@@ -68,6 +68,6 @@ public:
     return propertyTypename;
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_BOOLEAN_PROPERTY_H

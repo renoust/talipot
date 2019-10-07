@@ -60,7 +60,7 @@ public:
 
   void stepBy(int steps) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SCIENTIFIC_DOUBLE_SPIN_BOX_H
 

@@ -100,6 +100,6 @@ private:
 private slots:
   void checkValidity();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_COPY_PROPERTY_DIALOG_H
 ///@endcond

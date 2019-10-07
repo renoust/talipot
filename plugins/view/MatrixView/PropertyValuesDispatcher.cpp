@@ -218,4 +218,4 @@ void PropertyValuesDispatcher::treatEvent(const tlp::Event &evt) {
     }
   }
 }
-} // namespace tlp
+}

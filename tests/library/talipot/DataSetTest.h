@@ -38,5 +38,5 @@ public:
   void testSetGetStruct();
   void testDataSetSerialization();
 };
-} // namespace tlp
+}
 #endif // DATA_SET_TEST_H

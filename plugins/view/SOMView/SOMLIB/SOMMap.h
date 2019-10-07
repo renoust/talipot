@@ -129,5 +129,5 @@ protected:
 
   bool graphCreated;
 };
-} // namespace tlp
+}
 #endif // SOM_MAP_H

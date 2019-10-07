@@ -590,7 +590,7 @@ private:
 
   static GlShaderProgram *currentActiveShaderProgram;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SHADER_PROGRAM_H
 ///@endcond

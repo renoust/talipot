@@ -174,7 +174,7 @@ public:
 };
 
 extern void initQTypeSerializers();
-} // namespace tlp
+}
 
 #endif // TALIPOT_META_TYPES_H
 ///@endcond

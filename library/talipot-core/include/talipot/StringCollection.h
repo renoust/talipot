@@ -153,6 +153,6 @@ public:
     return _data[i];
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_STRING_COLLECTION_H
 ///@endcond

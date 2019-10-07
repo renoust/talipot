@@ -111,4 +111,4 @@ bool ParallelCoordsGlEntitiesSelector::eventFilter(QObject *widget, QEvent *e) {
 
   return false;
 }
-} // namespace tlp
+}

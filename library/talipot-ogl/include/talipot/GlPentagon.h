@@ -37,5 +37,5 @@ public:
    */
   ~GlPentagon() override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_PENTAGON_H

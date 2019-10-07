@@ -245,6 +245,6 @@ protected:
   float maxCaptionWidth;
   float maxGraduationLabelWidth;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_AXIS_H

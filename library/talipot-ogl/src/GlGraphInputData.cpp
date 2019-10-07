@@ -205,4 +205,4 @@ void GlGraphInputData::treatEvent(const Event &ev) {
     }
   }
 }
-} // namespace tlp
+}

@@ -166,4 +166,4 @@ DataSet ParameterListModel::parametersValues() const {
 void ParameterListModel::setParametersValues(const DataSet &data) {
   _data = data;
 }
-} // namespace tlp
+}

@@ -49,6 +49,6 @@ private:
   void setButtonColor(tlp::ColorButton *button, const Color &color);
   Ui::ScatterPlotCorrelCoeffSelectorOptionsWidgetData *_ui;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT_CORREL_COEFF_SELECTOR_OPTIONS_WIDGET_H

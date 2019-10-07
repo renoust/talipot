@@ -53,7 +53,7 @@ protected slots:
 protected:
   bool eventFilter(QObject *, QEvent *e) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_VIEW_TOOL_TIP_AND_URL_MANAGER_H
 

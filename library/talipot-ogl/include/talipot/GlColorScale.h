@@ -85,7 +85,7 @@ private:
   GlPolyQuad *colorScalePolyQuad;
   Orientation orientation;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_COLOR_SCALE_H
 ///@endcond

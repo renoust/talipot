@@ -88,7 +88,7 @@ private:
   std::vector<edge> ve;
   unsigned int i;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_FACE_ITERATOR_H
 
 ///@endcond

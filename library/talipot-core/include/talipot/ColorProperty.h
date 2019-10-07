@@ -57,5 +57,5 @@ public:
     return propertyTypename;
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_COLOR_PROPERTY_H

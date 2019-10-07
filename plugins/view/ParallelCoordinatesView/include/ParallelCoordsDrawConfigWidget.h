@@ -73,6 +73,6 @@ private:
   std::string oldLinesTextureFilename;
   Ui::ParallelCoordsDrawConfigWidgetData *_ui;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDS_DRAW_CONFIG_WIDGET_H

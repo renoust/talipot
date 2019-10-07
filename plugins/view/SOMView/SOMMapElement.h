@@ -68,5 +68,5 @@ protected:
   Size size;
   Size nodeAreaSize;
 };
-} // namespace tlp
+}
 #endif // SOM_MAP_ELEMENT_H

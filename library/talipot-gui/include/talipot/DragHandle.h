@@ -37,6 +37,6 @@ private:
   bool _pressed;
   QPoint _clickPosition;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_DRAG_HANDLE_H
 ///@endcond

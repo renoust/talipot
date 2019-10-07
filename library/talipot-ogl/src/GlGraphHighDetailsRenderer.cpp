@@ -653,4 +653,4 @@ void GlGraphHighDetailsRenderer::drawLabelsForComplexEntities(bool drawSelected,
     }
   }
 }
-} // namespace tlp
+}

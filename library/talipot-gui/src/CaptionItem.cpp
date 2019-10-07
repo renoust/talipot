@@ -452,4 +452,4 @@ void CaptionItem::selectedPropertyChanged(string /*propertyName*/) {
   _backupColorProperty = new ColorProperty(_graph);
   *_backupColorProperty = *_colorProperty;
 }
-} // namespace tlp
+}

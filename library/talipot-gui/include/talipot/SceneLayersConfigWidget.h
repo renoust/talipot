@@ -47,7 +47,7 @@ public slots:
 signals:
   void drawNeeded();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SCENE_LAYERS_CONFIG_WIDGET_H
 ///@endcond

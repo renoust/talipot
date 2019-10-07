@@ -71,4 +71,4 @@ void GlStar::computeStar() {
   createPolygon(points, 0);
   runTesselation();
 }
-} // namespace tlp
+}

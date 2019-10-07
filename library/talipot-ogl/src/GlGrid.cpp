@@ -142,4 +142,4 @@ void GlGrid::setWithXML(const string &inString, unsigned int &currentPosition) {
 
   GlGrid(frontTopLeft, backBottomRight, cell, color, displayDim);
 }
-} // namespace tlp
+}

@@ -73,6 +73,6 @@ public slots:
 
   void closeTabRequested(int tab);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_EDITORS_TAB_WIDGET_H

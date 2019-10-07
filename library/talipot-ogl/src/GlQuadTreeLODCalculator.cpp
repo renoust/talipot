@@ -669,4 +669,4 @@ void GlQuadTreeLODCalculator::setHaveToCompute() {
   haveToInitObservers = true;
   removeObservers();
 }
-} // namespace tlp
+}

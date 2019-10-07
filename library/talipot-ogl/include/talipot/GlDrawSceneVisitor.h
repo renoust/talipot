@@ -39,7 +39,7 @@ private:
   std::unordered_map<unsigned int, float> *lodMap;
   GlGraphInputData *inputData;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_DRAW_SCENE_VISITOR_H
 ///@endcond

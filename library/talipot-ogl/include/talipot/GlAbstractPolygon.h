@@ -245,5 +245,5 @@ protected:
   bool generated;
   GLuint buffers[7];
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_ABSTRACT_POLYGON_H

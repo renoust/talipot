@@ -243,7 +243,7 @@ protected:
   bool verticesUploadNeeded;
   bool colorsUploadNeeded;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_VERTEX_ARRAY_MANAGER_H
 ///@endcond

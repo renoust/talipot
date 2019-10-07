@@ -156,7 +156,7 @@ private:
   unsigned long long incrementStep;
   bool minMaxSet;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_QUANTITATIVE_AXIS_H
 ///@endcond

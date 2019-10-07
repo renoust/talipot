@@ -107,6 +107,6 @@ private:
   std::pair<double, double> initXAxisScale, initYAxisScale;
   Ui::HistoOptionsWidgetData *_ui;
 };
-} // namespace tlp
+}
 
 #endif // HISTO_OPTIONS_WIDGET_H

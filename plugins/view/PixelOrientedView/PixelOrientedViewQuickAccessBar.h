@@ -32,5 +32,5 @@ public slots:
   void reset() override;
   void setBackgroundColor(const QColor &) override;
 };
-} // namespace tlp
+}
 #endif // PIXEL_ORIENTED_VIEW_QUICK_ACCESS_BAR_H

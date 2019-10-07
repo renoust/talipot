@@ -21,7 +21,7 @@ namespace tlp {
 class Graph;
 class DataSet;
 class PluginProgress;
-} // namespace tlp
+}
 
 // Director
 struct ReadGraph {

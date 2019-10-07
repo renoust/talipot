@@ -46,4 +46,4 @@ void GlSimpleEntity::removeParent(GlComposite *composite) {
     }
   }
 }
-} // namespace tlp
+}

@@ -563,4 +563,4 @@ void RangeSlider::paintEvent(QPaintEvent *) {
   }
 }
 
-} // namespace tlp
+}

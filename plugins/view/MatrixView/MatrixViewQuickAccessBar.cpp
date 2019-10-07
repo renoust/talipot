@@ -66,4 +66,4 @@ void MatrixViewQuickAccessBar::setColorInterpolation(bool state) {
              : QIcon(":/talipot/gui/icons/20/color_interpolation_disabled.png")));
   emit settingsChanged();
 }
-} // namespace tlp
+}

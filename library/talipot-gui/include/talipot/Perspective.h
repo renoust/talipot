@@ -325,6 +325,6 @@ public:
   }
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(Perspective::ProgressOptions)
-} // namespace tlp
+}
 
 #endif // TALIPOT_PERSPECTIVE_H

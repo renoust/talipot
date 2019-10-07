@@ -162,7 +162,7 @@ public:
     return (curEdge.isValid());
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_BASIC_ITERATORS_H
 
 ///@endcond

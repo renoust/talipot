@@ -290,6 +290,6 @@ protected:
 
   QString _indentPattern;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_CODE_EDITOR_H

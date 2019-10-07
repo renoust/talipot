@@ -607,7 +607,7 @@ void GlComplexPolygon::setWithXML(const string &inString, unsigned int &currentP
     }
   }
 }
-} // namespace tlp
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

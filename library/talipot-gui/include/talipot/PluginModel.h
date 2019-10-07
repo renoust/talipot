@@ -211,7 +211,7 @@ public:
     return result;
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PLUGIN_MODEL_H
 ///@endcond

@@ -1112,4 +1112,4 @@ void GlVertexArrayManager::treatEvent(const Event &evt) {
     }
   }
 }
-} // namespace tlp
+}

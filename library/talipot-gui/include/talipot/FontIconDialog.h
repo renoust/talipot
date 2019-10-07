@@ -52,7 +52,7 @@ protected slots:
 
   void openUrlInBrowser(const QString &url);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_FONT_ICON_DIALOG_H
 ///@endcond

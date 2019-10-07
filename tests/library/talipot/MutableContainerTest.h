@@ -44,5 +44,5 @@ public:
   void testFindAll();
   void testCompression();
 };
-} // namespace tlp
+}
 #endif // MUTABLE_CONTAINER_TEST_H

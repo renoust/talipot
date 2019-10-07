@@ -58,4 +58,4 @@ void PixelOrientedInteractorNavigation::construct() {
   push_back(new PixelOrientedViewNavigator);
   push_back(new MouseNKeysNavigator);
 }
-} // namespace tlp
+}

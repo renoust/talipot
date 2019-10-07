@@ -104,7 +104,7 @@ public:
    */
   static std::string getIconUtf8String(const std::string &iconName);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_FONT_AWESOME_H
 

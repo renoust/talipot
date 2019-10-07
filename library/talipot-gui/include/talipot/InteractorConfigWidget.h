@@ -41,6 +41,6 @@ public:
   void showEvent(QShowEvent *) override;
 };
 
-} // namespace tlp
+}
 
 #endif // TALIPOT_INTERACTOR_CONFIG_WIDGET_H

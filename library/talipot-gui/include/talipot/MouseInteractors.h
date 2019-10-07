@@ -75,6 +75,6 @@ private:
   std::vector<tlp::node> nodeHierarchy;
   std::vector<float> alphaHierarchy;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MOUSE_INTERACTORS_H
 ///@endcond

@@ -83,7 +83,7 @@ public:
 
   bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_ELEMENT_MODEL_H
 ///@endcond

@@ -44,7 +44,7 @@ public:
 signals:
   void checkStateChanged(QModelIndex, Qt::CheckState);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_MODEL_H
 ///@endcond

@@ -36,7 +36,7 @@ public:
    */
   virtual void acceptVisitor(GlSceneVisitor *visitor) = 0;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_ENTITY_H
 ///@endcond

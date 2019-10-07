@@ -35,7 +35,7 @@ struct Face {
     return id != UINT_MAX;
   }
 };
-} // namespace tlp
+}
 
 namespace std {
 template <>

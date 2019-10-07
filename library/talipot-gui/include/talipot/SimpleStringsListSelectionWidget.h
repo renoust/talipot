@@ -71,7 +71,7 @@ private:
 
   unsigned int maxSelectedStringsListSize;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SIMPLE_STRINGS_LIST_SELECTION_WIDGET_H
 ///@endcond

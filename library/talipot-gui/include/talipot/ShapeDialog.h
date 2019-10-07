@@ -51,7 +51,7 @@ public:
 protected slots:
   void updateShapeList();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SHAPE_DIALOG_H
 

@@ -57,6 +57,6 @@ protected slots:
 
   void updateAutoCompletionList(bool dotContext = false) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_SHELL_WIDGET_H

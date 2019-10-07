@@ -55,6 +55,6 @@ private:
   std::vector<std::string> lastSelectedProperties;
   ElementType lastDataLocation;
 };
-} // namespace tlp
+}
 
 #endif // VIEW_GRAPH_PROPERTIES_SELECTION_WIDGET_H

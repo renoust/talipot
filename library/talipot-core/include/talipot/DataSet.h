@@ -330,7 +330,7 @@ public:
    */
   std::string toString() const;
 };
-} // namespace tlp
+}
 
 #include "cxx/DataSet.cxx"
 

@@ -195,4 +195,4 @@ GlScene *GlMetaNodeRenderer::getSceneForMetaGraph(Graph *g) const {
   auto sceneit = _metaGraphToSceneMap.find(g);
   return (sceneit == _metaGraphToSceneMap.end()) ? (nullptr) : (sceneit->second);
 }
-} // namespace tlp
+}

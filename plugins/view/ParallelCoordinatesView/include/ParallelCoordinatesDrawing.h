@@ -160,7 +160,7 @@ private:
 
   bool resetAxisLayout;
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

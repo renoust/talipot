@@ -95,7 +95,7 @@ protected:
   virtual void mMouseStretchAxis(double, double, GlMainWidget *);
   virtual void mAlign(EditOperation operation, GlMainWidget *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_MOUSE_SELECTION_EDITOR_H
 ///@endcond

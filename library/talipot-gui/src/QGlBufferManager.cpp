@@ -83,4 +83,4 @@ QOpenGLFramebufferObject *QGlBufferManager::getFramebufferObject(int width, int 
 
   return glFramebufferObject;
 }
-} // namespace tlp
+}

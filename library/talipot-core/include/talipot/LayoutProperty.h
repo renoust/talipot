@@ -332,5 +332,5 @@ public:
 };
 
 typedef CoordVectorProperty LayoutVectorProperty;
-} // namespace tlp
+}
 #endif // TALIPOT_LAYOUT_PROPERTY_H

@@ -71,7 +71,7 @@ struct TLP_GL_SCOPE OcclusionTest {
     return false;
   }
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 #endif // TALIPOT_OCCLUSION_TEST_H

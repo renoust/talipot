@@ -45,7 +45,7 @@ public:
 protected:
   bool threadSafe;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SCENE_VISITOR_H
 ///@endcond

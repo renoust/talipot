@@ -227,6 +227,6 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
   **/
   void getCompleteBB(Vec3f bb[8]) const;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_BOUNDING_BOX_H

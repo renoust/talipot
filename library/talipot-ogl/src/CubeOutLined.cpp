@@ -59,4 +59,4 @@ Coord CubeOutLined::getAnchor(const Coord &vector) const {
   return GlBox::getAnchor(vector);
 }
 
-} // namespace tlp
+}

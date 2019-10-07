@@ -81,7 +81,7 @@ private:
   static void loadImageColorScalesFromDir(const QString &colorScalesDir);
   static std::vector<Color> getColorScaleFromImageFile(const QString &imageFilePath);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_COLOR_SCALE_CONFIG_DIALOG_H
 ///@endcond

@@ -226,7 +226,7 @@ public:
   }
   FORWARD_STRING_METHODS(typename TypeInterface<std::vector<ELT_TYPE>>)
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SERIALIZABLE_TYPE_H
 ///@endcond

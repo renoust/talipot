@@ -51,5 +51,5 @@ protected:
 
   GlLayer *selectionLayer;
 };
-} // namespace tlp
+}
 #endif // EDIT_COLOR_SCALE_INTERACTOR_H

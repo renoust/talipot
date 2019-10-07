@@ -39,6 +39,6 @@ private:
   int x, y;
   bool dragStarted;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDS_AXIS_SPACER_H

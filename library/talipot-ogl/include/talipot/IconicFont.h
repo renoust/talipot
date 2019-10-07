@@ -72,7 +72,7 @@ public:
    */
   static std::string getIconUtf8String(const std::string &iconName);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_ICONIC_FONT_H
 

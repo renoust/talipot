@@ -453,6 +453,6 @@ protected slots:
    */
   void activateTooltipAndUrlManager(QWidget *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_VIEW_H

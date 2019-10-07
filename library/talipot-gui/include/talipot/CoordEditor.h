@@ -56,7 +56,7 @@ signals:
 private slots:
   void coordUpdated();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_COORD_EDITOR_H
 ///@endcond

@@ -83,6 +83,6 @@ protected:
   float _endSize;
   std::string texture;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_CURVE_H
 ///@endcond

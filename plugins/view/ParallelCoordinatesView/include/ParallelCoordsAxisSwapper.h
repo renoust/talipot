@@ -42,6 +42,6 @@ private:
   bool mouseMove;
   bool axisSwapStarted;
 };
-} // namespace tlp
+}
 
 #endif // PARALLEL_COORDS_AXIS_SWAPPER_H

@@ -566,4 +566,4 @@ SelectionTextItem::SelectionTextItem() {
   f.setBold(true);
   setFont(f);
 }
-} // namespace tlp
+}

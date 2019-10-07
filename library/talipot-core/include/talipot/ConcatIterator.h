@@ -76,5 +76,5 @@ template <class T>
 Iterator<T> *concatIterator(Iterator<T> *itOne, Iterator<T> *itTwo) {
   return new ConcatIterator<T>(itOne, itTwo);
 }
-} // namespace tlp
+}
 #endif // TALIPOT_CONCAT_ITERATOR_H

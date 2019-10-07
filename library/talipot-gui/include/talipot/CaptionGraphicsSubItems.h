@@ -197,7 +197,7 @@ protected:
   QGraphicsPathItem *_topSizeCaptionPathItem;
   QGraphicsPathItem *_bottomSizeCaptionPathItem;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_CAPTION_GRAPHICS_SUB_ITEMS_H
 ///@endcond

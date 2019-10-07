@@ -36,6 +36,6 @@ private:
   PixelOrientedView *pixelView;
   PixelOrientedOverview *selectedOverview;
 };
-} // namespace tlp
+}
 
 #endif // PIXEL_ORIENTED_VIEW_NAVIGATOR_H

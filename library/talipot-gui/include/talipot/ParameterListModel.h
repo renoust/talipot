@@ -44,7 +44,7 @@ public:
   Qt::ItemFlags flags(const QModelIndex &index) const override;
   bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PARAMETER_LIST_MODEL_H
 ///@endcond

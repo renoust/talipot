@@ -101,7 +101,7 @@ public:
 private:
   Ui::StringsListSelectionDialog *ui;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STRINGS_LIST_SELECTION_DIALOG_H
 ///@endcond

@@ -166,7 +166,7 @@ public:
   bool hasNext() override;
 };
 //============================================================
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_ITERATORS_H
 
 ///@endcond

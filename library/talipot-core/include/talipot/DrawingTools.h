@@ -159,7 +159,7 @@ TLP_SCOPE std::vector<tlp::Coord> computeRegularPolygon(unsigned int numberOfSid
                                                         const tlp::Coord &center,
                                                         const tlp::Size &size,
                                                         float startAngle = 0);
-} // namespace tlp
+}
 
 #endif // TALIPOT_DRAWING_TOOLS_H
 ///@endcond

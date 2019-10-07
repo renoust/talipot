@@ -480,7 +480,7 @@ typedef Vector<float, 3, double> Vec3f;
  * @brief typedef for 4D vector of float
  */
 typedef Vector<float, 4, double> Vec4f;
-} // namespace tlp
+}
 
 #ifdef _MSC_VER
 static double sqrt(tlp::Vector<float, 5> &v) {

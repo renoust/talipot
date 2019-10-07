@@ -30,5 +30,5 @@ public:
 private:
   MatrixView *_view;
 };
-} // namespace tlp
+}
 #endif // GL_MATRIX_BACKGROUND_GRID_H

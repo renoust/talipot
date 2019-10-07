@@ -600,4 +600,4 @@ void enableQtUserInput() {
   QApplication::restoreOverrideCursor();
 }
 
-} // namespace tlp
+}

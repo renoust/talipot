@@ -107,6 +107,6 @@ public:
    **/
   DataSet *dataSet;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_IMPORT_MODULE_H
 ///@endcond

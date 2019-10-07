@@ -86,6 +86,6 @@ public slots:
    */
   virtual void draw(tlp::GlMainWidget *);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_INTERACTOR_H

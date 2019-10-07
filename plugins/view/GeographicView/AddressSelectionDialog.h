@@ -45,6 +45,6 @@ public:
 
   void showEvent(QShowEvent *showEvt) override;
 };
-} // namespace tlp
+}
 
 #endif // ADDRESS_SELECTION_DIALOG_H

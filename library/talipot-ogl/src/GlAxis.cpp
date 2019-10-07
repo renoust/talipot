@@ -350,4 +350,4 @@ void GlAxis::setGradsLabelsHeight(float height) {
 
   computeBoundingBox();
 }
-} // namespace tlp
+}

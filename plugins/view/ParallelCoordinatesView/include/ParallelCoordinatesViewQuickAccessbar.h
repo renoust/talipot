@@ -35,5 +35,5 @@ public slots:
   void setBackgroundColor(const QColor &) override;
   void setLabelsVisible(bool) override;
 };
-} // namespace tlp
+}
 #endif // PARALLEL_COORDINATES_VIEW_QUICK_ACCESSBAR_H

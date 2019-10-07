@@ -34,7 +34,7 @@ private:
   static QStringList _installedVersions;
   static bool _installedVersionsChecked;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_VERSION_CHECKER_H
 ///@endcond

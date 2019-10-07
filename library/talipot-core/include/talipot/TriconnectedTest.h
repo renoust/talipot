@@ -38,5 +38,5 @@ public:
    **/
   static bool isTriconnected(Graph *graph);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_TRICONNECTED_TEST_H

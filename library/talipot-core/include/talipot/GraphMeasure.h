@@ -100,6 +100,6 @@ TLP_SCOPE double maxDistance(const Graph *graph, const unsigned int nPos,
                              tlp::NodeStaticProperty<double> &distance,
                              const NumericProperty *const weights,
                              EDGE_TYPE direction = UNDIRECTED);
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_MEASURE_H
 ///@endcond

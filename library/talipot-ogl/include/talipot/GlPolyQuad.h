@@ -152,6 +152,6 @@ private:
   int outlineWidth;
   Color outlineColor;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_POLY_QUAD_H
 ///@endcond

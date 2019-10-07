@@ -240,4 +240,4 @@ void NominalAxisConfigDialog::pressButtonLexOrder() {
     }
   }
 }
-} // namespace tlp
+}

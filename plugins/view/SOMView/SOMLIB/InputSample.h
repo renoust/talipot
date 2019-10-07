@@ -133,5 +133,5 @@ protected:
   // Indicates whether or not normalized values should be used
   bool usingNormalizedValues;
 };
-} // namespace tlp
+}
 #endif // INPUT_SAMPLE_H

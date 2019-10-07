@@ -232,6 +232,6 @@ TLP_SCOPE void computeDijkstra(const Graph *const graph, node src,
                                std::unordered_map<node, std::list<node>> &ancestors,
                                std::stack<node> *queueNodes = nullptr,
                                MutableContainer<int> *numberOfPaths = nullptr);
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_TOOLS_H
 ///@endcond

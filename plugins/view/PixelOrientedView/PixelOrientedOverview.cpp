@@ -232,4 +232,4 @@ void PixelOrientedOverview::setBLCorner(const Coord &blCorner) {
   blCornerPos = blCorner;
   computeBoundingBox();
 }
-} // namespace tlp
+}

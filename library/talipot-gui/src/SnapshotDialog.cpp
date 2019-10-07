@@ -237,4 +237,4 @@ void SnapshotDialog::sizeSpinBoxValueChanged() {
 void SnapshotDialog::setSnapshotHasViewSizeRatio(bool snapshotHasViewSizeRatio) {
   lockLabel->setAlwaysLocked(snapshotHasViewSizeRatio);
 }
-} // namespace tlp
+}

@@ -214,4 +214,4 @@ bool tlp::GraphPropertiesModel<PROPTYPE>::setData(const QModelIndex &index, cons
 
   return false;
 }
-} // namespace tlp
+}

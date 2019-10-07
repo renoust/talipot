@@ -54,4 +54,4 @@ void AddressSelectionDialog::showEvent(QShowEvent *showEvt) {
   QDialog::showEvent(showEvt);
 }
 
-} // namespace tlp
+}

@@ -64,4 +64,4 @@ void GlRegularPolygon::computePolygon() {
 
   clearGenerated();
 }
-} // namespace tlp
+}

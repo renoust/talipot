@@ -61,4 +61,4 @@ vector<Coord> GlCubicBSplineInterpolation::constructInterpolatingCubicBSpline(
   bSplineControlPoints.push_back(pointsToInterpolate[pointsToInterpolate.size() - 1]);
   return bSplineControlPoints;
 }
-} // namespace tlp
+}

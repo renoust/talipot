@@ -34,6 +34,6 @@ public:
   void paint(QPainter *painter, const QStyleOptionViewItem &option,
              const QModelIndex &index) const override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_TABLE_ITEM_DELEGATE_H
 ///@endcond

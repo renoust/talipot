@@ -115,4 +115,4 @@ void GraphPropertiesSelectionWidget::clearLists() {
   clearSelectedStringsList();
   clearUnselectedStringsList();
 }
-} // namespace tlp
+}

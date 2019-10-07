@@ -129,6 +129,6 @@ struct StlMapKeyIterator : public tlp::Iterator<KEY> {
 private:
   typename std::map<KEY, VALUE>::const_iterator it, itEnd;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STL_ITERATOR_H

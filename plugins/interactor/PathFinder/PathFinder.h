@@ -139,5 +139,5 @@ private:
   tlp::StringsListSelectionWidget *highlightersListWidget;
   QPushButton *configureHighlighterBtn;
 };
-} // namespace tlp
+}
 #endif // PATH_FINDER_H

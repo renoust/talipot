@@ -261,5 +261,5 @@ protected:
   std::vector<int> quadBorderPosition;
   std::vector<float> quadBorderTexFactor;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_COMPLEX_POLYGON_H

@@ -183,6 +183,6 @@ signals:
 };
 
 #include "PythonInterpreter.cxx"
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_INTERPRETER_H

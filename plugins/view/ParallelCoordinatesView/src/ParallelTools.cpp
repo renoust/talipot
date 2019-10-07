@@ -135,4 +135,4 @@ Coord *computeStraightLineIntersection(const Coord line1[2], const Coord line2[2
 
   return intersectionPoint;
 }
-} // namespace tlp
+}

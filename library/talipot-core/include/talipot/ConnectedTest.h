@@ -83,6 +83,6 @@ private:
    **/
   static void connect(const Graph *const, std::vector<node> &toLink);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_CONNECTED_TEST_H

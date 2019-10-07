@@ -185,5 +185,5 @@ public:
    **/
   virtual void setTitle(const std::string &title) = 0;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PLUGIN_PROGRESS_H

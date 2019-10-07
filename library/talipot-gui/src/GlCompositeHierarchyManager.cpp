@@ -303,4 +303,4 @@ void GlHierarchyMainComposite::setVisible(bool visible) {
   _manager->setVisible(visible);
   GlSimpleEntity::setVisible(visible);
 }
-} // namespace tlp
+}

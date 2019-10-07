@@ -43,7 +43,7 @@ public slots:
   // redefinition to ensure to catch the end of input
   void done(int r) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_STRING_EDITOR_H
 ///@endcond

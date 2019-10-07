@@ -36,4 +36,4 @@ template <typename T>
 tlp::ItemEditorCreator *ItemDelegate::creator() const {
   return creator(qMetaTypeId<T>());
 }
-} // namespace tlp
+}

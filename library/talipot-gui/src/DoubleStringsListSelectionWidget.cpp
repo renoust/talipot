@@ -179,4 +179,4 @@ void DoubleStringsListSelectionWidget::pressButtonSelectAll() {
 void DoubleStringsListSelectionWidget::pressButtonUnselectAll() {
   unselectAllStrings();
 }
-} // namespace tlp
+}

@@ -84,5 +84,5 @@ protected:
   Color color;           /**< The color of the grid */
   Size cell;             /**< The size of a cell of the grid */
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_GRID_H

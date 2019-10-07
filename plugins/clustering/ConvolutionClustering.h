@@ -54,6 +54,6 @@ private:
   int histosize, threshold, width;
   tlp::NumericProperty *metric;
 };
-} // namespace tlp
+}
 
 #endif // CONVOLUTION_CLUSTERING_H

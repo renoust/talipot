@@ -88,7 +88,7 @@ private slots:
   void showVisualProp(bool show);
   void hideInfos();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_MOUSE_SHOW_ELEMENT_INFO_H
 ///@endcond

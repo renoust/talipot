@@ -70,5 +70,5 @@ public:
    */
   virtual Coord &point(const unsigned int i);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_POLYGON_H

@@ -94,6 +94,6 @@ private slots:
 signals:
   void mappingChanged();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_GRAPH_MAPPING_CONFIGURATION_WIDGET_H
 ///@endcond

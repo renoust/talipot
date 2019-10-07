@@ -90,4 +90,4 @@ int OpenGlConfigManager::maxNumberOfSamples() {
 
   return maxSamples / 4;
 }
-} // namespace tlp
+}

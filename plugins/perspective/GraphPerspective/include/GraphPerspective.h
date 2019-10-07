@@ -31,7 +31,7 @@ class GraphHierarchiesModel;
 class View;
 class BooleanProperty;
 class ColorScaleConfigDialog;
-} // namespace tlp
+}
 
 namespace Ui {
 class GraphPerspectiveMainWindowData;

@@ -41,6 +41,6 @@ protected:
   Graph *graph;
   SelectionMode _mode;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MOUSE_SELECTOR_H
 ///@endcond

@@ -395,7 +395,7 @@ public:
       pos.set((*this)[i], i);
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_ID_MANAGER_H
 

@@ -1298,4 +1298,4 @@ void GeographicViewGraphicsView::setGeoLayoutComputed() {
   glMainWidget->getScene()->getGlGraphComposite()->setVisible(true);
 }
 
-} // namespace tlp
+}

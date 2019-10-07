@@ -193,4 +193,4 @@ unsigned int ThreadManager::getThreadNumber() {
 #endif
   return 0;
 }
-} // namespace tlp
+}

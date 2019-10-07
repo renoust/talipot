@@ -471,5 +471,5 @@ private:
   std::vector<float> textWidthVector;
   BoundingBox textBoundingBox;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_LABEL_H

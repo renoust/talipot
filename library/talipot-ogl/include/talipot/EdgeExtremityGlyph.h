@@ -52,7 +52,7 @@ public:
 protected:
   GlGraphInputData *edgeExtGlGraphInputData;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_EDGE_EXTREMITY_GLYPH_H
 ///@endcond

@@ -88,6 +88,6 @@ public:
 
   bool isCompatible(const std::string &viewName) const override;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT2D_INTERACTORS_H

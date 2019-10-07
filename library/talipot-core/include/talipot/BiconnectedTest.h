@@ -55,6 +55,6 @@ public:
    **/
   static void makeBiconnected(Graph *graph, std::vector<edge> &addedEdges);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_BICONNECTED_TEST_H

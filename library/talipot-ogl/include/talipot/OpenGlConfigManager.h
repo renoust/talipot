@@ -101,7 +101,7 @@ private:
   static bool _antialiased;
   static std::unordered_map<std::string, bool> _checkedExtensions;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_OPEN_GL_CONFIG_MANAGER_H
 ///@endcond

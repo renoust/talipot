@@ -125,7 +125,7 @@ TLP_QT_SCOPE void redirectErrorOutputToQCritical();
 TLP_QT_SCOPE void disableQtUserInput();
 
 TLP_QT_SCOPE void enableQtUserInput();
-} // namespace tlp
+}
 
 // QDebug extension
 inline QDebug operator<<(QDebug dbg, const std::string &s) {

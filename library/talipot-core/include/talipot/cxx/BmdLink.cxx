@@ -17,5 +17,5 @@ namespace tlp {
 template <typename TYPE>
 BmdLink<TYPE>::BmdLink(TYPE data, BmdLink<TYPE> *pre, BmdLink<TYPE> *suc)
     : data(data), pre(suc), suc(pre) {}
-} // namespace tlp
+}
 //=================================================================

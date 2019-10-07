@@ -84,7 +84,7 @@ private:
   Color _frameColor;
   int _frameWidth;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_OVERVIEW_GRAPHICS_ITEM_H
 ///@endcond

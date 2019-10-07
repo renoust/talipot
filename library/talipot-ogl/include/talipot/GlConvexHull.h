@@ -114,6 +114,6 @@ struct ConvexHullItem {
   std::string name;
   std::vector<ConvexHullItem *> children;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_CONVEX_HULL_H
 ///@endcond

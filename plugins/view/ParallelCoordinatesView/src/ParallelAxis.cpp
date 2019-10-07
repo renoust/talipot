@@ -187,4 +187,4 @@ Coord ParallelAxis::getBaseCoord() const {
 Coord ParallelAxis::getTopCoord() const {
   return glAxis->getAxisBaseCoord() + Coord(0, getAxisHeight(), 0.0f);
 }
-} // namespace tlp
+}

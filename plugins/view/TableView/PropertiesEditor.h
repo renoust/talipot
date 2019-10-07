@@ -28,7 +28,7 @@ class PropertiesEditor;
 namespace tlp {
 class Graph;
 class ItemDelegate;
-} // namespace tlp
+}
 
 #define OF_PROPERTY QString(" of the graph owning the property")
 #define OF_GRAPH QString(" of the current graph")

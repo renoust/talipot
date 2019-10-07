@@ -79,5 +79,5 @@ public:
    **/
   static std::list<edge> getObstructionsEdges(Graph *graph);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_PLANARITY_TEST_H

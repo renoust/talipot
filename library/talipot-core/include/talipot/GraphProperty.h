@@ -84,5 +84,5 @@ private:
   MutableContainer<std::set<node>> referencedGraph;
   const std::set<edge> &getReferencedEdges(const edge) const;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GRAPH_PROPERTY_H

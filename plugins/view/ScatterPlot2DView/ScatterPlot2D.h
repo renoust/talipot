@@ -181,6 +181,6 @@ private:
   int overviewId;
   static int overviewCpt;
 };
-} // namespace tlp
+}
 
 #endif // SCATTER_PLOT2D_H

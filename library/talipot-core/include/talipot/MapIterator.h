@@ -106,7 +106,7 @@ private:
   unsigned int pos;
   bool finished;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MAP_ITERATOR_H
 
 ///@endcond

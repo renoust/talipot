@@ -63,6 +63,6 @@ public slots:
 signals:
   void computeGeoLayout();
 };
-} // namespace tlp
+}
 
 #endif // GEOLOCALISATION_CONFIG_WIDGET_H

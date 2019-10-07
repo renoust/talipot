@@ -384,6 +384,6 @@ protected:
   CSVImportColumnToGraphPropertyMapping *propertiesManager;
   CSVImportParameters importParameters;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_GRAPH_IMPORT_H
 ///@endcond

@@ -38,6 +38,6 @@ private:
   QNetworkAccessManager *_networkAccessManager;
 };
 
-} // namespace tlp
+}
 
 #endif // NOMINATIM_GEOCODER_H

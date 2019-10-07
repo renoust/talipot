@@ -60,5 +60,5 @@ private:
   std::unordered_map<std::string, bool> entities;
   int entityId;
 };
-} // namespace tlp
+}
 #endif // PATH_HIGHLIGHTER_H

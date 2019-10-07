@@ -57,6 +57,6 @@ public:
 public slots:
   void browse();
 };
-} // namespace tlp
+}
 #endif // TALIPOT_TEXTURE_FILE_DIALOG_H
 ///@endcond

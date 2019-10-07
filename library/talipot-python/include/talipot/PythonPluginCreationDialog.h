@@ -56,6 +56,6 @@ protected slots:
 
   void selectPluginSourceFile();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_PYTHON_PLUGIN_CREATION_DIALOG_H

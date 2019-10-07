@@ -105,6 +105,6 @@ private:
   Ui::CSVImportWizard *ui;
   static tlp::Graph *graph;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_IMPORT_WIZARD_H
 ///@endcond

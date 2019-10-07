@@ -150,4 +150,4 @@ void DoubleStringsListRelationDialog::interpolateCheckBoxChange(int state) {
     }
   }
 }
-} // namespace tlp
+}

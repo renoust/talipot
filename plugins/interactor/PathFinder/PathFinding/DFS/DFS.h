@@ -69,5 +69,5 @@ private:
   bool computeSearchPaths(tlp::node src, tlp::BooleanProperty *visitable,
                           tlp::DoubleProperty *dists);
 };
-} // namespace tlp
+}
 #endif // DFS_H

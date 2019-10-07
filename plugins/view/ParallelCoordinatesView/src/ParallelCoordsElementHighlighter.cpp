@@ -39,4 +39,4 @@ ParallelCoordsElementHighlighter::~ParallelCoordsElementHighlighter() {
   if (parallelView)
     parallelView->resetHighlightedElements();
 }
-} // namespace tlp
+}

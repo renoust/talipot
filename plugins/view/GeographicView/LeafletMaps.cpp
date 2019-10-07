@@ -414,4 +414,4 @@ pair<double, double> LeafletMaps::getMapCurrentNorthEastLatLng() {
   return latLng;
 }
 
-} // namespace tlp
+}

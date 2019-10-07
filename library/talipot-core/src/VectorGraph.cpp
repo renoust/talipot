@@ -32,7 +32,7 @@ template class TLP_SCOPE NodeProperty<node>;
 template class TLP_SCOPE NodeProperty<double>;
 template class TLP_SCOPE EdgeProperty<node>;
 template class TLP_SCOPE EdgeProperty<double>;
-} // namespace tlp
+}
 
 namespace {
 //==================================================================================
@@ -712,4 +712,4 @@ void VectorGraph::partialDelEdge(node n, edge e) {
   _nData[n]._adjt.resize(endP);
 }
 //=======================================================
-} // namespace tlp
+}

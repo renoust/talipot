@@ -48,6 +48,6 @@ private slots:
 private:
   std::vector<Color> lastNonInterpolateValues;
 };
-} // namespace tlp
+}
 
 #endif // DOUBLE_STRINGS_LIST_RELATION_DIALOG_H

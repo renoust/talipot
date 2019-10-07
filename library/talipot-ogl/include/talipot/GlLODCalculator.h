@@ -215,7 +215,7 @@ protected:
 
   GlLODCalculator *attachedLODCalculator;
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

@@ -141,5 +141,5 @@ private:
   void updateNodesOrder();
   void updateLayout();
 };
-} // namespace tlp
+}
 #endif // MATRIX_VIEW_H

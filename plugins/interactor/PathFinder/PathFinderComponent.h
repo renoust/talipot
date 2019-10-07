@@ -68,6 +68,6 @@ private:
   void selectPath(GlMainWidget *glMainWidget, tlp::Graph *graph);
   PathHighlighter *findHighlighter(const std::string &name);
 };
-} // namespace tlp
+}
 
 #endif // PATH_FINDER_COMPONENT_H

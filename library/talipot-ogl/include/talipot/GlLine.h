@@ -107,7 +107,7 @@ protected:
   unsigned char factor;
   unsigned int pattern;
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

@@ -66,5 +66,5 @@ signals:
 private:
   bool _modifyingMetricList;
 };
-} // namespace tlp
+}
 #endif // MATRIX_VIEW_CONFIGURATION_WIDGET_H

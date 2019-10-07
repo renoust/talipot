@@ -67,7 +67,7 @@ private:
   static GLfloat *buildCurvePoints(const Coord &p0, const Coord &p1, const Coord &p2,
                                    const Coord &p3);
 };
-} // namespace tlp
+}
 #endif // DOXYGEN_NOTFOR_DEVEL
 #endif // TALIPOT_GL_LINES_H
 ///@endcond

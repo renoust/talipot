@@ -160,4 +160,4 @@ bool ParallelCoordsAxisSpacer::draw(GlMainWidget *glMainWidget) {
 void ParallelCoordsAxisSpacer::viewChanged(View *view) {
   parallelView = static_cast<ParallelCoordinatesView *>(view);
 }
-} // namespace tlp
+}

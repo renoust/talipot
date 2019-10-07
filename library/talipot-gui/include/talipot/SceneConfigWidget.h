@@ -51,7 +51,7 @@ public slots:
 protected:
   bool eventFilter(QObject *, QEvent *) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_SCENE_CONFIG_WIDGET_H
 ///@endcond

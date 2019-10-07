@@ -255,4 +255,4 @@ void GlPolyQuad::setWithXML(const string &inString, unsigned int &currentPositio
     boundingBox.expand(*it);
   }
 }
-} // namespace tlp
+}

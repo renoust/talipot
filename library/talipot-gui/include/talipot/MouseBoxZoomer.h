@@ -43,6 +43,6 @@ private:
   bool started;
   Graph *graph;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_MOUSE_BOX_ZOOMER_H
 ///@endcond

@@ -97,6 +97,6 @@ private:
   static GlShaderProgram *_glyphShader;
   static GlBox *_selectionBox;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GLYPH_RENDERER_H

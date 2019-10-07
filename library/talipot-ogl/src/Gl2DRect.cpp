@@ -158,4 +158,4 @@ void Gl2DRect::setWithXML(const string &inString, unsigned int &currentPosition)
   GlXMLTools::setWithXML(inString, currentPosition, "xInv", xInv, false);
   GlXMLTools::setWithXML(inString, currentPosition, "yInv", yInv, false);
 }
-} // namespace tlp
+}

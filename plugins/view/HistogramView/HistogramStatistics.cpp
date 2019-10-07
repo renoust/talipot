@@ -546,4 +546,4 @@ bool HistogramStatistics::draw(GlMainWidget *glMainWidget) {
   glEnable(GL_LIGHTING);
   return true;
 }
-} // namespace tlp
+}

@@ -184,6 +184,6 @@ private:
 };
 
 #endif
-} // namespace tlp
+}
 
 #endif // LEAFLET_MAPS_H

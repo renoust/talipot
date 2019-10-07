@@ -108,7 +108,7 @@ public:
    */
   static std::string getIconUtf8String(const std::string &iconName);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_MATERIAL_DESIGN_ICONS_H
 

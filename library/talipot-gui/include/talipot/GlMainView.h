@@ -263,6 +263,6 @@ protected:
 
   bool _updateOverview;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_MAIN_VIEW_H

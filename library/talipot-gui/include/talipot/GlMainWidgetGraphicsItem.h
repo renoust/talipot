@@ -76,7 +76,7 @@ private:
   bool _graphChanged;
   int width, height;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_MAIN_WIDGET_GRAPHICS_ITEM_H
 ///@endcond

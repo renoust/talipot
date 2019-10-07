@@ -433,4 +433,4 @@ std::vector<Coord> computeNormals(const std::vector<Coord> &vertices,
 
   return normals;
 }
-} // namespace tlp
+}

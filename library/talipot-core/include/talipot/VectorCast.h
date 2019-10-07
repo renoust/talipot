@@ -103,7 +103,7 @@ public:
     return VECTORCAST(*this) ^= v;
   }
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_VECTOR_CAST_H
 ///@endcond

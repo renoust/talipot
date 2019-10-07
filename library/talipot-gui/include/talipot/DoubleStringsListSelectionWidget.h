@@ -72,7 +72,7 @@ private slots:
 private:
   void qtWidgetsConnection();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_DOUBLE_STRINGS_LIST_SELECTION_WIDGET_H
 ///@endcond

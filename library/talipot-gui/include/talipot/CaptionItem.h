@@ -89,7 +89,7 @@ private:
   ColorProperty *_backupColorProperty;
   ColorProperty *_backupBorderColorProperty;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_CAPTION_ITEM_H
 ///@endcond

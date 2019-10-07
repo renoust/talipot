@@ -35,7 +35,7 @@ public:
   static std::string labelPositionName(int id);
   static int labelPositionId(const std::string &name);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_STATIC_DATA_H
 ///@endcond

@@ -824,4 +824,4 @@ void computeDijkstra(const Graph *const graph, node src, const EdgeStaticPropert
   dijkstra.ancestors(ancestors);
 }
 
-} // namespace tlp
+}

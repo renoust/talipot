@@ -35,6 +35,6 @@ public:
 private:
   std::string desc;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_EXCEPTION_H
 ///@endcond

@@ -1192,4 +1192,4 @@ void HistogramMetricMapping::updateMapping(GlQuantitativeAxis *histoXAxis,
     }
   }
 }
-} // namespace tlp
+}

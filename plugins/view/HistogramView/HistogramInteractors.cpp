@@ -232,4 +232,4 @@ void HistogramInteractorGetInformation::construct() {
 bool HistogramInteractorGetInformation::isCompatible(const std::string &viewName) const {
   return (viewName == ViewName::HistogramViewName);
 }
-} // namespace tlp
+}

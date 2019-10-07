@@ -56,7 +56,7 @@ public slots:
 protected slots:
   void fontChanged();
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_FONT_DIALOG_H
 ///@endcond

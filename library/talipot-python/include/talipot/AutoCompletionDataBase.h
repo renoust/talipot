@@ -81,6 +81,6 @@ public:
 
   QString getTypeNameForExpr(const QString &varName) const;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_AUTO_COMPLETION_DATA_BASE_H

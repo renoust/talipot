@@ -130,5 +130,5 @@ public:
     return propertyTypename;
   }
 };
-} // namespace tlp
+}
 #endif // TALIPOT_DOUBLE_PROPERTY_H

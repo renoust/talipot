@@ -110,6 +110,6 @@ public:
    */
   void setWithXML(const std::string &inString, unsigned int &currentPosition) override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_QUAD_H
 ///@endcond

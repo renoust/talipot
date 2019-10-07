@@ -45,4 +45,4 @@ GlLayer *GlSceneEvent::getLayer() const {
 GlSceneEvent::GlSceneEventType GlSceneEvent::getSceneEventType() const {
   return sceneEventType;
 }
-} // namespace tlp
+}

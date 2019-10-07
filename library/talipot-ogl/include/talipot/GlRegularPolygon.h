@@ -72,5 +72,5 @@ protected:
   unsigned int numberOfSides;
   float startAngle;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_REGULAR_POLYGON_H

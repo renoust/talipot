@@ -237,7 +237,7 @@ protected:
   // override Observable::treatEvent
   void treatEvent(const Event &ev) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_UPDATES_RECORDER_H
 

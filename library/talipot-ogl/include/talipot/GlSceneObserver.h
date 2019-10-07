@@ -59,7 +59,7 @@ protected:
   GlLayer *layer;
   GlSimpleEntity *glSimpleEntity;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_SCENE_OBSERVER_H
 

@@ -172,6 +172,6 @@ protected:
   bool nodesModified;
   std::set<node> metaNodes;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_COMPOSITE_H

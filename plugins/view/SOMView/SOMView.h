@@ -419,5 +419,5 @@ private slots:
 
   void toggleInteractors(const bool activate);
 };
-} // namespace tlp
+}
 #endif // SOM_VIEW_H

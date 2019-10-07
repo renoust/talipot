@@ -67,7 +67,7 @@ public:
 protected:
   void paintEvent(QPaintEvent *) override;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_COLOR_BUTTON_H
 ///@endcond

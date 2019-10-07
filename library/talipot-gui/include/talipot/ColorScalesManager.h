@@ -72,7 +72,7 @@ private:
   static std::string findColorScaleFile(const std::string &rootDir,
                                         const std::string &colorScaleName);
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_COLOR_SCALES_MANAGER_H
 

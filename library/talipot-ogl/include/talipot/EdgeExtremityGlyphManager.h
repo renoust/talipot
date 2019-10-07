@@ -53,6 +53,6 @@ public:
   static void clearGlyphList(Graph **graph, GlGraphInputData *glGraphInputData,
                              MutableContainer<EdgeExtremityGlyph *> &glyphs);
 };
-} // namespace tlp
+}
 #endif // TALIPOT_EDGE_EXTREMITY_GLYPH_MANAGER_H
 ///@endcond

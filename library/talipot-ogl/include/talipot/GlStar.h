@@ -52,5 +52,5 @@ protected:
   Size size;
   unsigned int numberOfStarPoints;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_STAR_H

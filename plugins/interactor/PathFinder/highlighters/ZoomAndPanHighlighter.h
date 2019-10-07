@@ -29,5 +29,5 @@ public:
   bool isConfigurable() const override;
   QWidget *getConfigurationWidget() override;
 };
-} // namespace tlp
+}
 #endif // ZOOM_AND_PAN_HIGHLIGHTER_H

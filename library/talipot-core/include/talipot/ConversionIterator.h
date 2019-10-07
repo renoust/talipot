@@ -110,5 +110,5 @@ typename std::enable_if<has_const_iterator<Container>::value,
   return new MPConversionIterator<typename Container::value_type, TOUT, ConversionFunc>(
       stlIterator(stlContainer), convFunc);
 }
-} // namespace tlp
+}
 #endif // TALIPOT_CONVERSION_ITERATOR_H

@@ -109,5 +109,5 @@ public:
 
   void draw(float lod, Camera *camera) override;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_GL_RECT_H

@@ -47,5 +47,5 @@ private:
   Color oldBackgroundColor;
   std::string oldLayoutType;
 };
-} // namespace tlp
+}
 #endif // PIXEL_ORIENTED_OPTIONS_WIDGET_H

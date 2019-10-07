@@ -47,6 +47,6 @@ public:
    */
   virtual bool end(unsigned int rowNumber, unsigned int columnNumber) = 0;
 };
-} // namespace tlp
+}
 #endif // TALIPOT_CSV_CONTENT_HANDLER_H
 ///@endcond

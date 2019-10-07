@@ -75,7 +75,7 @@ private:
   QHash<QString, itemInfo> hashDataBase;
   ItemsListWidget *axisLabelsOrder;
 };
-} // namespace tlp
+}
 
 #endif // DOXYGEN_NOTFOR_DEVEL
 

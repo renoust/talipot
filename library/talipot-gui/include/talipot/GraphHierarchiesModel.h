@@ -116,7 +116,7 @@ public slots:
 private:
   QSet<const Graph *> _graphsChanged;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GRAPH_HIERARCHIES_MODEL_H
 ///@endcond

@@ -992,4 +992,4 @@ void GlScene::setWithXML(string &in, Graph *graph) {
 BoundingBox GlScene::getBoundingBox() {
   return lodCalculator->getSceneBoundingBox();
 }
-} // namespace tlp
+}
