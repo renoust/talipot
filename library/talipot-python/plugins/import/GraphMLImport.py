@@ -214,7 +214,8 @@ class GraphMLImport(tlp.ImportModule):
         # set our custom content handler
         parser.setContentHandler(GraphMLHandler(self.graph))
         # parse the GraphML file
-        parser.parse(open(self.dataSet['filename'], 'rb'))
+        with open(self.dataSet['filename'], 'rb') as graphml:
+            parser.parse(graphml)
 
         return True
 

@@ -41,7 +41,8 @@ def parsePackageJsonForDependenciesGraph(npmPackageDir, graph,
         return
 
     # parse package.json file
-    packageInfos = json.load(open(packageJsonFilePath))
+    with open(packageJsonFilePath) as packageJson:
+        packageInfos = json.load(packageJson)
 
     # create a string property that will store dependency type on edges
     dependencyType = graph.getStringProperty('dependencyType')

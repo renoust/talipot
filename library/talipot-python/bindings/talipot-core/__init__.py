@@ -65,8 +65,8 @@ class tlp(with_metaclass(tlpType, _talipot.tlp)):
             return False
 
         try:
-            pluginFile = open(pluginFilePath)
-            pluginFileContent = pluginFile.read()
+            with open(pluginFilePath) as pluginFile:
+                pluginFileContent = pluginFile.read()
         except Exception:
             return False
 
@@ -132,8 +132,9 @@ def runStartupScripts(scriptsPath):
     for file in files:
         filePath = scriptsPath+'/'+file
         if os.path.isfile(filePath) and filePath.endswith('.py'):
-            exec(compile(open(filePath).read(), filePath, 'exec'),
-                 globals(), locals())
+            with open(filePath) as fd:
+                exec(compile(fd.read(), filePath, 'exec'),
+                     globals(), locals())
 
 
 runStartupScripts(startupScriptsPath)

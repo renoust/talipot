@@ -34,19 +34,20 @@ cmakeProjectDotFileName = 'cmake_project'
 
 def executeCommand(command, cwd, stderrfile, pluginProgress):
     # execute the process
-    p = subprocess.Popen(command, cwd=cwd, shell=True, stdout=subprocess.PIPE,
-                         stderr=open(stderrfile, 'wb'))
-    # add some execution feedback trough the plugin progress
-    while True:
-        line = p.stdout.readline().decode('utf-8')
-        line = line.replace('\r\n', '').replace('\n', '')
-        if line == '' and p.poll() is not None:
-            break
-        if pluginProgress:
-            pluginProgress.setComment(line)
+    with open(stderrfile, 'wb') as err:
+        p = subprocess.Popen(command, cwd=cwd, shell=True,
+                             stdout=subprocess.PIPE, stderr=err)
+        # add some execution feedback trough the plugin progress
+        while True:
+            line = p.stdout.readline().decode('utf-8')
+            line = line.replace('\r\n', '').replace('\n', '')
+            if line == '' and p.poll() is not None:
+                break
+            if pluginProgress:
+                pluginProgress.setComment(line)
 
-    # wait for the process to complete
-    retval = p.wait()
+        # wait for the process to complete
+        retval = p.wait()
     return retval
 
 
@@ -108,7 +109,8 @@ class CMakeDependenciesGraphImport(tlp.ImportModule):
         # something went wrong
         if retval != 0:
             # read stderr file and transmit error string to the plugin progress
-            errors = open(stderrfile, 'rb').read().decode('utf-8')
+            with open(stderrfile, 'rb') as err:
+                errors = err.read().decode('utf-8')
             if self.pluginProgress:
                 self.pluginProgress.setError(errors)
             # remove temporary directory
