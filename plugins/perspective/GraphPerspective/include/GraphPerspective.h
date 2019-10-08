@@ -37,12 +37,10 @@ namespace Ui {
 class GraphPerspectiveMainWindowData;
 }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 class PythonPanel;
 namespace tlp {
 class PythonIDE;
 }
-#endif
 
 class GraphPerspective : public tlp::Perspective, tlp::Observable {
   Q_OBJECT
@@ -162,9 +160,7 @@ protected slots:
   void resetLoggerDialogPosition();
   void showHideLogger();
   void showHideMenuBar();
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   void initPythonIDE();
-#endif
 
 protected:
   bool eventFilter(QObject *, QEvent *) override;
@@ -172,11 +168,9 @@ protected:
   void updateLogIconsAndCounters();
   void destroyWorkspace();
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   PythonPanel *_pythonPanel;
   tlp::PythonIDE *_pythonIDE;
   QDialog *_pythonIDEDialog;
-#endif
 };
 
 #endif // GRAPH_PERSPECTIVE_H

@@ -126,16 +126,13 @@ MainWindow::MainWindow(QWidget *parent)
   connect(PerspectiveProcessHandler::instance(), SIGNAL(openPerspective(QString)), this,
           SLOT(createPerspective(QString)));
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   checkPython();
-#endif
 }
 
 MainWindow::~MainWindow() {
   delete _ui;
 }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 void MainWindow::checkPython() {
   if (!PythonVersionChecker::isPythonVersionMatching()) {
 
@@ -177,7 +174,6 @@ void MainWindow::checkPython() {
     showErrorMessage("Python", errorMessage);
   }
 }
-#endif
 
 void MainWindow::closeEvent(QCloseEvent *e) {
   _systemTrayIcon->deleteLater();

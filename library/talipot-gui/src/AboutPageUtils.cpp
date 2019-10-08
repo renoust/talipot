@@ -20,11 +20,9 @@
 
 namespace tlp {
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 QString getSipVersion() {
   return SIP_VERSION;
 }
-#endif
 
 QString getTalipotGitRevision() {
   QFile gitCommitFile(tlpStringToQString(TalipotShareDir + "GIT_COMMIT"));

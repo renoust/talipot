@@ -11,13 +11,11 @@
  *
  */
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 #include <talipot/PythonInterpreter.h>
 #include <talipot/APIDataBase.h>
 #include <talipot/PythonIDE.h>
 #include <talipot/PythonCodeEditor.h>
 #include "PythonPanel.h"
-#endif
 
 #include "GraphPerspective.h"
 
@@ -116,10 +114,8 @@ GraphPerspective::GraphPerspective(const tlp::PluginContext *c)
     _lastOpenLocation = QDir::currentPath();
   }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE = nullptr;
   _pythonIDEDialog = nullptr;
-#endif
 }
 
 void GraphPerspective::reserveDefaultProperties() {
@@ -260,12 +256,10 @@ GraphPerspective::~GraphPerspective() {
     delete graph;
   }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   delete _pythonIDEDialog;
   if (Perspective::instance() == this) {
     PythonCodeEditor::deleteStaticResources();
   }
-#endif
 
   delete _ui;
 }
@@ -288,18 +282,12 @@ void GraphPerspective::destroyWorkspace() {
 
 bool GraphPerspective::terminated() {
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE->savePythonFilesAndWriteToProject(true);
   _pythonIDEDialog->hide();
-#endif
 
   if (_graphs->needsSaving() || mainWindow()->isWindowModified()) {
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
     QString message("The project has been modified (loaded graphs or Python files opened in the "
                     "IDE).\nDo you want to save your changes?");
-#else
-    QString message("The project has been modified.\nDo you want to save your changes?");
-#endif
     QMessageBox::StandardButton answer = QMessageBox::question(
         _mainWindow, "Save", message,
         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel | QMessageBox::Escape);
@@ -384,7 +372,6 @@ void GraphPerspective::redrawPanels(bool center) {
   _ui->workspace->redrawPanels(center);
 }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 class PythonIDEDialog : public QDialog {
 
   QByteArray _windowGeometry;
@@ -406,7 +393,6 @@ protected:
     QDialog::closeEvent(e);
   }
 };
-#endif
 
 #define SET_TOOLTIP(a, tt) a->setToolTip(QString(tt))
 
@@ -414,7 +400,6 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   reserveDefaultProperties();
   _ui = new Ui::GraphPerspectiveMainWindowData;
   _ui->setupUi(_mainWindow);
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonPanel = new PythonPanel();
   QVBoxLayout *layout = new QVBoxLayout();
   layout->addWidget(_pythonPanel);
@@ -430,11 +415,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _pythonIDEDialog->setLayout(dialogLayout);
   _pythonIDEDialog->resize(800, 600);
   _pythonIDEDialog->setWindowTitle("Talipot Python IDE");
-#else
-  _ui->pythonButton->setVisible(false);
-  _ui->developButton->setVisible(false);
-  _ui->actionPython_IDE->setVisible(false);
-#endif
+
   currentGraphChanged(nullptr);
   // set win/Mac dependent tooltips with ctrl shortcut
   SET_TIPS_WITH_CTRL_SHORTCUT(_ui->exposeModeButton, "Toggle the Expose mode", "E");
@@ -681,12 +662,8 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
             SLOT(showUserDocumentation()));
     connect(_ui->actionShowDevelDocumentation, SIGNAL(triggered()), this,
             SLOT(showDevelDocumentation()));
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
     connect(_ui->actionShowPythonDocumentation, SIGNAL(triggered()), this,
             SLOT(showPythonDocumentation()));
-#else
-    _ui->actionShowPythonDocumentation->setVisible(false);
-#endif
   } else {
     _ui->actionShowUserDocumentation->setVisible(false);
     _ui->actionShowDevelDocumentation->setVisible(false);
@@ -730,14 +707,12 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
 
   _ui->searchPanel->setModel(_graphs);
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   connect(_ui->pythonButton, SIGNAL(clicked(bool)), this, SLOT(setPythonPanel(bool)));
   connect(_ui->developButton, SIGNAL(clicked()), this, SLOT(showPythonIDE()));
   _pythonPanel->setModel(_graphs);
   _pythonIDE->setGraphsModel(_graphs);
   tlp::PluginsManager::instance()->addListener(this);
   QTimer::singleShot(100, this, SLOT(initPythonIDE()));
-#endif
 
   if (!_externalFile.isEmpty() && QFileInfo(_externalFile).exists()) {
     open(_externalFile);
@@ -1001,9 +976,7 @@ bool GraphPerspective::saveAs(const QString &path) {
   progress.show();
   QMap<Graph *, QString> rootIds = _graphs->writeProject(_project, &progress);
   _ui->workspace->writeProject(_project, rootIds, &progress);
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDE->savePythonFilesAndWriteToProject();
-#endif
   bool ret = _project->write(path, &progress);
 
   if (ret)
@@ -1086,9 +1059,7 @@ void GraphPerspective::openProjectFile(const QString &path) {
     if (_project->openProjectFile(path, prg)) {
       QMap<QString, tlp::Graph *> rootIds = _graphs->readProject(_project, prg);
       _ui->workspace->readProject(_project, rootIds, prg);
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
       QTimer::singleShot(100, this, SLOT(initPythonIDE()));
-#endif
     } else {
       QMessageBox::critical(_mainWindow,
                             QString("Error while loading project ").append(_project->projectFile()),
@@ -1101,11 +1072,9 @@ void GraphPerspective::openProjectFile(const QString &path) {
   }
 }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 void GraphPerspective::initPythonIDE() {
   _pythonIDE->setProject(_project);
 }
-#endif
 
 void GraphPerspective::deleteSelectedElementsFromRootGraph() {
   deleteSelectedElements(true);
@@ -1424,8 +1393,6 @@ void GraphPerspective::currentGraphChanged(Graph *graph) {
     _ui->workspace->setGraphForFocusedPanel(graph);
   }
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
-
   if (_graphs->empty()) {
     _pythonIDE->clearPythonCodeEditors();
     _pythonIDEDialog->hide();
@@ -1436,7 +1403,6 @@ void GraphPerspective::currentGraphChanged(Graph *graph) {
     _ui->actionPython_IDE->setEnabled(true);
   }
 
-#endif
 }
 
 void GraphPerspective::CSVImport() {
@@ -1674,10 +1640,8 @@ void GraphPerspective::treatEvent(const tlp::Event &ev) {
 }
 
 void GraphPerspective::showPythonIDE() {
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   _pythonIDEDialog->show();
   _pythonIDEDialog->raise();
-#endif
 }
 
 #ifdef APPIMAGE_BUILD

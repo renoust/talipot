@@ -200,32 +200,29 @@ ELSE()
   SET(TALIPOT_BUILD_CORE_ONLY OFF CACHE BOOL "Do you want a minimal build of Talipot (no OpenGL rendering, no Qt gui, no documentation) ? [ON|OFF]")
 ENDIF()
 
-SET(TALIPOT_BUILD_PYTHON_COMPONENTS ON CACHE BOOL "Do you want to build Talipot Python components ? [ON|OFF]")
-IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-  SET(TALIPOT_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-core/talipot_module)
-  SET(TALIPOT_PYTHON_FOLDER ${TALIPOT_PYTHON_ROOT_FOLDER}/talipot)
-  SET(TALIPOTGUI_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-gui/talipotgui_module)
-  SET(TALIPOTGUI_PYTHON_FOLDER ${TALIPOTGUI_PYTHON_ROOT_FOLDER}/talipotgui)
-  SET(TALIPOT_PYTHON_NATIVE_FOLDER ${TALIPOT_PYTHON_FOLDER}/native)
-  SET(TALIPOTGUI_PYTHON_NATIVE_FOLDER ${TALIPOTGUI_PYTHON_FOLDER}/native)
-  SET(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET OFF CACHE BOOL "Add a wheel make target for generating Python talipot-core module wheel ? [ON|OFF]")
-  IF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
-    SET(TALIPOT_BUILD_CORE_ONLY ON)
-    IF(APPLE)
-      # build binaries with install rpath when generating Talipot Python wheels
-      # for MacOs as we don't install the project in that case
-      SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-    ELSEIF(LINUX)
-      FILE(READ /etc/issue LINUX_ISSUE)
-      IF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
-        MESSAGE(FATAL_ERROR "Python binary wheels for Linux platform must be compiled using the CentOS 5.11 docker image provided by the manylinux project from the Python Packaging Authority.\nSee https://github.com/pypa/manylinux for more details.")
-      ENDIF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
-      # build binaries with install rpath when generating Talipot Python wheels for Linux
-      # as we don't install the project in that case
-      SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-    ENDIF(APPLE)
-  ENDIF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
-ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+SET(TALIPOT_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-core/talipot_module)
+SET(TALIPOT_PYTHON_FOLDER ${TALIPOT_PYTHON_ROOT_FOLDER}/talipot)
+SET(TALIPOTGUI_PYTHON_ROOT_FOLDER ${CMAKE_BINARY_DIR}/library/talipot-python/bindings/talipot-gui/talipotgui_module)
+SET(TALIPOTGUI_PYTHON_FOLDER ${TALIPOTGUI_PYTHON_ROOT_FOLDER}/talipotgui)
+SET(TALIPOT_PYTHON_NATIVE_FOLDER ${TALIPOT_PYTHON_FOLDER}/native)
+SET(TALIPOTGUI_PYTHON_NATIVE_FOLDER ${TALIPOTGUI_PYTHON_FOLDER}/native)
+SET(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET OFF CACHE BOOL "Add a wheel make target for generating Python talipot-core module wheel ? [ON|OFF]")
+IF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
+  SET(TALIPOT_BUILD_CORE_ONLY ON)
+  IF(APPLE)
+    # build binaries with install rpath when generating Talipot Python wheels
+    # for MacOs as we don't install the project in that case
+    SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+  ELSEIF(LINUX)
+    FILE(READ /etc/issue LINUX_ISSUE)
+    IF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
+      MESSAGE(FATAL_ERROR "Python binary wheels for Linux platform must be compiled using the CentOS 5.11 docker image provided by the manylinux project from the Python Packaging Authority.\nSee https://github.com/pypa/manylinux for more details.")
+    ENDIF(NOT "${LINUX_ISSUE}" MATCHES ".*CentOS release 5\\.11 \\(Final\\).*" OR NOT EXISTS /usr/local/bin/auditwheel)
+    # build binaries with install rpath when generating Talipot Python wheels for Linux
+    # as we don't install the project in that case
+    SET(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+  ENDIF(APPLE)
+ENDIF(TALIPOT_ACTIVATE_PYTHON_WHEEL_TARGET)
 
 ## ========================================================
 ## Required packages
@@ -300,9 +297,7 @@ ENDIF(NOT TALIPOT_USE_THIRDPARTY_QUAZIP)
 ENDIF(NOT TALIPOT_BUILD_CORE_ONLY)
 
 # Python
-IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-  INCLUDE(cmake/TalipotPython.cmake)
-ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
+INCLUDE(cmake/TalipotPython.cmake)
 
 ## ========================================================
 ## Include and library paths
@@ -560,7 +555,7 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
 
     IF(NOT NSIS_PATH_EMPTY)
 
-      IF(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      IF(EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
         STRING(REPLACE "/" "\\" NSIS_PATH "${NSIS_PATH}")
         STRING(REPLACE "/" "\\" BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
@@ -581,12 +576,12 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
                           COMMAND cmd //C win_bundle.bat \"${NSIS_PATH}\" \"${TLP_DIR}\" \"${BINARY_DIR}\" ${DEBUG_MODE}
                           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bundlers/win)
 
-      ELSE(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      ELSE(EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
         MESSAGE("NSIS Inetc plugin is required to build the Talipot installer.")
         MESSAGE("Extract ${CMAKE_CURRENT_SOURCE_DIR}/bundlers/win/Inetc.zip in ${NSIS_PATH}.")
 
-      ENDIF(NOT TALIPOT_BUILD_PYTHON_COMPONENTS OR EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
+      ENDIF(EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")
 
     ELSE(NOT NSIS_PATH_EMPTY)
 

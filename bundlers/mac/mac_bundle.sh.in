@@ -20,7 +20,6 @@ fi
 TALIPOT_DIR=@CMAKE_INSTALL_PREFIX@
 DEST_DIR=$1
 SRC_DIR=@talipot_SOURCE_DIR@/bundlers/mac
-PYTHON_BUILD=@TALIPOT_BUILD_PYTHON_COMPONENTS@
 QT_BINARY_DIR=@QT_BINARY_DIR@
 
 if [ "${QT_BINARY_DIR}" = "" ]
@@ -77,12 +76,8 @@ mv bin/talipot MacOS/Talipot
 # run macdeployqt with talipot_perspective as an other executable to update
 # but also the Talipot Python dynamic modules (not processed by macdeployqt as
 # they are suffixed by .so instead of .dylib)
-if [ "$PYTHON_BUILD" = "ON" ]
-then
 ${QT_BINARY_DIR}/macdeployqt ${DEST_DIR}/application/Talipot.app -executable=${DEST_DIR}/application/Talipot.app/Contents/bin/talipot_perspective -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipot/native/_talipot.so -executable=${DEST_DIR}/application/Talipot.app/Contents/lib/talipot/python/talipotgui/native/_talipotgui.so
-else
-${QT_BINARY_DIR}/macdeployqt ${DEST_DIR}/application/Talipot.app -executable=${DEST_DIR}/application/Talipot.app/Contents/bin/talipot_perspective
-fi
+
 mv MacOS/Talipot bin/talipot
 # rename
 mv ${DEST_DIR}/application/Talipot.app ${DEST_DIR}/application/${APP_NAME}-@TalipotVersion@.app
@@ -110,11 +105,5 @@ cd "${DEST_DIR}"
 sh "${SRC_DIR}/make_dmg.sh" ${APP_NAME} "@TalipotVersion@" "${DEST_DIR}/application"
 
 # rename dmg if needed
-if [ "$PYTHON_BUILD" = "ON" ]
-then
 echo "${APP_NAME}-@TalipotVersion@.dmg has been correctly generated in ${DEST_DIR}"
 mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@.dmg
-else
-echo "${APP_NAME}-@TalipotVersion@_no_python.dmg has been correctly generated in ${DEST_DIR}"
-mv ${APP_NAME}-@TalipotVersion@.dmg ${APP_NAME}-@TalipotVersion@_no_python.dmg
-fi

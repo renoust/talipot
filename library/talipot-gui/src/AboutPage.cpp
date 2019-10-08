@@ -28,9 +28,7 @@
 #include <QUrl>
 
 namespace tlp {
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 extern QString getSipVersion();
-#endif
 extern QString getTalipotGitRevision();
 }
 
@@ -82,8 +80,6 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       "): <a href=\"https://www.opengl.org\">https://www.opengl.org</a> </li>"
       "  <li> <b>OGDF</b> v2015.05 (Baobab) aka the Open Graph Drawing Framework : <a "
       "href=\"http://www.ogdf.net\">http://www.ogdf.net</a> </li>"
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
-
       "  <li> <b> Python </b> " +
       PythonVersionChecker::compiledVersion() +
       ": <a href=\"https://www.python.org\">https://www.python.org</a> </li>"
@@ -92,7 +88,6 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       ": <a "
       "href=\"https://www.riverbankcomputing.com/software/sip/\">https://"
       "www.riverbankcomputing.com/software/sip</a> </li>"
-#endif
       "</ul>"
       "</p>";
 

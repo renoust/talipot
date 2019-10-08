@@ -34,7 +34,7 @@
 #include <QDir>
 #include <QApplication>
 #include <QStandardPaths>
-#if defined(__MINGW32__) && defined(TALIPOT_BUILD_PYTHON_COMPONENTS)
+#if defined(__MINGW32__)
 #include <QSslSocket>
 #endif
 
@@ -380,14 +380,13 @@ void initTalipotSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins)
   QApplication::addLibraryPath(QApplication::applicationDirPath() + "/../lib/");
 #endif
 
-#if defined(__MINGW32__) && defined(TALIPOT_BUILD_PYTHON_COMPONENTS)
+#if defined(__MINGW32__)
   // When using MSYS2 platform to compile Tulip, force the dynamic loading of
   // OpenSSL libraries Qt was compiled against before Python initialization to
   // avoid a DLL Hell on windows
   QSslSocket::supportsSsl();
 #endif
 
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
 // MS stated that SetDllDirectory only exists since WinXP SP1
 #if defined(WIN32) && (_WIN32_WINNT >= 0x0502)
 
@@ -399,7 +398,6 @@ void initTalipotSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins)
     SetDllDirectory(tlp::QStringToTlpString(tlp::PythonVersionChecker::getPythonHome()).c_str());
   }
 
-#endif
 #endif
 
   if (removeDiscardedPlugins) {

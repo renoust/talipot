@@ -1,5 +1,4 @@
 !define ARCH "@PROCESSOR_ARCHITECTURE@"
-!define CHECK_PYTHON "@TALIPOT_BUILD_PYTHON_COMPONENTS@"
 !define PYTHON_INSTALLER_EXT "@PYTHON_INSTALLER_EXT@"
 
 !include "MUI.nsh"
@@ -17,11 +16,8 @@ Function .onInit
 Yes:
 FunctionEnd
   InstallDir "$PROGRAMFILES64\Talipot-@TalipotVersion@"
-  !if ${CHECK_PYTHON} == "ON"
-    Name "Talipot-@TalipotVersion@ (x64)"
-  !else
-    Name "Talipot-@TalipotVersion@ (x64 without Python Components)"
-  !endif
+  Name "Talipot-@TalipotVersion@ (x64)"
+
 !else
 Function .onInit
   ${If} ${RunningX64}
@@ -31,11 +27,8 @@ NoAbort:
   ${Endif}
 FunctionEnd
   InstallDir "$PROGRAMFILES\Talipot-@TalipotVersion@"
-  !if ${CHECK_PYTHON} == "ON"
-    Name "Talipot-@TalipotVersion@"
-  !else
-    Name "Talipot-@TalipotVersion@ (without Python Components)"
-  !endif
+  Name "Talipot-@TalipotVersion@"
+
 !endif
 
 !define MUI_ICON "files\share\talipot\bitmaps\talipot.ico"
@@ -59,23 +52,13 @@ RequestExecutionLevel admin
 
 ; Setup file
 !ifndef OUT_FILE
-!if ${CHECK_PYTHON} == "ON"
 !if ${ARCH} == "64"
 !define OUT_FILE "talipot-@TalipotVersion@_x64_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !else
 !define OUT_FILE "talipot-@TalipotVersion@_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !endif
-!else
-!if ${ARCH} == "64"
-!define OUT_FILE "talipot-@TalipotVersion@_x64_no_python@SUFFIX@_setup.exe"
-!else
-!define OUT_FILE "talipot-@TalipotVersion@_no_python@SUFFIX@_setup.exe"
-!endif
-!endif
 !endif
 OutFile "${OUT_FILE}"
-
-!if ${CHECK_PYTHON} == "ON"
 
 !if ${ARCH} != "64"
 
@@ -138,8 +121,6 @@ FunctionEnd
 
 !endif
 
-!endif
-
 !define SHCNE_ASSOCCHANGED 0x08000000
 !define SHCNF_IDLIST 0
 
@@ -159,12 +140,10 @@ Section "Talipot"
   SetShellVarContext all
   SetOutPath $INSTDIR
 
-!if ${CHECK_PYTHON} == "ON"
 !if ${ARCH} == "64"
   SetRegView 64
 !endif
   Call CheckAndInstallPython
-!endif
 
 File /r files\*.*
 

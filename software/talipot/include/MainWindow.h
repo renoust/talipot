@@ -83,10 +83,7 @@ protected slots:
 
 private:
   void bringWindowToFront();
-
-#ifdef TALIPOT_BUILD_PYTHON_COMPONENTS
   void checkPython();
-#endif
 
   enum SystemTrayMessage { NoMessage, PluginErrorMessage };
 

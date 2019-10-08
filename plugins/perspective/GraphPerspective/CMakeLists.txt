@@ -34,10 +34,6 @@ designer/PreferencesDialog.ui
 designer/SearchWidget.ui
 )
 
-IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-  ADD_DEFINITIONS("-DTALIPOT_BUILD_PYTHON_COMPONENTS")
-ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-
 QTX_WRAP_CPP(MOC_SRCS
 include/AlgorithmRunner.h
 include/AlgorithmRunnerItem.h
@@ -54,8 +50,6 @@ include/PreferencesDialog.h
 include/SearchWidget.h
 )
 
-IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-
 INCLUDE_DIRECTORIES(${TalipotPythonInclude})
 
 SET(LIB_SRCS
@@ -71,15 +65,11 @@ QTX_WRAP_CPP(MOC_SRCS
 include/PythonPanel.h
 )
 
-ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
-
 ADD_LIBRARY(GraphPerspective-${TalipotVersion} SHARED ${LIB_SRCS} ${RCC_SRCS} ${UI_SRCS} ${MOC_SRCS})
 
 TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName})
 TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${QT_LIBRARIES})
-IF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 TARGET_LINK_LIBRARIES(GraphPerspective-${TalipotVersion} ${LibTalipotPythonName})
-ENDIF(TALIPOT_BUILD_PYTHON_COMPONENTS)
 
 TALIPOT_INSTALL_PLUGIN(GraphPerspective-${TalipotVersion} ${TalipotPerspectivePluginsInstallDir})
 
