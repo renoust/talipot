@@ -193,9 +193,6 @@ static void logMsgToStdErr(const QString &msg) {
   }
 }
 
-#define SET_TIPS(a, tt)                                                                            \
-  a->setToolTip(QString(tt));                                                                      \
-  a->setStatusTip(a->toolTip())
 void GraphPerspective::updateLogIconsAndCounters() {
   GraphPerspectiveLogger::LogType logType = _logger->getLastLogType();
   QFrame *logIconCounterFrame = nullptr;
@@ -222,9 +219,9 @@ void GraphPerspective::updateLogIconsAndCounters() {
 
   logIconCounterFrame->setVisible(true);
   logIconLabel->setPixmap(_logger->icon(logType));
-  SET_TIPS(logIconLabel, "Click here to show/hide the message log window");
+  logIconLabel->setToolTip("Click here to show/hide the message log window");
   logCounterLabel->setText(QString::number(_logger->countByType(logType)));
-  SET_TIPS(logCounterLabel, "Click here to show/hide the message log window");
+  logCounterLabel->setToolTip("Click here to show/hide the message log window");
 }
 
 void graphPerspectiveLogger(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
@@ -386,8 +383,6 @@ protected:
   }
 };
 
-#define SET_TOOLTIP(a, tt) a->setToolTip(QString(tt))
-
 void GraphPerspective::start(tlp::PluginProgress *progress) {
   reserveDefaultProperties();
   _ui = new Ui::GraphPerspectiveMainWindowData;
@@ -410,121 +405,115 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
 
   currentGraphChanged(nullptr);
   // set win/Mac dependent tooltips with ctrl shortcut
-  SET_TIPS_WITH_CTRL_SHORTCUT(_ui->exposeModeButton, "Toggle the Expose mode", "E");
-  SET_TIPS_WITH_CTRL_SHORTCUT(_ui->searchButton, "Show/hide the graph's elements search panel",
-                              "F");
-  SET_TIPS_WITH_CTRL_SHORTCUT(_ui->pythonButton,
-                              "Show/hide the Python interpreter (Read Eval Print Loop) panel",
-                              "Shift+P");
-  SET_TIPS_WITH_CTRL_SHORTCUT(_ui->previousPageButton, "Show previous panel", "Shift+Left");
-  SET_TIPS_WITH_CTRL_SHORTCUT(_ui->nextPageButton, "Show next panel", "Shift+Right");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionNewProject, "Open a new  empty Talipot perspective",
-                                 "Shift+N");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(
+  setToolTipWithCtrlShortcut(_ui->exposeModeButton, "Toggle the Expose mode", "E");
+  setToolTipWithCtrlShortcut(_ui->searchButton, "Show/hide the graph's elements search panel", "F");
+  setToolTipWithCtrlShortcut(_ui->pythonButton,
+                             "Show/hide the Python interpreter (Read Eval Print Loop) panel",
+                             "Shift+P");
+  setToolTipWithCtrlShortcut(_ui->previousPageButton, "Show previous panel", "Shift+Left");
+  setToolTipWithCtrlShortcut(_ui->nextPageButton, "Show next panel", "Shift+Right");
+  setToolTipWithCtrlShortcut(_ui->actionNewProject, "Open a new  empty Talipot perspective",
+                             "Shift+N");
+  setToolTipWithCtrlShortcut(
       _ui->actionSave_Project,
       "Save the current project (current graphs with current views) in the attached file", "S");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionSave_Project_as, "Save Project as a new file name",
-                                 "Shift+S");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionImport, "Display the Graph importing wizard",
-                                 "Shift+O");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionExit, "Exit from Talipot perspective", "Q");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionUndo, "Undo the latest update of the current graph",
-                                 "Z");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionRedo, "Redo the latest update of the current graph",
-                                 "Y");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionCut,
-                                 "Move the selected elements of the current graph into the "
-                                 "clipboard (the selected edges ends are selected too)",
-                                 "X");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionCopy,
-                                 "Copy the selected elements of the current graph into the "
-                                 "clipboard (the selected edges ends are selected too)",
-                                 "C");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPaste,
-                                 "Paste the clipboard elements into the current graph", "V");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionSelect_All, "Select all elements of the current graph",
-                                 "A");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionInvert_selection,
-                                 "Invert the selection of the current "
-                                 "graph elements, deselect if "
-                                 "selected and select if not selected",
-                                 "I");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionCancel_selection,
-                                 "Deselect all selected elements of the current grap", "Shift+A");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionGroup_elements,
-                                 "Create a meta-node representing a newly created subgraph "
-                                 "containing all selected elements of the current graph",
-                                 "G");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(
+  setToolTipWithCtrlShortcut(_ui->actionSave_Project_as, "Save Project as a new file name",
+                             "Shift+S");
+  setToolTipWithCtrlShortcut(_ui->actionImport, "Display the Graph importing wizard", "Shift+O");
+  setToolTipWithCtrlShortcut(_ui->actionExit, "Exit from Talipot perspective", "Q");
+  setToolTipWithCtrlShortcut(_ui->actionUndo, "Undo the latest update of the current graph", "Z");
+  setToolTipWithCtrlShortcut(_ui->actionRedo, "Redo the latest update of the current graph", "Y");
+  setToolTipWithCtrlShortcut(_ui->actionCut,
+                             "Move the selected elements of the current graph into the "
+                             "clipboard (the selected edges ends are selected too)",
+                             "X");
+  setToolTipWithCtrlShortcut(_ui->actionCopy,
+                             "Copy the selected elements of the current graph into the "
+                             "clipboard (the selected edges ends are selected too)",
+                             "C");
+  setToolTipWithCtrlShortcut(_ui->actionPaste,
+                             "Paste the clipboard elements into the current graph", "V");
+  setToolTipWithCtrlShortcut(_ui->actionSelect_All, "Select all elements of the current graph",
+                             "A");
+  setToolTipWithCtrlShortcut(_ui->actionInvert_selection,
+                             "Invert the selection of the current "
+                             "graph elements, deselect if "
+                             "selected and select if not selected",
+                             "I");
+  setToolTipWithCtrlShortcut(_ui->actionCancel_selection,
+                             "Deselect all selected elements of the current grap", "Shift+A");
+  setToolTipWithCtrlShortcut(_ui->actionGroup_elements,
+                             "Create a meta-node representing a newly created subgraph "
+                             "containing all selected elements of the current graph",
+                             "G");
+  setToolTipWithCtrlShortcut(
       _ui->actionCreate_sub_graph,
       "Create a subgraph containing all selected elements of the current graph", "Shift+G");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPreferences, "Show Talipot preferences dialog", ",");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowUserDocumentation,
-                                 "Display the User handbook in a navigator", "?");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowDevelDocumentation,
-                                 "Display the Developer handbook in a navigator", "D");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionShowPythonDocumentation,
-                                 "Display the Talipot python documentation in a navigator", "P");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionMessages_log, "Show the message log", "M");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionPython_IDE, "Show the Python IDE", "Alt+P");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionExport, "Show the Graph exporting wizard", "E");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionOpen_Project, "Open a graph file", "O");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionFind_plugins,
-                                 "Allow to find algorithms in typing text in a search field",
-                                 "Alt+H");
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_ui->actionNew_graph, "Create a new empty graph", "N");
+  setToolTipWithCtrlShortcut(_ui->actionPreferences, "Show Talipot preferences dialog", ",");
+  setToolTipWithCtrlShortcut(_ui->actionShowUserDocumentation,
+                             "Display the User handbook in a navigator", "?");
+  setToolTipWithCtrlShortcut(_ui->actionShowDevelDocumentation,
+                             "Display the Developer handbook in a navigator", "D");
+  setToolTipWithCtrlShortcut(_ui->actionShowPythonDocumentation,
+                             "Display the Talipot python documentation in a navigator", "P");
+  setToolTipWithCtrlShortcut(_ui->actionMessages_log, "Show the message log", "M");
+  setToolTipWithCtrlShortcut(_ui->actionPython_IDE, "Show the Python IDE", "Alt+P");
+  setToolTipWithCtrlShortcut(_ui->actionExport, "Show the Graph exporting wizard", "E");
+  setToolTipWithCtrlShortcut(_ui->actionOpen_Project, "Open a graph file", "O");
+  setToolTipWithCtrlShortcut(_ui->actionFind_plugins,
+                             "Allow to find algorithms in typing text in a search field", "Alt+H");
+  setToolTipWithCtrlShortcut(_ui->actionNew_graph, "Create a new empty graph", "N");
   // set portable tooltips
-  SET_TIPS(_ui->undoButton, "Undo the latest update of the current graph");
-  SET_TIPS(_ui->redoButton, "Redo the latest undone update of the current graph");
-  _ui->workspaceButton->setToolTip(QString("Display the existing graph views"));
-  SET_TIPS(_ui->developButton,
-           "Display the Talipot Python IDE for developing scripts and plugins to "
-           "execute on the loaded graphs");
-  _ui->loggerMessageInfo->setToolTip(QString("Show/Hide the Messages log panel"));
+  _ui->undoButton->setToolTip("Undo the latest update of the current graph");
+  _ui->redoButton->setToolTip("Redo the latest undone update of the current graph");
+  _ui->workspaceButton->setToolTip("Display the existing graph views");
+  _ui->developButton->setToolTip(
+      "Display the Talipot Python IDE for developing scripts and plugins to "
+      "execute on the loaded graphs");
+  _ui->loggerMessageInfo->setToolTip("Show/Hide the Messages log panel");
   _ui->loggerMessagePython->setToolTip(_ui->loggerMessageInfo->toolTip());
   _ui->loggerMessageWarning->setToolTip(_ui->loggerMessageInfo->toolTip());
   _ui->loggerMessageError->setToolTip(_ui->loggerMessageInfo->toolTip());
-  SET_TIPS(_ui->exportButton, "Display the Graph exporting wizard");
-  SET_TIPS(_ui->csvImportButton, "Import data in the current graph using a csv formatted file");
-  SET_TIPS(_ui->importButton, "Display the Graph importing wizard");
-  SET_TIPS(_ui->pluginsButton, "Display the Plugin center");
-  SET_TIPS(_ui->sidebarButton, "Hide Sidebar");
-  SET_TIPS(_ui->menubarButton, "Hide Menubar");
-  SET_TIPS(_ui->statusbarButton, "Hide Statusbar");
-  SET_TIPS(_ui->addPanelButton, "Open a new visualization panel on the current graph");
-  SET_TIPS(_ui->singleModeButton, "Switch to 1 panel mode");
-  SET_TIPS(_ui->splitModeButton, "Switch to 2 panels mode");
-  SET_TIPS(_ui->splitHorizontalModeButton, "Switch to 2 panels mode");
-  SET_TIPS(_ui->split3ModeButton, "Switch to 2-top 1-bottom panels mode");
-  SET_TIPS(_ui->split32ModeButton, "Switch to 1-left 2-right panels mode");
-  SET_TIPS(_ui->split33ModeButton, "Switch to 2-left 1-right panels mode");
-  SET_TIPS(_ui->gridModeButton, "Switch to 4 panels mode");
-  SET_TIPS(_ui->sixModeButton, "Switch to 6 panels mode");
-  SET_TIPS(_ui->menuDelete, "Delete elements of the current graph");
+  _ui->exportButton->setToolTip("Display the Graph exporting wizard");
+  _ui->csvImportButton->setToolTip("Import data in the current graph using a csv formatted file");
+  _ui->importButton->setToolTip("Display the Graph importing wizard");
+  _ui->pluginsButton->setToolTip("Display the Plugin center");
+  _ui->sidebarButton->setToolTip("Hide Sidebar");
+  _ui->menubarButton->setToolTip("Hide Menubar");
+  _ui->addPanelButton->setToolTip("Open a new visualization panel on the current graph");
+  _ui->singleModeButton->setToolTip("Switch to 1 panel mode");
+  _ui->splitModeButton->setToolTip("Switch to 2 panels mode");
+  _ui->splitHorizontalModeButton->setToolTip("Switch to 2 panels mode");
+  _ui->split3ModeButton->setToolTip("Switch to 2-top 1-bottom panels mode");
+  _ui->split32ModeButton->setToolTip("Switch to 1-left 2-right panels mode");
+  _ui->split33ModeButton->setToolTip("Switch to 2-left 1-right panels mode");
+  _ui->gridModeButton->setToolTip("Switch to 4 panels mode");
+  _ui->sixModeButton->setToolTip("Switch to 6 panels mode");
+  _ui->menuDelete->setToolTip("Delete elements of the current graph");
   _ui->menuOpen_recent_file->setToolTip(
-      QString("Choose a file to open among the recently opened/saved graphs or projects"));
-  SET_TOOLTIP(_ui->actionDelete, "Delete the selected elements from the current graph [Del]");
-  SET_TOOLTIP(_ui->actionFull_screen, "Display the Talipot perspective in full screen [F11]");
-  SET_TOOLTIP(_ui->actionShow_Menubar, "Show/Hide the main menu bar [Ctrl+Shift+M]");
-  SET_TOOLTIP(_ui->actionAbout_us, "Display the 'About Talipot' information dialog [F1]");
-  SET_TOOLTIP(_ui->actionPlugins_Center, _ui->pluginsButton->toolTip());
-  SET_TOOLTIP(_ui->actionImport_CSV, _ui->csvImportButton->toolTip());
-  SET_TOOLTIP(_ui->actionSave_graph_to_file, "Write the current graph into a file");
-  SET_TOOLTIP(_ui->actionCreate_empty_sub_graph, "Create an empty subgraph of the current graph");
-  SET_TOOLTIP(_ui->actionClone_sub_graph,
-              "Create a subgraph containing the same elements as the current graph");
-  SET_TOOLTIP(_ui->action_Close_All, "Close all opened workspace views");
-  SET_TOOLTIP(_ui->actionColor_scales_management, "Manage Talipot color scales");
-  SET_TOOLTIP(_ui->actionMake_selection_a_graph,
-              "Add the non selected ends of the selected edges to the current graph selection");
-  SET_TOOLTIP(_ui->actionDelete_from_the_root_graph, "Delete the selected elements from the whole "
-                                                     "graph hierarchy (not only from the current "
-                                                     "graph) [Shift+Del]");
-  SET_TOOLTIP(_ui->actionReverse_selected_edges,
-              "Reverse the source and target nodes of the selected edges");
-  SET_TOOLTIP(_ui->actionDelete_all, "Delete all elements of the current graph");
-  SET_TOOLTIP(_ui->actionSelect_All_Nodes, "Select all nodes of the current graph");
-  SET_TOOLTIP(_ui->actionSelect_All_Edges, "Select all edges of the current graph");
+      "Choose a file to open among the recently opened/saved graphs or projects");
+  _ui->actionDelete->setToolTip("Delete the selected elements from the current graph [Del]");
+  _ui->actionFull_screen->setToolTip("Display the Talipot perspective in full screen [F11]");
+  _ui->actionShow_Menubar->setToolTip("Show/Hide the main menu bar [Ctrl+Shift+M]");
+  _ui->actionAbout_us->setToolTip("Display the 'About Talipot' information dialog [F1]");
+  _ui->actionPlugins_Center->setToolTip(_ui->pluginsButton->toolTip());
+  _ui->actionImport_CSV->setToolTip(_ui->csvImportButton->toolTip());
+  _ui->actionSave_graph_to_file->setToolTip("Write the current graph into a file");
+  _ui->actionCreate_empty_sub_graph->setToolTip("Create an empty subgraph of the current graph");
+  _ui->actionClone_sub_graph->setToolTip(
+      "Create a subgraph containing the same elements as the current graph");
+  _ui->action_Close_All->setToolTip("Close all opened workspace views");
+  _ui->actionColor_scales_management->setToolTip("Manage Talipot color scales");
+  _ui->actionMake_selection_a_graph->setToolTip(
+      "Add the non selected ends of the selected edges to the current graph selection");
+  _ui->actionDelete_from_the_root_graph->setToolTip("Delete the selected elements from the whole "
+                                                    "graph hierarchy (not only from the current "
+                                                    "graph) [Shift+Del]");
+  _ui->actionReverse_selected_edges->setToolTip(
+      "Reverse the source and target nodes of the selected edges");
+  _ui->actionDelete_all->setToolTip("Delete all elements of the current graph");
+  _ui->actionSelect_All_Nodes->setToolTip("Select all nodes of the current graph");
+  _ui->actionSelect_All_Edges->setToolTip("Select all edges of the current graph");
 
   _ui->singleModeButton->setEnabled(false);
   _ui->singleModeButton->hide();
@@ -558,10 +547,6 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _ui->loggerFrame->installEventFilter(this);
   _mainWindow->installEventFilter(this);
   _mainWindow->setAcceptDrops(true);
-  _mainWindow->statusBar();
-
-  if (!Settings::instance().showStatusBar())
-    _mainWindow->statusBar()->hide();
 
   connect(_logger, SIGNAL(cleared()), this, SLOT(logCleared()));
   connect(_logger, SIGNAL(resetLoggerPosition()), this, SLOT(resetLoggerDialogPosition()));
@@ -574,11 +559,10 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   redirectWarningOutputToQWarning();
   redirectErrorOutputToQCritical();
 
-  // redirect statusTip or toolTip of menu actions in status bar
-  Perspective::redirectStatusTipOfMenu(_ui->menuFile);
-  Perspective::redirectStatusTipOfMenu(_ui->menuEdit);
-  Perspective::redirectStatusTipOfMenu(_ui->menuHelp);
-  Perspective::redirectStatusTipOfMenu(_ui->menuWindow);
+  _ui->menuFile->setToolTipsVisible(true);
+  _ui->menuEdit->setToolTipsVisible(true);
+  _ui->menuHelp->setToolTipsVisible(true);
+  _ui->menuWindow->setToolTipsVisible(true);
 
   Settings::instance().synchronizeViewSettings();
 
@@ -717,7 +701,6 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
 
   connect(_ui->sidebarButton, SIGNAL(clicked()), this, SLOT(showHideSideBar()));
   connect(_ui->menubarButton, SIGNAL(clicked()), this, SLOT(showHideMenuBar()));
-  connect(_ui->statusbarButton, SIGNAL(clicked()), this, SLOT(showHideStatusBar()));
 
 #if !defined(__APPLE__) && !defined(_WIN32)
   // Hide plugins center when not on MacOS or Windows
@@ -1014,9 +997,9 @@ void GraphPerspective::open(QString fileName) {
   filters.insert(0, filterAny);
 
   if (fileName.isEmpty()) // If open() was called without a parameter, open the file dialog
-    fileName = QFileDialog::getOpenFileName(
-        _mainWindow, tr("Open graph"), _lastOpenLocation, filters.c_str(), nullptr,
-        static_cast<QFileDialog::Options>(0));
+    fileName = QFileDialog::getOpenFileName(_mainWindow, tr("Open graph"), _lastOpenLocation,
+                                            filters.c_str(), nullptr,
+                                            static_cast<QFileDialog::Options>(0));
 
   if (!fileName.isEmpty()) {
     QFileInfo fileInfo(fileName);
@@ -1060,7 +1043,7 @@ void GraphPerspective::openProjectFile(const QString &path) {
 
 void GraphPerspective::initPythonIDE() {
   _pythonIDE->setProject(_project);
-    if (Settings::instance().pythonIDEAnchored()) {
+  if (Settings::instance().pythonIDEAnchored()) {
     _pythonIDE->setVisible(false);
     _pythonIDE->setAnchored(true);
     _pythonIDE->setParent(nullptr);
@@ -1309,11 +1292,7 @@ void GraphPerspective::group() {
 
 void GraphPerspective::make_graph() {
   Graph *graph = _graphs->currentGraph();
-  unsigned int added = makeSelectionGraph(_graphs->currentGraph(),
-                                          graph->getBooleanProperty("viewSelection"));
-  stringstream msg;
-  msg << "Make selection a graph: " << added << " elements added to the selection.";
-  Perspective::showStatusMessage(msg.str());
+  makeSelectionGraph(_graphs->currentGraph(), graph->getBooleanProperty("viewSelection"));
 }
 
 Graph *GraphPerspective::createSubGraph(Graph *graph) {
@@ -1413,7 +1392,6 @@ void GraphPerspective::currentGraphChanged(Graph *graph) {
     _ui->developButton->setEnabled(true);
     _ui->actionPython_IDE->setEnabled(true);
   }
-
 }
 
 void GraphPerspective::CSVImport() {
@@ -1705,10 +1683,10 @@ void GraphPerspective::showAPIDocumentation() {
 void GraphPerspective::showHideSideBar() {
   if (_ui->docksWidget->isVisible()) {
     _ui->docksWidget->setVisible(false);
-    SET_TIPS(_ui->sidebarButton, "Show Sidebar");
+    _ui->sidebarButton->setToolTip("Show Sidebar");
   } else {
     _ui->docksWidget->setVisible(true);
-    SET_TIPS(_ui->sidebarButton, "Hide Sidebar");
+    _ui->sidebarButton->setToolTip("Hide Sidebar");
   }
 
   if (_logger->anchored()) {
@@ -1719,25 +1697,11 @@ void GraphPerspective::showHideSideBar() {
 void GraphPerspective::showHideMenuBar() {
   if (_mainWindow->menuBar()->isVisible()) {
     _mainWindow->menuBar()->setVisible(false);
-    SET_TIPS(_ui->menubarButton, "Show Menubar");
+    _ui->menubarButton->setToolTip("Show Menubar");
   } else {
     _mainWindow->menuBar()->setVisible(true);
-    SET_TIPS(_ui->menubarButton, "Hide Menubar");
+    _ui->menubarButton->setToolTip("Hide Menubar");
   }
-}
-
-void GraphPerspective::showHideStatusBar() {
-  QStatusBar *stsBar = _mainWindow->statusBar();
-
-  if (stsBar->isVisible()) {
-    stsBar->setVisible(false);
-    SET_TIPS(_ui->statusbarButton, "Show Statusbar");
-  } else {
-    stsBar->setVisible(true);
-    SET_TIPS(_ui->statusbarButton, "Hide Statusbar");
-  }
-
-  Settings::instance().setShowStatusBar(stsBar->isVisible());
 }
 
 void GraphPerspective::displayColorScalesDialog() {
@@ -1771,10 +1735,9 @@ void GraphPerspective::resetLoggerDialogPosition() {
   }
 
   // extend the logger frame width until reaching the right side of the main window
-  _logger->setGeometry(
-      pos.x(), pos.y(), _mainWindow->width() - _ui->loggerFrame->width(),
-      _mainWindow->mapToGlobal(QPoint(0, 0)).y() + _mainWindow->height() - pos.y() - 2 -
-          (_mainWindow->statusBar()->isVisible() ? _mainWindow->statusBar()->height() : 0));
+  _logger->setGeometry(pos.x(), pos.y(), _mainWindow->width() - _ui->loggerFrame->width(),
+                       _mainWindow->mapToGlobal(QPoint(0, 0)).y() + _mainWindow->height() -
+                           pos.y() - 2);
 }
 
 PLUGIN(GraphPerspective)

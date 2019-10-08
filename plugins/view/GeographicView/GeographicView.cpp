@@ -110,10 +110,10 @@ void GeographicView::viewTypeChanged(QString viewTypeName) {
 void GeographicView::fillContextMenu(QMenu *menu, const QPointF &pf) {
   _viewActionsManager->fillContextMenu(menu);
   QAction *action = menu->addAction("Zoom +");
-  action->setToolTip(QString("Increase zoom level"));
+  action->setToolTip("Increase zoom level");
   connect(action, SIGNAL(triggered()), this, SLOT(zoomIn()));
   action = menu->addAction("Zoom -");
-  action->setToolTip(QString("Increase zoom level"));
+  action->setToolTip("Increase zoom level");
   connect(action, SIGNAL(triggered()), this, SLOT(zoomOut()));
   menu->addSeparator();
   menu->addAction("Augmented display")->setEnabled(false);

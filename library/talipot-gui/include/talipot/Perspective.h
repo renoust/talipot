@@ -228,26 +228,6 @@ public:
     emit resetWindowTitle();
   }
 
-  /**
-   * @brief a static function to ease the display of messages
-   * on mainWindow()->statusBar()
-   */
-  static void showStatusMessage(const QString &);
-
-  /**
-   * @brief a static function to ease the display of messages
-   * on mainWindow()->statusBar()
-   */
-  static void showStatusMessage(const std::string &msg) {
-    showStatusMessage(tlp::tlpStringToQString(msg));
-  }
-
-  /**
-   * @brief a static function to enable the redirection of the statusTip or toolTip of menu actions
-   * on mainWindow->statusBar()
-   */
-  static void redirectStatusTipOfMenu(QMenu *menu);
-
 public slots:
   /**
    * @brief Called when the user wants to close the application.
@@ -310,12 +290,6 @@ protected slots:
    */
   void createPerspective(const QString &name);
 
-  /**
-   * @brief Show the statusTip (or the toolTip) of an action on mainWindow()->statusBar()
-   * @param action a QAction
-   */
-  void showStatusTipOf(QAction *action);
-
 public:
   /**
    * @brief usage Displays a usage message when called from the talipot_perspective executable
@@ -325,6 +299,6 @@ public:
   }
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(Perspective::ProgressOptions)
-}
+} // namespace tlp
 
 #endif // TALIPOT_PERSPECTIVE_H

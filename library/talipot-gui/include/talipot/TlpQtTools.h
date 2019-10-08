@@ -125,7 +125,7 @@ TLP_QT_SCOPE void redirectErrorOutputToQCritical();
 TLP_QT_SCOPE void disableQtUserInput();
 
 TLP_QT_SCOPE void enableQtUserInput();
-}
+} // namespace tlp
 
 // QDebug extension
 inline QDebug operator<<(QDebug dbg, const std::string &s) {
@@ -133,16 +133,14 @@ inline QDebug operator<<(QDebug dbg, const std::string &s) {
   return dbg.space();
 }
 
-// useful macros needed for menu actions building
+// useful function needed for menu actions building
+template <class QElt>
+inline void setToolTipWithCtrlShortcut(QElt *elt, const QString &tt, const QString &sc) {
 #ifdef __APPLE__
-#define SET_TOOLTIP_WITH_CTRL_SHORTCUT(a, tt, sc)                                                  \
-  a->setToolTip(QString(tt) + tlpStringToQString(" [⌘+") + sc + "]")
+  elt->setToolTip(tt + tlp::tlpStringToQString(" [⌘+") + sc + "]");
 #else
-#define SET_TOOLTIP_WITH_CTRL_SHORTCUT(a, tt, sc) a->setToolTip(QString(tt) + " [Ctrl+" + sc + "]")
+  elt->setToolTip(tt + " [Ctrl+" + sc + "]");
 #endif
-
-#define SET_TIPS_WITH_CTRL_SHORTCUT(a, tt, sc)                                                     \
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(a, tt, sc);                                                       \
-  a->setStatusTip(a->toolTip())
+}
 
 #endif // TALIPOT_TLP_QT_TOOLS_H

@@ -171,9 +171,6 @@ public:
   bool warnUserAboutGraphicsCard() const;
   void setWarnUserAboutGraphicsCard(bool);
 
-  bool showStatusBar() const;
-  void setShowStatusBar(bool);
-
   bool loggerAnchored() const;
   void setLoggerAnchored(bool);
 
@@ -188,6 +185,6 @@ private:
 
   void setFavoriteAlgorithms(const QSet<QString> &lst);
 };
-}
+} // namespace tlp
 #endif // TALIPOT_SETTINGS_H
 ///@endcond

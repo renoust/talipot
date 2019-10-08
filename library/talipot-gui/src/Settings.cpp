@@ -66,7 +66,6 @@ static const QString TS_UseTlpbFileFormat = "graph/auto/usetlpb";
 static const QString TS_SeedForRandomSequence = "graph/auto/seed";
 
 static const QString TS_WarnUserAboutGraphicsCard = "app/warn_about_graphics_card";
-static const QString TS_ShowStatusBar = "app/gui/show_status_bar";
 static const QString TS_LoggerAnchored = "app/gui/logger_anchored";
 static const QString TS_PythonIDEAnchored = "app/gui/python_ide_anchored";
 
@@ -429,14 +428,6 @@ bool Settings::warnUserAboutGraphicsCard() const {
 
 void Settings::setWarnUserAboutGraphicsCard(bool f) {
   setValue(TS_WarnUserAboutGraphicsCard, f);
-}
-
-bool Settings::showStatusBar() const {
-  return value(TS_ShowStatusBar, true).toBool();
-}
-
-void Settings::setShowStatusBar(bool f) {
-  setValue(TS_ShowStatusBar, f);
 }
 
 bool Settings::loggerAnchored() const {

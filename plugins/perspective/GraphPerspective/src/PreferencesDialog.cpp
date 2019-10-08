@@ -43,8 +43,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   for (int i = 0; i < _ui->graphDefaultsTable->rowCount(); ++i) {
     _ui->graphDefaultsTable->item(i, 0)->setFlags(Qt::ItemIsEnabled);
     QTableWidgetItem *item = _ui->graphDefaultsTable->item(i, 0);
-    item->setToolTip(QString("Click mouse right button to display a contextual menu allowing to "
-                             "reset the default values of <b>") +
+    item->setToolTip("Click mouse right button to display a contextual menu allowing to "
+                     "reset the default values of <b>" +
                      item->text() + "</b>.");
   }
 
@@ -433,7 +433,7 @@ void PreferencesDialog::showGraphDefaultsContextMenu(const QPoint &p) {
                               "y2:1, stop:0 rgb(75,75,75), stop:1 rgb(60, 60, 60))}");
     // so it is the "mainMenu"
     contextMenu.setProperty("mainMenu", true);
-    Perspective::redirectStatusTipOfMenu(&contextMenu);
+    contextMenu.setToolTipsVisible(true);
 
     int row = idx.row();
     QString defaultProp = _ui->graphDefaultsTable->item(row, idx.column())->text();
@@ -443,24 +443,20 @@ void PreferencesDialog::showGraphDefaultsContextMenu(const QPoint &p) {
 
     if (row < 3) {
       QMenu *subMenu = contextMenu.addMenu(QString("Reset to Talipot predefined"));
-      subMenu->setToolTip(
-          QString("Choose the type of elements for which the default value will be reset"));
-      action = subMenu->addAction(QString("Node default value"));
-      action->setToolTip(QString("Reset the node ") + defaultProp +
-                         " to the Talipot predefined value");
+      subMenu->setToolTip("Choose the type of elements for which the default value will be reset");
+      action = subMenu->addAction("Node default value");
+      action->setToolTip("Reset the node " + defaultProp + " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_NODE)));
-      action = subMenu->addAction(QString("Edge default value"));
-      action->setToolTip(QString("Reset the edge ") + defaultProp +
-                         " to the Talipot predefined value");
+      action = subMenu->addAction("Edge default value");
+      action->setToolTip("Reset the edge " + defaultProp + " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_EDGE)));
-      action = subMenu->addAction(QString("Node/Edge default values"));
-      action->setToolTip(QString("Reset the node/edge ") + defaultProp +
-                         " to the Talipot predefined value");
+      action = subMenu->addAction("Node/Edge default values");
+      action->setToolTip("Reset the node/edge " + defaultProp + " to the Talipot predefined value");
       action->setData(QVariant(int(RESET_BOTH)));
     } else {
-      action = contextMenu.addAction(QString("Reset to Talipot predefined value"));
+      action = contextMenu.addAction("Reset to Talipot predefined value");
       action->setData(QVariant(int(RESET_BOTH)));
-      action->setToolTip(QString("Reset ") + defaultProp + " to the Talipot predefined value");
+      action->setToolTip("Reset " + defaultProp + " to the Talipot predefined value");
     }
 
     action = contextMenu.exec(QCursor::pos() - QPoint(5, 5));

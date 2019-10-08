@@ -331,7 +331,6 @@ void GlMainView::sceneRectChanged(const QRectF &rect) {
 
     updateShowOverviewButton();
   }
-
 }
 
 QPixmap GlMainView::snapshot(const QSize &outputSize) const {
@@ -365,7 +364,7 @@ void GlMainView::fillContextMenu(QMenu *menu, const QPointF &pf) {
   _viewActionsManager->fillContextMenu(menu);
 
   QAction *viewOrtho = menu->addAction("Use orthogonal projection");
-  viewOrtho->setToolTip(QString("Enable to switch between true perspective and orthogonal"));
+  viewOrtho->setToolTip("Enable to switch between true perspective and orthogonal");
   viewOrtho->setCheckable(true);
   viewOrtho->setChecked(_glMainWidget->getScene()->isViewOrtho());
   connect(viewOrtho, SIGNAL(triggered(bool)), this, SLOT(setViewOrtho(bool)));
@@ -375,14 +374,14 @@ void GlMainView::fillContextMenu(QMenu *menu, const QPointF &pf) {
   menu->addSeparator();
 
   QAction *a = menu->addAction("Show overview", this, SLOT(setOverviewVisible(bool)));
-  a->setToolTip(QString("Show/hide the overview in a corner of the view"));
+  a->setToolTip("Show/hide the overview in a corner of the view");
   a->setCheckable(true);
   a->setChecked(overviewVisible());
 
   if (needQuickAccessBar) {
     QAction *quickbarAction =
         menu->addAction("Show quick access bar", this, SLOT(setQuickAccessBarVisible(bool)));
-    quickbarAction->setToolTip(QString("Show/hide the quick access bar"));
+    quickbarAction->setToolTip("Show/hide the quick access bar");
     quickbarAction->setCheckable(true);
     quickbarAction->setChecked(quickAccessBarVisible());
   }

@@ -169,25 +169,3 @@ void Perspective::createPerspective(const QString &name) {
 void Perspective::notifyProjectLocation(const QString &path) {
   sendAgentMessage("PROJECT_LOCATION\t" + QString::number(_perspectiveId) + " " + path);
 }
-
-void Perspective::showStatusMessage(const QString &msg) {
-  instance()->mainWindow()->statusBar()->showMessage(msg);
-}
-
-void Perspective::redirectStatusTipOfMenu(QMenu *menu) {
-  if (Perspective::instance()) {
-    connect(menu, SIGNAL(hovered(QAction *)), instance(), SLOT(showStatusTipOf(QAction *)));
-    connect(menu, SIGNAL(aboutToHide()), instance()->mainWindow()->statusBar(),
-            SLOT(clearMessage()));
-  }
-}
-
-void Perspective::showStatusTipOf(QAction *action) {
-  QString tip = action->statusTip();
-
-  if (tip.isEmpty())
-    tip = action->toolTip();
-
-  action->setStatusTip(tip);
-  showStatusMessage(tip);
-}

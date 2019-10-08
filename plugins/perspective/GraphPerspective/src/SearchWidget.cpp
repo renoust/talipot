@@ -421,9 +421,6 @@ void SearchWidget::search() {
     _ui->resultsCountLabel->setText(QString::number(resultsCountNodes) + " node(s) and " +
                                     QString::number(resultsCountEdges) + " edge(s) " +
                                     searchOpDescription);
-
-  // display in the status bar too
-  Perspective::showStatusMessage(_ui->resultsCountLabel->text());
 }
 
 void SearchWidget::graphIndexChanged() {

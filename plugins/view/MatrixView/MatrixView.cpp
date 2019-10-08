@@ -222,14 +222,17 @@ void MatrixView::fillContextMenu(QMenu *menu, const QPointF &point) {
 
     menu->addSeparator();
 
+    auto genEltToolTip = [this, sId](const QString &s) {
+      return s + (isNode ? " node #" : " edge #") + sId;
+    };
+
     QAction *action =
         menu->addAction(tr("Toggle selection"), this, SLOT(addRemoveItemToSelection()));
-    action->setToolTip(QString("Invert the selection of the ") + (isNode ? "node #" : "edge #") +
-                       sId);
+    action->setToolTip(genEltToolTip("Invert the selection of the"));
     action = menu->addAction(tr("Select"), this, SLOT(selectItem()));
-    action->setToolTip(QString("Select the ") + (isNode ? "node #" : "edge #") + sId);
+    action->setToolTip(genEltToolTip("Select the"));
     action = menu->addAction(tr("Delete"), this, SLOT(deleteItem()));
-    action->setToolTip(QString("Delete the ") + (isNode ? "node #" : "edge #") + sId);
+    action->setToolTip(genEltToolTip("Delete the"));
   }
 }
 
@@ -657,4 +660,4 @@ void MatrixView::applySettings() {
 }
 
 PLUGIN(MatrixView)
-}
+} // namespace tlp

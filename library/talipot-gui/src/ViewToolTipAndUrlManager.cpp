@@ -56,8 +56,8 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu, node n) {
     return;
 
   menu->addSeparator();
-  QAction *action = menu->addAction(QString("Open ").append(tlpStringToQString(_contextMenuUrl)),
-                                    this, SLOT(openUrl()));
+  QAction *action =
+      menu->addAction("Open " + tlpStringToQString(_contextMenuUrl), this, SLOT(openUrl()));
   action->setToolTip(action->text().append(" in the default browser"));
 }
 
@@ -74,8 +74,8 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu, edge e) {
 
   menu->addSeparator();
 
-  QAction *action = menu->addAction(QString("Open ").append(tlpStringToQString(_contextMenuUrl)),
-                                    this, SLOT(openUrl()));
+  QAction *action =
+      menu->addAction("Open " + tlpStringToQString(_contextMenuUrl), this, SLOT(openUrl()));
   action->setToolTip(action->text().append(" in the default browser"));
 }
 
@@ -88,8 +88,8 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu) {
   Graph *graph = _view->graph();
 
   QAction *action = menu->addAction("Tooltips");
-  action->setToolTip(QString("When moving the mouse pointer, a tooltip is displayed with some "
-                             "information about the graph element located under the pointer"));
+  action->setToolTip("When moving the mouse pointer, a tooltip is displayed with some "
+                     "information about the graph element located under the pointer");
   action->setCheckable(true);
   action->setChecked(_tooltips);
   connect(action, SIGNAL(triggered(bool)), this, SLOT(displayToolTips(bool)));
@@ -104,7 +104,7 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu) {
     _urlPropName.clear();
   }
   urlPropMenu->setToolTip(
-      QString("Choose the property giving the web page associated with a graph element"));
+      "Choose the property giving the web page associated with a graph element");
 
   QActionGroup *urlPropGroup = new QActionGroup(urlPropMenu);
   urlPropGroup->setExclusive(true);
@@ -114,7 +114,7 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu) {
   urlPropGroup->addAction(action);
   if (_urlPropName.empty())
     action->setChecked(true);
-  action->setToolTip(QString("The graph elements have no associated web page"));
+  action->setToolTip("The graph elements have no associated web page");
   // get all existing StringProperty
   std::set<std::string> props;
   for (auto inheritedProp : graph->getInheritedObjectProperties()) {
@@ -136,9 +136,8 @@ void ViewToolTipAndUrlManager::fillContextMenu(QMenu *menu) {
     if (propName.find("view") != 0 || propName == "viewLabel") {
       action = urlPropMenu->addAction(tlpStringToQString(propName));
       action->setToolTip(
-          QString("The url of the web page associated with a graph element is given by the \"")
-              .append(tlpStringToQString(propName))
-              .append(QString("\" property value")));
+          "The url of the web page associated with a graph element is given by the \"" +
+          tlpStringToQString(propName) + "\" property value");
       urlPropGroup->addAction(action);
       action->setCheckable(true);
       if (_urlPropName == propName)

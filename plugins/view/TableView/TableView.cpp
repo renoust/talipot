@@ -626,7 +626,7 @@ void TableView::showCustomContextMenu(const QPoint &pos) {
   QModelIndexList highlightedRows = _ui->table->selectionModel()->selectedRows();
 
   QMenu contextMenu;
-  Perspective::redirectStatusTipOfMenu(&contextMenu);
+  contextMenu.setToolTipsVisible(true);
   // the style sheet below allows to display disabled items
   // as "title" items in the "mainMenu"
   contextMenu.setStyleSheet("QMenu[mainMenu = \"true\"]::item:disabled {color: white; "
@@ -642,23 +642,22 @@ void TableView::showCustomContextMenu(const QPoint &pos) {
   QMenu *subMenu = contextMenu.addMenu("Set value(s) of ");
   QAction *setAll = nullptr;
   if (propIsInherited) {
-    setAll =
-        subMenu->addAction(QString("All ") + eltsName + OF_PROPERTY + " to a new default value");
-    setAll->setToolTip(QString("Choose a new ") + eltsName +
-                       " default value to reset the values of all " + eltsName + OF_PROPERTY);
+    setAll = subMenu->addAction("All " + eltsName + OF_PROPERTY + " to a new default value");
+    setAll->setToolTip("Choose a new " + eltsName + " default value to reset the values of all " +
+                       eltsName + OF_PROPERTY);
   }
-  QAction *setAllGraph = subMenu->addAction(QString("All ") + eltsName + OF_GRAPH);
-  setAllGraph->setToolTip(QString("Choose a value to be assigned to all the existing ") + eltsName +
+  QAction *setAllGraph = subMenu->addAction("All " + eltsName + OF_GRAPH);
+  setAllGraph->setToolTip("Choose a value to be assigned to all the existing " + eltsName +
                           OF_GRAPH);
 
-  QAction *selectedSetAll = subMenu->addAction(QString("Selected ") + eltsName + OF_GRAPH);
-  selectedSetAll->setToolTip(QString("Choose a value to be assigned to the selected ") + eltsName +
+  QAction *selectedSetAll = subMenu->addAction("Selected " + eltsName + OF_GRAPH);
+  selectedSetAll->setToolTip("Choose a value to be assigned to the selected " + eltsName +
                              OF_GRAPH);
 
   QAction *highlightedSetAll;
   if (highlightedRows.size() > 1) {
-    highlightedSetAll = subMenu->addAction(QString("Rows highlighted ") + eltsName);
-    highlightedSetAll->setToolTip(QString("Choose a value to be assigned to the ") + eltsName +
+    highlightedSetAll = subMenu->addAction("Rows highlighted " + eltsName);
+    highlightedSetAll->setToolTip("Choose a value to be assigned to the " + eltsName +
                                   " displayed in the currently highlighted row(s)");
   } else {
     highlightedSetAll = subMenu->addAction(QString("%1 #%2").arg(eltName).arg(eltId));
@@ -673,18 +672,16 @@ void TableView::showCustomContextMenu(const QPoint &pos) {
   if (propName != "viewLabel") {
     subMenu = contextMenu.addMenu("To label(s) of ");
     toLabels = subMenu->addAction("All " + eltsName + OF_GRAPH);
-    toLabels->setToolTip(QString("Set the values of the current property as labels of the ") +
-                         eltsName + OF_GRAPH);
-    selectedToLabels = subMenu->addAction(QString("Selected ") + eltsName + OF_GRAPH);
+    toLabels->setToolTip("Set the values of the current property as labels of the " + eltsName +
+                         OF_GRAPH);
+    selectedToLabels = subMenu->addAction("Selected " + eltsName + OF_GRAPH);
     selectedToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the selected ") + eltsName +
-        OF_GRAPH);
+        "Set the values of the current property as labels of the selected " + eltsName + OF_GRAPH);
 
     if (highlightedRows.size() > 1) {
-      highlightedToLabels = subMenu->addAction(QString("Rows highlighted ") + eltsName);
-      highlightedToLabels->setToolTip(
-          QString("Set the values of the current property as labels of the ") + eltsName +
-          " displayed in the currently highlighted row(s)");
+      highlightedToLabels = subMenu->addAction("Rows highlighted " + eltsName);
+      highlightedToLabels->setToolTip("Set the values of the current property as labels of the " +
+                                      eltsName + " displayed in the currently highlighted row(s)");
     } else {
       highlightedToLabels = subMenu->addAction(QString("%1 #%2").arg(eltName).arg(eltId));
       highlightedToLabels->setToolTip(
@@ -696,19 +693,19 @@ void TableView::showCustomContextMenu(const QPoint &pos) {
 
   contextMenu.addSeparator();
   action =
-      contextMenu.addAction(highlightedRows.size() > 1 ? (QString("Rows highlighted ") + eltsName)
+      contextMenu.addAction(highlightedRows.size() > 1 ? "Rows highlighted " + eltsName
                                                        : QString("%1 #%2").arg(eltName).arg(eltId));
   action->setEnabled(false);
   contextMenu.addSeparator();
   QAction *toggleAction = contextMenu.addAction("Toggle selection");
-  toggleAction->setToolTip(QString("Invert the selection of the ") + action->text() +
+  toggleAction->setToolTip("Invert the selection of the " + action->text() +
                            ": deselect if selected or select if not selected");
   QAction *selectAction = contextMenu.addAction("Select");
-  selectAction->setToolTip(QString("Set the selection with the ") + action->text());
+  selectAction->setToolTip("Set the selection with the " + action->text());
   QAction *deleteAction = contextMenu.addAction("Delete");
-  deleteAction->setToolTip(QString("Delete the ") + action->text());
+  deleteAction->setToolTip("Delete the " + action->text());
   QAction *setValueAction =
-      contextMenu.addAction(QString((highlightedRows.size() > 1) ? "Set values" : "Set value"));
+      contextMenu.addAction((highlightedRows.size() > 1) ? "Set values" : "Set value");
   setValueAction->setToolTip(highlightedSetAll->toolTip());
 
   contextMenu.addSeparator();
@@ -826,7 +823,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
   QModelIndexList highlightedRows = _ui->table->selectionModel()->selectedRows();
 
   QMenu contextMenu;
-  Perspective::redirectStatusTipOfMenu(&contextMenu);
+  contextMenu.setToolTipsVisible(true);
   // the style sheet below allows to display disabled items
   // as "title" items in the "mainMenu"
   contextMenu.setStyleSheet("QMenu[mainMenu = \"true\"]::item:disabled {color: white; "
@@ -842,7 +839,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
       contextMenu.addAction(QIcon(":/talipot/gui/icons/64/list-add.png"), "Add new property");
   addProp->setToolTip("Display a dialog to create a new property belonging to the current graph");
   QAction *copyProp = contextMenu.addAction("Copy");
-  copyProp->setToolTip(QString("Copy the values of \"") + action->text() +
+  copyProp->setToolTip("Copy the values of \"" + action->text() +
                        "\" in a property of the same type");
   QAction *deleteProp = nullptr;
 
@@ -850,14 +847,14 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
       // Enable deletion of reserved properties when on a subgraph and that properties are local
       (graph() != graph()->getRoot() && graph()->existLocalProperty(propName))) {
     deleteProp = contextMenu.addAction("Delete");
-    deleteProp->setToolTip(QString("Delete the property \"") + action->text() + '"');
+    deleteProp->setToolTip("Delete the property \"" + action->text() + '"');
   }
 
   QAction *renameProp = nullptr;
 
   if (!Perspective::instance()->isReservedPropertyName(propName.c_str())) {
     renameProp = contextMenu.addAction("Rename");
-    renameProp->setToolTip(QString("Rename the property \"") + action->text() + '"');
+    renameProp->setToolTip("Rename the property \"" + action->text() + '"');
   }
 
   contextMenu.addSeparator();
@@ -868,35 +865,32 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
   if (propIsInherited) {
     nodesSetAll =
         subMenu->addAction(QString("All nodes") + OF_PROPERTY + " to a new default value");
-    nodesSetAll->setToolTip(
-        QString("Choose a new node default value to reset the values of all nodes") + OF_PROPERTY);
-    edgesSetAll =
-        subMenu->addAction(QString("All edges") + OF_PROPERTY + " to a new default value");
-    edgesSetAll->setToolTip(
-        QString("Choose a new edge default value to reset the values of all edges ") + OF_PROPERTY);
+    nodesSetAll->setToolTip("Choose a new node default value to reset the values of all nodes" +
+                            OF_PROPERTY);
+    edgesSetAll = subMenu->addAction("All edges" + OF_PROPERTY + " to a new default value");
+    edgesSetAll->setToolTip("Choose a new edge default value to reset the values of all edges " +
+                            OF_PROPERTY);
   }
-  QAction *nodesSetAllGraph = subMenu->addAction(QString("All nodes") + OF_GRAPH);
-  nodesSetAllGraph->setToolTip(QString("Choose a value to be assigned to all the existing nodes") +
+  QAction *nodesSetAllGraph = subMenu->addAction("All nodes" + OF_GRAPH);
+  nodesSetAllGraph->setToolTip("Choose a value to be assigned to all the existing nodes" +
                                OF_GRAPH);
-  QAction *edgesSetAllGraph = subMenu->addAction(QString("All edges") + OF_GRAPH);
-  edgesSetAllGraph->setToolTip(QString("Choose a value to be assigned to all the existing edges") +
+  QAction *edgesSetAllGraph = subMenu->addAction("All edges" + OF_GRAPH);
+  edgesSetAllGraph->setToolTip("Choose a value to be assigned to all the existing edges" +
                                OF_GRAPH);
-  QAction *nodesSelectedSetAll = subMenu->addAction(QString("Selected nodes") + OF_GRAPH);
-  nodesSelectedSetAll->setToolTip(QString("Choose a value to be assigned to the selected nodes") +
-                                  OF_GRAPH);
-  QAction *edgesSelectedSetAll = subMenu->addAction(QString("Selected edges") + OF_GRAPH);
-  edgesSelectedSetAll->setToolTip(QString("Choose a value to be assigned to the selected edges") +
-                                  OF_GRAPH);
+  QAction *nodesSelectedSetAll = subMenu->addAction("Selected nodes" + OF_GRAPH);
+  nodesSelectedSetAll->setToolTip("Choose a value to be assigned to the selected nodes" + OF_GRAPH);
+  QAction *edgesSelectedSetAll = subMenu->addAction("Selected edges" + OF_GRAPH);
+  edgesSelectedSetAll->setToolTip("Choose a value to be assigned to the selected edges" + OF_GRAPH);
   QAction *highlightedSetAll = nullptr;
 
   if (!highlightedRows.isEmpty()) {
     highlightedSetAll = subMenu->addAction(
-        (QString("Rows highlighted ") + eltsName) +
+        "Rows highlighted " + eltsName +
         (highlightedRows.size() > 1
              ? ""
              : QString(NODES_DISPLAYED ? " (Node #%1)" : " (Edge #%1)")
                    .arg(highlightedRows[0].data(Model::ElementIdRole).toUInt())));
-    highlightedSetAll->setToolTip(QString("Choose a value to be assigned to the ") + eltsName +
+    highlightedSetAll->setToolTip("Choose a value to be assigned to the " + eltsName +
                                   " displayed in the currently highlighted row(s)");
   }
 
@@ -910,44 +904,40 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
 
   if (propName != "viewLabel") {
     subMenu = contextMenu.addMenu("To labels of ");
-    toLabels = subMenu->addAction(QString("All elements") + OF_GRAPH);
-    toLabels->setToolTip(
-        QString("Set the values of the current property as labels of all elements") + OF_GRAPH);
-    nodesToLabels = subMenu->addAction(QString("All nodes") + OF_GRAPH);
-    nodesToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the nodes") + OF_GRAPH);
-    edgesToLabels = subMenu->addAction(QString("All edges") + OF_GRAPH);
-    edgesToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the edges") + OF_GRAPH);
-    selectedToLabels = subMenu->addAction(QString("Selected elements") + OF_GRAPH);
+    toLabels = subMenu->addAction("All elements" + OF_GRAPH);
+    toLabels->setToolTip("Set the values of the current property as labels of all elements" +
+                         OF_GRAPH);
+    nodesToLabels = subMenu->addAction("All nodes" + OF_GRAPH);
+    nodesToLabels->setToolTip("Set the values of the current property as labels of the nodes" +
+                              OF_GRAPH);
+    edgesToLabels = subMenu->addAction("All edges" + OF_GRAPH);
+    edgesToLabels->setToolTip("Set the values of the current property as labels of the edges" +
+                              OF_GRAPH);
+    selectedToLabels = subMenu->addAction("Selected elements" + OF_GRAPH);
     selectedToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the selected elements") +
-        OF_GRAPH);
+        "Set the values of the current property as labels of the selected elements" + OF_GRAPH);
     nodesSelectedToLabels = subMenu->addAction("Selected nodes" + OF_GRAPH);
     nodesSelectedToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the selected nodes") +
-        OF_GRAPH);
+        "Set the values of the current property as labels of the selected nodes" + OF_GRAPH);
     edgesSelectedToLabels = subMenu->addAction("Selected edges" + OF_GRAPH);
     edgesSelectedToLabels->setToolTip(
-        QString("Set the values of the current property as labels of the selected edges") +
-        OF_GRAPH);
+        "Set the values of the current property as labels of the selected edges" + OF_GRAPH);
 
     if (!highlightedRows.isEmpty()) {
       highlightedToLabels = subMenu->addAction(
-          (QString("Rows highlighted ") + eltsName) +
+          "Rows highlighted " + eltsName +
           (highlightedRows.size() > 1
                ? ""
                : QString(NODES_DISPLAYED ? " (Node #%1)" : " (Edge #%1)")
                      .arg(highlightedRows[0].data(Model::ElementIdRole).toUInt())));
-      highlightedToLabels->setToolTip(
-          QString("Set the values of the current property as labels of the ") + eltsName +
-          " displayed in the currently highlighted row(s)");
+      highlightedToLabels->setToolTip("Set the values of the current property as labels of the " +
+                                      eltsName + " displayed in the currently highlighted row(s)");
     }
   }
 
   contextMenu.addSeparator();
   QAction *sortById = contextMenu.addAction("Sort the rows by id");
-  sortById->setToolTip(QString("Display the rows in ordering of the id of the ") + eltsName);
+  sortById->setToolTip("Display the rows in ordering of the id of the " + eltsName);
 
   // display the menu with the mouse inside to give it the focus
   // and thus allow keyboard navigation

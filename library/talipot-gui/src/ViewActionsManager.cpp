@@ -27,22 +27,22 @@ ViewActionsManager::ViewActionsManager(View *view, GlMainWidget *widget, bool ke
   // create actions and add them to _view->graphicsView()
   // to enable their keyboard shortcut
   _forceRedrawAction = new QAction("Force redraw", widget);
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(_forceRedrawAction, "Redraw the current view", "Shift+R");
+  setToolTipWithCtrlShortcut(_forceRedrawAction, "Redraw the current view", "Shift+R");
   connect(_forceRedrawAction, SIGNAL(triggered()), this, SLOT(redraw()));
   _forceRedrawAction->setShortcut(tr("Ctrl+Shift+R"));
   _forceRedrawAction->setShortcutContext(Qt::WidgetWithChildrenShortcut);
   _view->graphicsView()->addAction(_forceRedrawAction);
 
   _centerViewAction = new QAction("Center view", widget);
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(
-      _centerViewAction, "Make the view to fully display and center its contents", "Shif+C");
+  setToolTipWithCtrlShortcut(_centerViewAction,
+                             "Make the view to fully display and center its contents", "Shif+C");
   connect(_centerViewAction, SIGNAL(triggered()), this, SLOT(centerView()));
   _centerViewAction->setShortcut(tr("Ctrl+Shift+C"));
   _centerViewAction->setShortcutContext(Qt::WidgetWithChildrenShortcut);
   _view->graphicsView()->addAction(_centerViewAction);
 
   _snapshotAction = new QAction("Take a snapshot", widget);
-  SET_TOOLTIP_WITH_CTRL_SHORTCUT(
+  setToolTipWithCtrlShortcut(
       _snapshotAction, "Show a dialog to save a snapshot of the current view display", "Shift+P");
   connect(_snapshotAction, SIGNAL(triggered()), this, SLOT(openSnapshotDialog()));
   _snapshotAction->setShortcut(tr("Ctrl+Shift+P"));
@@ -51,9 +51,8 @@ ViewActionsManager::ViewActionsManager(View *view, GlMainWidget *widget, bool ke
 
   if (showAAA) {
     _advAntiAliasingAction = new QAction("Advanced anti-aliasing", widget);
-    _advAntiAliasingAction->setToolTip(
-        QString("Enable to use a better but more expensive technique "
-                "of anti-aliasing (needs off screen rendering)"));
+    _advAntiAliasingAction->setToolTip("Enable to use a better but more expensive technique "
+                                       "of anti-aliasing (needs off screen rendering)");
     _advAntiAliasingAction->setCheckable(true);
     _advAntiAliasingAction->setChecked(_glMainWidget->advancedAntiAliasingActivated());
     connect(_advAntiAliasingAction, SIGNAL(triggered(bool)), this,
@@ -99,7 +98,7 @@ void ViewActionsManager::fillContextMenu(QMenu *menu) {
   menu->addAction(_centerViewAction);
 
   QAction *action = menu->addAction("Anti-aliasing");
-  action->setToolTip(QString("Improve line rendering quality"));
+  action->setToolTip("Improve line rendering quality");
   action->setCheckable(true);
   action->setChecked(OpenGlConfigManager::antiAliasing());
   connect(action, SIGNAL(triggered(bool)), this, SLOT(setAntiAliasing(bool)));

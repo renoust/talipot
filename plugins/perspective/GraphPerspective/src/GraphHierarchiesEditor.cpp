@@ -162,7 +162,7 @@ void GraphHierarchiesEditor::contextMenuRequested(const QPoint &p) {
   if (_contextIndex.isValid()) {
     _contextGraph = _contextIndex.data(tlp::GraphHierarchiesModel::GraphRole).value<tlp::Graph *>();
     QMenu menu;
-    tlp::Perspective::redirectStatusTipOfMenu(&menu);
+    menu.setToolTipsVisible(true);
     menu.addAction(_ui->actionCreate_panel);
     menu.addSeparator();
     menu.addAction(_ui->actionExport);
