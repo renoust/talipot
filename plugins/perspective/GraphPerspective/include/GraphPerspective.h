@@ -161,6 +161,7 @@ protected slots:
   void showHideLogger();
   void showHideMenuBar();
   void initPythonIDE();
+  void anchoredPythonIDE(bool anchored);
 
 protected:
   bool eventFilter(QObject *, QEvent *) override;

@@ -711,6 +711,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   connect(_ui->developButton, SIGNAL(clicked()), this, SLOT(showPythonIDE()));
   _pythonPanel->setModel(_graphs);
   _pythonIDE->setGraphsModel(_graphs);
+  connect(_pythonIDE, SIGNAL(anchoredRequest(bool)), this, SLOT(anchoredPythonIDE(bool)));
   tlp::PluginsManager::instance()->addListener(this);
   QTimer::singleShot(100, this, SLOT(initPythonIDE()));
 
@@ -1074,6 +1075,31 @@ void GraphPerspective::openProjectFile(const QString &path) {
 
 void GraphPerspective::initPythonIDE() {
   _pythonIDE->setProject(_project);
+    if (Settings::instance().pythonIDEAnchored()) {
+    _pythonIDE->setVisible(false);
+    _pythonIDE->setAnchored(true);
+    _pythonIDE->setParent(nullptr);
+    _ui->mainSplitter->addWidget(_pythonIDE);
+    _ui->mainSplitter->setCollapsible(2, false);
+    _ui->developButton->setCheckable(true);
+  }
+}
+
+void GraphPerspective::anchoredPythonIDE(bool anchored) {
+  _ui->developButton->setCheckable(anchored);
+  Settings::instance().setPythonIDEAnchored(anchored);
+  if (anchored) {
+    _pythonIDEDialog->hide();
+    _pythonIDE->setParent(nullptr);
+    _ui->mainSplitter->addWidget(_pythonIDE);
+    _ui->mainSplitter->setCollapsible(2, false);
+    _ui->developButton->setChecked(anchored);
+  } else {
+    _pythonIDE->setParent(nullptr);
+    _pythonIDEDialog->layout()->addWidget(_pythonIDE);
+    _pythonIDEDialog->show();
+    _ui->developButton->setChecked(false);
+  }
 }
 
 void GraphPerspective::deleteSelectedElementsFromRootGraph() {
@@ -1640,8 +1666,14 @@ void GraphPerspective::treatEvent(const tlp::Event &ev) {
 }
 
 void GraphPerspective::showPythonIDE() {
-  _pythonIDEDialog->show();
-  _pythonIDEDialog->raise();
+  if (!_pythonIDE->isAnchored()) {
+    _pythonIDEDialog->raise();
+    _pythonIDEDialog->show();
+    _pythonIDEDialog->raise();
+  } else {
+    _pythonIDE->setVisible(!_pythonIDE->isVisible());
+    _ui->developButton->setChecked(_pythonIDE->isVisible());
+  }
 }
 
 #ifdef APPIMAGE_BUILD
