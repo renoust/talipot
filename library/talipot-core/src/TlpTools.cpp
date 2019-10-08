@@ -540,13 +540,3 @@ std::ostream *tlp::getOutputFileStream(const std::string &filename,
 
 //=========================================================
 
-// Gui Test mode
-static bool GuiTestingMode = false;
-
-bool tlp::inGuiTestingMode() {
-  return GuiTestingMode;
-}
-
-void tlp::setGuiTestingMode(bool enabled) {
-  GuiTestingMode = enabled;
-}

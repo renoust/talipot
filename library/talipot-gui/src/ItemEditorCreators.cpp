@@ -332,7 +332,7 @@ public:
   void showEvent(QShowEvent *ev) override {
     QDialog::showEvent(ev);
 
-    if (!inGuiTestingMode() && parentWidget())
+    if (parentWidget())
       move(parentWidget()->window()->frameGeometry().topLeft() +
            parentWidget()->window()->rect().center() - rect().center());
   }
@@ -347,7 +347,7 @@ QWidget *FileDescriptorEditorCreator::createWidget(QWidget *parent) const {
 #if defined(__APPLE__)
   dlg->setOption(QFileDialog::DontUseNativeDialog, true);
 #else
-  dlg->setOption(QFileDialog::DontUseNativeDialog, inGuiTestingMode());
+  dlg->setOption(QFileDialog::DontUseNativeDialog, false);
 #endif
   dlg->setMinimumSize(300, 400);
   return dlg;
@@ -362,12 +362,6 @@ void FileDescriptorEditorCreator::setEditorData(QWidget *w, const QVariant &v, b
   // only if there is a non empty absolute path
   if (!desc.absolutePath.isEmpty())
     dlg->setDirectory(QFileInfo(desc.absolutePath).absolutePath());
-  // or if we are in gui testing mode
-  // where we must ensure that choosing the file is relative to
-  // the current directory to allow to run the gui tests
-  // from any relative tests/gui directory
-  else if (inGuiTestingMode())
-    dlg->setDirectory(QDir::currentPath());
 
   if (desc.type == FileDescriptor::Directory) {
     dlg->setFileMode(QFileDialog::Directory);

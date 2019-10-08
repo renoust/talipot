@@ -114,9 +114,6 @@ public:
     if (g->getSuperGraph() != g) {
       os << "(cluster " << g->getId() << endl;
 
-      if (inGuiTestingMode())
-        g->sortElts();
-
       const std::vector<node> &nodes = g->nodes();
       unsigned int nbNodes = nodes.size();
       const std::vector<edge> &edges = g->edges();
@@ -305,13 +302,7 @@ public:
 
       os << "(default \"" << convert(nDefault) << "\" \"" << convert(eDefault) << "\")" << endl;
 
-      Iterator<node> *itN = prop->getNonDefaultValuatedNodes(g);
-
-      if (inGuiTestingMode())
-        // sort nodes to ensure a predictable ordering of the output
-        itN = new StableIterator<node>(itN, 0, true, true);
-
-      for (auto n : itN) {
+      for (auto n : prop->getNonDefaultValuatedNodes(g)) {
 
         if (progress % (1 + nonDefaultvaluatedElementCount / 100) == 0)
           pluginProgress->progress(progress, nonDefaultvaluatedElementCount);
@@ -338,13 +329,7 @@ public:
         os << "(node " << getNode(n).id << " \"" << convert(tmp) << "\")" << endl;
       }
 
-      Iterator<edge> *itE = prop->getNonDefaultValuatedEdges(g);
-
-      if (inGuiTestingMode())
-        // sort edges to ensure a predictable ordering of the output
-        itE = new StableIterator<edge>(itE, 0, true, true);
-
-      for (auto e : itE) {
+      for (auto e : prop->getNonDefaultValuatedEdges(g)) {
 
         if (progress % (1 + nonDefaultvaluatedElementCount / 100) == 0)
           pluginProgress->progress(progress, nonDefaultvaluatedElementCount);

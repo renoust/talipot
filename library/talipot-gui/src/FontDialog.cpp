@@ -105,7 +105,7 @@ Font FontDialog::getFont(QWidget * /*parent*/, const Font &selectedFont) {
 void FontDialog::showEvent(QShowEvent *ev) {
   QDialog::showEvent(ev);
 
-  if (!inGuiTestingMode() && parentWidget())
+  if (parentWidget())
     move(parentWidget()->window()->frameGeometry().topLeft() +
          parentWidget()->window()->rect().center() - rect().center());
 }

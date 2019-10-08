@@ -106,14 +106,6 @@ GraphPerspective::GraphPerspective(const tlp::PluginContext *c)
       _recentDocumentsSettingsKey("perspective/recent_files"), _logger(nullptr) {
   Q_INIT_RESOURCE(GraphPerspective);
 
-  if (c && static_cast<const PerspectiveContext *>(c)->parameters.contains("gui_testing")) {
-    tlp::setGuiTestingMode(true);
-    // we must ensure that choosing a file is relative to
-    // the current directory to allow to run the gui tests
-    // from any relative tests/gui directory
-    _lastOpenLocation = QDir::currentPath();
-  }
-
   _pythonIDE = nullptr;
   _pythonIDEDialog = nullptr;
 }
@@ -568,7 +560,7 @@ void GraphPerspective::start(tlp::PluginProgress *progress) {
   _mainWindow->setAcceptDrops(true);
   _mainWindow->statusBar();
 
-  if (tlp::inGuiTestingMode() || !Settings::instance().showStatusBar())
+  if (!Settings::instance().showStatusBar())
     _mainWindow->statusBar()->hide();
 
   connect(_logger, SIGNAL(cleared()), this, SLOT(logCleared()));
@@ -1024,19 +1016,12 @@ void GraphPerspective::open(QString fileName) {
   if (fileName.isEmpty()) // If open() was called without a parameter, open the file dialog
     fileName = QFileDialog::getOpenFileName(
         _mainWindow, tr("Open graph"), _lastOpenLocation, filters.c_str(), nullptr,
-        // ensure predictable behavior
-        // needed by gui tests
-        inGuiTestingMode() ? QFileDialog::DontUseNativeDialog
-                           : static_cast<QFileDialog::Options>(0));
+        static_cast<QFileDialog::Options>(0));
 
   if (!fileName.isEmpty()) {
     QFileInfo fileInfo(fileName);
 
-    // we must ensure that choosing a file is relative to
-    // the current directory to allow to run the gui tests
-    // from any relative tests/gui directory
-    if (!tlp::inGuiTestingMode())
-      _lastOpenLocation = fileInfo.absolutePath();
+    _lastOpenLocation = fileInfo.absolutePath();
 
     for (const std::string &extension : modules.keys()) {
       if (fileName.endsWith(".tlpx")) {
