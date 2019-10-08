@@ -474,7 +474,7 @@ protected:
   GlVertexArrayManager *_glVertexArrayManager;
   GlGlyphRenderer *_glGlyphRenderer;
 };
-} // namespace tlp
+}
 
 #endif // TALIPOT_GL_GRAPH_INPUT_DATA_H
 ///@endcond

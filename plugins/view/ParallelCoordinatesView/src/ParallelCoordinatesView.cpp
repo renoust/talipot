@@ -1018,4 +1018,4 @@ void ParallelCoordinatesView::applySettings() {
   if (dataConfigWidget->configurationChanged() || drawConfigWidget->configurationChanged())
     setupAndDrawView();
 }
-} // namespace tlp
+}
