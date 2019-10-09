@@ -27,7 +27,6 @@
 #include <talipot/Glyph.h>
 #include <talipot/Interactor.h>
 #include <talipot/View.h>
-#include <talipot/Perspective.h>
 #include <talipot/EdgeExtremityGlyph.h>
 #include <talipot/TlpQtTools.h>
 
@@ -1142,8 +1141,7 @@ static QSet<QString> getAlgorithmPluginsListOfType(const QString &type, const QS
     Plugin *plugin = PluginsManager::getPluginObject(*it);
 
     if (plugin->category() != GLYPH_CATEGORY && plugin->category() != EEGLYPH_CATEGORY &&
-        plugin->category() != INTERACTOR_CATEGORY && plugin->category() != VIEW_CATEGORY &&
-        plugin->category() != PERSPECTIVE_CATEGORY) {
+        plugin->category() != INTERACTOR_CATEGORY && plugin->category() != VIEW_CATEGORY) {
 
       if (type.isEmpty() || plugin->category() == QStringToTlpString(type)) {
         QString pluginName = "\"" + tlpStringToQString(*it) + "\"";

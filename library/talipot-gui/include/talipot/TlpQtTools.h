@@ -23,6 +23,7 @@
 
 class QWidget;
 class QString;
+class QMainWindow;
 
 namespace tlp {
 
@@ -125,6 +126,8 @@ TLP_QT_SCOPE void redirectErrorOutputToQCritical();
 TLP_QT_SCOPE void disableQtUserInput();
 
 TLP_QT_SCOPE void enableQtUserInput();
+
+TLP_QT_SCOPE QMainWindow *getMainWindow();
 }
 
 // QDebug extension

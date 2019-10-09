@@ -1,80 +1,145 @@
 SET(SRCS
-  src/main.cpp
-  src/PerspectiveItemWidget.cpp
-  src/PluginErrorReport.cpp
-  src/PluginsCenter.cpp
-  src/PluginInformationListItem.cpp
-  src/MainWindow.cpp
-  src/SplashScreen.cpp
-  src/WelcomePage.cpp
-  src/PerspectiveProcessHandler.cpp
-  src/PerspectiveCrashHandler.cpp
-  src/FormPost.cpp
-  src/PerspectiveSelectionDialog.cpp
+    src/main.cpp
+    src/AlgorithmRunner.cpp
+    src/AlgorithmRunnerItem.cpp
+    src/ExpandableGroupBox.cpp
+    src/ExportWizard.cpp
+    src/GraphHierarchiesEditor.cpp
+    src/HeaderFrame.cpp
+    src/ImportWizard.cpp
+    src/OutputPanelButton.cpp
+    src/PanelSelectionWizard.cpp
+    src/PreferencesDialog.cpp
+    src/PythonPanel.cpp
+    src/PluginErrorReport.cpp
+    src/PluginInformationListItem.cpp
+    src/PluginsCenter.cpp
+    src/SearchWidget.cpp
+    src/SplashScreen.cpp
+    src/TalipotLogger.cpp
+    src/TalipotMainWindow.cpp
 )
 
 QTX_SET_INCLUDES_AND_DEFINITIONS()
 
-QTX_WRAP_UI(UI_HEADERS
-  designer/PerspectiveItem.ui
-  designer/PluginsCenter.ui
-  designer/MainWindow.ui
-  designer/WelcomePage.ui
-  designer/PluginInformationListItem.ui
-  designer/PerspectiveCrashHandler.ui
-  designer/PerspectiveSelectionDialog.ui
-)
+QTX_ADD_RESOURCES(RCC_SRCS
+                  resources/TalipotApp.qrc
+                  OPTIONS -name TalipotApp)
 
 QTX_WRAP_CPP(MOC_SRCS
-  include/PerspectiveItemWidget.h
-  include/PluginErrorReport.h
-  include/PluginsCenter.h
-  include/MainWindow.h
-  include/WelcomePage.h
-  include/PluginInformationListItem.h
-  include/PerspectiveProcessHandler.h
-  include/PerspectiveCrashHandler.h
-  include/FormPost.h
-  include/PerspectiveSelectionDialog.h
+             include/AlgorithmRunner.h
+             include/AlgorithmRunnerItem.h
+             include/ExpandableGroupBox.h
+             include/ExportWizard.h
+             include/GraphHierarchiesEditor.h
+             include/HeaderFrame.h
+             include/ImportWizard.h
+             include/OutputPanelButton.h
+             include/PanelSelectionWizard.h
+             include/PluginInformationListItem.h
+             include/PluginsCenter.h
+             include/PreferencesDialog.h
+             include/PythonPanel.h
+             include/SearchWidget.h
+             include/TalipotLogger.h
+             include/TalipotMainWindow.h
 )
 
-QTX_ADD_RESOURCES(RCC_SRCS resources/TalipotAgent.qrc)
+QTX_WRAP_UI(UI_SRCS
+            designer/AlgorithmRunner.ui
+            designer/AlgorithmRunnerItem.ui
+            designer/GraphHierarchiesEditor.ui
+            designer/HeaderFrame.ui
+            designer/ImportWizard.ui
+            designer/ExportWizard.ui
+            designer/PanelSelectionWizard.ui
+            designer/PluginInformationListItem.ui
+            designer/PluginsCenter.ui
+            designer/PreferencesDialog.ui
+            designer/PythonPanel.ui
+            designer/SearchWidget.ui
+            designer/TalipotLogger.ui
+            designer/TalipotMainWindow.ui
+)
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../crash_handling)
+INCLUDE_DIRECTORIES(../crash_handling include/ ${CMAKE_CURRENT_BINARY_DIR})
 
-INCLUDE_DIRECTORIES(include ${CMAKE_CURRENT_BINARY_DIR} ${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude}
+                    ${TalipotPythonInclude} ${TalipotGUIInclude} ${OPENGL_INCLUDE_DIR})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 IF(WIN32)
 
-STRING(TIMESTAMP CURRENT_YEAR "%Y")
+  STRING(TIMESTAMP CURRENT_YEAR "%Y")
 
-INCLUDE(generate_product_version)
-generate_product_version(
-   VersionFiles
-   NAME "Talipot Agent"
-   ICON ${PROJECT_SOURCE_DIR}/library/talipot-gui/resources/icons/talipot.ico
-   VERSION_MAJOR ${TalipotMajorVersion}
-   VERSION_MINOR ${TalipotMinorVersion}
-   VERSION_PATCH ${TalipotReleaseVersion}
-   COMPANY_NAME "The Talipot developers"
-   COMPANY_COPYRIGHT "(C) Copyright ${CURRENT_YEAR}"
-   ORIGINAL_FILENAME "talipot.exe"
-)
+  INCLUDE(generate_product_version)
+  generate_product_version(
+    VersionFiles
+    NAME "Talipot"
+    ICON ${PROJECT_SOURCE_DIR}/library/talipot-gui/resources/icons/talipot.ico
+    VERSION_MAJOR ${TalipotMajorVersion}
+    VERSION_MINOR ${TalipotMinorVersion}
+    VERSION_PATCH ${TalipotReleaseVersion}
+    COMPANY_NAME "The Talipot developers"
+    COMPANY_COPYRIGHT "(C) Copyright ${CURRENT_YEAR}"
+    ORIGINAL_FILENAME "talipot.exe"
+  )
 
-SET(SRCS ${SRCS} ${VersionFiles})
+  SET(SRCS ${SRCS} ${VersionFiles})
 
 ENDIF(WIN32)
 
-ADD_EXECUTABLE(talipot ${SRCS} ${UI_HEADERS} ${MOC_SRCS} ${RCC_SRCS})
+ADD_EXECUTABLE(talipot ${SRCS} ${RCC_SRCS} ${MOC_SRCS} ${UI_SRCS})
 
-TARGET_LINK_LIBRARIES(talipot crash_handling ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(talipot crash_handling ${LibTalipotCoreName} ${LibTalipotOGLName}
+                               ${LibTalipotGUIName} ${LibTalipotPythonName} ${QT_LIBRARIES})
 
 INSTALL(TARGETS talipot
   RUNTIME DESTINATION ${TalipotBinInstallDir} COMPONENT talipot_app
   LIBRARY DESTINATION ${TalipotLibInstallDir} COMPONENT talipot_app
   ARCHIVE DESTINATION ${TalipotLibInstallDir} COMPONENT talipot_app)
+
+IF(WIN32)
+  SET(TALIPOT_FIXUP_BUNDLE ON CACHE BOOL "Enable / disable the gathering and copy of Talipot DLL dependencies into the install bin folder")
+  # That simple install command does the magic of gathering all required dll dependencies
+  # in order to run Talipot and copy them to the bin install folder (thanks to the CMake module named BundleUtilities)
+  # In the case where a dll dependency is not automatically found, you must add its path to the CMAKE_LIBRARY_PATH variable.
+  IF(TALIPOT_FIXUP_BUNDLE)
+    # copy required Qt plugins
+    INSTALL(DIRECTORY ${QT_PLUGINS_DIR}/imageformats DESTINATION ${TalipotBinInstallDir})
+    INSTALL(DIRECTORY ${QT_PLUGINS_DIR}/platforms DESTINATION ${TalipotBinInstallDir})
+    IF(EXISTS ${QT_PLUGINS_DIR}/styles)
+      INSTALL(DIRECTORY ${QT_PLUGINS_DIR}/styles DESTINATION ${TalipotBinInstallDir})
+    ENDIF(EXISTS ${QT_PLUGINS_DIR}/styles)
+
+    # then schedule a call to FIXUP_BUNDLE at the end of the CMake install process
+    # this process is configured here instead in the root CMakeLists.txt as
+    # CMake inserts install commands before the ones defined in sub directories
+    # and we need Talipot to be fully installed before running the bundle fixing process
+    SET(APP "\${CMAKE_INSTALL_PREFIX}/bin/talipot.exe")
+    SET(LIB_DIRS ${QT_BINARY_DIR} ${PYTHON_HOME_PATH} ${CMAKE_LIBRARY_PATH})
+    STRING(REPLACE ";" "\;" LIB_DIRS "${LIB_DIRS}")
+    GET_PROPERTY(FIXUP_BUNDLE_LIBS GLOBAL PROPERTY FIXUP_BUNDLE_LIBS)
+    INSTALL(CODE
+            "INCLUDE(BundleUtilities)
+             FIXUP_BUNDLE(\"${APP}\" \"${FIXUP_BUNDLE_LIBS}\" \"${LIB_DIRS}\")"
+    )
+    # When generating Talipot installers using MSYS2, we need to bundle OpenSSL
+    # libraries in order for the Geographic view to work correctly.
+    # As Qt5 does not link directly to OpenSSL for license issue and thus use
+    # a dynamic loading approach, we are forced to use the following trick to copy
+    # the needed dlls into the Talipot install folder.
+    IF(MINGW AND EXISTS ${MINGW_BIN_PATH}/openssl.exe)
+      INSTALL(CODE
+              "INCLUDE(BundleUtilities)
+               FILE(COPY \"${MINGW_BIN_PATH}/openssl.exe\" DESTINATION \"\${CMAKE_INSTALL_PREFIX}/bin/\")
+               FIXUP_BUNDLE(\"\${CMAKE_INSTALL_PREFIX}/bin/openssl.exe\" \"\" \"${LIB_DIRS}\")
+               FILE(REMOVE \"\${CMAKE_INSTALL_PREFIX}/bin/openssl.exe\")"
+      )
+    ENDIF(MINGW AND EXISTS ${MINGW_BIN_PATH}/openssl.exe)
+  ENDIF(TALIPOT_FIXUP_BUNDLE)
+ENDIF(WIN32)
 
 IF(LINUX)
 
@@ -82,7 +147,7 @@ IF(LINUX)
 
   IF(TALIPOT_LINUX_DESKTOP_REGISTRATION)
 
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/Talipot.desktop.in
+    CONFIGURE_FILE(resources/linux_desktop/Talipot.desktop.in
                    ${CMAKE_CURRENT_BINARY_DIR}/Talipot-${TalipotVersion}.desktop)
 
     INSTALL(CODE
@@ -92,31 +157,31 @@ IF(LINUX)
                        COMMAND mkdir -p ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/icons)"
     )
 
-    INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpx.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlp.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpgz.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpz.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpb.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpbgz.xml
-                  ${CMAKE_CURRENT_SOURCE_DIR}/resources/linux_desktop/application-x-talipot-tlpbz.xml
+    INSTALL(FILES resources/linux_desktop/application-x-talipot-tlpx.xml
+                  resources/linux_desktop/application-x-talipot-tlp.xml
+                  resources/linux_desktop/application-x-talipot-tlpgz.xml
+                  resources/linux_desktop/application-x-talipot-tlpz.xml
+                  resources/linux_desktop/application-x-talipot-tlpb.xml
+                  resources/linux_desktop/application-x-talipot-tlpbgz.xml
+                  resources/linux_desktop/application-x-talipot-tlpbz.xml
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/mime/packages)
 
     INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/Talipot-${TalipotVersion}.desktop
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/applications)
 
-    INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/talipot-icon.png
+    INSTALL(FILES resources/icons/talipot-icon.png
             RENAME talipot.png
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/pixmaps)
 
-    INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/talipot-file-icon.png
+    INSTALL(FILES resources/icons/talipot-file-icon.png
             RENAME application-x-talipot.png
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/pixmaps)
 
-    INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/talipot-icon.png
+    INSTALL(FILES resources/icons/talipot-icon.png
             RENAME talipot.png
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/icons)
 
-    INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/talipot-file-icon.png
+    INSTALL(FILES resources/icons/talipot-file-icon.png
             RENAME application-x-talipot.png
             DESTINATION ${DESKTOP_CONFIG_INSTALL_PREFIX}/share/icons)
 

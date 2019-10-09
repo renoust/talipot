@@ -69,7 +69,7 @@ public:
                     "1.9", "File")
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/export_svg.png";
+    return ":/talipot/app/icons/32/export_svg.png";
   }
 
   string fileExtension() const override {

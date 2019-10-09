@@ -14,7 +14,6 @@
 #include "talipot/Mimes.h"
 
 #include <talipot/MetaTypes.h>
-#include <talipot/Perspective.h>
 #include <talipot/TlpQtTools.h>
 
 using namespace tlp;

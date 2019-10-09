@@ -15,7 +15,6 @@
 #include "ui_MatrixViewConfigurationWidget.h"
 
 #include <talipot/Graph.h>
-#include <talipot/Perspective.h>
 #include <talipot/ColorButton.h>
 #include <talipot/TlpQtTools.h>
 
@@ -38,8 +37,7 @@ MatrixViewConfigurationWidget::MatrixViewConfigurationWidget(QWidget *parent)
   connect(_ui->orientedCBox, SIGNAL(clicked(bool)), this, SIGNAL(updateOriented(bool)));
   connect(_ui->ascendingOrderCBox, SIGNAL(toggled(bool)), this, SLOT(orderingDirectionChanged()));
 
-  if (Perspective::instance())
-    _ui->backgroundColorBtn->setDialogParent(Perspective::instance()->mainWindow());
+  _ui->backgroundColorBtn->setDialogParent(getMainWindow());
 }
 
 MatrixViewConfigurationWidget::~MatrixViewConfigurationWidget() {

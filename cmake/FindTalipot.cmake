@@ -18,7 +18,6 @@
 # TALIPOT_GLYPH_PLUGINS_DIR: Path where Talipot glyph plugins are located
 # TALIPOT_INTERACTOR_PLUGINS_DIR: Path where Talipot interaction plugins are located
 # TALIPOT_VIEW_PLUGINS_DIR: Path where Talipot view plugins are located
-# TALIPOT_PERSPECTIVE_PLUGINS_DIR: Path where Talipot perspective plugins are located
 # TALIPOT_CORE_LIBRARY: The path to the TalipotCore module library.
 # TALIPOT_OGL_LIBRARY: The path to the TalipotOGL module library.
 # TALIPOT_GUI_LIBRARY: The path to the TalipotGUI module library.
@@ -146,8 +145,6 @@ SET(TALIPOT_INTERACTOR_PLUGINS_DIR ${TALIPOT_PLUGINS_DIR}/interactor)
 MARK_AS_ADVANCED(TALIPOT_INTERACTOR_PLUGINS_DIR)
 SET(TALIPOT_VIEW_PLUGINS_DIR ${TALIPOT_PLUGINS_DIR}/view)
 MARK_AS_ADVANCED(TALIPOT_VIEW_PLUGINS_DIR)
-SET(TALIPOT_PERSPECTIVE_PLUGINS_DIR ${TALIPOT_PLUGINS_DIR}/perspective)
-MARK_AS_ADVANCED(TALIPOT_PERSPECTIVE_PLUGINS_DIR)
 SET(TALIPOT_FOUND true)
 
 IF(WIN32 AND NOT MSVC)

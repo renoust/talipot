@@ -11,37 +11,42 @@
  *
  */
 
-#include <QLocale>
-#include <QProcess>
+#include <QString>
 #include <QDir>
-
 #include <QApplication>
+#include <QMainWindow>
 #include <QMessageBox>
+#include <QDesktopWidget>
 #include <QStandardPaths>
-#include <QTcpSocket>
-
-#include <talipot/Release.h>
-#include <talipot/PluginsManager.h>
-#include <talipot/PluginLibraryLoader.h>
-#include <talipot/TlpTools.h>
-#include <talipot/TlpQtTools.h>
-#include <talipot/Settings.h>
-#include <talipot/PluginManager.h>
-#include <talipot/QuaZIPFacade.h>
-#include <talipot/TlpQtTools.h>
 
 #include <CrashHandling.h>
 
-#include "MainWindow.h"
+#include <talipot/Exception.h>
+#include <talipot/Release.h>
+#include <talipot/PluginLibraryLoader.h>
+#include <talipot/PluginsManager.h>
+#include <talipot/TlpTools.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Project.h>
+#include <talipot/SimplePluginProgressWidget.h>
+#include <talipot/PluginsManager.h>
+#include <talipot/Interactor.h>
+#include <talipot/GlyphManager.h>
+#include <talipot/EdgeExtremityGlyphManager.h>
+#include <talipot/QGlBufferManager.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Settings.h>
+#include <talipot/WorkspacePanel.h>
+#include <talipot/View.h>
+#include <talipot/GlMainView.h>
+#include <talipot/GlMainWidget.h>
+#include <talipot/PythonInterpreter.h>
+
+#include "TalipotMainWindow.h"
 #include "SplashScreen.h"
 #include "PluginsCenter.h"
-#include "FormPost.h"
-#include <talipot/SystemDefinition.h>
 
-#if defined(__APPLE__)
-#include <sys/types.h>
-#include <signal.h>
-#endif
+#include <iostream>
 
 #ifdef WIN32
 #include <windows.h>
@@ -51,132 +56,110 @@
 #undef interface
 #endif
 
-bool sendAgentMessage(int port, const QString &message) {
-  bool result = true;
+using namespace std;
+using namespace tlp;
 
-  QTcpSocket sck;
-  sck.connectToHost(QHostAddress::LocalHost, port);
-  sck.waitForConnected(1000);
+void usage(const QString &error) {
+  int returnCode = 0;
 
-  if (sck.state() == QAbstractSocket::ConnectedState) {
-    sck.write(message.toUtf8());
-    sck.flush();
-  } else {
-    result = false;
+  if (!error.isEmpty()) {
+    QMessageBox::warning(nullptr, "Error", error);
+    returnCode = 1;
   }
 
-  sck.close();
-  return result;
-}
+  cout << "Usage: talipot [OPTION] [FILE]" << endl
+       << endl
+       << "FILE: a graph file supported by Talipot to open. " << endl
+       << "List of options:" << endl
+       << endl
+       << "  --help (-h)\tDisplay this help message and ignore other options." << endl
+       << endl;
 
-void checkTalipotRunning(const QString &perspName, const QString &fileToOpen, bool showAgent) {
-  QFile lockFile(QDir(QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0))
-                     .filePath("talipot.lck"));
-
-  if (lockFile.exists() && lockFile.open(QIODevice::ReadOnly)) {
-    QString agentPort = lockFile.readAll();
-    bool ok;
-    int n_agentPort = agentPort.toInt(&ok);
-
-    if (ok && sendAgentMessage(n_agentPort, "HELLO\tHELLO")) {
-
-      if (showAgent) {
-        sendAgentMessage(n_agentPort, "SHOW_AGENT\tPROJECTS");
-      }
-
-      // if a file was passed as argument, forward it to the running instance
-      if (!fileToOpen.isEmpty()) { // open the file passed as argument
-        if (!perspName.isEmpty()) {
-          sendAgentMessage(n_agentPort, "OPEN_PROJECT_WITH\t" + perspName + "\t" + fileToOpen);
-        } else {
-          sendAgentMessage(n_agentPort, "OPEN_PROJECT\t" + fileToOpen);
-        }
-      } else if (!perspName.isEmpty()) { // open the perspective passed as argument
-        sendAgentMessage(n_agentPort, "CREATE_PERSPECTIVE\t" + perspName);
-      }
-
-      exit(0);
-    }
-  }
-
-  lockFile.close();
-  lockFile.remove();
+  exit(returnCode);
 }
 
 int main(int argc, char **argv) {
+
   CrashHandling::installCrashHandler();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
   QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
 #endif
-  QApplication talipot_agent(argc, argv);
-  QString name("Talipot ");
 
-  // show patch number only if needed
-  if (TALIPOT_INT_VERSION % 10)
-    name += TALIPOT_VERSION;
-  else
-    name += TALIPOT_MM_VERSION;
+  QApplication talipot(argc, argv);
+  talipot.setApplicationName("Talipot");
 
-  // the applicationName below is used to identify the location
-  // of downloaded plugins, so it must be the same as in
-  // talipot_perspective/main.cpp
-  talipot_agent.setApplicationName(name);
+  // Check arguments
+  QString inputFilePath;
+  QVariantMap extraParams;
 
-  // Parse arguments
-  QRegExp perspectiveRegexp("^\\-\\-perspective=(.*)");
-  QString perspName;
-  QString fileToOpen;
-  bool showAgent = true;
+  QRegExp extraParametersRegexp("^\\-\\-([^=]*)=(.*)");
 
-  for (int i = 1; i < QApplication::arguments().size(); ++i) {
-    QString s = QApplication::arguments()[i];
+  QStringList args = QApplication::arguments();
 
-    if (perspectiveRegexp.exactMatch(s)) {
-      perspName = perspectiveRegexp.cap(1);
-    } else if (s == "--no-show-agent") {
-      showAgent = false;
+  bool debugPluginsLoad = false;
+
+  for (int i = 1; i < args.size(); ++i) {
+    QString a = args[i];
+
+    if ((a == "--help") || (a == "-h")) {
+      usage("");
+    } else if (a == "--debug-plugins-load") {
+      debugPluginsLoad = true;
+    } else if (extraParametersRegexp.exactMatch(a)) {
+      extraParams[extraParametersRegexp.cap(1)] = extraParametersRegexp.cap(2);
     } else {
-      fileToOpen = s;
+      inputFilePath = a;
     }
   }
 
-  showAgent = showAgent || fileToOpen.isEmpty();
-
-  checkTalipotRunning(perspName, fileToOpen, showAgent);
-
-  SplashScreen splashScreen;
-  tlp::initTalipotSoftware(&splashScreen, true);
+  initTalipotLib(QStringToTlpString(QApplication::applicationDirPath()).c_str());
 
 #ifdef _MSC_VER
-  // Add path to Talipot pdb files generated by Visual Studio (for configurations Debug and
-  // RelWithDebInfo)
+  // Add path to Talipot pdb files generated by Visual Studio
+  // (for configurations Debug and RelWithDebInfo)
   // It allows to get a detailed stack trace when Talipot crashes.
   CrashHandling::setExtraSymbolsSearchPaths(tlp::TalipotShareDir + "pdb");
 #endif
 
-  // Main window
-  MainWindow *mainWindow = MainWindow::instance();
-  mainWindow->pluginsCenter()->reportPluginErrors(splashScreen.errors());
+  // initialize embedded Python interpreter
+  PythonInterpreter::getInstance();
 
-  mainWindow->show();
-  splashScreen.finish(mainWindow);
-
-  // Treat arguments
-  if (!fileToOpen.isEmpty()) { // open the file passed as argument
-    if (!perspName.isEmpty())
-      mainWindow->openProjectWith(fileToOpen, perspName);
-    else
-      mainWindow->openProject(fileToOpen);
-  } else if (!perspName.isEmpty()) { // open the perspective passed as argument
-    mainWindow->createPerspective(perspName);
+  // initialize Talipot
+  QMap<QString, QString> pluginErrors;
+  try {
+    SplashScreen loader(debugPluginsLoad);
+    tlp::initTalipotSoftware(&loader);
+    pluginErrors = loader.errors();
+  } catch (tlp::Exception &e) {
+    QMessageBox::warning(nullptr, "Error", e.what());
+    exit(1);
   }
 
-  int result = talipot_agent.exec();
+  QFileInfo fileInfo(inputFilePath);
 
-  QFile f(QDir(QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0))
-              .filePath("talipot.lck"));
-  f.remove();
+  if (!inputFilePath.isEmpty() && (!fileInfo.exists() || fileInfo.isDir())) {
+    usage("File " + inputFilePath + " not found or is a directory");
+  }
+
+  // Create and initialize Talipot main window
+  TalipotMainWindow *mainWindow = new TalipotMainWindow();
+  mainWindow->pluginsCenter()->reportPluginErrors(pluginErrors);
+
+  mainWindow->show();
+  mainWindow->start(inputFilePath);
+
+  Settings::instance().setFirstRun(false);
+  Settings::instance().setFirstTalipotMMRun(false);
+
+  int result = talipot.exec();
+
+  delete mainWindow;
+
+  // We need to clear allocated Qt buffers and QGlWidget to remove a
+  // segfault when we close talipot
+  QGlBufferManager::clearBuffers();
+  GlMainWidget::clearFirstQGLWidget();
 
   return result;
 }

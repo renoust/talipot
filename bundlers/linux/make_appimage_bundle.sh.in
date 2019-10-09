@@ -6,7 +6,6 @@
 
 TALIPOT_INSTALL_DIR=@CMAKE_INSTALL_PREFIX@
 OUTPUT_DIR=/tmp
-PERSPECTIVE=Talipot
 QMAKE=@QT_QMAKE_EXECUTABLE@
 
 usage()
@@ -15,7 +14,6 @@ usage()
   cat <<EOF
 Options:
   --appdir <dir> (indicate the directory where the Talipot.AppDir will be created, default is /tmp)
-  --perspective <name> (indicate the perspective the AppImage will launch, default is Talipot)
 EOF
   exit $1
 }
@@ -25,10 +23,6 @@ while test $# -gt 0; do
     --appdir)
       shift
       OUTPUT_DIR=$1
-      ;;
-    --perspective)
-      shift
-      PERSPECTIVE=$1
       ;;
     --help)
       usage 0
@@ -40,7 +34,7 @@ while test $# -gt 0; do
   shift
 done
 
-BUNDLE_DIR=$OUTPUT_DIR/$PERSPECTIVE.AppDir
+BUNDLE_DIR=$OUTPUT_DIR/Talipot.AppDir
 
 # if BUNDLE_DIR already exists
 # remove it
@@ -76,10 +70,10 @@ echo "export PYTHONHOME=\${BUNDLE_DIR}/usr" >> $APPRUN_FILE
 echo "export TLP_DIR=\${BUNDLE_DIR}/usr/lib" >> $APPRUN_FILE
 echo "if [ \"\$1\" = \"-no-output-filtering\" ]; then" >> $APPRUN_FILE
 # for debugging purpose, allow to run without filtering of console output
-echo "  \${BUNDLE_DIR}/usr/bin/talipot_perspective -p Talipot" >> $APPRUN_FILE
+echo "  \${BUNDLE_DIR}/usr/bin/talipot" >> $APPRUN_FILE
 echo "else" >> $APPRUN_FILE
 # run with gtk output hidden
-echo "  \${BUNDLE_DIR}/usr/bin/talipot_perspective -p Talipot 2>&1 | sed -e '/Gtk-/d'" >> $APPRUN_FILE
+echo "  \${BUNDLE_DIR}/usr/bin/talipot 2>&1 | sed -e '/Gtk-/d'" >> $APPRUN_FILE
 echo "fi" >> $APPRUN_FILE
 chmod 755 $APPRUN_FILE
 
@@ -88,7 +82,7 @@ DESKTOP_FILE=$BUNDLE_DIR/talipot.desktop
 echo "[Desktop Entry]" > $DESKTOP_FILE
 echo "Name=Talipot" >> $DESKTOP_FILE
 echo "Type=Application" >> $DESKTOP_FILE
-echo "Exec=talipot_perspective" >> $DESKTOP_FILE
+echo "Exec=talipot" >> $DESKTOP_FILE
 echo "Icon=Talipot" >> $DESKTOP_FILE
 echo "Categories=Science;" >> $DESKTOP_FILE
 
@@ -103,8 +97,8 @@ cp @talipot_SOURCE_DIR@/bundlers/linux/Talipot.png $BUNDLE_DIR
 # copy talipot.appdata.xml
 cp @talipot_SOURCE_DIR@/bundlers/linux/talipot.appdata.xml $BUNDLE_SHARE_DIR/metainfo
 
-# copy talipot_perspective exe
-cp -v -p $TALIPOT_INSTALL_DIR/bin/talipot_perspective $BUNDLE_BIN_DIR
+# copy talipot exe
+cp -v -p $TALIPOT_INSTALL_DIR/bin/talipot $BUNDLE_BIN_DIR
 # copy all lib and share installed files (no include)
 echo "copying $TALIPOT_INSTALL_DIR/lib files into $BUNDLE_LIB_DIR"
 cp -Rp $TALIPOT_INSTALL_DIR/@CMAKE_INSTALL_LIBDIR@/* $BUNDLE_LIB_DIR
@@ -135,9 +129,9 @@ fi
 export QT_INSTALL_LIBS_DIR=$(${QMAKE} -query QT_INSTALL_LIBS)
 export LD_LIBRARY_PATH=${QT_INSTALL_LIBS_DIR}:${LD_LIBRARY_PATH}
 
-# copy talipot_perspective needed libs
+# copy talipot needed libs
 pushd $BUNDLE_DIR > /dev/null 2>&1
-ldd $BUNDLE_BIN_DIR/talipot_perspective | grep "=> /" | awk '{print $3}' | grep -v talipot | xargs -I '{}' cp -v '{}' ./usr/lib || true
+ldd $BUNDLE_BIN_DIR/talipot | grep "=> /" | awk '{print $3}' | grep -v talipot | xargs -I '{}' cp -v '{}' ./usr/lib || true
 popd > /dev/null 2>&1
 
 # extend LD_LIBRARY_PATH to ensure PYTHON_LIBRARY can be found

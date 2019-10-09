@@ -46,7 +46,6 @@
 #include <talipot/GraphHierarchiesModel.h>
 #include <talipot/Mimes.h>
 #include <talipot/MetaTypes.h>
-#include <talipot/Perspective.h>
 
 #include <talipot/PythonIDE.h>
 #include <talipot/PythonPluginCreationDialog.h>
@@ -960,9 +959,10 @@ void PythonIDE::writeFileToProject(const QString &projectFile, const QString &fi
     delete fs;
   }
 
+  QMainWindow *mainWindow = getMainWindow();
   // notify the Talipot main window that the Talipot project has been modified
-  if (Perspective::instance() && _notifyProjectModified && fileModified) {
-    Perspective::instance()->mainWindow()->setWindowModified(true);
+  if (mainWindow && _notifyProjectModified && fileModified) {
+    mainWindow->setWindowModified(true);
   }
 }
 
@@ -1498,8 +1498,9 @@ void PythonIDE::writeScriptsFilesList(int deleted) {
   deleteFilesFromProjectIfRemoved(PYTHON_SCRIPTS_PATH, existingScriptFilenames);
 
   // notify the Talipot main window that the Talipot project has been modified
-  if (Perspective::instance() && _notifyProjectModified && fileModified) {
-    Perspective::instance()->mainWindow()->setWindowModified(true);
+  QMainWindow *mainWindow = getMainWindow();
+  if (mainWindow && _notifyProjectModified && fileModified) {
+    mainWindow->setWindowModified(true);
   }
 }
 
@@ -1549,8 +1550,9 @@ void PythonIDE::writePluginsFilesList(int deleted) {
   deleteFilesFromProjectIfRemoved(PYTHON_PLUGINS_PATH, existingPluginsFilenames);
 
   // notify the Talipot main window that the Talipot project has been modified
-  if (Perspective::instance() && _notifyProjectModified && fileModified) {
-    Perspective::instance()->mainWindow()->setWindowModified(true);
+  QMainWindow *mainWindow = getMainWindow();
+  if (mainWindow && _notifyProjectModified && fileModified) {
+    mainWindow->setWindowModified(true);
   }
 }
 
@@ -1609,8 +1611,9 @@ void PythonIDE::writeModulesFilesList(int deleted) {
   deleteFilesFromProjectIfRemoved(PYTHON_MODULES_PATH, existingModuleFilenames);
 
   // notify the Talipot main window that the Talipot project has been modified
-  if (Perspective::instance() && _notifyProjectModified && fileModified) {
-    Perspective::instance()->mainWindow()->setWindowModified(true);
+  QMainWindow *mainWindow = getMainWindow();
+  if (mainWindow && _notifyProjectModified && fileModified) {
+    mainWindow->setWindowModified(true);
   }
 }
 

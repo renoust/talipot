@@ -34,6 +34,8 @@
 #include <QDir>
 #include <QApplication>
 #include <QStandardPaths>
+#include <QMainWindow>
+
 #if defined(__MINGW32__)
 #include <QSslSocket>
 #endif
@@ -596,6 +598,15 @@ void enableQtUserInput() {
   delete disableQtUserInputFilter;
   disableQtUserInputFilter = nullptr;
   QApplication::restoreOverrideCursor();
+}
+
+QMainWindow *getMainWindow() {
+  for (QWidget *widget : qApp->topLevelWidgets()) {
+    if (QMainWindow *mainWindow = qobject_cast<QMainWindow *>(widget)) {
+      return mainWindow;
+    }
+  }
+  return nullptr;
 }
 
 }

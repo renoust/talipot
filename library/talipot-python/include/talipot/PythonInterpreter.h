@@ -27,6 +27,9 @@ typedef _object PyObject;
 #include <QSet>
 #include <QString>
 
+#include <memory>
+#include <mutex>
+
 class QAbstractScrollArea;
 class QPlainTextEdit;
 class QTextBrowser;
@@ -34,6 +37,8 @@ class QTextBrowser;
 namespace tlp {
 
 class TLP_PYTHON_SCOPE PythonInterpreter : public QObject {
+
+  friend std::unique_ptr<PythonInterpreter>::deleter_type;
 
   Q_OBJECT
 
@@ -46,7 +51,8 @@ class TLP_PYTHON_SCOPE PythonInterpreter : public QObject {
   void setDefaultConsoleWidget(QAbstractScrollArea *consoleWidget);
   void setConsoleWidget(QAbstractScrollArea *consoleWidget);
 
-  static PythonInterpreter _instance;
+  static std::unique_ptr<PythonInterpreter> _instance;
+  static std::once_flag _onceFlag;
 
   bool _wasInit;
   bool _runningScript;

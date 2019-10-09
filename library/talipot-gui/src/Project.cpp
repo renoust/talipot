@@ -254,14 +254,6 @@ void Project::setAuthor(const QString &a) {
   _author = a;
 }
 
-QString Project::perspective() const {
-  return _perspective;
-}
-
-void Project::setPerspective(const QString &p) {
-  _perspective = p;
-}
-
 QString Project::version() const {
   return TLPPROJ_VERSION;
 }

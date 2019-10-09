@@ -33,7 +33,6 @@
 #include <talipot/FontDialog.h>
 #include <talipot/GlyphManager.h>
 #include <talipot/GraphPropertiesModel.h>
-#include <talipot/Perspective.h>
 #include <talipot/ItemEditorCreators.h>
 #include <talipot/FontAwesome.h>
 #include <talipot/TextureFileDialog.h>
@@ -95,8 +94,8 @@ public:
   ColorEditorCreator
 */
 QWidget *ColorEditorCreator::createWidget(QWidget *parent) const {
-  ColorDialog *colorDialog = new ColorDialog(
-      tlp::Perspective::instance() ? tlp::Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  ColorDialog *colorDialog = new ColorDialog(mainWindow ? mainWindow : parent);
   colorDialog->setModal(true);
   return colorDialog;
 }
@@ -155,8 +154,8 @@ QString BooleanEditorCreator::displayText(const QVariant &v) const {
   CoordEditorCreator
 */
 QWidget *CoordEditorCreator::createWidget(QWidget *parent) const {
-  return new CoordEditor(Perspective::instance() ? Perspective::instance()->mainWindow() : parent,
-                         editSize);
+  QMainWindow *mainWindow = getMainWindow();
+  return new CoordEditor(mainWindow ? mainWindow : parent, editSize);
 }
 
 void CoordEditorCreator::setEditorData(QWidget *w, const QVariant &v, bool, tlp::Graph *) {
@@ -342,8 +341,8 @@ public:
   FileDescriptorEditorCreator
   */
 QWidget *FileDescriptorEditorCreator::createWidget(QWidget *parent) const {
-  QFileDialog *dlg =
-      new FileDialog(Perspective::instance() ? Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  QFileDialog *dlg = new FileDialog(mainWindow ? mainWindow : parent);
 #if defined(__APPLE__)
   dlg->setOption(QFileDialog::DontUseNativeDialog, true);
 #else
@@ -500,8 +499,8 @@ QSize FileDescriptorEditorCreator::sizeHint(const QStyleOptionViewItem &option,
   TextureFileEditorCreator
   */
 QWidget *TextureFileEditorCreator::createWidget(QWidget *parent) const {
-  return new TextureFileDialog(Perspective::instance() ? Perspective::instance()->mainWindow()
-                                                       : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  return new TextureFileDialog(mainWindow ? mainWindow : parent);
 }
 
 void TextureFileEditorCreator::setEditorData(QWidget *w, const QVariant &v, bool, tlp::Graph *) {
@@ -581,8 +580,8 @@ QWidget *FontIconCreator::createWidget(QWidget *parent) const {
   // of items in a QGraphicsScene (popup has a too large height,
   // making the scrollbars unreachable ...), we use a native
   // dialog with the combo box inside
-  return new FontIconDialog(Perspective::instance() ? Perspective::instance()->mainWindow()
-                                                    : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  return new FontIconDialog(mainWindow ? mainWindow : parent);
 }
 
 void FontIconCreator::setEditorData(QWidget *w, const QVariant &v, bool, tlp::Graph *) {
@@ -654,8 +653,8 @@ QWidget *NodeShapeEditorCreator::createWidget(QWidget *parent) const {
     shapes.push_back(std::make_pair(shapeName, pixmap));
   }
 
-  return new ShapeDialog(shapes,
-                         Perspective::instance() ? Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  return new ShapeDialog(shapes, mainWindow ? mainWindow : parent);
 }
 
 void NodeShapeEditorCreator::setEditorData(QWidget *w, const QVariant &data, bool, tlp::Graph *) {
@@ -725,8 +724,8 @@ QWidget *EdgeExtremityShapeEditorCreator::createWidget(QWidget *parent) const {
     shapes.push_back(std::make_pair(shapeName, pixmap));
   }
 
-  ShapeDialog *shapeDialog = new ShapeDialog(
-      shapes, Perspective::instance() ? Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  ShapeDialog *shapeDialog = new ShapeDialog(shapes, mainWindow ? mainWindow : parent);
   shapeDialog->setWindowTitle("Select an edge extremity shape");
   return shapeDialog;
 }
@@ -815,7 +814,8 @@ QString EdgeShapeEditorCreator::displayText(const QVariant &data) const {
 
 // FontEditorCreator
 QWidget *FontEditorCreator::createWidget(QWidget *parent) const {
-  return new FontDialog(Perspective::instance() ? Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  return new FontDialog(mainWindow ? mainWindow : parent);
 }
 void FontEditorCreator::setEditorData(QWidget *editor, const QVariant &data, bool, tlp::Graph *) {
   Font font = data.value<Font>();
@@ -923,8 +923,8 @@ QString EdgeSetEditorCreator::displayText(const QVariant &var) const {
 }
 
 QWidget *QVectorBoolEditorCreator::createWidget(QWidget *parent) const {
-  VectorEditor *w = new VectorEditor(
-      tlp::Perspective::instance() ? tlp::Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  VectorEditor *w = new VectorEditor(mainWindow ? mainWindow : parent);
   w->setWindowFlags(Qt::Dialog);
   w->setWindowModality(Qt::ApplicationModal);
   return w;
@@ -982,8 +982,8 @@ QString QVectorBoolEditorCreator::displayText(const QVariant &data) const {
 
 // QStringEditorCreator
 QWidget *QStringEditorCreator::createWidget(QWidget *parent) const {
-  StringEditor *editor = new StringEditor(
-      tlp::Perspective::instance() ? tlp::Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  StringEditor *editor = new StringEditor(mainWindow ? mainWindow : parent);
   editor->setWindowTitle(QString("Set ") + propName.c_str() + " value");
   editor->setMinimumSize(QSize(250, 250));
   return editor;
@@ -1027,8 +1027,8 @@ QString StdStringEditorCreator::displayText(const QVariant &var) const {
 
 // QStringListEditorCreator
 QWidget *QStringListEditorCreator::createWidget(QWidget *parent) const {
-  VectorEditor *w = new VectorEditor(
-      tlp::Perspective::instance() ? tlp::Perspective::instance()->mainWindow() : parent);
+  QMainWindow *mainWindow = getMainWindow();
+  VectorEditor *w = new VectorEditor(mainWindow ? mainWindow : parent);
   w->setWindowFlags(Qt::Dialog);
   w->setWindowModality(Qt::ApplicationModal);
   return w;

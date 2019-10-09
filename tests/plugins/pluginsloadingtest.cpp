@@ -50,7 +50,7 @@ public:
 int main(int argc, char **argv) {
 
 #ifndef TALIPOT_BUILD_CORE_ONLY
-  // we need to create a QApplication as some plugins (view, perspective, interactor)
+  // we need to create a QApplication as some plugins (view, interactor)
   // need one to load correctly
   QApplication app(argc, argv);
 #endif

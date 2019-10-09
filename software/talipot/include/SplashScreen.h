@@ -21,22 +21,19 @@
 
 /**
   @brief a splash screen used when loading plugins.
-  Loading plugins in the talipot_app process allows to check for plugins error before loading any
-  perspective. It provides the user with some basic preemptive information
-  and forbid the use of invalid perspectives.
   */
 class SplashScreen : public tlp::PluginLoader, public QSplashScreen {
 public:
-  SplashScreen();
+  SplashScreen(bool debugOuput);
 
   void start(const std::string &path) override;
   void loading(const std::string &filename) override;
-  void loaded(const tlp::Plugin *info, const std::list<tlp::Dependency> &deps) override;
+  void loaded(const tlp::Plugin *plugin, const std::list<tlp::Dependency> &deps) override;
   void numberOfFiles(int n) override {
     _numberOfFiles = n;
     _fileCounter = 0;
   }
-  void aborted(const std::string &filename, const std::string &erreurmsg) override;
+  void aborted(const std::string &filename, const std::string &errMsg) override;
   void finished(bool state, const std::string &msg) override;
 
   const QMap<QString, QString> &errors() {
@@ -54,6 +51,7 @@ private:
   int _numberOfFiles;
 
   QMap<QString, QString> _errors;
+  bool _debugOutput;
 };
 
 #endif // SPLASH_SCREEN_H

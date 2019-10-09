@@ -1,10 +1,10 @@
 .. _gui:
 
-***********************************************
-A Quick Presentation of the Talipot Perspective
-***********************************************
+***************************************
+A Quick Presentation of the Talipot GUI
+***************************************
 
-Here are the components of Talipot Perspective's main window:
+Here are the components of Talipot's main window:
 
 .. image:: _images/i_interface.png
     :width: 900
@@ -31,9 +31,6 @@ Here are the components of Talipot Perspective's main window:
 
 |l_gre| Status bar
 
-From this point and even if it is no fully correct, we will refer to the Talipot perspective by simply using the term Talipot. Differentiating one (Talipot perspective) from the other (Talipot agent) should not be too complex as the perspective window proposes the visualization actions and the Talipot agent window only offers you to manage your plugins and to choose your project.
-
-
 .. _menu:
 
 Menus
@@ -55,17 +52,17 @@ The last two menus, *Window* and *Help*, give a few various options e.g., enabli
 Toolbar
 =======
 
-.. |icon_undo| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/undo.png
-.. |icon_redo| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/redo.png
-.. |icon_workspace| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/desktop.png
-.. |icon_develop| image:: ../../plugins/perspective/GraphPerspective/resources/icons/48/python.png
+.. |icon_undo| image:: ../../software/talipot/resources/icons/32/undo.png
+.. |icon_redo| image:: ../../software/talipot/resources/icons/32/redo.png
+.. |icon_workspace| image:: ../../software/talipot/resources/icons/32/desktop.png
+.. |icon_develop| image:: ../../software/talipot/resources/icons/48/python.png
     :width: 32
 .. |icon_export| image:: ../../library/talipot-gui/resources/icons/64/document-export.png
     :width: 32
-.. |icon_csv| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/spreadsheet.png
+.. |icon_csv| image:: ../../software/talipot/resources/icons/32/spreadsheet.png
 .. |icon_import| image:: ../../library/talipot-gui/resources/icons/64/document-import.png
     :width: 32
-.. |icon_plugin| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/system-software-install.png
+.. |icon_plugin| image:: ../../software/talipot/resources/icons/32/system-software-install.png
 
 The vertical toolbar, on the left of the main window, contains 8 buttons:
 
@@ -91,9 +88,9 @@ The vertical toolbar, on the left of the main window, contains 8 buttons:
 Algorithms panel
 ================
 
-.. |icon_algorithm_fav| image:: ../../plugins/perspective/GraphPerspective/resources/icons/16/favorite.png
-.. |icon_algorithm_unfav| image:: ../../plugins/perspective/GraphPerspective/resources/icons/16/favorite-empty.png
-.. |icon_algorithm_properties| image:: ../../plugins/perspective/GraphPerspective/resources/icons/16/preferences-other.png
+.. |icon_algorithm_fav| image:: ../../software/talipot/resources/icons/16/favorite.png
+.. |icon_algorithm_unfav| image:: ../../software/talipot/resources/icons/16/favorite-empty.png
+.. |icon_algorithm_properties| image:: ../../software/talipot/resources/icons/16/preferences-other.png
 .. |icon_algorithm_launch| image:: ../../library/talipot-gui/resources/icons/22/start.png
     :width: 16
 .. |icon_link| image:: _images/i_link.png

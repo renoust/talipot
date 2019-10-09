@@ -17,15 +17,14 @@
 #include <QLabel>
 
 /**
-  @brief This widget provides with maintenance actions related to a plugin load error.
+  @brief This widget provides with maintenance actions related to a plugin load errror.
   When a plugin crash at load time, the user shall have the following choices:
   @list
-  @li Uninstall the plugin (removes the file permanently)
+  @li Uninstall the plugin (removes the file permanantly)
   @li Reinstall it from a distant repository
   @list
   */
 class PluginErrorReport : public QLabel {
-  Q_OBJECT
 public:
   explicit PluginErrorReport(const QString &fileName, const QString &errorMsg,
                              QWidget *parent = nullptr);

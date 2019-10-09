@@ -46,6 +46,8 @@ class PropertiesEditor : public QWidget {
   QWidget *editorParent;
   Qt::CaseSensitivity _caseSensitiveSearch;
 
+  QSet<QString> _reservedProperties;
+
 public:
   explicit PropertiesEditor(QWidget *parent = nullptr);
   ~PropertiesEditor() override;
@@ -68,6 +70,11 @@ public:
   bool renameProperty(tlp::PropertyInterface *prop);
 
   tlp::PropertyInterface *contextProperty() const;
+
+  void registerReservedProperty(const QString &s);
+
+  bool isReservedPropertyName(const QString &name);
+
 signals:
   void propertyVisibilityChanged(tlp::PropertyInterface *, bool);
   void setFilteredNodes();

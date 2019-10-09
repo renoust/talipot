@@ -23,7 +23,6 @@
 #include <QMessageBox>
 #include <QTimer>
 
-#include <talipot/Perspective.h>
 #include <talipot/GraphModel.h>
 #include <talipot/ItemEditorCreators.h>
 #include <talipot/CopyPropertyDialog.h>
@@ -78,6 +77,28 @@ void PropertiesEditor::setGraph(tlp::Graph *g) {
   _ui->tableView->resizeColumnsToContents();
   _ui->tableView->sortByColumn(0, Qt::AscendingOrder);
   _ui->visualPropertiesCheck->setChecked(true);
+  registerReservedProperty("viewColor");
+  registerReservedProperty("viewLabelColor");
+  registerReservedProperty("viewLabelBorderColor");
+  registerReservedProperty("viewLabelBorderWidth");
+  registerReservedProperty("viewSize");
+  registerReservedProperty("viewLabel");
+  registerReservedProperty("viewLabelPosition");
+  registerReservedProperty("viewShape");
+  registerReservedProperty("viewRotation");
+  registerReservedProperty("viewSelection");
+  registerReservedProperty("viewFont");
+  registerReservedProperty("viewIcon");
+  registerReservedProperty("viewFontSize");
+  registerReservedProperty("viewTexture");
+  registerReservedProperty("viewBorderColor");
+  registerReservedProperty("viewBorderWidth");
+  registerReservedProperty("viewLayout");
+  registerReservedProperty("viewSrcAnchorShape");
+  registerReservedProperty("viewSrcAnchorSize");
+  registerReservedProperty("viewTgtAnchorShape");
+  registerReservedProperty("viewTgtAnchorSize");
+  registerReservedProperty("viewAnimationFrame");
 }
 
 void PropertiesEditor::setPropertiesFilter(QString filter) {
@@ -118,7 +139,7 @@ void PropertiesEditor::showCustomContextMenu(const QPoint &p) {
     bool enabled = true;
 
     for (auto pi : _contextPropertyList) {
-      if (Perspective::instance()->isReservedPropertyName(pi->getName().c_str()) &&
+      if (isReservedPropertyName(pi->getName().c_str()) &&
           (_graph == _graph->getRoot() || !_graph->existLocalProperty(pi->getName()))) {
         enabled = false;
         break;
@@ -158,7 +179,7 @@ void PropertiesEditor::showCustomContextMenu(const QPoint &p) {
     bool enabled = true;
     const std::string &propName = _contextProperty->getName();
 
-    if (Perspective::instance()->isReservedPropertyName(propName.c_str())) {
+    if (isReservedPropertyName(propName.c_str())) {
       // Enable deletion of reserved properties when on a subgraph and that properties are local
       if (_graph == _graph->getRoot() || !_graph->existLocalProperty(propName))
         enabled = false;
@@ -172,7 +193,7 @@ void PropertiesEditor::showCustomContextMenu(const QPoint &p) {
 
     QAction *rename = nullptr;
 
-    if (!Perspective::instance()->isReservedPropertyName(propName.c_str())) {
+    if (!isReservedPropertyName(propName.c_str())) {
       rename = menu.addAction("Rename");
       rename->setToolTip("Rename the property \"" + tlpStringToQString(propName) + '"');
     }
@@ -408,8 +429,7 @@ void PropertiesEditor::setDefaultValue(tlp::PropertyInterface *prop, bool nodes)
 void PropertiesEditor::copyProperty() {
   _graph->push();
 
-  if (CopyPropertyDialog::copyProperty(_graph, _contextProperty, true,
-                                       Perspective::instance()->mainWindow()) == nullptr)
+  if (CopyPropertyDialog::copyProperty(_graph, _contextProperty, true, getMainWindow()) == nullptr)
     // copy has been cancelled
     _graph->pop();
 }
@@ -417,7 +437,7 @@ void PropertiesEditor::copyProperty() {
 void PropertiesEditor::newProperty() {
   _graph->push();
 
-  if (PropertyCreationDialog::createNewProperty(_graph, Perspective::instance()->mainWindow(),
+  if (PropertyCreationDialog::createNewProperty(_graph, getMainWindow(),
                                                 _contextProperty ? _contextProperty->getTypename()
                                                                  : std::string()) == nullptr)
     // creation has been cancelled
@@ -437,7 +457,7 @@ void PropertiesEditor::delProperties() {
 }
 
 bool PropertiesEditor::renameProperty(PropertyInterface *prop) {
-  return RenamePropertyDialog::renameProperty(prop, Perspective::instance()->mainWindow());
+  return RenamePropertyDialog::renameProperty(prop, getMainWindow());
 }
 
 void PropertiesEditor::toLabels() {
@@ -515,4 +535,12 @@ void PropertiesEditor::setPropertyChecked(const QString &pName, bool state) {
 
 PropertyInterface *PropertiesEditor::contextProperty() const {
   return _contextProperty;
+}
+
+void PropertiesEditor::registerReservedProperty(const QString &s) {
+  _reservedProperties.insert(s);
+}
+
+bool PropertiesEditor::isReservedPropertyName(const QString &s) {
+  return _reservedProperties.contains(s);
 }

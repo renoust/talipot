@@ -32,7 +32,6 @@
 #include <talipot/GlMainWidget.h>
 #include <talipot/GlMainView.h>
 #include <talipot/GlGraphInputData.h>
-#include <talipot/Perspective.h>
 #include <talipot/SnapshotDialog.h>
 #include <talipot/ItemDelegate.h>
 #include <talipot/CaptionGraphicsSubItems.h>
@@ -61,7 +60,8 @@ public:
   }
 
   void showPopup() override {
-    QPoint mainWindowPos = tlp::Perspective::instance()->mainWindow()->pos();
+    QMainWindow *mainWindow = getMainWindow();
+    QPoint mainWindowPos = mainWindow ? mainWindow->pos() : QPoint(0, 0);
 
     if (_view == nullptr) {
       _view = findChild<QListView *>();

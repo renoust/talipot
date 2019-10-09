@@ -149,19 +149,15 @@ File /r files\*.*
 
 !if ${ARCH} == "64"
   CreateDirectory "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Talipot-@TalipotVersion@ agent (x64).lnk" "$INSTDIR\bin\talipot.exe" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot_perspective.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ agent (x64).lnk" "$INSTDIR\bin\talipot.exe" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot_perspective.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Talipot-@TalipotVersion@" "DisplayName" "Talipot-@TalipotVersion@ (x64)"
 !else
   CreateDirectory "$SMPROGRAMS\Talipot-@TalipotVersion@"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Talipot-@TalipotVersion@ agent.lnk" "$INSTDIR\bin\talipot.exe" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot_perspective.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ agent.lnk" "$INSTDIR\bin\talipot.exe" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot_perspective.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Talipot-@TalipotVersion@" "DisplayName" "Talipot-@TalipotVersion@"
 !endif
 
@@ -182,11 +178,9 @@ Section "Uninstall"
   SetShellVarContext all
 !if ${ARCH} == "64"
   SetRegView 64
-  Delete "$DESKTOP\Talipot-@TalipotVersion@ agent (x64).lnk"
   Delete "$DESKTOP\Talipot-@TalipotVersion@ (x64).lnk"
   RMDir /r "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)"
 !else
-  Delete "$DESKTOP\Talipot-@TalipotVersion@ agent.lnk"
   Delete "$DESKTOP\Talipot-@TalipotVersion@.lnk"
   RMDir /r "$SMPROGRAMS\Talipot-@TalipotVersion@"
 !endif

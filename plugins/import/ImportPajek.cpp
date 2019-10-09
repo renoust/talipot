@@ -129,7 +129,7 @@ public:
   ~ImportPajek() override {}
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/import_pajek.png";
+    return ":/talipot/app/icons/32/import_pajek.png";
   }
 
   unsigned int nbNodes;

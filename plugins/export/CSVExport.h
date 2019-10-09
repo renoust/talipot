@@ -64,7 +64,7 @@ public:
                     "1.0", "File")
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/spreadsheet.png";
+    return ":/talipot/app/icons/32/spreadsheet.png";
   }
 
   std::string fileExtension() const override {

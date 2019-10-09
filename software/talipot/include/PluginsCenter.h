@@ -52,7 +52,6 @@ public slots:
   void searchGlyphs();
   void searchViews();
   void searchInteractors();
-  void searchPerspectives();
 
   void setNameFilter(const QString &filter);
   void setCategoryFilter(const QString &filter);

@@ -64,7 +64,6 @@ PyDict_SetItemString(moduleDict, "tlpgui", tlpClass);
 #include <talipot/EdgeExtremityGlyphManager.h>
 #include <talipot/Interactor.h>
 #include <talipot/PluginLibraryLoader.h>
-#include <talipot/Perspective.h>
 #include <talipot/Workspace.h>
 
 static int argc = 1;

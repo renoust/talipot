@@ -45,10 +45,10 @@ std::vector<std::string> ViewsManager::getViews() {
 }
 
 tlp::Workspace *ViewsManager::tlpWorkspace() {
-  tlp::Perspective *perspective = tlp::Perspective::instance();
+  QMainWindow *mainWindow = tlp::getMainWindow();
 
-  if (perspective) {
-    return perspective->mainWindow()->findChild<tlp::Workspace *>();
+  if (mainWindow) {
+    return mainWindow->findChild<tlp::Workspace *>();
   }
 
   return nullptr;

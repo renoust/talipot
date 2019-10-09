@@ -172,8 +172,6 @@ const char *PythonInterpreter::pythonKeywords[] = {
     "break",   "continue", "as",    "lambda", "del",  "try",   "except", "raise",
     "finally", "yield",    "async", "await",  nullptr};
 
-PythonInterpreter PythonInterpreter::_instance;
-
 #ifdef _MSC_VER
 extern "C" {
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
@@ -198,6 +196,9 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserve
 }
 }
 #endif
+
+std::unique_ptr<PythonInterpreter> PythonInterpreter::_instance;
+std::once_flag PythonInterpreter::_onceFlag;
 
 PythonInterpreter::PythonInterpreter()
     : _wasInit(false), _runningScript(false), _defaultConsoleWidget(nullptr), _outputEnabled(true),
@@ -276,10 +277,7 @@ PythonInterpreter::PythonInterpreter()
   _pythonVersion = QString(PyString_AsString(pVersion));
 #endif
 
-  // checking if a QApplication is instanced before instancing any QWidget
-  // allow to avoid segfaults when trying to instantiate the plugin outside the Talipot GUI (for
-  // instance, with talipot_check_pl)
-  if (QApplication::instance() && !_wasInit) {
+  if (!_wasInit) {
 
 #if PY_MAJOR_VERSION < 3
     reloadModule("sys");
@@ -406,7 +404,8 @@ PythonInterpreter::~PythonInterpreter() {
 }
 
 PythonInterpreter *PythonInterpreter::getInstance() {
-  return &_instance;
+  std::call_once(PythonInterpreter::_onceFlag, []() { _instance.reset(new PythonInterpreter); });
+  return _instance.get();
 }
 
 void PythonInterpreter::initConsoleOutput() {
@@ -476,7 +475,6 @@ bool PythonInterpreter::runString(const QString &pythonCode, const QString &scri
   if (!scriptFilePath.isEmpty())
     mainScriptFileName = scriptFilePath;
 
-  timer.start();
   int ret = 0;
   holdGIL();
   ret = PyRun_SimpleString(QStringToTlpString(pythonCode).c_str());

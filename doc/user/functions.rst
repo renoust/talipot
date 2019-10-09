@@ -187,7 +187,7 @@ If you want to follow this part as a tutorial, feel free to use the two texts ab
 Import the nodes
 ----------------
 
-.. |icon_csv| image:: ../../plugins/perspective/GraphPerspective/resources/icons/32/spreadsheet.png
+.. |icon_csv| image:: ../../software/talipot/resources/icons/32/spreadsheet.png
 
 Click on the |icon_csv| **CSV** icon to open the CSV Import Wizard (also available through the menu *Edit →	Import CSV*).
 

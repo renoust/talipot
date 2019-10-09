@@ -74,7 +74,6 @@ TLP_SCOPE std::string getMinor(const std::string &release);
  * @see tlp::TemplateAlgorithm and its subclasses for plugins operating on graph properties
  * @see tlp::View for panel plugins
  * @see tlp::Interactor for plugins responsible for user interactions.
- * @see tlp::Perspective for plugins handling the main GUI
  */
 class TLP_SCOPE Plugin : public tlp::WithParameter, public tlp::WithDependency {
 public:

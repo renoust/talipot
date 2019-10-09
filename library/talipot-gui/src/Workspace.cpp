@@ -118,8 +118,13 @@ void Workspace::closeAll() {
   // if expose mode activated, close it before closing views to prevent a crash
   hideExposeMode();
 
-  for (auto p : _panels) {
-    delete p; // beware: the destroyed signal is connected to panelDestroyed
+  // use a _panels copy to get a stable iteration because
+  // each panel destroyed signal is connected to panelDestroyed slot
+  // which modifies the _panels vector
+  auto panels = _panels;
+
+  for (auto p : panels) {
+    delete p;
   }
   _panels.clear();
 }
@@ -218,8 +223,9 @@ void Workspace::panelDestroyed(QObject *obj) {
   // placeholder widget that contained this panel
   for (auto mode : _modeToSlots.keys()) {
     for (auto p : _modeToSlots[mode]) {
-      if (p->widget() == panel)
+      if (p->widget() == panel) {
         p->resetWidget();
+      }
     }
   }
 

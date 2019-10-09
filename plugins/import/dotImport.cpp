@@ -72,7 +72,7 @@ public:
   ~DotImport() override {}
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/import_graphviz.png";
+    return ":/talipot/app/icons/32/import_graphviz.png";
   }
 
   bool importGraph() override {

@@ -14,7 +14,6 @@
 #include <QColorDialog>
 #include <QMainWindow>
 
-#include <talipot/Perspective.h>
 #include <talipot/TlpQtTools.h>
 
 #include "PixelOrientedOptionsWidget.h"
@@ -26,7 +25,7 @@ using namespace tlp;
 PixelOrientedOptionsWidget::PixelOrientedOptionsWidget(QWidget *parent)
     : QWidget(parent), _ui(new Ui::PixelOrientedOptionsWidgetData), oldValuesInitialized(false) {
   _ui->setupUi(this);
-  _ui->backColorButton->setDialogParent(Perspective::instance()->mainWindow());
+  _ui->backColorButton->setDialogParent(getMainWindow());
   _ui->backColorButton->setDialogTitle("Choose the background color");
   setBackgroundColor(Color(255, 255, 255));
 }

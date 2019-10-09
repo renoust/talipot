@@ -204,8 +204,7 @@ for pluginName in pluginsNames:
         plugins[plugin.category()] = []
     plugins[plugin.category()].append(plugin)
 for cat in sorted(plugins.keys()):
-    if cat in ('Perspective', 'Panel', 'Node shape',
-               'Edge extremity', 'Interactor'):
+    if cat in ('Panel', 'Node shape', 'Edge extremity', 'Interactor'):
         continue
     writeSection(cat, '-')
     if cat == 'Algorithm':

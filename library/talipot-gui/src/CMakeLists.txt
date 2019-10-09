@@ -29,7 +29,6 @@ SET(SRCS
   NodeLinkDiagramComponent.cpp
   NodeLinkDiagramComponentInteractor.cpp
   ShapeDialog.cpp
-  Perspective.cpp
   PluginManager.cpp
   PropertyCreationDialog.cpp
   QGlBufferManager.cpp
@@ -189,7 +188,6 @@ QTX_WRAP_CPP(MOC_SRCS
   ../include/talipot/InteractorComposite.h
   ../include/talipot/ItemsListWidget.h
   ../include/talipot/NodeLinkDiagramComponent.h
-  ../include/talipot/Perspective.h
   ../include/talipot/PlaceHolderWidget.h
   ../include/talipot/ProcessingAnimationItem.h
   ../include/talipot/PropertyCreationDialog.h

@@ -24,7 +24,6 @@
 #include <talipot/Interactor.h>
 #include <talipot/Graph.h>
 #include <talipot/TlpQtTools.h>
-#include <talipot/Perspective.h>
 #include <talipot/ViewToolTipAndUrlManager.h>
 
 using namespace tlp;

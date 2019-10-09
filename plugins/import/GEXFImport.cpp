@@ -76,7 +76,7 @@ public:
   ~GEXFImport() override {}
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/import_gephi.png";
+    return ":/talipot/app/icons/32/import_gephi.png";
   }
 
   std::list<std::string> fileExtensions() const override {

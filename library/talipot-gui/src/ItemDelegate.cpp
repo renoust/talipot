@@ -26,7 +26,6 @@
 #include <talipot/MetaTypes.h>
 #include <talipot/ItemEditorCreators.h>
 #include <talipot/GraphModel.h>
-#include <talipot/Perspective.h>
 
 using namespace tlp;
 
@@ -271,9 +270,8 @@ QVariant ItemDelegate::showEditorDialog(tlp::ElementType elType, tlp::PropertyIn
 
   ItemEditorCreator *creator = delegate->creator(value.userType());
 
-  // Display the dialog on the same screen as the perspective
-  if (Perspective::instance())
-    dialogParent = Perspective::instance()->mainWindow();
+  // Display the dialog on the same screen as the main window
+  dialogParent = getMainWindow();
 
   creator->setPropertyToEdit(pi);
   QWidget *w = creator->createWidget(dialogParent);

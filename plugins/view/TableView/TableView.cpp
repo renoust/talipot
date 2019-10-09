@@ -21,7 +21,6 @@
 #include <talipot/TlpQtTools.h>
 #include <talipot/StringProperty.h>
 #include <talipot/MetaTypes.h>
-#include <talipot/Perspective.h>
 #include <talipot/CopyPropertyDialog.h>
 #include <talipot/PropertyCreationDialog.h>
 
@@ -843,7 +842,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
                        "\" in a property of the same type");
   QAction *deleteProp = nullptr;
 
-  if (!Perspective::instance()->isReservedPropertyName(propName.c_str()) ||
+  if (!propertiesEditor->isReservedPropertyName(propName.c_str()) ||
       // Enable deletion of reserved properties when on a subgraph and that properties are local
       (graph() != graph()->getRoot() && graph()->existLocalProperty(propName))) {
     deleteProp = contextMenu.addAction("Delete");
@@ -852,7 +851,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
 
   QAction *renameProp = nullptr;
 
-  if (!Perspective::instance()->isReservedPropertyName(propName.c_str())) {
+  if (!propertiesEditor->isReservedPropertyName(propName.c_str())) {
     renameProp = contextMenu.addAction("Rename");
     renameProp->setToolTip("Rename the property \"" + action->text() + '"');
   }
@@ -982,8 +981,7 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
   graph()->push();
 
   if (action == copyProp) {
-    if (CopyPropertyDialog::copyProperty(graph(), prop, true,
-                                         Perspective::instance()->mainWindow()) == nullptr)
+    if (CopyPropertyDialog::copyProperty(graph(), prop, true, getMainWindow()) == nullptr)
       // cancelled so undo
       graph()->pop();
 
@@ -1004,8 +1002,8 @@ void TableView::showHorizontalHeaderCustomContextMenu(const QPoint &pos) {
   }
 
   if (action == addProp) {
-    if (PropertyCreationDialog::createNewProperty(graph(), Perspective::instance()->mainWindow(),
-                                                  prop->getTypename()) == nullptr)
+    if (PropertyCreationDialog::createNewProperty(graph(), getMainWindow(), prop->getTypename()) ==
+        nullptr)
       // cancelled so undo
       graph()->pop();
 

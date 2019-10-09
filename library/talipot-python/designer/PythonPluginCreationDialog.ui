@@ -125,8 +125,8 @@ background-color: white;
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../../plugins/perspective/GraphPerspective/resources/GraphPerspective.qrc">
-            <normaloff>:/talipot/graphperspective/icons/16/document-open.png</normaloff>:/talipot/graphperspective/icons/16/document-open.png</iconset>
+           <iconset resource="../../../software/talipot/resources/TalipotApp.qrc">
+            <normaloff>:/talipot/app/icons/16/document-open.png</normaloff>:/talipot/app/icons/16/document-open.png</iconset>
           </property>
          </widget>
         </item>
@@ -303,7 +303,7 @@ background-color: white;
   </layout>
  </widget>
  <resources>
-  <include location="../../../plugins/perspective/GraphPerspective/resources/GraphPerspective.qrc"/>
+  <include location="../../../software/talipot/resources/TalipotApp.qrc"/>
  </resources>
  <connections>
   <connection>

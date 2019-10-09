@@ -24,7 +24,8 @@
 
 using namespace tlp;
 
-SplashScreen::SplashScreen() : PluginLoader(), QSplashScreen(), _fileCounter(0) {
+SplashScreen::SplashScreen(bool debugOutput)
+    : PluginLoader(), QSplashScreen(), _fileCounter(0), _debugOutput(debugOutput) {
   setPixmap(QPixmap(QDir(QApplication::applicationDirPath())
                         .absoluteFilePath("../share/talipot/bitmaps/logo.png")));
   setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
@@ -36,10 +37,13 @@ SplashScreen::SplashScreen() : PluginLoader(), QSplashScreen(), _fileCounter(0) 
   fadeInAnimation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
-void SplashScreen::start(const std::string &) {
+void SplashScreen::start(const std::string &path) {
   _title = "Loading...";
   _message = QString();
   repaint();
+  if (_debugOutput) {
+    tlp::debug() << "Entering " << path << std::endl;
+  }
 }
 
 void SplashScreen::loading(const std::string &filename) {
@@ -47,22 +51,36 @@ void SplashScreen::loading(const std::string &filename) {
   _fileCounter++;
   _message = filename.c_str();
   repaint();
+  if (_debugOutput) {
+    tlp::debug() << "Loading " << filename << std::endl;
+  }
 }
 
-void SplashScreen::loaded(const Plugin *info, const std::list<Dependency> &) {
-  _message = tlp::tlpStringToQString(info->name()) + " loaded.";
+void SplashScreen::loaded(const Plugin *plugin, const std::list<Dependency> &) {
+  _message = tlp::tlpStringToQString(plugin->name()) + " loaded.";
+  if (_debugOutput) {
+    tlp::debug() << "  - Plugin '" << plugin->name() << "' registered" << std::endl;
+  }
 }
 
-void SplashScreen::aborted(const std::string &filename, const std::string &erreurmsg) {
-  _message = QString("Error loading ") + filename.c_str() + ": " + erreurmsg.c_str();
-  _errors[filename.c_str()] = erreurmsg.c_str();
+void SplashScreen::aborted(const std::string &filename, const std::string &errorMsg) {
+  _message = QString("Error loading ") + filename.c_str() + ": " + errorMsg.c_str();
+  _errors[filename.c_str()] = errorMsg.c_str();
+  tlp::error() << "[Error] Failed to load " << filename << ": " << errorMsg << std::endl;
 }
 
-void SplashScreen::finished(bool state, const std::string &) {
+void SplashScreen::finished(bool state, const std::string &msg) {
   _title = "Plugins loaded.";
 
-  if (!state)
-    _message = "Errors have been reported, see details on the startup screen.";
+  if (state) {
+    if (_debugOutput) {
+      tlp::debug() << "Plugins successfully loaded" << std::endl;
+    }
+  } else {
+    if (_debugOutput) {
+      tlp::debug() << msg << std::endl;
+    }
+  }
 
   repaint();
 }

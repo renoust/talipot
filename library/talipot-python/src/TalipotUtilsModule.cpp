@@ -20,21 +20,29 @@
 #include "talipot/PythonInterpreter.h"
 
 #include <talipot/PluginsManager.h>
-#include <talipot/Perspective.h>
+#include <talipot/TlpQtTools.h>
+#include <talipot/Workspace.h>
+
+#include <QMainWindow>
 
 using namespace tlp;
 
 static PyObject *talipotutils_updateVisualization(PyObject *, PyObject *args) {
-  tlp::Perspective *persp = tlp::Perspective::instance();
+  Workspace *workspace = nullptr;
+  QMainWindow *mainWindow = getMainWindow();
   int i;
+
+  if (mainWindow) {
+    workspace = mainWindow->findChild<Workspace *>();
+  }
 
   if (!PyArg_ParseTuple(args, "|i", &i))
     Py_RETURN_NONE;
 
   bool centerViews = i > 0;
 
-  if (persp != nullptr) {
-    persp->redrawPanels(centerViews);
+  if (workspace) {
+    workspace->redrawPanels(centerViews);
   }
 
   Py_RETURN_NONE;

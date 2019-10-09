@@ -1412,7 +1412,7 @@ public:
   }
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/import_bibtex.png";
+    return ":/talipot/app/icons/32/import_bibtex.png";
   }
 
   std::list<std::string> fileExtensions() const override {

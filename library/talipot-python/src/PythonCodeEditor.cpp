@@ -11,12 +11,12 @@
  *
  */
 
+#include <talipot/TlpQtTools.h>
+
 #include "talipot/PythonInterpreter.h"
 #include "talipot/PythonCodeEditor.h"
 #include "talipot/PythonCodeHighlighter.h"
 #include "talipot/ParenMatcherHighlighter.h"
-
-#include <talipot/Perspective.h>
 
 #include <QTextStream>
 #include <QPainter>
@@ -487,20 +487,8 @@ PythonCodeEditor::PythonCodeEditor(QWidget *parent)
     // Hack to get a pointer on the main window
     // in order for the autocompletion dialog to catch
     // window activate/deactivate events
-    if (Perspective::instance()) {
-      _mainWindow = Perspective::instance()->mainWindow();
-    } else {
-      QWidget *parente = dynamic_cast<QWidget *>(this->parent());
 
-      while (parente) {
-        _mainWindow = dynamic_cast<QMainWindow *>(parente);
-
-        if (_mainWindow)
-          break;
-
-        parente = dynamic_cast<QWidget *>(parente->parent());
-      }
-    }
+    _mainWindow = getMainWindow();
 
     if (_mainWindow) {
       _mainWindow->installEventFilter(_autoCompletionList);

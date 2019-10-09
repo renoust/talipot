@@ -53,7 +53,7 @@ public:
   /**
    * @brief GraphNeedsSavingObserver Class constructor
    * @param graph The graph which needs to be observed for modifications
-   * @param mainWindow The Qt QMainWindow object behin the perspective
+   * @param mainWindow A QMainWindow object
    */
   GraphNeedsSavingObserver(Graph *graph, QMainWindow *mainWindow = nullptr);
 

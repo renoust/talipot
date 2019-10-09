@@ -38,14 +38,9 @@ class PluginProgress;
   @li name (QString): the name of the project
   @li description (QString): Comments about the project
   @li author (QString): the author of the project
-  @li perspective (QString): the name of the perspective plugin associated to the project
   @li date (QDate): the date of project's last modification
   @li version (QString): the version of the Talipot project format
   @endlist
-
-  Alongside this information, one can store any kind of file into a Talipot project. Since a project
-  is meant to be associated to a specific perspective, the responisbility of those file
-  is left to the perspective.
 
   A Project DOES NOT automatically save to disk. One will have to call the write() method to
   serialize data.
@@ -319,22 +314,6 @@ public:
   QString author() const;
 
   /**
-    @brief Name of the perspective associated to the project.
-
-    When the user open a project from Talipot, this property is first read to identify find kind of
-    perspective plugin should be launched to
-    open the project
-
-    @warning If the perspective name associated to the project is invalid or correspond to a missing
-    plugin, talipot may not be able to open the file.
-    */
-  Q_PROPERTY(QString perspective READ perspective WRITE setPerspective)
-  /**
-   * @see perspective
-   */
-  QString perspective() const;
-
-  /**
     @brief The version of the Talipot project format with which the file was created.
     Project from older format version will be always saved into the newest version available.
     */
@@ -363,10 +342,6 @@ public slots:
    * @see author
    */
   void setAuthor(const QString &);
-  /**
-   * @see perspective
-   */
-  void setPerspective(const QString &);
 
 private:
   bool writeMetaInfo();
@@ -384,7 +359,6 @@ private:
   QString _author;
   QString _name;
   QString _description;
-  QString _perspective;
 };
 }
 #endif // TALIPOT_PROJECT_H

@@ -19,7 +19,6 @@
 
 #include <talipot/TlpTools.h>
 #include <talipot/TlpQtTools.h>
-#include <talipot/Perspective.h>
 
 using namespace tlp;
 

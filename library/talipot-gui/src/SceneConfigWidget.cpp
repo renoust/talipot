@@ -19,7 +19,6 @@
 
 #include <talipot/GlGraphComposite.h>
 #include <talipot/GlMainWidget.h>
-#include <talipot/Perspective.h>
 #include <talipot/Settings.h>
 #include <talipot/GraphPropertiesModel.h>
 
@@ -35,9 +34,10 @@ SceneConfigWidget::SceneConfigWidget(QWidget *parent)
   _ui->selectionColorButton->setDialogTitle("Choose the color of selected nodes or edges");
   _ui->backgroundColorButton->setDialogTitle("Choose the background color");
 
-  if (Perspective::instance() != nullptr && Perspective::instance()->mainWindow() != nullptr) {
-    _ui->selectionColorButton->setDialogParent(Perspective::instance()->mainWindow());
-    _ui->backgroundColorButton->setDialogParent(Perspective::instance()->mainWindow());
+  QMainWindow *mainWindow = getMainWindow();
+  if (mainWindow) {
+    _ui->selectionColorButton->setDialogParent(mainWindow);
+    _ui->backgroundColorButton->setDialogParent(mainWindow);
   }
 
   _ui->labelsDisabledLabel->installEventFilter(this);

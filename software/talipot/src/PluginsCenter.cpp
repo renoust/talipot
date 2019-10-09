@@ -20,7 +20,6 @@
 #include <talipot/TemplateAlgorithm.h>
 #include <talipot/PropertyAlgorithm.h>
 #include <talipot/View.h>
-#include <talipot/Perspective.h>
 #include <talipot/Interactor.h>
 #include <talipot/Glyph.h>
 #include <talipot/EdgeExtremityGlyph.h>
@@ -37,8 +36,7 @@ static const int IMPORTEXPORT_ROW = 2;
 static const int GLYPHS_ROW = 3;
 static const int VIEWS_ROW = 4;
 static const int INTERACTORS_ROW = 5;
-static const int PERSPECTIVES_ROW = 6;
-static const int ERRORS_ROW = 8;
+static const int ERRORS_ROW = 7;
 
 using namespace tlp;
 
@@ -101,10 +99,6 @@ void PluginsCenter::searchViews() {
 
 void PluginsCenter::searchInteractors() {
   setCategoryFilter(tlp::INTERACTOR_CATEGORY.c_str());
-}
-
-void PluginsCenter::searchPerspectives() {
-  setCategoryFilter(tlp::PERSPECTIVE_CATEGORY.c_str());
 }
 
 void PluginsCenter::setCategoryFilter(const QString &filter) {
@@ -173,10 +167,6 @@ void PluginsCenter::sideListRowChanged(int i) {
 
   case INTERACTORS_ROW:
     searchInteractors();
-    break;
-
-  case PERSPECTIVES_ROW:
-    searchPerspectives();
     break;
 
   case ERRORS_ROW:

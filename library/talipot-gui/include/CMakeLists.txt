@@ -11,7 +11,6 @@ INSTALL(FILES
   talipot/MouseInteractors.h
   talipot/NodeLinkDiagramComponent.h
   talipot/NodeLinkDiagramComponentInteractor.h
-  talipot/Perspective.h
   talipot/QtGlSceneZoomAndPanAnimator.h
   talipot/QuickAccessBar.h
   talipot/SimplePluginProgressWidget.h

@@ -34,7 +34,6 @@
 #include <talipot/EdgeExtremityGlyphManager.h>
 #include <talipot/GraphNeedsSavingObserver.h>
 #include <talipot/TlpQtTools.h>
-#include <talipot/Perspective.h>
 #include <talipot/StableIterator.h>
 
 #include <fstream>
@@ -658,8 +657,7 @@ void GraphHierarchiesModel::addGraph(tlp::Graph *g) {
 
   beginInsertRows(QModelIndex(), rowCount(), rowCount());
 
-  _saveNeeded[g] = new GraphNeedsSavingObserver(
-      g, Perspective::instance() ? Perspective::instance()->mainWindow() : nullptr);
+  _saveNeeded[g] = new GraphNeedsSavingObserver(g, getMainWindow());
 
   _graphs.push_back(g);
 

@@ -215,7 +215,7 @@ public:
   ~ImportUCINET() override {}
 
   std::string icon() const override {
-    return ":/talipot/graphperspective/icons/32/import_ucinet.png";
+    return ":/talipot/app/icons/32/import_ucinet.png";
   }
 
   unsigned int nbNodes;
