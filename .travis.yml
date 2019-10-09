@@ -373,7 +373,7 @@ jobs:
         - build_time=$(( (end_time-start_time) / (6 * (10 ** 10)) ))
         - echo "build time = $build_time minutes"
         # skip dmg bundle generation if there is not enough time remaining for the travis job
-        - if (( build_time >= 45 )); then travis_terminate 0; fi
+        - if [ "$build_time" -ge "40" ]; then travis_terminate 0; fi
         # build Talipot bundle
         - ninja bundle
         - cd ..
