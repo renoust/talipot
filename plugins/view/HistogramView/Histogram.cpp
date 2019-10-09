@@ -182,13 +182,11 @@ void Histogram::computeHistogram() {
     } else {
       if (dataLocation == NODE) {
         for (auto n : graph->nodes()) {
-          propertyCopy.setNodeValue(
-              n, graph->getIntegerProperty(propertyName)->getNodeValue(n));
+          propertyCopy.setNodeValue(n, graph->getIntegerProperty(propertyName)->getNodeValue(n));
         }
       } else {
         for (auto e : graph->edges()) {
-          propertyCopy.setEdgeValue(
-              e, graph->getIntegerProperty(propertyName)->getEdgeValue(e));
+          propertyCopy.setEdgeValue(e, graph->getIntegerProperty(propertyName)->getEdgeValue(e));
         }
       }
     }
@@ -461,8 +459,7 @@ void Histogram::createAxis() {
 
   refSize = std::min(refSizeX, refSizeY);
 
-  edgeAsNodeGraph->getSizeProperty("viewSize")
-      ->setAllNodeValue(Size(refSize, refSize, 0));
+  edgeAsNodeGraph->getSizeProperty("viewSize")->setAllNodeValue(Size(refSize, refSize, 0));
 }
 
 void Histogram::updateLayout() {
@@ -593,8 +590,7 @@ void Histogram::update() {
     updateSizes();
 
   ostringstream oss;
-  edgeAsNodeGraph->getSizeProperty("viewSize")
-      ->setAllNodeValue(Size(refSize, refSize, refSize));
+  edgeAsNodeGraph->getSizeProperty("viewSize")->setAllNodeValue(Size(refSize, refSize, refSize));
   ColorProperty *viewColor = graph->getColorProperty("viewColor");
 
   histoBinsComposite->reset(true);

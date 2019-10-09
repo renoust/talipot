@@ -193,4 +193,3 @@ void PluginsCenter::itemFocused() {
   _currentItem = static_cast<PluginInformationListItem *>(sender());
   _currentItem->focusIn();
 }
-

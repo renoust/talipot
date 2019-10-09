@@ -709,8 +709,7 @@ void GeographicViewGraphicsView::mapToPolygon() {
 
             geoLayout->setNodeValue(n, bb.center());
             polygon->setFillColor(graph->getColorProperty("viewColor")->getNodeValue(n));
-            polygon->setOutlineColor(
-                graph->getColorProperty("viewBorderColor")->getNodeValue(n));
+            polygon->setOutlineColor(graph->getColorProperty("viewBorderColor")->getNodeValue(n));
             break;
           }
         }

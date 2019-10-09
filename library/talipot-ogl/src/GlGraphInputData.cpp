@@ -115,11 +115,9 @@ void GlGraphInputData::reloadGraphProperties() {
     _properties.insert(_propertiesMap[VIEW_COLOR]);
     _propertiesMap[VIEW_LABELCOLOR] = graph->getColorProperty("viewLabelColor");
     _properties.insert(_propertiesMap[VIEW_LABELCOLOR]);
-    _propertiesMap[VIEW_LABELBORDERCOLOR] =
-        graph->getColorProperty("viewLabelBorderColor");
+    _propertiesMap[VIEW_LABELBORDERCOLOR] = graph->getColorProperty("viewLabelBorderColor");
     _properties.insert(_propertiesMap[VIEW_LABELBORDERCOLOR]);
-    _propertiesMap[VIEW_LABELBORDERWIDTH] =
-        graph->getDoubleProperty("viewLabelBorderWidth");
+    _propertiesMap[VIEW_LABELBORDERWIDTH] = graph->getDoubleProperty("viewLabelBorderWidth");
     _properties.insert(_propertiesMap[VIEW_LABELBORDERWIDTH]);
     _propertiesMap[VIEW_SIZE] = graph->getSizeProperty("viewSize");
     _properties.insert(_propertiesMap[VIEW_SIZE]);

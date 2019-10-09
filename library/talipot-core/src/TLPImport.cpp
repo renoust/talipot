@@ -437,7 +437,6 @@ struct TLPGraphBuilder : public TLPTrue {
 
       if (pos != std::string::npos)
         value.replace(pos, TulipBitmapDirSym.size(), TalipotBitmapDir);
-
     }
 
     return prop->setAllNodeStringValue(value);

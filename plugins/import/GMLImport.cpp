@@ -69,8 +69,7 @@ struct GMLGraphBuilder : public GMLTrue {
   }
   bool setNodeValue(int nodeId, const string &propertyName, const string &value) {
     if (_graph->isElement(nodeIndex[nodeId])) {
-      _graph->getLocalStringProperty(propertyName)
-          ->setNodeValue(nodeIndex[nodeId], value);
+      _graph->getLocalStringProperty(propertyName)->setNodeValue(nodeIndex[nodeId], value);
       return true;
     }
 
@@ -78,8 +77,7 @@ struct GMLGraphBuilder : public GMLTrue {
   }
   bool setNodeValue(int nodeId, const string &propertyName, const double &value) {
     if (_graph->isElement(nodeIndex[nodeId])) {
-      _graph->getLocalDoubleProperty(propertyName)
-          ->setNodeValue(nodeIndex[nodeId], value);
+      _graph->getLocalDoubleProperty(propertyName)->setNodeValue(nodeIndex[nodeId], value);
       return true;
     }
 
@@ -87,8 +85,7 @@ struct GMLGraphBuilder : public GMLTrue {
   }
   bool setNodeValue(int nodeId, const string &propertyName, int value) {
     if (_graph->isElement(nodeIndex[nodeId])) {
-      _graph->getLocalIntegerProperty(propertyName)
-          ->setNodeValue(nodeIndex[nodeId], value);
+      _graph->getLocalIntegerProperty(propertyName)->setNodeValue(nodeIndex[nodeId], value);
       return true;
     }
 
@@ -96,8 +93,7 @@ struct GMLGraphBuilder : public GMLTrue {
   }
   bool setNodeValue(int nodeId, const string &propertyName, bool value) {
     if (_graph->isElement(nodeIndex[nodeId])) {
-      _graph->getLocalBooleanProperty(propertyName)
-          ->setNodeValue(nodeIndex[nodeId], value);
+      _graph->getLocalBooleanProperty(propertyName)->setNodeValue(nodeIndex[nodeId], value);
       return true;
     }
 
@@ -105,8 +101,7 @@ struct GMLGraphBuilder : public GMLTrue {
   }
   bool setNodeCoordValue(int nodeId, const string &propertyName, const Coord &value) {
     if (_graph->isElement(nodeIndex[nodeId])) {
-      _graph->getLocalLayoutProperty(propertyName)
-          ->setNodeValue(nodeIndex[nodeId], value);
+      _graph->getLocalLayoutProperty(propertyName)->setNodeValue(nodeIndex[nodeId], value);
       return true;
     }
 

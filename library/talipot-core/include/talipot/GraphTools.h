@@ -137,7 +137,6 @@ TLP_SCOPE void bfs(const Graph *graph, node root, std::vector<node> &nodes);
  */
 TLP_SCOPE void bfs(const Graph *graph, std::vector<node> &nodes);
 
-
 /**
  * @brief Performs a depth-first search on a graph.
  * @param graph The graph to traverse with a DFS.

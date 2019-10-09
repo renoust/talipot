@@ -271,17 +271,13 @@ Graph *ImportExportTest::createSimpleGraph() const {
   SizeProperty *sizeProp = original->getSizeProperty("sizeProp");
   StringProperty *stringProp = original->getStringProperty("stringProp");
 
-  BooleanVectorProperty *booleanVecProp =
-      original->getBooleanVectorProperty("booleanVecProp");
+  BooleanVectorProperty *booleanVecProp = original->getBooleanVectorProperty("booleanVecProp");
   ColorVectorProperty *colorVecProp = original->getColorVectorProperty("colorVecProp");
-  DoubleVectorProperty *doubleVecProp =
-      original->getDoubleVectorProperty("doubleVecProp");
-  IntegerVectorProperty *integerVecProp =
-      original->getIntegerVectorProperty("intVecProp");
+  DoubleVectorProperty *doubleVecProp = original->getDoubleVectorProperty("doubleVecProp");
+  IntegerVectorProperty *integerVecProp = original->getIntegerVectorProperty("intVecProp");
   LayoutVectorProperty *coordVecProp = original->getCoordVectorProperty("coordVecProp");
   SizeVectorProperty *sizeVecProp = original->getSizeVectorProperty("sizeVecProp");
-  StringVectorProperty *stringVecProp =
-      original->getStringVectorProperty("stringVecProp");
+  StringVectorProperty *stringVecProp = original->getStringVectorProperty("stringVecProp");
 
   std::ostringstream oss;
   for (auto n : original->nodes()) {
@@ -383,8 +379,7 @@ void ImportExportTest::updateIdProperty(Graph *graph) const {
 void ImportExportTest::testNanInfValuesImportExport() {
   Graph *original = createSimpleGraph();
   DoubleProperty *doubleProp = original->getDoubleProperty("doubleProp");
-  DoubleVectorProperty *doubleVecProp =
-      original->getDoubleVectorProperty("doubleVecProp");
+  DoubleVectorProperty *doubleVecProp = original->getDoubleVectorProperty("doubleVecProp");
   for (auto n : original->nodes()) {
     if (n.id % 3 == 0) {
       doubleProp->setNodeValue(n, std::numeric_limits<double>::quiet_NaN());

@@ -65,8 +65,8 @@ bool QStringType::fromString(QString &s, const std::string &str) {
   return true;
 }
 
-#define CHECK_QVARIANT(TYPE)                                                                       \
-  if (v.userType() == qMetaTypeId<TYPE>())                                                         \
+#define CHECK_QVARIANT(TYPE)               \
+  if (v.userType() == qMetaTypeId<TYPE>()) \
     return new TypedData<TYPE>(new TYPE(v.value<TYPE>()));
 
 tlp::DataType *MetaTypes::qVariantToDataType(const QVariant &v) {
@@ -132,8 +132,8 @@ tlp::DataType *MetaTypes::qVariantToDataType(const QVariant &v) {
   return nullptr;
 }
 
-#define CHECK_DATATYPE(TYPE)                                                                       \
-  if (type.compare(typeid(TYPE).name()) == 0)                                                      \
+#define CHECK_DATATYPE(TYPE)                  \
+  if (type.compare(typeid(TYPE).name()) == 0) \
     return typedVariant<TYPE>(dm);
 
 #include <QDebug>

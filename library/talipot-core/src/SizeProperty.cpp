@@ -224,8 +224,7 @@ PropertyInterface *SizeVectorProperty::clonePrototype(Graph *g, const std::strin
     return nullptr;
 
   // allow to get an unregistered property (empty name)
-  SizeVectorProperty *p =
-      n.empty() ? new SizeVectorProperty(g) : g->getLocalSizeVectorProperty(n);
+  SizeVectorProperty *p = n.empty() ? new SizeVectorProperty(g) : g->getLocalSizeVectorProperty(n);
   p->setAllNodeValue(getNodeDefaultValue());
   p->setAllEdgeValue(getEdgeDefaultValue());
   return p;

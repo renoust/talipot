@@ -211,15 +211,13 @@ void HistogramView::setState(const DataSet &dataSet) {
             ->setNodeValue(edgeToNode[e],
                            _histoGraph->getColorProperty("viewColor")->getEdgeValue(e));
         edgeAsNodeGraph->getBooleanProperty("viewSelection")
-            ->setNodeValue(
-                edgeToNode[e],
-                _histoGraph->getBooleanProperty("viewSelection")->getEdgeValue(e));
+            ->setNodeValue(edgeToNode[e],
+                           _histoGraph->getBooleanProperty("viewSelection")->getEdgeValue(e));
         edgeAsNodeGraph->getStringProperty("viewLabel")
             ->setNodeValue(edgeToNode[e],
                            _histoGraph->getStringProperty("viewLabel")->getEdgeValue(e));
       }
-      edgeAsNodeGraph->getIntegerProperty("viewShape")
-          ->setAllNodeValue(NodeShape::Circle);
+      edgeAsNodeGraph->getIntegerProperty("viewShape")->setAllNodeValue(NodeShape::Circle);
       edgeAsNodeGraph->getBooleanProperty("viewSelection")->addListener(this);
       _histoGraph->addListener(this);
       _histoGraph->getProperty("viewColor")->addListener(this);
@@ -1014,8 +1012,7 @@ void HistogramView::afterSetEdgeValue(PropertyInterface *p, const edge e) {
     edgeAsNodeGraphColors->setNodeValue(edgeToNode[e], viewColor->getEdgeValue(e));
     setUpdateNeeded();
   } else if (p->getName() == "viewLabel") {
-    StringProperty *edgeAsNodeGraphLabels =
-        edgeAsNodeGraph->getStringProperty("viewLabel");
+    StringProperty *edgeAsNodeGraphLabels = edgeAsNodeGraph->getStringProperty("viewLabel");
     StringProperty *viewLabel = static_cast<StringProperty *>(p);
     edgeAsNodeGraphLabels->setNodeValue(edgeToNode[e], viewLabel->getEdgeValue(e));
   } else if (p->getName() == "viewSelection") {
@@ -1064,8 +1061,7 @@ void HistogramView::afterSetAllEdgeValue(PropertyInterface *p) {
     edgeAsNodeGraphColors->setAllNodeValue(viewColor->getEdgeDefaultValue());
     setUpdateNeeded();
   } else if (p->getName() == "viewLabel") {
-    StringProperty *edgeAsNodeGraphLabels =
-        edgeAsNodeGraph->getStringProperty("viewLabel");
+    StringProperty *edgeAsNodeGraphLabels = edgeAsNodeGraph->getStringProperty("viewLabel");
     StringProperty *viewLabel = static_cast<StringProperty *>(p);
     edgeAsNodeGraphLabels->setAllNodeValue(viewLabel->getEdgeDefaultValue());
   } else if (p->getName() == "viewSelection") {

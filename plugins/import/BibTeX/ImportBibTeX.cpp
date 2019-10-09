@@ -28,7 +28,7 @@
 #if defined(_MSC_VER) && !defined(strtok_r)
 #define strtok_r strtok_s
 #endif
-#if defined(strtok_r) && defined(_WIN32) && defined(__GNUC__) &&                                   \
+#if defined(strtok_r) && defined(_WIN32) && defined(__GNUC__) && \
     ((__GNUC__ * 100 + __GNUC__MINOR) < 409)
 // in MINGW environment
 // strtok_r is declared in pthread.h instead of string.h
@@ -1446,10 +1446,8 @@ public:
 
     // known properties to extract
     StringProperty *keyProp = oneEdgePerPubli ? graph->getStringProperty("key") : nullptr;
-    StringProperty *typeProp =
-        oneEdgePerPubli ? graph->getStringProperty("type") : nullptr;
-    IntegerProperty *yearProp =
-        oneEdgePerPubli ? graph->getIntegerProperty("year") : nullptr;
+    StringProperty *typeProp = oneEdgePerPubli ? graph->getStringProperty("type") : nullptr;
+    IntegerProperty *yearProp = oneEdgePerPubli ? graph->getIntegerProperty("year") : nullptr;
     BooleanProperty *fromLabriProp =
         createAuthNodes ? graph->getBooleanProperty("from LaBRI") : nullptr;
     IntegerVectorProperty *labriAuthorsProp =
@@ -1458,8 +1456,7 @@ public:
         createPubliNodes ? graph->getStringVectorProperty("LaBRI teams") : nullptr;
     StringVectorProperty *authProp =
         createPubliNodes ? graph->getStringVectorProperty("authors") : nullptr;
-    StringProperty *authNameProp =
-        createAuthNodes ? graph->getStringProperty("name") : nullptr;
+    StringProperty *authNameProp = createAuthNodes ? graph->getStringProperty("name") : nullptr;
     StringProperty *labriTeamProp =
         createAuthNodes ? graph->getStringProperty("LaBRI team") : nullptr;
     IntegerProperty *countProp =
@@ -1470,8 +1467,7 @@ public:
     StringProperty *icon = graph->getStringProperty("viewIcon");
     StringProperty *label = graph->getStringProperty("viewLabel");
 
-    graph->getIntegerProperty("viewLabelPosition")
-        ->setAllNodeValue(LabelPosition::Bottom);
+    graph->getIntegerProperty("viewLabelPosition")->setAllNodeValue(LabelPosition::Bottom);
     graph->getIntegerProperty("viewShape")->setAllNodeValue(tlp::NodeShape::Icon);
 
     std::unordered_map<std::string, node> authorsMap;
@@ -2103,9 +2099,8 @@ public:
         graph->delLocalProperty(fromLabriProp->getName());
 
       string err;
-      return graph->applyPropertyAlgorithm("FM^3 (OGDF)",
-                                           graph->getLayoutProperty("viewLayout"), err,
-                                           nullptr, pluginProgress);
+      return graph->applyPropertyAlgorithm("FM^3 (OGDF)", graph->getLayoutProperty("viewLayout"),
+                                           err, nullptr, pluginProgress);
     }
 
     return true;

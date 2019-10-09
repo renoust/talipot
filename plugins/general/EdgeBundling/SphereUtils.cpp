@@ -22,10 +22,9 @@ using namespace std;
 
 float centerOnOriginAndScale(Graph *graph, LayoutProperty *layout, float dist) {
   graph->getSizeProperty("viewSize")->setAllNodeValue(Size(0, 0, 0));
-  BoundingBox bb =
-      tlp::computeBoundingBox(graph, graph->getLayoutProperty("viewLayout"),
-                              graph->getSizeProperty("viewSize"),
-                              graph->getDoubleProperty("viewRotation"), nullptr);
+  BoundingBox bb = tlp::computeBoundingBox(graph, graph->getLayoutProperty("viewLayout"),
+                                           graph->getSizeProperty("viewSize"),
+                                           graph->getDoubleProperty("viewRotation"), nullptr);
   Coord move_coord = Coord((bb[0] + bb[1])) / (-2.f);
   layout->translate(move_coord, graph);
   float ray = (move_coord - bb[1]).norm();

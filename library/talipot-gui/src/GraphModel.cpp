@@ -246,40 +246,40 @@ void GraphModel::treatEvent(const Event &ev) {
   }
 }
 
-#define STANDARD_NODE_CHECKS(MACRO)                                                                \
-  MACRO(DoubleProperty, double);                                                                   \
-  MACRO(DoubleVectorProperty, std::vector<double>);                                                \
-  MACRO(ColorProperty, tlp::Color);                                                                \
-  MACRO(ColorVectorProperty, std::vector<tlp::Color>);                                             \
-  MACRO(SizeProperty, tlp::Size);                                                                  \
-  MACRO(SizeVectorProperty, std::vector<tlp::Size>);                                               \
-  /*MACRO(StringProperty,std::string);*/                                                           \
-  MACRO(StringVectorProperty, std::vector<std::string>);                                           \
-  MACRO(LayoutProperty, tlp::Coord);                                                               \
-  MACRO(CoordVectorProperty, std::vector<tlp::Coord>);                                             \
-  MACRO(GraphProperty, tlp::Graph *);                                                              \
-  /*MACRO(IntegerProperty,int);*/                                                                  \
-  MACRO(IntegerVectorProperty, std::vector<int>);                                                  \
+#define STANDARD_NODE_CHECKS(MACRO)                      \
+  MACRO(DoubleProperty, double);                         \
+  MACRO(DoubleVectorProperty, std::vector<double>);      \
+  MACRO(ColorProperty, tlp::Color);                      \
+  MACRO(ColorVectorProperty, std::vector<tlp::Color>);   \
+  MACRO(SizeProperty, tlp::Size);                        \
+  MACRO(SizeVectorProperty, std::vector<tlp::Size>);     \
+  /*MACRO(StringProperty,std::string);*/                 \
+  MACRO(StringVectorProperty, std::vector<std::string>); \
+  MACRO(LayoutProperty, tlp::Coord);                     \
+  MACRO(CoordVectorProperty, std::vector<tlp::Coord>);   \
+  MACRO(GraphProperty, tlp::Graph *);                    \
+  /*MACRO(IntegerProperty,int);*/                        \
+  MACRO(IntegerVectorProperty, std::vector<int>);        \
   MACRO(BooleanProperty, bool);
 
-#define STANDARD_EDGE_CHECKS(MACRO)                                                                \
-  MACRO(DoubleProperty, double);                                                                   \
-  MACRO(DoubleVectorProperty, std::vector<double>);                                                \
-  MACRO(ColorProperty, tlp::Color);                                                                \
-  MACRO(GraphProperty, std::set<tlp::edge>);                                                       \
-  MACRO(ColorVectorProperty, std::vector<tlp::Color>);                                             \
-  MACRO(SizeProperty, tlp::Size);                                                                  \
-  MACRO(SizeVectorProperty, std::vector<tlp::Size>);                                               \
-  /*MACRO(StringProperty,std::string);*/                                                           \
-  MACRO(StringVectorProperty, std::vector<std::string>);                                           \
-  MACRO(LayoutProperty, std::vector<tlp::Coord>);                                                  \
-  MACRO(CoordVectorProperty, std::vector<tlp::Coord>);                                             \
-  /*MACRO(IntegerProperty,int);*/                                                                  \
-  MACRO(IntegerVectorProperty, std::vector<int>);                                                  \
+#define STANDARD_EDGE_CHECKS(MACRO)                      \
+  MACRO(DoubleProperty, double);                         \
+  MACRO(DoubleVectorProperty, std::vector<double>);      \
+  MACRO(ColorProperty, tlp::Color);                      \
+  MACRO(GraphProperty, std::set<tlp::edge>);             \
+  MACRO(ColorVectorProperty, std::vector<tlp::Color>);   \
+  MACRO(SizeProperty, tlp::Size);                        \
+  MACRO(SizeVectorProperty, std::vector<tlp::Size>);     \
+  /*MACRO(StringProperty,std::string);*/                 \
+  MACRO(StringVectorProperty, std::vector<std::string>); \
+  MACRO(LayoutProperty, std::vector<tlp::Coord>);        \
+  MACRO(CoordVectorProperty, std::vector<tlp::Coord>);   \
+  /*MACRO(IntegerProperty,int);*/                        \
+  MACRO(IntegerVectorProperty, std::vector<int>);        \
   MACRO(BooleanProperty, bool);
 
-#define GET_NODE_VALUE(PROP, TYPE)                                                                 \
-  else if (dynamic_cast<PROP *>(prop) !=                                                           \
+#define GET_NODE_VALUE(PROP, TYPE)       \
+  else if (dynamic_cast<PROP *>(prop) != \
            nullptr) return QVariant::fromValue<TYPE>(static_cast<PROP *>(prop)->getNodeValue(n))
 QVariant GraphModel::nodeValue(unsigned int id, PropertyInterface *prop) {
   node n(id);
@@ -318,8 +318,8 @@ QVariant GraphModel::nodeValue(unsigned int id, PropertyInterface *prop) {
   return QVariant();
 }
 
-#define GET_NODE_DEFAULT_VALUE(PROP, TYPE)                                                         \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) return QVariant::fromValue<TYPE>(                \
+#define GET_NODE_DEFAULT_VALUE(PROP, TYPE)                                          \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) return QVariant::fromValue<TYPE>( \
       static_cast<PROP *>(prop)->getNodeDefaultValue())
 QVariant GraphModel::nodeDefaultValue(PropertyInterface *prop) {
   if (dynamic_cast<IntegerProperty *>(prop) != nullptr) {
@@ -370,8 +370,8 @@ inline void setValueToGraphNodes(PropertyInterface *prop, const TYPE &value, con
   }
 }
 
-#define SET_ALL_NODE_VALUE(PROP, TYPE)                                                             \
-  else if (dynamic_cast<PROP *>(prop) != nullptr)                                                  \
+#define SET_ALL_NODE_VALUE(PROP, TYPE)            \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) \
       setValueToGraphNodes<PROP>(prop, v.value<TYPE>(), graph)
 bool GraphModel::setAllNodeValue(PropertyInterface *prop, QVariant v, Graph *graph) {
   if (dynamic_cast<IntegerProperty *>(prop) != nullptr) {
@@ -403,8 +403,8 @@ bool GraphModel::setAllNodeValue(PropertyInterface *prop, QVariant v, Graph *gra
   return true;
 }
 
-#define SET_NODE_VALUE(PROP, TYPE)                                                                 \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setNodeValue(         \
+#define SET_NODE_VALUE(PROP, TYPE)                                                         \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setNodeValue( \
       n, v.value<TYPE>())
 bool GraphModel::setNodeValue(unsigned int id, PropertyInterface *prop, QVariant v) {
   node n(id);
@@ -439,8 +439,8 @@ bool GraphModel::setNodeValue(unsigned int id, PropertyInterface *prop, QVariant
   return true;
 }
 
-#define SET_NODE_DEFAULT_VALUE(PROP, TYPE)                                                         \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setNodeDefaultValue(  \
+#define SET_NODE_DEFAULT_VALUE(PROP, TYPE)                                                        \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setNodeDefaultValue( \
       v.value<TYPE>())
 bool GraphModel::setNodeDefaultValue(PropertyInterface *prop, QVariant v) {
 
@@ -475,8 +475,8 @@ bool GraphModel::setNodeDefaultValue(PropertyInterface *prop, QVariant v) {
   return true;
 }
 
-#define GET_EDGE_VALUE(PROP, TYPE)                                                                 \
-  else if (dynamic_cast<PROP *>(prop) !=                                                           \
+#define GET_EDGE_VALUE(PROP, TYPE)       \
+  else if (dynamic_cast<PROP *>(prop) != \
            nullptr) return QVariant::fromValue<TYPE>(static_cast<PROP *>(prop)->getEdgeValue(e))
 QVariant GraphModel::edgeValue(unsigned int id, PropertyInterface *prop) {
   edge e(id);
@@ -525,8 +525,8 @@ QVariant GraphModel::edgeValue(unsigned int id, PropertyInterface *prop) {
   return QVariant();
 }
 
-#define GET_EDGE_DEFAULT_VALUE(PROP, TYPE)                                                         \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) return QVariant::fromValue<TYPE>(                \
+#define GET_EDGE_DEFAULT_VALUE(PROP, TYPE)                                          \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) return QVariant::fromValue<TYPE>( \
       static_cast<PROP *>(prop)->getEdgeDefaultValue())
 QVariant GraphModel::edgeDefaultValue(PropertyInterface *prop) {
   if (dynamic_cast<IntegerProperty *>(prop) != nullptr) {
@@ -573,8 +573,8 @@ QVariant GraphModel::edgeDefaultValue(PropertyInterface *prop) {
   return QVariant();
 }
 
-#define SET_EDGE_VALUE(PROP, TYPE)                                                                 \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setEdgeValue(         \
+#define SET_EDGE_VALUE(PROP, TYPE)                                                         \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setEdgeValue( \
       e, v.value<TYPE>())
 bool GraphModel::setEdgeValue(unsigned int id, PropertyInterface *prop, QVariant v) {
   edge e(id);
@@ -619,8 +619,8 @@ bool GraphModel::setEdgeValue(unsigned int id, PropertyInterface *prop, QVariant
   return true;
 }
 
-#define SET_EDGE_DEFAULT_VALUE(PROP, TYPE)                                                         \
-  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setEdgeDefaultValue(  \
+#define SET_EDGE_DEFAULT_VALUE(PROP, TYPE)                                                        \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) static_cast<PROP *>(prop)->setEdgeDefaultValue( \
       v.value<TYPE>())
 bool GraphModel::setEdgeDefaultValue(PropertyInterface *prop, QVariant v) {
 
@@ -679,8 +679,8 @@ inline void setValueToGraphEdges(PropertyInterface *prop, const TYPE &value, con
   }
 }
 
-#define SET_ALL_EDGE_VALUE(PROP, TYPE)                                                             \
-  else if (dynamic_cast<PROP *>(prop) != nullptr)                                                  \
+#define SET_ALL_EDGE_VALUE(PROP, TYPE)            \
+  else if (dynamic_cast<PROP *>(prop) != nullptr) \
       setValueToGraphEdges<PROP>(prop, v.value<TYPE>(), graph)
 bool GraphModel::setAllEdgeValue(PropertyInterface *prop, QVariant v, Graph *graph) {
   if (dynamic_cast<IntegerProperty *>(prop) != nullptr) {

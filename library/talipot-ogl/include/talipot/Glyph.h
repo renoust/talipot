@@ -115,10 +115,10 @@ public:
 };
 }
 
-#define GLYPHINFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, ID)                                    \
-  PLUGININFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, "")                                         \
-  int id() const override {                                                                        \
-    return ID;                                                                                     \
+#define GLYPHINFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, ID) \
+  PLUGININFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, "")      \
+  int id() const override {                                     \
+    return ID;                                                  \
   }
 
 #endif // DOXYGEN_NOTFOR_DEVEL

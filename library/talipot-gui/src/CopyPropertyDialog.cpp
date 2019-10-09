@@ -144,12 +144,12 @@ PropertyInterface *CopyPropertyDialog::copyProperty(QString &errorMsg) {
     CopyPropertyDialog::PropertyScope destinationScope = destinationPropertyScope();
     _graph->push();
 
-#define COPY_PROPERTY(TYPE, GRAPH, SOURCE, NAME, SCOPE)                                            \
-  if (typeid((*SOURCE)) == typeid(TYPE)) {                                                         \
-    TYPE *newProperty = SCOPE == INHERITED ? GRAPH->getSuperGraph()->getProperty<TYPE>(NAME)       \
-                                           : GRAPH->getLocalProperty<TYPE>(NAME);                  \
-    *newProperty = *(static_cast<TYPE *>(SOURCE));                                                 \
-    return newProperty;                                                                            \
+#define COPY_PROPERTY(TYPE, GRAPH, SOURCE, NAME, SCOPE)                                      \
+  if (typeid((*SOURCE)) == typeid(TYPE)) {                                                   \
+    TYPE *newProperty = SCOPE == INHERITED ? GRAPH->getSuperGraph()->getProperty<TYPE>(NAME) \
+                                           : GRAPH->getLocalProperty<TYPE>(NAME);            \
+    *newProperty = *(static_cast<TYPE *>(SOURCE));                                           \
+    return newProperty;                                                                      \
   }
 
     COPY_PROPERTY(DoubleProperty, _graph, _source, talipotPropertyName, destinationScope);

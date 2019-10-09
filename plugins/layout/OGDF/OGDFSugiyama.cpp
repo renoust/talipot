@@ -85,8 +85,8 @@
 #define ELT_COFFMANGRAHAMRANKING 2
 
 #define ELT_TWOLAYERCROSS "Two-layer crossing minimization"
-#define ELT_TWOLAYERCROSSLIST                                                                      \
-  "BarycenterHeuristic;MedianHeuristic;SplitHeuristic;SiftingHeuristic;GreedyInsertHeuristic;"     \
+#define ELT_TWOLAYERCROSSLIST                                                                  \
+  "BarycenterHeuristic;MedianHeuristic;SplitHeuristic;SiftingHeuristic;GreedyInsertHeuristic;" \
   "GreedySwitchHeuristic;GlobalSiftingHeuristic;GridSiftingHeuristic"
 #define ELT_BARYCENTER 0
 #define ELT_MEDIAN 1
@@ -98,7 +98,7 @@
 #define ELT_GRIDSIFTING 7
 
 #define ELT_HIERARCHYLAYOUT "Layout"
-#define ELT_HIERARCHYLAYOUTLIST                                                                    \
+#define ELT_HIERARCHYLAYOUTLIST \
   "FastHierarchyLayout;FastSimpleHierarchyLayout;OptimalHierarchyLayout"
 #define ELT_FASTHIERARCHY 0
 #define ELT_FASTSIMPLEHIERARCHY 1

@@ -26,16 +26,16 @@
 
 #include <talipot/TypeInterface.h>
 
-#define FORWARD_TOSTRING(T)                                                                        \
-  static std::string toString(const T::RealType &v) {                                              \
-    std::ostringstream oss;                                                                        \
-    write(oss, v);                                                                                 \
-    return oss.str();                                                                              \
+#define FORWARD_TOSTRING(T)                           \
+  static std::string toString(const T::RealType &v) { \
+    std::ostringstream oss;                           \
+    write(oss, v);                                    \
+    return oss.str();                                 \
   }
-#define FORWARD_FROMSTRING(T)                                                                      \
-  static bool fromString(T::RealType &v, const std::string &s) {                                   \
-    std::istringstream iss(s);                                                                     \
-    return read(iss, v);                                                                           \
+#define FORWARD_FROMSTRING(T)                                    \
+  static bool fromString(T::RealType &v, const std::string &s) { \
+    std::istringstream iss(s);                                   \
+    return read(iss, v);                                         \
   }
 #define FORWARD_STRING_METHODS(T) FORWARD_FROMSTRING(T) FORWARD_TOSTRING(T)
 

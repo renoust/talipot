@@ -94,12 +94,12 @@ public:
   }
 };
 
-#define STRING_CMP(NAME, CMP)                                                                      \
-  class NAME : public StringSearchOperator {                                                       \
-  public:                                                                                          \
-    bool compareStrings(const QString &a, const QString &b) {                                      \
-      return CMP;                                                                                  \
-    }                                                                                              \
+#define STRING_CMP(NAME, CMP)                                 \
+  class NAME : public StringSearchOperator {                  \
+  public:                                                     \
+    bool compareStrings(const QString &a, const QString &b) { \
+      return CMP;                                             \
+    }                                                         \
   };
 STRING_CMP(StringEqualsOperator, a == b)
 STRING_CMP(StringDifferentOperator, a != b)
@@ -128,12 +128,12 @@ public:
   }
 };
 
-#define NUM_CMP(NAME, CMP)                                                                         \
-  class NAME : public NumericSearchOperator {                                                      \
-  public:                                                                                          \
-    bool compareDoubles(double a, double b) {                                                      \
-      return a CMP b;                                                                              \
-    }                                                                                              \
+#define NUM_CMP(NAME, CMP)                    \
+  class NAME : public NumericSearchOperator { \
+  public:                                     \
+    bool compareDoubles(double a, double b) { \
+      return a CMP b;                         \
+    }                                         \
   };
 NUM_CMP(DoubleEqualsOperator, ==)
 NUM_CMP(DoubleDifferentOperator, !=)

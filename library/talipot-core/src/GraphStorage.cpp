@@ -19,8 +19,8 @@
 using namespace tlp;
 
 #define VECT_SET_SIZE(v, t, sz) reinterpret_cast<t **>(v)[1] = reinterpret_cast<t **>(v)[0] + sz
-#define VECT_INC_SIZE(v, t, sz)                                                                    \
-  (*v).reserve(sz);                                                                                \
+#define VECT_INC_SIZE(v, t, sz) \
+  (*v).reserve(sz);             \
   VECT_SET_SIZE(v, t, sz)
 
 //=======================================================

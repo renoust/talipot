@@ -162,13 +162,13 @@ bool ParameterDescriptionList::isMandatory(const string &name) const {
   return const_cast<ParameterDescriptionList *>(this)->getParameter(name)->isMandatory();
 }
 
-#define CHECK_PROPERTY(T)                                                                          \
-  if (type.compare(typeid(T).name()) == 0) {                                                       \
-    if (!g || defaultValue.empty() || !g->existProperty(defaultValue))                             \
-      dataSet.set(name, static_cast<T *>(nullptr));                                                \
-    else                                                                                           \
-      dataSet.set(name, static_cast<T *>(g->getProperty<T>(defaultValue)));                        \
-    continue;                                                                                      \
+#define CHECK_PROPERTY(T)                                                   \
+  if (type.compare(typeid(T).name()) == 0) {                                \
+    if (!g || defaultValue.empty() || !g->existProperty(defaultValue))      \
+      dataSet.set(name, static_cast<T *>(nullptr));                         \
+    else                                                                    \
+      dataSet.set(name, static_cast<T *>(g->getProperty<T>(defaultValue))); \
+    continue;                                                               \
   }
 
 void ParameterDescriptionList::buildDefaultDataSet(DataSet &dataSet, Graph *g) const {

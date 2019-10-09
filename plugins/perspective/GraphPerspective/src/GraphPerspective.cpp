@@ -1643,8 +1643,8 @@ void GraphPerspective::showPythonIDE() {
 // When running the appimage
 // the LD_LIBRARY_PATH variable must be unset to ensure a successful launch
 // of the default web browser to show the Talipot documentation
-#define UNSET_LD_LIBRARY_PATH()                                                                    \
-  auto ldPath = qgetenv("LD_LIBRARY_PATH");                                                        \
+#define UNSET_LD_LIBRARY_PATH()             \
+  auto ldPath = qgetenv("LD_LIBRARY_PATH"); \
   qunsetenv("LD_LIBRARY_PATH")
 #define RESTORE_LD_LIBRARY_PATH() qputenv("LD_LIBRARY_PATH", ldPath);
 #else

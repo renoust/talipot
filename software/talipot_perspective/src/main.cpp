@@ -319,8 +319,8 @@ int main(int argc, char **argv) {
   context->mainWindow = mainWindow;
 
   // Create perspective object
-  Perspective *perspective =
-      PluginsManager::getPluginObject<Perspective>(tlp::QStringToTlpString(perspectiveName), context);
+  Perspective *perspective = PluginsManager::getPluginObject<Perspective>(
+      tlp::QStringToTlpString(perspectiveName), context);
 
   if (perspective == nullptr) {
     usage("Cannot open perspective: " + perspectiveName +

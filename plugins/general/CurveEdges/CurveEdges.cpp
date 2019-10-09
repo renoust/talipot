@@ -38,7 +38,7 @@
 #include <climits>
 
 #define CURVE_TYPE "Curve Type"
-#define CURVE_TYPE_LIST                                                                            \
+#define CURVE_TYPE_LIST \
   "QuadraticContinuous;QuadraticDiscrete;QuadraticDiagonalCross;\
 QuadraticStraightCross;QuadraticHorizontal;QuadraticVertical;CubicContinuous;CubicVertical;\
 CubicDiagonalCross;CubicVerticalDiagonalCross;CubicStraightCrossSource;CubicStraightCrossTarget"

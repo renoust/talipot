@@ -46,7 +46,7 @@ typedef unsigned char uchar;
 // disable deprecated warnings when compiling the talipot dlls, as MSVC is overly verbose with
 // deprecation
 // (even if a deprecated function is not used, warnings are issued)
-#if defined(DLL_Talipot) || defined(DLL_TALIPOT_GL) || defined(DLL_TALIPOT_QT) ||                  \
+#if defined(DLL_Talipot) || defined(DLL_TALIPOT_GL) || defined(DLL_TALIPOT_QT) || \
     defined(DLL_TALIPOT_QT2)
 #pragma warning(disable : 4996) // deprecated functions
 #endif

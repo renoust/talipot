@@ -201,8 +201,8 @@ private:
   static bool _canUseLock;
 };
 
-#define TLP_LOCK_SECTION(mtx)                                                                      \
-  static tlp::OpenMPLock mtx;                                                                      \
+#define TLP_LOCK_SECTION(mtx) \
+  static tlp::OpenMPLock mtx; \
   mtx.lock();
 #define TLP_UNLOCK_SECTION(mtx) mtx.unlock();
 #define TLP_DECLARE_GLOBAL_LOCK(mtx) extern tlp::OpenMPLock mtx
@@ -223,8 +223,8 @@ private:
 
 #else
 
-#define TLP_LOCK_SECTION(mtx)                                                                      \
-  static std::mutex mtx;                                                                           \
+#define TLP_LOCK_SECTION(mtx) \
+  static std::mutex mtx;      \
   mtx.lock();
 #define TLP_UNLOCK_SECTION(mtx) mtx.unlock()
 #define TLP_DECLARE_GLOBAL_LOCK(mtx) extern std::mutex mtx

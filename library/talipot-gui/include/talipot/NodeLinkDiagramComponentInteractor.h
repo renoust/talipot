@@ -38,7 +38,6 @@ public:
   QLabel *configurationDocWidget() const override;
 
   unsigned int priority() const override;
-
 };
 }
 

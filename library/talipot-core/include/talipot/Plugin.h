@@ -224,32 +224,32 @@ protected:
  * @see tlp::Plugin
  * @see PLUGIN
  */
-#define PLUGININFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, GROUP)                                \
-  std::string name() const override {                                                              \
-    return NAME;                                                                                   \
-  }                                                                                                \
-  std::string author() const override {                                                            \
-    return AUTHOR;                                                                                 \
-  }                                                                                                \
-  std::string date() const override {                                                              \
-    return DATE;                                                                                   \
-  }                                                                                                \
-  std::string info() const override {                                                              \
-    return INFO;                                                                                   \
-  }                                                                                                \
-  std::string release() const override {                                                           \
-    return RELEASE;                                                                                \
-  }                                                                                                \
-  std::string talipotRelease() const override {                                                    \
-    return TALIPOT_VERSION;                                                                        \
-  }                                                                                                \
-  std::string group() const override {                                                             \
-    return GROUP;                                                                                  \
+#define PLUGININFORMATION(NAME, AUTHOR, DATE, INFO, RELEASE, GROUP) \
+  std::string name() const override {                               \
+    return NAME;                                                    \
+  }                                                                 \
+  std::string author() const override {                             \
+    return AUTHOR;                                                  \
+  }                                                                 \
+  std::string date() const override {                               \
+    return DATE;                                                    \
+  }                                                                 \
+  std::string info() const override {                               \
+    return INFO;                                                    \
+  }                                                                 \
+  std::string release() const override {                            \
+    return RELEASE;                                                 \
+  }                                                                 \
+  std::string talipotRelease() const override {                     \
+    return TALIPOT_VERSION;                                         \
+  }                                                                 \
+  std::string group() const override {                              \
+    return GROUP;                                                   \
   }
 }
 
-// This include is here because the PluginsManager needs to know the Plugin type, and the PLUGIN macro
-// needs to know the PluginsManager.
+// This include is here because the PluginsManager needs to know the Plugin type, and the PLUGIN
+// macro needs to know the PluginsManager.
 #include <talipot/PluginsManager.h>
 namespace tlp {
 /**
@@ -276,21 +276,21 @@ PLUGIN(MyPlugin) // Register MyPlugin into Talipot
  * @see tlp::Plugin
  * @see PLUGININFORMATION
  */
-#define PLUGIN(C)                                                                                  \
-  class C##Factory : public tlp::FactoryInterface {                                                \
-  public:                                                                                          \
-    C##Factory() {                                                                                 \
-      tlp::PluginsManager::registerPlugin(this);                                                     \
-    }                                                                                              \
-    ~C##Factory() {}                                                                               \
-    tlp::Plugin *createPluginObject(tlp::PluginContext *context) {                                 \
-      C *tmp = new C(context);                                                                     \
-      return tmp;                                                                                  \
-    }                                                                                              \
-  };                                                                                               \
-                                                                                                   \
-  extern "C" {                                                                                     \
-  C##Factory C##FactoryInitializer;                                                                \
+#define PLUGIN(C)                                                  \
+  class C##Factory : public tlp::FactoryInterface {                \
+  public:                                                          \
+    C##Factory() {                                                 \
+      tlp::PluginsManager::registerPlugin(this);                   \
+    }                                                              \
+    ~C##Factory() {}                                               \
+    tlp::Plugin *createPluginObject(tlp::PluginContext *context) { \
+      C *tmp = new C(context);                                     \
+      return tmp;                                                  \
+    }                                                              \
+  };                                                               \
+                                                                   \
+  extern "C" {                                                     \
+  C##Factory C##FactoryInitializer;                                \
   }
 }
 

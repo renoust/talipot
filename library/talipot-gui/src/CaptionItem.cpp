@@ -97,8 +97,7 @@ void CaptionItem::clearObservers() {
     _metricProperty->removeObserver(this);
 
   if (!_captionGraphicsItem->usedProperty().empty()) {
-    _metricProperty =
-        view->graph()->getDoubleProperty(_captionGraphicsItem->usedProperty());
+    _metricProperty = view->graph()->getDoubleProperty(_captionGraphicsItem->usedProperty());
     _metricProperty->addObserver(this);
   } else {
     _metricProperty = nullptr;

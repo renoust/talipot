@@ -264,7 +264,7 @@ private:
   std::vector<ParameterDescription> parameters;
 };
 
-#define HTML_HELP_OPEN()                                                                           \
+#define HTML_HELP_OPEN() \
   "<!DOCTYPE html><html><head>\
 <style type=\"text/css\">.body { font-family: \"Segoe UI\", Candara, \"Bitstream Vera Sans\", \"DejaVu Sans\", \"Bitstream Vera Sans\", \"Trebuchet MS\", Verdana, \"Verdana Ref\", sans-serif; }\
     .paramtable { width: 100%; border: 0px; border-bottom: 1px solid #C9C9C9; padding: 5px; }\

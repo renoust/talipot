@@ -96,24 +96,18 @@ static void setViewPropertiesDefaults(Graph *g) {
                     texture = "viewTexture", tgtAnchorSize = "viewTgtAnchorSize";
 
   if (!g->existProperty(shapes)) {
-    g->getIntegerProperty(shapes)->setAllNodeValue(
-        ViewSettings::instance().defaultShape(NODE));
-    g->getIntegerProperty(shapes)->setAllEdgeValue(
-        ViewSettings::instance().defaultShape(EDGE));
+    g->getIntegerProperty(shapes)->setAllNodeValue(ViewSettings::instance().defaultShape(NODE));
+    g->getIntegerProperty(shapes)->setAllEdgeValue(ViewSettings::instance().defaultShape(EDGE));
   }
 
   if (!g->existProperty(colors)) {
-    g->getColorProperty(colors)->setAllNodeValue(
-        ViewSettings::instance().defaultColor(NODE));
-    g->getColorProperty(colors)->setAllEdgeValue(
-        ViewSettings::instance().defaultColor(EDGE));
+    g->getColorProperty(colors)->setAllNodeValue(ViewSettings::instance().defaultColor(NODE));
+    g->getColorProperty(colors)->setAllEdgeValue(ViewSettings::instance().defaultColor(EDGE));
   }
 
   if (!g->existProperty(sizes)) {
-    g->getSizeProperty(sizes)->setAllNodeValue(
-        ViewSettings::instance().defaultSize(NODE));
-    g->getSizeProperty(sizes)->setAllEdgeValue(
-        ViewSettings::instance().defaultSize(EDGE));
+    g->getSizeProperty(sizes)->setAllNodeValue(ViewSettings::instance().defaultSize(NODE));
+    g->getSizeProperty(sizes)->setAllEdgeValue(ViewSettings::instance().defaultSize(EDGE));
   }
 
   if (!g->existProperty(metrics)) {
@@ -122,17 +116,13 @@ static void setViewPropertiesDefaults(Graph *g) {
   }
 
   if (!g->existProperty(fonts)) {
-    g->getStringProperty(fonts)->setAllNodeValue(
-        ViewSettings::instance().defaultFontFile());
-    g->getStringProperty(fonts)->setAllEdgeValue(
-        ViewSettings::instance().defaultFontFile());
+    g->getStringProperty(fonts)->setAllNodeValue(ViewSettings::instance().defaultFontFile());
+    g->getStringProperty(fonts)->setAllEdgeValue(ViewSettings::instance().defaultFontFile());
   }
 
   if (!g->existProperty(fontSizes)) {
-    g->getIntegerProperty(fontSizes)->setAllNodeValue(
-        ViewSettings::instance().defaultFontSize());
-    g->getIntegerProperty(fontSizes)->setAllEdgeValue(
-        ViewSettings::instance().defaultFontSize());
+    g->getIntegerProperty(fontSizes)->setAllNodeValue(ViewSettings::instance().defaultFontSize());
+    g->getIntegerProperty(fontSizes)->setAllEdgeValue(ViewSettings::instance().defaultFontSize());
   }
 
   if (!g->existProperty(borderWidth)) {
@@ -160,10 +150,8 @@ static void setViewPropertiesDefaults(Graph *g) {
   }
 
   if (!g->existProperty(labelColor)) {
-    g->getColorProperty(labelColor)
-        ->setAllNodeValue(ViewSettings::instance().defaultLabelColor());
-    g->getColorProperty(labelColor)
-        ->setAllEdgeValue(ViewSettings::instance().defaultLabelColor());
+    g->getColorProperty(labelColor)->setAllNodeValue(ViewSettings::instance().defaultLabelColor());
+    g->getColorProperty(labelColor)->setAllEdgeValue(ViewSettings::instance().defaultLabelColor());
   }
 
   if (!g->existProperty(labelBorderColor)) {

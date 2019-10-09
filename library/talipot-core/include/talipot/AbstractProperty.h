@@ -698,8 +698,8 @@ public:
 };
 }
 #if !defined(_MSC_VER) || defined(DLL_Talipot) // When using VC++, we only want to include this when
-  // we are in the Talipot dll. With any other compiler,
-  // include it all the time
+// we are in the Talipot dll. With any other compiler,
+// include it all the time
 #include "cxx/AbstractProperty.cxx"
 #endif
 #endif // TALIPOT_ABSTRACT_PROPERTY_H

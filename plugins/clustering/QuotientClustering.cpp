@@ -160,15 +160,14 @@ public:
         Size minSize = viewSize->getMin(cluster);
         Size maxSize = viewSize->getMax(cluster);
         layoutParams.set("Unit edge length", std::max(maxSize[0], maxSize[1]) * 5.0);
-        cluster->applyPropertyAlgorithm(layoutName,
-                                        cluster->getLocalLayoutProperty("viewLayout"),
+        cluster->applyPropertyAlgorithm(layoutName, cluster->getLocalLayoutProperty("viewLayout"),
                                         errMsg, &layoutParams);
         double border = std::min(minSize[0], minSize[1]);
         layoutParams.set("x border", border);
         layoutParams.set("y border", border);
         cluster->applyPropertyAlgorithm("Fast Overlap Removal",
-                                        cluster->getLocalLayoutProperty("viewLayout"),
-                                        errMsg, &layoutParams);
+                                        cluster->getLocalLayoutProperty("viewLayout"), errMsg,
+                                        &layoutParams);
       }
     }
 
@@ -369,14 +368,13 @@ public:
       Size maxSize = viewSize->getMax(quotientGraph);
       layoutParams.set("Unit edge length", std::max(maxSize[0], maxSize[1]) * 2.0);
       quotientGraph->applyPropertyAlgorithm(
-          layoutName, quotientGraph->getLocalLayoutProperty("viewLayout"), errMsg,
-          &layoutParams);
+          layoutName, quotientGraph->getLocalLayoutProperty("viewLayout"), errMsg, &layoutParams);
       double border = std::min(minSize[0], minSize[1]);
       layoutParams.set("x border", border);
       layoutParams.set("y border", border);
-      quotientGraph->applyPropertyAlgorithm(
-          "Fast Overlap Removal", quotientGraph->getLocalLayoutProperty("viewLayout"),
-          errMsg, &layoutParams);
+      quotientGraph->applyPropertyAlgorithm("Fast Overlap Removal",
+                                            quotientGraph->getLocalLayoutProperty("viewLayout"),
+                                            errMsg, &layoutParams);
     }
 
     // recursive call if needed

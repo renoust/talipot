@@ -274,18 +274,18 @@ T *getCppPointerFromPyObject(PyObject *pyObj) {
   return v;
 }
 
-#define CHECK_BASE_CPP_TYPE_CONVERSION(T)                                                          \
-  if (!pyObj && dataType && dataType->getTypeName() == std::string(typeid(T).name())) {            \
-    pyObj = getPyObjectFromCppObject(*(static_cast<T *>(dataType->value)));                        \
+#define CHECK_BASE_CPP_TYPE_CONVERSION(T)                                               \
+  if (!pyObj && dataType && dataType->getTypeName() == std::string(typeid(T).name())) { \
+    pyObj = getPyObjectFromCppObject(*(static_cast<T *>(dataType->value)));             \
   }
 
-#define CHECK_SIP_CPP_TYPE_CONVERSION(T)                                                           \
-  if (!pyObj && dataType && dataType->getTypeName() == std::string(typeid(T).name())) {            \
-    if (noCopy) {                                                                                  \
-      pyObj = getPyObjectFromCppObject(static_cast<T *>(dataType->value));                         \
-    } else {                                                                                       \
-      pyObj = getPyObjectFromCppObject(*(static_cast<T *>(dataType->value)));                      \
-    }                                                                                              \
+#define CHECK_SIP_CPP_TYPE_CONVERSION(T)                                                \
+  if (!pyObj && dataType && dataType->getTypeName() == std::string(typeid(T).name())) { \
+    if (noCopy) {                                                                       \
+      pyObj = getPyObjectFromCppObject(static_cast<T *>(dataType->value));              \
+    } else {                                                                            \
+      pyObj = getPyObjectFromCppObject(*(static_cast<T *>(dataType->value)));           \
+    }                                                                                   \
   }
 
 PyObject *getPyObjectFromDataType(const tlp::DataType *dataType, bool noCopy) {
@@ -388,26 +388,26 @@ PyObject *getPyObjectFromDataType(const tlp::DataType *dataType, bool noCopy) {
   return pyObj;
 }
 
-#define CHECK_SIP_TYPE_CONVERSION(CPP_TYPE, SIP_TYPE_STR)                                          \
-  if (sipCanConvertToType(pyObj, sipFindType(SIP_TYPE_STR), SIP_NOT_NONE)) {                       \
-    if (!dataType || dataType->getTypeName() == std::string(typeid(CPP_TYPE).name())) {            \
-      valSetter.setValue(getCppObjectFromPyObject<CPP_TYPE>(pyObj));                               \
-      return true;                                                                                 \
-    }                                                                                              \
+#define CHECK_SIP_TYPE_CONVERSION(CPP_TYPE, SIP_TYPE_STR)                               \
+  if (sipCanConvertToType(pyObj, sipFindType(SIP_TYPE_STR), SIP_NOT_NONE)) {            \
+    if (!dataType || dataType->getTypeName() == std::string(typeid(CPP_TYPE).name())) { \
+      valSetter.setValue(getCppObjectFromPyObject<CPP_TYPE>(pyObj));                    \
+      return true;                                                                      \
+    }                                                                                   \
   }
 
-#define CHECK_SIP_ENUM_CONVERSION(SIP_TYPE_STR)                                                    \
-  if (sipCanConvertToEnum(pyObj, sipFindType(SIP_TYPE_STR))) {                                     \
-    valSetter.setValue(int(PyLong_AsLong(pyObj)));                                                 \
-    return true;                                                                                   \
+#define CHECK_SIP_ENUM_CONVERSION(SIP_TYPE_STR)                \
+  if (sipCanConvertToEnum(pyObj, sipFindType(SIP_TYPE_STR))) { \
+    valSetter.setValue(int(PyLong_AsLong(pyObj)));             \
+    return true;                                               \
   }
 
-#define CHECK_SIP_POINTER_TYPE_CONVERSION(CPP_TYPE, SIP_TYPE_STR)                                  \
-  if (sipCanConvertToType(pyObj, sipFindType(SIP_TYPE_STR), 0)) {                                  \
-    if (!dataType || dataType->getTypeName() == std::string(typeid(CPP_TYPE *).name())) {          \
-      valSetter.setValue(getCppPointerFromPyObject<CPP_TYPE>(pyObj));                              \
-      return true;                                                                                 \
-    }                                                                                              \
+#define CHECK_SIP_POINTER_TYPE_CONVERSION(CPP_TYPE, SIP_TYPE_STR)                         \
+  if (sipCanConvertToType(pyObj, sipFindType(SIP_TYPE_STR), 0)) {                         \
+    if (!dataType || dataType->getTypeName() == std::string(typeid(CPP_TYPE *).name())) { \
+      valSetter.setValue(getCppPointerFromPyObject<CPP_TYPE>(pyObj));                     \
+      return true;                                                                        \
+    }                                                                                     \
   }
 
 #define CHECK_SIP_VECTOR_LIST_CONVERSION(CPP_TYPE, SIP_TYPE_STR)                                   \
