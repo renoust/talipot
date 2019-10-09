@@ -329,6 +329,8 @@ jobs:
       osx_image: xcode9.2
       compiler: clang
       cache: ccache
+      before_install:
+        - start_time=$(travis_nanoseconds)
       install:
         # install MacPorts in order to easily retrieve Talipot dependencies
         - curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
@@ -366,6 +368,12 @@ jobs:
         - ninja -j4 install
         # run Talipot unit tests
         - ninja runTests
+        # compute overall build time
+        - end_time=$(travis_nanoseconds)
+        - build_time=$(( (end_time-start_time) / (6 * (10 ** 10)) ))
+        - echo "build time = $build_time minutes"
+        # skip dmg bundle generation if there is not enough time remaining for the travis job
+        - if (( build_time >= 45 )); then travis_terminate 0; fi
         # build Talipot bundle
         - ninja bundle
         - cd ..
