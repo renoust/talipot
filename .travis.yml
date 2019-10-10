@@ -372,10 +372,12 @@ jobs:
         - end_time=$(travis_nanoseconds)
         - build_time=$(( (end_time-start_time) / (6 * (10 ** 10)) ))
         - echo "build time = $build_time minutes"
-        # skip dmg bundle generation if there is not enough time remaining for the travis job
-        - if [ "$build_time" -ge "40" ]; then travis_terminate 0; fi
-        # build Talipot bundle
-        - ninja bundle
+        - | # skip dmg bundle generation if there is not enough time remaining for the travis job
+          if (( build_time <= 40 ))
+          then
+            # build Talipot bundle
+            ninja bundle
+          fi
         - cd ..
 
       # deploy Talipot MacOS bundle on bintray
