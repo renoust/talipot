@@ -27,8 +27,7 @@
 
 //====================================================
 tlp::GlTextureLoader *tlp::GlTextureManager::loader = nullptr;
-uintptr_t tlp::GlTextureManager::currentContext = 0;
-tlp::GlTextureManager::ContextAndTextureMap tlp::GlTextureManager::texturesMap;
+tlp::GlTextureManager::TextureMap tlp::GlTextureManager::texturesMap;
 std::set<std::string> tlp::GlTextureManager::texturesWithError;
 unsigned int tlp::GlTextureManager::animationFrame = 0;
 
@@ -409,8 +408,7 @@ static bool generateTexture(const std::string &filename, const TextureInfo &text
     }
   }
 
-  glGenTextures(spriteNumber,
-                textureNum); // FIXME: handle case where no memory is available to load texture
+  glGenTextures(spriteNumber, textureNum);
 
   glEnable(GL_TEXTURE_2D);
 
@@ -483,33 +481,21 @@ bool GlTextureLoader::loadTexture(const string &filename, GlTexture &texture) {
   return result;
 }
 //====================================================================
-void GlTextureManager::changeContext(uintptr_t context) {
-  currentContext = context;
-
-  if (texturesMap.find(currentContext) == texturesMap.end()) {
-    texturesMap[currentContext] = TextureUnit();
-  }
-}
-//====================================================================
-void GlTextureManager::removeContext(uintptr_t context) {
-  texturesMap.erase(context);
-}
-//====================================================================
 GlTexture GlTextureManager::getTextureInfo(const string &filename) {
-  if (texturesMap[currentContext].find(filename) != texturesMap[currentContext].end())
-    return (texturesMap[currentContext])[filename];
+  if (texturesMap.find(filename) != texturesMap.end())
+    return (texturesMap)[filename];
   else
     return GlTexture();
 }
 //====================================================================
 bool GlTextureManager::existsTexture(const string &filename) {
-  return (texturesMap[currentContext].find(filename) != texturesMap[currentContext].end());
+  return (texturesMap.find(filename) != texturesMap.end());
 }
 //====================================================================
 bool GlTextureManager::loadTexture(const string &filename) {
   glEnable(GL_TEXTURE_2D);
 
-  if (texturesMap[currentContext].find(filename) != texturesMap[currentContext].end())
+  if (texturesMap.find(filename) != texturesMap.end())
     return true;
 
   GlTexture texture;
@@ -517,7 +503,7 @@ bool GlTextureManager::loadTexture(const string &filename) {
   if (!getTextureLoader()->loadTexture(filename, texture))
     return false;
 
-  (texturesMap[currentContext])[filename] = texture;
+  (texturesMap)[filename] = texture;
   return true;
 }
 
@@ -527,21 +513,22 @@ void GlTextureManager::registerExternalTexture(const std::string &textureName,
   texture.spriteNumber = 1;
   texture.id = new GLuint[1];
   texture.id[0] = textureId;
-  (texturesMap[currentContext])[textureName] = texture;
+  (texturesMap)[textureName] = texture;
 }
 
 //====================================================================
+static void deleteGlTexture(GlTexture &texture) {
+  for (unsigned int i = 0; i < texture.spriteNumber; ++i) {
+    glDeleteTextures(1, &(texture.id[i]));
+  }
+  delete[] texture.id;
+}
+
 void GlTextureManager::deleteTexture(const string &name) {
-  for (ContextAndTextureMap::iterator it = texturesMap.begin(); it != texturesMap.end(); ++it) {
-    TextureUnit::iterator it2 = it->second.find(name);
-
-    if (it2 != it->second.end()) {
-      for (unsigned int i = 0; i < it2->second.spriteNumber; ++i)
-        glDeleteTextures(1, &(it2->second.id[i]));
-
-      delete[] it2->second.id;
-      it->second.erase(name);
-    }
+  TextureMap::iterator it = texturesMap.find(name);
+  if (it != texturesMap.end()) {
+    deleteGlTexture(it->second);
+    texturesMap.erase(it);
   }
 }
 //====================================================================
@@ -565,7 +552,7 @@ bool GlTextureManager::activateTexture(const string &filename, unsigned int fram
 
   bool loadOk = true;
 
-  if (texturesMap[currentContext].find(filename) == texturesMap[currentContext].end())
+  if (texturesMap.find(filename) == texturesMap.end())
     loadOk = loadTexture(filename);
   else
     glEnable(GL_TEXTURE_2D);
@@ -576,13 +563,20 @@ bool GlTextureManager::activateTexture(const string &filename, unsigned int fram
     return false;
   }
 
-  unsigned int spriteNumber = ((texturesMap[currentContext])[filename]).spriteNumber;
+  unsigned int spriteNumber = ((texturesMap)[filename]).spriteNumber;
   frame = frame - (frame / spriteNumber) * spriteNumber;
-  glBindTexture(GL_TEXTURE_2D, (texturesMap[currentContext])[filename].id[frame]);
+  glBindTexture(GL_TEXTURE_2D, (texturesMap)[filename].id[frame]);
   return true;
 }
 //====================================================================
 void GlTextureManager::deactivateTexture() {
   glDisable(GL_TEXTURE_2D);
 }
+//====================================================================
+void GlTextureManager::deleteAllTextures() {
+  for (auto &it : texturesMap) {
+    deleteGlTexture(it.second);
+  }
+}
+
 }

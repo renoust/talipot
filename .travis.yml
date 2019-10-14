@@ -141,7 +141,6 @@ jobs:
             - libcppunit-dev
             - binutils-dev
             - qt5-default
-            - libqt5opengl5-dev
             - libqt5webkit5-dev
             - libquazip5-dev
             - libglew-dev
@@ -202,7 +201,6 @@ jobs:
             - libcppunit-dev
             - binutils-dev
             - qt5-default
-            - libqt5opengl5-dev
             - libqt5webkit5-dev
             - libquazip5-dev
             - libglew-dev

@@ -82,7 +82,7 @@ public:
   ~GeographicView() override;
 
   std::string icon() const override {
-    return ":/talipot/geoview/geographic_view.png";
+    return ":/talipot/view/geographic/geographic_view.png";
   }
 
   void setupUi() override;

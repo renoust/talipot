@@ -33,7 +33,6 @@
 #include <talipot/Interactor.h>
 #include <talipot/GlyphManager.h>
 #include <talipot/EdgeExtremityGlyphManager.h>
-#include <talipot/QGlBufferManager.h>
 #include <talipot/TlpQtTools.h>
 #include <talipot/Settings.h>
 #include <talipot/WorkspacePanel.h>
@@ -41,6 +40,8 @@
 #include <talipot/GlMainView.h>
 #include <talipot/GlMainWidget.h>
 #include <talipot/PythonInterpreter.h>
+#include <talipot/GlOffscreenRenderer.h>
+#include <talipot/GlTextureManager.h>
 
 #include "TalipotMainWindow.h"
 #include "SplashScreen.h"
@@ -156,10 +157,10 @@ int main(int argc, char **argv) {
 
   delete mainWindow;
 
-  // We need to clear allocated Qt buffers and QGlWidget to remove a
+  // We need to clear allocated OpenGL resources to avoid a
   // segfault when we close talipot
-  QGlBufferManager::clearBuffers();
-  GlMainWidget::clearFirstQGLWidget();
+  GlTextureManager::deleteAllTextures();
+  delete GlOffscreenRenderer::getInstance();
 
   return result;
 }

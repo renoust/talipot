@@ -31,7 +31,6 @@ SET(SRCS
   ShapeDialog.cpp
   PluginManager.cpp
   PropertyCreationDialog.cpp
-  QGlBufferManager.cpp
   QtGlSceneZoomAndPanAnimator.cpp
   QuaZIPFacade.cpp
   RenamePropertyDialog.cpp

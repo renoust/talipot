@@ -51,9 +51,6 @@ namespace tlp {
 
 PLUGIN(HistogramView)
 
-GLuint HistogramView::binTextureId(0);
-unsigned int HistogramView::histoViewInstancesCount(0);
-
 HistogramView::HistogramView(const PluginContext *)
     : GlMainView(true), propertiesSelectionWidget(nullptr), histoOptionsWidget(nullptr),
       xAxisDetail(nullptr), yAxisDetail(nullptr), _histoGraph(nullptr), emptyGraph(nullptr),
@@ -62,21 +59,12 @@ HistogramView::HistogramView(const PluginContext *)
       detailedHistogram(nullptr), sceneRadiusBak(0), zoomFactorBak(0), noDimsLabel(nullptr),
       noDimsLabel1(nullptr), noDimsLabel2(nullptr), emptyRect(nullptr), emptyRect2(nullptr),
       isConstruct(false), lastNbHistograms(0), dataLocation(NODE), needUpdateHistogram(false),
-      edgeAsNodeGraph(nullptr) {
-  ++histoViewInstancesCount;
-}
+      edgeAsNodeGraph(nullptr) {}
 
 HistogramView::~HistogramView() {
   if (isConstruct) {
     if (currentInteractor() != nullptr)
       currentInteractor()->uninstall();
-
-    --histoViewInstancesCount;
-
-    if (histoViewInstancesCount == 0) {
-      GlTextureManager::deleteTexture(BIN_RECT_TEXTURE);
-      binTextureId = 0;
-    }
 
     delete propertiesSelectionWidget;
     delete histoOptionsWidget;
@@ -169,13 +157,6 @@ void HistogramView::setState(const DataSet &dataSet) {
     histoOptionsWidget = new HistoOptionsWidget();
     propertiesSelectionWidget->setWidgetEnabled(true);
     histoOptionsWidget->setWidgetEnabled(false);
-  }
-
-  if (binTextureId == 0) {
-    gl->getFirstQGLWidget()->makeCurrent();
-    binTextureId = gl->getFirstQGLWidget()->bindTexture(
-        QImage(":/histo_texture.png").transformed(QTransform().rotate(90)), GL_TEXTURE_2D);
-    GlTextureManager::registerExternalTexture(BIN_RECT_TEXTURE, binTextureId);
   }
 
   GlMainView::setState(dataSet);
@@ -624,7 +605,7 @@ void HistogramView::graphChanged(Graph *) {
 
 void HistogramView::buildHistograms() {
 
-  GlMainWidget::getFirstQGLWidget()->makeCurrent();
+  getGlMainWidget()->makeCurrent();
 
   histogramsComposite->reset(false);
   labelsComposite->reset(true);

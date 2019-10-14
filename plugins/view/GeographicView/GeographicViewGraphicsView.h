@@ -26,6 +26,8 @@
 #include <QGraphicsView>
 #include <QComboBox>
 
+class QOpenGLFramebufferObject;
+
 namespace tlp {
 
 class GeographicView;
@@ -145,10 +147,11 @@ protected:
   int tId;
   void timerEvent(QTimerEvent *event) override;
 #endif
+  void paintEvent(QPaintEvent *event) override;
+  void updateMapTexture();
 
 private:
   GeographicView *_geoView;
-  GlMainWidget *glWidget;
   Graph *graph;
   LeafletMaps *leafletMaps;
   std::unordered_map<node, std::pair<double, double>> nodeLatLng;
@@ -189,7 +192,8 @@ private:
 
   bool geoLayoutComputed;
 
-  static unsigned int planisphereTextureId;
+  QOpenGLFramebufferObject *renderFbo;
+  GlLayer *backgroundLayer;
 };
 }
 

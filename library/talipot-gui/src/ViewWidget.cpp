@@ -23,16 +23,16 @@
 
 using namespace tlp;
 
-struct MyGraphicsView : public QGraphicsView {
+struct TalipotGraphicsView : public QGraphicsView {
   QGraphicsItem *_centralItem;
 
-  MyGraphicsView() : QGraphicsView(new QGraphicsScene()), _centralItem(nullptr) {
+  TalipotGraphicsView() : QGraphicsView(new QGraphicsScene()), _centralItem(nullptr) {
     setAcceptDrops(false);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   }
 
-  ~MyGraphicsView() override {
+  ~TalipotGraphicsView() override {
     delete scene();
   }
 
@@ -84,9 +84,9 @@ QGraphicsView *ViewWidget::graphicsView() const {
 }
 
 void ViewWidget::setupUi() {
-  _graphicsView = new MyGraphicsView();
+  _graphicsView = new TalipotGraphicsView();
   _graphicsView->setFrameStyle(QFrame::NoFrame);
-  _graphicsView->scene()->setBackgroundBrush(Qt::green);
+  _graphicsView->scene()->setBackgroundBrush(Qt::white);
   setupWidget();
   assert(_centralWidget);
 }
@@ -117,7 +117,6 @@ void ViewWidget::setCentralWidget(QWidget *w, bool deleteOldCentralWidget) {
   if (glMainWidget) {
     _graphicsView->setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing |
                                   QPainter::TextAntialiasing);
-    _graphicsView->setViewport(new GlMainWidget());
     _graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 
     GlMainWidgetGraphicsItem *glMainWidgetItem =
@@ -146,7 +145,7 @@ void ViewWidget::setCentralWidget(QWidget *w, bool deleteOldCentralWidget) {
     _centralWidget->resize(_graphicsView->width(), _graphicsView->height());
   }
 
-  static_cast<MyGraphicsView *>(_graphicsView)->_centralItem = _centralWidgetItem;
+  static_cast<TalipotGraphicsView *>(_graphicsView)->_centralItem = _centralWidgetItem;
 
   _centralWidgetItem->setPos(0, 0);
 

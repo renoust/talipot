@@ -64,6 +64,7 @@
 #include <talipot/PythonVersionChecker.h>
 #include <talipot/FileDownloader.h>
 #include <talipot/ItemEditorCreators.h>
+#include <talipot/GlOffscreenRenderer.h>
 
 /**
  * For openDataSetDialog function : see OpenDataSet.cpp
@@ -274,15 +275,14 @@ public:
 
     GLuint *textureNum = new GLuint[spriteNumber];
 
-    image = image.mirrored();
+    image = image.mirrored().convertToFormat(QImage::Format_RGBA8888);
 
     glTexture.width = width;
     glTexture.height = height;
     glTexture.spriteNumber = spriteNumber;
     glTexture.id = new GLuint[spriteNumber];
 
-    glGenTextures(spriteNumber,
-                  textureNum); // FIXME: handle case where no memory is available to load texture
+    glGenTextures(spriteNumber, textureNum);
 
     glEnable(GL_TEXTURE_2D);
 
@@ -291,16 +291,10 @@ public:
 
       glTexture.id[0] = textureNum[0];
 
-      int glFmt = GL_RGB;
-      if (image.hasAlphaChannel()) {
-        glFmt = GL_RGBA;
-        if (image.format() != QImage::Format_RGBA8888)
-          image = image.convertToFormat(QImage::Format_RGBA8888);
-      } else if (image.format() != QImage::Format_RGB888)
-        image = image.convertToFormat(QImage::Format_RGB888);
+      int glFmt = image.hasAlphaChannel() ? GL_RGBA : GL_RGB;
 
       glTexImage2D(GL_TEXTURE_2D, 0, glFmt, width, height, 0, glFmt, GL_UNSIGNED_BYTE,
-                   image.bits());
+                   image.constBits());
 
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -425,6 +419,10 @@ void initTalipotSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins)
   tlp::InteractorLister::initInteractorsDependencies();
   tlp::GlyphManager::loadGlyphPlugins();
   tlp::EdgeExtremityGlyphManager::loadGlyphPlugins();
+
+  // Explicitely create a shared OpenGL context to
+  // ensure it is initialized before using it
+  GlOffscreenRenderer::getInstance()->getOpenGLContext();
 }
 
 // tlp::debug redirection

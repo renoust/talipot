@@ -24,8 +24,6 @@
 
 using namespace std;
 
-const string BIN_RECT_TEXTURE = tlp::TalipotBitmapDir + "histo_texture.png";
-
 const float DEFAULT_AXIS_LENGTH = 1000.;
 
 const std::string XAXIS_ID = "x axis";

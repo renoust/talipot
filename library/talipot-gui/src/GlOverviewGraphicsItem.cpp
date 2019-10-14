@@ -16,6 +16,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QGraphicsSceneMouseEvent>
+#include <QPen>
 
 #include <talipot/GlOffscreenRenderer.h>
 #include <talipot/GlMainWidget.h>
@@ -57,11 +58,6 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
   if (_frameWidth % 2 == 1) {
     ++_frameWidth;
   }
-
-  // Initialize the context avoid segfault when trying to render graph without any initialised gl
-  // context.
-  QGLWidget *firstWidget = GlMainWidget::getFirstQGLWidget();
-  firstWidget->makeCurrent();
 
   if (!overviewBorder.parentItem()) {
 

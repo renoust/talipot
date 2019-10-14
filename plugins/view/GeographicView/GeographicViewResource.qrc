@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/talipot/geoview">
+    <qresource prefix="/talipot/view/geographic">
         <file>MAPAGR4.txt</file>
         <file>planisphere.jpg</file>
         <file>help-contents.png</file>

@@ -18,6 +18,7 @@
 #include <talipot/Release.h>
 #include <talipot/OpenGlConfigManager.h>
 #include <talipot/PythonVersionChecker.h>
+#include <talipot/GlOffscreenRenderer.h>
 
 #include "ui_AboutPage.h"
 
@@ -26,6 +27,7 @@
 #include <QTextStream>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QOpenGLContext>
 
 namespace tlp {
 extern QString getSipVersion();
@@ -60,10 +62,11 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       "  </body>"
       "</html>");
 
-  bool openGL_OK = GlMainWidget::getFirstQGLWidget()->isValid();
+  bool openGlOk = GlOffscreenRenderer::getInstance()->getOpenGLContext()->isValid();
 
-  if (openGL_OK)
-    GlMainWidget::getFirstQGLWidget()->makeCurrent();
+  if (openGlOk) {
+    GlOffscreenRenderer::getInstance()->makeOpenGLContextCurrent();
+  }
 
   QString talipotDependenciesInfo =
       "<p style=\"font-size:12pt\">"
@@ -73,10 +76,9 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       tlpStringToQString(qVersion()) +
       ": <a href=\"https://www.qt.io\">https://www.qt.io</a></li>"
       "  <li> <b> OpenGL </b> " +
-      (openGL_OK ? QString::number(OpenGlConfigManager::getOpenGLVersion()) : QString("?.?")) +
+      (openGlOk ? QString::number(OpenGlConfigManager::getOpenGLVersion()) : QString("?.?")) +
       " (from vendor " +
-      (openGL_OK ? tlpStringToQString(OpenGlConfigManager::getOpenGLVendor())
-                 : QString("unknown")) +
+      (openGlOk ? tlpStringToQString(OpenGlConfigManager::getOpenGLVendor()) : QString("unknown")) +
       "): <a href=\"https://www.opengl.org\">https://www.opengl.org</a> </li>"
       "  <li> <b>OGDF</b> v2015.05 (Baobab) aka the Open Graph Drawing Framework : <a "
       "href=\"http://www.ogdf.net\">http://www.ogdf.net</a> </li>"
@@ -91,8 +93,9 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       "</ul>"
       "</p>";
 
-  if (openGL_OK)
-    GlMainWidget::getFirstQGLWidget()->doneCurrent();
+  if (openGlOk) {
+    GlOffscreenRenderer::getInstance()->doneOpenGLContextCurrent();
+  }
 
   _ui->dependenciesInfo->setText(talipotDependenciesInfo);
   connect(_ui->aboutQt, SIGNAL(clicked()), qApp, SLOT(aboutQt()));

@@ -28,6 +28,7 @@
 #include <QPushButton>
 
 #include <talipot/View.h>
+#include <talipot/GlOffscreenRenderer.h>
 
 using namespace std;
 
@@ -78,8 +79,10 @@ SnapshotDialog::SnapshotDialog(const View *v, QWidget *parent)
       inSizeSpinBoxValueChanged(false) {
   ui->setupUi(this);
 
+  GlOffscreenRenderer::getInstance()->makeOpenGLContextCurrent();
   int maxTextureSize = 0;
   glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+  GlOffscreenRenderer::getInstance()->doneOpenGLContextCurrent();
 
   // restrict snapshot width and height to the half of the GL_MAX_TEXTURE_SIZE value
   ui->widthSpinBox->setMaximum(maxTextureSize / 2);
