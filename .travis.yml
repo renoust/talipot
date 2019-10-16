@@ -21,7 +21,7 @@ language: cpp
 # define build jobs
 jobs:
   include:
-  #==============================================================================================================================================================
+  #=============================================================================================
     # Talipot core build stage on Linux
     - stage: Talipot core build (Linux)
     # legacy Talipot core build on Linux
@@ -50,14 +50,21 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot core build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON
+            -DTALIPOT_BUILD_CORE_ONLY=ON
+            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------
     # modern Talipot core build on Linux
     -
       os: linux
@@ -94,14 +101,21 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot core build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON
+            -DTALIPOT_BUILD_CORE_ONLY=ON
+            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4  || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-  #==============================================================================================================================================================
+  #=============================================================================================
     # Talipot complete build stage on Linux
     - stage: Talipot complete build (Linux)
       # legacy Talipot complete build on Linux, we also build the documentation in this one
@@ -144,14 +158,21 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot complete build with cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_BUILD_DOC=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_BUILD_DOC=ON
+            -DTALIPOT_USE_CCACHE=ON
+            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------
     # modern Talipot complete build on Linux
     -
       os: linux
@@ -200,14 +221,21 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot complete build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_BUILD_DOC=OFF -DTALIPOT_USE_CCACHE=ON -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_BUILD_DOC=OFF
+            -DTALIPOT_USE_CCACHE=ON
+            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4  || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-  #==============================================================================================================================================================
+  #=============================================================================================
     # Talipot AppImage build on CentOS
     - stage: Talipot AppImage build (CentOS)
       # Talipot x86_64 AppImage build on CentOS 6
@@ -238,7 +266,15 @@ jobs:
         - sleep 3
 
       script:
-        - sudo docker run --rm=true -e CCACHE_DIR=/ccache --volumes-from ccache --cap-add SYS_ADMIN --device /dev/fuse:/dev/fuse:mrw --rm=true -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ${DOCKER_IMAGE} /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE RUN_TESTS"
+        - sudo docker run
+            --rm=true
+            -e CCACHE_DIR=/ccache --volumes-from ccache
+            --cap-add SYS_ADMIN
+            --device /dev/fuse:/dev/fuse:mrw
+            -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY
+            -v /tmp/.X11-unix:/tmp/.X11-unix
+            ${DOCKER_IMAGE}
+            /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE RUN_TESTS"
 
       # deploy Talipot AppImage on bintray
       deploy:
@@ -251,7 +287,7 @@ jobs:
         key:
           secure: "${BINTRAY_API_KEY}"
 
-  #==============================================================================================================================================================
+  #=============================================================================================
     # Talipot core build stage on Mac OS
     - stage: Talipot core build (Mac OS)
     # Talipot core build on Mac OS (MacPorts)
@@ -279,14 +315,22 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot core build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DTALIPOT_BUILD_CORE_ONLY=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
+            -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
+            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON
+            -DTALIPOT_BUILD_CORE_ONLY=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------
     # Talipot core build on Mac OS (Homebrew)
     -
       os: osx
@@ -310,18 +354,28 @@ jobs:
         - ENV="MacOS 10.14, LLVM Clang, Homebrew"
       script:
         # install missing headers
-        - sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+        - sudo installer
+            -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+            -target /
         # create build directory
         - mkdir build && cd build
         # configure Talipot core build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_CORE_ONLY=ON -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang
+            -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
+            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+            -DTALIPOT_BUILD_CORE_ONLY=ON
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
         # run Talipot unit tests
         - ninja runTests
 
-  #==============================================================================================================================================================
+  #=============================================================================================
     # Talipot complete build stage on Mac OS
     - stage: Talipot complete build (Mac OS)
     # Talipot complete build on Mac OS (MacPorts)
@@ -362,7 +416,21 @@ jobs:
         # create build directory
         - mkdir build && cd build
         # configure Talipot complete build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0 -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0 -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON -DZLIB_INCLUDE_DIR=/opt/local/include -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib -DPNG_INCLUDE_DIR=/opt/local/include -DPNG_LIBRARY_RELEASE=/opt/local/lib/libpng.dylib -DJPEG_INCLUDE_DIR=/opt/local/include -DJPEG_LIBRARY=/opt/local/lib/libjpeg.dylib -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
+            -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
+            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON
+            -DZLIB_INCLUDE_DIR=/opt/local/include
+            -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib
+            -DPNG_INCLUDE_DIR=/opt/local/include
+            -DPNG_LIBRARY_RELEASE=/opt/local/lib/libpng.dylib
+            -DJPEG_INCLUDE_DIR=/opt/local/include
+            -DJPEG_LIBRARY=/opt/local/lib/libjpeg.dylib
+            -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
         # compile Talipot using ninja for faster builds
         - ninja -j4
         - ninja -j4 install
@@ -390,7 +458,7 @@ jobs:
         user: "anlambert"
         key:
           secure: "${BINTRAY_API_KEY}"
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------
     # Talipot complete build on Mac OS (Homebrew)
     -
       os: osx
@@ -427,14 +495,25 @@ jobs:
 
       script:
         # install missing headers
-        - sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+        - sudo installer
+            -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+            -target /
         # workaround for reference to unknown /Applications/Xcode-beta.app
         # in bogus FindGLEW.cmake since cmake 3.15
         - sudo ln -s /Applications/Xcode.app /Applications/Xcode-beta.app
         # create build directory
         - mkdir build && cd build
         # configure Talipot build using cmake
-        - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PWD/install -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++ -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DSPHINX_EXECUTABLE=$HOME/Library/Python/2.7/bin/sphinx-build -DTALIPOT_BUILD_TESTS=ON -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
+        - cmake .. -G Ninja
+            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=$PWD/install
+            -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang
+            -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
+            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+            -DCMAKE_PREFIX_PATH=/usr/local/opt/qt
+            -DSPHINX_EXECUTABLE=$HOME/Library/Python/2.7/bin/sphinx-build
+            -DTALIPOT_BUILD_TESTS=ON
+            -DTALIPOT_USE_CCACHE=ON || travis_terminate 1
         # compile Talipot using ninja for faster builds
         - ninja -j4 || travis_terminate 1
         - ninja -j4 install || travis_terminate 1
