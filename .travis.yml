@@ -274,7 +274,7 @@ jobs:
             -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY
             -v /tmp/.X11-unix:/tmp/.X11-unix
             ${DOCKER_IMAGE}
-            /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE RUN_TESTS"
+            /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos6_build.sh CCACHE"
 
       # deploy Talipot AppImage on bintray
       deploy:
