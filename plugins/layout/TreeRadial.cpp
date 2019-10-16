@@ -339,19 +339,10 @@ public:
     if (pluginProgress)
       pluginProgress->showPreview(false);
 
-    // push a temporary graph state (not redoable)
-    // preserving layout updates
-    std::vector<PropertyInterface *> propsToPreserve;
-
-    if (!result->getName().empty())
-      propsToPreserve.push_back(result);
-
-    graph->push(false, &propsToPreserve);
-
     tree = TreeTest::computeTree(graph, pluginProgress);
 
     if (pluginProgress && pluginProgress->state() != TLP_CONTINUE) {
-      graph->pop();
+      TreeTest::cleanComputedTree(graph, tree);
       return pluginProgress->state() != TLP_CANCEL;
     }
 
@@ -386,8 +377,7 @@ public:
     // clear all bends in the Layout
     result->setAllEdgeValue(vector<Coord>());
 
-    // forget last temporary graph state
-    graph->pop();
+    TreeTest::cleanComputedTree(graph, tree);
 
     return true;
   }
