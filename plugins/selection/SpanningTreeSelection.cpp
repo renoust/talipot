@@ -21,11 +21,11 @@ using namespace std;
 using namespace tlp;
 
 SpanningTreeSelection::SpanningTreeSelection(const tlp::PluginContext *context)
-    : BooleanAlgorithm(context) {}
-
-SpanningTreeSelection::~SpanningTreeSelection() {
+    : BooleanAlgorithm(context) {
   addOutParameter<unsigned int>("#edges selected", "The number of 'tree' selected edges");
 }
+
+SpanningTreeSelection::~SpanningTreeSelection() {}
 
 ///===========================================================
 bool SpanningTreeSelection::run() {
