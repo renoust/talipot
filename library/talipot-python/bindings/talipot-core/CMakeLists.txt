@@ -48,6 +48,7 @@ SET(TALIPOT_SIP_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/PluginLoader.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/PluginProgress.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Plugin.sip
+    ${CMAKE_CURRENT_SOURCE_DIR}/PluginsManager.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/PropertyAlgorithm.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/PropertyEvent.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/PropertyInterface.sip

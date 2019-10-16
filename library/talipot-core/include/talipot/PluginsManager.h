@@ -17,6 +17,8 @@
 #include <list>
 #include <string>
 #include <map>
+#include <memory>
+#include <mutex>
 
 #include <talipot/Plugin.h>
 #include <talipot/PluginLoader.h>
@@ -58,17 +60,30 @@ public:
  * @see tlp::PluginLibraryLoader
  */
 class TLP_SCOPE PluginsManager : public Observable {
-private:
+
   struct PluginDescription {
     FactoryInterface *factory;
     std::string library;
     Plugin *info;
+    bool deprecated;
 
-    PluginDescription() : factory(nullptr), info(nullptr) {}
+    PluginDescription() : factory(nullptr), info(nullptr), deprecated(false) {}
+    ~PluginDescription() {
+      delete info;
+    }
   };
+
+  // Stores the factories and info of all the plugins
+  // that register into this map
+  std::map<std::string, PluginDescription> _plugins;
+
+  static std::unique_ptr<PluginsManager> _instance;
+  static std::once_flag _onceFlag;
 
 public:
   static PluginLoader *currentLoader;
+
+  ~PluginsManager();
 
   /**
    * @brief Checks if all registered plug-ins have their dependencies met.
@@ -106,8 +121,7 @@ public:
    */
   template <typename PluginType>
   static bool pluginExists(const std::string &pluginName) {
-    auto it = _plugins.find(pluginName);
-    return (it != _plugins.end() && (dynamic_cast<const PluginType *>(it->second.info) != nullptr));
+    return instance()->pluginExistsImpl<PluginType>(pluginName);
   }
 
   /**
@@ -124,16 +138,7 @@ public:
   template <typename PluginType>
   static PluginType *getPluginObject(const std::string &name,
                                      tlp::PluginContext *context = nullptr) {
-    auto it = _plugins.find(name);
-    if (it != _plugins.end() && (dynamic_cast<const PluginType *>(it->second.info) != nullptr)) {
-      std::string pluginName = it->second.info->name();
-      if (name != pluginName)
-        tlp::warning() << "Warning: '" << name << "' is a deprecated plugin name. Use '"
-                       << pluginName << "' instead." << std::endl;
-
-      return static_cast<PluginType *>(it->second.factory->createPluginObject(context));
-    }
-    return nullptr;
+    return instance()->getPluginObjectImpl<PluginType>(name, context);
   }
 
   /**
@@ -144,19 +149,7 @@ public:
 
   template <typename PluginType>
   static std::list<std::string> availablePlugins() {
-    std::list<std::string> keys;
-
-    for (auto it = _plugins.begin(); it != _plugins.end(); ++it) {
-      PluginType *plugin = dynamic_cast<PluginType *>(it->second.info);
-
-      if (plugin != nullptr &&
-          // deprecated names are not listed
-          it->first == it->second.info->name()) {
-        keys.push_back(it->first);
-      }
-    }
-
-    return keys;
+    return instance()->availablePluginsImpl<PluginType>();
   }
 
   /**
@@ -217,20 +210,49 @@ public:
    */
   static void registerPlugin(FactoryInterface *objectFactory);
 
-  ///@cond DOXYGEN_HIDDEN
-protected:
-  /**
-   * @brief Stores the factory, dependencies, and parameters of all the plugins that register into
-   *this map.
-   **/
-  // We use a reference to allow to get an initialized
-  // plugins map to register plugins in the same translation unit;
-  // that is while loading the shared lib containing the Plugins class
-  static std::map<std::string, PluginDescription> &_plugins;
+  void sendPluginAddedEvent(const std::string &pluginName);
 
-  // used to initialize the plugins map as soon as a plugin is registered
-  // and at least when the _plugins is dynamically initialized
-  static std::map<std::string, PluginDescription> &getPluginsMap();
+  void sendPluginRemovedEvent(const std::string &pluginName);
+
+  ///@cond DOXYGEN_HIDDEN
+private:
+  PluginsManager() {}
+
+  template <typename PluginType>
+  bool pluginExistsImpl(const std::string &pluginName) {
+    auto it = _plugins.find(pluginName);
+    return (it != _plugins.end() && (dynamic_cast<const PluginType *>(it->second.info) != nullptr));
+  }
+
+  template <typename PluginType>
+  PluginType *getPluginObjectImpl(const std::string &name, tlp::PluginContext *context = nullptr) {
+    auto it = _plugins.find(name);
+    if (it != _plugins.end() && (dynamic_cast<const PluginType *>(it->second.info) != nullptr)) {
+      std::string pluginName = it->second.info->name();
+      if (name != pluginName)
+        tlp::warning() << "Warning: '" << name << "' is a deprecated plugin name. Use '"
+                       << pluginName << "' instead." << std::endl;
+
+      return static_cast<PluginType *>(it->second.factory->createPluginObject(context));
+    }
+    return nullptr;
+  }
+
+  template <typename PluginType>
+  std::list<std::string> availablePluginsImpl() {
+    std::list<std::string> keys;
+    for (auto it = _plugins.begin(); it != _plugins.end(); ++it) {
+      PluginType *plugin = dynamic_cast<PluginType *>(it->second.info);
+
+      if (plugin != nullptr &&
+          // deprecated names are not listed
+          it->first == it->second.info->name()) {
+        keys.push_back(it->first);
+      }
+    }
+
+    return keys;
+  }
 
   /**
    * @brief Gets the release number of the given plug-in.

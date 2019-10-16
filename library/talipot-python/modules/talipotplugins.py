@@ -12,6 +12,7 @@ This module provides utility functions to register Talipot plugins written
 in Python in the plugins database.
 """
 
+import atexit
 import sys
 import traceback
 if sys.version_info[0] == 3:
@@ -59,13 +60,20 @@ def reloadTalipotPythonPlugins():
 
 
 def removePlugin(pluginName):
-    talipotUtilsOk = True
-    try:
-        import talipotutils
-    except ImportError:
-        talipotUtilsOk = False
-    if talipotUtilsOk:
-        talipotutils.removePlugin(pluginName)
+    if tlp.PluginsManager.pluginExists(pluginName):
+        tlp.PluginsManager.removePlugin(pluginName)
+
+
+def destroyPlugins():
+    global pluginFactory
+    for pluginName in pluginFactory.keys():
+        removePlugin(pluginName)
+
+
+# register an exit hook to remove sip Talipot Python plugin wrappers
+# from the plugins database to avoid a segfault when the Talipot C++
+# runtime terminates
+atexit.register(destroyPlugins)
 
 
 def initFactory(self):

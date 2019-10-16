@@ -264,8 +264,8 @@ in C++ or the :class:`tlp.Algorithm` interface in Python.
 %End
 
 %MethodCode
-  std::list<std::string> algoList = tlp::PluginsManager::instance()->availablePlugins<tlp::Algorithm>();
-  std::list<std::string> propAlgoList = tlp::PluginsManager::instance()->availablePlugins<tlp::PropertyAlgorithm>();
+  std::list<std::string> algoList = tlp::PluginsManager::availablePlugins<tlp::Algorithm>();
+  std::list<std::string> propAlgoList = tlp::PluginsManager::availablePlugins<tlp::PropertyAlgorithm>();
   std::list<std::string> ret;
   for (std::list<std::string>::iterator it = algoList.begin() ; it != algoList.end() ; ++it) {
     if (std::find(propAlgoList.begin(), propAlgoList.end(), *it) == propAlgoList.end()) {
@@ -289,7 +289,7 @@ in C++ or the :class:`tlp.ImportModule` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::ImportModule>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::ImportModule>());
 %End
 
 //=====================================================================
@@ -306,7 +306,7 @@ in C++ or the :class:`tlp.ExportModule` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::ExportModule>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::ExportModule>());
 %End
 
 //=====================================================================
@@ -323,7 +323,7 @@ the :class:`tlp.BooleanAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::BooleanAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::BooleanAlgorithm>());
 %End
 
 //=====================================================================
@@ -340,7 +340,7 @@ the :class:`tlp.IntegerAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::IntegerAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::IntegerAlgorithm>());
 %End
 
 //=====================================================================
@@ -357,7 +357,7 @@ the :class:`tlp.DoubleAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::DoubleAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::DoubleAlgorithm>());
 %End
 //=====================================================================
 
@@ -373,7 +373,7 @@ the :class:`tlp.ColorAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::ColorAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::ColorAlgorithm>());
 %End
 
 //=====================================================================
@@ -390,7 +390,7 @@ the :class:`tlp.LayoutAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::LayoutAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::LayoutAlgorithm>());
 %End
 
 //=====================================================================
@@ -407,7 +407,7 @@ the :class:`tlp.SizeAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::SizeAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::SizeAlgorithm>());
 %End
 
 //=====================================================================
@@ -424,7 +424,7 @@ the :class:`tlp.StringAlgorithm` interface in Python.
 %End
 
 %MethodCode
-  sipRes = new std::list<std::string>(tlp::PluginsManager::instance()->availablePlugins<tlp::StringAlgorithm>());
+  sipRes = new std::list<std::string>(tlp::PluginsManager::availablePlugins<tlp::StringAlgorithm>());
 %End
 
 //=====================================================================

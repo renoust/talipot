@@ -19,29 +19,24 @@
 using namespace tlp;
 using namespace std;
 
+std::unique_ptr<PluginsManager> PluginsManager::_instance;
+std::once_flag PluginsManager::_onceFlag;
+
 PluginLoader *PluginsManager::currentLoader = nullptr;
 
-struct PluginsManagerInstance : public PluginsManager {
-  // there is only one instance of this class
-  // It is first used by PluginsManager::registerPlugin
-  // at the talipot-core library loading time while
-  // it is only 'zero' initialized
-  bool created;
-  PluginsManagerInstance() : created(true) {}
-  inline void sendPluginAddedEvent(const std::string &pluginName) {
-    if (created)
-      sendEvent(PluginEvent(PluginEvent::TLP_ADD_PLUGIN, pluginName));
-  }
-  inline void sendPluginRemovedEvent(const std::string &pluginName) {
-    if (created)
-      sendEvent(PluginEvent(PluginEvent::TLP_REMOVE_PLUGIN, pluginName));
-  }
-};
-
-PluginsManagerInstance _instance;
-
 PluginsManager *PluginsManager::instance() {
-  return &_instance;
+  std::call_once(PluginsManager::_onceFlag, []() { _instance.reset(new PluginsManager); });
+  return _instance.get();
+}
+
+PluginsManager::~PluginsManager() {
+  for (auto &it : _plugins) {
+    // avoid double free
+    if (it.second.deprecated) {
+      it.second.info = nullptr;
+    }
+  }
+  _plugins.clear();
 }
 
 void PluginsManager::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
@@ -96,7 +91,9 @@ void PluginsManager::checkLoadedPluginsDependencies(tlp::PluginLoader *loader) {
 std::list<std::string> PluginsManager::availablePlugins() {
   std::list<std::string> keys;
 
-  for (auto it = _plugins.begin(); it != _plugins.end(); ++it) {
+  auto &plugins = instance()->_plugins;
+
+  for (auto it = plugins.begin(); it != plugins.end(); ++it) {
     // deprecated names are not listed
     if (it->first == it->second.info->name())
       keys.push_back(it->first);
@@ -106,29 +103,16 @@ std::list<std::string> PluginsManager::availablePlugins() {
 }
 
 const Plugin &PluginsManager::pluginInformation(const std::string &name) {
-  return *(_plugins.find(name)->second.info);
+  auto &plugins = instance()->_plugins;
+  return *(plugins.find(name)->second.info);
 }
-
-// used to initialize the _plugins map
-// it is first called by registerPlugin at the library loading time
-// while _plugins is only 'zero' initialized
-std::map<std::string, PluginsManager::PluginDescription> &PluginsManager::getPluginsMap() {
-  static std::map<std::string, PluginDescription> plugins;
-  return plugins;
-}
-
-// the _plugins map
-std::map<std::string, PluginsManager::PluginDescription> &PluginsManager::_plugins =
-    PluginsManager::getPluginsMap();
 
 void PluginsManager::registerPlugin(FactoryInterface *objectFactory) {
-  // because the talipot-core library contains some import/export plugins
-  // we must ensure plugins map initialization at the library loading time
-  // while _plugins is only 'zero' initialized
-  std::map<std::string, PluginsManager::PluginDescription> &plugins = getPluginsMap();
 
   tlp::Plugin *information = objectFactory->createPluginObject(nullptr);
   std::string pluginName = information->name();
+
+  auto &plugins = instance()->_plugins;
 
   if (plugins.find(pluginName) == plugins.end()) {
     PluginDescription &description = plugins[pluginName];
@@ -140,14 +124,15 @@ void PluginsManager::registerPlugin(FactoryInterface *objectFactory) {
       currentLoader->loaded(information, information->dependencies());
     }
 
-    _instance.sendPluginAddedEvent(pluginName);
+    instance()->sendPluginAddedEvent(pluginName);
 
     // register under a deprecated name if needed
     std::string oldName = information->deprecatedName();
     if (!oldName.empty()) {
-      if (!pluginExists(oldName))
+      if (!pluginExists(oldName)) {
         plugins[oldName] = plugins[pluginName];
-      else if (currentLoader != nullptr) {
+        plugins[oldName].deprecated = true;
+      } else if (currentLoader != nullptr) {
         std::string tmpStr;
         tmpStr += "'" + oldName + "' cannot be a deprecated name of plugin '" + pluginName + "'";
         currentLoader->aborted(tmpStr, "multiple definitions found; check your plugin libraries.");
@@ -165,14 +150,16 @@ void PluginsManager::registerPlugin(FactoryInterface *objectFactory) {
 }
 
 void tlp::PluginsManager::removePlugin(const std::string &name) {
-  _plugins.erase(name);
-  _instance.sendPluginRemovedEvent(name);
+  auto &plugins = instance()->_plugins;
+  plugins.erase(name);
+  instance()->sendPluginRemovedEvent(name);
 }
 
 tlp::Plugin *PluginsManager::getPluginObject(const std::string &name, PluginContext *context) {
-  auto it = _plugins.find(name);
+  auto &plugins = instance()->_plugins;
+  auto it = plugins.find(name);
 
-  if (it != _plugins.end()) {
+  if (it != plugins.end()) {
     std::string pluginName = it->second.info->name();
     if (name != pluginName)
       tlp::warning() << "Warning: '" << name << "' is a deprecated plugin name. Use '" << pluginName
@@ -197,9 +184,19 @@ const std::list<tlp::Dependency> &PluginsManager::getPluginDependencies(const st
 }
 
 std::string PluginsManager::getPluginLibrary(const std::string &name) {
-  return _plugins.find(name)->second.library;
+  auto &plugins = instance()->_plugins;
+  return plugins.find(name)->second.library;
 }
 
 bool PluginsManager::pluginExists(const std::string &pluginName) {
-  return _plugins.find(pluginName) != _plugins.end();
+  auto &plugins = instance()->_plugins;
+  return plugins.find(pluginName) != plugins.end();
+}
+
+void PluginsManager::sendPluginAddedEvent(const std::string &pluginName) {
+  sendEvent(PluginEvent(PluginEvent::TLP_ADD_PLUGIN, pluginName));
+}
+
+void PluginsManager::sendPluginRemovedEvent(const std::string &pluginName) {
+  sendEvent(PluginEvent(PluginEvent::TLP_REMOVE_PLUGIN, pluginName));
 }

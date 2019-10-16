@@ -103,20 +103,6 @@ static PyObject *talipotutils_runGraphScript(PyObject *, PyObject *args) {
   Py_RETURN_NONE;
 }
 
-static PyObject *talipotutils_removePlugin(PyObject *, PyObject *args) {
-
-  char *buf;
-
-  if (!PyArg_ParseTuple(args, "s", &buf))
-    Py_RETURN_NONE;
-
-  if (tlp::PluginsManager::pluginExists(buf)) {
-    tlp::PluginsManager::removePlugin(buf);
-  }
-
-  Py_RETURN_NONE;
-}
-
 static PyObject *talipotutils_setProcessQtEvents(PyObject *, PyObject *o) {
   int i;
 
@@ -133,7 +119,6 @@ static PyMethodDef talipotUtilsMethods[] = {
      "Update views on current graph."},
     {"pauseRunningScript", talipotutils_pauseRunningScript, METH_VARARGS,
      "Pause the execution of the current running script."},
-    {"removePlugin", talipotutils_removePlugin, METH_VARARGS, ""},
     {"runGraphScript", talipotutils_runGraphScript, METH_VARARGS,
      "Allow to execute a script from a script."},
     {"setProcessQtEvents", talipotutils_setProcessQtEvents, METH_VARARGS, ""},

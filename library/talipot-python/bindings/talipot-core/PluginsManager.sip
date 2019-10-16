@@ -13,7 +13,7 @@
 
 namespace tlp {
 
-class PluginsManager {
+class PluginsManager /Abstract/ {
 
 public:
 
@@ -26,6 +26,8 @@ public:
   static const tlp::ParameterDescriptionList& getPluginParameters(const std::string& name);
 
   static std::string getPluginLibrary(const std::string& name);
+
+  static void removePlugin(const std::string &name);
 
 };
 
