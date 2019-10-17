@@ -1609,45 +1609,24 @@ void TalipotMainWindow::showPythonIDE() {
   }
 }
 
-#ifdef APPIMAGE_BUILD
-// When running the appimage
-// the LD_LIBRARY_PATH variable must be unset to ensure a successful launch
-// of the default web browser to show the Talipot documentation
-#define UNSET_LD_LIBRARY_PATH()             \
-  auto ldPath = qgetenv("LD_LIBRARY_PATH"); \
-  qunsetenv("LD_LIBRARY_PATH")
-#define RESTORE_LD_LIBRARY_PATH() qputenv("LD_LIBRARY_PATH", ldPath);
-#else
-#define UNSET_LD_LIBRARY_PATH()
-#define RESTORE_LD_LIBRARY_PATH()
-#endif
-
 void TalipotMainWindow::showUserDocumentation() {
-  UNSET_LD_LIBRARY_PATH();
   QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
                                                 "../doc/talipot/talipot-user/html/index.html"));
-  RESTORE_LD_LIBRARY_PATH();
 }
 
 void TalipotMainWindow::showDevelDocumentation() {
-  UNSET_LD_LIBRARY_PATH();
   QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
                                                 "../doc/talipot/talipot-dev/html/index.html"));
-  RESTORE_LD_LIBRARY_PATH();
 }
 
 void TalipotMainWindow::showPythonDocumentation() {
-  UNSET_LD_LIBRARY_PATH();
   QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
                                                 "../doc/talipot/talipot-python/html/index.html"));
-  RESTORE_LD_LIBRARY_PATH();
 }
 
 void TalipotMainWindow::showAPIDocumentation() {
-  UNSET_LD_LIBRARY_PATH();
   QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
                                                 "../doc/talipot/doxygen/html/index.html"));
-  RESTORE_LD_LIBRARY_PATH();
 }
 
 void TalipotMainWindow::showHideSideBar() {
