@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This script is centos 6.8 specific:
-# it intends to create a talipot bundle suitable to build a portable app
-# (using AppImageKit) runable on most linux distributions
+# This script is CentOS 7.x specific, it intends to create a
+# talipot portable bundle (using AppImageKit) suitable to
+# run on most linux distributions
 
 TALIPOT_INSTALL_DIR=@CMAKE_INSTALL_PREFIX@
 OUTPUT_DIR=/tmp
@@ -56,25 +56,11 @@ BUNDLE_USR_DIR=$BUNDLE_DIR/usr
 APPRUN_FILE=$BUNDLE_DIR/AppRun
 echo "#!/bin/sh" > $APPRUN_FILE
 echo "BUNDLE_DIR=\"\$(dirname \$0)\"" >> $APPRUN_FILE
-# configure GTK2 for AppImage environment (needed for qt5 gtk2 platformthemes plugin)
-echo "export GTK_EXE_PREFIX=\${BUNDLE_DIR}/usr" >> $APPRUN_FILE
-echo "export GTK_MODULES=" >> $APPRUN_FILE
-# allow to find gtk modules when running the AppImage on a debian based distribution
-echo "if [ -d /usr/lib/x86_64-linux-gnu/gtk-2.0 ]; then" >> $APPRUN_FILE
-echo "  export GTK_PATH=/usr/lib/x86_64-linux-gnu/gtk-2.0" >> $APPRUN_FILE
-echo "fi" >> $APPRUN_FILE
-echo "if [ -d /usr/lib/i386-linux-gnu/gtk-2.0 ]; then" >> $APPRUN_FILE
-echo "  export GTK_PATH=/usr/lib/i386-linux-gnu/gtk-2.0" >> $APPRUN_FILE
-echo "fi" >> $APPRUN_FILE
 echo "export PYTHONHOME=\${BUNDLE_DIR}/usr" >> $APPRUN_FILE
 echo "export TLP_DIR=\${BUNDLE_DIR}/usr/lib" >> $APPRUN_FILE
-echo "if [ \"\$1\" = \"-no-output-filtering\" ]; then" >> $APPRUN_FILE
-# for debugging purpose, allow to run without filtering of console output
-echo "  \${BUNDLE_DIR}/usr/bin/talipot" >> $APPRUN_FILE
-echo "else" >> $APPRUN_FILE
-# run with gtk output hidden
-echo "  \${BUNDLE_DIR}/usr/bin/talipot 2>&1 | sed -e '/Gtk-/d'" >> $APPRUN_FILE
-echo "fi" >> $APPRUN_FILE
+# configure GDK2 for AppImage environment (needed for qt5 gtk3 platformthemes plugin)
+echo "export GDK_PIXBUF_MODULE_FILE=\${BUNDLE_DIR}/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache" >> $APPRUN_FILE
+echo "\${BUNDLE_DIR}/usr/bin/talipot" >> $APPRUN_FILE
 chmod 755 $APPRUN_FILE
 
 # create desktop file
@@ -120,9 +106,9 @@ if [ -e @QT_PLUGINS_DIR@/xcbglintegrations ]; then
   cp -v -Rp @QT_PLUGINS_DIR@/xcbglintegrations $BUNDLE_USR_DIR/plugins
 fi
 
-# add gtk-2.0 plugins directory (needed for qt5 gtk2 platformthemes plugin)
-if [ -e /usr/@CMAKE_INSTALL_LIBDIR@/gtk-2.0 ]; then
-  cp -v -Rp /usr/@CMAKE_INSTALL_LIBDIR@/gtk-2.0 $BUNDLE_LIB_DIR
+# add gdk-2.0 plugins directory (needed for qt5 gtk3 platformthemes plugin)
+if [ -e /usr/lib64/gdk-pixbuf-2.0 ]; then
+  cp -v -Rp /usr/lib64/gdk-pixbuf-2.0 $BUNDLE_LIB_DIR
 fi
 
 # set up LD_LIBRARY_PATH with the installation path of the Qt libs used
@@ -139,6 +125,7 @@ popd > /dev/null 2>&1
 export LD_LIBRARY_PATH=$(dirname @PYTHON_LIBRARY@):$LD_LIBRARY_PATH
 
 # add Python environment
+rm -f $BUNDLE_LIB_DIR/libpython*
 PYTHON_LIB=$(ldd $(ls $BUNDLE_LIB_DIR/libtalipot-python*) | grep libpython | awk '{print $3}')
 # we need to create a symlink as the libtalipot-python*.so
 # performs a dlopen on libpythonX.Y.so when it is loaded
@@ -171,8 +158,8 @@ function looking_for_plugin_dependencies() {
       if [ ! -e $BUNDLE_LIB_DIR/$(basename $LIB) ]; then
         cp -v --preserve=mode $LIB $BUNDLE_LIB_DIR
       fi
-    done;
-  done;
+    done
+  done
 }
 
 # copy other common libs needed by talipot plugins
@@ -186,7 +173,7 @@ looking_for_plugin_dependencies $PYTHON_PACKAGE_BUNDLE_DIR/lib-dynload
 
 pushd $BUNDLE_LIB_DIR > /dev/null 2>&1
 # remove unneeded libs
-LIBS=$(ls libc.* libdbus*.* libdl.* libdrm.* libexpat.* libfontconfig.* libfreetype.* libgio-*.* libglib-*.* libgobject-*.* libgcc_s.* libGL.* libm.* libnsl.* libpthread.* libresolv.* librt.* libstdc++.* libutil.*  libuuid.* libxcb*.* libX*.* libz.* 2> /dev/null)
+LIBS=$(ls libc.* libdbus*.* libdl.* libdrm.* libexpat.* libEGL.* libfontconfig.* libfreetype.* libgio-*.* libglib-*.* libgobject-*.* libgcc_s.* libGL.* libGLdispatch.* libm.* libnsl.* libpthread.* libresolv.* librt.* libstdc++.* libutil.*  libuuid.* libxcb*.* libX*.* libz.* 2> /dev/null)
 if [ "$LIBS" != "" ]; then
   rm $LIBS
 fi
@@ -212,4 +199,4 @@ do
   # LIB may be in read only mode, make it writable before stripping it
   chmod +w $LIB
   strip --strip-unneeded $LIB
-done;
+done
