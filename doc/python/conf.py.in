@@ -210,11 +210,13 @@ def mdicon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
 # hack to include dynamically generated Talipot plugins documentation
 def source_read(app, docname, source):
     if docname == 'talipotpluginsdocumentation':
-        f = open('@CMAKE_CURRENT_BINARY_DIR@/talipotpluginsdocumentation.rst',
-                 'r')
         if sys.version_info[0] == 2:
+            f = open('@CMAKE_CURRENT_BINARY_DIR@/talipotpluginsdocumentation.rst',
+                     'r')
             source[0] += f.read().decode('utf-8')
         else:
+            f = open('@CMAKE_CURRENT_BINARY_DIR@/talipotpluginsdocumentation.rst',
+                     'r', encoding='utf-8')
             source[0] += f.read()
 
 

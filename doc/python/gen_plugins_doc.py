@@ -16,16 +16,14 @@ import os # noqa
 def safeprint(s, file=None):
     try:
         print(s, file=file)
+    # Python 2 only
     except UnicodeEncodeError:
-        if sys.version_info >= (3,):
-            print(s.encode('utf8').decode(sys.stdout.encoding), file=file)
-        else:
-            print(s.encode('utf8'), file=file)
+        print(s.encode('utf8'), file=file)
 
 
 def utf8len(s):
     if sys.version_info >= (3,):
-        return len(s.encode('utf8').decode(sys.stdout.encoding))
+        return len(s)
     else:
         return len(s.encode('utf8'))
 
@@ -45,7 +43,10 @@ tlp.loadTalipotPluginsFromDir('%s/plugins/test' % talipot_build_dir)
 tlp.loadTalipotPluginsFromDir(os.environ['TALIPOT_PYTHON_PLUGINS_DIR'])
 tlp.loadTalipotPluginsFromDir(os.environ['TalipotGUI_PYTHON_PLUGINS_DIR'])
 
-f = open('talipotpluginsdocumentation.rst', 'w')
+if sys.version_info >= (3,):
+    f = open('talipotpluginsdocumentation.rst', 'w', encoding='utf-8')
+else:
+    f = open('talipotpluginsdocumentation.rst', 'w')
 
 safeprint("""
 .. |br| raw:: html
@@ -182,9 +183,9 @@ writeSection('Talipot plugins documentation', '=')
 
 safeprint("""
 In this section, you can find some documentation regarding the C++ algorithm
-plugins bundled in the Talipot software but also with the Talipot Python modules
-installable through the pip tool. In particular, an exhaustive description of
-the input and output parameters for each plugin is given.
+plugins bundled in the Talipot software but also with the Talipot Python
+modules installable through the pip tool. In particular, an exhaustive
+description of the input and output parameters for each plugin is given.
 To learn how to call all these algorithms in Python, you can refer to the
 :ref:`Applying an algorithm on a graph <applyGraphAlgorithm>` section.
 The plugins documentation is ordered according to their type.
@@ -364,8 +365,8 @@ for cat in sorted(plugins.keys()):
                        '\'resultLayout\')'), file=f)
             safeprint(('  success = graph.applyLayoutAlgorithm(\'%s\', '
                        'resultLayout, params)\n') % p.name(), file=f)
-            safeprint(('  # or store the result of the algorithm in the'
-                       ' default Talipot layout property named \'viewLayout\''),
+            safeprint(('  # or store the result of the algorithm in the '
+                       'default Talipot layout property named \'viewLayout\''),
                       file=f)
             safeprint(('  success = graph.applyLayoutAlgorithm(\'%s\', '
                        'params)\n') % p.name(), file=f)
@@ -376,8 +377,8 @@ for cat in sorted(plugins.keys()):
                        '\'resultMetric\')'), file=f)
             safeprint(('  success = graph.applyDoubleAlgorithm(\'%s\''
                        ', resultMetric, params)\n') % p.name(), file=f)
-            safeprint(('  # or store the result of the algorithm in the'
-                       ' default Talipot metric property named \'viewMetric\''),
+            safeprint(('  # or store the result of the algorithm in the '
+                       'default Talipot metric property named \'viewMetric\''),
                       file=f)
             safeprint(('  success = graph.applyDoubleAlgorithm(\'%s\','
                        ' params)\n') % p.name(), file=f)
