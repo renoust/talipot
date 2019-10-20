@@ -234,8 +234,6 @@ TalipotMainWindow::TalipotMainWindow()
   setToolTipWithCtrlShortcut(_ui->actionPreferences, "Show Talipot preferences dialog", ",");
   setToolTipWithCtrlShortcut(_ui->actionShowUserDocumentation,
                              "Display the User handbook in a navigator", "?");
-  setToolTipWithCtrlShortcut(_ui->actionShowDevelDocumentation,
-                             "Display the Developer handbook in a navigator", "D");
   setToolTipWithCtrlShortcut(_ui->actionShowPythonDocumentation,
                              "Display the Talipot python documentation in a navigator", "P");
   setToolTipWithCtrlShortcut(_ui->actionMessages_log, "Show the message log", "M");
@@ -414,13 +412,10 @@ TalipotMainWindow::TalipotMainWindow()
           .exists()) {
     connect(_ui->actionShowUserDocumentation, SIGNAL(triggered()), this,
             SLOT(showUserDocumentation()));
-    connect(_ui->actionShowDevelDocumentation, SIGNAL(triggered()), this,
-            SLOT(showDevelDocumentation()));
     connect(_ui->actionShowPythonDocumentation, SIGNAL(triggered()), this,
             SLOT(showPythonDocumentation()));
   } else {
     _ui->actionShowUserDocumentation->setVisible(false);
-    _ui->actionShowDevelDocumentation->setVisible(false);
     _ui->actionShowPythonDocumentation->setVisible(false);
   }
 
@@ -1612,11 +1607,6 @@ void TalipotMainWindow::showPythonIDE() {
 void TalipotMainWindow::showUserDocumentation() {
   QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
                                                 "../doc/talipot/talipot-user/html/index.html"));
-}
-
-void TalipotMainWindow::showDevelDocumentation() {
-  QDesktopServices::openUrl(QUrl::fromLocalFile(tlpStringToQString(tlp::TalipotShareDir) +
-                                                "../doc/talipot/talipot-dev/html/index.html"));
 }
 
 void TalipotMainWindow::showPythonDocumentation() {

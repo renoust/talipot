@@ -123,7 +123,6 @@ public slots:
   void showLogger();
   void showAPIDocumentation();
   void showUserDocumentation();
-  void showDevelDocumentation();
   void showPythonDocumentation();
 
   void redrawPanels(bool center = false);

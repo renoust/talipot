@@ -1492,11 +1492,10 @@ border-image: url(:/talipot/app/ui/panel_button_hover.png) 2 2 2 19
      <string>&amp;Help</string>
     </property>
     <addaction name="actionShowUserDocumentation"/>
-    <addaction name="actionShowDevelDocumentation"/>
     <addaction name="actionShowAPIDocumentation"/>
     <addaction name="actionShowPythonDocumentation"/>
-    <addaction name="actionAbout_us"/>
     <addaction name="actionPlugins_Center"/>
+    <addaction name="actionAbout_us"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
