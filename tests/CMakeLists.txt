@@ -20,8 +20,7 @@ MACRO(UNIT_TEST)
   # otherwise this is a Python test
   ELSE()
     SET(PYTHON_TEST_MODULE ${ARGV1})
-    FILE(COPY ${PYTHON_TEST_MODULE}.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-    ADD_TEST(NAME ${TEST_NAME} COMMAND ${PYTHON_EXECUTABLE} -m unittest ${PYTHON_TEST_MODULE} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+    ADD_TEST(NAME ${TEST_NAME} COMMAND ${PYTHON_EXECUTABLE} -m unittest ${PYTHON_TEST_MODULE})
   ENDIF()
   # In order to run the tests on windows, we need to add the paths of the dll depencencies (cppunit, tulip, gzstream, yajl)
   # in the PATH environment variable
@@ -52,7 +51,7 @@ MACRO(UNIT_TEST)
     SET(NEWPATH "$ENV{PATH}")
   ENDIF(WIN32)
   # add Talipot modules path to PYTHONPATH in order to run the Python tests
-  SET(PYTHONPATH "${CMAKE_BINARY_DIR}/library/talipot-python/modules/;${TALIPOT_PYTHON_ROOT_FOLDER};${TALIPOTGUI_PYTHON_ROOT_FOLDER};${CMAKE_BINARY_DIR}/thirdparty/sip-${SIP_VERSION_STR}/siplib")
+  SET(PYTHONPATH "${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_SOURCE_DIR}/library/talipot-python/modules/;${TALIPOT_PYTHON_ROOT_FOLDER};${TALIPOTGUI_PYTHON_ROOT_FOLDER};${CMAKE_BINARY_DIR}/thirdparty/sip-${SIP_VERSION_STR}/siplib")
   IF(WIN32)
     STRING(REPLACE "\\;" ";" PYTHONPATH "${PYTHONPATH}")
     STRING(REPLACE ";" "\\;" PYTHONPATH "${PYTHONPATH}")
@@ -64,8 +63,6 @@ MACRO(UNIT_TEST)
 ENDMACRO(UNIT_TEST)
 
 ADD_SUBDIRECTORY(library)
-
-ADD_DEPENDENCIES(runTests copyTalipotPluginsPyInBuild)
 
 IF(NOT TALIPOT_BUILD_CORE_ONLY)
   ADD_SUBDIRECTORY(plugins)

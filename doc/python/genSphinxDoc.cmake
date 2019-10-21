@@ -27,7 +27,7 @@ ENDIF(WIN32)
 # in order for the interpreter to import them
 SET(PYTHON_PATHS "${BIN_DIR}/../../library/talipot-python/bindings/talipot-core/talipot_module"
                  "${BIN_DIR}/../../library/talipot-python/bindings/talipot-gui/talipotgui_module"
-                 "${BIN_DIR}/../../library/talipot-python/modules"
+                 "${SRC_DIR}/../../library/talipot-python/modules"
                  "${SRC_DIR}")
 
 # Add the path of the sip Python module if we compile it from thirdparty as
@@ -57,7 +57,7 @@ IF(APPLE)
 ENDIF(APPLE)
 
 # Generate Talipot plugins documentation file from embedded plugins metadata
-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${BIN_DIR}/gen_plugins_doc.py WORKING_DIRECTORY ${BIN_DIR})
+EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${SRC_DIR}/gen_plugins_doc.py WORKING_DIRECTORY ${BIN_DIR})
 
 # Everything is now set up, we can generate the documentation
 EXECUTE_PROCESS(COMMAND ${SPHINX_EXECUTABLE} -c ${BIN_DIR} -b html -E -d ${BIN_DIR}/doctrees ${SRC_DIR} ${BIN_DIR}/html)
