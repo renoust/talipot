@@ -101,6 +101,19 @@ INSTALL(TARGETS talipot
   ARCHIVE DESTINATION ${TalipotLibInstallDir} COMPONENT talipot_app)
 
 IF(WIN32)
+
+IF(NOT MSYS2_PYTHON)
+  ADD_EXECUTABLE(getpythonhome src/getpythonhome.cpp)
+  TARGET_LINK_LIBRARIES(getpythonhome ${LibTalipotCoreName} ${LibTalipotOGLName} ${LibTalipotGUIName} ${QT_LIBRARIES})
+
+  INSTALL(TARGETS getpythonhome
+    RUNTIME DESTINATION ${TalipotBinInstallDir} COMPONENT talipot_app
+    LIBRARY DESTINATION ${TalipotLibInstallDir} COMPONENT talipot_app
+    ARCHIVE DESTINATION ${TalipotLibInstallDir} COMPONENT talipot_app)
+
+  INSTALL(FILES src/talipot.bat DESTINATION ${TalipotBinInstallDir})
+ENDIF(NOT MSYS2_PYTHON)
+
   SET(TALIPOT_FIXUP_BUNDLE ON CACHE BOOL "Enable / disable the gathering and copy of Talipot DLL dependencies into the install bin folder")
   # That simple install command does the magic of gathering all required dll dependencies
   # in order to run Talipot and copy them to the bin install folder (thanks to the CMake module named BundleUtilities)
@@ -119,10 +132,27 @@ IF(WIN32)
     # and we need Talipot to be fully installed before running the bundle fixing process
     SET(APP "\${CMAKE_INSTALL_PREFIX}/bin/talipot.exe")
     SET(LIB_DIRS ${QT_BINARY_DIR} ${PYTHON_HOME_PATH} ${CMAKE_LIBRARY_PATH})
+    STRING(REPLACE "\\" "/" LIB_DIRS "${LIB_DIRS}")
     STRING(REPLACE ";" "\;" LIB_DIRS "${LIB_DIRS}")
+    STRING(REPLACE "\\" "/" PATH_ESCAPED "$ENV{PATH}")
+    STRING(REPLACE ";" "\;" PATH_ESCAPED "${PATH_ESCAPED}")
     GET_PROPERTY(FIXUP_BUNDLE_LIBS GLOBAL PROPERTY FIXUP_BUNDLE_LIBS)
+    SET(FIXUP_BUNDLE_LIBS "${CMAKE_INSTALL_PREFIX}/bin/imageformats/qsvg.dll"
+                          "${CMAKE_INSTALL_PREFIX}/bin/platforms/qwindows.dll"
+                          "${FIXUP_BUNDLE_LIBS}")
+    STRING(REPLACE "\\" "/" FIXUP_BUNDLE_LIBS "${FIXUP_BUNDLE_LIBS}")
+    STRING(REPLACE ";" "\;" FIXUP_BUNDLE_LIBS "${FIXUP_BUNDLE_LIBS}")
+
+    # CMake currently does not know how to locate dumpbin when compiling
+    # with Visual Studio >= 2017, so we need to get its path and provide
+    # it to the GetPrerequisites module in order for FIXUP_BUNDLE
+    # to work properly
+    GET_FILENAME_COMPONENT(GP_CMD_PATH "${CMAKE_LINKER}" DIRECTORY)
+
     INSTALL(CODE
             "INCLUDE(BundleUtilities)
+             SET(ENV{PATH} \"${PYTHON_HOME_PATH}\;${PATH_ESCAPED}\")
+             SET(gp_cmd_paths \"${GP_CMD_PATH}\")
              FIXUP_BUNDLE(\"${APP}\" \"${FIXUP_BUNDLE_LIBS}\" \"${LIB_DIRS}\")"
     )
     # When generating Talipot installers using MSYS2, we need to bundle OpenSSL

@@ -11,10 +11,6 @@
  *
  */
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
 #include <GL/glew.h>
 
 #include <talipot/TlpQtTools.h>
@@ -35,10 +31,6 @@
 #include <QApplication>
 #include <QStandardPaths>
 #include <QMainWindow>
-
-#if defined(__MINGW32__)
-#include <QSslSocket>
-#endif
 
 #include <talipot/DataSet.h>
 #include <talipot/Settings.h>
@@ -374,26 +366,6 @@ void initTalipotSoftware(tlp::PluginLoader *loader, bool removeDiscardedPlugins)
 #if defined(__APPLE__)
   QApplication::addLibraryPath(QApplication::applicationDirPath() + "/../");
   QApplication::addLibraryPath(QApplication::applicationDirPath() + "/../lib/");
-#endif
-
-#if defined(__MINGW32__)
-  // When using MSYS2 platform to compile Tulip, force the dynamic loading of
-  // OpenSSL libraries Qt was compiled against before Python initialization to
-  // avoid a DLL Hell on windows
-  QSslSocket::supportsSsl();
-#endif
-
-// MS stated that SetDllDirectory only exists since WinXP SP1
-#if defined(WIN32) && (_WIN32_WINNT >= 0x0502)
-
-  // Python on windows can be installed for current user only.
-  // In that case, the Python dll is not located in system path but in the Python home directory.
-  // So add the Python home directory in the Dll search paths in order to be able to load plugins
-  // depending on Python.
-  if (tlp::PythonVersionChecker::isPythonVersionMatching()) {
-    SetDllDirectory(tlp::QStringToTlpString(tlp::PythonVersionChecker::getPythonHome()).c_str());
-  }
-
 #endif
 
   if (removeDiscardedPlugins) {

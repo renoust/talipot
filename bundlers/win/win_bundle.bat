@@ -9,15 +9,13 @@ if [%4] NEQ [] (
     set OUT_FILE=%4
   )
 )
+SET MINGW=%5
 set SRC_DIR=%cd%
 
 echo 'Wiping destination directory'
-rem In order to remove the contents of a non empty folder
-rem we create an empty folder to clone in the first one using robocopy
-rem the empty folder will be removed at the end
-if NOT EXIST "%DEST_DIR%\\empty_folder" ( mkdir "%DEST_DIR%\\empty_folder" )
 if EXIST "%DEST_DIR%\\files" (
-  robocopy "%DEST_DIR%\\empty_folder" "%DEST_DIR%\\files" /MIR >nul 2>&1
+  del /s /f /q "%DEST_DIR%\\files\\*.*" >nul 2>&1
+  for /f %%f in ('dir /ad /b "%DEST_DIR%\\files"') do rd /s /q "%DEST_DIR%\\files\\%%f"
 ) else ( mkdir "%DEST_DIR%\\files" )
 
 echo 'Copying Talipot files'
@@ -28,17 +26,25 @@ echo 'Removing debug libs'
 del /Q /F /S "%DEST_DIR%\\files\\bin\\Qt5*d.dll" >nul 2>&1
 del /Q /F /S "%DEST_DIR%\\files\\bin\\imageformats\\q*d.dll" >nul 2>&1
 del /Q /F /S "%DEST_DIR%\\files\\bin\\imageformats\\q*d.pdb" >nul 2>&1
-del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\q*d.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\qdirect2dd.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\qminimald.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\qoffscreend.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\qwebgld.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\qwindowsd.dll" >nul 2>&1
 del /Q /F /S "%DEST_DIR%\\files\\bin\\platforms\\q*d.pdb" >nul 2>&1
 del /Q /F /S "%DEST_DIR%\\files\\bin\\styles\\q*d.dll" >nul 2>&1
 del /Q /F /S "%DEST_DIR%\\files\\bin\\styles\\q*d.pdb" >nul 2>&1
 )
 
+echo 'Removing not needed dlls copied by fixup_bundle'
+del /Q /F /S "%DEST_DIR%\\files\\bin\\python*.dll" >nul 2>&1
+del /Q /F /S "%DEST_DIR%\\files\\bin\\opengl*.dll" >nul 2>&1
+if "%MINGW%" == "TRUE" (
+  del /Q /F /S "%DEST_DIR%\\files\\bin\\vc*.dll" >nul 2>&1
+)
+
 echo 'Removing non dll files from lib directory'
 del /Q /F /S "%DEST_DIR%\\files\\lib\\*.dll.a" >nul 2>&1
-rem same trick with our empty folder
-robocopy "%DEST_DIR%\\empty_folder" "%DEST_DIR%\\files\\lib\\cmake" /MIR >nul 2>&1
-rmdir /Q /S "%DEST_DIR%\\files\\lib\\cmake" >nul 2>&1
 
 echo 'Copying NSIS script and licence'
 
@@ -54,7 +60,8 @@ if "%OUT_FILE%" == "" (
   makensis /V4 /DOUT_FILE=%OUT_FILE% Talipot.nsi
 )
 
-echo 'NSIS installer generator completed !'
+echo 'Cleaning up files'
+del /s /f /q "%DEST_DIR%\\files\\*.*" >nul 2>&1
+for /f %%f in ('dir /ad /b "%DEST_DIR%\\files"') do rd /s /q "%DEST_DIR%\\files\\%%f"
 
-rem final removal
-rmdir /Q /S "%DEST_DIR%\\empty_folder" >nul 2>&1
+echo 'NSIS installer generator completed !'

@@ -77,6 +77,3 @@ deploy:
     override: true
     artifact: talipot_installers
 
-notifications:
-  - provider: Email
-    on_build_success: false

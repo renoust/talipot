@@ -53,9 +53,9 @@ RequestExecutionLevel admin
 ; Setup file
 !ifndef OUT_FILE
 !if ${ARCH} == "64"
-!define OUT_FILE "talipot-@TalipotVersion@_x64_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
+!define OUT_FILE "Talipot-@TalipotVersion@_x64_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !else
-!define OUT_FILE "talipot-@TalipotVersion@_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
+!define OUT_FILE "Talipot-@TalipotVersion@_python@PYTHON_VERSION_NO_DOT@@SUFFIX@_setup.exe"
 !endif
 !endif
 OutFile "${OUT_FILE}"
@@ -149,26 +149,26 @@ File /r files\*.*
 
 !if ${ARCH} == "64"
   CreateDirectory "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.bat" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@ (x64)\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@ (x64).lnk" "$INSTDIR\bin\talipot.bat" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Talipot-@TalipotVersion@" "DisplayName" "Talipot-@TalipotVersion@ (x64)"
 !else
   CreateDirectory "$SMPROGRAMS\Talipot-@TalipotVersion@"
-  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.exe" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.bat" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   CreateShortCut "$SMPROGRAMS\Talipot-@TalipotVersion@\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.exe" "-p Talipot" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
+  CreateShortCut "$DESKTOP\Talipot-@TalipotVersion@.lnk" "$INSTDIR\bin\talipot.bat" "" "$INSTDIR\share\talipot\bitmaps\talipot.ico"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Talipot-@TalipotVersion@" "DisplayName" "Talipot-@TalipotVersion@"
 !endif
 
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Talipot-@TalipotVersion@" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
- ${registerExtension} "$INSTDIR\bin\talipot.exe" ".tlp" "Talipot.File" "Talipot Graph File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
- ${registerExtension} "$INSTDIR\bin\talipot.exe" ".tlpb" "Talipot.BinaryFile" "Talipot Graph Binary File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
- ${registerExtension} "$INSTDIR\bin\talipot.exe" ".tlpz" "Talipot.File.Gzip" "Talipot Graph File (gzipped)" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
- ${registerExtension} "$INSTDIR\bin\talipot.exe" ".tlpbz" "Talipot.BinaryFile.Gzip" "Talipot Graph Binary File (gzipped)" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
- ${registerExtension} "$INSTDIR\bin\talipot.exe" ".tlpx" "Talipot.ProjectFile" "Talipot Project File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
+ ${registerExtension} "$INSTDIR\bin\talipot.bat" ".tlp" "Talipot.File" "Talipot Graph File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
+ ${registerExtension} "$INSTDIR\bin\talipot.bat" ".tlpb" "Talipot.BinaryFile" "Talipot Graph Binary File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
+ ${registerExtension} "$INSTDIR\bin\talipot.bat" ".tlpz" "Talipot.File.Gzip" "Talipot Graph File (gzipped)" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
+ ${registerExtension} "$INSTDIR\bin\talipot.bat" ".tlpbz" "Talipot.BinaryFile.Gzip" "Talipot Graph Binary File (gzipped)" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
+ ${registerExtension} "$INSTDIR\bin\talipot.bat" ".tlpx" "Talipot.ProjectFile" "Talipot Project File" "$INSTDIR\share\talipot\bitmaps\talipot-file-icon.ico"
 
  Call RefreshShellIcons
 

@@ -528,13 +528,15 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
       IF(MSVC12)
         INSTALL(PROGRAMS "${MSVC12_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC120.OPENMP/vcomp120.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF(MSVC12)
-      IF(MSVC14 AND MSVC_VERSION EQUAL 1900)
+      IF(MSVC_VERSION EQUAL 1900)
         INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC140.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
       # for Visual Studio 15.0 2017
-      ELSEIF(MSVC14 AND MSVC_VERSION EQUAL 1910)
+      ELSEIF(MSVC_VERSION EQUAL 1910)
         INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC150.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
-      ELSEIF(MSVC14 AND MSVC_VERSION EQUAL 1912)
+      ELSEIF(MSVC_VERSION GREATER 1910 AND MSVC_VERSION LESS 1920)
         INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC141.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
+      ELSEIF(MSVC_VERSION GREATER_EQUAL 1920)
+        INSTALL(PROGRAMS "${MSVC_REDIST_DIR}/${CMAKE_MSVC_ARCH}/Microsoft.VC142.OPENMP/vcomp140.dll" DESTINATION ${TalipotBinInstallDir})
       ENDIF()
     ENDIF(OPENMP_FOUND)
   ENDIF(MSVC)
@@ -542,7 +544,7 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
   IF(WIN32)
     # initialize the list of bundle libs (second arg of FIXUP_BUNDLE),
     # updated in plugins/view/GeographicView,
-    # and finally used in software/talipot_perpective/CMakeLists.txt
+    # and finally used in software/talipot/CMakeLists.txt
     SET_PROPERTY(GLOBAL PROPERTY FIXUP_BUNDLE_LIBS "")
 
     GET_FILENAME_COMPONENT(NSIS_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\NSIS]" ABSOLUTE)
@@ -567,12 +569,20 @@ IF(NOT TALIPOT_BUILD_CORE_ONLY)
           SET(DEBUG_MODE "TRUE")
         ENDIF(TalipotBuildIsRelease OR MSVC)
 
+        IF(MINGW)
+          SET(MINGW_BUILD "TRUE")
+          SET(BUNDLE_COMMAND cmd //C win_bundle.bat \"${NSIS_PATH}\" \"${TLP_DIR}\" \"${BINARY_DIR}\" ${DEBUG_MODE} ${MINGW_BUILD})
+        ELSE(MINGW)
+          SET(MINGW_BUILD "FALSE")
+          SET(BUNDLE_COMMAND cmd /C "\"win_bundle.bat \"${NSIS_PATH}\" \"${TLP_DIR}\" \"${BINARY_DIR}\" ${DEBUG_MODE} ${MINGW_BUILD}\"")
+        ENDIF(MINGW)
+
         ADD_CUSTOM_TARGET(bundle
                           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake
                           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/bundlers/win/win_bundle.bat ${CMAKE_CURRENT_BINARY_DIR}/bundlers/win/win_bundle.bat
                           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/bundlers/win/FileAssociation.nsh ${CMAKE_CURRENT_BINARY_DIR}/FileAssociation.nsh
                           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE ${CMAKE_CURRENT_BINARY_DIR}/bundlers/win/LICENSE
-                          COMMAND cmd //C win_bundle.bat \"${NSIS_PATH}\" \"${TLP_DIR}\" \"${BINARY_DIR}\" ${DEBUG_MODE}
+                          COMMAND ${BUNDLE_COMMAND}
                           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bundlers/win)
 
       ELSE(EXISTS "${NSIS_PATH}/Plugins/inetc.dll" OR EXISTS "${NSIS_PATH}/Plugins/x86-ansi/inetc.dll")

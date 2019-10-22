@@ -30,6 +30,9 @@
 #include <QMutex>
 #include <QWaitCondition>
 #include <QDir>
+#if defined(__MINGW32__)
+#include <QSslSocket>
+#endif
 
 #include <talipot/Release.h>
 #include <talipot/TlpTools.h>
@@ -209,6 +212,13 @@ PythonInterpreter::PythonInterpreter()
   }
 
   if (!_wasInit) {
+
+#if defined(__MINGW32__)
+    // When using MSYS2 platform to compile Tulip, force the dynamic loading of
+    // OpenSSL libraries Qt was compiled against before Python initialization to
+    // avoid a DLL Hell on windows
+    QSslSocket::supportsSsl();
+#endif
 
     int argc = 1;
 #if PY_MAJOR_VERSION >= 3
