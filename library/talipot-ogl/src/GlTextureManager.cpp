@@ -13,17 +13,24 @@
 
 #include <cstdio>
 #include <cstring>
-#if defined(_MSC_VER)
-// need to include that header with Visual Studio to fix a typedef conflict
-// with latest version of jpeg lib (9a)
-#include <basetsd.h>
-#endif
-#include <jpeglib.h>
-#include <png.h>
+
 #include <GL/glew.h>
+
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#endif
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include <stb_image_resize.h>
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 
 #include <talipot/GlTextureManager.h>
 #include <talipot/OpenGlConfigManager.h>
+#include <talipot/TlpTools.h>
 
 //====================================================
 tlp::GlTextureLoader *tlp::GlTextureManager::loader = nullptr;
@@ -35,274 +42,12 @@ using namespace std;
 namespace tlp {
 
 struct TextureInfo {
-  bool hasAlpha;
   unsigned int width;
   unsigned int height;
   unsigned char *data;
 };
 
-typedef bool(TextureLoader_t)(const string &, TextureInfo *);
-
-//====================================================================
-/* simple loader for 24bit bitmaps (data is in rgb-format) */
-static bool loadBMP(const string &filename, TextureInfo *texture) {
-  FILE *file;
-  unsigned short int bfType;
-  long int bfOffBits;
-  short int biPlanes;
-  short int biBitCount;
-  long int biSizeImage;
-  int i;
-/* make sure the file is there and open it read-only (binary) */
-#ifndef _MSC_VER
-  file = fopen(filename.c_str(), "rb");
-#else
-  fopen_s(&file, filename.c_str(), "rb");
-#endif
-
-  if (file == nullptr) {
-    tlp::error() << "File not found:" << filename << std::endl;
-    return false;
-  }
-
-  if (!fread(&bfType, sizeof(short int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << endl;
-    fclose(file);
-    return false;
-  }
-
-  /* check if file is a bitmap */
-  if (bfType != 19778) {
-    tlp::error() << "Not a Bitmap-File: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  /* get the file size */
-  /* skip file size and reserved fields of bitmap file header */
-  fseek(file, 8, SEEK_CUR);
-
-  /* get the position of the actual bitmap data */
-  if (!fread(&bfOffBits, sizeof(int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  /* skip size of bitmap info header */
-  fseek(file, 4, SEEK_CUR);
-
-  if (!fread(&texture->width, sizeof(int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  if (!fread(&texture->height, sizeof(int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  /* get the number of planes (must be set to 1) */
-  if (!fread(&biPlanes, sizeof(short int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  if (biPlanes != 1) {
-    tlp::error() << "Error: number of Planes not 1 in: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  /* get the number of bits per pixel */
-  if (!fread(&biBitCount, sizeof(short int), 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  if (biBitCount != 24) {
-    tlp::error() << "Error: Bits per Pixel not 24: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  /* calculate the size of the image in bytes */
-  biSizeImage = texture->width * texture->height * 3;
-  texture->data = new unsigned char[biSizeImage];
-  /* seek to the actual data */
-  fseek(file, bfOffBits, SEEK_SET);
-
-  if (!fread(texture->data, biSizeImage, 1, file)) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    delete[] texture->data;
-    texture->data = nullptr;
-    fclose(file);
-    return false;
-  }
-
-  /* swap red and blue (bgr -> rgb) */
-  for (i = 0; i < biSizeImage; i += 3) {
-    unsigned char temp = texture->data[i];
-    texture->data[i] = texture->data[i + 2];
-    texture->data[i + 2] = temp;
-  }
-
-  fclose(file);
-  texture->hasAlpha = false;
-  return true;
-}
-//====================================================================
-#ifdef __GNUC__
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wold-style-cast"
-#endif
-static bool loadJPEG(const string &filename, TextureInfo *texture) {
-  FILE *file;
-#ifndef _MSC_VER
-  file = fopen(filename.c_str(), "rb");
-#else
-  fopen_s(&file, filename.c_str(), "rb");
-#endif
-
-  if (file == nullptr) {
-    tlp::error() << "File not found:" << filename << std::endl;
-    return false;
-  }
-
-  struct jpeg_decompress_struct cinfo;
-
-  struct jpeg_error_mgr jerr;
-
-  cinfo.err = jpeg_std_error(&jerr);
-
-  jpeg_create_decompress(&cinfo);
-
-  jpeg_stdio_src(&cinfo, file);
-
-  jpeg_read_header(&cinfo, TRUE);
-
-  cinfo.out_color_components = 3;
-
-  cinfo.out_color_space = JCS_RGB;
-
-  cinfo.dct_method = JDCT_FLOAT;
-
-  cinfo.rec_outbuf_height = 1;
-
-  jpeg_start_decompress(&cinfo);
-
-  texture->hasAlpha = false;
-
-  texture->width = cinfo.output_width;
-
-  texture->height = cinfo.output_height;
-
-  texture->data = new unsigned char[texture->width * texture->height * 3];
-
-  JSAMPROW row_pointer = new JSAMPLE[texture->width * 3];
-
-  while (cinfo.output_scanline < cinfo.output_height) {
-    jpeg_read_scanlines(&cinfo, &row_pointer, 1);
-    memcpy(&(texture->data[(cinfo.output_height - cinfo.output_scanline) * 3 * cinfo.output_width]),
-           row_pointer, (texture->width) * 3);
-  }
-
-  delete[] row_pointer;
-  jpeg_finish_decompress(&cinfo);
-  jpeg_destroy_decompress(&cinfo);
-  fclose(file);
-  return true;
-}
-#ifdef __GNUC__
-#pragma GCC diagnostic pop
-#endif
-//====================================================================
-static bool loadPNG(const string &filename, TextureInfo *texture) {
-  FILE *file;
-#ifndef _MSC_VER
-  file = fopen(filename.c_str(), "rb");
-#else
-  fopen_s(&file, filename.c_str(), "rb");
-#endif
-
-  if (file == nullptr) {
-    tlp::error() << "File not found:" << filename << std::endl;
-    return false;
-  }
-
-  png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-
-  if (!png_ptr) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    fclose(file);
-    return false;
-  }
-
-  png_infop info_ptr = png_create_info_struct(png_ptr);
-
-  if (!info_ptr) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    png_destroy_read_struct(&png_ptr, static_cast<png_infopp>(nullptr),
-                            static_cast<png_infopp>(nullptr));
-    fclose(file);
-    return false;
-  }
-
-  png_infop end_info = png_create_info_struct(png_ptr);
-
-  if (!end_info) {
-    tlp::error() << "Error reading file: " << filename << std::endl;
-    png_destroy_read_struct(&png_ptr, &info_ptr, static_cast<png_infopp>(nullptr));
-    fclose(file);
-    return false;
-  }
-
-#ifdef PNG_SETJMP_SUPPORTED
-
-  if (setjmp(png_jmpbuf(png_ptr)))
-#endif
-  {
-    png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
-    fclose(file);
-    return true;
-  }
-
-  png_init_io(png_ptr, file);
-  png_read_info(png_ptr, info_ptr);
-  /*
-  png_uint_32 width, height;
-  int bit_depth, color_type, interlace_method, compression_method, filter_method;
-  png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth,
-         &color_type, &interlace_method, &compression_method, &filter_method);
-   */
-
-  int ctype = png_get_color_type(png_ptr, info_ptr);
-  texture->hasAlpha = (ctype == PNG_COLOR_TYPE_GRAY_ALPHA) || (ctype == PNG_COLOR_TYPE_RGB_ALPHA);
-  texture->width = png_get_image_width(png_ptr, info_ptr);
-  texture->height = png_get_image_height(png_ptr, info_ptr);
-  int linestride = texture->width * (texture->hasAlpha ? 4 : 3);
-  texture->data = new unsigned char[linestride * texture->height];
-  png_bytep *row_pointers = new png_bytep[texture->height];
-
-  for (unsigned int i = 0; i < texture->height; ++i)
-    row_pointers[i] =
-        static_cast<png_bytep>(&(texture->data[linestride * (texture->height - 1 - i)]));
-
-  png_set_strip_16(png_ptr);    // force 8 bits/channel
-  png_set_gray_to_rgb(png_ptr); // force RGB
-  png_read_image(png_ptr, row_pointers);
-  png_read_end(png_ptr, end_info);
-  png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
-  fclose(file);
-  return true;
-}
-
 static bool generateTexture(const TextureInfo &texti, GlTexture &glTexture) {
-  int GLFmt = texti.hasAlpha ? GL_RGBA : GL_RGB;
 
   unsigned int width = texti.width;
   unsigned int height = texti.height;
@@ -319,7 +64,7 @@ static bool generateTexture(const TextureInfo &texti, GlTexture &glTexture) {
 
   glBindTexture(GL_TEXTURE_2D, glTexture.id);
 
-  glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE, texti.data);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texti.data);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -335,28 +80,50 @@ static bool generateTexture(const TextureInfo &texti, GlTexture &glTexture) {
   return true;
 }
 //====================================================================
-bool GlTextureLoader::loadTexture(const string &filename, GlTexture &texture) {
-  string extension = filename.substr(filename.find_last_of('.') + 1);
-
-  for (unsigned int i = 0; i < extension.length(); ++i)
-    extension[i] = static_cast<char>(toupper(extension[i]));
-
-  TextureLoader_t *loader = nullptr;
-
-  if (extension == "BMP")
-    loader = &loadBMP;
-  else if ((extension == "JPG") || (extension == "JPEG"))
-    loader = &loadJPEG;
-  else if (extension == "PNG")
-    loader = &loadPNG;
-  else {
-    tlp::error() << "GlTextureLoader Error: no texture loader found for file extension \""
-                 << extension << "\"" << std::endl;
+static unsigned char *invertImage(int pitch, int height, unsigned char *imagePixels) {
+  unsigned char *tempRow = new unsigned char[pitch];
+  unsigned int heightDiv2 = static_cast<unsigned int>(height * .5);
+  for (unsigned int index = 0; index < heightDiv2; ++index) {
+    memcpy(tempRow, imagePixels + pitch * index, pitch);
+    memcpy(imagePixels + pitch * index, imagePixels + pitch * (height - index - 1), pitch);
+    memcpy(imagePixels + pitch * (height - index - 1), tempRow, pitch);
   }
+  delete[] tempRow;
+  return imagePixels;
+}
+//====================================================================
+static unsigned int nearestPOT(unsigned int x) {
+  return pow(2, ceil(log(x) / log(2)));
+}
+//====================================================================
+bool GlTextureLoader::loadTexture(const string &filename, GlTexture &texture) {
 
   TextureInfo texti;
 
-  if ((loader == nullptr) || !(*loader)(filename, &texti)) {
+  tlp_stat_t buf;
+  if (tlp::statPath(filename.c_str(), &buf) < 0) {
+    tlp::error() << "Image file " << filename << " does not exist." << std::endl;
+    return false;
+  }
+  int w, h, n;
+  static const unsigned int nbBytesPerPixel = 4;
+  unsigned char *pixels = stbi_load(filename.c_str(), &w, &h, &n, nbBytesPerPixel);
+  if (pixels) {
+    int nearestpotW = nearestPOT(w);
+    int nearestpotH = nearestPOT(h);
+    if (nearestpotW != w || nearestpotH != h) {
+      unsigned char *newPixels = new unsigned char[nearestpotW * nearestpotH * nbBytesPerPixel];
+      stbir_resize_uint8(pixels, w, h, 0, newPixels, nearestpotW, nearestpotH, 0, nbBytesPerPixel);
+      delete[] pixels;
+      pixels = newPixels;
+      w = nearestpotW;
+      h = nearestpotH;
+    }
+    texti.width = w;
+    texti.height = h;
+    texti.data = invertImage(w * nbBytesPerPixel, h, pixels);
+  } else {
+    tlp::error() << "Unable to load image file " << filename << std::endl;
     return false;
   }
 

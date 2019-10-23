@@ -55,7 +55,6 @@ if "%TALIPOT_BUILD_CORE_ONLY%" == "0" (
 :install_complete_talipot_build_dependencies
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-freetype"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-glew"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-libpng"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qt5"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-quazip"
 bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qtwebkit"

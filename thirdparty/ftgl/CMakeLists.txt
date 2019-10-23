@@ -122,9 +122,9 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} ${Tess2Include} ${FREETYPE_INCLU
 ADD_LIBRARY(${FTGLLibrary} SHARED ${ftgl_SRCS} ${ftgl_headers_SRCS} ${ftglyph_SRCS} ${ftfont_SRCS} ${ftlayout_SRCS})
 TARGET_LINK_LIBRARIES(${FTGLLibrary} ${OPENGL_gl_LIBRARY} ${FREETYPE_LIBRARY} ${Tess2Library} ${GLEW_LIBRARY})
 # Prevent link issues with MSVC when freetype is dynamically linked
-# against zlib and libpng
+# against zlib
 IF(MSVC)
-  TARGET_LINK_LIBRARIES(${FTGLLibrary} ${ZLIB_LIBRARY} ${PNG_LIBRARY})
+  TARGET_LINK_LIBRARIES(${FTGLLibrary} ${ZLIB_LIBRARY})
 ENDIF(MSVC)
 
 SET_TARGET_PROPERTIES(${FTGLLibrary} PROPERTIES

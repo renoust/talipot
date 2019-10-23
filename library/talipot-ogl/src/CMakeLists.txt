@@ -73,13 +73,12 @@ SET(talipot-ogl_LIB_SRCS
 )
 
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${PROJECT_SOURCE_DIR} ${FTGLInclude} ${FREETYPE_INCLUDE_DIRS} ${UTF8CppInclude})
-INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${JPEG_INCLUDE_DIR} ${PNG_INCLUDE_DIR} ${Tess2Include})
+INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${StbInclude} ${Tess2Include})
 
 ADD_LIBRARY (${LibTalipotOGLName} SHARED ${talipot-ogl_LIB_SRCS})
 TARGET_LINK_LIBRARIES(${LibTalipotOGLName} ${FTGLLibrary} ${GLEW_LIBRARY}
                       ${LibTalipotCoreName} ${OPENGL_gl_LIBRARY}
-                      ${FREETYPE_LIBRARY} ${JPEG_LIBRARY} ${PNG_LIBRARY}
-                      ${Tess2Library})
+                      ${FREETYPE_LIBRARY} ${Tess2Library})
 
 INSTALL(TARGETS ${LibTalipotOGLName}
   RUNTIME DESTINATION ${TalipotBinInstallDir} COMPONENT talipot_ogl

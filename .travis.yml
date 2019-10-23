@@ -144,8 +144,6 @@ jobs:
             - libqt5webkit5-dev
             - libquazip5-dev
             - libglew-dev
-            - libpng-dev
-            - libjpeg-dev
             - libfreetype6-dev
       install:
         # install latest sphinx version for generating the documentation
@@ -204,8 +202,6 @@ jobs:
             - libqt5webkit5-dev
             - libquazip5-dev
             - libglew-dev
-            - libpng-dev
-            - libjpeg-dev
             - libfreetype6-dev
       before_install:
         # force the use of GCC 9
@@ -398,8 +394,6 @@ jobs:
         - sudo port -N install quazip
         - sudo port -N install freetype
         - sudo port -N install glew
-        - sudo port -N install libpng
-        - sudo port -N install jpeg
         - sudo port -N install qhull
         - sudo port -N install yajl
         - sudo port -N install pkgconfig
@@ -424,10 +418,6 @@ jobs:
             -DTALIPOT_USE_CCACHE=ON
             -DZLIB_INCLUDE_DIR=/opt/local/include
             -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib
-            -DPNG_INCLUDE_DIR=/opt/local/include
-            -DPNG_LIBRARY_RELEASE=/opt/local/lib/libpng.dylib
-            -DJPEG_INCLUDE_DIR=/opt/local/include
-            -DJPEG_LIBRARY=/opt/local/lib/libjpeg.dylib
             -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
         # compile Talipot using ninja for faster builds
         - ninja -j4
@@ -477,8 +467,6 @@ jobs:
             - pkg-config
             - glew
             - freetype
-            - jpeg
-            - libpng
             - qt5
             - quazip
 

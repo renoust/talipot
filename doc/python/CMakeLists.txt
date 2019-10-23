@@ -2,7 +2,7 @@ IF(PYTHONINTERP_FOUND AND SIP_OK)
 
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in ${CMAKE_CURRENT_BINARY_DIR}/conf.py)
 
-# On windows, it is required that the paths to the dll dependencies (e.g. zlib, libpng, ...) are contained
+# On windows, it is required that the paths to the dll dependencies (e.g. zlib) are contained
 # in the CMAKE_LIBRARY_PATH variable (especially with Visual Studio).
 # Some warnings will be output when configuring the whole project if it is not the case.
 # Otherwise, the Python API documentation will not be generated as the import of the talipot modules will fail.
