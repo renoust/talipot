@@ -29,7 +29,6 @@
 tlp::GlTextureLoader *tlp::GlTextureManager::loader = nullptr;
 tlp::GlTextureManager::TextureMap tlp::GlTextureManager::texturesMap;
 std::set<std::string> tlp::GlTextureManager::texturesWithError;
-unsigned int tlp::GlTextureManager::animationFrame = 0;
 
 using namespace std;
 
@@ -302,149 +301,36 @@ static bool loadPNG(const string &filename, TextureInfo *texture) {
   return true;
 }
 
-static bool generateTexture(const std::string &filename, const TextureInfo &texti,
-                            GlTexture &glTexture) {
+static bool generateTexture(const TextureInfo &texti, GlTexture &glTexture) {
   int GLFmt = texti.hasAlpha ? GL_RGBA : GL_RGB;
 
-  bool spriteOnWidth = false;
-  unsigned int spriteNumber = 1;
   unsigned int width = texti.width;
   unsigned int height = texti.height;
-
-  if ((texti.height - (texti.height / texti.width) * texti.width) != 0 &&
-      (texti.width - (texti.width / texti.height) * texti.height) != 0) {
-    tlp::error() << "Texture loader error: invalid size\ntexture size should be of the form:\n - "
-                    "width=height or\n - height=N*width (for animated textures)\nfor file: "
-                 << filename << std::endl;
-    return false;
-  } else {
-    if (texti.width != texti.height) {
-      if (texti.height > texti.width) {
-        // spriteOnHeight=true;
-        spriteNumber = texti.height / texti.width;
-        height = width;
-      } else {
-        spriteOnWidth = true;
-        spriteNumber = texti.width / texti.height;
-        width = height;
-      }
-    }
-
-    bool canUseNpotTextures =
-        OpenGlConfigManager::isExtensionSupported("GL_ARB_texture_non_power_of_two");
-
-    if (!canUseNpotTextures) {
-      bool formatOk = false;
-
-      for (unsigned int i = 1; i <= width; i *= 2) {
-        if (i == width)
-          formatOk = true;
-      }
-
-      if (!formatOk) {
-        tlp::error() << "Texture loader error: invalid size\ntexture width should be a power of "
-                        "2\nfor file: "
-                     << filename << std::endl;
-        return false;
-      }
-
-      formatOk = false;
-
-      for (unsigned int i = 1; i <= height; i *= 2) {
-        if (i == height)
-          formatOk = true;
-      }
-
-      if (!formatOk) {
-        tlp::error() << "Texture loader error: invalid size\ntexture height should be a power of "
-                        "2\nfor file: "
-                     << filename << std::endl;
-        return false;
-      }
-    }
-  }
 
   bool canUseMipmaps = OpenGlConfigManager::isExtensionSupported("GL_ARB_framebuffer_object") ||
                        OpenGlConfigManager::isExtensionSupported("GL_EXT_framebuffer_object");
 
-  GLuint *textureNum = new GLuint[spriteNumber];
-
   glTexture.width = width;
   glTexture.height = height;
-  glTexture.spriteNumber = spriteNumber;
-  glTexture.id = new GLuint[spriteNumber];
 
-  unsigned char **dataForWidthSpriteTexture;
-  dataForWidthSpriteTexture = new unsigned char *[spriteNumber];
-
-  if (spriteOnWidth) {
-    for (unsigned int i = 0; i < spriteNumber; i++) {
-      if (texti.hasAlpha)
-        dataForWidthSpriteTexture[i] = new unsigned char[4 * width * height];
-      else
-        dataForWidthSpriteTexture[i] = new unsigned char[3 * width * height];
-    }
-
-    for (unsigned int i = 0; i < texti.height; i++) {
-      for (unsigned int j = 0; j < texti.width; ++j) {
-        if (texti.hasAlpha) {
-          dataForWidthSpriteTexture[j / width][i * width * 4 + (j - (j / width) * width) * 4] =
-              texti.data[i * texti.width * 4 + j * 4];
-          dataForWidthSpriteTexture[j / width][i * width * 4 + (j - (j / width) * width) * 4 + 1] =
-              texti.data[i * texti.width * 4 + j * 4 + 1];
-          dataForWidthSpriteTexture[j / width][i * width * 4 + (j - (j / width) * width) * 4 + 2] =
-              texti.data[i * texti.width * 4 + j * 4 + 2];
-          dataForWidthSpriteTexture[j / width][i * width * 4 + (j - (j / width) * width) * 4 + 3] =
-              texti.data[i * texti.width * 4 + j * 4 + 3];
-        } else {
-          dataForWidthSpriteTexture[j / width][i * width * 3 + (j - (j / width) * width) * 3] =
-              texti.data[i * texti.width * 3 + j * 3];
-          dataForWidthSpriteTexture[j / width][i * width * 3 + (j - (j / width) * width) * 3 + 1] =
-              texti.data[i * texti.width * 3 + j * 3 + 1];
-          dataForWidthSpriteTexture[j / width][i * width * 3 + (j - (j / width) * width) * 3 + 2] =
-              texti.data[i * texti.width * 3 + j * 3 + 2];
-        }
-      }
-    }
-  }
-
-  glGenTextures(spriteNumber, textureNum);
+  glGenTextures(1, &glTexture.id);
 
   glEnable(GL_TEXTURE_2D);
 
-  for (unsigned int i = 0; i < spriteNumber; ++i) {
-    glBindTexture(GL_TEXTURE_2D, textureNum[i]);
+  glBindTexture(GL_TEXTURE_2D, glTexture.id);
 
-    glTexture.id[i] = textureNum[i];
+  glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE, texti.data);
 
-    if (!spriteOnWidth) {
-      if (texti.hasAlpha)
-        glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE,
-                     texti.data + (width * height * 4 * i));
-      else
-        glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE,
-                     texti.data + (width * height * 3 * i));
-    } else {
-      glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE,
-                   dataForWidthSpriteTexture[i]);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-      delete[] dataForWidthSpriteTexture[i];
-    }
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    if (canUseMipmaps) {
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-      glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    }
+  if (canUseMipmaps) {
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glGenerateMipmap(GL_TEXTURE_2D);
+  } else {
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   }
 
   glDisable(GL_TEXTURE_2D);
-
-  delete[] textureNum;
-  delete[] dataForWidthSpriteTexture;
 
   return true;
 }
@@ -474,7 +360,7 @@ bool GlTextureLoader::loadTexture(const string &filename, GlTexture &texture) {
     return false;
   }
 
-  bool result = generateTexture(filename, texti, texture);
+  bool result = generateTexture(texti, texture);
 
   delete[] texti.data;
 
@@ -510,18 +396,13 @@ bool GlTextureManager::loadTexture(const string &filename) {
 void GlTextureManager::registerExternalTexture(const std::string &textureName,
                                                const GLuint textureId) {
   GlTexture texture;
-  texture.spriteNumber = 1;
-  texture.id = new GLuint[1];
-  texture.id[0] = textureId;
+  texture.id = textureId;
   (texturesMap)[textureName] = texture;
 }
 
 //====================================================================
 static void deleteGlTexture(GlTexture &texture) {
-  for (unsigned int i = 0; i < texture.spriteNumber; ++i) {
-    glDeleteTextures(1, &(texture.id[i]));
-  }
-  delete[] texture.id;
+  glDeleteTextures(1, &texture.id);
 }
 
 void GlTextureManager::deleteTexture(const string &name) {
@@ -543,10 +424,6 @@ void GlTextureManager::beginNewTexture(const string &) {
 }
 //====================================================================
 bool GlTextureManager::activateTexture(const string &filename) {
-  return activateTexture(filename, animationFrame);
-}
-//====================================================================
-bool GlTextureManager::activateTexture(const string &filename, unsigned int frame) {
   if (texturesWithError.count(filename) != 0)
     return false;
 
@@ -563,9 +440,7 @@ bool GlTextureManager::activateTexture(const string &filename, unsigned int fram
     return false;
   }
 
-  unsigned int spriteNumber = ((texturesMap)[filename]).spriteNumber;
-  frame = frame - (frame / spriteNumber) * spriteNumber;
-  glBindTexture(GL_TEXTURE_2D, (texturesMap)[filename].id[frame]);
+  glBindTexture(GL_TEXTURE_2D, (texturesMap)[filename].id);
   return true;
 }
 //====================================================================

@@ -223,7 +223,8 @@ public:
       }
     }
 
-    // store icon preview of the loaded texture in the icon pool used by the Tulip spreadsheet view
+    // store icon preview of the loaded texture in the icon pool
+    // used by the Tulip spreadsheet view
     if (!image.isNull()) {
       addIconToPool(qFilename, QIcon(QPixmap::fromImage(image)));
     }
@@ -234,114 +235,30 @@ public:
     unsigned int width = image.width();
     unsigned int height = image.height();
 
-    bool isSprite = false;
-
-    if (width != height) {
-      bool widthPowerOfTwo = false;
-      bool heightPowerOfTwo = false;
-
-      for (unsigned int i = 1; i <= width; i *= 2) {
-        if (i == width)
-          widthPowerOfTwo = true;
-      }
-
-      for (unsigned int i = 1; i <= height; i *= 2) {
-        if (i == height)
-          heightPowerOfTwo = true;
-      }
-
-      if (widthPowerOfTwo && heightPowerOfTwo) {
-        isSprite = true;
-      }
-    }
-
-    int spriteNumber = 1;
-
-    if (isSprite) {
-      if (width > height) {
-        spriteNumber = width / height;
-      } else {
-        spriteNumber = height / width;
-      }
-    }
-
-    GLuint *textureNum = new GLuint[spriteNumber];
-
     image = image.mirrored().convertToFormat(QImage::Format_RGBA8888);
 
     glTexture.width = width;
     glTexture.height = height;
-    glTexture.spriteNumber = spriteNumber;
-    glTexture.id = new GLuint[spriteNumber];
 
-    glGenTextures(spriteNumber, textureNum);
+    glGenTextures(1, &glTexture.id);
 
     glEnable(GL_TEXTURE_2D);
 
-    if (!isSprite) {
-      glBindTexture(GL_TEXTURE_2D, textureNum[0]);
+    glBindTexture(GL_TEXTURE_2D, glTexture.id);
 
-      glTexture.id[0] = textureNum[0];
+    int glFmt = image.hasAlphaChannel() ? GL_RGBA : GL_RGB;
 
-      int glFmt = image.hasAlphaChannel() ? GL_RGBA : GL_RGB;
+    glTexImage2D(GL_TEXTURE_2D, 0, glFmt, width, height, 0, glFmt, GL_UNSIGNED_BYTE,
+                 image.constBits());
 
-      glTexImage2D(GL_TEXTURE_2D, 0, glFmt, width, height, 0, glFmt, GL_UNSIGNED_BYTE,
-                   image.constBits());
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-      if (canUseMipmaps) {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glGenerateMipmap(GL_TEXTURE_2D);
-      } else {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      }
-
+    if (canUseMipmaps) {
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+      glGenerateMipmap(GL_TEXTURE_2D);
     } else {
-      QImage *images = new QImage[spriteNumber];
-
-      if (width > height) {
-        QRect rect(0, 0, height, height);
-
-        for (int i = 0; i < spriteNumber; i++) {
-          images[i] = image.copy(rect);
-          rect.translate(height, 0);
-        }
-      } else {
-        QRect rect(0, 0, width, width);
-
-        for (int i = 0; i < spriteNumber; i++) {
-          images[i] = image.copy(rect);
-          rect.translate(0, width);
-        }
-      }
-
-      width = images[0].width();
-      height = images[0].height();
-
-      for (int i = 0; i < spriteNumber; i++) {
-        glBindTexture(GL_TEXTURE_2D, textureNum[i]);
-
-        glTexture.id[i] = textureNum[i];
-
-        int GLFmt = images[i].hasAlphaChannel() ? GL_RGBA : GL_RGB;
-        glTexImage2D(GL_TEXTURE_2D, 0, GLFmt, width, height, 0, GLFmt, GL_UNSIGNED_BYTE,
-                     images[i].bits());
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-        if (canUseMipmaps) {
-          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-          glGenerateMipmap(GL_TEXTURE_2D);
-        } else {
-          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        }
-      }
-
-      delete[] images;
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     }
-
-    delete[] textureNum;
 
     glDisable(GL_TEXTURE_2D);
 

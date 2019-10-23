@@ -97,8 +97,6 @@ void GlNode::draw(float lod, const GlGraphInputData *data, Camera *camera) {
     data->getMetaNodeRenderer()->render(n, lod, camera);
   }
 
-  GlTextureManager::setAnimationFrame(data->getElementAnimationFrame()->getNodeValue(n));
-
   if (lod < LOD_MIN_TRESHOLD) { // less than four pixel on screen, we use points instead of glyphs
     if (lod < 1)
       lod = 1;
@@ -162,8 +160,6 @@ void GlNode::draw(float lod, const GlGraphInputData *data, Camera *camera) {
 
     glPopMatrix();
   }
-
-  GlTextureManager::setAnimationFrame(0);
 }
 
 void GlNode::drawLabel(bool drawSelect, OcclusionTest *test, const GlGraphInputData *data,

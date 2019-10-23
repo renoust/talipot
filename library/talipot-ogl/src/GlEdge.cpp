@@ -262,14 +262,11 @@ void GlEdge::draw(float lod, const GlGraphInputData *data, Camera *camera) {
   if (vertexArrayRendering)
     return;
 
-  // Reset in case of drawing extremity glyph that can alterate value
-  GlTextureManager::setAnimationFrame(data->getElementAnimationFrame()->getEdgeValue(e));
   // draw Edge
   drawEdge(srcCoord, tgtCoord, beginLineAnchor, endLineAnchor, bends, srcCol, tgtCol,
            camera->getCenter() - camera->getEyes(), data->parameters->isEdgeColorInterpolate(),
            strokeColor, edgeSize, data->getElementShape()->getEdgeValue(e),
            data->parameters->isEdge3D(), lodSize, edgeTexture, borderWidth);
-  GlTextureManager::setAnimationFrame(0);
 
   glEnable(GL_LIGHTING);
 }

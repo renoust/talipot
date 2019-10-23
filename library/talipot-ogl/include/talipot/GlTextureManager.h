@@ -27,10 +27,9 @@
 namespace tlp {
 
 struct GlTexture {
-  GLuint *id;
+  GLuint id;
   int height;
   int width;
-  unsigned int spriteNumber;
 };
 
 /**
@@ -78,10 +77,7 @@ public:
    * Begin a new texture with given name
    */
   static void beginNewTexture(const std::string &);
-  /**
-   * Activate a texture with given name
-   */
-  static bool activateTexture(const std::string &, unsigned int);
+
   /**
    * Activate a texture with given name
    */
@@ -90,18 +86,7 @@ public:
    * Disable texture with given name
    */
   static void deactivateTexture();
-  /**
-   * Set animationStep for next textures (for next activateTexture)
-   */
-  static inline void setAnimationFrame(unsigned int id) {
-    animationFrame = id;
-  }
-  /**
-   * Get animationStep of next textures
-   */
-  static inline unsigned int getAnimationFrame() {
-    return animationFrame;
-  }
+
   /**
    * Clear vector of textures with error
    */
@@ -144,8 +129,6 @@ private:
 
   static TextureMap texturesMap;
   static std::set<std::string> texturesWithError;
-
-  static unsigned int animationFrame;
 };
 }
 
