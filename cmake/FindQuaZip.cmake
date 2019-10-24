@@ -12,19 +12,10 @@ UNSET(QUAZIP_INCLUDE_DIRS CACHE)
 UNSET(QUAZIP_ZLIB_INCLUDE_DIR CACHE)
 
 IF (WIN32)
-  FIND_PATH(QUAZIP_LIBRARY_DIR
-    WIN32_DEBUG_POSTFIX d
-    NAMES libquazip.dll
-    HINTS "C:/Programme/" "C:/Program Files"
-    PATH_SUFFIXES QuaZip/lib
-  )
-  SET(QUAZIP_INCLUDE_PATH_SUFFIXES include/quazip)
-  SET(QUAZIP_DLL_NAMES libquazip.dll)
-  # special case when using Qt5 on MSYS2
-  SET(QUAZIP_INCLUDE_PATH_SUFFIXES include/quazip5 ${QUAZIP_INCLUDE_PATH_SUFFIXES})
-  SET(QUAZIP_DLL_NAMES libquazip5.dll ${QUAZIP_DLL_NAMES})
-  FIND_LIBRARY(QUAZIP_LIBRARIES NAMES ${QUAZIP_DLL_NAMES} HINTS ${QUAZIP_LIBRARY_DIR})
-  FIND_PATH(QUAZIP_INCLUDE_DIR NAMES quazip.h HINTS ${QUAZIP_LIBRARY_DIR}/../ PATH_SUFFIXES ${QUAZIP_INCLUDE_PATH_SUFFIXES})
+  FIND_LIBRARY(QUAZIP_LIBRARIES
+    NAMES libquazip5 quazip5
+  ) 
+  FIND_PATH(QUAZIP_INCLUDE_DIR NAMES quazip.h PATH_SUFFIXES include/quazip5 quazip5)
   FIND_PATH(QUAZIP_ZLIB_INCLUDE_DIR NAMES zlib.h)
 ELSE(WIN32)  
 
@@ -42,8 +33,8 @@ ELSE(WIN32)
   # special case when using Qt5 on unix
   SET(QUAZIP_PATH_SUFFIXES quazip5 quazip)
   FIND_PATH(QUAZIP_INCLUDE_DIR quazip.h
-  HINTS /usr/include /usr/local/include /usr/local/include/quazip
-  PATH_SUFFIXES ${QUAZIP_PATH_SUFFIXES}
+    HINTS /usr/include /usr/local/include /usr/local/include/quazip
+    PATH_SUFFIXES ${QUAZIP_PATH_SUFFIXES}
   )
   FIND_PATH(QUAZIP_ZLIB_INCLUDE_DIR zlib.h HINTS /usr/include /usr/local/include)
 ENDIF (WIN32)

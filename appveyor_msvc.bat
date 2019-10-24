@@ -37,6 +37,29 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 msbuild INSTALL.vcxproj /m /clp:ErrorsOnly /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+rem get, compile and install qhull
+cd C:/talipot_dependencies
+curl -LO http://www.qhull.org/download/qhull-2019.1.zip
+if %errorlevel% neq 0 exit /b %errorlevel%
+7z x qhull-2019.1.zip
+cd qhull-2019.1
+md build_qhull && cd build_qhull
+cmake -G "%CMAKE_VS_GENERATOR%" -DCMAKE_INSTALL_PREFIX="C:/talipot_dependencies" ..
+if %errorlevel% neq 0 exit /b %errorlevel%
+msbuild INSTALL.vcxproj /m /clp:ErrorsOnly /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+rem get, compile and install yajl
+cd C:/talipot_dependencies
+git clone git://github.com/lloyd/yajl
+if %errorlevel% neq 0 exit /b %errorlevel%
+cd yajl
+md build && cd build
+cmake -G "%CMAKE_VS_GENERATOR%" -DCMAKE_INSTALL_PREFIX="C:/talipot_dependencies" ..
+if %errorlevel% neq 0 exit /b %errorlevel%
+msbuild INSTALL.vcxproj /m /clp:ErrorsOnly /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 rem get, compile and install cppunit
 cd C:/talipot_dependencies
 git clone git://anongit.freedesktop.org/git/libreoffice/cppunit/
@@ -80,6 +103,16 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 msbuild INSTALL.vcxproj /m /clp:ErrorsOnly /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+rem get, compile and install quazip
+cd C:/talipot_dependencies
+curl -LO https://github.com/stachenov/quazip/archive/v0.8.1.zip
+7z x v0.8.1.zip
+cd quazip-0.8.1
+md build && cd build
+cmake -G "%CMAKE_VS_GENERATOR%" -DCMAKE_INSTALL_PREFIX="C:/talipot_dependencies" -DCMAKE_PREFIX_PATH="%QT5_DIR%" -DZLIB_INCLUDE_DIRS="%QT5_DIR%/include/QtZlib" ..
+if %errorlevel% neq 0 exit /b %errorlevel%
+msbuild INSTALL.vcxproj /m /clp:ErrorsOnly /p:Configuration=Release %CLCACHE_MSBUILD_CONF%
+if %errorlevel% neq 0 exit /b %errorlevel%
 goto talipot_build
 
 
