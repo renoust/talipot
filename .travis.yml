@@ -22,313 +22,313 @@ language: cpp
 jobs:
   include:
   #=============================================================================================
-    # Talipot core build stage on Linux
-    - stage: Talipot core build (Linux)
-    # legacy Talipot core build on Linux
-      os: linux
-      dist: xenial
-      compiler: gcc
-      cache: ccache
-      addons:
-        apt:
-          # install Talipot build dependencies
-          packages:
-            - cmake
-            - ccache
-            - ninja-build
-            - doxygen
-            - graphviz
-            - libqhull-dev
-            - libyajl-dev
-            - libpython2.7-dev
-            - libcppunit-dev
-            - binutils-dev
-      env:
-        # use Python 2.7
-        - PYTHON_EXECUTABLE=/usr/bin/python2.7
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot core build with cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_USE_CCACHE=ON
-            -DTALIPOT_BUILD_CORE_ONLY=ON
-            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Talipot using ninja for faster builds
-        - ninja -j4 || travis_terminate 1
-        - ninja -j4 install || travis_terminate 1
-        # run Talipot unit tests
-        - ninja runTests
+  #   # Talipot core build stage on Linux
+  #   - stage: Talipot core build (Linux)
+  #   # legacy Talipot core build on Linux
+  #     os: linux
+  #     dist: xenial
+  #     compiler: gcc
+  #     cache: ccache
+  #     addons:
+  #       apt:
+  #         # install Talipot build dependencies
+  #         packages:
+  #           - cmake
+  #           - ccache
+  #           - ninja-build
+  #           - doxygen
+  #           - graphviz
+  #           - libqhull-dev
+  #           - libyajl-dev
+  #           - libpython2.7-dev
+  #           - libcppunit-dev
+  #           - binutils-dev
+  #     env:
+  #       # use Python 2.7
+  #       - PYTHON_EXECUTABLE=/usr/bin/python2.7
+  #     script:
+  #       # create build directory
+  #       - mkdir build && cd build
+  #       # configure Talipot core build with cmake
+  #       - cmake .. -G Ninja
+  #           -DCMAKE_BUILD_TYPE=Release
+  #           -DCMAKE_INSTALL_PREFIX=$PWD/install
+  #           -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  #           -DTALIPOT_BUILD_TESTS=ON
+  #           -DTALIPOT_USE_CCACHE=ON
+  #           -DTALIPOT_BUILD_CORE_ONLY=ON
+  #           -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+  #       # compile Talipot using ninja for faster builds
+  #       - ninja -j4 || travis_terminate 1
+  #       - ninja -j4 install || travis_terminate 1
+  #       # run Talipot unit tests
+  #       - ninja runTests
 
-    #-------------------------------------------------------------------------------------------
-    # modern Talipot core build on Linux
-    -
-      os: linux
-      dist: bionic
-      compiler: gcc
-      cache: ccache
-      addons:
-        apt:
-          # we get GCC 9.x and Python 3.7 from external ppas
-          sources:
-            - sourceline: "ppa:ubuntu-toolchain-r/test"
-            - sourceline: "ppa:deadsnakes/ppa"
-          # install Talipot build dependencies
-          packages:
-            - g++-9
-            - cmake
-            - ccache
-            - ninja-build
-            - libqhull-dev
-            - libyajl-dev
-            - python3.7
-            - libpython3.7-dev
-            - libcppunit-dev
-            - binutils-dev
-      before_install:
-        # force the use of GCC 9
-        - eval "${MATRIX_EVAL}"
-      env:
-        # use Python 3.7
-        - PYTHON_EXECUTABLE=/usr/bin/python3.7
-        # use GCC 7
-        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot core build with cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_USE_CCACHE=ON
-            -DTALIPOT_BUILD_CORE_ONLY=ON
-            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Talipot using ninja for faster builds
-        - ninja -j4  || travis_terminate 1
-        - ninja -j4 install || travis_terminate 1
-        # run Talipot unit tests
-        - ninja runTests
+  #   #-------------------------------------------------------------------------------------------
+  #   # modern Talipot core build on Linux
+  #   -
+  #     os: linux
+  #     dist: bionic
+  #     compiler: gcc
+  #     cache: ccache
+  #     addons:
+  #       apt:
+  #         # we get GCC 9.x and Python 3.7 from external ppas
+  #         sources:
+  #           - sourceline: "ppa:ubuntu-toolchain-r/test"
+  #           - sourceline: "ppa:deadsnakes/ppa"
+  #         # install Talipot build dependencies
+  #         packages:
+  #           - g++-9
+  #           - cmake
+  #           - ccache
+  #           - ninja-build
+  #           - libqhull-dev
+  #           - libyajl-dev
+  #           - python3.7
+  #           - libpython3.7-dev
+  #           - libcppunit-dev
+  #           - binutils-dev
+  #     before_install:
+  #       # force the use of GCC 9
+  #       - eval "${MATRIX_EVAL}"
+  #     env:
+  #       # use Python 3.7
+  #       - PYTHON_EXECUTABLE=/usr/bin/python3.7
+  #       # use GCC 7
+  #       - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+  #     script:
+  #       # create build directory
+  #       - mkdir build && cd build
+  #       # configure Talipot core build with cmake
+  #       - cmake .. -G Ninja
+  #           -DCMAKE_BUILD_TYPE=Release
+  #           -DCMAKE_INSTALL_PREFIX=$PWD/install
+  #           -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  #           -DTALIPOT_BUILD_TESTS=ON
+  #           -DTALIPOT_USE_CCACHE=ON
+  #           -DTALIPOT_BUILD_CORE_ONLY=ON
+  #           -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+  #       # compile Talipot using ninja for faster builds
+  #       - ninja -j4  || travis_terminate 1
+  #       - ninja -j4 install || travis_terminate 1
+  #       # run Talipot unit tests
+  #       - ninja runTests
 
-  #=============================================================================================
-    # Talipot complete build stage on Linux
-    - stage: Talipot complete build (Linux)
-      # legacy Talipot complete build on Linux, we also build the documentation in this one
-      os: linux
-      dist: xenial
-      compiler: gcc
-      cache: ccache
-      services:
-        - xvfb
-      addons:
-        apt:
-          # install Talipot build dependencies
-          packages:
-            - cmake
-            - ccache
-            - ninja-build
-            - python-pip
-            - doxygen
-            - graphviz
-            - libqhull-dev
-            - libyajl-dev
-            - libpython2.7-dev
-            - libcppunit-dev
-            - binutils-dev
-            - qt5-default
-            - libqt5webkit5-dev
-            - libquazip5-dev
-            - libglew-dev
-            - libfreetype6-dev
-      install:
-        # install latest sphinx version for generating the documentation
-        - sudo pip install sphinx
-      env:
-        # use Python 2.7
-        - PYTHON_EXECUTABLE=/usr/bin/python2.7
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot complete build with cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_BUILD_DOC=ON
-            -DTALIPOT_USE_CCACHE=ON
-            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Talipot using ninja for faster builds
-        - ninja -j4 || travis_terminate 1
-        - ninja -j4 install || travis_terminate 1
-        # run Talipot unit tests
-        - ninja runTests
+  # #=============================================================================================
+  #   # Talipot complete build stage on Linux
+  #   - stage: Talipot complete build (Linux)
+  #     # legacy Talipot complete build on Linux, we also build the documentation in this one
+  #     os: linux
+  #     dist: xenial
+  #     compiler: gcc
+  #     cache: ccache
+  #     services:
+  #       - xvfb
+  #     addons:
+  #       apt:
+  #         # install Talipot build dependencies
+  #         packages:
+  #           - cmake
+  #           - ccache
+  #           - ninja-build
+  #           - python-pip
+  #           - doxygen
+  #           - graphviz
+  #           - libqhull-dev
+  #           - libyajl-dev
+  #           - libpython2.7-dev
+  #           - libcppunit-dev
+  #           - binutils-dev
+  #           - qt5-default
+  #           - libqt5webkit5-dev
+  #           - libquazip5-dev
+  #           - libglew-dev
+  #           - libfreetype6-dev
+  #     install:
+  #       # install latest sphinx version for generating the documentation
+  #       - sudo pip install sphinx
+  #     env:
+  #       # use Python 2.7
+  #       - PYTHON_EXECUTABLE=/usr/bin/python2.7
+  #     script:
+  #       # create build directory
+  #       - mkdir build && cd build
+  #       # configure Talipot complete build with cmake
+  #       - cmake .. -G Ninja
+  #           -DCMAKE_BUILD_TYPE=Release
+  #           -DCMAKE_INSTALL_PREFIX=$PWD/install
+  #           -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  #           -DTALIPOT_BUILD_TESTS=ON
+  #           -DTALIPOT_BUILD_DOC=ON
+  #           -DTALIPOT_USE_CCACHE=ON
+  #           -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+  #       # compile Talipot using ninja for faster builds
+  #       - ninja -j4 || travis_terminate 1
+  #       - ninja -j4 install || travis_terminate 1
+  #       # run Talipot unit tests
+  #       - ninja runTests
 
-    #-------------------------------------------------------------------------------------------
-    # modern Talipot complete build on Linux
-    -
-      os: linux
-      dist: bionic
-      compiler: gcc
-      cache: ccache
-      services:
-        - xvfb
-      addons:
-        apt:
-          # we get GCC 9.x, Python 3.7 and Qt 5.13 from external ppas
-          sources:
-            - sourceline: "ppa:ubuntu-toolchain-r/test"
-            - sourceline: "ppa:deadsnakes/ppa"
-            - sourceline: 'deb http://archive.neon.kde.org/user/ bionic main'
-              key_url: 'http://archive.neon.kde.org/public.key'
-          # install Talipot build dependencies
-          packages:
-            - g++-9
-            - cmake
-            - ccache
-            - ninja-build
-            - libqhull-dev
-            - libyajl-dev
-            - python3.7
-            - libpython3.7-dev
-            - libcppunit-dev
-            - binutils-dev
-            - qt5-default
-            - libqt5webkit5-dev
-            - libquazip5-dev
-            - libglew-dev
-            - libfreetype6-dev
-      before_install:
-        # force the use of GCC 9
-        - eval "${MATRIX_EVAL}"
-      env:
-        # use Python 3.7
-        - PYTHON_EXECUTABLE=/usr/bin/python3.7
-        # use GCC 9
-        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot complete build using cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_BUILD_DOC=OFF
-            -DTALIPOT_USE_CCACHE=ON
-            -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
-        # compile Talipot using ninja for faster builds
-        - ninja -j4  || travis_terminate 1
-        - ninja -j4 install || travis_terminate 1
-        # run Talipot unit tests
-        - ninja runTests
+  #   #-------------------------------------------------------------------------------------------
+  #   # modern Talipot complete build on Linux
+  #   -
+  #     os: linux
+  #     dist: bionic
+  #     compiler: gcc
+  #     cache: ccache
+  #     services:
+  #       - xvfb
+  #     addons:
+  #       apt:
+  #         # we get GCC 9.x, Python 3.7 and Qt 5.13 from external ppas
+  #         sources:
+  #           - sourceline: "ppa:ubuntu-toolchain-r/test"
+  #           - sourceline: "ppa:deadsnakes/ppa"
+  #           - sourceline: 'deb http://archive.neon.kde.org/user/ bionic main'
+  #             key_url: 'http://archive.neon.kde.org/public.key'
+  #         # install Talipot build dependencies
+  #         packages:
+  #           - g++-9
+  #           - cmake
+  #           - ccache
+  #           - ninja-build
+  #           - libqhull-dev
+  #           - libyajl-dev
+  #           - python3.7
+  #           - libpython3.7-dev
+  #           - libcppunit-dev
+  #           - binutils-dev
+  #           - qt5-default
+  #           - libqt5webkit5-dev
+  #           - libquazip5-dev
+  #           - libglew-dev
+  #           - libfreetype6-dev
+  #     before_install:
+  #       # force the use of GCC 9
+  #       - eval "${MATRIX_EVAL}"
+  #     env:
+  #       # use Python 3.7
+  #       - PYTHON_EXECUTABLE=/usr/bin/python3.7
+  #       # use GCC 9
+  #       - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+  #     script:
+  #       # create build directory
+  #       - mkdir build && cd build
+  #       # configure Talipot complete build using cmake
+  #       - cmake .. -G Ninja
+  #           -DCMAKE_BUILD_TYPE=Release
+  #           -DCMAKE_INSTALL_PREFIX=$PWD/install
+  #           -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  #           -DTALIPOT_BUILD_TESTS=ON
+  #           -DTALIPOT_BUILD_DOC=OFF
+  #           -DTALIPOT_USE_CCACHE=ON
+  #           -DTALIPOT_PYTHON_SITE_INSTALL=ON || travis_terminate 1
+  #       # compile Talipot using ninja for faster builds
+  #       - ninja -j4  || travis_terminate 1
+  #       - ninja -j4 install || travis_terminate 1
+  #       # run Talipot unit tests
+  #       - ninja runTests
 
-  #=============================================================================================
-    # Talipot AppImage build on CentOS
-    - stage: Talipot AppImage build (CentOS)
-      # Talipot x86_64 AppImage build on CentOS 7
-      os: linux
-      dist: trusty
-      cache:
-        directories:
-          - $HOME/ccache
+  # #=============================================================================================
+  #   # Talipot AppImage build on CentOS
+  #   - stage: Talipot AppImage build (CentOS)
+  #     # Talipot x86_64 AppImage build on CentOS 7
+  #     os: linux
+  #     dist: trusty
+  #     cache:
+  #       directories:
+  #         - $HOME/ccache
 
-      sudo: required
-      env:
-        - ARCH=x86_64
-        - DOCKER_IMAGE=centos:7
+  #     sudo: required
+  #     env:
+  #       - ARCH=x86_64
+  #       - DOCKER_IMAGE=centos:7
 
-      services:
-        - docker
+  #     services:
+  #       - docker
 
-      before_install:
-        - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
-        - sudo service docker restart
-        - sleep 5
-        - sudo docker pull ${DOCKER_IMAGE}
-        - sudo docker create -v $HOME/ccache:/ccache --name ccache ${DOCKER_IMAGE}
+  #     before_install:
+  #       - echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+  #       - sudo service docker restart
+  #       - sleep 5
+  #       - sudo docker pull ${DOCKER_IMAGE}
+  #       - sudo docker create -v $HOME/ccache:/ccache --name ccache ${DOCKER_IMAGE}
 
-      before_script:
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-        - sleep 3
+  #     before_script:
+  #       - export DISPLAY=:99.0
+  #       - sh -e /etc/init.d/xvfb start
+  #       - sleep 3
 
-      script:
-        - sudo docker run
-            --rm=true
-            -e CCACHE_DIR=/ccache --volumes-from ccache
-            --cap-add SYS_ADMIN
-            --device /dev/fuse:/dev/fuse:mrw
-            -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY
-            -v /tmp/.X11-unix:/tmp/.X11-unix
-            ${DOCKER_IMAGE}
-            /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos7_build.sh CCACHE RUN_TESTS"
+  #     script:
+  #       - sudo docker run
+  #           --rm=true
+  #           -e CCACHE_DIR=/ccache --volumes-from ccache
+  #           --cap-add SYS_ADMIN
+  #           --device /dev/fuse:/dev/fuse:mrw
+  #           -v `pwd`:/talipot:rw -e DISPLAY=$DISPLAY
+  #           -v /tmp/.X11-unix:/tmp/.X11-unix
+  #           ${DOCKER_IMAGE}
+  #           /bin/bash -c "bash -xe /talipot/bundlers/linux/talipot_appimage_centos7_build.sh CCACHE RUN_TESTS"
 
-      # deploy Talipot AppImage on bintray
-      deploy:
-        provider: bintray
-        skip_cleanup: true
-        on:
-          branch: master
-        file: "build/deploy/TalipotPackagesToBintray.json"
-        user: "anlambert"
-        key:
-          secure: "${BINTRAY_API_KEY}"
+  #     # deploy Talipot AppImage on bintray
+  #     deploy:
+  #       provider: bintray
+  #       skip_cleanup: true
+  #       on:
+  #         branch: master
+  #       file: "build/deploy/TalipotPackagesToBintray.json"
+  #       user: "anlambert"
+  #       key:
+  #         secure: "${BINTRAY_API_KEY}"
 
   #=============================================================================================
     # Talipot core build stage on Mac OS
     - stage: Talipot core build (Mac OS)
-    # Talipot core build on Mac OS (MacPorts)
-      os: osx
-      osx_image: xcode9.2
-      compiler: clang
-      cache: ccache
-      install:
-        # install MacPorts in order to easily retrieve Talipot dependencies
-        - curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
-        - source ./macports-ci install
-        # install Talipot core build dependencies
-        - sudo port -N install cmake
-        - sudo port -N install clang-9.0
-        - sudo port -N install ccache
-        - sudo port -N install ninja
-        - sudo port -N install qhull
-        - sudo port -N install yajl
-        - sudo port -N install pkgconfig
-        - sudo port -N install cppunit
-      env:
-        - ENV="MacOS 10.12, LLVM Clang, MacPorts"
+    # # Talipot core build on Mac OS (MacPorts)
+    #   os: osx
+    #   osx_image: xcode9.2
+    #   compiler: clang
+    #   cache: ccache
+    #   install:
+    #     # install MacPorts in order to easily retrieve Talipot dependencies
+    #     - curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+    #     - source ./macports-ci install
+    #     # install Talipot core build dependencies
+    #     - sudo port -N install cmake
+    #     - sudo port -N install clang-9.0
+    #     - sudo port -N install ccache
+    #     - sudo port -N install ninja
+    #     - sudo port -N install qhull
+    #     - sudo port -N install yajl
+    #     - sudo port -N install pkgconfig
+    #     - sudo port -N install cppunit
+    #   env:
+    #     - ENV="MacOS 10.12, LLVM Clang, MacPorts"
 
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot core build using cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
-            -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
-            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_USE_CCACHE=ON
-            -DTALIPOT_BUILD_CORE_ONLY=ON || travis_terminate 1
-        # compile Talipot using ninja for faster builds
-        - ninja -j4 || travis_terminate 1
-        - ninja -j4 install || travis_terminate 1
-        # run Talipot unit tests
-        - ninja runTests
+    #   script:
+    #     # create build directory
+    #     - mkdir build && cd build
+    #     # configure Talipot core build using cmake
+    #     - cmake .. -G Ninja
+    #         -DCMAKE_BUILD_TYPE=Release
+    #         -DCMAKE_INSTALL_PREFIX=$PWD/install
+    #         -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
+    #         -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
+    #         -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+    #         -DTALIPOT_BUILD_TESTS=ON
+    #         -DTALIPOT_USE_CCACHE=ON
+    #         -DTALIPOT_BUILD_CORE_ONLY=ON || travis_terminate 1
+    #     # compile Talipot using ninja for faster builds
+    #     - ninja -j4 || travis_terminate 1
+    #     - ninja -j4 install || travis_terminate 1
+    #     # run Talipot unit tests
+    #     - ninja runTests
 
-    #-------------------------------------------------------------------------------------------
-    # Talipot core build on Mac OS (Homebrew)
-    -
+    # #-------------------------------------------------------------------------------------------
+    # # Talipot core build on Mac OS (Homebrew)
+    # -
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode10.3
       compiler: clang
       cache: ccache
       addons:
@@ -347,11 +347,6 @@ jobs:
       env:
         - ENV="MacOS 10.14, LLVM Clang, Homebrew"
       script:
-        # install missing headers
-        - sudo installer
-            -allowUntrusted
-            -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
-            -target /
         # create build directory
         - mkdir build && cd build
         # configure Talipot core build using cmake
@@ -373,85 +368,85 @@ jobs:
   #=============================================================================================
     # Talipot complete build stage on Mac OS
     - stage: Talipot complete build (Mac OS)
-    # Talipot complete build on Mac OS (MacPorts)
-      os: osx
-      osx_image: xcode9.2
-      compiler: clang
-      cache: ccache
-      before_install:
-        - start_time=$(travis_nanoseconds)
-      install:
-        # install MacPorts in order to easily retrieve Talipot dependencies
-        - curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
-        - source ./macports-ci install
-        # install Talipot complete build dependencies
-        - sudo port -N install cmake
-        - sudo port -N install clang-9.0
-        - sudo port -N install ccache
-        - sudo port -N install ninja
-        - sudo port -N install qt5-qtbase
-        - sudo port -N install qt5-qttools
-        - sudo port -N install qt5-qtwebkit
-        - sudo port -N install quazip
-        - sudo port -N install freetype
-        - sudo port -N install glew
-        - sudo port -N install qhull
-        - sudo port -N install yajl
-        - sudo port -N install pkgconfig
-        - sudo port -N install cppunit
-        - curl -O https://bootstrap.pypa.io/get-pip.py
-        - sudo python get-pip.py
-        - sudo pip install sphinx==1.7.9 --ignore-installed six
-      env:
-        - ENV="MacOS 10.12, LLVM Clang, MacPorts"
+    # # Talipot complete build on Mac OS (MacPorts)
+    #   os: osx
+    #   osx_image: xcode9.2
+    #   compiler: clang
+    #   cache: ccache
+    #   before_install:
+    #     - start_time=$(travis_nanoseconds)
+    #   install:
+    #     # install MacPorts in order to easily retrieve Talipot dependencies
+    #     - curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+    #     - source ./macports-ci install
+    #     # install Talipot complete build dependencies
+    #     - sudo port -N install cmake
+    #     - sudo port -N install clang-9.0
+    #     - sudo port -N install ccache
+    #     - sudo port -N install ninja
+    #     - sudo port -N install qt5-qtbase
+    #     - sudo port -N install qt5-qttools
+    #     - sudo port -N install qt5-qtwebkit
+    #     - sudo port -N install quazip
+    #     - sudo port -N install freetype
+    #     - sudo port -N install glew
+    #     - sudo port -N install qhull
+    #     - sudo port -N install yajl
+    #     - sudo port -N install pkgconfig
+    #     - sudo port -N install cppunit
+    #     - curl -O https://bootstrap.pypa.io/get-pip.py
+    #     - sudo python get-pip.py
+    #     - sudo pip install sphinx==1.7.9 --ignore-installed six
+    #   env:
+    #     - ENV="MacOS 10.12, LLVM Clang, MacPorts"
 
-      script:
-        # create build directory
-        - mkdir build && cd build
-        # configure Talipot complete build using cmake
-        - cmake .. -G Ninja
-            -DCMAKE_BUILD_TYPE=Release
-            -DCMAKE_INSTALL_PREFIX=$PWD/install
-            -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
-            -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
-            -DPYTHON_EXECUTABLE=/usr/bin/python2.7
-            -DTALIPOT_BUILD_TESTS=ON
-            -DTALIPOT_USE_CCACHE=ON
-            -DZLIB_INCLUDE_DIR=/opt/local/include
-            -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib
-            -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
-        # compile Talipot using ninja for faster builds
-        - ninja -j4
-        - ninja -j4 install
-        # run Talipot unit tests
-        - ninja runTests
-        # compute overall build time
-        - end_time=$(travis_nanoseconds)
-        - build_time=$(( (end_time-start_time) / (6 * (10 ** 10)) ))
-        - echo "build time = $build_time minutes"
-        - | # skip dmg bundle generation if there is not enough time remaining for the travis job
-          if (( build_time <= 40 ))
-          then
-            # build Talipot bundle
-            ninja bundle
-          fi
-        - cd ..
+    #   script:
+    #     # create build directory
+    #     - mkdir build && cd build
+    #     # configure Talipot complete build using cmake
+    #     - cmake .. -G Ninja
+    #         -DCMAKE_BUILD_TYPE=Release
+    #         -DCMAKE_INSTALL_PREFIX=$PWD/install
+    #         -DCMAKE_C_COMPILER=/opt/local/bin/clang-mp-9.0
+    #         -DCMAKE_CXX_COMPILER=/opt/local/bin/clang++-mp-9.0
+    #         -DPYTHON_EXECUTABLE=/usr/bin/python2.7
+    #         -DTALIPOT_BUILD_TESTS=ON
+    #         -DTALIPOT_USE_CCACHE=ON
+    #         -DZLIB_INCLUDE_DIR=/opt/local/include
+    #         -DZLIB_LIBRARY_RELEASE=/opt/local/lib/libz.dylib
+    #         -DGLEW_SHARED_LIBRARY_RELEASE=/opt/local/lib/libGLEW.dylib
+    #     # compile Talipot using ninja for faster builds
+    #     - ninja -j4
+    #     - ninja -j4 install
+    #     # run Talipot unit tests
+    #     - ninja runTests
+    #     # compute overall build time
+    #     - end_time=$(travis_nanoseconds)
+    #     - build_time=$(( (end_time-start_time) / (6 * (10 ** 10)) ))
+    #     - echo "build time = $build_time minutes"
+    #     - | # skip dmg bundle generation if there is not enough time remaining for the travis job
+    #       if (( build_time <= 40 ))
+    #       then
+    #         # build Talipot bundle
+    #         ninja bundle
+    #       fi
+    #     - cd ..
 
-      # deploy Talipot MacOS bundle on bintray
-      deploy:
-        provider: bintray
-        skip_cleanup: true
-        on:
-          branch: master
-        file: "build/deploy/TalipotPackagesToBintray.json"
-        user: "anlambert"
-        key:
-          secure: "${BINTRAY_API_KEY}"
-    #-------------------------------------------------------------------------------------------
-    # Talipot complete build on Mac OS (Homebrew)
-    -
+    #   # deploy Talipot MacOS bundle on bintray
+    #   deploy:
+    #     provider: bintray
+    #     skip_cleanup: true
+    #     on:
+    #       branch: master
+    #     file: "build/deploy/TalipotPackagesToBintray.json"
+    #     user: "anlambert"
+    #     key:
+    #       secure: "${BINTRAY_API_KEY}"
+    # #-------------------------------------------------------------------------------------------
+    # # Talipot complete build on Mac OS (Homebrew)
+    # -
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode10.3
       compiler: clang
       cache: ccache
       addons:
@@ -481,11 +476,6 @@ jobs:
         - ENV="MacOS 10.14, LLVM Clang, Homebrew"
 
       script:
-        # install missing headers
-        - sudo installer
-            -allowUntrusted
-            -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
-            -target /
         # workaround for reference to unknown /Applications/Xcode-beta.app
         # in bogus FindGLEW.cmake since cmake 3.15
         - sudo ln -s /Applications/Xcode.app /Applications/Xcode-beta.app
