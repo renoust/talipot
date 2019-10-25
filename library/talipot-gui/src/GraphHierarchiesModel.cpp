@@ -843,3 +843,9 @@ void GraphHierarchiesModel::treatEvents(const std::vector<tlp::Event> &) {
 
   _graphsChanged.clear();
 }
+
+void GraphHierarchiesModel::clear() {
+  _indexCache.clear();
+  _saveNeeded.clear();
+  _currentGraph = nullptr;
+}

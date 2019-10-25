@@ -1728,6 +1728,7 @@ void TalipotMainWindow::cleanProject() {
 
     _pythonIDE->clearPythonCodeEditors();
     _project->clearProject();
+    _graphs->clear();
   }
 }
 

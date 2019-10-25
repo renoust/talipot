@@ -103,6 +103,8 @@ public:
   void setCurrentGraph(tlp::Graph *);
   tlp::Graph *currentGraph() const;
 
+  void clear();
+
 signals:
   void currentGraphChanged(tlp::Graph *);
 
