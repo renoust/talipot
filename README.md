@@ -68,20 +68,13 @@ The following dependencies are required to build Talipot:
   * [Qt](https://www.qt.io) >= 5.5.0
   * [OpenGL](https://www.opengl.org) >= 2.0
   * [GLEW](http://glew.sourceforge.net/) >= 1.4
-
-In order to build the Python components, the following dependencies are needed:
-
-  * [Python](https://www.python.org) >= 2.6
-  * [SIP](https://www.riverbankcomputing.com/software/sip/intro) >= 4.19.14
-  (if SIP can not be found or its version does not match the required one,
-  it will be compiled using a copy of its source code in the Talipot tree)
-
-The following dependencies are also needed but they will be compiled from the Talipot
-source tree if they can not be found on your system:
-
   * [Qhull](http://www.qhull.org/)
   * [QuaZIP](http://quazip.sourceforge.net/)
   * [yajl](https://lloyd.github.io/yajl/) >= 2.0
+  * [Python](https://www.python.org) >= 2.6
+  * [SIP](https://www.riverbankcomputing.com/software/sip/intro) >= 4.19.17
+  (if SIP can not be found or its version does not match the required one,
+  it will be compiled using a copy of its source code in the Talipot tree)
 
 In order to generate the documentation, the following tools must be installed:
 
