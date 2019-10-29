@@ -235,7 +235,7 @@ Below is the exhaustive list of the constants for nodes shapes:
     * :const:`tlp.NodeShape.Star`
     * :const:`tlp.NodeShape.Triangle`
     * :const:`tlp.NodeShape.Window`
-    * :const:`tlp.NodeShape.Icon` (see :class:`tlp.FontAwesome` and :class:`tlp.MaterialDesignIcons`)
+    * :const:`tlp.NodeShape.Icon`
 
 Below is the exhaustive list of the constants for edges shapes:
 
@@ -264,7 +264,7 @@ Constants are also available for code readability, here is the exhaustive list :
     * :const:`tlp.EdgeExtremityShape.Sphere`
     * :const:`tlp.EdgeExtremityShape.Square`
     * :const:`tlp.EdgeExtremityShape.Star`
-    * :const:`tlp.EdgeExtremityShape.FontAwesomeIcon` (see :class:`tlp.FontAwesome`)
+    * :const:`tlp.EdgeExtremityShape.Icon`
 
 The sample code below set the shape of the selected nodes to a circle::
 
@@ -276,6 +276,33 @@ The sample code below set the shape of the selected nodes to a circle::
         viewShape[n] = tlp.NodeShape.Circle
 
 .. _graph-labels:
+
+Icons of graph elements
+------------------------
+
+Talipot can render nodes and edges extremities as icons through the use
+of the :const:`tlp.NodeShape.Icon` and :const:`tlp.EdgeExtremityShape.Icon`
+glyphs.
+
+The name of the icon to use must then be set in the "viewIcon" string property.
+As an example, the following code snippet activates the icon glyph for all nodes
+and sets the :const:`tlp.FontAwesome.Solid.User` icon (:fasicon:`user`)::
+
+  # graph is a pointer to a tlp.Graph object
+  viewShape = graph.getIntegerProperty("viewShape")
+  viewIcon = graph.getStringProperty("viewIcon")
+
+  # sets the Icon glyph on all nodes
+  viewShape.setAllNodeValue(tlp.NodeShape.Icon)
+  # sets the "user" glyph for all nodes
+  viewIcon.setAllNodeValue(tlp.FontAwesome.Solid.User)
+
+The following string constants representing the supported icons (based on
+`Font Awesome <https://fontawesome.com/>`_ and
+`Material Design Icons <https://materialdesignicons.com/>`_) are defined
+for commodity of use:
+
+.. include:: fonticons.rst
 
 Labels of graph elements
 ------------------------

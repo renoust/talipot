@@ -67,9 +67,6 @@ SET(talipot-ogl_LIB_SRCS
   Glyph.cpp
   GlyphManager.cpp
   OpenGlConfigManager.cpp
-  FontAwesome.cpp
-  IconicFont.cpp
-  MaterialDesignIcons.cpp
 )
 
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${PROJECT_SOURCE_DIR} ${FTGLInclude} ${FREETYPE_INCLUDE_DIRS} ${UTF8CppInclude})

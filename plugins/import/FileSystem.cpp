@@ -14,6 +14,7 @@
 #include <talipot/PluginHeaders.h>
 #include <talipot/TlpQtTools.h>
 #include <talipot/ViewSettings.h>
+#include <talipot/FontAwesome.h>
 
 #include <QStack>
 #include <QPair>
@@ -85,6 +86,7 @@ static const char *commonDevFilesExtArray[] = {
     "c",       "cc",        "class", "cpp", "cs",   "dtd", "fla", "h",   "hh",
     "hpp",     "java",      "lua",   "m",   "pl",   "py",  "sh",  "sln", "swift",
     "vcxproj", "xcodeproj", "css",   "js",  "html", "xml", "htm", "php", "xhtml"};
+
 static const std::vector<std::string> commonDevFilesExt(commonDevFilesExtArray,
                                                         commonDevFilesExtArray +
                                                             sizeof(commonDevFilesExtArray) /
@@ -171,7 +173,7 @@ public:
     if (_useIcons) {
       tlp::IntegerProperty *viewShape = graph->getIntegerProperty("viewShape");
       viewShape->setAllNodeValue(tlp::NodeShape::Icon);
-      _fontIcon->setAllNodeValue("fa-file-o");
+      _fontIcon->setAllNodeValue(tlp::FontAwesome::Regular::File);
     }
 
     tlp::ColorProperty *viewColor = graph->getColorProperty("viewColor");
@@ -273,35 +275,35 @@ private:
       std::string extension = QStringToTlpString(info.suffix());
 
       if (info.isDir()) {
-        _fontIcon->setNodeValue(n, "fa-folder-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::Folder);
         tlp::ColorProperty *viewColor = graph->getColorProperty("viewColor");
         viewColor->setNodeValue(n, dirColor);
       } else if (std::find(commonTextFilesExt.begin(), commonTextFilesExt.end(), extension) !=
                  commonTextFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "fa-file-text-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileAlt);
       } else if (std::find(commonArchiveFilesExt.begin(), commonArchiveFilesExt.end(), extension) !=
                  commonArchiveFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "fa-file-archive-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileArchive);
       } else if (std::find(commonAudioFilesExt.begin(), commonAudioFilesExt.end(), extension) !=
                  commonAudioFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "fa-file-audio-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileAudio);
       } else if (std::find(commonImageFilesExt.begin(), commonImageFilesExt.end(), extension) !=
                  commonImageFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "fa-file-image-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileImage);
       } else if (std::find(commonVideoFilesExt.begin(), commonVideoFilesExt.end(), extension) !=
                  commonVideoFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "fa-file-video-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileVideo);
       } else if (std::find(commonDevFilesExt.begin(), commonDevFilesExt.end(), extension) !=
                  commonDevFilesExt.end()) {
-        _fontIcon->setNodeValue(n, "file-file-code-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileCode);
       } else if (extension == "pdf") {
-        _fontIcon->setNodeValue(n, "file-file-pdf-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FilePdf);
       } else if (extension == "doc" || extension == "docx") {
-        _fontIcon->setNodeValue(n, "file-file-word-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileWord);
       } else if (extension == "xls" || extension == "xlsx") {
-        _fontIcon->setNodeValue(n, "file-file-excel-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FileExcel);
       } else if (extension == "ppt" || extension == "pptx") {
-        _fontIcon->setNodeValue(n, "file-file-powerpoint-o");
+        _fontIcon->setNodeValue(n, tlp::FontAwesome::Regular::FilePowerpoint);
       }
     }
 

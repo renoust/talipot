@@ -27,6 +27,7 @@ SET(TALIPOT_SIP_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/DrawingTools.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Edge.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/ExportModule.sip
+    ${CMAKE_CURRENT_SOURCE_DIR}/FontAwesome.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Graph.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/GraphEvent.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/GraphProperty.sip
@@ -37,6 +38,7 @@ SET(TALIPOT_SIP_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/Iterator.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/LayoutPropertySpecific.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/MapIterator.sip
+    ${CMAKE_CURRENT_SOURCE_DIR}/MaterialDesignIcons.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Matrix.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Module.sip
     ${CMAKE_CURRENT_SOURCE_DIR}/Node.sip

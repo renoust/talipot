@@ -19,6 +19,7 @@ INSTALL(FILES
   talipot/DrawingTools.h
   talipot/Edge.h
   talipot/ExportModule.h
+  talipot/FontAwesome.h
   talipot/GraphAbstract.h
   talipot/GraphDecorator.h
   talipot/Graph.h
@@ -31,6 +32,7 @@ INSTALL(FILES
   talipot/IntegerProperty.h
   talipot/Iterator.h
   talipot/LayoutProperty.h
+  talipot/MaterialDesignIcons.h
   talipot/Matrix.h
   talipot/MemoryPool.h
   talipot/MinMaxProperty.h
@@ -79,6 +81,8 @@ INSTALL(FILES
   talipot/TypeInterface.h
   talipot/SerializableType.h
   ${CMAKE_CURRENT_BINARY_DIR}/talipot/Release.h
+  talipot/FontAwesomeConstants.h
+  talipot/MaterialDesignIconsConstants.h
 DESTINATION ${TalipotIncludeInstallDir}/talipot/
 COMPONENT talipot_core_dev
 )

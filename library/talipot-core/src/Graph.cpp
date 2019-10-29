@@ -38,6 +38,7 @@
 #include <talipot/DrawingTools.h>
 #include <talipot/ViewSettings.h>
 #include <talipot/VectorGraph.h>
+#include <talipot/FontAwesome.h>
 
 using namespace std;
 using namespace tlp;
@@ -211,41 +212,8 @@ static void setViewPropertiesDefaults(Graph *g) {
   }
 
   if (!g->existProperty(icon)) {
-    g->getStringProperty(icon)->setAllNodeValue("fa-question-circle");
-    g->getStringProperty(icon)->setAllEdgeValue("fa-question-circle");
-  }
-
-  // for backward compatibility with Tulip < 5.0
-  if (g->existLocalProperty(fontAwesomeIcon)) {
-    StringProperty *faiProp = g->getStringProperty(fontAwesomeIcon);
-    StringProperty *iProp = g->getStringProperty(icon);
-
-    // transform old font awesome icon names to new ones and store them in the viewIcon
-    // property only if the content of that property is default valuated
-    if (iProp->hasNonDefaultValuatedNodes()) {
-      iProp->setAllNodeValue("fa-" + faiProp->getNodeDefaultValue());
-      for (auto n : faiProp->getNonDefaultValuatedNodes()) {
-        const string &faIconName = faiProp->getNodeValue(n);
-
-        if (!faIconName.empty()) {
-          iProp->setNodeValue(n, "fa-" + faIconName);
-        }
-      }
-      iProp->setAllEdgeValue("fa-" + faiProp->getEdgeDefaultValue());
-      for (auto e : faiProp->getNonDefaultValuatedEdges()) {
-        const string &faIconName = faiProp->getEdgeValue(e);
-
-        if (!faIconName.empty()) {
-          iProp->setEdgeValue(e, "fa-" + faIconName);
-        }
-      }
-    }
-
-    // finally delete the old property
-    // to avoid any further overwriting of the "viewIcon" property
-    // when re-executing this piece of code after
-    // a further save/load step of this graph.
-    g->delLocalProperty(fontAwesomeIcon);
+    g->getStringProperty(icon)->setAllNodeValue(FontAwesome::Solid::QuestionCircle);
+    g->getStringProperty(icon)->setAllEdgeValue(FontAwesome::Solid::QuestionCircle);
   }
 }
 

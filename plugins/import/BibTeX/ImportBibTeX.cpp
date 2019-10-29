@@ -17,9 +17,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
+
 #include <talipot/PluginHeaders.h>
 #include <talipot/ViewSettings.h>
 #include <talipot/StringCollection.h>
+#include <talipot/FontAwesome.h>
 
 #include <xdkbibtex/file.h>
 #include <xdkbibtex/formatter.h>
@@ -1521,7 +1523,7 @@ public:
           // set rendering properties
           color->setNodeValue(publi, tlp::Color::Beige);
           label->setNodeValue(publi, key);
-          icon->setNodeValue(publi, "fa-file-text");
+          icon->setNodeValue(publi, FontAwesome::Regular::FileAlt);
         }
 
         // loop of entry fields
@@ -1990,7 +1992,7 @@ public:
                   labriTeamProp->setNodeValue(author, teams[teamIndex]);
 
                 label->setNodeValue(author, aName);
-                icon->setNodeValue(author, "fa-user");
+                icon->setNodeValue(author, FontAwesome::Solid::User);
                 countProp->setNodeValue(author, 1);
               }
 

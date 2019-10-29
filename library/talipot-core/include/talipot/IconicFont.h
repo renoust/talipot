@@ -23,7 +23,7 @@ namespace tlp {
 /**
  * @brief Helper class to ease the use of iconic fonts bundled with Talipot
  */
-class TLP_GL_SCOPE IconicFont {
+class TLP_SCOPE IconicFont {
 
 public:
   /**

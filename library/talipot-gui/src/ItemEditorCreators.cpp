@@ -37,7 +37,7 @@
 #include <talipot/FontAwesome.h>
 #include <talipot/TextureFileDialog.h>
 #include <talipot/FontIconDialog.h>
-#include <talipot/FontIconEngine.h>
+#include <talipot/FontIconManager.h>
 #include <talipot/ShapeDialog.h>
 
 using namespace tlp;
@@ -618,7 +618,7 @@ bool FontIconCreator::paint(QPainter *painter, const QStyleOptionViewItem &optio
   opt.features |= QStyleOptionViewItemV2::HasDisplay;
 #endif
 
-  opt.icon.addPixmap(FontIconEngine::pixmap(iconName, 16));
+  opt.icon = FontIconManager::icon(iconName);
 
   opt.decorationSize = opt.icon.actualSize(QSize(16, 16));
 

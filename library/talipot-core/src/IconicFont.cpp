@@ -20,41 +20,41 @@
 using namespace tlp;
 
 std::string IconicFont::getTTFLocation(const std::string &iconName) {
-  return (iconName.find("fa-") == 0) ? FontAwesome::getTTFLocation(iconName)
-                                     : MaterialDesignIcons::getTTFLocation();
+  return (iconName.find("fa") == 0) ? FontAwesome::getTTFLocation(iconName)
+                                    : MaterialDesignIcons::getTTFLocation();
 }
 
 std::string IconicFont::getWOFFLocation(const std::string &iconName) {
   assert(isIconSupported(iconName));
-  return (iconName.find("fa-") == 0) ? FontAwesome::getWOFFLocation(iconName)
-                                     : MaterialDesignIcons::getWOFFLocation();
+  return (iconName.find("fa") == 0) ? FontAwesome::getWOFFLocation(iconName)
+                                    : MaterialDesignIcons::getWOFFLocation();
 }
 
 std::string IconicFont::getWOFF2Location(const std::string &iconName) {
   assert(isIconSupported(iconName));
-  return (iconName.find("fa-") == 0) ? FontAwesome::getWOFF2Location(iconName)
-                                     : MaterialDesignIcons::getWOFF2Location();
+  return (iconName.find("fa") == 0) ? FontAwesome::getWOFF2Location(iconName)
+                                    : MaterialDesignIcons::getWOFF2Location();
 }
 
 bool IconicFont::isIconSupported(const std::string &iconName) {
-  return (iconName.find("fa-") == 0) ? FontAwesome::isIconSupported(iconName)
-                                     : MaterialDesignIcons::isIconSupported(iconName);
+  return (iconName.find("fa") == 0) ? FontAwesome::isIconSupported(iconName)
+                                    : MaterialDesignIcons::isIconSupported(iconName);
 }
 
 unsigned int IconicFont::getIconCodePoint(const std::string &iconName) {
   assert(isIconSupported(iconName));
-  return (iconName.find("fa-") == 0) ? FontAwesome::getIconCodePoint(iconName)
-                                     : MaterialDesignIcons::getIconCodePoint(iconName);
+  return (iconName.find("fa") == 0) ? FontAwesome::getIconCodePoint(iconName)
+                                    : MaterialDesignIcons::getIconCodePoint(iconName);
 }
 
 std::string IconicFont::getIconFamily(const std::string &iconName) {
   assert(isIconSupported(iconName));
-  return (iconName.find("fa-") == 0) ? FontAwesome::getIconFamily(iconName)
-                                     : MaterialDesignIcons::getIconFamily(iconName);
+  return (iconName.find("fa") == 0) ? FontAwesome::getIconFamily(iconName)
+                                    : MaterialDesignIcons::getIconFamily(iconName);
 }
 
 std::string IconicFont::getIconUtf8String(const std::string &iconName) {
   assert(isIconSupported(iconName));
-  return (iconName.find("fa-") == 0) ? FontAwesome::getIconUtf8String(iconName)
-                                     : MaterialDesignIcons::getIconUtf8String(iconName);
+  return (iconName.find("fa") == 0) ? FontAwesome::getIconUtf8String(iconName)
+                                    : MaterialDesignIcons::getIconUtf8String(iconName);
 }

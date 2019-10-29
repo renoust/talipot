@@ -17,6 +17,7 @@ Dijkstra.cpp
 DoubleProperty.cpp
 DrawingTools.cpp
 FaceIterator.cpp
+FontAwesome.cpp
 GraphAbstract.cpp
 Graph.cpp
 GraphDecorator.cpp
@@ -28,10 +29,12 @@ GraphStorage.cpp
 GraphTools.cpp
 GraphUpdatesRecorder.cpp
 GraphView.cpp
+IconicFont.cpp
 IdManager.cpp
 IntegerProperty.cpp
 LayoutProperty.cpp
 MapIterator.cpp
+MaterialDesignIcons.cpp
 NumericProperty.cpp
 Observable.cpp
 Ordering.cpp
@@ -76,6 +79,12 @@ TLPBExport.cpp
 TLPBImport.cpp
 )
 
+# disable GCC var tracking on these file as it eats too much compile time
+# and warnings are emitted otherwise
+IF(CMAKE_COMPILER_IS_GNUCXX)
+  SET_SOURCE_FILES_PROPERTIES(FontAwesome.cpp MaterialDesignIcons.cpp COMPILE_FLAGS -fno-var-tracking)
+ENDIF(CMAKE_COMPILER_IS_GNUCXX)
+
 IF(EMSCRIPTEN)
 SET(talipot_LIB_SRCS ${talipot_LIB_SRCS}
                     ../../../plugins/layout/DatasetTools.cpp
@@ -90,6 +99,25 @@ IF(HAVE_REENTRANT_QHULL)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAVE_REENTRANT_QHULL")
 ENDIF(HAVE_REENTRANT_QHULL)
 INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${PROJECT_SOURCE_DIR} ${ZLIB_INCLUDE_DIR} ${YajlInclude} ${QhullInclude} ${GZStreamInclude} ${UTF8CppInclude})
+
+ADD_CUSTOM_COMMAND(
+  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/FontAwesomeData.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/MaterialDesignIconsData.cpp
+        ${CMAKE_SOURCE_DIR}/library/talipot-core/include/talipot/FontAwesomeConstants.h
+        ${CMAKE_SOURCE_DIR}/library/talipot-core/include/talipot/MaterialDesignIcons.h
+        ${CMAKE_SOURCE_DIR}/library/talipot-python/bindings/talipot-core/FontAwesome.sip
+        ${CMAKE_SOURCE_DIR}/library/talipot-python/bindings/talipot-core/MaterialDesignIcons.sip
+  COMMAND ${PYTHON_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/utils/scripts/fonticons/generate_font_icons_data.py
+            ${CMAKE_SOURCE_DIR}
+  DEPENDS ${CMAKE_SOURCE_DIR}/utils/scripts/fonticons/generate_font_icons_data.py
+          ${CMAKE_SOURCE_DIR}/utils/scripts/fonticons/fa-icons.json
+          ${CMAKE_SOURCE_DIR}/utils/scripts/fonticons/md-icons.json
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+SET_SOURCE_FILES_PROPERTIES(FontAwesome.cpp MaterialDesignIcons.cpp
+                            PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/FontAwesomeData.cpp;${CMAKE_CURRENT_SOURCE_DIR}/MaterialDesignIconsData.cpp")
 
 ADD_LIBRARY(${LibTalipotCoreName} SHARED ${talipot_LIB_SRCS} ../include/talipot/Release.h)
 TARGET_LINK_LIBRARIES(${LibTalipotCoreName} ${GZStreamLibrary} ${YajlLibrary} ${QhullLibrary} ${CMAKE_DL_LIBS})

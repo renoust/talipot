@@ -12,7 +12,7 @@
  */
 
 #include <talipot/FontIconDialog.h>
-#include <talipot/FontIconEngine.h>
+#include <talipot/FontIconManager.h>
 #include <talipot/FontAwesome.h>
 #include <talipot/MaterialDesignIcons.h>
 #include <talipot/TlpQtTools.h>
@@ -61,7 +61,7 @@ void FontIconDialog::updateIconList() {
     QString iconName = tlpStringToQString(*it);
 
     if (regexp.indexIn(iconName) != -1) {
-      _ui->iconListWidget->addItem(new QListWidgetItem(FontIconEngine::icon(*it), iconName));
+      _ui->iconListWidget->addItem(new QListWidgetItem(FontIconManager::icon(iconName), iconName));
     }
   }
 
@@ -72,11 +72,12 @@ void FontIconDialog::updateIconList() {
     QString iconName = tlpStringToQString(*it);
 
     if (regexp.indexIn(iconName) != -1) {
-      _ui->iconListWidget->addItem(new QListWidgetItem(FontIconEngine::icon(*it), iconName));
+      _ui->iconListWidget->addItem(new QListWidgetItem(FontIconManager::icon(iconName), iconName));
     }
   }
 
   if (_ui->iconListWidget->count() > 0) {
+    _ui->iconListWidget->sortItems();
     _ui->iconListWidget->setCurrentRow(0);
   }
 }

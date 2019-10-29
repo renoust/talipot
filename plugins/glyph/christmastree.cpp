@@ -25,6 +25,7 @@
 #include <talipot/IconicFont.h>
 #include <talipot/GlLabel.h>
 #include <talipot/GlGraphRenderingParameters.h>
+#include <talipot/FontAwesome.h>
 
 using namespace std;
 using namespace tlp;
@@ -32,7 +33,7 @@ using namespace tlp;
 void drawTree(const Color &color, const Color &outlineColor, const float outlineSize,
               const std::string &texture) {
   static GlLabel label;
-  label.setFontNameSizeAndColor(IconicFont::getTTFLocation("fa-tree"), 18, color);
+  label.setFontNameSizeAndColor(IconicFont::getTTFLocation(FontAwesome::Solid::Tree), 18, color);
   label.setPosition(Coord(0, 0, 0));
   label.setSize(Size(1, 1, 0));
   label.setUseLODOptimisation(false);
@@ -40,7 +41,7 @@ void drawTree(const Color &color, const Color &outlineColor, const float outline
   label.setOutlineColor(outlineColor);
   label.setOutlineSize(outlineSize);
   label.setTextureName(texture);
-  label.setText(IconicFont::getIconUtf8String("fa-tree"));
+  label.setText(IconicFont::getIconUtf8String(FontAwesome::Solid::Tree));
   label.draw(100);
 }
 

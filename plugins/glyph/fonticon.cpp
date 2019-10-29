@@ -35,6 +35,7 @@
 #include <talipot/OpenGlConfigManager.h>
 #include <talipot/GlTextureManager.h>
 #include <talipot/ViewSettings.h>
+#include <talipot/FontAwesome.h>
 
 #define ushort_cast(x) static_cast<unsigned short>((x))
 
@@ -257,7 +258,7 @@ static FontIcon &getFontIcon(const string &iconName) {
   if (iconName.empty() || !IconicFont::isIconSupported(iconName)) {
     // initialization of defaultFontIcon is delayed
     if (defaultFontIcon.iconCodePoint == 0) {
-      static const std::string defaultIconName = "fa-question-circle";
+      static const std::string defaultIconName = FontAwesome::Solid::QuestionCircle;
       defaultFontIcon.iconCodePoint = IconicFont::getIconCodePoint(defaultIconName);
       defaultFontIcon.fontFile = IconicFont::getTTFLocation(defaultIconName);
     }

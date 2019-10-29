@@ -51,11 +51,11 @@ namespace tlp {
  *    // sets the Icon glyph on all nodes
  *    viewShape->setAllNodeValue(tlp::NodeShape::Icon);
  *    // sets the "user" glyph for all nodes
- *    viewIcon->setAllNodeValue("md-user");
+ *    viewIcon->setAllNodeValue(tlp::MaterialDesignIcons::User);
  * @endcode
  **/
 
-class TLP_GL_SCOPE MaterialDesignIcons {
+class TLP_SCOPE MaterialDesignIcons {
 
 public:
   /**
@@ -107,9 +107,11 @@ public:
    * @return
    */
   static std::string getIconUtf8String(const std::string &iconName);
-};
-}
 
+#include "MaterialDesignIconsConstants.h"
+};
+
+}
 #endif // TALIPOT_MATERIAL_DESIGN_ICONS_H
 
 ///@endcond

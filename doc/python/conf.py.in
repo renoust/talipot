@@ -189,13 +189,26 @@ def process_signature(app, what, name, obj, opts, sig, ann):
 
 # icon role taken from the sphinx-trap theme
 # (https://github.com/jfardello/Sphinxtrap)
-def faicon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
-    options.update({'classes': ["fa"] + ["fa-" + x for x in text.split(",")]})
+def fabicon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+    options.update({'classes': ["fab"] + ["fa-" + x for x in text.split(",")]})
     options['classes'].append('icon-holder')
     set_classes(options)
     node = emphasis(**options)
     return [node], []
 
+def faricon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+    options.update({'classes': ["far"] + ["fa-" + x for x in text.split(",")]})
+    options['classes'].append('icon-holder')
+    set_classes(options)
+    node = emphasis(**options)
+    return [node], []
+
+def fasicon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+    options.update({'classes': ["fas"] + ["fa-" + x for x in text.split(",")]})
+    options['classes'].append('icon-holder')
+    set_classes(options)
+    node = emphasis(**options)
+    return [node], []
 
 def mdicon_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
     options.update({
@@ -224,5 +237,7 @@ def setup(app):
     app.connect('autodoc-process-signature', process_signature)
     app.connect('autodoc-process-docstring', process_docstring)
     app.connect('source-read', source_read)
-    app.add_role('faicon', faicon_role)
+    app.add_role('fabicon', fabicon_role)
+    app.add_role('faricon', faricon_role)
+    app.add_role('fasicon', fasicon_role)
     app.add_role('mdicon', mdicon_role)

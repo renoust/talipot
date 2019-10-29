@@ -19,6 +19,7 @@
 #include <talipot/IconicFont.h>
 #include <talipot/TlpTools.h>
 #include <talipot/ParametricCurves.h>
+#include <talipot/FontAwesome.h>
 
 #include <QFile>
 
@@ -563,7 +564,7 @@ bool ExportSvg::addShape(const tlp::NodeShape::NodeShapes &type, const Coord &co
   } break;
 
   case NodeShape::ChristmasTree:
-    iconName = "fa-tree";
+    iconName = FontAwesome::Solid::Tree;
 
   case NodeShape::Icon: {
     addWebFontFromIconName(iconName);

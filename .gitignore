@@ -56,3 +56,11 @@ __pycache__/
 # Prevent committing generated doc
 doc/html
 
+# Generated source files to exclude
+library/talipot-core/include/talipot/FontAwesomeConstants.h
+library/talipot-core/include/talipot/MaterialDesignIconsConstants.h
+library/talipot-core/src/FontAwesomeData.cpp
+library/talipot-core/src/MaterialDesignIconsData.cpp
+library/talipot-python/bindings/talipot-core/FontAwesome.sip
+library/talipot-python/bindings/talipot-core/MaterialDesignIcons.sip
+doc/python/fonticons.rst
