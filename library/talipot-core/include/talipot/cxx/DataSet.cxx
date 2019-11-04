@@ -15,14 +15,11 @@
 // DataSet implementation
 template <typename T>
 bool tlp::DataSet::get(const std::string &str, T &value) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    const std::pair<std::string, tlp::DataType *> &p = *it;
+  auto it = data.find(str);
 
-    if (p.first == str) {
-      value = *(static_cast<T *>(p.second->value));
-      return true;
-    }
+  if (it != data.end()) {
+    value = *(static_cast<T *>(it->second->value));
+    return true;
   }
 
   return false;
@@ -30,18 +27,13 @@ bool tlp::DataSet::get(const std::string &str, T &value) const {
 
 template <typename T>
 bool tlp::DataSet::getAndFree(const std::string &str, T &value) {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    std::pair<std::string, tlp::DataType *> &p = *it;
-
-    if (p.first == str) {
-      value = *(static_cast<T *>(p.second->value));
-      delete p.second;
-      data.erase(it);
-      return true;
-    }
+  auto it = data.find(str);
+  if (it != data.end()) {
+    value = *(static_cast<T *>(it->second->value));
+    delete it->second;
+    data.erase(it);
+    return true;
   }
-
   return false;
 }
 

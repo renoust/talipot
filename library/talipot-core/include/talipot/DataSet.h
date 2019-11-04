@@ -14,14 +14,14 @@
 #ifndef TALIPOT_DATA_SET_H
 #define TALIPOT_DATA_SET_H
 
-#include <unordered_map>
 #include <talipot/config.h>
 #include <talipot/StlIterator.h>
 
+#include <map>
 #include <string>
 #include <sstream>
 #include <typeinfo>
-#include <list>
+#include <unordered_map>
 
 namespace tlp {
 
@@ -181,8 +181,8 @@ public:
  *set by the user.
  **/
 class TLP_SCOPE DataSet {
-  // Internal list of key-value pairs.
-  std::list<std::pair<std::string, DataType *>> data;
+  // Internal map of key to data
+  std::map<std::string, DataType *> data;
   /* management of data serialization
       two hashmap to retrieve data serializer from their
       type names and output type names

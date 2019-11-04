@@ -59,84 +59,64 @@ DataSet::DataSet(const DataSet &set) {
 DataSet &DataSet::operator=(const DataSet &set) {
   if (this != &set) {
     data.clear();
-
-    for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = set.data.begin();
-         it != set.data.end(); ++it) {
-      data.push_back(std::pair<std::string, tlp::DataType *>((*it).first, (*it).second->clone()));
+    for (const auto &it : set.data) {
+      data.emplace(it.first, it.second->clone());
     }
   }
-
   return *this;
 }
 
 DataSet::~DataSet() {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    if (it->second)
-      delete it->second;
-  }
-}
-
-bool DataSet::exists(const string &str) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    if ((*it).first == str)
-      return true;
-  }
-
-  return false;
-}
-
-std::string DataSet::getTypeName(const string &str) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    if (it->first == str)
-      return it->second->getTypeName();
-  }
-
-  return std::string();
-}
-
-void DataSet::remove(const string &str) {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    if ((*it).first == str) {
-      if (it->second)
-        delete it->second;
-
-      data.erase(it);
-      break;
+  for (const auto &it : data) {
+    if (it.second) {
+      delete it.second;
     }
   }
 }
 
-DataType *DataSet::getData(const string &str) const {
-  for (std::list<std::pair<std::string, tlp::DataType *>>::const_iterator it = data.begin();
-       it != data.end(); ++it) {
-    if ((*it).first == str)
-      return it->second ? it->second->clone() : nullptr;
-  }
+bool DataSet::exists(const string &str) const {
+  return data.find(str) != data.end();
+}
 
+std::string DataSet::getTypeName(const string &str) const {
+  auto it = data.find(str);
+  if (it != data.end()) {
+    return it->second->getTypeName();
+  }
+  return "";
+}
+
+void DataSet::remove(const string &str) {
+  auto it = data.find(str);
+
+  if (it != data.end()) {
+    if (it->second) {
+      delete it->second;
+    }
+
+    data.erase(it);
+  }
+}
+
+DataType *DataSet::getData(const string &str) const {
+  auto it = data.find(str);
+  if (it != data.end()) {
+    return it->second ? it->second->clone() : nullptr;
+  }
   return nullptr;
 }
 
 void DataSet::setData(const std::string &str, const DataType *value) {
   DataType *val = value ? value->clone() : nullptr;
-
-  for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-       it != data.end(); ++it) {
-    std::pair<std::string, tlp::DataType *> &p = *it;
-
-    if (p.first == str) {
-      if (p.second)
-        delete p.second;
-
-      p.second = val;
-      return;
+  auto it = data.find(str);
+  if (it != data.end()) {
+    if (it->second) {
+      delete it->second;
     }
+    it->second = val;
+    return;
   }
-
-  data.push_back(std::pair<std::string, tlp::DataType *>(str, val));
+  data.emplace(str, val);
 }
 
 unsigned int DataSet::size() const {
@@ -148,11 +128,7 @@ bool DataSet::empty() const {
 }
 
 Iterator<pair<string, DataType *>> *DataSet::getValues() const {
-  list<pair<string, DataType *>>::const_iterator begin = data.begin();
-  list<pair<string, DataType *>>::const_iterator end = data.end();
-
-  return new StlIterator<pair<string, DataType *>, list<pair<string, DataType *>>::const_iterator>(
-      begin, end);
+  return stlMapIterator(data);
 }
 
 // management of the serialization
@@ -226,21 +202,17 @@ bool DataSet::readData(std::istream &is, const std::string &prop,
 
   if (dt) {
     // replace any preexisting value associated to prop
-    for (std::list<std::pair<std::string, tlp::DataType *>>::iterator it = data.begin();
-         it != data.end(); ++it) {
-      std::pair<std::string, tlp::DataType *> &p = *it;
-
-      if (p.first == prop) {
-        if (p.second)
-          delete p.second;
-
-        p.second = dt;
-        return true;
+    auto it = data.find(prop);
+    if (it != data.end()) {
+      if (it->second) {
+        delete it->second;
       }
+      it->second = dt;
+      return true;
     }
 
     // no preexisting value
-    data.push_back(std::pair<std::string, tlp::DataType *>(prop, dt));
+    data.emplace(prop, dt);
     return true;
   }
 
