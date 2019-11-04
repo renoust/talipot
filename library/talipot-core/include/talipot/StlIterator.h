@@ -38,9 +38,7 @@ template <typename T, typename ITERATOR>
 struct StlIterator : public Iterator<T> {
   StlIterator(const ITERATOR &startIt, const ITERATOR &endIt) : it(startIt), itEnd(endIt) {}
   T next() {
-    T tmp = *it;
-    ++it;
-    return tmp;
+    return *it++;
   }
   bool hasNext() {
     return (itEnd != it);
@@ -90,16 +88,14 @@ typename std::enable_if<
 }
 
 //=================================================
-template <typename KEY, typename VALUE>
-struct StlMapIterator : public Iterator<std::pair<KEY, VALUE>> {
-  StlMapIterator(typename std::map<KEY, VALUE>::const_iterator startIt,
-                 typename std::map<KEY, VALUE>::const_iterator endIt)
+template <typename Map>
+struct StlMapIterator
+    : public Iterator<std::pair<typename Map::key_type, typename Map::mapped_type>> {
+  StlMapIterator(typename Map::const_iterator startIt, typename Map::const_iterator endIt)
       : it(startIt), itEnd(endIt) {}
 
-  std::pair<KEY, VALUE> next() {
-    std::pair<KEY, VALUE> tmp = *it;
-    ++it;
-    return tmp;
+  std::pair<typename Map::key_type, typename Map::mapped_type> next() {
+    return *it++;
   }
 
   bool hasNext() {
@@ -107,17 +103,22 @@ struct StlMapIterator : public Iterator<std::pair<KEY, VALUE>> {
   }
 
 private:
-  typename std::map<KEY, VALUE>::const_iterator it, itEnd;
+  typename Map::const_iterator it, itEnd;
 };
 //=================================================
-template <typename KEY, typename VALUE>
-struct StlMapKeyIterator : public tlp::Iterator<KEY> {
-  StlMapKeyIterator(typename std::map<KEY, VALUE>::const_iterator startIt,
-                    typename std::map<KEY, VALUE>::const_iterator endIt)
+template <typename Map>
+typename std::enable_if<has_const_iterator<Map>::value,
+                        StlMapIterator<Map> *>::type inline stlMapIterator(const Map &map) {
+  return new StlMapIterator<Map>(map.begin(), map.end());
+}
+//=================================================
+template <typename Map>
+struct StlMapKeyIterator : public tlp::Iterator<typename Map::key_type> {
+  StlMapKeyIterator(typename Map::const_iterator startIt, typename Map::const_iterator endIt)
       : it(startIt), itEnd(endIt) {}
 
-  KEY next() {
-    const KEY tmp = it->first;
+  typename Map::key_type next() {
+    auto tmp = it->first;
     ++it;
     return tmp;
   }
@@ -127,8 +128,14 @@ struct StlMapKeyIterator : public tlp::Iterator<KEY> {
   }
 
 private:
-  typename std::map<KEY, VALUE>::const_iterator it, itEnd;
+  typename Map::const_iterator it, itEnd;
 };
+//=================================================
+template <typename Map>
+typename std::enable_if<has_const_iterator<Map>::value,
+                        StlMapKeyIterator<Map> *>::type inline stlMapKeyIterator(const Map &map) {
+  return new StlMapKeyIterator<Map>(map.begin(), map.end());
+}
 }
 
 #endif // TALIPOT_STL_ITERATOR_H

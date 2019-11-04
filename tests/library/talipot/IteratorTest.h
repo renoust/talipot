@@ -37,6 +37,7 @@ class IteratorTest : public CppUnit::TestFixture {
   CPPUNIT_TEST(testIteratorReduce);
   CPPUNIT_TEST(testIteratorCountCheck);
   CPPUNIT_TEST(testIteratorToStlContainers);
+  CPPUNIT_TEST(testStlMapIterator);
   CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -58,6 +59,7 @@ public:
   void testIteratorReduce();
   void testIteratorCountCheck();
   void testIteratorToStlContainers();
+  void testStlMapIterator();
 };
 
 #endif // ITERATOR_TEST_H

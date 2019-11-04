@@ -178,3 +178,22 @@ void IteratorTest::testIteratorToStlContainers() {
     CPPUNIT_ASSERT(sNodes.find(n) != sNodes.end());
   }
 }
+
+void IteratorTest::testStlMapIterator() {
+  std::map<std::string, int> m{{"key1", 3}, {"key2", 67}, {"key3", -34}};
+  size_t size = 0;
+  for (const auto &kv : tlp::stlMapIterator(m)) {
+    auto it = m.find(kv.first);
+    CPPUNIT_ASSERT(it != m.end());
+    CPPUNIT_ASSERT_EQUAL(kv.second, it->second);
+    ++size;
+  }
+  CPPUNIT_ASSERT_EQUAL(size, m.size());
+  size = 0;
+  for (const auto &k : tlp::stlMapKeyIterator(m)) {
+    auto it = m.find(k);
+    CPPUNIT_ASSERT(it != m.end());
+    ++size;
+  }
+  CPPUNIT_ASSERT_EQUAL(size, m.size());
+}
