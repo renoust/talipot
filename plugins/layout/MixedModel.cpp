@@ -358,13 +358,13 @@ void MixedModel::placeNodesEdges() {
       vector<Coord> bends;
 
       if (rs > rt) {
-        cs = std::move(InPoints[e][0] + NodeCoords[src]);
-        ct = std::move(OutPoints[e] + NodeCoords[tgt]);
-        c = std::move(Coord(ct.getX(), cs.getY(), 0));
+        cs = InPoints[e][0] + NodeCoords[src];
+        ct = OutPoints[e] + NodeCoords[tgt];
+        c = Coord(ct.getX(), cs.getY(), 0);
       } else {
-        ct = std::move(InPoints[e][0] + NodeCoords[tgt]);
-        cs = std::move(OutPoints[e] + NodeCoords[src]);
-        c = std::move(Coord(cs.getX(), ct.getY(), 0));
+        ct = InPoints[e][0] + NodeCoords[tgt];
+        cs = OutPoints[e] + NodeCoords[src];
+        c = Coord(cs.getX(), ct.getY(), 0);
       }
 
       if (ct.getX() >= maxX)
