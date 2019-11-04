@@ -24,25 +24,15 @@ bash -lc "pacman --noconfirm --sync --refresh --sysupgrade"
 rem Install required tools
 bash -lc "pacman --noconfirm -S --needed base-devel unzip"
 
-rem Remove Ada and ObjC compilers as they are now dropped by MSYS2
-rem and cause conflicts for installing GCC 9
-rem (see https://github.com/msys2/MINGW-packages/issues/5434)
-bash -lc "pacman --noconfirm -R mingw-w64-%MSYS2_ARCH%-gcc-ada"
-bash -lc "pacman --noconfirm -R mingw-w64-%MSYS2_ARCH%-gcc-objc"
-rem These two packages must also be removed as they are outdated
-rem and break GCC 9 install on AppVeyor environment
-bash -lc "pacman --noconfirm -Rdd mingw-w64-%MSYS2_ARCH%-ncurses"
-bash -lc "pacman --noconfirm -Rdd mingw-w64-%MSYS2_ARCH%-termcap"
-
 rem Always install latest GCC toolchain in order to detect possible build failures
 rem when its version evolves
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-toolchain"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-toolchain"
 
 rem Install the relevant native dependencies
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-ccache"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-yajl"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qhull"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-cppunit"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-ccache"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-yajl"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-qhull"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-cppunit"
 
 set TALIPOT_BUILD_DOC=OFF
 
@@ -53,11 +43,11 @@ if "%TALIPOT_BUILD_CORE_ONLY%" == "0" (
 )
 
 :install_complete_talipot_build_dependencies
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-freetype"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-glew"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qt5"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-quazip"
-bash -lc "pacman --noconfirm -S --needed --force mingw-w64-%MSYS2_ARCH%-qtwebkit"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-freetype"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-glew"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-qt5"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-quazip"
+bash -lc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-qtwebkit"
 rem Workaround a MSYS2 packaging issue for Qt5
 rem (see https://github.com/msys2/MINGW-packages/issues/5253)
 rem Qt 5.12.3
