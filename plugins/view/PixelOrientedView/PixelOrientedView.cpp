@@ -437,8 +437,8 @@ void PixelOrientedView::destroyOverviewsIfNeeded() {
 }
 
 void PixelOrientedView::destroyData() {
-  for (map<string, GraphDimension *>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
-    delete it->second;
+  for (const auto &it : dataMap) {
+    delete it.second;
   }
 
   dataMap.clear();
@@ -638,13 +638,12 @@ void PixelOrientedView::updateOverviews(const bool updateAll) {
   // before allowing the progressBar display
   QApplication::processEvents();
 
-  for (map<string, PixelOrientedOverview *>::iterator it = overviewsMap.begin();
-       it != overviewsMap.end(); ++it) {
-    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it->first) !=
+  for (const auto &it : overviewsMap) {
+    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it.first) !=
         selectedGraphProperties.end()) {
-      if (updateAll || overviewGenMap[it->first]) {
-        (it->second)->computePixelView();
-        overviewGenMap[it->first] = true;
+      if (updateAll || overviewGenMap[it.first]) {
+        it.second->computePixelView();
+        overviewGenMap[it.first] = true;
       }
 
       progressBar->progress(++currentStep, nbOverviews);
@@ -679,11 +678,10 @@ void PixelOrientedView::updateOverviews(const bool updateAll) {
 vector<PixelOrientedOverview *> PixelOrientedView::getOverviews() {
   vector<PixelOrientedOverview *> ret;
 
-  for (map<string, PixelOrientedOverview *>::const_iterator it = overviewsMap.begin();
-       it != overviewsMap.end(); ++it) {
-    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it->first) !=
+  for (const auto &it : overviewsMap) {
+    if (std::find(selectedGraphProperties.begin(), selectedGraphProperties.end(), it.first) !=
         selectedGraphProperties.end()) {
-      ret.push_back(it->second);
+      ret.push_back(it.second);
     }
   }
 

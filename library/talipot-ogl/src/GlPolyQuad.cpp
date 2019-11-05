@@ -249,10 +249,8 @@ void GlPolyQuad::setWithXML(const string &inString, unsigned int &currentPositio
   GlXMLTools::setWithXML(inString, currentPosition, "polyQuadEdgesColors", polyQuadEdgesColors);
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
 
-  vector<Coord>::iterator it;
-
-  for (it = polyQuadEdges.begin(); it != polyQuadEdges.end(); ++it) {
-    boundingBox.expand(*it);
+  for (const auto &p : polyQuadEdges) {
+    boundingBox.expand(p);
   }
 }
 }

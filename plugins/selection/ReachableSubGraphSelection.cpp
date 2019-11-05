@@ -119,25 +119,21 @@ bool ReachableSubGraphSelection::run() {
     result->setAllNodeValue(false);
 
     // iterate on startNodes add them and their reachables
-    for (const node &current : itN) {
+    for (auto current : itN) {
       reachables[current] = true;
       markReachableNodes(graph, current, reachables, maxDistance, edgeDirection);
     }
 
-    std::unordered_map<node, bool>::const_iterator itr = reachables.begin();
-    std::unordered_map<node, bool>::const_iterator ite = reachables.end();
-
     // select nodes
-    while (itr != ite) {
-      result->setNodeValue(itr->first, true);
-      ++itr;
+    for (const auto &itr : reachables) {
+      result->setNodeValue(itr.first, true);
       ++num_nodes;
     }
 
+    auto ite = reachables.end();
     // select corresponding edges
-    for (const edge &e : graph->edges()) {
-      const std::pair<node, node> &ends = graph->ends(e);
-
+    for (auto e : graph->edges()) {
+      const auto &ends = graph->ends(e);
       if ((reachables.find(ends.first) != ite) && (reachables.find(ends.second) != ite)) {
         result->setEdgeValue(e, true);
         ++num_edges;

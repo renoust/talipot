@@ -75,8 +75,7 @@ class PluginModel : public tlp::Model {
     QMap<QString, QMap<QString, QStringList>> pluginTree;
     std::list<std::string> plugins = PluginsManager::availablePlugins<PLUGIN>();
 
-    for (std::list<std::string>::iterator it = plugins.begin(); it != plugins.end(); ++it) {
-      std::string name = *it;
+    for (const auto &name : plugins) {
       const Plugin &plugin = PluginsManager::pluginInformation(name);
       pluginTree[tlp::tlpStringToQString(plugin.category())]
                 [tlp::tlpStringToQString(plugin.group())]

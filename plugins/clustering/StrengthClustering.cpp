@@ -30,13 +30,11 @@ double StrengthClustering::computeMQValue(const vector<unordered_set<node>> &par
   map<pair<unsigned int, unsigned int>, unsigned int> nbExtraEdges;
 
   MutableContainer<unsigned int> clusterId;
-  auto itPart = partition.begin();
 
-  for (unsigned int i = 0; itPart != partition.end(); ++itPart, ++i) {
-    auto itSet = itPart->begin();
-
-    for (; itSet != itPart->end(); ++itSet) {
-      clusterId.set(itSet->id, i);
+  unsigned int i = 0;
+  for (const auto &p : partition) {
+    for (auto n : p) {
+      clusterId.set(n.id, i++);
     }
   }
 
@@ -77,11 +75,10 @@ double StrengthClustering::computeMQValue(const vector<unordered_set<node>> &par
   positive /= double(partition.size());
 
   double negative = 0;
-  map<pair<unsigned int, unsigned int>, unsigned int>::const_iterator itMap = nbExtraEdges.begin();
 
-  for (; itMap != nbExtraEdges.end(); ++itMap) {
-    const pair<unsigned int, unsigned int> &pp = itMap->first;
-    unsigned int val = itMap->second;
+  for (const auto &itMap : nbExtraEdges) {
+    const auto &pp = itMap.first;
+    unsigned int val = itMap.second;
 
     if (!partition[pp.first].empty() && !partition[pp.second].empty())
       negative += double(val) / double(partition[pp.first].size() * partition[pp.second].size());
@@ -251,10 +248,8 @@ bool StrengthClustering::run() {
   computeNodePartition(threshold, tmp);
 
   for (unsigned int i = 0; i < tmp.size(); ++i) {
-    unordered_set<node>::const_iterator it;
-
-    for (it = tmp[i].begin(); it != tmp[i].end(); ++it) {
-      result->setNodeValue(*it, i);
+    for (auto n : tmp[i]) {
+      result->setNodeValue(n, i);
     }
   }
 

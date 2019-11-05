@@ -79,11 +79,9 @@ void EdgeSetType::writeb(ostream &oss, const RealType &v) {
   // write the size of the set
   oss.write(reinterpret_cast<const char *>(&vSize), sizeof(vSize));
 
-  set<edge>::const_iterator it;
-
   // loop to write the edges
-  for (it = v.begin(); it != v.end(); ++it)
-    oss.write(reinterpret_cast<const char *>(&(it->id)), sizeof(unsigned int));
+  for (auto e : v)
+    oss.write(reinterpret_cast<const char *>(&(e.id)), sizeof(unsigned int));
 }
 
 bool EdgeSetType::read(istream &is, RealType &v) {

@@ -50,16 +50,10 @@ bool PlanarityTestImpl::isPlanar(bool embedsg) {
     // finds all terminal nodes and their respective components in T[V_G \ L];
     findTerminalNodes(sg, n1, listOfComponents, terminalNodes);
 
-    for (list<node>::iterator it = listOfComponents.begin(); it != listOfComponents.end(); ++it) {
-      node comp = *it;
+    for (auto comp : listOfComponents) {
 
       if (terminalNodes[comp].size() > 0) {
         // creates a new c-node to represent current component;
-        //  tlp::warning() << "  *terminal nodes for w = " << dfsPosNum.get(n1.id) << ":\n";
-        //  tlp::warning() << "    in component (" << dfsPosNum.get(comp.id) << "): ";
-        //  for (list<node>::iterator it2= terminalNodes[comp].begin();
-        //  it2!=terminalNodes[comp].end(); ++it2)
-        //    tlp::warning() << dfsPosNum.get(it2->id) << ",";
         node newCNode = sg->addNode();
         dfsPosNum.set(newCNode.id, -(++totalCNodes)); // marks as c-node;
 
@@ -75,7 +69,6 @@ bool PlanarityTestImpl::isPlanar(bool embedsg) {
         }
 
         // calculates RBC, label_b, etc, for new c-node;
-        //  tlp::debug() << "setInfoForNewCNode call " << endl;
         setInfoForNewCNode(sg, n1, newCNode, terminalNodes[comp]);
       }
     }
@@ -86,17 +79,14 @@ bool PlanarityTestImpl::isPlanar(bool embedsg) {
     embedRoot(sg, nbOfNodes);
 
   // restores G;
-  // forall_nodes(u, G)
-
   for (auto n2 : stableIterator(sg->getNodes())) {
 
     if (isCNode(n2))
       sg->delNode(n2, true);
   }
 
-  //  tlp::debug() << "Le sge est " << (planar ? "planaire" : "non planaire") << endl;
   restore();
-//  displayMap(sg);
+
 #ifndef NDEBUG
 
   if (planar && embedsg)
@@ -112,18 +102,13 @@ std::list<edge> PlanarityTestImpl::getObstructions() {
 //=================================================================
 void PlanarityTestImpl::restore() {
   // update obstruction edges to select only original edges
-  list<edge>::iterator it;
-
-  for (it = obstructionEdges.begin(); it != obstructionEdges.end(); ++it) {
-    if (bidirectedEdges.find(*it) != bidirectedEdges.end())
-      *it = bidirectedEdges[*it];
+  for (auto &e : obstructionEdges) {
+    if (bidirectedEdges.find(e) != bidirectedEdges.end())
+      e = bidirectedEdges[e];
   }
 
-  // delete edges added in bidirected
-  unordered_map<edge, edge>::const_iterator it2;
-
-  for (it2 = bidirectedEdges.begin(); it2 != bidirectedEdges.end(); ++it2) {
-    sg->delEdge(it2->first, true);
+  for (const auto &it : bidirectedEdges) {
+    sg->delEdge(it.first, true);
   }
 }
 
@@ -156,22 +141,19 @@ void PlanarityTestImpl::init() {
   p0.setAll(NULL_NODE);
   cNodeOfPossibleK33Obstruction = NULL_NODE;
   counter.setAll(0);
-  // if(SimpleTest::isSimple(sG))
   makeBidirected(sg);
 }
 //=================================================================
 void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfComponents,
                                           map<node, list<node>> &terminalNodes) {
   // to remove an element from list terminal_nodes in constant time;
-  // map<node, list_item> terminal_nodes_item;
-  map<node, node> terminalNodesItem; //!!!! attention normalement list item pour l'efficacite
+  map<node, node> terminalNodesItem;
   map<node, node> componentOf;
   list<node> traversedNodes; // to restore state[u] for all traversed node u;
   list<edge> listEdges;
   componentOf[n] = NULL_NODE;
   state.set(n.id, VISITED);
   traversedNodes.push_back(n);
-  // forall_out_edges(e, n) {
 
   for (auto e : sG->getOutEdges(n)) {
     node target = sG->target(e);
@@ -181,7 +163,6 @@ void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfC
       list<node> S; // helps calculate representant of 2-connected component;
 
       if (embed) {
-        //  edgeReversal(e);
         listEdges.push_back(edgeReversal(e));
       }
 
@@ -190,8 +171,6 @@ void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfC
       // looks for a terminal node, upward in T;
       while (state.get(target.id) != VISITED && state.get(target.id) != TERMINAL) {
 
-        //  tlp::warning() << dfsPosNum.get(target.id) << "(" <<
-        //  dfsPosNum.get(parent.get(target.id).id) << "), ";
         assert(target.isValid());
 
         if (isCNode(parent.get(target.id))) {
@@ -231,8 +210,6 @@ void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfC
         node c = componentOf[terminalNode];
         // add the terminal node found in the terminal_nodes list
         // of its respective component;
-        // terminalNodesItem[terminalNode] =
-        //  terminalNodes[c].push_back(terminalNode);
         terminalNodes[c].push_back(terminalNode);
         terminalNodesItem[terminalNode] = terminalNode;
         neighborWTerminal.set(terminalNode.id, neighborOfN);
@@ -250,15 +227,12 @@ void PlanarityTestImpl::findTerminalNodes(Graph *sG, node n, list<node> &listOfC
   }
 
   // groups all back-edges in T_w by their respective 2-connected component;
-  // forall(e, listEdges)
-  for (list<edge>::iterator it = listEdges.begin(); it != listEdges.end(); ++it)
-    listBackEdges[componentOf[sG->source(*it)]].push_back(*it);
+  for (auto e : listEdges)
+    listBackEdges[componentOf[sG->source(e)]].push_back(e);
 
   // restores state[target] for all traversed nodes target;
-  // node target;
-  // forall (target, traversed_nodes)
-  for (list<node>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto n : traversedNodes)
+    state.set(n.id, NOT_VISITED);
 }
 //=================================================================
 bool PlanarityTestImpl::findObstruction(Graph *sG, node n, list<node> &terminalNodes) {
@@ -451,7 +425,6 @@ bool PlanarityTestImpl::findObstruction(Graph *sG, node n, list<node> &terminalN
 //=================================================================
 void PlanarityTestImpl::setInfoForNewCNode(Graph *sG, node n, node newCNode,
                                            list<node> &terminalNodes) {
-  // largest_neighbor[newCNode] = dfspos_num[n];
   labelB.set(newCNode.id, dfsPosNum.get(n.id));
 
   if (embed) // needed to calculate obstruction edges;

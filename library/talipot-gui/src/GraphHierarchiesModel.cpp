@@ -364,7 +364,7 @@ QMap<QString, tlp::Graph *> GraphHierarchiesModel::readProject(tlp::Project *pro
     } else {
       // failure when loading a graph
       // so delete already loaded graphs
-      for (QMap<QString, tlp::Graph *>::iterator it = rootIds.begin(); it != rootIds.end(); ++it) {
+      for (auto it = rootIds.begin(); it != rootIds.end(); ++it) {
         delete it.value();
       }
 

@@ -25,9 +25,8 @@ namespace tlp {
 void drawComposite(GlComposite *composite, float lod, Camera *camera) {
   map<string, GlSimpleEntity *> glEntities(composite->getGlEntities());
 
-  for (map<string, GlSimpleEntity *>::const_iterator it2 = glEntities.begin();
-       it2 != glEntities.end(); ++it2) {
-    GlSimpleEntity *entity = it2->second;
+  for (const auto &it : glEntities) {
+    GlSimpleEntity *entity = it.second;
     GlComposite *compositeEntity = dynamic_cast<GlComposite *>(entity);
 
     if (compositeEntity != nullptr) {

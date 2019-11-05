@@ -56,11 +56,10 @@ TreeReingoldAndTilfordExtended::~TreeReingoldAndTilfordExtended() {}
 //=============================================================================
 double TreeReingoldAndTilfordExtended::calcDecal(const std::list<LR> &arbreG,
                                                  const std::list<LR> &arbreD) {
-  list<LR>::const_iterator itG, itD;
   double decal = 0;
   int iG = 0, iD = 0;
-  itG = arbreG.begin();
-  itD = arbreD.begin();
+  auto itG = arbreG.begin();
+  auto itD = arbreD.begin();
   decal = ((*itG).R - (*itD).L + nodeSpacing);
   iG += std::min((*itG).size, (*itD).size);
   iD += std::min((*itG).size, (*itD).size);
@@ -261,8 +260,8 @@ list<LR> *TreeReingoldAndTilfordExtended::TreePlace(tlp::node n,
     tmpLR.size = 1;
     leftTree->push_front(tmpLR);
 
-    list<double>::const_iterator itI = childPos.begin();
-    for (const edge &ite : tree->getOutEdges(n)) {
+    auto itI = childPos.begin();
+    for (edge ite : tree->getOutEdges(n)) {
       itn = tree->target(ite);
       (*p)[itn] = *itI - posFather;
       ++itI;
@@ -287,12 +286,12 @@ void TreeReingoldAndTilfordExtended::TreeLevelSizing(tlp::node n,
     maxSize[level] = sizes->getNodeValue(n).getH();
 
   if (useLength) {
-    for (const edge &ite : tree->getOutEdges(n)) {
+    for (edge ite : tree->getOutEdges(n)) {
       node itn = tree->target(ite);
       TreeLevelSizing(itn, maxSize, level + (lengthMetric->getEdgeValue(ite)), levels);
     }
   } else {
-    for (const node &itn : tree->getOutNodes(n)) {
+    for (auto itn : tree->getOutNodes(n)) {
       TreeLevelSizing(itn, maxSize, level + 1, levels);
     }
   }
@@ -456,7 +455,7 @@ bool TreeReingoldAndTilfordExtended::run() {
 
   // rotate layout and size
   if (orientation == "horizontal") {
-    for (const node &n : tree->nodes()) {
+    for (auto n : tree->nodes()) {
       const Coord &tmpC = result->getNodeValue(n);
       result->setNodeValue(n, Coord(-tmpC[1], tmpC[0], tmpC[2]));
     }

@@ -86,16 +86,16 @@ GlComposite *readPolyFile(QString fileName) {
     float lng;
     float lat;
 
-    for (auto it = strList.begin(); it != strList.end(); ++it) {
-      (*it).toDouble(&ok);
+    for (const auto &s : strList) {
+      s.toDouble(&ok);
 
       if (ok) {
         if (!findLng) {
           findLng = true;
-          lng = (*it).toDouble();
+          lng = s.toDouble();
         } else {
           findLat = true;
-          lat = (*it).toDouble();
+          lat = s.toDouble();
         }
       }
     }
@@ -241,16 +241,16 @@ void simplifyPolyFile(QString fileName, float definition) {
     float lng;
     float lat;
 
-    for (auto it = strList.begin(); it != strList.end(); ++it) {
-      (*it).toDouble(&ok);
+    for (const auto &s : strList) {
+      s.toDouble(&ok);
 
       if (ok) {
         if (!findLng) {
           findLng = true;
-          lng = (*it).toDouble();
+          lng = s.toDouble();
         } else {
           findLat = true;
-          lat = (*it).toDouble();
+          lat = s.toDouble();
         }
       }
     }
@@ -305,30 +305,30 @@ void simplifyPolyFile(QString fileName, float definition) {
 
   Coord *lastCoord = nullptr;
 
-  for (auto it1 = clearPolygons.begin(); it1 != clearPolygons.end(); ++it1) {
-    out << (*it1).first.c_str();
+  for (auto &it1 : clearPolygons) {
+    out << it1.first.c_str();
 
     unsigned int i = 1;
 
-    for (auto it2 = (*it1).second.begin(); it2 != (*it1).second.end(); ++it2) {
+    for (auto &it2 : it1.second) {
       out << i << "\n";
 
-      for (auto it3 = (*it2).begin(); it3 != (*it2).end(); ++it3) {
+      for (auto &c : it2) {
         if (lastCoord == nullptr) {
-          out << (*it3)[0] << " " << (*it3)[1] << "\n";
-          lastCoord = &(*it3);
+          out << c[0] << " " << c[1] << "\n";
+          lastCoord = &c;
         } else {
-          if ((*lastCoord).dist(*it3) > definition) {
-            if (simplifiedCoord.count(*it3) == 0) {
-              out << (*it3)[0] << " " << (*it3)[1] << "\n";
-              lastCoord = &(*it3);
+          if ((*lastCoord).dist(c) > definition) {
+            if (simplifiedCoord.count(c) == 0) {
+              out << c[0] << " " << c[1] << "\n";
+              lastCoord = &c;
             } else {
-              lastCoord = &simplifiedCoord[*it3];
+              lastCoord = &simplifiedCoord[c];
               out << (*lastCoord)[0] << " " << (*lastCoord)[1] << "\n";
             }
           } else {
-            if (simplifiedCoord.count(*it3) == 0)
-              simplifiedCoord[*it3] = *lastCoord;
+            if (simplifiedCoord.count(c) == 0)
+              simplifiedCoord[c] = *lastCoord;
           }
         }
       }
@@ -658,14 +658,13 @@ void GeographicViewGraphicsView::mapToPolygon() {
 
     Coord nodePos = geoLayout->getNodeValue(n);
 
-    for (auto it = entities.begin(); it != entities.end(); ++it) {
-      if ((*it).second->getBoundingBox().contains(nodePos)) {
-        GlComplexPolygon *polygon = static_cast<GlComplexPolygon *>((*it).second);
+    for (const auto &entity : entities) {
+      if (entity.second->getBoundingBox().contains(nodePos)) {
+        GlComplexPolygon *polygon = static_cast<GlComplexPolygon *>(entity.second);
 
-        const vector<vector<Coord>> polygonSides = polygon->getPolygonSides();
+        const auto &polygonSides = polygon->getPolygonSides();
 
-        for (auto it2 = polygonSides.begin(); it2 != polygonSides.end(); ++it2) {
-          vector<Coord> polygonSide = (*it2);
+        for (const auto &polygonSide : polygonSides) {
           bool oddNodes = false;
           Coord lastCoord = polygonSide[0];
 
@@ -685,8 +684,8 @@ void GeographicViewGraphicsView::mapToPolygon() {
 
             BoundingBox bb;
 
-            for (auto it3 = polygonSides[0].begin(); it3 != polygonSides[0].end(); ++it3) {
-              bb.expand(*it3);
+            for (const auto &c : polygonSides[0]) {
+              bb.expand(c);
             }
 
             geoLayout->setNodeValue(n, bb.center());

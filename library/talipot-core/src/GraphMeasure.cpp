@@ -153,11 +153,10 @@ void tlp::clusteringCoefficient(const Graph *graph, tlp::NodeStaticProperty<doub
     markReachableNodes(graph, n, reachables, maxDepth);
     double nbEdge = 0; // e(N_v)*2$
 
-    std::unordered_map<node, bool>::const_iterator itr = reachables.begin();
-    std::unordered_map<node, bool>::const_iterator ite = reachables.end();
+    auto ite = reachables.end();
 
-    while (itr != ite) {
-      node itn = itr->first;
+    for (const auto &itr : reachables) {
+      node itn = itr.first;
 
       for (auto e : graph->getInOutEdges(itn)) {
         auto eEnds = graph->ends(e);
@@ -166,8 +165,6 @@ void tlp::clusteringCoefficient(const Graph *graph, tlp::NodeStaticProperty<doub
           ++nbEdge;
         }
       }
-
-      ++itr;
     }
 
     double nNode = reachables.size(); //$|N_v|$

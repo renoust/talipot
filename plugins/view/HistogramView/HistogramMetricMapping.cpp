@@ -512,9 +512,9 @@ int GlGlyphScale::getGlyphAtPos(const Coord &pos) {
     } else if (pos.getY() > baseCoord.getY() + length) {
       return glyphScaleMap[make_pair(baseCoord.getY() + length - size, baseCoord.getY() + length)];
     } else {
-      for (auto it = glyphScaleMap.begin(); it != glyphScaleMap.end(); ++it) {
-        if (pos.getY() >= (*it).first.first && pos.getY() < (*it).first.second) {
-          return (*it).second;
+      for (const auto &it : glyphScaleMap) {
+        if (pos.getY() >= it.first.first && pos.getY() < it.first.second) {
+          return it.second;
         }
       }
     }
@@ -524,9 +524,9 @@ int GlGlyphScale::getGlyphAtPos(const Coord &pos) {
     } else if (pos.getX() > baseCoord.getX() + length) {
       return glyphScaleMap[make_pair(baseCoord.getX() + length - size, baseCoord.getX() + length)];
     } else {
-      for (auto it = glyphScaleMap.begin(); it != glyphScaleMap.end(); ++it) {
-        if (pos.getX() >= (*it).first.first && pos.getX() < (*it).first.second) {
-          return (*it).second;
+      for (const auto &it : glyphScaleMap) {
+        if (pos.getX() >= it.first.first && pos.getX() < it.first.second) {
+          return it.second;
         }
       }
     }

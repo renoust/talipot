@@ -164,8 +164,8 @@ NominalAxisConfigDialog::NominalAxisConfigDialog(NominalParallelAxis *axis)
   vector<string> labelsOrder = axis->getLabelsOrder();
   vector<string>::reverse_iterator it;
 
-  for (it = labelsOrder.rbegin(); it != labelsOrder.rend(); ++it) {
-    axisLabelsOrder->addItem(tlpStringToQString(*it));
+  for (auto l : reversed(labelsOrder)) {
+    axisLabelsOrder->addItem(tlpStringToQString(l));
   }
 
   setLayout(dialogLayout);
@@ -227,16 +227,14 @@ void NominalAxisConfigDialog::pressButtonLexOrder() {
   std::sort(labelsOrder.begin(), labelsOrder.end());
 
   if (++clickCount % 2 == 1) {
-    vector<string>::iterator it;
-
-    for (it = labelsOrder.begin(); it != labelsOrder.end(); ++it) {
-      axisLabelsOrder->addItem(tlpStringToQString(*it));
+    for (const auto &l : labelsOrder) {
+      axisLabelsOrder->addItem(tlpStringToQString(l));
     }
   } else {
     vector<string>::reverse_iterator it;
 
-    for (it = labelsOrder.rbegin(); it != labelsOrder.rend(); ++it) {
-      axisLabelsOrder->addItem(tlpStringToQString(*it));
+    for (auto l : reversed(labelsOrder)) {
+      axisLabelsOrder->addItem(tlpStringToQString(l));
     }
   }
 }

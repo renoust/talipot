@@ -63,7 +63,7 @@ public:
   /**
    * Translate entity
    */
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * Function to export data in outString (in XML format)

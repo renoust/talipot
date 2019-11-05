@@ -85,8 +85,8 @@ void CSVParserConfigurationWidget::fillEncodingComboBox() {
   ui->encodingComboBox->clear();
   QStringList list;
 
-  for (QList<QByteArray>::const_iterator it = codecs.constBegin(); it != codecs.constEnd(); ++it) {
-    list.push_back(QString(*it));
+  for (const auto &it : codecs) {
+    list.push_back(it);
   }
 
   list.sort();

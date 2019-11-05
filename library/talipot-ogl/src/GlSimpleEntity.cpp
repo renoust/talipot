@@ -15,12 +15,14 @@
 
 #include <talipot/GlComposite.h>
 
+#include <algorithm>
+
 using namespace std;
 
 namespace tlp {
 GlSimpleEntity::~GlSimpleEntity() {
-  for (std::vector<GlComposite *>::iterator it = parents.begin(); it != parents.end(); ++it) {
-    (*it)->deleteGlEntity(this, false);
+  for (auto parent : parents) {
+    parent->deleteGlEntity(this, false);
   }
 }
 
@@ -34,16 +36,17 @@ void GlSimpleEntity::setVisible(bool visible) {
 
   this->visible = visible;
 
-  for (vector<GlComposite *>::iterator it = parents.begin(); it != parents.end(); ++it) {
-    (*it)->notifyModified(this);
+  for (auto parent : parents) {
+    parent->notifyModified(this);
   }
 }
+
 void GlSimpleEntity::removeParent(GlComposite *composite) {
-  for (std::vector<GlComposite *>::iterator it = parents.begin(); it != parents.end(); ++it) {
-    if ((*it) == composite) {
-      parents.erase(it);
-      return;
-    }
+  auto it = find(parents.begin(), parents.end(), composite);
+
+  if (it != parents.end()) {
+    parents.erase(it);
   }
 }
+
 }

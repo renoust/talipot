@@ -267,9 +267,9 @@ in C++ or the :class:`tlp.Algorithm` interface in Python.
   std::list<std::string> algoList = tlp::PluginsManager::availablePlugins<tlp::Algorithm>();
   std::list<std::string> propAlgoList = tlp::PluginsManager::availablePlugins<tlp::PropertyAlgorithm>();
   std::list<std::string> ret;
-  for (std::list<std::string>::iterator it = algoList.begin() ; it != algoList.end() ; ++it) {
-    if (std::find(propAlgoList.begin(), propAlgoList.end(), *it) == propAlgoList.end()) {
-      ret.push_back(*it);
+  for (const auto &algo : algoList) {
+    if (std::find(propAlgoList.begin(), propAlgoList.end(), algo) == propAlgoList.end()) {
+      ret.push_back(algo);
     }
   }
   sipRes = new std::list<std::string>(ret);

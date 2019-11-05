@@ -246,9 +246,7 @@ void GraphView::addNodes(Iterator<node> *addedNodes) {
   Graph *super = getSuperGraph();
   bool superIsRoot = (super == getRoot());
 
-  while (addedNodes->hasNext()) {
-    node n = addedNodes->next();
-
+  for (auto n : addedNodes) {
     if (!isElement(n)) {
       nodes.push_back(n);
 
@@ -258,8 +256,7 @@ void GraphView::addNodes(Iterator<node> *addedNodes) {
   }
 
   if (!superNodes.empty()) {
-    StlIterator<node, std::vector<node>::iterator> it(superNodes.begin(), superNodes.end());
-    super->addNodes(&it);
+    super->addNodes(stlIterator(superNodes));
   }
 
   if (!nodes.empty())
@@ -350,8 +347,7 @@ void GraphView::addEdges(Iterator<edge> *addedEdges) {
   Graph *super = getSuperGraph();
   bool superIsRoot = (super == getRoot());
 
-  while (addedEdges->hasNext()) {
-    edge e = addedEdges->next();
+  for (auto e : addedEdges) {
     assert(getRootImpl()->isElement(e));
     assert(isElement(source(e)));
     assert(isElement(target(e)));
@@ -365,8 +361,7 @@ void GraphView::addEdges(Iterator<edge> *addedEdges) {
   }
 
   if (!superEdges.empty()) {
-    StlIterator<edge, std::vector<edge>::iterator> it(superEdges.begin(), superEdges.end());
-    super->addEdges(&it);
+    super->addEdges(stlIterator(superEdges));
   }
 
   if (!ee.empty())
@@ -459,8 +454,7 @@ void GraphView::delEdge(const edge e, bool deleteInAllGraphs) {
 }
 //----------------------------------------------------------------
 Iterator<node> *GraphView::getNodes() const {
-  return new GraphNodeIterator(
-      this, new StlIterator<node, std::vector<node>::const_iterator>(_nodes.begin(), _nodes.end()));
+  return new GraphNodeIterator(this, stlIterator(_nodes));
 }
 //----------------------------------------------------------------
 Iterator<node> *GraphView::getInNodes(const node n) const {
@@ -476,8 +470,7 @@ Iterator<node> *GraphView::getInOutNodes(const node n) const {
 }
 //----------------------------------------------------------------
 Iterator<edge> *GraphView::getEdges() const {
-  return new GraphEdgeIterator(
-      this, new StlIterator<edge, std::vector<edge>::const_iterator>(_edges.begin(), _edges.end()));
+  return new GraphEdgeIterator(this, stlIterator(_edges));
 }
 //----------------------------------------------------------------
 Iterator<edge> *GraphView::getInEdges(const node n) const {

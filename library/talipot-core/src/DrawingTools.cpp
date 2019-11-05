@@ -149,13 +149,12 @@ pair<Coord, Coord> tlp::computeBoundingRadius(const Graph *graph, const LayoutPr
 vector<Coord> tlp::computeConvexHull(const std::vector<Coord> &allPoints) {
   vector<unsigned int> hullIndices;
   convexHull(allPoints, hullIndices); // compute the convex hull
-  vector<unsigned int>::const_iterator it;
   vector<Coord> finalResult(hullIndices.size());
-  vector<Coord>::iterator itR = finalResult.begin();
 
-  for (it = hullIndices.begin(); it != hullIndices.end(); ++it, ++itR) {
-    (*itR) = allPoints[*it];
-    (*itR)[2] = 0;
+  unsigned int i = 0;
+  for (auto idx : hullIndices) {
+    finalResult[i] = allPoints[idx];
+    finalResult[i++][2] = 0;
   }
 
   return finalResult;

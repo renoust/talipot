@@ -311,8 +311,8 @@ void GlComplexPolygon::createPolygon(const vector<Coord> &coords, int polygonEdg
 
     addPoint(coords[coords.size() - 1]);
   } else {
-    for (vector<Coord>::const_iterator it = coords.begin(); it != coords.end(); ++it) {
-      addPoint(*it);
+    for (const auto &c : coords) {
+      addPoint(c);
     }
   }
 }
@@ -545,9 +545,9 @@ void GlComplexPolygon::draw(float, Camera *) {
 void GlComplexPolygon::translate(const Coord &vec) {
   boundingBox.translate(vec);
 
-  for (vector<vector<Coord>>::iterator it = points.begin(); it != points.end(); ++it) {
-    for (vector<Coord>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-      (*it2) += vec;
+  for (auto &vp : points) {
+    for (auto &p : vp) {
+      p += vec;
     }
   }
 
@@ -601,9 +601,9 @@ void GlComplexPolygon::setWithXML(const string &inString, unsigned int &currentP
   GlXMLTools::setWithXML(inString, currentPosition, "outlineSize", outlineSize);
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
 
-  for (vector<vector<Coord>>::iterator it = points.begin(); it != points.end(); ++it) {
-    for (vector<Coord>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-      boundingBox.expand(*it2);
+  for (const auto &vp : points) {
+    for (const auto &p : vp) {
+      boundingBox.expand(p);
     }
   }
 }

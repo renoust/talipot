@@ -630,11 +630,9 @@ void SuperGraphTest::testPropertiesIteration() {
   g3 = g2->addSubGraph();
   g4 = g2->addSubGraph();
 
-  set<string>::const_iterator it;
-
-  for (it = propList1.begin(); it != propList1.end(); ++it) {
-    graph->getIntegerProperty(*it);
-    CPPUNIT_ASSERT(g4->existProperty(*it));
+  for (const string &str : propList1) {
+    graph->getIntegerProperty(str);
+    CPPUNIT_ASSERT(g4->existProperty(str));
   }
 
   for (const string &str : graph->getProperties()) {
@@ -657,9 +655,9 @@ void SuperGraphTest::testPropertiesIteration() {
       CPPUNIT_ASSERT(propList1.find(str) != propList1.end());
   }
 
-  for (it = propList2.begin(); it != propList2.end(); ++it) {
-    g2->getIntegerProperty(*it);
-    CPPUNIT_ASSERT(g4->existProperty(*it));
+  for (const string &str : propList2) {
+    g2->getIntegerProperty(str);
+    CPPUNIT_ASSERT(g4->existProperty(str));
   }
 
   for (const string &str : graph->getProperties()) {

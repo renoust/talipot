@@ -129,8 +129,7 @@ const ParameterDescriptionList &tlp::WithParameter::getParameters() const {
 }
 
 Iterator<ParameterDescription> *ParameterDescriptionList::getParameters() const {
-  return new StlIterator<ParameterDescription, vector<ParameterDescription>::const_iterator>(
-      parameters.begin(), parameters.end());
+  return stlIterator(parameters);
 }
 
 ParameterDescription *ParameterDescriptionList::getParameter(const string &name) {

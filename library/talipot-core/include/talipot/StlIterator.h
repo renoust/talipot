@@ -136,6 +136,25 @@ typename std::enable_if<has_const_iterator<Map>::value,
                         StlMapKeyIterator<Map> *>::type inline stlMapKeyIterator(const Map &map) {
   return new StlMapKeyIterator<Map>(map.begin(), map.end());
 }
+//=================================================
+template <typename Container>
+struct reverse_wrapper {
+
+  Container &_c;
+  reverse_wrapper(Container &c) : _c(c) {}
+
+  typename Container::reverse_iterator begin() {
+    return _c.rbegin();
+  }
+  typename Container::reverse_iterator end() {
+    return _c.rend();
+  }
+};
+
+template <typename Container>
+inline reverse_wrapper<Container> reversed(Container &c) {
+  return reverse_wrapper<Container>(c);
+}
 }
 
 #endif // TALIPOT_STL_ITERATOR_H

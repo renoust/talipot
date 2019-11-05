@@ -164,7 +164,7 @@ protected:
  * VectorGraph g;
  * EdgeProperty<double> weight;
  * g.alloc(weight); //connect weight to g, g allocate memory for that attribute
- * for (const edge &e : g.edges()) {
+ * for (auto e : g.edges()) {
  *   weight[n] = g.deg(g.target(e)) + g.deg(g.source(e));
  * }
  * EdgeProperty<double> weight2 = weight; //weight2 and weight are pointing on the same memory

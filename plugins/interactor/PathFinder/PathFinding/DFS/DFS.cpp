@@ -58,8 +58,7 @@ bool DFS::computeSearchPaths(node src, BooleanProperty *visitable, DoublePropert
 
     node nd(src);
 
-    for (vector<edge>::reverse_iterator it = path.rbegin(); it != path.rend(); ++it) {
-      edge e(*it);
+    for (auto e : reversed(path)) {
       node opposite(graph->opposite(e, nd));
       result->setEdgeValue(e, true);
       result->setNodeValue(opposite, true);

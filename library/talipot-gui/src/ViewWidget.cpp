@@ -181,8 +181,7 @@ void ViewWidget::removeFromScene(QGraphicsItem *item) {
 }
 
 void ViewWidget::refreshItemsParenthood() {
-  for (QSet<QGraphicsItem *>::iterator it = _items.begin(); it != _items.end(); ++it) {
-    QGraphicsItem *item = *it;
+  for (auto item : _items) {
     item->setParentItem(_centralWidgetItem);
   }
 }

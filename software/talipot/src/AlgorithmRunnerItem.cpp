@@ -197,13 +197,11 @@ public:
   ~AlgorithmPreviewHandler() override {
     if (!outPropsMap.empty()) {
       // build outPropsMap with initial properties
-      std::vector<OutPropertyParam>::const_iterator it = outPropParams.begin();
+      for (const auto &outPropParam : outPropParams) {
+        const std::string &outPropName = outPropParam.dest->getName();
 
-      for (; it != outPropParams.end(); ++it) {
-        const std::string &outPropName = it->dest->getName();
-
-        if (it->tmp && !outPropName.empty())
-          outPropsMap[outPropName] = it->dest;
+        if (outPropParam.tmp && !outPropName.empty())
+          outPropsMap[outPropName] = outPropParam.dest;
       }
 
       // restore initial properties
@@ -214,13 +212,11 @@ public:
   void progressStateChanged(int, int) override {
     if (!inited) {
       // build outPropsMap with temporary properties
-      std::vector<OutPropertyParam>::const_iterator it = outPropParams.begin();
+      for (const auto &outPropParam : outPropParams) {
+        const std::string &outPropName = outPropParam.dest->getName();
 
-      for (; it != outPropParams.end(); ++it) {
-        const std::string &outPropName = it->dest->getName();
-
-        if (it->tmp && !outPropName.empty())
-          outPropsMap[outPropName] = it->tmp;
+        if (outPropParam.tmp && !outPropName.empty())
+          outPropsMap[outPropName] = outPropParam.tmp;
       }
 
       inited = true;

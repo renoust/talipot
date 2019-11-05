@@ -68,10 +68,9 @@ int main(int argc, char **argv) {
   tlp::PluginLibraryLoader::loadPluginsFromDir(talipotPluginsDir, &pLoader);
 
   // create an instance of each of them, then destroy it
-  std::list<std::string> pluginNames = tlp::PluginsManager::availablePlugins();
-  std::list<std::string>::const_iterator it = pluginNames.begin();
-  for (; it != pluginNames.end(); ++it) {
-    tlp::Plugin *plugin = tlp::PluginsManager::getPluginObject(*it);
+  auto pluginNames = tlp::PluginsManager::availablePlugins();
+  for (const auto &pluginName : pluginNames) {
+    tlp::Plugin *plugin = tlp::PluginsManager::getPluginObject(pluginName);
     delete plugin;
   }
 

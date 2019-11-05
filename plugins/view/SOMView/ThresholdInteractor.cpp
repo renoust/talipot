@@ -37,12 +37,8 @@ using namespace std;
 
 void drawComposite(GlComposite *composite, float lod, Camera *camera) {
 
-  map<string, GlSimpleEntity *> glEntities = composite->getGlEntities();
-
-  map<string, GlSimpleEntity *>::iterator it2;
-
-  for (it2 = glEntities.begin(); it2 != glEntities.end(); ++it2) {
-    it2->second->draw(lod, camera);
+  for (const auto &entity : composite->getGlEntities()) {
+    entity.second->draw(lod, camera);
   }
 }
 
@@ -180,10 +176,10 @@ void ColorScaleSlider::updatePosition() {
   float xShift = xPos - position.getX();
 
   if (xShift != 0) {
-    Coord mouvement(xShift, 0, 0);
-    arrow->translate(mouvement);
-    label->translate(mouvement);
-    rect->translate(mouvement);
+    Coord move(xShift, 0, 0);
+    arrow->translate(move);
+    label->translate(move);
+    rect->translate(move);
     setColor(linkedScale->getGlColorScale()->getColorAtPos(Coord(xPos, 0, 0)));
     ostringstream oss;
     oss << getValue();
@@ -331,15 +327,11 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 
     if (!selectedEntities.empty()) {
 
-      map<string, GlSimpleEntity *> displays = layer->getGlEntities();
+      for (const auto &itPE : selectedEntities) {
+        for (const auto &itDisplay : layer->getGlEntities()) {
+          GlComposite *composite = dynamic_cast<GlComposite *>(itDisplay.second);
 
-      for (vector<SelectedEntity>::iterator itPE = selectedEntities.begin();
-           itPE != selectedEntities.end(); ++itPE) {
-        for (map<string, GlSimpleEntity *>::iterator itDisplay = displays.begin();
-             itDisplay != displays.end(); ++itDisplay) {
-          GlComposite *composite = dynamic_cast<GlComposite *>(itDisplay->second);
-
-          if (composite && !composite->findKey(itPE->getSimpleEntity()).empty()) {
+          if (composite && !composite->findKey(itPE.getSimpleEntity()).empty()) {
 
             Slider *slider = dynamic_cast<Slider *>(composite);
 
@@ -350,8 +342,8 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 
             break;
           } else {
-            if (itDisplay->second == (itPE->getSimpleEntity())) {
-              Slider *slider = dynamic_cast<Slider *>(itDisplay->second);
+            if (itDisplay.second == (itPE.getSimpleEntity())) {
+              Slider *slider = dynamic_cast<Slider *>(itDisplay.second);
 
               if (slider) {
                 // finalSelectedEntities.insert(slider);
@@ -453,8 +445,8 @@ void ThresholdInteractor::performSelection(SOMView *view, tlp::Iterator<node> *i
 
     if (nodeValue <= rightSliderRealValue && nodeValue >= leftSliderRealValue) {
       if (mappingTab.find(n) != mappingTab.end()) {
-        for (set<node>::iterator it = mappingTab[n].begin(); it != mappingTab[n].end(); ++it) {
-          selection->setNodeValue(*it, true);
+        for (auto v : mappingTab[n]) {
+          selection->setNodeValue(v, true);
         }
       }
 

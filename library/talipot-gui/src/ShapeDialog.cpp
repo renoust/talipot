@@ -32,9 +32,8 @@ ShapeDialog::~ShapeDialog() {
 void ShapeDialog::updateShapeList() {
   _ui->shapeListWidget->clear();
 
-  for (std::list<std::pair<QString, QPixmap>>::const_iterator it = shapes.begin();
-       it != shapes.end(); ++it) {
-    _ui->shapeListWidget->addItem(new QListWidgetItem(it->second, it->first));
+  for (const auto &it : shapes) {
+    _ui->shapeListWidget->addItem(new QListWidgetItem(it.second, it.first));
   }
 
   if (_ui->shapeListWidget->count() > 0) {

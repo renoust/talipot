@@ -127,7 +127,7 @@ public:
   /**
    * @brief Translate entity
    */
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * @brief Function to export data in outString (in XML format)

@@ -206,8 +206,7 @@ public:
                                  tlp::QStringToTlpString(currentDir.absolutePath()));
       pluginProgress->progress(i, entries.count());
 
-      for (QFileInfoList::iterator it = entries.begin(); it != entries.end(); ++it) {
-        QFileInfo fileInfo(*it);
+      for (const auto &fileInfo : entries) {
 
         // consider files starting with a dot as hidden (for windows platform)
         if (!hiddenFiles && fileInfo.fileName().startsWith(".")) {

@@ -448,65 +448,58 @@ void MovablePathItem::updatePath() {
   pair<double, float> lastValue = *_metricToSizeFilteredList.begin();
   int state = 0;
 
-  for (vector<pair<double, float>>::iterator it = _metricToSizeFilteredList.begin();
-       it != _metricToSizeFilteredList.end(); ++it) {
-    if ((*it).first < firstLimit) {
+  for (const auto &it : _metricToSizeFilteredList) {
+    if (it.first < firstLimit) {
       if (state == 0) {
         // init of first path
-        pathsPoints[0].push_back(QPoint(15 + 15. * (*it).second, 160));
+        pathsPoints[0].push_back(QPoint(15 + 15. * it.second, 160));
         state = 1;
       } else {
-        pathsPoints[0].push_back(
-            QPoint(15 + 15 * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[0].push_back(QPoint(15 + 15 * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                       (_maxMetric - _minMetric)));
       }
-    } else if ((*it).first <= secondLimit) {
+    } else if (it.first <= secondLimit) {
       if (state == 1) {
         // init of second path
         float midValue =
-            computeToto(firstLimit, lastValue.second, (*it).second, lastValue.first, (*it).first);
+            computeToto(firstLimit, lastValue.second, it.second, lastValue.first, it.first);
         pathsPoints[0].push_back(QPoint(15 + 15. * midValue, 160 - 160 * (firstLimit - _minMetric) /
                                                                        (_maxMetric - _minMetric)));
         pathsPoints[1].push_back(QPoint(15 + 15. * midValue, 160 - 160 * (firstLimit - _minMetric) /
                                                                        (_maxMetric - _minMetric)));
-        pathsPoints[1].push_back(
-            QPoint(15 + 15. * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[1].push_back(QPoint(15 + 15. * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                        (_maxMetric - _minMetric)));
         state = 2;
       } else if (state <= 1) {
-        pathsPoints[1].push_back(
-            QPoint(15 + 15. * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[1].push_back(QPoint(15 + 15. * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                        (_maxMetric - _minMetric)));
         state = 2;
       } else {
-        pathsPoints[1].push_back(
-            QPoint(15 + 15 * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[1].push_back(QPoint(15 + 15 * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                       (_maxMetric - _minMetric)));
       }
 
     } else {
       if (state == 2) {
         // init of third path
         float midValue =
-            computeToto(secondLimit, lastValue.second, (*it).second, lastValue.first, (*it).first);
+            computeToto(secondLimit, lastValue.second, it.second, lastValue.first, it.first);
         pathsPoints[1].push_back(
             QPoint(15 + 15. * midValue,
                    160 - 160 * (secondLimit - _minMetric) / (_maxMetric - _minMetric)));
         pathsPoints[2].push_back(
             QPoint(15 + 15. * midValue,
                    160 - 160 * (secondLimit - _minMetric) / (_maxMetric - _minMetric)));
-        pathsPoints[2].push_back(
-            QPoint(15 + 15. * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[2].push_back(QPoint(15 + 15. * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                        (_maxMetric - _minMetric)));
         state = 3;
       } else {
-        pathsPoints[2].push_back(
-            QPoint(15 + 15 * (*it).second,
-                   160 - 160 * ((*it).first - _minMetric) / (_maxMetric - _minMetric)));
+        pathsPoints[2].push_back(QPoint(15 + 15 * it.second, 160 - 160 * (it.first - _minMetric) /
+                                                                       (_maxMetric - _minMetric)));
       }
     }
 
-    lastValue = (*it);
+    lastValue = it;
   }
 
   if (state == 2) {

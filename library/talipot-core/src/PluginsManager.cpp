@@ -93,10 +93,11 @@ std::list<std::string> PluginsManager::availablePlugins() {
 
   auto &plugins = instance()->_plugins;
 
-  for (auto it = plugins.begin(); it != plugins.end(); ++it) {
+  for (const auto &it : plugins) {
     // deprecated names are not listed
-    if (it->first == it->second.info->name())
-      keys.push_back(it->first);
+    if (it.first == it.second.info->name()) {
+      keys.push_back(it.first);
+    }
   }
 
   return keys;

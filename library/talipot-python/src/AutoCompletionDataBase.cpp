@@ -1137,20 +1137,20 @@ static QSet<QString> getAlgorithmPluginsListOfType(const QString &type, const QS
   QSet<QString> ret;
   list<string> pluginNames = PluginsManager::availablePlugins();
 
-  for (list<string>::iterator it = pluginNames.begin(); it != pluginNames.end(); ++it) {
-    Plugin *plugin = PluginsManager::getPluginObject(*it);
+  for (const auto &pluginNameStr : pluginNames) {
+    Plugin *plugin = PluginsManager::getPluginObject(pluginNameStr);
 
     if (plugin->category() != GLYPH_CATEGORY && plugin->category() != EEGLYPH_CATEGORY &&
         plugin->category() != INTERACTOR_CATEGORY && plugin->category() != VIEW_CATEGORY) {
 
       if (type.isEmpty() || plugin->category() == QStringToTlpString(type)) {
-        QString pluginName = "\"" + tlpStringToQString(*it) + "\"";
+        QString pluginName = "\"" + tlpStringToQString(pluginNameStr) + "\"";
 
         if (pluginName.startsWith(prefix)) {
           ret.insert(pluginName);
         }
 
-        pluginName = "'" + tlpStringToQString(*it) + "'";
+        pluginName = "'" + tlpStringToQString(pluginNameStr) + "'";
 
         if (pluginName.startsWith(prefix)) {
           ret.insert(pluginName);

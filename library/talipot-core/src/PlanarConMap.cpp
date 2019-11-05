@@ -261,18 +261,18 @@ void PlanarConMap::delEdgeMap(edge e, Face f) {
       }
 
       facesEdges[f1] = v_edges;
-      edgeMap::iterator it = edgesFaces.find(e);
+      auto it = edgesFaces.find(e);
       edgesFaces.erase(it, ++it);
       vector<Face> v_faces;
       v_faces.push_back(f1);
       nodesFaces[n_tmp] = v_faces;
 
       if (n2 == n_tmp) {
-        nodeMap::iterator it2 = nodesFaces.find(n1);
+        auto it2 = nodesFaces.find(n1);
         nodesFaces.erase(it2, ++it2);
         delNode(n1);
       } else {
-        nodeMap::iterator it2 = nodesFaces.find(n2);
+        auto it2 = nodesFaces.find(n2);
         nodesFaces.erase(it2, ++it2);
         delNode(n2);
       }
@@ -324,9 +324,9 @@ void PlanarConMap::delEdgeMap(edge e, Face f) {
     }
 
     facesEdges[f1] = v_edges;
-    edgeMap::iterator it = edgesFaces.find(e);
+    auto it = edgesFaces.find(e);
     edgesFaces.erase(it, ++it);
-    faceMap::iterator it2 = facesEdges.find(f2);
+    auto it2 = facesEdges.find(f2);
     facesEdges.erase(it2, ++it2);
 
     for (unsigned int id : isInF2.findAll(true)) {
@@ -339,10 +339,7 @@ void PlanarConMap::delEdgeMap(edge e, Face f) {
       nodesFaces[n_tmp] = v_faces;
     }
 
-    vector<Face>::iterator itf = faces.begin();
-
-    for (; *itf != f2; ++itf) {
-    }
+    auto itf = std::find(faces.begin(), faces.end(), f2);
 
     faces.erase(itf);
     delEdge(e);
@@ -501,7 +498,6 @@ node PlanarConMap::predCycleNode(const node v, const node w) const {
 //============================================================
 void PlanarConMap::update() {
   assert(SimpleTest::isSimple(this));
-  // assert(ConnectedTest::isConnected(this));
   assert(PlanarityTest::isPlanar(this));
 
   PlanarityTest::planarEmbedding(this);
@@ -526,7 +522,7 @@ void PlanarConMap::computeFaces() {
     // Compute the list of adjacent faces of each edge
     for (auto e : edges()) {
       edgesFaces.insert(edgeMapEntry(e, v_faces));
-      faceMap::iterator itf = facesEdges.find(f);
+      auto itf = facesEdges.find(f);
 
       if (itf == facesEdges.end()) {
         vector<edge> v_tmp;
@@ -581,7 +577,7 @@ void PlanarConMap::computeFaces() {
             e1 = it_e.next();
             n = opposite(e1, n);
             edges.push_back(e1);
-            nodeMap::iterator it_n = nodesFaces.find(n);
+            auto it_n = nodesFaces.find(n);
 
             if (it_n == nodesFaces.end()) {
               vector<Face> v_tmp;
@@ -590,7 +586,7 @@ void PlanarConMap::computeFaces() {
             } else
               nodesFaces[n].push_back(lf);
 
-            edgeMap::iterator ite = edgesFaces.find(e1);
+            auto ite = edgesFaces.find(e1);
 
             if (ite == edgesFaces.end()) {
               vector<Face> v_tmp;

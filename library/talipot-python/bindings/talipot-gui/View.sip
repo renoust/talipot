@@ -242,9 +242,8 @@ Returns the current active interactor of the view.
 %MethodCode
     std::list<tlp::Observable*> ret;
     QSet<tlp::Observable*> obs = sipCpp->triggers();
-    QSet<tlp::Observable *>::const_iterator i = obs.constBegin();
-    for ( ; i != obs.constEnd() ; ++i) {
-        ret.push_back(*i);
+    for (auto o : obs) {
+      ret.push_back(o);
     }
     sipRes = new std::list<tlp::Observable*>(ret);
 %End
@@ -264,9 +263,8 @@ Installs a new set of interactors on the view.
 
 %MethodCode
     QList<tlp::Interactor*> param;
-    std::list<tlp::Interactor*>::const_iterator it = a0->begin();
-    for (; it != a0->end() ; ++it) {
-        param.append(*it);
+    for (auto i : *a0) {
+        param.append(i);
     }
     sipCpp->setInteractors(param);
 %End

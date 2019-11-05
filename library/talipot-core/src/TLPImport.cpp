@@ -103,7 +103,7 @@ struct TLPGraphBuilder : public TLPTrue {
   ~TLPGraphBuilder() override {}
 
   Graph *getSubGraph(int id) {
-    std::map<int, Graph *>::const_iterator it = clusterIndex.find(id);
+    auto it = clusterIndex.find(id);
 
     if (it != clusterIndex.end()) {
       return it->second;
@@ -145,7 +145,7 @@ struct TLPGraphBuilder : public TLPTrue {
     _graph->addNodes(last - first + 1);
 
     if (version < 2.1) {
-      std::vector<node>::const_iterator it = _graph->nodes().begin();
+      auto it = _graph->nodes().begin();
 
       while (first <= last) {
         nodeIndex[first] = (*it);
@@ -1016,8 +1016,8 @@ public:
       std::list<std::string> gext(gzipFileExtensions());
       bool gzip(false);
 
-      for (std::list<std::string>::const_iterator it = gext.begin(); it != gext.end(); ++it) {
-        if (filename.rfind(*it) == (filename.length() - (*it).length())) {
+      for (const auto &it : gext) {
+        if (filename.rfind(it) == (filename.length() - it.length())) {
           size = getUncompressedSizeOfGzipFile(filename);
           input = tlp::getIgzstream(filename);
           gzip = true;

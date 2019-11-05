@@ -30,6 +30,7 @@ public:
                         Graph *) override {
     // meta edge color is the color of the first underlying edge
     color->setEdgeValue(mE, color->getEdgeValue(itE->next()));
+    delete itE;
   }
 };
 

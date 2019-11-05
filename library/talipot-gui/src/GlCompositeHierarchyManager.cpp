@@ -206,11 +206,11 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
 }
 
 void GlCompositeHierarchyManager::treatEvents(const std::vector<Event> &) {
-  for (auto it = _graphsComposites.begin(); it != _graphsComposites.end(); ++it) {
-    if (!it->first->isEmpty()) {
-      it->second.second->updateHull(_layout, _size, _rotation);
+  for (const auto &it : _graphsComposites) {
+    if (!it.first->isEmpty()) {
+      it.second.second->updateHull(_layout, _size, _rotation);
     } else {
-      it->second.second->setVisible(false);
+      it.second.second->setVisible(false);
     }
   }
 }
@@ -268,10 +268,10 @@ bool GlCompositeHierarchyManager::isVisible() const {
 DataSet GlCompositeHierarchyManager::getData() {
   DataSet set;
 
-  for (auto it = _graphsComposites.begin(); it != _graphsComposites.end(); ++it) {
-    unsigned int graphId = it->first->getId();
+  for (const auto &it : _graphsComposites) {
+    unsigned int graphId = it.first->getId();
     unsigned int visibility =
-        uint(it->second.first->isVisible()) * 2 + uint(it->second.second->isVisible());
+        uint(it.second.first->isVisible()) * 2 + uint(it.second.second->isVisible());
     stringstream graph;
     graph << graphId;
     set.set(graph.str(), visibility);
@@ -281,17 +281,17 @@ DataSet GlCompositeHierarchyManager::getData() {
 }
 
 void GlCompositeHierarchyManager::setData(const DataSet &dataSet) {
-  for (auto it = _graphsComposites.begin(); it != _graphsComposites.end(); ++it) {
+  for (const auto &it : _graphsComposites) {
     stringstream graph;
-    graph << it->first->getId();
+    graph << it.first->getId();
 
     if (dataSet.exists(graph.str())) {
       unsigned int visibility = 0;
       dataSet.get(graph.str(), visibility);
       bool firstVisibility = visibility - 1 > 0;
-      it->second.first->setVisible(firstVisibility);
+      it.second.first->setVisible(firstVisibility);
       bool secondVisibility = visibility % 2 > 0;
-      it->second.second->setVisible(secondVisibility);
+      it.second.second->setVisible(secondVisibility);
     }
   }
 }

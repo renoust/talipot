@@ -64,8 +64,8 @@ static bool voronoiDiagram(tlp::Graph *graph, bool voronoiCellsSubGraphs,
         vector<tlp::node> cellSgNodes;
         cellSgNodes.reserve(cell.size());
 
-        for (set<unsigned int>::iterator it2 = cell.begin(); it2 != cell.end(); ++it2) {
-          cellSgNodes.push_back(sgNodes[*it2]);
+        for (auto c : cell) {
+          cellSgNodes.push_back(sgNodes[c]);
         }
 
         tlp::Graph *cellSg = voronoiSg->inducedSubGraph(cellSgNodes);
@@ -79,8 +79,8 @@ static bool voronoiDiagram(tlp::Graph *graph, bool voronoiCellsSubGraphs,
 
         const tlp::VoronoiDiagram::Cell &cell = voronoiDiag.voronoiCellForSite(i);
 
-        for (set<unsigned int>::iterator it2 = cell.begin(); it2 != cell.end(); ++it2) {
-          voronoiSg->addEdge(nodes[i], sgNodes[*it2]);
+        for (auto c : cell) {
+          voronoiSg->addEdge(nodes[i], sgNodes[c]);
         }
       }
     }

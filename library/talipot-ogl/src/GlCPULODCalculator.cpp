@@ -87,18 +87,18 @@ void GlCPULODCalculator::reserveMemoryForGraphElts(unsigned int nbNodes, unsigne
 void GlCPULODCalculator::compute(const Vector<int, 4> &globalViewport,
                                  const Vector<int, 4> &currentViewport) {
 
-  for (auto it = layersLODVector.begin(); it != layersLODVector.end(); ++it) {
-    Camera *camera = it->camera;
+  for (auto &it : layersLODVector) {
+    Camera *camera = it.camera;
 
     Matrix<float, 4> transformMatrix;
     camera->getTransformMatrix(globalViewport, transformMatrix);
 
     if (camera->is3D()) {
-      Coord &&eye = camera->getEyes() +
-                    (camera->getEyes() - camera->getCenter()) / float(camera->getZoomFactor());
-      computeFor3DCamera(&(*it), eye, transformMatrix, globalViewport, currentViewport);
+      Coord eye = camera->getEyes() +
+                  (camera->getEyes() - camera->getCenter()) / float(camera->getZoomFactor());
+      computeFor3DCamera(&it, eye, transformMatrix, globalViewport, currentViewport);
     } else {
-      computeFor2DCamera(&(*it), globalViewport, currentViewport);
+      computeFor2DCamera(&it, globalViewport, currentViewport);
     }
 
     glMatrixMode(GL_MODELVIEW);
@@ -149,19 +149,16 @@ void GlCPULODCalculator::computeFor2DCamera(LayerLODUnit *layerLODUnit,
                                             const Vector<int, 4> &globalViewport,
                                             const Vector<int, 4> &currentViewport) {
 
-  for (auto it = layerLODUnit->simpleEntitiesLODVector.begin();
-       it != layerLODUnit->simpleEntitiesLODVector.end(); ++it) {
-    it->lod = calculate2DLod(it->boundingBox, globalViewport, currentViewport);
+  for (auto &it : layerLODUnit->simpleEntitiesLODVector) {
+    it.lod = calculate2DLod(it.boundingBox, globalViewport, currentViewport);
   }
 
-  for (auto it = layerLODUnit->nodesLODVector.begin(); it != layerLODUnit->nodesLODVector.end();
-       ++it) {
-    it->lod = calculate2DLod(it->boundingBox, globalViewport, currentViewport);
+  for (auto &it : layerLODUnit->nodesLODVector) {
+    it.lod = calculate2DLod(it.boundingBox, globalViewport, currentViewport);
   }
 
-  for (auto it = layerLODUnit->edgesLODVector.begin(); it != layerLODUnit->edgesLODVector.end();
-       ++it) {
-    it->lod = calculate2DLod(it->boundingBox, globalViewport, currentViewport);
+  for (auto &it : layerLODUnit->edgesLODVector) {
+    it.lod = calculate2DLod(it.boundingBox, globalViewport, currentViewport);
   }
 }
 }

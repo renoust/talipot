@@ -414,13 +414,13 @@ GLfloat *GlLines::buildCurvePoints(const Coord &startPoint, const vector<Coord> 
   bendsCoordinates[0] = startPoint[0];
   bendsCoordinates[1] = startPoint[1];
   bendsCoordinates[2] = startPoint[2];
-  vector<Coord>::const_iterator it;
+
   int i = 1;
 
-  for (it = bends.begin(); it != bends.end(); ++it) {
-    bendsCoordinates[i * 3] = (*it)[0];
-    bendsCoordinates[i * 3 + 1] = (*it)[1];
-    bendsCoordinates[i * 3 + 2] = (*it)[2];
+  for (const auto &b : bends) {
+    bendsCoordinates[i * 3] = b[0];
+    bendsCoordinates[i * 3 + 1] = b[1];
+    bendsCoordinates[i * 3 + 2] = b[2];
     i++;
   }
 

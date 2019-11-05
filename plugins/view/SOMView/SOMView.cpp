@@ -68,8 +68,8 @@ SOMView::~SOMView() {
     mask = nullptr;
 
     // Clear the color properties
-    for (auto it = propertyToColorProperty.begin(); it != propertyToColorProperty.end(); ++it) {
-      delete it->second;
+    for (const auto &it : propertyToColorProperty) {
+      delete it.second;
     }
 
     propertyToColorProperty.clear();
@@ -342,17 +342,17 @@ void SOMView::drawPreviews() {
   int pos = 0;
   int colNumber = int(ceil(sqrt(double(propertiesName.size()))));
 
-  for (vector<string>::iterator it = propertiesName.begin(); it != propertiesName.end(); ++it) {
+  for (const auto &p : propertiesName) {
     double minValue;
     double maxValue;
-    ColorProperty *colorProperty = computePropertyColor((*it), minValue, maxValue);
+    ColorProperty *colorProperty = computePropertyColor(p, minValue, maxValue);
 
     Coord previewCoord((pos % colNumber) * (thumbWidth + spacing),
                        (colNumber - 1) - int(floor(pos / colNumber)) * (thumbHeight + spacing), 0);
     Size previewSize(thumbWidth, thumbHeight, 0);
 
     // If the input data uses normalized values we had to translate it to get the real value.
-    unsigned int propertyIndex = inputSample.findIndexForProperty(*it);
+    unsigned int propertyIndex = inputSample.findIndexForProperty(p);
     double minimumDisplayed = inputSample.isUsingNormalizedValues()
                                   ? inputSample.unnormalize(minValue, propertyIndex)
                                   : minValue;
@@ -360,12 +360,12 @@ void SOMView::drawPreviews() {
                                   ? inputSample.unnormalize(maxValue, propertyIndex)
                                   : maxValue;
     SOMPreviewComposite *SOMPrevComp = new SOMPreviewComposite(
-        previewCoord, previewSize, *it, colorProperty, som,
-        this->properties->getPropertyColorScale(*it), minimumDisplayed, maximumDisplayed);
+        previewCoord, previewSize, p, colorProperty, som,
+        this->properties->getPropertyColorScale(p), minimumDisplayed, maximumDisplayed);
 
-    propertyToPreviews[*it] = SOMPrevComp;
+    propertyToPreviews[p] = SOMPrevComp;
 
-    previewWidget->getScene()->getLayer("Main")->addGlEntity(SOMPrevComp, *it);
+    previewWidget->getScene()->getLayer("Main")->addGlEntity(SOMPrevComp, p);
 
     ++pos;
   }
@@ -376,8 +376,8 @@ void SOMView::drawPreviews() {
 void SOMView::clearPreviews() {
 
   // Destroy preview
-  for (auto it = propertyToPreviews.begin(); it != propertyToPreviews.end(); ++it) {
-    delete it->second;
+  for (const auto &it : propertyToPreviews) {
+    delete it.second;
   }
 
   propertyToPreviews.clear();
@@ -580,8 +580,8 @@ void SOMView::cleanSOMMap() {
   }
 
   // Clear the color properties
-  for (auto it = propertyToColorProperty.begin(); it != propertyToColorProperty.end(); ++it) {
-    delete it->second;
+  for (const auto &it : propertyToColorProperty) {
+    delete it.second;
   }
 
   propertyToColorProperty.clear();
@@ -620,9 +620,8 @@ void SOMView::computeSOMMap() {
   // Update somMap representation
   drawPreviews();
 
-  for (vector<string>::iterator it = propertiesSelected.begin(); it != propertiesSelected.end();
-       ++it) {
-    if (oldSelection.compare(*it) == 0) {
+  for (const auto &p : propertiesSelected) {
+    if (oldSelection.compare(p) == 0) {
       selection = oldSelection;
     }
   }
@@ -679,12 +678,12 @@ void SOMView::computeMapping() {
   Coord nodeCoord;
   Size nodeSize;
 
-  for (auto it = mappingTab.begin(); it != mappingTab.end(); ++it) {
-    som->getPosForNode(it->first, x, y);
+  for (const auto &it : mappingTab) {
+    som->getPosForNode(it.first, x, y);
     nodeDisplayAreaTopLeft = marginShift + mapCompositeElements->getTopLeftPositionForElement(x, y);
     unsigned int num = 0;
 
-    for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2) {
+    for (auto n : it.second) {
       // Compute node center
       nodeCoord.set(nodeDisplayAreaTopLeft[0] + (num % colNumber) * maxElementWidth +
                         maxElementWidth / 2,
@@ -696,7 +695,7 @@ void SOMView::computeMapping() {
         nodeSize.set((1 - spacingCoef) * maxElementWidth, (1 - spacingCoef) * maxElementHeight, 0);
       } else if (mt == SOMPropertiesWidget::RealNodeSizeMapping) {
         // Compute size mapping coef
-        Size realSize = realGraphSizeProperty->getNodeValue(*it2);
+        Size realSize = realGraphSizeProperty->getNodeValue(n);
         nodeSize.set(
             minElementWidth + ((realSize.getW() - graphMinSize.getW()) / (graphDiffSize.getW())) *
                                   (maxElementWidth - minElementWidth),
@@ -706,8 +705,8 @@ void SOMView::computeMapping() {
         assert(nodeSize.getW() >= 0 && nodeSize.getH() >= 0);
       }
 
-      graphLayoutProperty->setNodeValue(*it2, nodeCoord);
-      graphSizeProperty->setNodeValue(*it2, nodeSize);
+      graphLayoutProperty->setNodeValue(n, nodeCoord);
+      graphSizeProperty->setNodeValue(n, nodeSize);
       ++num;
     }
   }
@@ -761,9 +760,8 @@ ColorProperty *SOMView::getSelectedBaseSOMColors() {
 
 vector<SOMPreviewComposite *> SOMView::getPreviews() {
   vector<SOMPreviewComposite *> previews;
-
-  for (auto it = propertyToPreviews.begin(); it != propertyToPreviews.end(); ++it) {
-    previews.push_back((*it).second);
+  for (const auto &it : propertyToPreviews) {
+    previews.push_back(it.second);
   }
 
   return previews;
@@ -774,11 +772,10 @@ void SOMView::getPreviewsAtViewportCoord(int x, int y, std::vector<SOMPreviewCom
   previewWidget->getScene()->selectEntities(RenderingSimpleEntities, x, y, 0, 0, nullptr,
                                             selectedEntities);
 
-  for (auto itEntities = selectedEntities.begin(); itEntities != selectedEntities.end();
-       ++itEntities) {
-    for (auto itSOM = propertyToPreviews.begin(); itSOM != propertyToPreviews.end(); ++itSOM) {
-      if (itSOM->second->isElement(itEntities->getSimpleEntity())) {
-        result.push_back(itSOM->second);
+  for (const auto &itEntities : selectedEntities) {
+    for (const auto &itSOM : propertyToPreviews) {
+      if (itSOM.second->isElement(itEntities.getSimpleEntity())) {
+        result.push_back(itSOM.second);
       }
     }
   }
@@ -892,12 +889,12 @@ void SOMView::updateNodeColorMapping(tlp::ColorProperty *cp) {
     Observable::holdObservers();
     graph()->push();
 
-    for (auto it = mappingTab.begin(); it != mappingTab.end(); ++it) {
-      Color currentNodeColor = somColorProperty->getNodeValue(it->first);
+    for (const auto &it : mappingTab) {
+      Color currentNodeColor = somColorProperty->getNodeValue(it.first);
 
-      for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2) {
+      for (auto n : it.second) {
         // Update real color
-        realColorProp->setNodeValue(*it2, currentNodeColor);
+        realColorProp->setNodeValue(n, currentNodeColor);
       }
     }
 
@@ -909,10 +906,10 @@ void SOMView::updateNodeColorMapping(tlp::ColorProperty *cp) {
 }
 
 void SOMView::updateDefaultColorProperty() {
-  for (auto itCP = propertyToColorProperty.begin(); itCP != propertyToColorProperty.end(); ++itCP) {
+  for (const auto &itCP : propertyToColorProperty) {
     double min, max;
     // Recompute color property
-    computePropertyColor(itCP->first, min, max);
+    computePropertyColor(itCP.first, min, max);
   }
 
   refreshPreviews();
@@ -927,8 +924,8 @@ void SOMView::refreshPreviews() {
     maskedColor = new ColorProperty(som);
   }
 
-  for (auto itPC = propertyToPreviews.begin(); itPC != propertyToPreviews.end(); ++itPC) {
-    ColorProperty *color = propertyToColorProperty[itPC->first];
+  for (const auto &itPC : propertyToPreviews) {
+    ColorProperty *color = propertyToColorProperty[itPC.first];
 
     if (mask) {
       for (auto n : som->nodes()) {
@@ -937,9 +934,9 @@ void SOMView::refreshPreviews() {
         else
           maskedColor->setNodeValue(n, Color(200, 200, 200));
       }
-      itPC->second->updateColors(maskedColor);
+      itPC.second->updateColors(maskedColor);
     } else
-      itPC->second->updateColors(color);
+      itPC.second->updateColors(color);
   }
 
   if (maskedColor)
@@ -982,9 +979,9 @@ void SOMView::copySelectionToMask() {
     set<node> somNodes;
     BooleanProperty *selection = graph()->getBooleanProperty("viewSelection");
     for (auto n : selection->getNodesEqualTo(true, graph())) {
-      for (auto it = mappingTab.begin(); it != mappingTab.end(); ++it) {
-        if (it->second.find(n) != it->second.end())
-          somNodes.insert(it->first);
+      for (const auto &it : mappingTab) {
+        if (it.second.find(n) != it.second.end())
+          somNodes.insert(it.first);
       }
     }
     setMask(somNodes);
@@ -1017,8 +1014,8 @@ void SOMView::selectAllNodesInMask() {
     selection->setAllNodeValue(false);
     for (auto n : mask->getNodesEqualTo(true, som)) {
       if (mappingTab.find(n) != mappingTab.end()) {
-        for (auto it = mappingTab[n].begin(); it != mappingTab[n].end(); ++it) {
-          selection->setNodeValue(*it, true);
+        for (auto v : mappingTab[n]) {
+          selection->setNodeValue(v, true);
         }
       }
     }
@@ -1111,8 +1108,8 @@ void SOMView::internalSwitchToPreviewMode(bool animation) {
   previewWidget->draw();
   GlBoundingBoxSceneVisitor bbsv(previewWidget->getScene()->getGlGraphComposite()->getInputData());
 
-  for (auto it = propertyToPreviews.begin(); it != propertyToPreviews.end(); ++it)
-    it->second->acceptVisitor(&bbsv);
+  for (const auto &it : propertyToPreviews)
+    it.second->acceptVisitor(&bbsv);
 
   if (animation) {
     tlp::zoomOnScreenRegion(previewWidget, bbsv.getBoundingBox(), true,

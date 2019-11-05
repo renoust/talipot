@@ -50,16 +50,12 @@ public:
         _parsingPathViewProperty(false), _waitingForGraphId(false) {}
 
   void setGraphPropertiesValues() {
-    for (std::map<tlp::Graph *, TemporaryGraphProperty>::const_iterator graphIterator =
-             _graphProperties.begin();
-         graphIterator != _graphProperties.end(); ++graphIterator) {
-      for (TemporaryGraphProperty::const_iterator propertyIterator = graphIterator->second.begin();
-           propertyIterator != graphIterator->second.end(); ++propertyIterator) {
-        tlp::GraphProperty *prop = graphIterator->first->getGraphProperty(propertyIterator->first);
+    for (const auto &graphIterator : _graphProperties) {
+      for (const auto &propertyIterator : graphIterator.second) {
+        tlp::GraphProperty *prop = graphIterator.first->getGraphProperty(propertyIterator.first);
 
-        for (TemporaryGraphValue::const_iterator valueIterator = propertyIterator->second.begin();
-             valueIterator != propertyIterator->second.end(); ++valueIterator) {
-          prop->setNodeValue(tlp::node(valueIterator->first), _clusterIndex[valueIterator->second]);
+        for (const auto &valueIterator : propertyIterator.second) {
+          prop->setNodeValue(tlp::node(valueIterator.first), _clusterIndex[valueIterator.second]);
         }
       }
     }

@@ -159,15 +159,14 @@ void SizeProperty::resetMinMax() {
 }
 //=================================================================================
 void SizeProperty::setNodeValue(const node n, tlp::StoredType<Size>::ReturnedConstValue v) {
-  std::unordered_map<unsigned int, bool>::const_iterator it = minMaxOk.begin();
 
-  if (it != minMaxOk.end()) {
+  if (!minMaxOk.empty()) {
     const Size &oldV = getNodeValue(n);
 
     if (v != oldV) {
       // loop on subgraph min/max
-      for (; it != minMaxOk.end(); ++it) {
-        unsigned int gid = (*it).first;
+      for (const auto &it : minMaxOk) {
+        unsigned int gid = it.first;
         const Size &minV = min[gid];
         const Size &maxV = max[gid];
 

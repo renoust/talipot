@@ -301,18 +301,17 @@ void Observable::unholdObservers() {
       }
 
       {
-        map<node, vector<Event>>::const_iterator it;
 
-        for (it = preparedEvents.begin(); it != preparedEvents.end(); ++it) {
+        for (const auto &it : preparedEvents) {
           // treat scheduled events
-          _oEventsToTreat[it->first] -= it->second.size();
+          _oEventsToTreat[it.first] -= it.second.size();
 
-          if (_oAlive[it->first]) {
-            Observable *obs = static_cast<Observable *>(_oPointer[it->first]);
+          if (_oAlive[it.first]) {
+            Observable *obs = static_cast<Observable *>(_oPointer[it.first]);
 #ifndef NDEBUG
             ++(obs->received);
 #endif
-            obs->treatEvents(it->second);
+            obs->treatEvents(it.second);
           }
         }
       }

@@ -109,16 +109,15 @@ void ExportWizard::pathChanged(QString s) {
   _ui->algFrame->setEnabled(!s.isEmpty());
   button(QWizard::FinishButton)->setEnabled(!s.isEmpty());
 
-  std::list<std::string> modules = PluginsManager::availablePlugins<ExportModule>();
+  auto modules = PluginsManager::availablePlugins<ExportModule>();
 
-  for (std::list<std::string>::iterator itm = modules.begin(); itm != modules.end(); ++itm) {
-    ExportModule *p = PluginsManager::getPluginObject<ExportModule>(*itm);
-    std::list<std::string> extension = p->allFileExtensions();
+  for (const auto &m : modules) {
+    ExportModule *p = PluginsManager::getPluginObject<ExportModule>(m);
+    auto extensions = p->allFileExtensions();
 
-    for (list<string>::const_iterator extit = extension.begin(); extit != extension.end();
-         ++extit) {
-      if (s.endsWith((*extit).c_str())) {
-        selectedExport = itm->c_str();
+    for (const auto &ext : extensions) {
+      if (s.endsWith(ext.c_str())) {
+        selectedExport = m.c_str();
         delete p;
         break;
       }
@@ -147,16 +146,16 @@ void ExportWizard::pathChanged(QString s) {
 void ExportWizard::browseButtonClicked() {
   QString filter;
   QString all = "all supported formats (";
-  const std::list<std::string> modules = PluginsManager::availablePlugins<ExportModule>();
+  auto modules = PluginsManager::availablePlugins<ExportModule>();
 
-  for (std::list<std::string>::const_iterator itm = modules.begin(); itm != modules.end(); ++itm) {
-    ExportModule *p = PluginsManager::getPluginObject<ExportModule>(*itm);
-    const std::list<std::string> extension = p->allFileExtensions();
+  for (const auto &m : modules) {
+    ExportModule *p = PluginsManager::getPluginObject<ExportModule>(m);
+    auto extensions = p->allFileExtensions();
     filter += tlpStringToQString(p->name()) + " (";
 
-    for (list<string>::const_iterator it = extension.begin(); it != extension.end(); ++it) {
-      filter += (*it).c_str() + QString(" ");
-      all += (*it).c_str() + QString(" ");
+    for (const auto &ext : extensions) {
+      filter += ext.c_str() + QString(" ");
+      all += ext.c_str() + QString(" ");
     }
 
     filter.resize(filter.length() - 1);
@@ -188,18 +187,18 @@ bool ExportWizard::validateCurrentPage() {
   // check correct extension
   ExportModule *p =
       PluginsManager::getPluginObject<ExportModule>(tlp::QStringToTlpString(algorithm()));
-  std::list<std::string> extension;
+  std::list<std::string> extensions;
 
   if (p != nullptr)
-    extension = p->allFileExtensions();
+    extensions = p->allFileExtensions();
 
   bool extok(false);
   QString ext;
 
-  for (list<string>::const_iterator it = extension.begin(); it != extension.end(); ++it) {
-    ext += tlp::tlpStringToQString(*it) + ", ";
+  for (const auto &ex : extensions) {
+    ext += tlp::tlpStringToQString(ex) + ", ";
 
-    if (exportFile.endsWith(tlp::tlpStringToQString(*it))) {
+    if (exportFile.endsWith(tlp::tlpStringToQString(ex))) {
       extok = true;
     }
   }
@@ -207,8 +206,8 @@ bool ExportWizard::validateCurrentPage() {
   delete p;
 
   if (!extok) {
-    if (extension.size() == 1)
-      _ui->pathEdit->setText(exportFile + "." + tlp::tlpStringToQString(*extension.begin()));
+    if (extensions.size() == 1)
+      _ui->pathEdit->setText(exportFile + "." + tlp::tlpStringToQString(*extensions.begin()));
     else {
       ext.resize(ext.length() - 2);
       QString msg = "Filename does not terminate with a valid extension. ";

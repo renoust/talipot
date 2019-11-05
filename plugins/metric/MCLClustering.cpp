@@ -111,12 +111,11 @@ void MCLClustering::power(node n) {
     }
   }
 
-  for (std::unordered_map<node, double>::iterator it = newTargets.begin(); it != newTargets.end();
-       ++it) {
+  for (const auto &it : newTargets) {
     edge ne;
-    ne = g.addEdge(n, it->first);
+    ne = g.addEdge(n, it.first);
     inW[ne] = 0.;
-    outW[ne] = it->second;
+    outW[ne] = it.second;
   }
 }
 //==================================================

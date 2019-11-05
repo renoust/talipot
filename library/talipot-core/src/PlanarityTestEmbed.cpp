@@ -21,20 +21,16 @@ using namespace tlp;
 
 void sortEdges(Graph *graph, const vector<edge> &order, unordered_map<edge, edge> &rev) {
   map<node, vector<edge>> graphMap;
-  vector<edge>::const_iterator it = order.begin();
 
-  for (; it != order.end(); ++it) {
-    edge e = *it;
+  for (auto e : order) {
     auto &v = graphMap[graph->source(e)];
     v.push_back(e);
     v.push_back(rev[e]);
   }
 
-  map<node, vector<edge>>::const_iterator itM = graphMap.begin();
-
-  for (; itM != graphMap.end(); ++itM) {
-    assert(graph->deg(itM->first) == itM->second.size());
-    graph->setEdgeOrder(itM->first, itM->second);
+  for (const auto &itM : graphMap) {
+    assert(graph->deg(itM.first) == itM.second.size());
+    graph->setEdgeOrder(itM.first, itM.second);
   }
 }
 //=================================================================
@@ -53,13 +49,12 @@ void PlanarityTestImpl::embedRoot(Graph *sG, int n) {
   edge e;
   node r = nodeWithDfsPos.get(n), u;
   state.set(r.id, VISITED);
-  //  tlp::debug() << "   " << dfsPosNum.get(r.id) << ": ";
-  /// forall_out_edges(e, r)
+
   for (auto e : stableIterator(sG->getOutEdges(r))) {
     u = sG->target(e);
 
     if (dfsPosNum.get(u.id) < dfsPosNum.get(r.id) && isBackEdge(sG, e)) {
-      //      edgeReversal(e);
+
       listBackEdges[r].push_back(edgeReversal(e));
 
       while (state.get(u.id) != VISITED) {
@@ -74,16 +69,12 @@ void PlanarityTestImpl::embedRoot(Graph *sG, int n) {
     }
   }
 
-  for (list<node>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto n : traversedNodes)
+    state.set(n.id, NOT_VISITED);
 
-  // array<edge> back_edge;
   vector<edge> backEdge;
   int nH = sortBackEdgesByDfs(sG, r, r, listBackEdges[r], backEdge);
-  /*
-  if (embedList.find(r)==embedList.end())
-    embedList[r] = new BmList<edge>();
-  */
+
   BmdList<edge> el1, l1;
 
   for (int i = 1; i <= nH; ++i) {
@@ -127,48 +118,6 @@ void PlanarityTestImpl::embedRoot(Graph *sG, int n) {
     finalEmbList.push_back(itBm.next());
   }
 
-  //   { // due to myforall macro;
-  //     map<node, list<edge> > el;
-  //     list<node> nl;
-  //     MutableContainer<bool> marked;
-  //     marked.setAll(false);
-  //     BmdListIt<edge> itBm(embedList[r]);
-  //     while (itBm.hasNext()) {
-  //       edge e= itBm.next();
-  //       node w = sG->source(e);
-  //       if (!marked.get(w.id)) {
-  //  marked.set(w.id, true);
-  //  nl.push_back(w);
-  //       }
-  //       el[w].push_back(e);
-  //     }
-  //     //    tlp::debug() << "\n       * FINAL Embed List: ";
-  //     //    tlp::debug() << "[" << embedList[r].size() << " / "
-  //     //  << sG->numberOfEdges() << "]\n";
-  //     list<node>::const_iterator it= nl.begin();
-  //     for(; it!=nl.end();++it) {
-  //       node k = *it;
-  //       tlp::debug() << "         " << dfsPosNum.get(k.id) << ": ";
-  //       list<edge>::const_iterator itE = el[k].begin();
-  //       for(;itE!=el[k].end();++itE) {
-  //  edge e = *itE;
-  //  tlp::debug() << dfsPosNum.get(sG->target(e).id) << ", ";
-  //       }
-  //       tlp::debug() << "\n";
-  //     }
-  //     tlp::debug() << "         List of edges: ";
-
-  //     { // due to myforall macro;
-  //       BmdListIt<edge> itBm(embedList[r]);
-  //       while (itBm.hasNext()) {
-  //  edge e = itBm.next();
-  //  tlp::debug() << "(" << dfsPosNum.get(sG->source(e).id) << "," <<
-  //    dfsPosNum.get(sG->target(e).id) << ") ";
-  //       }
-  //       tlp::debug() << "\n";
-  //     }
-  //   }
-
   sortEdges(sG, finalEmbList, reversalEdge);
 }
 //=================================================================
@@ -190,25 +139,21 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
   switch (terminalNodes.size()) {
   case 1: {
     map<node, node> backEdgeRepresentant;
-    // node term = terminalNodes.contents(terminalNodes.first());
+
     node term = terminalNodes.front();
 
     // marks as VISITED all nodes in the boundary cycle;
     markPathInT(term, w, backEdgeRepresentant, traversedNodes);
-    // map<node, list<edge> > bEdgesRepres;
+
     map<node, list<edge>> &&bEdgesRepres = groupBackEdgesByRepr(
         sG, listBackEdges, backEdgeRepresentant, traversedNodes, listRepresentants);
     list<node> toEmbedLater;
 
-    //    if (embedList.find(newCNode)==embedList.end())
-    //    embedList[newCNode] = new BmdList<edge>();*/
-    //    BmdList<edge>* tmp1 = embedList[newCNode];
     toEmbedLater =
         embedUpwardT(true, term, w, sG, w, bEdgesRepres, traversedNodes, embedList[newCNode]);
 
     // embeds all nodes in to_embed_later;
-    for (list<node>::iterator it = toEmbedLater.begin(); it != toEmbedLater.end(); ++it) {
-      node t = *it;
+    for (auto t : toEmbedLater) {
       BmdList<edge> el1;
       embedBackEdges(false, sG, t, traversedNodes, bEdgesRepres[t], el1);
       el1.reverse();
@@ -217,16 +162,12 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
       embedList[newCNode].conc(listBackEdgesOutW);
     }
 
-    //    delete bEdgesRepres;
   } break;
 
   case 2: {
     map<node, node> backEdgeRepresentant;
-    node
-        //    term1 = terminal_nodes.contents(terminal_nodes.first()),
-        //    term2 = terminal_nodes.contents(terminal_nodes.last()),
-        term1 = terminalNodes.front(),
-        term2 = terminalNodes.back(), t1 = term1, t2 = term2, m = lcaBetweenTermNodes(t1, t2);
+    node term1 = terminalNodes.front(), term2 = terminalNodes.back(), t1 = term1, t2 = term2,
+         m = lcaBetweenTermNodes(t1, t2);
 
     // makes term1 with lowest dfspos_num
     // (as in calculate_new_RBC);
@@ -239,7 +180,6 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
     assert(!(isCNode(t1) || isCNode(t2)));
 
     if (dfsPosNum.get(t1.id) > dfsPosNum.get(t2.id))
-      // leda_swap(term1, term2);
       swapNode(term1, term2);
 
     t1 = lastPNode(term1, m);
@@ -247,15 +187,14 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
     markPathInT(term2, w, backEdgeRepresentant, traversedNodes);
     markPathInT(term1, t1, backEdgeRepresentant, traversedNodes);
 
-    // MutableContainer<list<edge>* > *bEdgesRepres;
     map<node, list<edge>> &&bEdgesRepres = groupBackEdgesByRepr(
         sG, listBackEdges, backEdgeRepresentant, traversedNodes, listRepresentants);
     list<node> toEmbedLater;
     toEmbedLater =
         embedUpwardT(true, term2, w, sG, w, bEdgesRepres, traversedNodes, embedList[newCNode]);
 
-    for (list<node>::iterator it = toEmbedLater.begin(); it != toEmbedLater.end(); ++it) {
-      embedBackEdges(true, sG, *it, traversedNodes, bEdgesRepres[*it], embedList[newCNode]);
+    for (auto n : toEmbedLater) {
+      embedBackEdges(true, sG, n, traversedNodes, bEdgesRepres[n], embedList[newCNode]);
     }
 
     if (t1 != m) {
@@ -274,7 +213,6 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
     el1.swap(embedList[newCNode]);
 
     embedList[newCNode].conc(listBackEdgesOutW);
-    //    delete bEdgesRepres;
   } break;
 
   default: // sg is not planar (abort procedure);
@@ -282,14 +220,11 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
   }
 
   // restores auxiliary variables;
-  // node u;
-  // forall(u, traversedNodes)
-  for (list<node>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto n : traversedNodes)
+    state.set(n.id, NOT_VISITED);
 
-  // forall(u, listRepresentants)
-  for (list<node>::iterator it = listRepresentants.begin(); it != listRepresentants.end(); ++it)
-    hasBackEdge.set((*it).id, false);
+  for (auto n : listRepresentants)
+    hasBackEdge.set(n.id, false);
 }
 //=================================================================
 /*
@@ -327,9 +262,7 @@ map<node, list<edge>> PlanarityTestImpl::groupBackEdgesByRepr(Graph *sG, list<ed
                                                               list<node> &listRepresentants) {
   list<node> nl;
 
-  // forall(e, listBackEdges)
-  for (list<edge>::iterator it = listBackEdges.begin(); it != listBackEdges.end(); ++it) {
-    edge e = *it;
+  for (auto e : listBackEdges) {
     list<node> S;
     node u = sG->source(e), pNode = u; // pNode is never a c-node;
 
@@ -355,10 +288,7 @@ map<node, list<edge>> PlanarityTestImpl::groupBackEdgesByRepr(Graph *sG, list<ed
       traversedNodes.push_back(repr);
     }
 
-    // forall(u, S)
-    for (list<node>::iterator it = S.begin(); it != S.end(); ++it) {
-      node u = *it;
-
+    for (auto u : S) {
       if (isCNode(u) && isCNode(parent.get(u.id)))
         backEdgeRepresentant[u] = backEdgeRepresentant[parent.get(u.id)];
       else
@@ -371,24 +301,18 @@ map<node, list<edge>> PlanarityTestImpl::groupBackEdgesByRepr(Graph *sG, list<ed
     }
   }
 
-  // map<node, list<edge> > listEdges;
-  map<node, list<edge>> listEdges; // = new MutableContainer<list<edge>* >();
+  map<node, list<edge>> listEdges;
 
-  // forall(e, listBackEdges)
-  for (list<edge>::iterator it = listBackEdges.begin(); it != listBackEdges.end(); ++it) {
-    node v = sG->source(*it);
-    //    listEdges->get((backEdgeRepresentant[v]).id)->push_back(*it);
-    listEdges[backEdgeRepresentant[v]].push_back(*it);
+  for (auto e : listBackEdges) {
+    node v = sG->source(e);
+    listEdges[backEdgeRepresentant[v]].push_back(e);
   }
 
-  //  node u;
-  // forall(u, nl)
-  for (list<node>::iterator it = nl.begin(); it != nl.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto n : nl)
+    state.set(n.id, NOT_VISITED);
 
-  // forall(u, listRepresentants)
-  for (list<node>::iterator it = listRepresentants.begin(); it != listRepresentants.end(); ++it)
-    state.set((*it).id, VISITED);
+  for (auto n : listRepresentants)
+    state.set(n.id, VISITED);
 
   return listEdges;
 }
@@ -510,13 +434,10 @@ void PlanarityTestImpl::addOldCNodeToEmbedding(bool embBackEdgesOutW, Graph *sG,
     listNodesL.swap(listNodesR);
 
   // embeds all back-edges in oldCNode;
-  // listNodesR.reverse_items();
   listNodesR.reverse();
   node t;
 
-  // forall(t, listNodesR)
-  for (list<node>::iterator it = listNodesR.begin(); it != listNodesR.end(); ++it) {
-    t = *it;
+  for (auto t : listNodesR) {
     embedBackEdges(embBackEdgesOutW, sG, t, traversedNodes, bEdgesRepres[t], embList);
   }
 
@@ -526,7 +447,6 @@ void PlanarityTestImpl::addOldCNodeToEmbedding(bool embBackEdgesOutW, Graph *sG,
   embedList[oldCNode].conc(embList);
   embedList[oldCNode].swap(embList);
 
-  // toEmbedLater.conc(listNodesL, LEDA::before);
   toEmbedLater.splice(toEmbedLater.begin(), listNodesL);
 }
 //=================================================================
@@ -546,7 +466,6 @@ void PlanarityTestImpl::embedBackEdges(bool embBackEdgesOutW, Graph *sG, node re
 
   edge e;
   BmdList<edge> el1, l1, wl1;
-  // node w = target(listBackEdges.contents(listBackEdges.first()));
   node w = sG->target(listBackEdges.front());
 
   vector<edge> backEdge;
@@ -608,15 +527,12 @@ int PlanarityTestImpl::sortBackEdgesByDfs(Graph *sG, node, node repr, list<edge>
   Graph *D = tlp::newGraph();
 
   list<node> listNodes, listCNodes;
-  // map<node, node> nodeInD, nodeInG;
   map<node, node> nodeInD, nodeInG;
 
   nodeInD[repr] = D->addNode();
   nodeInG[nodeInD[repr]] = repr;
 
-  // forall(e, listBackEdges)
-  for (list<edge>::iterator it = listBackEdges.begin(); it != listBackEdges.end(); ++it) {
-    edge e = *it;
+  for (auto e : listBackEdges) {
     node u = sG->source(e);
     node predU = NULL_NODE;
 
@@ -646,17 +562,12 @@ int PlanarityTestImpl::sortBackEdgesByDfs(Graph *sG, node, node repr, list<edge>
       D->addEdge(nodeInD[u], nodeInD[predU]);
   }
 
-  // forall(v, listNodes)
-  for (list<node>::iterator it = listNodes.begin(); it != listNodes.end(); ++it)
-    state.set((*it).id, NOT_VISITED);
+  for (auto n : listNodes)
+    state.set(n.id, NOT_VISITED);
 
-  // creates  edges from c-nodes;
   map<node, bool> isInD;
 
-  // forall(v, listCNodes)
-  for (list<node>::iterator it = listCNodes.begin(); it != listCNodes.end(); ++it) {
-    node v = *it;
-    //    node u;
+  for (auto v : listCNodes) {
     BmdListIt<node> bmItn(RBC[v]);
 
     while (bmItn.hasNext())
@@ -669,9 +580,8 @@ int PlanarityTestImpl::sortBackEdgesByDfs(Graph *sG, node, node repr, list<edge>
       el.push_back(e);
     }
 
-    // D.del_edges(el);
-    for (list<edge>::iterator edgeIt = el.begin(); edgeIt != el.end(); ++edgeIt)
-      D->delEdge(*edgeIt);
+    for (auto e : el)
+      D->delEdge(e);
 
     BmdListRevIt<node> itR(RBC[v]);
 
@@ -683,27 +593,20 @@ int PlanarityTestImpl::sortBackEdgesByDfs(Graph *sG, node, node repr, list<edge>
     }
   }
 
-  // orders back-edges by DFS number;
-  // node_array<int> dfspos(D, 0);
+  // orders back-edges by DFS number
   MutableContainer<int> dfsPos;
   dfsPos.setAll(0);
 
   posDFS(D, dfsPos);
   int tot = D->numberOfNodes();
-  backEdge.resize(tot + 1); // Warning
+  backEdge.resize(tot + 1);
   backEdge[0] = NULL_EDGE;
 
   for (int i = 1; i <= tot; ++i)
     backEdge[i] = NULL_EDGE;
 
-  // forall(e, listBackEdges)
-  for (list<edge>::iterator it = listBackEdges.begin(); it != listBackEdges.end(); ++it) {
-    edge e = *it;
+  for (auto e : listBackEdges) {
     node v = sG->source(e);
-    //     tlp::debug() << v.id << endl;
-    //     tlp::debug() << "nodeInD[v].id = " << nodeInD.get(v.id).id << endl;
-    //     tlp::debug() << "dfsPos.get(nodeInD[v].id) = " << dfsPos.get(nodeInD.get(v.id).id) <<
-    //     endl;
     backEdge[dfsPos.get(nodeInD[v].id)] = e;
   }
 
@@ -728,7 +631,6 @@ bool PlanarityTestImpl::isPlanarEmbedding(const tlp::Graph *sG) {
   sens.setAll(false);
   int fc = 0;
 
-  //  displayMap(sG);
   for (int k = 0; k < 2; ++k) {
 
     for (auto e : sG->edges()) {
@@ -743,7 +645,6 @@ bool PlanarityTestImpl::isPlanarEmbedding(const tlp::Graph *sG) {
         else
           n = sG->source(e1);
 
-        //      tlp::warning() << "-(" << e1.id << ")->" << n.id << flush;
         n_tmp = n;
 
         do {
@@ -755,7 +656,6 @@ bool PlanarityTestImpl::isPlanarEmbedding(const tlp::Graph *sG) {
           if (sG->source(e1) == n)
             sens.set(e1.id, true);
 
-          //  tlp::warning() << "-(" << e1.id << ")->" << n.id << flush;
           ++count;
 
           if (count > 2 * sG->numberOfEdges() + 1)

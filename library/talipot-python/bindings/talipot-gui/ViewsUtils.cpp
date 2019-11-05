@@ -31,17 +31,8 @@ ViewMainWindow::ViewMainWindow() : QMainWindow() {
   resize(800, 600);
 }
 
-std::vector<std::string> ViewsManager::getViews() {
-  std::vector<std::string> ret;
-  std::list<std::string> views = PluginsManager::availablePlugins<View>();
-
-  for (std::list<std::string>::iterator it = views.begin(); it != views.end(); ++it) {
-    if (*it != "Python Script view") {
-      ret.push_back(*it);
-    }
-  }
-
-  return ret;
+std::list<std::string> ViewsManager::getViews() {
+  return PluginsManager::availablePlugins<View>();
 }
 
 tlp::Workspace *ViewsManager::tlpWorkspace() {

@@ -389,8 +389,8 @@ void GraphDecorator::delNode(const node n, bool deleteInAllGraphs) {
 void GraphDecorator::delNodes(Iterator<node> *itN, bool deleteInAllGraphs) {
   assert(itN != nullptr);
 
-  while (itN->hasNext()) {
-    delNode(itN->next(), deleteInAllGraphs);
+  for (auto n : itN) {
+    delNode(n, deleteInAllGraphs);
   }
 }
 
@@ -404,8 +404,8 @@ void GraphDecorator::delEdge(const edge e, bool deleteInAllGraphs) {
 void GraphDecorator::delEdges(Iterator<edge> *itE, bool deleteInAllGraphs) {
   assert(itE != nullptr);
 
-  while (itE->hasNext()) {
-    delEdge(itE->next(), deleteInAllGraphs);
+  for (auto e : itE) {
+    delEdge(e, deleteInAllGraphs);
   }
 }
 

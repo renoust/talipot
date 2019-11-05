@@ -23,16 +23,14 @@ StringCollection::StringCollection(const std::vector<string> &vectorParam)
 
 StringCollection::StringCollection(const std::string &param) : current(0) {
   string temp;
-  string::const_iterator itChar = param.begin();
   bool escapeChar = false;
 
-  while (itChar != param.end()) {
+  for (auto itChar : param) {
     if (escapeChar) {
       // when escaped semi colon can be added to the string
-      if (*itChar == ';') {
-        temp += *itChar;
+      if (itChar == ';') {
+        temp += itChar;
         escapeChar = false;
-        ++itChar;
         continue;
       } else {
         escapeChar = false;
@@ -41,21 +39,18 @@ StringCollection::StringCollection(const std::string &param) : current(0) {
     }
 
     // check string separator
-    if (*itChar == ';') {
+    if (itChar == ';') {
       escapeChar = false;
       _data.push_back(temp);
       temp.clear();
-      ++itChar;
       continue;
     }
 
     // check escape char
-    if (*itChar == '\\')
+    if (itChar == '\\')
       escapeChar = true;
     else
-      temp += *itChar;
-
-    ++itChar;
+      temp += itChar;
   }
 
   if (!temp.empty())
@@ -74,9 +69,10 @@ StringCollection::StringCollection(const std::vector<string> &vectorParam,
                                    const std::string &currentString)
     : _data(vectorParam), current(0) {
 
-  for (vector<string>::const_iterator itS = _data.begin(); itS != _data.end(); ++itS, ++current) {
-    if ((*itS) == currentString)
+  for (const auto &itS : _data) {
+    if (itS == currentString)
       return;
+    ++current;
   }
 
   current = 0;

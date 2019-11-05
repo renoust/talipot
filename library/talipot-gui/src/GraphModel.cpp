@@ -1007,18 +1007,15 @@ void NodesGraphModel::treatEvent(const Event &ev) {
     } else if (graphEv->getType() == GraphEvent::TLP_ADD_NODES) {
       _nodesAdded = true;
 
-      const std::vector<node> &addedNodes = graphEv->getNodes();
-
-      for (std::vector<tlp::node>::const_iterator it = addedNodes.begin(); it != addedNodes.end();
-           ++it) {
+      for (auto n : graphEv->getNodes()) {
         // if the node was removed then readded before the call to Observable::unholdObservers(),
         // remove
         // it from the elementsToModify list as no update has to be performed in the model for that
         // element
-        int wasDeleted = _nodesRemoved ? _elementsToModify.indexOf(qMakePair(it->id, false)) : -1;
+        int wasDeleted = _nodesRemoved ? _elementsToModify.indexOf(qMakePair(n.id, false)) : -1;
 
         if (wasDeleted == -1) {
-          _elementsToModify.push_back(QPair<unsigned int, bool>(it->id, true));
+          _elementsToModify.push_back(QPair<unsigned int, bool>(n.id, true));
         } else {
           _elementsToModify.remove(wasDeleted);
         }
@@ -1098,18 +1095,15 @@ void EdgesGraphModel::treatEvent(const Event &ev) {
     } else if (graphEv->getType() == GraphEvent::TLP_ADD_EDGES) {
       _edgesAdded = true;
 
-      const std::vector<edge> &addedEdges = graphEv->getEdges();
-
-      for (std::vector<tlp::edge>::const_iterator it = addedEdges.begin(); it != addedEdges.end();
-           ++it) {
+      for (auto e : graphEv->getEdges()) {
         // if the edge was removed then readded before the call to Observable::unholdObservers(),
         // remove
         // it from the elementsToModify list as no update has to be performed in the model for that
         // element
-        int wasDeleted = _edgesRemoved ? _elementsToModify.indexOf(qMakePair(it->id, false)) : -1;
+        int wasDeleted = _edgesRemoved ? _elementsToModify.indexOf(qMakePair(e.id, false)) : -1;
 
         if (wasDeleted == -1) {
-          _elementsToModify.push_back(QPair<unsigned int, bool>(it->id, true));
+          _elementsToModify.push_back(QPair<unsigned int, bool>(e.id, true));
         } else {
           _elementsToModify.remove(wasDeleted);
         }

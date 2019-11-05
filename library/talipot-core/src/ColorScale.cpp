@@ -42,7 +42,7 @@ ColorScale &ColorScale::operator=(const ColorScale &scale) {
 
 ColorScale::~ColorScale() {}
 
-void ColorScale::setColorScale(const std::vector<Color> colors, const bool gradientV) {
+void ColorScale::setColorScale(const std::vector<Color> &colors, const bool gradientV) {
   gradient = gradientV;
   colorMap.clear();
 
@@ -98,7 +98,7 @@ Color ColorScale::getColorAtPos(const float pos) const {
     Color startColor;
     Color endColor;
     float startPos, endPos;
-    map<float, Color>::const_iterator it = colorMap.begin();
+    auto it = colorMap.begin();
     startPos = endPos = it->first;
     startColor = endColor = it->second;
 
@@ -134,11 +134,11 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
   colorMap.clear();
 
   // insert all values in [0, 1]
-  for (map<float, Color>::const_iterator it = newColorMap.begin(); it != newColorMap.end(); ++it) {
-    if ((*it).first < 0.f || (*it).first > 1.f)
+  for (const auto &it : newColorMap) {
+    if (it.first < 0.f || it.first > 1.f)
       continue;
     else
-      colorMap[(*it).first] = (*it).second;
+      colorMap[it.first] = it.second;
   }
 
   if (!colorMap.empty()) {
@@ -151,7 +151,7 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
       colorMap[1.f] = c;
     } else {
       // Ensure the first value is mapped to 0 and last is mapped to 1
-      map<float, Color>::iterator begin = colorMap.begin();
+      auto begin = colorMap.begin();
 
       if ((*begin).first != 0) {
         Color c = (*begin).second;
@@ -159,7 +159,7 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
         colorMap[0.f] = c;
       }
 
-      map<float, Color>::reverse_iterator end = colorMap.rbegin();
+      auto end = colorMap.rbegin();
 
       if ((*end).first != 1) {
         Color c = (*end).second;
@@ -174,9 +174,8 @@ void ColorScale::setColorMap(const map<float, Color> &newColorMap) {
 
 void ColorScale::setColorMapTransparency(unsigned char alpha) {
   // force the alpha value of all mapped colors
-  for (map<float, Color>::iterator it = colorMap.begin(); it != colorMap.end(); ++it) {
-    Color &color = it->second;
-    color.setA(alpha);
+  for (auto &it : colorMap) {
+    it.second.setA(alpha);
   }
 }
 
@@ -186,10 +185,8 @@ bool ColorScale::operator==(const std::vector<Color> &colors) const {
 
   unsigned int i = 0;
 
-  for (map<float, Color>::const_iterator it = colorMap.begin(); it != colorMap.end(); ++it, ++i) {
-    Color csColor = it->second;
-
-    if (csColor != colors[i])
+  for (const auto &it : colorMap) {
+    if (it.second != colors[i++])
       return false;
   }
 
@@ -202,10 +199,8 @@ bool ColorScale::hasRegularStops() const {
   }
 
   vector<float> v;
-  map<float, Color>::const_iterator it = colorMap.begin();
-
-  for (; it != colorMap.end(); ++it) {
-    v.push_back(it->first);
+  for (const auto &it : colorMap) {
+    v.push_back(it.first);
   }
 
   std::sort(v.begin(), v.end());

@@ -362,12 +362,9 @@ void ParallelCoordsAxisBoxPlot::buildGlAxisPlot(vector<ParallelAxis *> currentAx
 }
 
 void ParallelCoordsAxisBoxPlot::deleteGlAxisPlot() {
-  map<QuantitativeParallelAxis *, GlAxisBoxPlot *>::iterator it;
-
-  for (it = axisBoxPlotMap.begin(); it != axisBoxPlotMap.end(); ++it) {
-    delete (it->second);
+  for (const auto &it : axisBoxPlotMap) {
+    delete it.second;
   }
-
   axisBoxPlotMap.clear();
 }
 
@@ -431,10 +428,8 @@ bool ParallelCoordsAxisBoxPlot::draw(GlMainWidget *glMainWidget) {
   Camera &camera = glMainWidget->getScene()->getLayer("Main")->getCamera();
   camera.initGl();
 
-  map<QuantitativeParallelAxis *, GlAxisBoxPlot *>::iterator it;
-
-  for (it = axisBoxPlotMap.begin(); it != axisBoxPlotMap.end(); ++it) {
-    (it->second)->draw(0, &camera);
+  for (const auto &it : axisBoxPlotMap) {
+    it.second->draw(0, &camera);
   }
 
   return true;

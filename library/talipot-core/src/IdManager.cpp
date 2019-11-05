@@ -47,7 +47,7 @@ void IdManager::free(const unsigned int id) {
 
   if (id == state.firstId) {
     for (;;) {
-      set<unsigned int>::iterator it = state.freeIds.find(++state.firstId);
+      auto it = state.freeIds.find(++state.firstId);
 
       if (it == state.freeIds.end())
         break;
@@ -66,7 +66,7 @@ void IdManager::free(const unsigned int id) {
 //-----------------------------------------------------------
 #ifndef TLP_NO_IDS_REUSE
 unsigned int IdManager::getFreeId() {
-  std::set<unsigned int>::iterator it = state.freeIds.begin();
+  auto it = state.freeIds.begin();
   assert(it != state.freeIds.end());
   unsigned int tmp = *it;
   state.freeIds.erase(it);

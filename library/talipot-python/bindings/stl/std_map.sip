@@ -95,11 +95,11 @@ template<T1, T2>
     return NULL;
   }
 
-  for (std::map<T1, T2>::const_iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (const auto &it : *sipCpp) {
     PyObject *key = NULL;
     PyObject *val = NULL;
-    T1 *cppKey = new T1(it->first);
-    T2 *cppVal = new T2(it->second);
+    T1 *cppKey = new T1(it.first);
+    T2 *cppVal = new T2(it.second);
 
     key = sipConvertFromNewType(cppKey, kpTypeDef1, sipTransferObj);
     val = sipConvertFromNewType(cppVal, kpTypeDef2, sipTransferObj);
@@ -215,11 +215,11 @@ template<T1, T2>
     return NULL;
   }
 
-  for (std::map<T1, T2 *>::const_iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (const auto &it : *sipCpp) {
     PyObject *key = NULL;
     PyObject *val = NULL;
-    T1 *cppKey = new T1(it->first);
-    T2 *cppVal = it->second;
+    T1 *cppKey = new T1(it.first);
+    T2 *cppVal = it.second;
 
     key = sipConvertFromNewType(cppKey, kpTypeDef1, sipTransferObj);
     val = sipConvertFromType(cppVal, kpTypeDef2, sipTransferObj);
@@ -318,11 +318,11 @@ template<T2>
     return NULL;
   }
 
-  for (std::map<float, T2>::const_iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (const auto &it : *sipCpp) {
     PyObject *key = NULL;
     PyObject *val = NULL;
-    float cppKey = it->first;
-    T2 *cppVal = new T2(it->second);
+    float cppKey = it.first;
+    T2 *cppVal = new T2(it.second);
 
     key = PyFloat_FromDouble(cppKey);
     val = sipConvertFromNewType(cppVal, kpTypeDef2, sipTransferObj);

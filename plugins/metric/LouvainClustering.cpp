@@ -367,7 +367,7 @@ bool LouvainClustering::run() {
   weights = new EdgeProperty<double>();
   quotient->alloc(*weights);
   // init total_weight, weights and quotient edges
-  for (const edge &e : graph->edges()) {
+  for (auto e : graph->edges()) {
     double weight = metric ? metric->getEdgeDoubleValue(e) : 1;
     const std::pair<node, node> &ends = graph->ends(e);
     node q_src(clusters->getNodeValue(ends.first));

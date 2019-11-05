@@ -82,12 +82,12 @@ Histogram *HistogramViewNavigator::getOverviewUnderPointer(const Coord &sceneCoo
   Histogram *ret = nullptr;
   vector<Histogram *> overviews = histoView->getHistograms();
 
-  for (vector<Histogram *>::const_iterator it = overviews.begin(); it != overviews.end(); ++it) {
-    BoundingBox overviewBB((*it)->getBoundingBox());
+  for (auto h : overviews) {
+    BoundingBox overviewBB(h->getBoundingBox());
 
     if (sceneCoords.getX() >= overviewBB[0][0] && sceneCoords.getX() <= overviewBB[1][0] &&
         sceneCoords.getY() >= overviewBB[0][1] && sceneCoords.getY() <= overviewBB[1][1]) {
-      ret = *it;
+      ret = h;
       break;
     }
   }

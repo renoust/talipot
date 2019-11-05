@@ -35,7 +35,7 @@ node OctreeBundle::splitEdge(node a, node b) {
   const Coord &cB = layout->getNodeValue(b);
   Coord center = (cA + cB) / 2.0f;
 
-  MapVecNode::const_iterator itn = mapN.find(center);
+  auto itn = mapN.find(center);
 
   if (itn != mapN.end()) {
     return itn->second;
@@ -79,20 +79,19 @@ void OctreeBundle::elmentSplitting(const Coord &a, const Coord &b, const Coord &
 
   in.clear();
   out.clear();
-  vector<node>::const_iterator it = input.begin();
 
-  for (; it != input.end(); ++it) {
-    const Coord &tmp = layout->getNodeValue(*it);
+  for (auto n : input) {
+    const Coord &tmp = layout->getNodeValue(n);
 
     if (isIn(tmp, a, b, c, d))
-      in.push_back(*it);
+      in.push_back(n);
     else
-      out.push_back(*it);
+      out.push_back(n);
   }
 }
 //=====================================
 node OctreeBundle::addNode(const tlp::Coord &pos) {
-  MapVecNode::const_iterator itn = mapN.find(pos);
+  auto itn = mapN.find(pos);
 
   if (itn == mapN.end()) {
     node n = graph->addNode();

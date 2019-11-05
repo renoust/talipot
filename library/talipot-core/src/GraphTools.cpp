@@ -131,9 +131,8 @@ void makeProperDag(Graph *graph, list<node> &addedNodes,
     }
   }
 
-  for (std::unordered_map<edge, edge>::const_iterator it = replacedEdges.begin();
-       it != replacedEdges.end(); ++it)
-    graph->delEdge((*it).first);
+  for (const auto &it : replacedEdges)
+    graph->delEdge(it.first);
 
   assert(AcyclicTest::isAcyclic(graph));
 }
@@ -572,7 +571,7 @@ void bfs(const Graph *graph, node root, std::vector<tlp::node> &nodes) {
 void bfs(const Graph *graph, std::vector<tlp::node> &visitedNodes) {
   MutableContainer<bool> visited;
   visited.setAll(false);
-  for (const node n : graph->nodes()) {
+  for (auto n : graph->nodes()) {
     bfs(graph, n, visitedNodes, visited);
   }
 }
@@ -649,23 +648,23 @@ void buildNodesUniformQuantification(const Graph *graph, const NumericProperty *
 
   for (unsigned int i = 0; i < nbNodes; ++i) {
     double value = prop->getNodeDoubleValue(nodes[i]);
-    map<double, int>::iterator it = histogram.find(value);
+    auto it = histogram.find(value);
 
-    if (it == histogram.end())
+    if (it == histogram.end()) {
       histogram[value] = 1;
-    else
+    } else {
       ++(it->second);
+    }
   }
 
   // Build the color map
   double sum = 0;
   double cK = double(nbNodes) / double(k);
   int k2 = 0;
-  map<double, int>::iterator it = histogram.begin(), ite = histogram.end();
 
-  for (; it != ite; ++it) {
-    sum += it->second;
-    nodeMapping[it->first] = k2;
+  for (const auto &it : histogram) {
+    sum += it.second;
+    nodeMapping[it.first] = k2;
 
     if (sum > cK * (k2 + 1))
       k2 = ceil(sum / cK) - 1;
@@ -678,23 +677,23 @@ void buildEdgesUniformQuantification(const Graph *graph, const NumericProperty *
   map<double, int> histogram;
   for (auto e : graph->edges()) {
     double value = prop->getEdgeDoubleValue(e);
-    map<double, int>::iterator it = histogram.find(value);
+    auto it = histogram.find(value);
 
-    if (it == histogram.end())
+    if (it == histogram.end()) {
       histogram[value] = 1;
-    else
+    } else {
       ++(it->second);
+    }
   }
 
   // Build the color map
   double sum = 0;
   double cK = double(graph->numberOfEdges()) / double(k);
   int k2 = 0;
-  map<double, int>::iterator it = histogram.begin(), ite = histogram.end();
 
-  for (; it != ite; ++it) {
-    sum += it->second;
-    edgeMapping[it->first] = k2;
+  for (const auto &it : histogram) {
+    sum += it.second;
+    edgeMapping[it.first] = k2;
 
     if (sum > cK * (k2 + 1))
       k2 = ceil(sum / cK) - 1;

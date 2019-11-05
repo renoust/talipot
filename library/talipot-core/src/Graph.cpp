@@ -601,8 +601,7 @@ public:
       }
     }
 
-    rootsIterator =
-        new StlIterator<Graph *, std::vector<tlp::Graph *>::iterator>(roots.begin(), roots.end());
+    rootsIterator = stlIterator(roots);
   }
 
   ~RootGraphsIterator() override {
@@ -686,8 +685,7 @@ bool tlp::Graph::applyPropertyAlgorithm(const std::string &algorithm, PropertyIn
     }
   }
 
-  std::unordered_map<std::string, PropertyInterface *>::const_iterator it =
-      circularCalls.find(algorithm);
+  auto it = circularCalls.find(algorithm);
 
   if (it != circularCalls.end() && (*it).second == prop) {
     errorMessage = std::string("Circular call of ") + __PRETTY_FUNCTION__;
@@ -1322,17 +1320,12 @@ node Graph::createMetaNode(Graph *subGraph, bool multiEdges, bool edgeDelAll) {
   }
 
   // update metaInfo of new meta edges
-  std::unordered_map<edge, set<edge>>::const_iterator it;
-
-  for (it = subEdges.begin(); it != subEdges.end(); ++it) {
-    edge mE = it->first;
-    metaInfo->setEdgeValue(mE, it->second);
+  for (const auto &it : subEdges) {
+    edge mE = it.first;
+    metaInfo->setEdgeValue(mE, it.second);
     // compute meta edge values
     for (PropertyInterface *property : getObjectProperties()) {
-      Iterator<edge> *itE = getEdgeMetaInfo(mE);
-      assert(itE->hasNext());
-      property->computeMetaValue(mE, itE, this);
-      delete itE;
+      property->computeMetaValue(mE, getEdgeMetaInfo(mE), this);
     }
   }
 
@@ -1460,35 +1453,24 @@ void Graph::openMetaNode(node metaNode, bool updateProperties) {
       }
 
       // iterate on newMetaEdges
-      std::unordered_map<node, std::unordered_map<node, set<edge>>>::iterator itme =
-          newMetaEdges.begin();
+      for (const auto &itme : newMetaEdges) {
+        node src = itme.first;
 
-      while (itme != newMetaEdges.end()) {
-        node src = itme->first;
-        std::unordered_map<node, set<edge>>::iterator itnme = itme->second.begin();
-        std::unordered_map<node, set<edge>>::iterator itnmeEnd = itme->second.end();
-
-        while (itnme != itnmeEnd) {
+        for (const auto &itnme : itme.second) {
           Graph *graph = this;
-          node tgt(itnme->first);
+          node tgt(itnme.first);
 
           // add an edge in the relevant graph
           if (!isElement(src) || !isElement(tgt))
             graph = super;
 
           edge mE = graph->addEdge(src, tgt);
-          metaInfo->setEdgeValue(mE, itnme->second);
+          metaInfo->setEdgeValue(mE, itnme.second);
           // compute meta edge values
           for (PropertyInterface *property : graph->getObjectProperties()) {
-            Iterator<edge> *itE = getEdgeMetaInfo(mE);
-            assert(itE->hasNext());
-            property->computeMetaValue(mE, itE, graph);
-            delete itE;
+            property->computeMetaValue(mE, getEdgeMetaInfo(mE), graph);
           }
-          ++itnme;
         }
-
-        ++itme;
       }
     }
 
@@ -1626,7 +1608,7 @@ void Graph::createMetaNodes(Iterator<Graph *> *itS, Graph *quotientGraph, vector
             if (mSource != mTarget) {
               MetaEdge tmp;
               tmp.source = mSource.id, tmp.target = mTarget.id;
-              set<MetaEdge>::const_iterator itm = myQuotientGraph.find(tmp);
+              auto itm = myQuotientGraph.find(tmp);
 
               if (itm == myQuotientGraph.end()) {
                 edge mE = quotientGraph->addEdge(mSource, mTarget);
@@ -1644,18 +1626,13 @@ void Graph::createMetaNodes(Iterator<Graph *> *itS, Graph *quotientGraph, vector
     }
   }
   // set viewMetaGraph for added meta edges
-  unordered_map<edge, set<edge>>::const_iterator itm = eMapping.begin();
-
-  while (itm != eMapping.end()) {
-    edge mE = itm->first;
-    metaInfo->setEdgeValue(mE, itm->second);
+  for (const auto &itm : eMapping) {
+    edge mE = itm.first;
+    metaInfo->setEdgeValue(mE, itm.second);
     // compute meta edge values
     for (auto prop : quotientGraph->getObjectProperties()) {
-      Iterator<edge> *itE = getRoot()->getEdgeMetaInfo(mE);
-      prop->computeMetaValue(mE, itE, quotientGraph);
-      delete itE;
+      prop->computeMetaValue(mE, getRoot()->getEdgeMetaInfo(mE), quotientGraph);
     }
-    ++itm;
   }
 
   Observable::unholdObservers();
@@ -1682,23 +1659,19 @@ const std::string &GraphEvent::getPropertyName() const {
 }
 
 void Graph::addNodes(const std::vector<node> &nodes) {
-  StlIterator<node, vector<node>::const_iterator> vIterator(nodes.begin(), nodes.end());
-  addNodes(&vIterator);
+  addNodes(stlIterator(nodes));
 }
 
 void Graph::delNodes(const std::vector<node> &nodes, bool deleteInAllGraphs) {
-  StlIterator<node, vector<node>::const_iterator> vIterator(nodes.begin(), nodes.end());
-  delNodes(&vIterator, deleteInAllGraphs);
+  delNodes(stlIterator(nodes), deleteInAllGraphs);
 }
 
 void Graph::addEdges(const std::vector<edge> &edges) {
-  StlIterator<edge, vector<edge>::const_iterator> vIterator(edges.begin(), edges.end());
-  addEdges(&vIterator);
+  addEdges(stlIterator(edges));
 }
 
 void Graph::delEdges(const std::vector<edge> &edges, bool deleteInAllGraphs) {
-  StlIterator<edge, vector<edge>::const_iterator> vIterator(edges.begin(), edges.end());
-  delEdges(&vIterator, deleteInAllGraphs);
+  delEdges(stlIterator(edges), deleteInAllGraphs);
 }
 
 BooleanProperty *Graph::getLocalBooleanProperty(const string &propertyName) {

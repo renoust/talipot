@@ -196,8 +196,7 @@ void GraphAbstract::setSuperGraph(Graph *sg) {
 }
 //=========================================================================
 Iterator<Graph *> *GraphAbstract::getSubGraphs() const {
-  return new StlIterator<Graph *, vector<Graph *>::const_iterator>(subgraphs.cbegin(),
-                                                                   subgraphs.cend());
+  return stlIterator(subgraphs);
 }
 //=========================================================================
 bool GraphAbstract::isSubGraph(const Graph *sg) const {
@@ -319,16 +318,16 @@ node GraphAbstract::getOutNode(const node n, unsigned int i) const {
 void GraphAbstract::delNodes(Iterator<node> *itN, bool deleteInAllGraphs) {
   assert(itN != nullptr);
 
-  while (itN->hasNext()) {
-    delNode(itN->next(), deleteInAllGraphs);
+  for (auto n : itN) {
+    delNode(n, deleteInAllGraphs);
   }
 }
 //=========================================================================
 void GraphAbstract::delEdges(Iterator<edge> *itE, bool deleteInAllGraphs) {
   assert(itE != nullptr);
 
-  while (itE->hasNext()) {
-    delEdge(itE->next(), deleteInAllGraphs);
+  for (auto e : itE) {
+    delEdge(e, deleteInAllGraphs);
   }
 }
 //=========================================================================
@@ -497,13 +496,11 @@ std::string GraphAbstract::getName() const {
 Iterator<node> *GraphAbstract::bfs(const node root) const {
   vector<node> bfsResult;
   tlp::bfs(this, root, bfsResult);
-  return new StableIterator<tlp::node>(
-      new StlIterator<node, std::vector<tlp::node>::iterator>(bfsResult.begin(), bfsResult.end()));
+  return stableIterator(stlIterator(bfsResult));
 }
 
 Iterator<node> *GraphAbstract::dfs(const node root) const {
   vector<node> dfsResult;
   tlp::dfs(this, root, dfsResult);
-  return new StableIterator<tlp::node>(
-      new StlIterator<node, std::vector<tlp::node>::iterator>(dfsResult.begin(), dfsResult.end()));
+  return stableIterator(stlIterator((dfsResult)));
 }

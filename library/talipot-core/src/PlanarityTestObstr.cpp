@@ -56,7 +56,6 @@ void PlanarityTestImpl::extractBoundaryCycle(Graph *sG, node cNode, list<edge> &
   edge e;
   node u;
   u = parent.get(cNode.id);
-  //  e = el[u].contents(el[u].first());
   e = el[u].front();
   listEdges.push_back(e);
   u = sG->target(e);
@@ -94,12 +93,11 @@ void PlanarityTestImpl::obstrEdgesTerminal(Graph *G, node w, node t, node u) {
 void PlanarityTestImpl::addPartOfBc(Graph *sG, node cNode, node n1, node n2, node n3) {
   list<edge> bc, el1, el2;
   extractBoundaryCycle(sG, cNode, bc);
-  edge e;
   bool flag = false;
   int side = 0;
 
-  for (list<edge>::const_iterator it = bc.begin(); it != bc.end(); ++it) {
-    node source = sG->source(*it);
+  for (auto e : bc) {
+    node source = sG->source(e);
 
     if (source == n1) {
       if (flag)
@@ -305,9 +303,6 @@ void PlanarityTestImpl::obstructionEdgesT0(Graph *sG, node w, node t1, node t2, 
     min = dfsPosNum.get(m3.id);
   }
 
-  //  if (dfsPosNum.get(m2.id) > max) max = dfsPosNum.get(m2.id);
-  //  if (dfsPosNum.get(m3.id) > max) max = dfsPosNum.get(m3.id);
-
   max = std::max(max, dfsPosNum.get(m2.id));
   max = std::max(max, dfsPosNum.get(m3.id));
 
@@ -410,21 +405,6 @@ void PlanarityTestImpl::obstructionEdgesCountMin23(Graph *sG, node n, node cNode
   }
 }
 // //=================================================================
-// void PlanarityTestImpl::obstrEdgesTermCNode(Graph *sG, node w, node t) {
-//   node u = lastPNode(nodeLabelB.get(t.id), t);
-//   node uu = lastPNode(neighborWTerminal.get(t.id), t);
-//   assert(listEdgesUpwardT0(nodeLabelB.get(t.id), u));
-//   assert(listEdgesUpwardT0(neighborWTerminal.get(t.id), uu));
-
-//   addPartOfBc(sG, t, parent.get(t.id), u, uu);
-//   edge e = sG->existEdge(nodeLabelB.get(t.id), nodeWithDfsPos.get(labelB.get(t.id)));
-//   assert(e.isValid());
-//   obstructionEdges.push_back(e);
-//   e = sG->existEdge(neighborWTerminal.get(t.id), w);
-//   assert(e.isValid());
-//   obstructionEdges.push_back(e);
-// }
-// //=================================================================
 // /*
 //  * Pre-conditions:
 //  * - t1, t2 and t3 are (p-nodes) terminals in the same c-node;
@@ -438,10 +418,6 @@ void PlanarityTestImpl::obstructionEdgesK5(Graph *sG, node w, node cNode, node t
   int max = labelB.get(t1.id);
   max = std::max(max, labelB.get(t2.id));
   max = std::max(max, labelB.get(t3.id));
-  //  if (max < labelB.get(t2.id))
-  //    max = labelB.get(t2.id);
-  //  if (max < labelB.get(t3.id))
-  //    max = labelB.get(t3.id);
   assert(listEdgesUpwardT0(w, nodeWithDfsPos.get(max)));
   extractBoundaryCycle(sG, cNode, obstructionEdges);
   obstrEdgesTerminal(sG, w, t1, t1);
@@ -513,7 +489,6 @@ void PlanarityTestImpl::obstructionEdgesPossibleObstrConfirmed(Graph *sG, node w
  */
 void PlanarityTestImpl::obstructionEdgesCNodeCounter(Graph *sG, node cNode, node w, node jl,
                                                      node jr, node t1, node t2) {
-  //  tlp::debug() << __PRETTY_FUNCTION__ << endl;
   // seachs for a node f in RBC[cNode] between jl and jr s.t.
   // f has a descendant that is a neighbor of w in G;
   bool flag = false;
@@ -542,19 +517,6 @@ void PlanarityTestImpl::obstructionEdgesCNodeCounter(Graph *sG, node cNode, node
     nodeLabelB.set(f.id, neighborWTerminal.get(t1.id));
   else if (f == t22)
     nodeLabelB.set(f.id, neighborWTerminal.get(t2.id));
-
-  //#ifdef _DEBUG_MODE_
-  // if (f == NULL_NODE) {
-  //     tlp::debug() << "-> Program terminated! (obstruction_edges_cnode_counter-01)";
-  //     tlp::debug()<<"obstruction_edges_cnode_counter:\n";
-  //     tlp::debug()<<"  cnode="<<dfsPosNum.get(cNode.id)<<",f="<<dfsPosNum.get(f.id);
-  //     tlp::debug()<<"\n
-  //     jl="<<dfsPosNum.get(jl.id)<<",b="<<labelB.get(jl.id)<<",nl="<<dfsPosNum.get(nodeLabelB.get(jl.id).id);
-  //     tlp::debug()<<"\n
-  //     jr="<<dfsPosNum.get(jr.id)<<",b="<<labelB.get(jr.id)<<",nl="<<dfsPosNum.get(nodeLabelB.get(jr.id).id);
-  //     tlp::debug()<<"\n";
-  //   }
-  //#endif
 
   node w1 = nodeWithDfsPos.get(labelB.get(jl.id));
   node w2 = nodeWithDfsPos.get(labelB.get(jr.id));

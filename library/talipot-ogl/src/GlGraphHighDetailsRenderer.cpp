@@ -403,12 +403,11 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
     }
 
     // Draw
-    for (multiset<EntityWithDistance, entityWithDistanceCompare>::iterator it = entitiesSet.begin();
-         it != entitiesSet.end(); ++it) {
+    for (const auto &it : entitiesSet) {
       // Complex entities
-      ComplexEntityLODUnit *entity = static_cast<ComplexEntityLODUnit *>(it->entity);
+      ComplexEntityLODUnit *entity = static_cast<ComplexEntityLODUnit *>(it.entity);
 
-      if (it->isNode) {
+      if (it.isNode) {
 
         if (displayNodes ||
             ((displayMetaNodes || displayMetaNodesLabel) && graph->isMetaNode(node(entity->id)))) {

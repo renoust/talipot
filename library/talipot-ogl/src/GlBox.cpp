@@ -338,10 +338,10 @@ void GlBox::setTextureName(const string &textureName) {
   this->textureName = textureName;
 }
 //===========================================================
-void GlBox::translate(const Coord &mouvement) {
-  boundingBox.translate(mouvement);
+void GlBox::translate(const Coord &move) {
+  boundingBox.translate(move);
 
-  position += mouvement;
+  position += move;
 
   clearGenerated();
 }

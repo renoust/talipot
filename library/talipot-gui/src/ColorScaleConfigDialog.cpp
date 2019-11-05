@@ -396,10 +396,8 @@ void ColorScaleConfigDialog::deleteSavedColorScale() {
 void ColorScaleConfigDialog::loadUserSavedColorScales() {
   _ui->savedColorScalesList->clear();
 
-  map<QString, vector<Color>>::const_iterator it = talipotImageColorScales.begin();
-
-  for (; it != talipotImageColorScales.end(); ++it) {
-    _ui->savedColorScalesList->addItem(it->first);
+  for (const auto &it : talipotImageColorScales) {
+    _ui->savedColorScalesList->addItem(it.first);
   }
 
   Settings::instance().beginGroup("ColorScales");
@@ -470,7 +468,7 @@ void ColorScaleConfigDialog::setColorScale(const ColorScale &colorScale) {
     _ui->colorsTable->setRowCount(0);
 
     // init dialog with colors in the color Scale
-    std::map<float, tlp::Color> colorMap = colorScale.getColorMap();
+    const auto &colorMap = colorScale.getColorMap();
     unsigned int row = 0;
 
     if (colorScale.isGradient()) {
@@ -485,7 +483,7 @@ void ColorScaleConfigDialog::setColorScale(const ColorScale &colorScale) {
       row = (colorMap.size() / 2) - 1;
     }
 
-    for (std::map<float, tlp::Color>::iterator it = colorMap.begin(); it != colorMap.end();) {
+    for (auto it = colorMap.begin(); it != colorMap.end();) {
       QTableWidgetItem *item = new QTableWidgetItem();
       item->setFlags(Qt::ItemIsEnabled);
       item->setBackground(QBrush(

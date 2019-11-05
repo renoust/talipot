@@ -165,10 +165,9 @@ void CaptionItem::generateColorCaption(CaptionType captionType) {
     double intervale = (maxProp - minProp) / 50.;
     double nextValue = minProp;
 
-    for (map<double, Color>::const_iterator it = metricToColorMap.begin();
-         it != metricToColorMap.end(); ++it) {
-      if ((*it).first >= nextValue) {
-        metricToColorFiltered.push_back(*it);
+    for (const auto &it : metricToColorMap) {
+      if (it.first >= nextValue) {
+        metricToColorFiltered.push_back(it);
         nextValue += intervale;
       }
     }
@@ -192,8 +191,8 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
 
   if (!_metricProperty) {
     vector<pair<double, float>> metricToSizeFiltered;
-    metricToSizeFiltered.push_back(pair<double, float>(0., 1.));
-    metricToSizeFiltered.push_back(pair<double, float>(1., 1.));
+    metricToSizeFiltered.emplace_back(0., 1.);
+    metricToSizeFiltered.emplace_back(1., 1.);
     _captionGraphicsItem->generateSizeCaption(metricToSizeFiltered, "empty", 0., 1.);
     return;
   }
@@ -227,17 +226,16 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
   double intervale = (maxProp - minProp) / 50.;
   double nextValue = minProp;
 
-  for (map<double, float>::const_iterator it = metricToSizeMap.begin(); it != metricToSizeMap.end();
-       ++it) {
-    if ((*it).first >= nextValue) {
-      metricToSizeFiltered.push_back(pair<double, float>((*it).first, (*it).second / maxSize));
+  for (const auto &it : metricToSizeMap) {
+    if (it.first >= nextValue) {
+      metricToSizeFiltered.emplace_back(it.first, it.second / maxSize);
       nextValue += intervale;
     }
   }
 
   if (metricToSizeFiltered.empty()) {
-    metricToSizeFiltered.push_back(pair<double, float>(minProp, 0));
-    metricToSizeFiltered.push_back(pair<double, float>(maxProp, 0));
+    metricToSizeFiltered.emplace_back(minProp, 0);
+    metricToSizeFiltered.emplace_back(maxProp, 0);
   }
 
   if (metricToSizeFiltered.size() == 1) {
@@ -246,8 +244,8 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
 
   if (metricToSizeFiltered.size() < 2) {
     metricToSizeFiltered.clear();
-    metricToSizeFiltered.push_back(pair<double, float>(0., 1.));
-    metricToSizeFiltered.push_back(pair<double, float>(1., 1.));
+    metricToSizeFiltered.emplace_back(0., 1.);
+    metricToSizeFiltered.emplace_back(1., 1.);
     _captionGraphicsItem->generateSizeCaption(metricToSizeFiltered, "empty", 0., 1.);
     return;
   }
@@ -263,11 +261,9 @@ void CaptionItem::generateGradients(const vector<pair<double, Color>> &metricToC
 
   Color color;
 
-  for (vector<pair<double, Color>>::const_iterator it = metricToColorFiltered.begin();
-       it != metricToColorFiltered.end(); ++it) {
-    float position =
-        (maxProp - minProp) ? (1. - ((*it).first - minProp) / (maxProp - minProp)) : 0.0;
-    color = (*it).second;
+  for (const auto &it : metricToColorFiltered) {
+    float position = (maxProp - minProp) ? (1. - (it.first - minProp) / (maxProp - minProp)) : 0.0;
+    color = it.second;
     activeGradient.setColorAt(position, QColor(color[0], color[1], color[2], 255));
     hideGradient.setColorAt(position, QColor(color[0], color[1], color[2], 100));
   }
@@ -403,12 +399,12 @@ void CaptionItem::treatEvents(const vector<Event> &ev) {
   bool propertyEvent = false;
   bool graphEvent = false;
 
-  for (vector<Event>::const_iterator it = ev.begin(); it != ev.end(); ++it) {
+  for (const auto &e : ev) {
 
-    PropertyInterface *prop = dynamic_cast<PropertyInterface *>((*it).sender());
-    Graph *graph = dynamic_cast<Graph *>((*it).sender());
+    PropertyInterface *prop = dynamic_cast<PropertyInterface *>(e.sender());
+    Graph *graph = dynamic_cast<Graph *>(e.sender());
 
-    if ((*it).type() == Event::TLP_DELETE)
+    if (e.type() == Event::TLP_DELETE)
       deleteEvent = true;
 
     if (prop)

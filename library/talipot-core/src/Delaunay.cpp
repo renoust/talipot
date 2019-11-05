@@ -583,7 +583,7 @@ bool tlp::voronoiDiagram(vector<Coord> &sites, VoronoiDiagram &voronoiDiagram) {
         face4 = Face(simplices[i][0], simplices[i][1], simplices[i][3]);
       }
 
-      std::unordered_map<Face, unsigned int>::const_iterator it = faceToCircumCenter.find(face1);
+      auto it = faceToCircumCenter.find(face1);
 
       if (it != faceToCircumCenter.end()) {
         VoronoiDiagram::Edge edge = make_pair(circumCenterIdx, faceToCircumCenter[face1]);

@@ -140,8 +140,7 @@ DataTypeSerializerContainer DataSet::serializerContainer;
 void DataSet::registerDataTypeSerializer(const std::string &typeName, DataTypeSerializer *dts) {
 
 #ifndef NDEBUG
-  std::unordered_map<std::string, DataTypeSerializer *>::iterator it =
-      serializerContainer.tnTodts.find(typeName);
+  auto it = serializerContainer.tnTodts.find(typeName);
 
   if (it != serializerContainer.tnTodts.end())
     tlp::warning() << "Warning: a data type serializer is already registered for type "
@@ -160,8 +159,7 @@ void DataSet::registerDataTypeSerializer(const std::string &typeName, DataTypeSe
 
 // data write
 void DataSet::writeData(std::ostream &os, const std::string &prop, const DataType *dt) const {
-  std::unordered_map<std::string, DataTypeSerializer *>::iterator it =
-      serializerContainer.tnTodts.find(dt->getTypeName());
+  auto it = serializerContainer.tnTodts.find(dt->getTypeName());
 
   if (it == serializerContainer.tnTodts.end()) {
 #ifndef EMSCRIPTEN
@@ -188,8 +186,7 @@ void DataSet::write(std::ostream &os, const DataSet &ds) {
 // data read
 bool DataSet::readData(std::istream &is, const std::string &prop,
                        const std::string &outputTypeName) {
-  std::unordered_map<std::string, DataTypeSerializer *>::iterator it =
-      serializerContainer.otnTodts.find(outputTypeName);
+  auto it = serializerContainer.otnTodts.find(outputTypeName);
 
   if (it == serializerContainer.otnTodts.end()) {
     tlp::warning() << "Read error: No data type serializer found for read type " << outputTypeName

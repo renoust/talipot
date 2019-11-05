@@ -387,17 +387,16 @@ void GeographicView::loadStoredPolyInformation(const DataSet &dataset) {
     GlComposite *composite = geoViewGraphicsView->getPolygon();
     const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
 
-    for (map<string, GlSimpleEntity *>::const_iterator it = entities.begin(); it != entities.end();
-         ++it) {
+    for (const auto &it : entities) {
       DataSet entityData;
 
-      if (polyConf.exists((*it).first)) {
-        polyConf.get((*it).first, entityData);
+      if (polyConf.exists(it.first)) {
+        polyConf.get(it.first, entityData);
         Color color;
         entityData.get("color", color);
-        static_cast<GlComplexPolygon *>((*it).second)->setFillColor(color);
+        static_cast<GlComplexPolygon *>(it.second)->setFillColor(color);
         entityData.get("outlineColor", color);
-        static_cast<GlComplexPolygon *>((*it).second)->setOutlineColor(color);
+        static_cast<GlComplexPolygon *>(it.second)->setOutlineColor(color);
       }
     }
   }
@@ -408,13 +407,11 @@ void GeographicView::saveStoredPolyInformation(DataSet &dataset) const {
   DataSet polyConf;
   const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
 
-  for (map<string, GlSimpleEntity *>::const_iterator it = entities.begin(); it != entities.end();
-       ++it) {
+  for (const auto &it : entities) {
     DataSet entityData;
-    entityData.set("color", static_cast<GlComplexPolygon *>((*it).second)->getFillColor());
-    entityData.set("outlineColor",
-                   static_cast<GlComplexPolygon *>((*it).second)->getOutlineColor());
-    polyConf.set((*it).first, entityData);
+    entityData.set("color", static_cast<GlComplexPolygon *>(it.second)->getFillColor());
+    entityData.set("outlineColor", static_cast<GlComplexPolygon *>(it.second)->getOutlineColor());
+    polyConf.set(it.first, entityData);
   }
 
   dataset.set("polygons", polyConf);
@@ -432,15 +429,14 @@ void GeographicView::registerTriggers() {
 
   addRedrawTrigger(
       geoViewGraphicsView->getGlMainWidget()->getScene()->getGlGraphComposite()->getGraph());
-  std::set<tlp::PropertyInterface *> properties = geoViewGraphicsView->getGlMainWidget()
-                                                      ->getScene()
-                                                      ->getGlGraphComposite()
-                                                      ->getInputData()
-                                                      ->properties();
+  auto properties = geoViewGraphicsView->getGlMainWidget()
+                        ->getScene()
+                        ->getGlGraphComposite()
+                        ->getInputData()
+                        ->properties();
 
-  for (std::set<tlp::PropertyInterface *>::iterator it = properties.begin(); it != properties.end();
-       ++it) {
-    addRedrawTrigger(*it);
+  for (auto p : properties) {
+    addRedrawTrigger(p);
   }
 }
 

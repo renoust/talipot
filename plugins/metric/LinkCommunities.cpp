@@ -442,10 +442,8 @@ void LinkCommunities::setEdgeValues(double threshold, bool group_isthmus,
       }
 
       if (component.size() >= 2 || group_isthmus == false) {
-        vector<node>::const_iterator ite;
-
-        for (ite = component.begin(); ite != component.end(); ++ite) {
-          edge re = edges[ite->id];
+        for (auto n : component) {
+          edge re = edges[n.id];
           result->setEdgeValue(re, val);
         }
       }

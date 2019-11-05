@@ -76,33 +76,25 @@ template <typename Obj, typename OTYPE>
 tlp::Circle<Obj, OTYPE>
 tlp::lazyEnclosingCircle(const std::vector<tlp::Circle<Obj, OTYPE>> &circles) {
   // compute bounding box of a
-  tlp::Vector<Obj, 4, OTYPE> boundingBox;
-  //  for (int i=0;i<4;++i) boundingBox[i]=0;
-  typename std::vector<tlp::Circle<Obj, OTYPE>>::const_iterator it = circles.begin();
-  boundingBox[0] = (*it)[0] - (*it).radius;
-  boundingBox[1] = (*it)[1] - (*it).radius;
-  boundingBox[2] = (*it)[0] + (*it).radius;
-  boundingBox[3] = (*it)[1] + (*it).radius;
-  ++it;
+  tlp::Vector<Obj, 4, OTYPE> boundingBox = {1, 1, -1, -1};
 
-  for (; it != circles.end(); ++it) {
-    boundingBox[0] = std::min(boundingBox[0], ((*it)[0] - (*it).radius));
-    boundingBox[1] = std::min(boundingBox[1], ((*it)[1] - (*it).radius));
-    boundingBox[2] = std::max(boundingBox[2], ((*it)[0] + (*it).radius));
-    boundingBox[3] = std::max(boundingBox[3], ((*it)[1] + (*it).radius));
+  for (const auto &c : circles) {
+    boundingBox[0] = std::min(boundingBox[0], c[0] - c.radius);
+    boundingBox[1] = std::min(boundingBox[1], c[1] - c.radius);
+    boundingBox[2] = std::max(boundingBox[2], c[0] + c.radius);
+    boundingBox[3] = std::max(boundingBox[3], c[1] + c.radius);
   }
 
-  tlp::Vector<Obj, 2, OTYPE> center;
-  center[0] = (boundingBox[0] + boundingBox[2]) / 2.;
-  center[1] = (boundingBox[1] + boundingBox[3]) / 2.;
+  tlp::Vector<Obj, 2, OTYPE> center = {(boundingBox[0] + boundingBox[2]) / 2.,
+                                       (boundingBox[1] + boundingBox[3]) / 2.};
+
   Obj radius =
       std::max((boundingBox[2] - boundingBox[0]) / 2., (boundingBox[3] - boundingBox[1]) / 2.);
   tlp::Circle<Obj, OTYPE> result(center, radius);
 
   // compute circle hull
-  for (typename std::vector<tlp::Circle<Obj, OTYPE>>::const_iterator it = circles.begin();
-       it != circles.end(); ++it)
-    result.merge(*it);
+  for (const auto &c : circles)
+    result.merge(c);
 
   return result;
 }

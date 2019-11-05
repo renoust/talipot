@@ -33,11 +33,11 @@ void RectangleRelativePositionList::addRectangleRelativePosition(
 
 void RectangleRelativePositionList::allocateCoordinates() {
 
-  for (list<RectangleRelativePosition>::iterator itr = this->begin(); itr != this->end(); ++itr) {
-    (*(itr->rectangleIterator))[0][0] = itr->rectangleLeftAbscissa;
-    (*(itr->rectangleIterator))[0][1] = itr->rectangleLowOrdinate;
-    (*(itr->rectangleIterator))[1][0] = (*(itr->rectangleIterator))[0][0] + itr->rectangleWidth;
-    (*(itr->rectangleIterator))[1][1] = (*(itr->rectangleIterator))[0][1] + itr->rectangleHeight;
+  for (auto &itr : *this) {
+    (*(itr.rectangleIterator))[0][0] = itr.rectangleLeftAbscissa;
+    (*(itr.rectangleIterator))[0][1] = itr.rectangleLowOrdinate;
+    (*(itr.rectangleIterator))[1][0] = (*(itr.rectangleIterator))[0][0] + itr.rectangleWidth;
+    (*(itr.rectangleIterator))[1][1] = (*(itr.rectangleIterator))[0][1] + itr.rectangleHeight;
   }
 }
 

@@ -73,7 +73,7 @@ public:
 
   void draw(float lod, Camera *camera) override;
 
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * @brief Set texture

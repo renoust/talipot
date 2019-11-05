@@ -37,7 +37,7 @@ node QuadTreeBundle::splitEdge(node a, node b) {
   tmp[0] = center[0];
   tmp[1] = center[1];
 
-  MapVecNode::const_iterator itn = mapN.find(tmp);
+  auto itn = mapN.find(tmp);
 
   if (itn != mapN.end()) {
     return itn->second;
@@ -74,15 +74,14 @@ void QuadTreeBundle::elmentSplitting(const Coord &a, const Coord &b, const vecto
 
   in.clear();
   out.clear();
-  vector<node>::const_iterator it = input.begin();
 
-  for (; it != input.end(); ++it) {
-    const Coord &tmp = layout->getNodeValue(*it);
+  for (auto n : input) {
+    const Coord &tmp = layout->getNodeValue(n);
 
     if (isIn(tmp, a, b))
-      in.push_back(*it);
+      in.push_back(n);
     else
-      out.push_back(*it);
+      out.push_back(n);
   }
 }
 //=====================================

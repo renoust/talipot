@@ -83,13 +83,7 @@ class EdgeCardinalityCalculator : public IntegerMinMaxProperty::MetaValueCalcula
 public:
   void computeMetaValue(AbstractProperty<IntegerType, IntegerType, NumericProperty> *card, edge mE,
                         Iterator<edge> *itE, Graph *) override {
-    unsigned int nbEdges = 0;
-
-    while (itE->hasNext()) {
-      itE->next();
-      ++nbEdges;
-    }
-
+    unsigned int nbEdges = iteratorCount(itE);
     card->setEdgeValue(mE, nbEdges);
   }
 };
@@ -339,20 +333,18 @@ public:
 
           edgesToDel.insert(meToDel);
           set<edge> se = metaInfo->getEdgeValue(meToKeep);
-          const set<edge> &nse = metaInfo->getEdgeValue(meToDel);
-          set<edge>::const_iterator itnse;
 
-          for (itnse = nse.begin(); itnse != nse.end(); ++itnse)
-            se.insert(*itnse);
+          for (auto e : metaInfo->getEdgeValue(meToDel)) {
+            se.insert(e);
+          }
 
           metaInfo->setEdgeValue(meToKeep, se);
         }
       }
 
-      set<edge>::const_iterator it;
-
-      for (it = edgesToDel.begin(); it != edgesToDel.end(); ++it)
-        quotientGraph->delEdge(*it);
+      for (auto e : edgesToDel) {
+        quotientGraph->delEdge(e);
+      }
     }
 
     delete opProp;

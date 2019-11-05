@@ -55,9 +55,8 @@ public:
       visitor->visit(this);
     }
 
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      (*it)->acceptVisitor(visitor);
+    for (auto entity : _sortedElements) {
+      entity->acceptVisitor(visitor);
     }
   }
 
@@ -85,7 +84,7 @@ public:
   /**
    * Translate entity
    */
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * Function to export data in outString (in XML format)

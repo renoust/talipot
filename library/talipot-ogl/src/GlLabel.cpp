@@ -153,15 +153,15 @@ void GlLabel::setText(const string &text) {
   float x1, y1, z1, x2, y2, z2;
 
   // After we compute width of text
-  for (vector<string>::iterator it = textVector.begin(); it != textVector.end(); ++it) {
-    font->BBox((*it).c_str(), x1, y1, z1, x2, y2, z2);
+  for (auto it = textVector.begin(); it != textVector.end(); ++it) {
+    font->BBox(it->c_str(), x1, y1, z1, x2, y2, z2);
     textWidthVector.push_back(x2 - x1);
 
     if (it == textVector.begin()) {
       textBoundingBox.expand(Coord(0, y1, z1));
       textBoundingBox.expand(Coord(x2 - x1, y2, z2));
     } else {
-      font->BBox((*it).c_str(), x1, y1, z1, x2, y2, z2);
+      font->BBox(it->c_str(), x1, y1, z1, x2, y2, z2);
 
       if (x2 - x1 > textBoundingBox[1][0])
         textBoundingBox[1][0] = (x2 - x1);
@@ -688,10 +688,10 @@ void GlLabel::draw(float, Camera *camera) {
     float yShift = 0.;
 
     float x1, y1, z1, x2, y2, z2;
-    vector<float>::iterator itW = textWidthVector.begin();
+    auto itW = textWidthVector.begin();
 
-    for (vector<string>::iterator it = textVector.begin(); it != textVector.end(); ++it) {
-      font->BBox((*it).c_str(), x1, y1, z1, x2, y2, z2);
+    for (const auto &text : textVector) {
+      font->BBox(text.c_str(), x1, y1, z1, x2, y2, z2);
 
       FTPoint shift(-(textBoundingBox[1][0] - textBoundingBox[0][0]) / 2. - x1 +
                         ((textBoundingBox[1][0] - textBoundingBox[0][0]) - (*itW)) * xAlignFactor +
@@ -704,7 +704,7 @@ void GlLabel::draw(float, Camera *camera) {
 
       setMaterial(color);
 
-      font->Render((*it).c_str(), -1, shift);
+      font->Render(text.c_str(), -1, shift);
 
       if (!textureName.empty())
         GlTextureManager::deactivateTexture();
@@ -718,7 +718,7 @@ void GlLabel::draw(float, Camera *camera) {
 
         setMaterial(outlineColor);
 
-        borderFont->Render((*it).c_str(), -1, shift);
+        borderFont->Render(text.c_str(), -1, shift);
       }
 
       yShift -= fontSize + 5;
@@ -730,8 +730,8 @@ void GlLabel::draw(float, Camera *camera) {
   glPopAttrib();
 }
 //===========================================================
-void GlLabel::translate(const Coord &mouvement) {
-  centerPosition += mouvement;
+void GlLabel::translate(const Coord &move) {
+  centerPosition += move;
 }
 //===========================================================
 void GlLabel::rotate(float xRot, float yRot, float zRot) {

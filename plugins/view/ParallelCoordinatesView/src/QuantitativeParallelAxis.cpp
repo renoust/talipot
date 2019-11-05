@@ -154,10 +154,9 @@ void QuantitativeParallelAxis::computeBoxPlotCoords() {
     double lowBorder = (firstQuartile - (1.5 * (thirdQuartile - firstQuartile)));
     double bottomOutlier = 0.0;
 
-    for (vector<double>::const_iterator it = propertyValuesVector.begin();
-         it != propertyValuesVector.end(); ++it) {
-      if (*it > lowBorder) {
-        bottomOutlier = *it;
+    for (auto v : propertyValuesVector) {
+      if (v > lowBorder) {
+        bottomOutlier = v;
         break;
       }
     }
@@ -166,9 +165,9 @@ void QuantitativeParallelAxis::computeBoxPlotCoords() {
     double topOutlier = 0;
     vector<double>::reverse_iterator itr;
 
-    for (itr = propertyValuesVector.rbegin(); itr != propertyValuesVector.rend(); ++itr) {
-      if (*itr < highBorder) {
-        topOutlier = *itr;
+    for (auto v : reversed(propertyValuesVector)) {
+      if (v < highBorder) {
+        topOutlier = v;
         break;
       }
     }
@@ -344,12 +343,11 @@ const set<unsigned int> &QuantitativeParallelAxis::getDataBetweenBoxPlotBounds()
 void QuantitativeParallelAxis::updateSlidersWithDataSubset(const set<unsigned int> &dataSubset) {
   float rotAngleBak = rotationAngle;
   rotationAngle = 0.0f;
-  set<unsigned int>::iterator it;
   Coord max(getBaseCoord());
   Coord min(getBaseCoord() + Coord(0.0f, getAxisHeight()));
 
-  for (it = dataSubset.begin(); it != dataSubset.end(); ++it) {
-    Coord dataCoord(getPointCoordOnAxisForData(*it));
+  for (auto d : dataSubset) {
+    Coord dataCoord(getPointCoordOnAxisForData(d));
 
     if (dataCoord.getY() < min.getY()) {
       min = dataCoord;

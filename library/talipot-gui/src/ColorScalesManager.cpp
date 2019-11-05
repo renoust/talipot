@@ -165,7 +165,7 @@ ColorScale ColorScalesManager::getColorScale(const string &colorScaleName) {
   if (Settings::instance().contains(colorScaleName.c_str())) {
     QVariantMap colorsMapv = Settings::instance().value(colorScaleName.c_str()).toMap();
 
-    for (QVariantMap::iterator it = colorsMapv.begin(); it != colorsMapv.end(); ++it) {
+    for (auto it = colorsMapv.begin(); it != colorsMapv.end(); ++it) {
       colorsMap[(it.key()).toDouble()] = QColorToColor(it.value().value<QColor>());
     }
 
@@ -198,10 +198,9 @@ void ColorScalesManager::registerColorScale(const string &colorScaleName,
       Settings::instance().endGroup();
     } else {
       QVariantMap colorsMap;
-      map<float, Color> colorsMapTlp = colorScale.getColorMap();
 
-      for (map<float, Color>::iterator it = colorsMapTlp.begin(); it != colorsMapTlp.end(); ++it) {
-        colorsMap[QString::number(it->first)] = colorToQColor(it->second);
+      for (const auto &it : colorScale.getColorMap()) {
+        colorsMap[QString::number(it.first)] = colorToQColor(it.second);
       }
 
       Settings::instance().beginGroup("ColorScalesNoRegular");
@@ -238,14 +237,11 @@ void ColorScalesManager::setLatestColorScale(ColorScale &cs) {
   QList<QVariant> colors;
   QList<QVariant> stops;
 
-  map<float, Color> cm = cs.getColorMap();
-  map<float, Color>::iterator it = cm.begin();
-
-  for (; it != cm.end(); ++it) {
-    Color &c = it->second;
+  for (const auto &it : cs.getColorMap()) {
+    Color c = it.second;
     QColor qc(c.getR(), c.getG(), c.getB(), c.getA());
     colors.push_back(QVariant(qc));
-    stops.push_back(QVariant(it->first));
+    stops.push_back(QVariant(it.first));
   }
 
   Settings::instance().beginGroup("viewLatestColorScale");

@@ -86,8 +86,8 @@ bool TLPBImport::importGraph() {
     bool gzip(false);
     std::list<std::string> gext(gzipFileExtensions());
 
-    for (std::list<std::string>::const_iterator it = gext.begin(); it != gext.end(); ++it) {
-      if (filename.rfind(*it) == (filename.length() - (*it).length())) {
+    for (const auto &it : gext) {
+      if (filename.rfind(it) == (filename.length() - it.length())) {
         is = tlp::getIgzstream(filename);
         gzip = true;
         break;
@@ -194,8 +194,7 @@ bool TLPBImport::importGraph() {
           // loop to add nodes
           for (unsigned int i = 0; i < rangesToRead; ++i) {
             std::pair<node, node> &range = vRanges[i];
-            RangeIterator<node> itr(range.first, range.second);
-            sg->addNodes(&itr);
+            sg->addNodes(new RangeIterator<node>(range.first, range.second));
           }
 
           numRanges -= rangesToRead;
@@ -225,8 +224,7 @@ bool TLPBImport::importGraph() {
           // loop to add edges
           for (unsigned int i = 0; i < rangesToRead; ++i) {
             std::pair<edge, edge> &range = vRanges[i];
-            RangeIterator<edge> itr(range.first, range.second);
-            sg->addEdges(&itr);
+            sg->addEdges(new RangeIterator<edge>(range.first, range.second));
           }
 
           numRanges -= rangesToRead;

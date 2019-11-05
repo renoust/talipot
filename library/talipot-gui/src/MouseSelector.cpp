@@ -217,23 +217,21 @@ bool MouseSelector::eventFilter(QObject *widget, QEvent *e) {
         if (needPush)
           graph->push();
 
-        vector<SelectedEntity>::const_iterator it;
-
         if (_mode == EdgesAndNodes || _mode == NodesOnly) {
-          for (it = tmpSetNode.begin(); it != tmpSetNode.end(); ++it) {
-            selection->setNodeValue(node((*it).getComplexEntityId()),
-                                    revertSelection
-                                        ? !selection->getNodeValue(node((*it).getComplexEntityId()))
-                                        : boolVal);
+          for (const auto &entity : tmpSetNode) {
+            selection->setNodeValue(
+                node(entity.getComplexEntityId()),
+                revertSelection ? !selection->getNodeValue(node(entity.getComplexEntityId()))
+                                : boolVal);
           }
         }
 
         if (_mode == EdgesAndNodes || _mode == EdgesOnly) {
-          for (it = tmpSetEdge.begin(); it != tmpSetEdge.end(); ++it) {
-            selection->setEdgeValue(edge((*it).getComplexEntityId()),
-                                    revertSelection
-                                        ? !selection->getEdgeValue(edge((*it).getComplexEntityId()))
-                                        : boolVal);
+          for (const auto &entity : tmpSetEdge) {
+            selection->setEdgeValue(
+                edge(entity.getComplexEntityId()),
+                revertSelection ? !selection->getEdgeValue(edge(entity.getComplexEntityId()))
+                                : boolVal);
           }
         }
       }

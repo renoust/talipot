@@ -91,10 +91,8 @@ bool HierarchicalClustering::run() {
       splitRes.setAllNodeValue(true);
       splitRes.setAllEdgeValue(true);
 
-      list<node>::iterator itl;
-
-      for (itl = badNodeList.begin(); itl != badNodeList.end(); ++itl)
-        splitRes.setNodeValue(*itl, false);
+      for (auto n : badNodeList)
+        splitRes.setNodeValue(n, false);
 
       for (auto nit : graph->nodes()) {
 

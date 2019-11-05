@@ -22,7 +22,7 @@ ViewsManager tvm;
 
 namespace tlp {
 
-std::vector<std::string> getAvailableViews() const;
+std::list<std::string> getAvailableViews() const;
 %Docstring
 tlpgui.getAvailableViews()
 
@@ -32,7 +32,7 @@ Returns a list of the views names currently available in Talipot.
 %End
 
 %MethodCode
-    sipRes = new std::vector<std::string>(tvm.getViews());
+    sipRes = new std::list<std::string>(tvm.getViews());
 %End
 
 // =========================================================================================
@@ -92,7 +92,7 @@ Returns an instance of the newly created view.
 
 %MethodCode
     sipRes = NULL;
-    std::vector<std::string> tlpViews = tvm.getViews();
+    std::list<std::string> tlpViews = tvm.getViews();
     if (std::find(tlpViews.begin(), tlpViews.end(), *a0) != tlpViews.end()) {
         if (tvm.tlpWorkspace()) {
             PyObject *pyObj = sipGetPyObject(a1, sipFindType("tlp::Graph"));

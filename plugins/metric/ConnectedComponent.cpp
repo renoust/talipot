@@ -29,18 +29,13 @@ bool ConnectedComponent::run() {
   for (unsigned curComponent = 0; curComponent < components.size(); ++curComponent) {
     std::vector<node> &component = components[curComponent];
 
-    for (std::vector<node>::const_iterator itNode = component.begin(); itNode != component.end();
-         ++itNode) {
-      result->setNodeValue(*itNode, curComponent);
+    for (auto n : component) {
+      result->setNodeValue(n, curComponent);
     }
   }
 
   // propagate nodes computed value to edges
-  const std::vector<edge> &edges = graph->edges();
-  unsigned int nbEdges = edges.size();
-
-  for (unsigned int i = 0; i < nbEdges; ++i) {
-    edge e = edges[i];
+  for (auto e : graph->edges()) {
     result->setEdgeValue(e, result->getNodeValue(graph->source(e)));
   }
 

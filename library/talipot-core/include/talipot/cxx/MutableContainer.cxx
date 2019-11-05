@@ -28,7 +28,7 @@ tlp::MutableContainer<TYPE>::~MutableContainer() {
 
     if (StoredType<TYPE>::isPointer) {
       // delete stored values
-      typename std::deque<typename StoredType<TYPE>::Value>::const_iterator it = vData->begin();
+      auto it = vData->begin();
 
       while (it != vData->end()) {
         if ((*it) != defaultValue)
@@ -46,8 +46,7 @@ tlp::MutableContainer<TYPE>::~MutableContainer() {
 
     if (StoredType<TYPE>::isPointer) {
       // delete stored values
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::const_iterator
-          it = hData->begin();
+      auto it = hData->begin();
 
       while (it != hData->end()) {
         StoredType<TYPE>::destroy(it->second);
@@ -81,7 +80,7 @@ void tlp::MutableContainer<TYPE>::setAll(typename StoredType<TYPE>::ReturnedCons
 
     if (StoredType<TYPE>::isPointer) {
       // delete stored values
-      typename std::deque<typename StoredType<TYPE>::Value>::const_iterator it = vData->begin();
+      auto it = vData->begin();
 
       while (it != vData->end()) {
         if ((*it) != defaultValue)
@@ -98,12 +97,8 @@ void tlp::MutableContainer<TYPE>::setAll(typename StoredType<TYPE>::ReturnedCons
 
     if (StoredType<TYPE>::isPointer) {
       // delete stored values
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::const_iterator
-          it = hData->begin();
-
-      while (it != hData->end()) {
-        StoredType<TYPE>::destroy(it->second);
-        ++it;
+      for (const auto &it : *hData) {
+        StoredType<TYPE>::destroy(it.second);
       }
     }
 
@@ -232,8 +227,7 @@ void tlp::MutableContainer<TYPE>::set(const unsigned int i,
       return;
 
     case HASH: {
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-          hData->find(i);
+      auto it = hData->find(i);
 
       if (it != hData->end()) {
         StoredType<TYPE>::destroy(it->second);
@@ -260,8 +254,7 @@ void tlp::MutableContainer<TYPE>::set(const unsigned int i,
       return;
 
     case HASH: {
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-          hData->find(i);
+      auto it = hData->find(i);
 
       if (it != hData->end()) {
         StoredType<TYPE>::destroy(it->second);
@@ -316,8 +309,7 @@ void tlp::MutableContainer<TYPE>::add(const unsigned int i, TYPE val) {
     }
 
     case HASH: {
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-          hData->find(i);
+      auto it = hData->find(i);
 
       if (it != hData->end()) {
         // check default value
@@ -360,8 +352,7 @@ tlp::MutableContainer<TYPE>::get(const unsigned int i) const {
       return StoredType<TYPE>::get((*vData)[i - minIndex]);
 
   case HASH: {
-    typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-        hData->find(i);
+    auto it = hData->find(i);
 
     if (it != hData->end())
       return StoredType<TYPE>::get(it->second);
@@ -397,8 +388,7 @@ void tlp::MutableContainer<TYPE>::invertBooleanValue(const unsigned int i) {
     }
 
     case HASH: {
-      typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-          hData->find(i);
+      auto it = hData->find(i);
 
       if (it != hData->end()) {
         hData->erase(it);
@@ -466,8 +456,7 @@ tlp::MutableContainer<TYPE>::get(const unsigned int i, bool &notDefault) const {
     }
 
   case HASH: {
-    typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::iterator it =
-        hData->find(i);
+    auto it = hData->find(i);
 
     if (it != hData->end()) {
       notDefault = true;
@@ -522,11 +511,10 @@ void tlp::MutableContainer<TYPE>::hashtovect() {
   maxIndex = UINT_MAX;
   elementInserted = 0;
   state = VECT;
-  typename std::unordered_map<unsigned int, typename StoredType<TYPE>::Value>::const_iterator it;
 
-  for (it = hData->begin(); it != hData->end(); ++it) {
-    if (it->second != defaultValue)
-      vectset(it->first, it->second);
+  for (const auto &it : *hData) {
+    if (it.second != defaultValue)
+      vectset(it.first, it.second);
   }
 
   delete hData;

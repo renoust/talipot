@@ -170,11 +170,10 @@ bool GlGraphInputData::setProperty(const std::string &name, PropertyInterface *p
 
 bool GlGraphInputData::installProperties(
     const std::map<std::string, tlp::PropertyInterface *> &propsMap) {
-  auto pmIt = propsMap.begin();
   bool result = false;
 
-  for (; pmIt != propsMap.end(); ++pmIt) {
-    if (setProperty(pmIt->first, pmIt->second))
+  for (const auto &pmIt : propsMap) {
+    if (setProperty(pmIt.first, pmIt.second))
       result = true;
   }
 

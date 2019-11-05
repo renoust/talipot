@@ -126,16 +126,15 @@ public:
       os << "arrow \"last\"" << endl;
       os << "width 0.1" << endl;
       os << "Line [" << endl;
-      vector<Coord> lcoord;
-      vector<Coord>::const_iterator it;
-      lcoord = layout->getEdgeValue(e);
+
+      vector<Coord> lcoord = layout->getEdgeValue(e);
 
       if (!lcoord.empty()) {
         printPoint(os, layout->getNodeValue(ends.first));
       }
 
-      for (it = lcoord.begin(); it != lcoord.end(); ++it) {
-        printPoint(os, *it);
+      for (const auto &c : lcoord) {
+        printPoint(os, c);
       }
 
       if (!lcoord.empty()) {

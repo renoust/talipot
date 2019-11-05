@@ -256,16 +256,13 @@ bool MixedModel::run() {
 
     placeNodesEdges();
 
-    vector<edge>::const_iterator ite = dummy.begin();
+    for (auto e : dummy) {
+      currentGraph->delEdge(e, true);
+    }
 
-    for (; ite != dummy.end(); ++ite)
-      currentGraph->delEdge(*ite, true);
-
-    ite = added_edges.begin();
     const vector<Coord> &dv = result->getEdgeDefaultValue();
 
-    for (; ite != added_edges.end(); ++ite) {
-      edge e = *ite;
+    for (auto e : added_edges) {
       currentGraph->delEdge(e, true);
       result->setEdgeValue(e, dv);
     }
@@ -824,7 +821,7 @@ void MixedModel::computeCoords() {
 
   nodeSize.setAll(Coord()); // permet de conserver une taille relative pout les sommets
 
-  for (const node &n : carte->nodes()) {
+  for (auto n : carte->nodes()) {
     Coord c(sizeResult->getNodeValue(n));
     c[0] += edgeNodeSpacing;
     nodeSize.set(n.id, c);

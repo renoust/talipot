@@ -53,8 +53,8 @@ void PluginLibraryLoader::loadPlugins(PluginLoader *loader, const std::string &f
   std::string currentPluginPath = _pluginPath;
 
   // load the plugins in 'folder' for each path in TalipotPluginsPath (TalipotPluginsPath/folder)
-  for (std::vector<std::string>::const_iterator it = paths.begin(); it != paths.end(); ++it) {
-    std::string dir = (*it) + "/" + folder;
+  for (const auto &p : paths) {
+    std::string dir = p + "/" + folder;
 
     PluginsManager::currentLoader = loader;
     _pluginPath = dir;

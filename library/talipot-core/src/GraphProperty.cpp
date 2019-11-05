@@ -201,13 +201,11 @@ void GraphProperty::treatEvent(const Event &evt) {
 
     const set<node> &refs = referencedGraph.get(sg->getId());
 
-    set<node>::const_iterator it = refs.begin();
-
-    if (it != refs.end()) {
+    if (!refs.empty()) {
       // don't change values if this non longer exists (when undoing)
       if (graph->existProperty(name)) {
-        for (; it != refs.end(); ++it) {
-          AbstractGraphProperty::setNodeValue((*it), nullptr);
+        for (auto n : refs) {
+          AbstractGraphProperty::setNodeValue(n, nullptr);
         }
       }
 

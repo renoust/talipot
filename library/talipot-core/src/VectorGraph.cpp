@@ -256,16 +256,15 @@ void VectorGraph::reserveAdj(const node n, const size_t nbEdges) {
 }
 //=======================================================
 Iterator<node> *VectorGraph::getNodes() const {
-  return new MPStlIterator<node, vector<node>::const_iterator>(_nodes.begin(), _nodes.end());
+  return stlIterator(_nodes);
 }
 //=======================================================
 Iterator<edge> *VectorGraph::getEdges() const {
-  return new MPStlIterator<edge, vector<edge>::const_iterator>(_edges.begin(), _edges.end());
+  return stlIterator(_edges);
 }
 //=======================================================
 Iterator<edge> *VectorGraph::getInOutEdges(const node n) const {
-  return new MPStlIterator<edge, vector<edge>::const_iterator>(_nData[n]._adje.begin(),
-                                                               _nData[n]._adje.end());
+  return stlIterator(_nData[n]._adje);
 }
 //=======================================================
 Iterator<edge> *VectorGraph::getOutEdges(const node n) const {
@@ -277,8 +276,7 @@ Iterator<edge> *VectorGraph::getInEdges(const node n) const {
 }
 //=======================================================
 Iterator<node> *VectorGraph::getInOutNodes(const node n) const {
-  return new MPStlIterator<node, vector<node>::const_iterator>(_nData[n]._adjn.begin(),
-                                                               _nData[n]._adjn.end());
+  return stlIterator(_nData[n]._adjn);
 }
 //=======================================================
 Iterator<node> *VectorGraph::getInNodes(const node n) const {

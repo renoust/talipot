@@ -645,12 +645,12 @@ QWidget *NodeShapeEditorCreator::createWidget(QWidget *parent) const {
   // making the scrollbars unreachable ...), we use a native
   // dialog with a QListWidget inside
   std::list<std::pair<QString, QPixmap>> shapes;
-  std::list<std::string> glyphs(PluginsManager::availablePlugins<Glyph>());
+  auto glyphs = PluginsManager::availablePlugins<Glyph>();
 
-  for (std::list<std::string>::const_iterator it = glyphs.begin(); it != glyphs.end(); ++it) {
-    QString shapeName = tlpStringToQString(*it);
-    QPixmap pixmap = GlyphRenderer::render(GlyphManager::glyphId(*it));
-    shapes.push_back(std::make_pair(shapeName, pixmap));
+  for (const auto &glyph : glyphs) {
+    QString shapeName = tlpStringToQString(glyph);
+    QPixmap pixmap = GlyphRenderer::render(GlyphManager::glyphId(glyph));
+    shapes.emplace_back(shapeName, pixmap);
   }
 
   QMainWindow *mainWindow = getMainWindow();
@@ -714,14 +714,14 @@ QWidget *EdgeExtremityShapeEditorCreator::createWidget(QWidget *parent) const {
   // making the scrollbars unreachable ...), we use a native
   // dialog with a QListWidget inside
   std::list<std::pair<QString, QPixmap>> shapes;
-  shapes.push_back(std::make_pair(QString("NONE"), QPixmap()));
+  shapes.emplace_back("NONE", QPixmap());
 
-  std::list<std::string> glyphs(PluginsManager::availablePlugins<EdgeExtremityGlyph>());
+  auto glyphs = PluginsManager::availablePlugins<EdgeExtremityGlyph>();
 
-  for (std::list<std::string>::const_iterator it = glyphs.begin(); it != glyphs.end(); ++it) {
-    QString shapeName = tlpStringToQString(*it);
-    QPixmap pixmap = EdgeExtremityGlyphRenderer::render(EdgeExtremityGlyphManager::glyphId(*it));
-    shapes.push_back(std::make_pair(shapeName, pixmap));
+  for (const auto &glyph : glyphs) {
+    QString shapeName = tlpStringToQString(glyph);
+    QPixmap pixmap = EdgeExtremityGlyphRenderer::render(EdgeExtremityGlyphManager::glyphId(glyph));
+    shapes.emplace_back(shapeName, pixmap);
   }
 
   QMainWindow *mainWindow = getMainWindow();

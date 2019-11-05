@@ -23,9 +23,8 @@ GradientManager::~GradientManager() {
 }
 
 void GradientManager::cleanAllGradients() {
-  for (map<string, ColorScale *>::iterator it = colorScaleMap.begin(); it != colorScaleMap.end();
-       ++it) {
-    delete it->second;
+  for (const auto &it : colorScaleMap) {
+    delete it.second;
   }
 
   colorScaleMap.clear();

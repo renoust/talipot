@@ -92,7 +92,7 @@ public:
    * @param itNodes an iterator on graph nodes
    * @param itEdges an iterator on graph edges
    *
-   * @warning The iterators are not deleted
+   * @warning The iterators are deleted after their use
    **/
   void translate(const Vec3f &move, Iterator<node> *itNodes, Iterator<edge> *itEdges);
 
@@ -112,7 +112,7 @@ public:
    * @param itNodes an iterator on graph nodes
    * @param itEdges an iterator on graph edges
    *
-   * @warning The iterators are not deleted
+   * @warning The iterators are deleted after their use
    **/
   void scale(const Vec3f &scaleFactors, Iterator<node> *itNodes, Iterator<edge> *itEdges);
 
@@ -148,7 +148,7 @@ public:
    * @param itNodes an iterator on graph nodes
    * @param itEdges an iterator on graph edges
    *
-   * @warning The iterators are not deleted
+   * @warning The iterators are deleted after their use
    **/
   void rotateX(const double &alpha, Iterator<node> *itNodes, Iterator<edge> *itEdges);
 
@@ -160,7 +160,7 @@ public:
    * @param itNodes an iterator on graph nodes
    * @param itEdges an iterator on graph edges
    *
-   * @warning The iterators are not deleted
+   * @warning The iterators are deleted after their use
    **/
   void rotateY(const double &alpha, Iterator<node> *itNodes, Iterator<edge> *itEdges);
 
@@ -172,7 +172,7 @@ public:
    * @param itNodes an iterator on graph nodes
    * @param itEdges an iterator on graph edges
    *
-   * @warning The iterators are not deleted
+   * @warning The iterators are deleted after their use
    **/
   void rotateZ(const double &alpha, Iterator<node> *itNodes, Iterator<edge> *itEdges);
 

@@ -21,8 +21,8 @@ namespace tlp {
 GlLine::GlLine(const vector<Coord> &points, const vector<Color> &colors)
     : _points(points), _colors(colors), width(1.0), factor(1), pattern(0) {
 
-  for (vector<Coord>::iterator it = _points.begin(); it != _points.end(); ++it)
-    boundingBox.expand(*it);
+  for (const auto &p : _points)
+    boundingBox.expand(p);
 }
 //=====================================================
 GlLine::~GlLine() {}
@@ -95,11 +95,11 @@ void GlLine::setLineStipple(unsigned char factor, unsigned int pattern) {
   this->pattern = pattern;
 }
 //=====================================================
-void GlLine::translate(const Coord &mouvement) {
-  boundingBox.translate(mouvement);
+void GlLine::translate(const Coord &move) {
+  boundingBox.translate(move);
 
-  for (vector<Coord>::iterator it = _points.begin(); it != _points.end(); ++it) {
-    (*it) += mouvement;
+  for (auto &p : _points) {
+    p += move;
   }
 }
 //=====================================================
@@ -121,7 +121,7 @@ void GlLine::setWithXML(const string &inString, unsigned int &currentPosition) {
   GlXMLTools::setWithXML(inString, currentPosition, "factor", factor);
   GlXMLTools::setWithXML(inString, currentPosition, "pattern", pattern);
 
-  for (vector<Coord>::iterator it = _points.begin(); it != _points.end(); ++it)
-    boundingBox.expand(*it);
+  for (const auto &p : _points)
+    boundingBox.expand(p);
 }
 }

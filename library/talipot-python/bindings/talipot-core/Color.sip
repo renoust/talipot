@@ -60,7 +60,7 @@ class Color {
     r = uchar(PyLong_AsLong(PyTuple_GET_ITEM(sipPy, 0)));
     g = uchar(PyLong_AsLong(PyTuple_GET_ITEM(sipPy, 1)));
     b = uchar(PyLong_AsLong(PyTuple_GET_ITEM(sipPy, 2)));
-    if (PyList_GET_SIZE(sipPy) > 3)
+    if (PyTuple_GET_SIZE(sipPy) > 3)
       a = uchar(PyLong_AsLong(PyTuple_GET_ITEM(sipPy, 3)));
   #else
 

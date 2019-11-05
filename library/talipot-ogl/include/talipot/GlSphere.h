@@ -61,7 +61,7 @@ public:
   /**
    * @brief Translate entity
    */
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * @brief Get absolute position

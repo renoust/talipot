@@ -55,11 +55,10 @@ Coord GlNominativeAxis::getAxisPointCoordForValue(const string &value) {
 
 string GlNominativeAxis::getValueAtAxisPoint(const Coord &axisPointCoord) {
   string ret;
-  map<string, Coord>::iterator it;
 
-  for (it = labelsCoord.begin(); it != labelsCoord.end(); ++it) {
-    if (it->second == axisPointCoord) {
-      ret = it->first;
+  for (const auto &it : labelsCoord) {
+    if (it.second == axisPointCoord) {
+      ret = it.first;
       break;
     }
   }
@@ -69,10 +68,8 @@ string GlNominativeAxis::getValueAtAxisPoint(const Coord &axisPointCoord) {
 
 void GlNominativeAxis::translate(const Coord &c) {
   GlAxis::translate(c);
-  map<string, Coord>::iterator it;
-
-  for (it = labelsCoord.begin(); it != labelsCoord.end(); ++it) {
-    it->second += c;
+  for (auto &it : labelsCoord) {
+    it.second += c;
   }
 }
 

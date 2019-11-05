@@ -1480,7 +1480,8 @@ public:
 
       // extract entries from BibTeX file
       bibFile.readFromFile(filename, xdkbib::File::StrictQuote);
-      const std::vector<xdkbib::FileEntry> &entries = bibFile.entries();
+      std::vector<xdkbib::FileEntry> &entries =
+          const_cast<std::vector<xdkbib::FileEntry> &>(bibFile.entries());
 
       // first add nodes for publication
       vector<node> publis;
@@ -1489,12 +1490,9 @@ public:
         graph->addNodes(entries.size(), publis);
 
       // loop on entries
-      std::vector<xdkbib::FileEntry>::const_iterator it = entries.begin();
-      std::vector<xdkbib::FileEntry>::const_iterator itEnd = entries.end();
       unsigned int i = 0;
 
-      for (; it != itEnd; ++it, ++i) {
-        xdkbib::FileEntry &fe = const_cast<xdkbib::FileEntry &>(*it);
+      for (auto &fe : entries) {
 
         node publi;
 
@@ -1527,16 +1525,14 @@ public:
         }
 
         // loop of entry fields
-        std::map<std::string, xdkbib::Field>::const_iterator fit = fe.fields().begin();
-
-        for (; fit != fe.fields().end(); ++fit) {
-          string pName = fit->first;
+        for (auto &fit : fe.fields()) {
+          string pName = fit.first;
 
           // year is already set
           if (pName == "year")
             continue;
 
-          const xdkbib::Field &field = fit->second;
+          const xdkbib::Field &field = fit.second;
           bool isNumber =
               !field.valueParts().empty() && (field.valueParts()[0].type() == xdkbib::Number);
           bool isAuthor = (pName == "author");
@@ -1978,7 +1974,7 @@ public:
 
               node author;
               // check if the author already exists
-              std::unordered_map<std::string, node>::const_iterator itAuth = authorsMap.find(aKey);
+              auto itAuth = authorsMap.find(aKey);
 
               if (itAuth != authorsMap.end()) {
                 authorNodes.push_back(author = itAuth->second);
@@ -2066,6 +2062,7 @@ public:
             }
           }
         }
+        ++i;
       }
 
       // in case of duplicate

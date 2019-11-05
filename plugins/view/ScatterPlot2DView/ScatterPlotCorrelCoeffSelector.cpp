@@ -99,17 +99,16 @@ Coord *
 GlEditableComplexPolygon::getPolygonVertexUnderPointerIfAny(const Coord &pointerViewportCoord,
                                                             Camera *camera) {
   Coord *ret = nullptr;
-  vector<Coord>::iterator it;
   camera->initGl();
 
-  for (it = polygonPoints.begin(); it != polygonPoints.end(); ++it) {
-    Coord pointCenter = camera->worldTo2DViewport(*it);
+  for (const auto &c : polygonPoints) {
+    Coord pointCenter = camera->worldTo2DViewport(c);
 
     if (pointerViewportCoord.getX() > (pointCenter.getX() - POINT_RADIUS) &&
         pointerViewportCoord.getX() < (pointCenter.getX() + POINT_RADIUS) &&
         pointerViewportCoord.getY() > (pointCenter.getY() - POINT_RADIUS) &&
         pointerViewportCoord.getY() < (pointCenter.getY() + POINT_RADIUS)) {
-      ret = new Coord(*it);
+      ret = new Coord(c);
       break;
     }
   }
@@ -142,9 +141,7 @@ void GlEditableComplexPolygon::movePolygonVertexToPoint(const Coord &polygonVert
 
 void GlEditableComplexPolygon::addPolygonVertex(std::pair<Coord, Coord> polygonSegment,
                                                 const Coord &newVertex) {
-  vector<Coord>::iterator it;
-
-  for (it = polygonPoints.begin(); it != polygonPoints.end(); ++it) {
+  for (auto it = polygonPoints.begin(); it != polygonPoints.end(); ++it) {
     if ((*it) == polygonSegment.second) {
       polygonPoints.insert(it, newVertex);
       return;

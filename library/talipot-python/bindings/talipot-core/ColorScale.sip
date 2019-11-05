@@ -153,7 +153,7 @@ Clears the color scale.
 
 //==========================================================================================
 
-  virtual void setColorScale(const std::vector<tlp::Color> colors, const bool gradient = true);
+  virtual void setColorScale(const std::vector<tlp::Color> &colors, const bool gradient = true);
 %Docstring
 tlp.ColorScale.setColorScale(colors, gradient=True)
 
@@ -220,7 +220,7 @@ Specify whether the color scale must be considered as a gradient.
 
 //==========================================================================================
 
-  std::map<float, tlp::Color> getColorMap() const;
+  const std::map<float, tlp::Color> &getColorMap() const /NoCopy/;
 %Docstring
 tlp.ColorScale.getColorMap()
 
@@ -286,11 +286,11 @@ Sets the transparency of all the colors in the underlying map.
 %MethodCode
   std::ostringstream oss;
   std::vector<float> v;
-  std::map<float, tlp::Color> colorMap = sipCpp->getColorMap();
-  std::map<float, tlp::Color>::const_iterator it = colorMap.begin();
 
-  for(; it != colorMap.end() ; ++it) {
-    v.push_back(it->first);
+  auto colorMap = sipCpp->getColorMap();
+
+  for(const auto &it : colorMap) {
+    v.push_back(it.first);
   }
 
   std::sort(v.begin(), v.end());

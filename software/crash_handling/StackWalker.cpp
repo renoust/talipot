@@ -141,10 +141,9 @@ StackWalkerGCC::StackWalkerGCC() {}
 
 StackWalkerGCC::~StackWalkerGCC() {
 #ifdef HAVE_BFD
-  std::map<std::string, BfdWrapper *>::iterator it = bfdMap.begin();
 
-  for (; it != bfdMap.end(); ++it) {
-    delete it->second;
+  for (const auto &it : bfdMap) {
+    delete it.second;
   }
 
 #endif
@@ -322,10 +321,8 @@ StackWalkerMinGW::StackWalkerMinGW() {}
 
 StackWalkerMinGW::~StackWalkerMinGW() {
 #ifdef HAVE_BFD
-  std::map<std::string, BfdWrapper *>::iterator it = bfdMap.begin();
-
-  for (; it != bfdMap.end(); ++it) {
-    delete it->second;
+  for (const auto &it : bfdMap) {
+    delete it.second;
   }
 
 #endif

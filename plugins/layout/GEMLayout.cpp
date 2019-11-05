@@ -98,13 +98,13 @@ void GEMLayout::vertexdata_init(const float starttemp) {
   _center.fill(0);
   std::vector<GEMparticule>::iterator it;
 
-  for (it = _particules.begin(); it != _particules.end(); ++it) {
-    it->heat = starttemp;
-    _temperature += it->heat * it->heat;
-    it->imp.fill(0);
-    it->dir = 0;
-    it->mass = 1.f + it->mass / 3.f;
-    _center += it->pos;
+  for (auto &p : _particules) {
+    p.heat = starttemp;
+    _temperature += p.heat * p.heat;
+    p.imp.fill(0);
+    p.dir = 0;
+    p.mass = 1.f + p.mass / 3.f;
+    _center += p.pos;
   }
 }
 //=========================================================

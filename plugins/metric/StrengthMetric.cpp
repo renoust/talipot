@@ -23,7 +23,6 @@ StrengthMetric::StrengthMetric(const tlp::PluginContext *context) : DoubleAlgori
 StrengthMetric::~StrengthMetric() {}
 //=============================================================
 double StrengthMetric::e(std::unordered_set<tlp::node> &U, std::unordered_set<tlp::node> &V) {
-  std::unordered_set<node>::const_iterator itU;
   double result = 0;
   std::unordered_set<node> *A, *B;
 
@@ -35,10 +34,9 @@ double StrengthMetric::e(std::unordered_set<tlp::node> &U, std::unordered_set<tl
     B = &U;
   }
 
-  for (itU = A->begin(); itU != A->end(); ++itU) {
-    for (auto n : graph->getInOutNodes(*itU)) {
-
-      if (B->find(n) != B->end())
+  for (auto n : *A) {
+    for (auto n2 : graph->getInOutNodes(n)) {
+      if (B->find(n2) != B->end())
         result += 1.0;
     }
   }

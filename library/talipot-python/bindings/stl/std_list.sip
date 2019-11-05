@@ -33,8 +33,7 @@ template<TYPE *>
   }
 
   int i = 0;
-  for(std::list<TYPE *>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); iter++) {
-    TYPE *cpp = *iter;
+  for (TYPE *cpp : *sipCpp) {
     PyObject *pobj;
 
     // Get the Python wrapper for the Type instance, creating a new
@@ -122,8 +121,8 @@ template<TYPE>
   }
 
   int i = 0;
-  for(std::list<TYPE>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); iter++) {
-    TYPE *cpp = new TYPE(*iter);
+  for (const TYPE &v : *sipCpp) {
+    TYPE *cpp = new TYPE(v);
     PyObject *pobj;
 
     // Get the Python wrapper for the Type instance, creating a new
@@ -207,9 +206,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<double>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (double d : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyFloat_FromDouble(*iter));
+    PyList_SET_ITEM(l, i++, PyFloat_FromDouble(d));
   }
 
   // Return the Python list.
@@ -265,9 +264,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<float>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (float f : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyFloat_FromDouble(*iter));
+    PyList_SET_ITEM(l, i++, PyFloat_FromDouble(f));
   }
 
   // Return the Python list.
@@ -324,9 +323,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<int>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (int n : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyLong_FromLong(*iter));
+    PyList_SET_ITEM(l, i++, PyLong_FromLong(n));
   }
 
   // Return the Python list.
@@ -394,9 +393,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<unsigned int>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (unsigned int n : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyLong_FromUnsignedLong(*iter));
+    PyList_SET_ITEM(l, i++, PyLong_FromUnsignedLong(n));
   }
 
   // Return the Python list.
@@ -464,9 +463,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<long>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (long l : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyLong_FromLong(*iter));
+    PyList_SET_ITEM(l, i++, PyLong_FromLong(l));
   }
 
   // Return the Python list.
@@ -534,9 +533,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<unsigned long>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (unsigned int n : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i++, PyLong_FromUnsignedLong(*iter));
+    PyList_SET_ITEM(l, i++, PyLong_FromUnsignedLong(n));
   }
 
   // Return the Python list.
@@ -604,9 +603,9 @@ template<TYPE>
   // Go through each element in the C++ instance and convert it to a
   // wrapped object.
   int i = 0;
-  for (std::list<bool>::iterator iter = sipCpp->begin(); iter != sipCpp->end(); ++iter) {
+  for (bool b : *sipCpp) {
     // Add the wrapper to the list.
-    PyList_SET_ITEM(l, i, PyBool_FromLong(*iter));
+    PyList_SET_ITEM(l, i, PyBool_FromLong(b));
   }
 
   // Return the Python list.

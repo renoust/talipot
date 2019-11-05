@@ -341,8 +341,8 @@ DataSet ScatterPlot2DView::state() const {
   dataSet.set("selected graph properties", selectedGraphPropertiesDataSet);
   DataSet generatedScatterPlotDataSet;
 
-  for (auto it = scatterPlotsGenMap.begin(); it != scatterPlotsGenMap.end(); ++it) {
-    generatedScatterPlotDataSet.set((*it).first.first + "_" + (*it).first.second, (*it).second);
+  for (const auto &it : scatterPlotsGenMap) {
+    generatedScatterPlotDataSet.set(it.first.first + "_" + it.first.second, it.second);
   }
 
   dataSet.set("generated scatter plots", generatedScatterPlotDataSet);
@@ -767,10 +767,9 @@ void ScatterPlot2DView::destroyOverviewsIfNeeded() {
 }
 
 void ScatterPlot2DView::destroyOverviews() {
-  for (map<pair<string, string>, ScatterPlot2D *>::iterator it = scatterPlotsMap.begin();
-       it != scatterPlotsMap.end(); ++it) {
-    matrixComposite->deleteGlEntity(it->second);
-    delete it->second;
+  for (const auto &it : scatterPlotsMap) {
+    matrixComposite->deleteGlEntity(it.second);
+    delete it.second;
   }
 
   scatterPlotsMap.clear();
@@ -961,24 +960,23 @@ BoundingBox ScatterPlot2DView::getMatrixBoundingBox() {
 
 std::vector<ScatterPlot2D *> ScatterPlot2DView::getSelectedScatterPlots() const {
   vector<ScatterPlot2D *> ret;
-  map<pair<string, string>, ScatterPlot2D *>::const_iterator it;
 
-  for (it = scatterPlotsMap.begin(); it != scatterPlotsMap.end(); ++it) {
+  for (const auto &it : scatterPlotsMap) {
     // a scatter plot is selected if non null
     // and if the property on the x axis is before the property on the y axis
     // in the selectedGraphProperties vector
-    if (!it->second)
+    if (!it.second)
       continue;
 
     // properties on x and y axis
-    const string &xProp = (it->first).first;
-    const string &yProp = (it->first).second;
+    const string &xProp = it.first.first;
+    const string &yProp = it.first.second;
     // position in the selectedGraphProperties of the property on the x axis
     int xPos = -1;
     bool valid = false;
 
-    for (unsigned int i = 0; i < selectedGraphProperties.size(); ++i) {
-      const string &prop = selectedGraphProperties[i];
+    int i = 0;
+    for (const string &prop : selectedGraphProperties) {
 
       if (prop == xProp) {
         xPos = i;
@@ -991,10 +989,11 @@ std::vector<ScatterPlot2D *> ScatterPlot2DView::getSelectedScatterPlots() const 
 
         break;
       }
+      ++i;
     }
 
     if (valid)
-      ret.push_back(it->second);
+      ret.push_back(it.second);
   }
 
   return ret;

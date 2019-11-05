@@ -343,17 +343,15 @@ void LeafletMaps::setMapBounds(Graph *graph,
 
   if (!nodesLatLngs.empty()) {
 
-    pair<double, double> minLatLng = make_pair(90, 180);
-    pair<double, double> maxLatLng = make_pair(-90, -180);
+    auto minLatLng = make_pair(90.0, 180.0);
+    auto maxLatLng = make_pair(-90.0, -180.0);
 
-    unordered_map<node, pair<double, double>>::const_iterator it;
-
-    for (it = nodesLatLngs.begin(); it != nodesLatLngs.end(); ++it) {
-      if (graph->isElement(it->first)) {
-        minLatLng.first = std::min(minLatLng.first, (it->second).first);
-        minLatLng.second = std::min(minLatLng.second, (it->second).second);
-        maxLatLng.first = std::max(maxLatLng.first, (it->second).first);
-        maxLatLng.second = std::max(maxLatLng.second, (it->second).second);
+    for (const auto &it : nodesLatLngs) {
+      if (graph->isElement(it.first)) {
+        minLatLng.first = std::min(minLatLng.first, it.second.first);
+        minLatLng.second = std::min(minLatLng.second, it.second.second);
+        maxLatLng.first = std::max(maxLatLng.first, it.second.first);
+        maxLatLng.second = std::max(maxLatLng.second, it.second.second);
       }
     }
 

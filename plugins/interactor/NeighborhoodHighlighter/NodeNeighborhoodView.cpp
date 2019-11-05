@@ -87,8 +87,8 @@ void NodeNeighborhoodView::getNeighbors(node n, unsigned int dist, bool noRecurs
         graphViewNodes.push_back(n);
         int count = 0;
 
-        for (auto it = nodesTokeep.begin(); it != nodesTokeep.end(); ++it) {
-          for (auto n : it->second) {
+        for (const auto &it : nodesTokeep) {
+          for (auto n : it.second) {
             if (count++ > nbNodes)
               break;
 

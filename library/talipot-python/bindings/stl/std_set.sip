@@ -33,8 +33,8 @@ template<TYPE>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<TYPE>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
-    TYPE *cpp = new TYPE(*it);
+  for (const TYPE &v : *sipCpp) {
+    TYPE *cpp = new TYPE(v);
     PyObject *pobj;
 
     // Get the Python wrapper for the Type instance, creating a new
@@ -132,8 +132,7 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<TYPE*>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
-    TYPE *cpp = *it;
+  for (TYPE *cpp : *sipCpp) {
     PyObject *pobj;
 
     // Get the Python wrapper for the Type instance, creating a new
@@ -225,9 +224,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<double>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (double d : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyFloat_FromDouble(*it));
+    PySet_Add(l, PyFloat_FromDouble(d));
   }
 
   // Return the Python set.
@@ -289,9 +288,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<float>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (float f : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyFloat_FromDouble(*it));
+    PySet_Add(l, PyFloat_FromDouble(f));
   }
 
   // Return the Python set.
@@ -353,9 +352,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<int>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (int n : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyLong_FromLong(*it));
+    PySet_Add(l, PyLong_FromLong(n));
   }
 
   // Return the Python set.
@@ -427,9 +426,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<long>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (long n : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyLong_FromLong(*it));
+    PySet_Add(l, PyLong_FromLong(n));
   }
 
   // Return the Python set.
@@ -501,9 +500,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<unsigned int>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (unsigned int n : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyLong_FromUnsignedLong(*it));
+    PySet_Add(l, PyLong_FromUnsignedLong(n));
   }
 
   // Return the Python set.
@@ -574,9 +573,9 @@ template<TYPE*>
 
   // Go through each element in the C++ instance and convert it to a
   // wrapper object.
-  for (std::set<unsigned long>::iterator it = sipCpp->begin(); it != sipCpp->end(); ++it) {
+  for (unsigned long n : *sipCpp) {
     // Add the wrapper to the list.
-    PySet_Add(l, PyLong_FromUnsignedLong(*it));
+    PySet_Add(l, PyLong_FromUnsignedLong(n));
   }
 
   // Return the Python set.

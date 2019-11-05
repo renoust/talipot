@@ -826,10 +826,8 @@ QVector<QString> PythonInterpreter::getGlobalDictEntries(const QString &prefixFi
     }
   }
 
-  QSet<QString>::iterator it;
-
-  for (it = publicMembersSorted.begin(); it != publicMembersSorted.end(); ++it) {
-    ret.push_back(*it);
+  for (const auto &it : publicMembersSorted) {
+    ret.push_back(it);
   }
 
   setOutputEnabled(true);
@@ -883,10 +881,8 @@ QVector<QString> PythonInterpreter::getObjectDictEntries(const QString &objectNa
       }
     }
 
-    QSet<QString>::iterator it;
-
-    for (it = publicMembersSorted.begin(); it != publicMembersSorted.end(); ++it) {
-      ret.push_back(*it);
+    for (const auto &it : publicMembersSorted) {
+      ret.push_back(it);
     }
   }
 

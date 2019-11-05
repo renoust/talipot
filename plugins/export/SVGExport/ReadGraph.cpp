@@ -437,9 +437,7 @@ bool ReadGraph::readGraph(Graph *graph, tlp::DataSet *ds, tlp::PluginProgress *p
     unsigned sizeFirstVertice = 2 * metanodeVertices.size();
     vector<tlp::node> subMetanodeVertices;
 
-    for (vector<node>::const_iterator it = metanodeVertices.begin(); it != metanodeVertices.end();
-         ++it) {
-      node metanode = *it;
+    for (auto metanode : metanodeVertices) {
       Graph *metagraph = graph->getNodeMetaInfo(metanode);
       BoundingBox metagraphbb = tlp::computeBoundingBox(metagraph, layout, sizes, rotation);
       Coord coord_meta_node = layout->getNodeValue(metanode);
@@ -461,9 +459,8 @@ bool ReadGraph::readGraph(Graph *graph, tlp::DataSet *ds, tlp::PluginProgress *p
                                        metagraphbb.center().getY() * (scale - 1) -
                                        coord_meta_node.getY() + metagraphbb.center().getY());
 
-      vector<int>::const_iterator tran = transformationVertices.begin();
-
-      ret = exportint.writeMetaGraph(tran[indice_Transform], tran[indice_Transform + 1], scale);
+      ret = exportint.writeMetaGraph(transformationVertices[indice_Transform],
+                                     transformationVertices[indice_Transform + 1], scale);
 
       if (!ret) {
         if (pp->getError().empty())

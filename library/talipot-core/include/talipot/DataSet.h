@@ -158,10 +158,8 @@ class DataTypeSerializerContainer {
 
 public:
   ~DataTypeSerializerContainer() {
-    std::unordered_map<std::string, DataTypeSerializer *>::iterator it = tnTodts.begin();
-
-    for (; it != tnTodts.end(); ++it) {
-      delete it->second;
+    for (const auto &it : tnTodts) {
+      delete it.second;
     }
   }
 

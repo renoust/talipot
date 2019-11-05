@@ -128,9 +128,9 @@ bool pluginExists(std::string pluginName) {
     std::list<std::string> algoList = tlp::PluginsManager::availablePlugins<tlp::Algorithm>();
     std::list<std::string> propAlgoList = tlp::PluginsManager::availablePlugins<tlp::PropertyAlgorithm>();
     std::list<std::string> realAlgoList;
-    for (std::list<std::string>::iterator it = algoList.begin() ; it != algoList.end() ; ++it) {
-      if (std::find(propAlgoList.begin(), propAlgoList.end(), *it) == propAlgoList.end()) {
-        realAlgoList.push_back(*it);
+    for (const auto &algo : algoList) {
+      if (std::find(propAlgoList.begin(), propAlgoList.end(), algo) == propAlgoList.end()) {
+        realAlgoList.push_back(algo);
       }
     }
     return std::find(realAlgoList.begin(), realAlgoList.end(), pluginName) != realAlgoList.end();

@@ -18,10 +18,11 @@
 #include <talipot/GlGraphComposite.h>
 #include <talipot/GlXMLTools.h>
 
+#include <algorithm>
+
 using namespace std;
 
 namespace tlp {
-typedef std::map<string, GlSimpleEntity *>::const_iterator ITM;
 //============================================================
 GlComposite::GlComposite(bool deleteComponentsInDestructor)
     : deleteComponentsInDestructor(deleteComponentsInDestructor) {}
@@ -33,67 +34,64 @@ GlComposite::~GlComposite() {
 void GlComposite::addLayerParent(GlLayer *layer) {
   layerParents.push_back(layer);
 
-  for (list<GlSimpleEntity *>::iterator it = _sortedElements.begin(); it != _sortedElements.end();
-       ++it) {
-    GlComposite *composite = dynamic_cast<GlComposite *>(*it);
+  for (auto entity : _sortedElements) {
+    GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
-    if (composite)
+    if (composite) {
       composite->addLayerParent(layer);
+    }
   }
 }
 //============================================================
 void GlComposite::removeLayerParent(GlLayer *layer) {
-  for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-    if ((*it) == layer) {
-      layerParents.erase(it);
-      break;
-    }
+  auto it = find(layerParents.begin(), layerParents.end(), layer);
+  if (it != layerParents.end()) {
+    layerParents.erase(it);
   }
 
-  for (list<GlSimpleEntity *>::iterator it = _sortedElements.begin(); it != _sortedElements.end();
-       ++it) {
-    GlComposite *composite = dynamic_cast<GlComposite *>(*it);
+  for (auto entity : _sortedElements) {
+    GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
-    if (composite)
+    if (composite) {
       composite->removeLayerParent(layer);
+    }
   }
 }
 //============================================================
 void GlComposite::reset(bool deleteElems) {
   vector<GlSimpleEntity *> toTreat;
 
-  for (ITM i = elements.begin(); i != elements.end(); ++i) {
-    // Push elements to treat in a vector as deleting elements in the loop invalidate the current
-    // iterator.
-    toTreat.push_back(i->second);
+  for (const auto &it : elements) {
+    // Push elements to treat in a vector as deleting elements in the loop
+    // invalidate the current iterator.
+    toTreat.push_back(it.second);
   }
 
-  for (vector<GlSimpleEntity *>::iterator it = toTreat.begin(); it != toTreat.end(); ++it) {
-    for (vector<GlLayer *>::iterator it2 = layerParents.begin(); it2 != layerParents.end(); ++it2) {
-      if ((*it2)->getScene())
-        (*it2)->getScene()->notifyDeletedEntity(*it);
+  for (auto entity : toTreat) {
+    for (auto l : layerParents) {
+      if (l->getScene())
+        l->getScene()->notifyDeletedEntity(entity);
     }
 
-    (*it)->removeParent(this);
+    entity->removeParent(this);
 
-    for (vector<GlLayer *>::iterator itLayers = layerParents.begin();
-         itLayers != layerParents.end(); ++itLayers) {
-      GlComposite *composite = dynamic_cast<GlComposite *>(*it);
+    for (auto l : layerParents) {
+      GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
       if (composite)
-        composite->removeLayerParent(*itLayers);
+        composite->removeLayerParent(l);
     }
 
     if (deleteElems)
-      delete (*it);
+      delete entity;
   }
 
   elements.clear();
   _sortedElements.clear();
 
-  for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-    if ((*it)->getScene())
-      (*it)->getScene()->notifyModifyLayer((*it)->getName(), (*it));
+  for (auto l : layerParents) {
+    if (l->getScene())
+      l->getScene()->notifyModifyLayer(l->getName(), l);
   }
 }
 //============================================================
@@ -121,21 +119,20 @@ void GlComposite::addGlEntity(GlSimpleEntity *entity, const string &key) {
     GlComposite *composite;
     composite = dynamic_cast<GlComposite *>(entity);
 
-    for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
+    for (auto l : layerParents) {
       if (composite)
-        composite->addLayerParent(*it);
+        composite->addLayerParent(l);
 
-      if ((*it)->getScene())
-        (*it)->getScene()->notifyModifyLayer((*it)->getName(), (*it));
+      if (l->getScene())
+        l->getScene()->notifyModifyLayer(l->getName(), l);
     }
   }
 
   GlGraphComposite *graphComposite = dynamic_cast<GlGraphComposite *>(entity);
 
   if (graphComposite) {
-    for (std::vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end();
-         ++it) {
-      (*it)->glGraphCompositeAdded(graphComposite);
+    for (auto l : layerParents) {
+      l->glGraphCompositeAdded(graphComposite);
     }
   }
 }
@@ -153,8 +150,8 @@ void GlComposite::deleteGlEntity(const string &key, bool informTheEntity) {
     GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
     if (composite) {
-      for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-        composite->removeLayerParent(*it);
+      for (auto l : layerParents) {
+        composite->removeLayerParent(l);
       }
     }
   }
@@ -162,25 +159,25 @@ void GlComposite::deleteGlEntity(const string &key, bool informTheEntity) {
   GlGraphComposite *glGraphComposite = dynamic_cast<GlGraphComposite *>(entity);
 
   if (glGraphComposite) {
-    for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-      (*it)->glGraphCompositeRemoved(glGraphComposite);
+    for (auto l : layerParents) {
+      l->glGraphCompositeRemoved(glGraphComposite);
     }
   }
 
   _sortedElements.remove(elements[key]);
   elements.erase(key);
 
-  for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-    if ((*it)->getScene()) {
-      (*it)->getScene()->notifyModifyLayer((*it)->getName(), (*it));
-      (*it)->getScene()->notifyDeletedEntity(entity);
+  for (auto l : layerParents) {
+    if (l->getScene()) {
+      l->getScene()->notifyModifyLayer(l->getName(), l);
+      l->getScene()->notifyDeletedEntity(entity);
     }
   }
 }
 //============================================================
 void GlComposite::deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity) {
-  for (ITM i = elements.begin(); i != elements.end(); ++i) {
-    if (entity == (*i).second) {
+  for (const auto &it : elements) {
+    if (entity == it.second) {
 
       if (informTheEntity) {
         entity->removeParent(this);
@@ -188,20 +185,19 @@ void GlComposite::deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity) {
         GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
         if (composite) {
-          for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end();
-               ++it) {
-            composite->removeLayerParent(*it);
+          for (auto l : layerParents) {
+            composite->removeLayerParent(l);
           }
         }
       }
 
-      _sortedElements.remove((*i).second);
-      elements.erase(i->first);
+      _sortedElements.remove(it.second);
+      elements.erase(it.first);
 
-      for (vector<GlLayer *>::iterator it = layerParents.begin(); it != layerParents.end(); ++it) {
-        if ((*it)->getScene()) {
-          (*it)->getScene()->notifyModifyLayer((*it)->getName(), (*it));
-          (*it)->getScene()->notifyDeletedEntity(entity);
+      for (auto l : layerParents) {
+        if (l->getScene()) {
+          l->getScene()->notifyModifyLayer(l->getName(), l);
+          l->getScene()->notifyDeletedEntity(entity);
         }
       }
 
@@ -211,27 +207,27 @@ void GlComposite::deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity) {
 }
 //============================================================
 string GlComposite::findKey(GlSimpleEntity *entity) {
-  for (ITM it = elements.begin(); it != elements.end(); ++it) {
-    if (entity == (*it).second) {
-      return it->first;
+  for (const auto &it : elements) {
+    if (entity == it.second) {
+      return it.first;
     }
   }
 
-  return string("");
+  return "";
 }
 //============================================================
 GlSimpleEntity *GlComposite::findGlEntity(const string &key) {
-  ITM ite = elements.find(key);
+  auto ite = elements.find(key);
 
   if (ite == elements.end())
     return nullptr;
 
-  return (*ite).second;
+  return ite->second;
 }
 //============================================================
-void GlComposite::translate(const Coord &mouvement) {
-  for (ITM it = elements.begin(); it != elements.end(); ++it) {
-    (*it).second->translate(mouvement);
+void GlComposite::translate(const Coord &move) {
+  for (const auto &it : elements) {
+    it.second->translate(move);
   }
 }
 //============================================================
@@ -247,15 +243,14 @@ void GlComposite::getXML(string &outString) {
 
   GlXMLTools::beginChildNode(outString);
 
-  for (list<GlSimpleEntity *>::iterator it = _sortedElements.begin(); it != _sortedElements.end();
-       ++it) {
-    name = findKey(*it);
+  for (auto entity : _sortedElements) {
+    name = findKey(entity);
     GlXMLTools::beginChildNode(outString, "GlEntity");
     GlXMLTools::createProperty(outString, "name", name);
     GlXMLTools::beginDataNode(outString);
-    GlXMLTools::getXML(outString, "visible", (*it)->isVisible());
-    GlXMLTools::getXML(outString, "stencil", (*it)->getStencil());
-    (*it)->getXML(outString);
+    GlXMLTools::getXML(outString, "visible", entity->isVisible());
+    GlXMLTools::getXML(outString, "stencil", entity->getStencil());
+    entity->getXML(outString);
     GlXMLTools::endDataNode(outString);
     GlXMLTools::endChildNode(outString, "GlEntity");
   }

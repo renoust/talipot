@@ -117,7 +117,7 @@ void ConvolutionClustering::autoSetParameter() {
   double deltaXMin = -1;
   double deltaXMax = 0;
   double deltaSum = 0;
-  map<double, int>::iterator itMap = histo.begin();
+  auto itMap = histo.begin();
   double lastValue = (*itMap).first;
   ++itMap;
 
@@ -201,11 +201,9 @@ vector<double> *ConvolutionClustering::getHistogram() {
   for (int pos = 0; pos < histosize; ++pos)
     smoothHistogram[pos] = 0;
 
-  map<int, int>::iterator itMap;
-
-  for (itMap = histogramOfValues.begin(); itMap != histogramOfValues.end(); ++itMap) {
-    double value = itMap->second;
-    int index = itMap->first;
+  for (const auto &itMap : histogramOfValues) {
+    double value = itMap.second;
+    int index = itMap.first;
 
     for (int i = -width; i <= width; ++i) {
       if ((index + i) >= 0 && (index + i) < histosize)

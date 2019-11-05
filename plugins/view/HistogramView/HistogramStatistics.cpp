@@ -90,15 +90,10 @@ inline double square(double x) {
   return x * x;
 }
 
-/*inline double cube(double x) {
-return x*x*x;
-}*/
 } // namespace
 static void drawComposite(tlp::GlComposite *composite, float lod, tlp::Camera *camera) {
-  map<string, tlp::GlSimpleEntity *> glEntities = composite->getGlEntities();
-
-  for (auto it2 = glEntities.begin(); it2 != glEntities.end(); ++it2) {
-    tlp::GlSimpleEntity *entity = it2->second;
+  for (const auto &it : composite->getGlEntities()) {
+    tlp::GlSimpleEntity *entity = it.second;
     tlp::GlComposite *compositeEntity = dynamic_cast<tlp::GlComposite *>(entity);
 
     if (compositeEntity != nullptr) {
@@ -223,9 +218,8 @@ HistogramStatistics::HistogramStatistics(const HistogramStatistics &histoStats)
 HistogramStatistics::~HistogramStatistics() {
   cleanupAxis();
 
-  for (map<QString, KernelFunction *>::iterator it = kernelFunctionsMap.begin();
-       it != kernelFunctionsMap.end(); ++it) {
-    delete it->second;
+  for (const auto &it : kernelFunctionsMap) {
+    delete it.second;
   }
 }
 
@@ -365,8 +359,8 @@ void HistogramStatistics::computeInteractor() {
 
   propertyMean /= (nbElements);
 
-  for (auto it = graphPropertyValueSet.begin(); it != graphPropertyValueSet.end(); ++it) {
-    propertyStandardDeviation += square(it->second - propertyMean);
+  for (const auto &it : graphPropertyValueSet) {
+    propertyStandardDeviation += square(it.second - propertyMean);
   }
 
   propertyStandardDeviation = sqrt(propertyStandardDeviation / (nbElements - 1));
@@ -384,8 +378,8 @@ void HistogramStatistics::computeInteractor() {
     for (double val = min; val <= max; val += sampleStep) {
       float fx = 0;
 
-      for (auto it = graphPropertyValueSet.begin(); it != graphPropertyValueSet.end(); ++it) {
-        fx += float((*kf)((val - (it->second)) / (bandwidth / 2.)));
+      for (const auto &it : graphPropertyValueSet) {
+        fx += float((*kf)((val - (it.second)) / (bandwidth / 2.)));
       }
 
       fx *= (1.f / float(graphPropertyValueSet.size() * (bandwidth / 2.)));

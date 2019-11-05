@@ -216,8 +216,7 @@ public:
 
   // return an iterator on the existing elts
   inline Iterator<ID_TYPE> *getElts() const {
-    return new StlIterator<ID_TYPE, typename std::vector<ID_TYPE>::const_iterator>(this->begin(),
-                                                                                   this->end());
+    return stlIterator(*this);
   }
 
   // return the position of an existing elt
@@ -346,11 +345,10 @@ public:
     pos.setAll(UINT_MAX);
   }
   inline bool isElement(ID_TYPE elt) const {
-    return (pos.get(elt) != UINT_MAX);
+    return (getPos(elt) != UINT_MAX);
   }
 
   inline unsigned int getPos(ID_TYPE elt) const {
-    assert(isElement(elt));
     return pos.get(elt);
   }
 

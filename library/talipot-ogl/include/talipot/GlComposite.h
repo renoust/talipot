@@ -94,9 +94,8 @@ public:
   void setStencil(int stencil) override {
     this->stencil = stencil;
 
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      (*it)->setStencil(stencil);
+    for (auto entity : _sortedElements) {
+      entity->setStencil(stencil);
     }
   }
 
@@ -110,7 +109,7 @@ public:
   /**
    * @brief translate the composite with children
    */
-  void translate(const Coord &mouvement) override;
+  void translate(const Coord &move) override;
 
   /**
    * @brief Function to export data in outString (in XML format)
@@ -129,18 +128,16 @@ public:
    */
   void acceptVisitor(GlSceneVisitor *visitor) override {
     // visitor->visit(this);
-    for (std::list<GlSimpleEntity *>::iterator it = _sortedElements.begin();
-         it != _sortedElements.end(); ++it) {
-      if ((*it)->isVisible()) {
+    for (auto entity : _sortedElements) {
+      if (entity->isVisible()) {
 
 #ifndef NDEBUG
-        GlComposite *composite = dynamic_cast<GlComposite *>(*it);
+        GlComposite *composite = dynamic_cast<GlComposite *>(entity);
 
-        if (!composite && !(*it)->getBoundingBox().isValid()) {
-          for (std::map<std::string, GlSimpleEntity *>::iterator itE = elements.begin();
-               itE != elements.end(); ++itE) {
-            if (itE->second == (*it)) {
-              tlp::warning() << "Invalid bounding box for entity: " << itE->first << std::endl;
+        if (!composite && !entity->getBoundingBox().isValid()) {
+          for (const auto &itE : elements) {
+            if (itE.second == entity) {
+              tlp::warning() << "Invalid bounding box for entity: " << itE.first << std::endl;
               assert(false);
             }
           }
@@ -148,7 +145,7 @@ public:
 
 #endif
 
-        (*it)->acceptVisitor(visitor);
+        entity->acceptVisitor(visitor);
       }
     }
   }

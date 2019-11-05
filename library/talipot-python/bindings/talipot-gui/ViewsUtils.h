@@ -44,7 +44,7 @@ class ViewsManager : public QObject, public tlp::Observable {
 public:
   ViewsManager();
 
-  std::vector<std::string> getViews();
+  std::list<std::string> getViews();
 
   std::vector<tlp::View *> getOpenedViews();
 

@@ -60,9 +60,7 @@ void ViewGraphPropertiesSelectionWidget::setWidgetParameters(
   if (!lastSelectedProperties.empty() && graph) {
     vector<string> stringList;
 
-    for (vector<string>::const_iterator it = lastSelectedProperties.begin();
-         it != lastSelectedProperties.end(); ++it) {
-      string prop(*it);
+    for (const auto &prop : lastSelectedProperties) {
 
       if (graph->existProperty(prop)) {
         stringList.push_back(prop);
@@ -176,11 +174,10 @@ bool ViewGraphPropertiesSelectionWidget::configurationChanged() {
   }
 
   bool sameSelectedProperties = true;
-  vector<string>::const_iterator itLast = lastSelectedProperties.begin();
+  auto itLast = lastSelectedProperties.begin();
 
-  for (vector<string>::const_iterator it = selectedProperties.begin();
-       it != selectedProperties.end(); ++it) {
-    if ((*it) != (*itLast)) {
+  for (const auto &prop : selectedProperties) {
+    if (prop != (*itLast)) {
       sameSelectedProperties = false;
       break;
     }

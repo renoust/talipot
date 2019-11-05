@@ -422,8 +422,8 @@ void GlAbstractPolygon::draw(float lod, Camera *) {
 void GlAbstractPolygon::translate(const Coord &vec) {
   boundingBox.translate(vec);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it) += vec;
+  for (auto &p : points) {
+    p += vec;
   }
 
   clearGenerated();
@@ -432,8 +432,8 @@ void GlAbstractPolygon::translate(const Coord &vec) {
 void GlAbstractPolygon::scale(const Size &factor) {
   boundingBox.scale(factor);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    (*it) *= factor;
+  for (auto &p : points) {
+    p *= factor;
   }
 
   clearGenerated();
@@ -470,8 +470,8 @@ void GlAbstractPolygon::setWithXML(const string &inString, unsigned int &current
   GlXMLTools::setWithXML(inString, currentPosition, "textureName", textureName);
   GlXMLTools::setWithXML(inString, currentPosition, "outlineSize", outlineSize);
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    boundingBox.expand(*it);
+  for (const auto &p : points) {
+    boundingBox.expand(p);
   }
 }
 //============================================================
@@ -518,8 +518,8 @@ void GlAbstractPolygon::clearGenerated() {
 void GlAbstractPolygon::recomputeBoundingBox() {
   boundingBox = BoundingBox();
 
-  for (vector<Coord>::iterator it = points.begin(); it != points.end(); ++it) {
-    boundingBox.expand(*it);
+  for (const auto &p : points) {
+    boundingBox.expand(p);
   }
 }
 }

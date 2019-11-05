@@ -30,13 +30,13 @@ DoubleStringsListRelationDialog::DoubleStringsListRelationDialog(
       lastNonInterpolateValues(secondValues) {
   _ui->setupUi(this);
 
-  for (vector<string>::const_iterator it = firstValues.begin(); it != firstValues.end(); ++it) {
-    _ui->firstListWidget->addItem((*it).c_str());
+  for (const auto &s : firstValues) {
+    _ui->firstListWidget->addItem(tlpStringToQString(s));
   }
 
-  for (vector<Color>::const_iterator it = secondValues.begin(); it != secondValues.end(); ++it) {
+  for (const auto &c : secondValues) {
     QListWidgetItem *item = new QListWidgetItem;
-    item->setBackground(QBrush(QColor((*it)[0], (*it)[1], (*it)[2], (*it)[3])));
+    item->setBackground(QColor(c[0], c[1], c[2], c[3]));
     _ui->secondListWidget->addItem(item);
   }
 
@@ -124,10 +124,9 @@ void DoubleStringsListRelationDialog::interpolateCheckBoxChange(int state) {
     // then replace the color columns with value in
     // vector lastNonInterpolateValues
     _ui->secondListWidget->clear();
-    for (vector<Color>::const_iterator it = lastNonInterpolateValues.begin();
-         it != lastNonInterpolateValues.end(); ++it) {
+    for (const auto &c : lastNonInterpolateValues) {
       QListWidgetItem *item = new QListWidgetItem;
-      item->setBackground(QBrush(QColor((*it)[0], (*it)[1], (*it)[2], (*it)[3])));
+      item->setBackground(QColor(c[0], c[1], c[2], c[3]));
       _ui->secondListWidget->addItem(item);
     }
   } else {
@@ -145,7 +144,7 @@ void DoubleStringsListRelationDialog::interpolateCheckBoxChange(int state) {
     for (float i = 0.; i < nbOfValues; ++i) {
       QListWidgetItem *item = new QListWidgetItem;
       Color ic = tempCS.getColorAtPos(i / (nbOfValues - 1.));
-      item->setBackground(QBrush(QColor(ic[0], ic[1], ic[2], ic[3])));
+      item->setBackground(QColor(ic[0], ic[1], ic[2], ic[3]));
       _ui->secondListWidget->addItem(item);
     }
   }

@@ -32,12 +32,12 @@ void PluginLoaderTxt::loaded(const Plugin *info, const std::list<Dependency> &de
 
   // output dependencies if any
   if (deps.size()) {
-    unsigned int i = deps.size();
+    unsigned int i = deps.size() - 1;
     std::cout << "depending on ";
-    list<Dependency>::const_iterator itD = deps.begin();
 
-    for (i--; itD != deps.end(); ++itD, --i)
-      std::cout << itD->pluginName << (i ? ", " : "");
+    for (const auto &d : deps) {
+      std::cout << d.pluginName << (--i ? ", " : "");
+    }
     std::cout << endl;
   }
 }

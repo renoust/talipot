@@ -475,10 +475,8 @@ bool EdgeBundling::run() {
       vector<node> toTreatByThreads;
       set<node> blockNodes;
       vector<node> toDelete;
-      auto it = orderedNodes.begin();
 
-      for (; it != orderedNodes.end(); ++it) {
-        node n = *it;
+      for (auto n : orderedNodes) {
 
         if ((blockNodes.find(n) == blockNodes.end() || optimizationLevel < 3) &&
             (vertexCoverGraph->deg(n) > 0 || optimizationLevel < 2)) {

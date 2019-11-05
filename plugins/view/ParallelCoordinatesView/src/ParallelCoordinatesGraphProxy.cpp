@@ -53,12 +53,11 @@ bool ParallelCoordinatesGraphProxy::selectedPropertiesisEmpty() const {
 
 vector<string> ParallelCoordinatesGraphProxy::getSelectedProperties() {
   vector<string> selectedPropertiesTmp;
-  vector<string>::iterator it;
 
   // check if one of the selected properties has not been deleted by an undo operation
-  for (it = selectedProperties.begin(); it != selectedProperties.end(); ++it) {
-    if (existProperty(*it)) {
-      selectedPropertiesTmp.push_back(*it);
+  for (const auto &p : selectedProperties) {
+    if (existProperty(p)) {
+      selectedPropertiesTmp.push_back(p);
     }
   }
 
@@ -71,14 +70,9 @@ void ParallelCoordinatesGraphProxy::setSelectedProperties(const vector<string> &
 }
 
 void ParallelCoordinatesGraphProxy::removePropertyFromSelection(const std::string &propertyName) {
-  vector<string> selectedPropertiesCopy(selectedProperties);
-  vector<string>::iterator it;
-  selectedProperties.clear();
-
-  for (it = selectedPropertiesCopy.begin(); it != selectedPropertiesCopy.end(); ++it) {
-    if (*it != propertyName) {
-      selectedProperties.push_back(*it);
-    }
+  auto it = find(selectedProperties.begin(), selectedProperties.end(), propertyName);
+  if (it != selectedProperties.end()) {
+    selectedProperties.erase(it);
   }
 }
 
@@ -175,10 +169,9 @@ void ParallelCoordinatesGraphProxy::unsetHighlightedElts() {
 
 void ParallelCoordinatesGraphProxy::resetHighlightedElts(const set<unsigned int> &highlightedData) {
   highlightedElts.clear();
-  set<unsigned int>::iterator it;
 
-  for (it = highlightedData.begin(); it != highlightedData.end(); ++it) {
-    addOrRemoveEltToHighlight(*it);
+  for (auto d : highlightedData) {
+    addOrRemoveEltToHighlight(d);
   }
 }
 
@@ -196,19 +189,15 @@ void ParallelCoordinatesGraphProxy::selectHighlightedElements() {
   selectionProp->setAllNodeValue(false);
   selectionProp->setAllEdgeValue(false);
 
-  set<unsigned int>::iterator it;
-
-  for (it = highlightedElts.begin(); it != highlightedElts.end(); ++it) {
-    setDataSelected(*it, true);
+  for (auto d : highlightedElts) {
+    setDataSelected(d, true);
   }
 }
 
 void ParallelCoordinatesGraphProxy::setSelectHighlightedElements(bool val) {
   // add/remove elements to/from selection
-  set<unsigned int>::iterator it;
-
-  for (it = highlightedElts.begin(); it != highlightedElts.end(); ++it) {
-    setDataSelected(*it, val);
+  for (auto d : highlightedElts) {
+    setDataSelected(d, val);
   }
 }
 

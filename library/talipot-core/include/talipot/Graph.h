@@ -614,9 +614,9 @@ public:
    * and node cannot be added this way to the root graph.
 
    * @warning Using this method on the root graph will display a warning on the console.
-   * @warning The graph does not take ownership of the Iterator.
+   * @warning The graph takes ownership of the Iterator.
    *
-   * @param nodes An iterator over nodes to add to this subgraph. The graph does not takes ownership
+   * @param nodes An iterator over nodes to add to this subgraph. The graph takes ownership
    of this iterator.
    */
   virtual void addNodes(Iterator<node> *nodes) = 0;
@@ -646,7 +646,7 @@ public:
   /**
    * @brief Deletes nodes in the graph.
    * These nodes are also removed in the subgraphs hierarchy of the current graph.
-   * @warning the graph does not take ownership of the Iterator.
+   * @warning the graph takes ownership of the Iterator.
    * @param it The nodes to delete.
    * @param deleteInAllGraphs Whether to delete in all its parent graphs or only in this graph. By
    * default only removes in the current graph.
@@ -719,8 +719,9 @@ public:
    * The added edges must be elements of the graph hierarchy,
    * thus they must be elements of the root graph.
    * @warning Using this method on the root graph will display a warning on the console.
-   * @warning The graph does not take ownership of the iterator.
-   * @param edges The edges to add on this subgraph.
+   * @warning The graph takes ownership of the iterator.
+   * @param edges An iterator over edges to add to this subgraph. The graph takes ownership
+   of this iterator.
    */
   virtual void addEdges(Iterator<edge> *edges) = 0;
 
@@ -747,7 +748,7 @@ public:
   /**
    * @brief Deletes edges in the graph. These edges are also removed in the subgraphs hierarchy.
    * The ordering of remaining edges is preserved.
-   * @warning The graph does not take ownership of the Iterator.
+   * @warning The graph takes ownership of the Iterator.
    * @param itE
    * @param deleteInAllGraphs  Whether to delete in all its parent graphs or only in this graph. By
    * default only removes in the current graph.

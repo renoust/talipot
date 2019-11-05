@@ -115,8 +115,8 @@ void ParallelCoordinatesDrawing::createAxis(GlMainWidget *glWidget, GlProgressBa
     }
   }
 
-  for (auto it2 = parallelAxis.begin(); it2 != parallelAxis.end(); ++it2) {
-    (it2->second)->setHidden(true);
+  for (const auto &it2 : parallelAxis) {
+    it2.second->setHidden(true);
   }
 
   nbAxis = graphProxy->getNumberOfSelectedProperties();
@@ -232,10 +232,10 @@ void ParallelCoordinatesDrawing::createAxis(GlMainWidget *glWidget, GlProgressBa
 }
 
 void ParallelCoordinatesDrawing::destroyAxisIfNeeded() {
-  for (auto it = parallelAxis.begin(); it != parallelAxis.end(); ++it) {
-    if (!graphProxy->existProperty(it->first)) {
-      delete it->second;
-      parallelAxis.erase(it->first);
+  for (const auto &it : parallelAxis) {
+    if (!graphProxy->existProperty(it.first)) {
+      delete it.second;
+      parallelAxis.erase(it.first);
     }
   }
 }
@@ -443,14 +443,15 @@ void ParallelCoordinatesDrawing::swapAxis(ParallelAxis *axis1, ParallelAxis *axi
   int pi = 0, pj = 0;
   int pos = 0;
 
-  for (auto it = axisOrder.begin(); it != axisOrder.end(); ++it, ++pos) {
-    if (*it == axis1->getAxisName()) {
+  for (const auto &axisName : axisOrder) {
+    if (axisName == axis1->getAxisName()) {
       pi = pos;
     }
 
-    if (*it == axis2->getAxisName()) {
+    if (axisName == axis2->getAxisName()) {
       pj = pos;
     }
+    ++pos;
   }
 
   string tmp(axisOrder[pi]);
@@ -648,15 +649,14 @@ void ParallelCoordinatesDrawing::updateWithAxisSlidersRange(
 
   if (!dataSubset.empty()) {
     graphProxy->unsetHighlightedElts();
-    set<unsigned int>::iterator it;
 
-    for (it = dataSubset.begin(); it != dataSubset.end(); ++it) {
-      graphProxy->addOrRemoveEltToHighlight(*it);
+    for (auto d : dataSubset) {
+      graphProxy->addOrRemoveEltToHighlight(d);
     }
 
-    for (auto it2 = parallelAxis.begin(); it2 != parallelAxis.end(); ++it2) {
-      if ((it2->second) != axis) {
-        (it2->second)->updateSlidersWithDataSubset(dataSubset);
+    for (const auto &it2 : parallelAxis) {
+      if (it2.second != axis) {
+        it2.second->updateSlidersWithDataSubset(dataSubset);
       }
     }
 
@@ -667,8 +667,8 @@ void ParallelCoordinatesDrawing::updateWithAxisSlidersRange(
 void ParallelCoordinatesDrawing::resetAxisSlidersPosition() {
   vector<ParallelAxis *> axis = getAllAxis();
 
-  for (auto it = axis.begin(); it != axis.end(); ++it) {
-    (*it)->resetSlidersPosition();
+  for (auto ax : axis) {
+    ax->resetSlidersPosition();
   }
 }
 

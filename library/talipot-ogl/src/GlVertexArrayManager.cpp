@@ -522,10 +522,9 @@ void GlVertexArrayManager::endRendering() {
       }
     }
 
-    for (map<float, vector<GLuint>>::const_iterator it = quadsOutlineRenderingIndicesArray.begin();
-         it != quadsOutlineRenderingIndicesArray.end(); ++it) {
-      glLineWidth(it->first);
-      glDrawElements(GL_LINES, it->second.size(), GL_UNSIGNED_INT, VECTOR_DATA(it->second));
+    for (const auto &it : quadsOutlineRenderingIndicesArray) {
+      glLineWidth(it.first);
+      glDrawElements(GL_LINES, it.second.size(), GL_UNSIGNED_INT, VECTOR_DATA(it.second));
     }
 
     if (canUseVBO && quadsColorsUploaded) {
@@ -622,11 +621,9 @@ void GlVertexArrayManager::endRendering() {
     glDrawElements(GL_TRIANGLES, quadsSelectedRenderingIndicesArray.size(), GL_UNSIGNED_INT,
                    VECTOR_DATA(quadsSelectedRenderingIndicesArray));
 
-    for (map<float, vector<GLuint>>::iterator it =
-             quadsSelectedOutlineRenderingIndicesArray.begin();
-         it != quadsSelectedOutlineRenderingIndicesArray.end(); ++it) {
-      glLineWidth(it->first);
-      glDrawElements(GL_LINES, it->second.size(), GL_UNSIGNED_INT, VECTOR_DATA(it->second));
+    for (const auto &it : quadsSelectedOutlineRenderingIndicesArray) {
+      glLineWidth(it.first);
+      glDrawElements(GL_LINES, it.second.size(), GL_UNSIGNED_INT, VECTOR_DATA(it.second));
     }
 
     if (canUseVBO) {

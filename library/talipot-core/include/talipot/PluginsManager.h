@@ -241,13 +241,13 @@ private:
   template <typename PluginType>
   std::list<std::string> availablePluginsImpl() {
     std::list<std::string> keys;
-    for (auto it = _plugins.begin(); it != _plugins.end(); ++it) {
-      PluginType *plugin = dynamic_cast<PluginType *>(it->second.info);
+    for (const auto &it : _plugins) {
+      PluginType *plugin = dynamic_cast<PluginType *>(it.second.info);
 
       if (plugin != nullptr &&
           // deprecated names are not listed
-          it->first == it->second.info->name()) {
-        keys.push_back(it->first);
+          it.first == it.second.info->name()) {
+        keys.push_back(it.first);
       }
     }
 

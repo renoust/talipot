@@ -681,8 +681,8 @@ bool ExportSvg::createEdge(const tlp::EdgeShape::EdgeShapes &type, const vector<
     case EdgeShape::Polyline: {
       points += " L";
 
-      for (vector<Coord>::const_iterator it = bends.begin(); it != bends.end(); ++it) {
-        points += " " + QString::number(it->getX()) + "," + QString::number(it->getY());
+      for (const auto &b : bends) {
+        points += " " + QString::number(b.getX()) + "," + QString::number(b.getY());
       }
 
       break;
@@ -697,9 +697,8 @@ bool ExportSvg::createEdge(const tlp::EdgeShape::EdgeShapes &type, const vector<
         computeBezierPoints(controlPoints, curvePoints);
         points += " S";
 
-        for (vector<Coord>::const_iterator it = curvePoints.begin(); it != curvePoints.end();
-             ++it) {
-          points += " " + QString::number(it->getX()) + "," + QString::number(it->getY());
+        for (const auto &p : curvePoints) {
+          points += " " + QString::number(p.getX()) + "," + QString::number(p.getY());
         }
       }
 
@@ -710,8 +709,8 @@ bool ExportSvg::createEdge(const tlp::EdgeShape::EdgeShapes &type, const vector<
       computeCatmullRomPoints(controlPoints, curvePoints);
       points += " S";
 
-      for (vector<Coord>::const_iterator it = curvePoints.begin(); it != curvePoints.end(); ++it) {
-        points += " " + QString::number(it->getX()) + "," + QString::number(it->getY());
+      for (const auto &p : curvePoints) {
+        points += " " + QString::number(p.getX()) + "," + QString::number(p.getY());
       }
 
       break;
@@ -721,8 +720,8 @@ bool ExportSvg::createEdge(const tlp::EdgeShape::EdgeShapes &type, const vector<
       computeOpenUniformBsplinePoints(controlPoints, curvePoints);
       points += " S";
 
-      for (vector<Coord>::const_iterator it = curvePoints.begin(); it != curvePoints.end(); ++it) {
-        points += " " + QString::number(it->getX()) + "," + QString::number(it->getY());
+      for (const auto &p : curvePoints) {
+        points += " " + QString::number(p.getX()) + "," + QString::number(p.getY());
       }
 
       break;

@@ -47,8 +47,8 @@ public:
     boundingBox.expand(start);
     boundingBox.expand(end);
 
-    for (std::vector<Coord>::iterator it = bends.begin(); it != bends.end(); ++it) {
-      boundingBox.expand(*it);
+    for (const auto &c : bends) {
+      boundingBox.expand(c);
     }
   }
 

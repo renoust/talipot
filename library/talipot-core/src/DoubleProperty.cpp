@@ -64,8 +64,7 @@ static void computeEdgeAvgValue(
   double value = 0;
   unsigned int nbEdges = 0;
 
-  while (itE->hasNext()) {
-    edge e = itE->next();
+  for (auto e : itE) {
     ++nbEdges;
     value += metric->getEdgeValue(e);
   }
@@ -101,8 +100,7 @@ static void computeEdgeSumValue(
     Iterator<edge> *itE) {
   double value = 0;
 
-  while (itE->hasNext()) {
-    edge e = itE->next();
+  for (auto e : itE) {
     value += metric->getEdgeValue(e);
   }
 
@@ -139,8 +137,8 @@ static void computeEdgeMaxValue(
     Iterator<edge> *itE) {
   double value = -DBL_MAX;
 
-  while (itE->hasNext()) {
-    const double &eVal = metric->getEdgeValue(itE->next());
+  for (auto e : itE) {
+    const double &eVal = metric->getEdgeValue(e);
 
     if (eVal > value)
       value = eVal;
@@ -179,8 +177,8 @@ static void computeEdgeMinValue(
     Iterator<edge> *itE) {
   double value = DBL_MAX;
 
-  while (itE->hasNext()) {
-    const double &eVal = metric->getEdgeValue(itE->next());
+  for (auto e : itE) {
+    const double &eVal = metric->getEdgeValue(e);
 
     if (eVal < value)
       value = eVal;

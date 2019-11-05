@@ -82,12 +82,12 @@ const set<unsigned int> &NominalParallelAxis::getDataInSlidersRange() {
   map<string, unsigned int> labelsInRange;
   vector<string>::iterator it;
 
-  for (it = labelsOrder.begin(); it != labelsOrder.end(); ++it) {
-    Coord labelCoord = glNominativeAxis->getAxisPointCoordForValue(*it);
+  for (const auto &l : labelsOrder) {
+    Coord labelCoord = glNominativeAxis->getAxisPointCoordForValue(l);
 
     if (labelCoord.getY() >= bottomSliderCoord.getY() &&
         labelCoord.getY() <= topSliderCoord.getY()) {
-      labelsInRange[*it] = 1;
+      labelsInRange[l] = 1;
     }
   }
 
@@ -106,12 +106,11 @@ const set<unsigned int> &NominalParallelAxis::getDataInSlidersRange() {
 void NominalParallelAxis::updateSlidersWithDataSubset(const set<unsigned int> &dataSubset) {
   float rotAngleBak = rotationAngle;
   rotationAngle = 0.0f;
-  set<unsigned int>::iterator it;
   Coord max(getBaseCoord());
   Coord min(getBaseCoord() + Coord(0.0f, getAxisHeight()));
 
-  for (it = dataSubset.begin(); it != dataSubset.end(); ++it) {
-    Coord labelCoord(getPointCoordOnAxisForData(*it));
+  for (auto d : dataSubset) {
+    Coord labelCoord(getPointCoordOnAxisForData(d));
 
     if (labelCoord.getY() < min.getY()) {
       min = labelCoord;

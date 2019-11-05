@@ -57,7 +57,7 @@ Dijkstra::Dijkstra(const Graph *const graph, node src, const EdgeStaticProperty<
 
   while (!dijkstraTable.empty()) {
     // select the first element in the list the one with min value
-    set<DijkstraElement *, LessDijkstraElement>::iterator it = dijkstraTable.begin();
+    auto it = dijkstraTable.begin();
     DijkstraElement &u = *(*it);
     dijkstraTable.erase(it);
     if (queueNodes)

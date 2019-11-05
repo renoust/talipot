@@ -56,9 +56,8 @@ void FontIconDialog::updateIconList() {
 
   std::vector<std::string> iconNames = FontAwesome::getSupportedIcons();
 
-  for (std::vector<std::string>::const_iterator it = iconNames.begin(); it != iconNames.end();
-       ++it) {
-    QString iconName = tlpStringToQString(*it);
+  for (const auto &ic : iconNames) {
+    QString iconName = tlpStringToQString(ic);
 
     if (regexp.indexIn(iconName) != -1) {
       _ui->iconListWidget->addItem(new QListWidgetItem(FontIconManager::icon(iconName), iconName));
@@ -67,9 +66,8 @@ void FontIconDialog::updateIconList() {
 
   iconNames = MaterialDesignIcons::getSupportedIcons();
 
-  for (std::vector<std::string>::const_iterator it = iconNames.begin(); it != iconNames.end();
-       ++it) {
-    QString iconName = tlpStringToQString(*it);
+  for (const auto &ic : iconNames) {
+    QString iconName = tlpStringToQString(ic);
 
     if (regexp.indexIn(iconName) != -1) {
       _ui->iconListWidget->addItem(new QListWidgetItem(FontIconManager::icon(iconName), iconName));

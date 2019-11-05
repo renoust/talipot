@@ -95,12 +95,10 @@ public:
   }
 
   inline tlp::node getNode(tlp::node n) {
-    assert(graph->isElement(n));
     return tlp::node(graph->nodePos(n));
   }
 
   inline tlp::edge getEdge(tlp::edge e) {
-    assert(graph->isElement(e));
     return tlp::edge(graph->edgePos(e));
   }
 

@@ -386,12 +386,10 @@ bool MouseSelectionEditor::compute(GlMainWidget *glMainWidget) {
     }
 
     bool layerInScene = false;
-    const vector<pair<std::string, GlLayer *>> &layersList =
-        glMainWidget->getScene()->getLayersList();
+    const auto &layersList = glMainWidget->getScene()->getLayersList();
 
-    for (vector<pair<std::string, GlLayer *>>::const_iterator it = layersList.begin();
-         it != layersList.end(); ++it) {
-      if ((*it).second == layer) {
+    for (const auto &it : layersList) {
+      if (it.second == layer) {
         layerInScene = true;
         break;
       }
@@ -490,11 +488,8 @@ void MouseSelectionEditor::mMouseTranslate(double newX, double newY, GlMainWidge
   v1 = glMainWidget->getScene()->getGraphCamera().viewportTo3DWorld(
       glMainWidget->screenToViewport(v1));
   v1 -= v0;
-  Iterator<node> *itN = _selection->getNodesEqualTo(true, _graph);
-  Iterator<edge> *itE = _selection->getEdgesEqualTo(true, _graph);
-  _layout->translate(v1, itN, itE);
-  delete itN;
-  delete itE;
+  _layout->translate(v1, _selection->getNodesEqualTo(true, _graph),
+                     _selection->getEdgesEqualTo(true, _graph));
   editPosition[0] = newX;
   editPosition[1] = newY;
   Observable::unholdObservers();
@@ -527,36 +522,24 @@ void MouseSelectionEditor::mMouseStretchAxis(double newX, double newY, GlMainWid
     Coord center(editLayoutCenter);
     center *= -1.;
     // move the center to the origin in order to be able to scale
-    Iterator<node> *itN = _selection->getNodesEqualTo(true, _graph);
-    Iterator<edge> *itE = _selection->getEdgesEqualTo(true, _graph);
-    _layout->translate(center, itN, itE);
-    delete itN;
-    delete itE;
+    _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
     // scale the drawing
-    itN = _selection->getNodesEqualTo(true, _graph);
-    itE = _selection->getEdgesEqualTo(true, _graph);
-    _layout->scale(stretch, itN, itE);
-    delete itN;
-    delete itE;
+    _layout->scale(stretch, _selection->getNodesEqualTo(true, _graph),
+                   _selection->getEdgesEqualTo(true, _graph));
     // replace the center of the graph at its originale position
     center *= -1.;
-    itN = _selection->getNodesEqualTo(true, _graph);
-    itE = _selection->getEdgesEqualTo(true, _graph);
-    _layout->translate(center, itN, itE);
-    delete itN;
-    delete itE;
+    _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
   }
 
   // stretch size
   if (mode == COORD_AND_SIZE || mode == SIZE) {
-    Iterator<node> *itN = _selection->getNodesEqualTo(true, _graph);
-    Iterator<edge> *itE = _selection->getEdgesEqualTo(true, _graph);
     stretch[0] = abs(stretch[0]);
     stretch[1] = abs(stretch[1]);
     stretch[2] = abs(stretch[1]);
-    _sizes->scale(stretch, itN, itE);
-    delete itN;
-    delete itE;
+    _sizes->scale(stretch, _selection->getNodesEqualTo(true, _graph),
+                  _selection->getEdgesEqualTo(true, _graph));
   }
 
   Observable::unholdObservers();
@@ -589,22 +572,13 @@ void MouseSelectionEditor::mMouseRotate(double newX, double newY, GlMainWidget *
     if (mode == COORD_AND_SIZE || mode == COORD) {
       Coord center(editLayoutCenter);
       center *= -1.;
-      Iterator<node> *itN = _selection->getNodesEqualTo(true, _graph);
-      Iterator<edge> *itE = _selection->getEdgesEqualTo(true, _graph);
-      _layout->translate(center, itN, itE);
-      delete itN;
-      delete itE;
-      itN = _selection->getNodesEqualTo(true, _graph);
-      itE = _selection->getEdgesEqualTo(true, _graph);
-      _layout->rotateZ(-degAngle, itN, itE);
-      delete itN;
-      delete itE;
+      _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                         _selection->getEdgesEqualTo(true, _graph));
+      _layout->rotateZ(-degAngle, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
       center *= -1.;
-      itN = _selection->getNodesEqualTo(true, _graph);
-      itE = _selection->getEdgesEqualTo(true, _graph);
-      _layout->translate(center, itN, itE);
-      delete itN;
-      delete itE;
+      _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                         _selection->getEdgesEqualTo(true, _graph));
     }
 
     if (mode == COORD_AND_SIZE || mode == SIZE) {
@@ -647,27 +621,19 @@ void MouseSelectionEditor::mMouseRotate(double newX, double newY, GlMainWidget *
 
     Coord center(editLayoutCenter);
     center *= -1.;
-    Iterator<node> *itN = _selection->getNodesEqualTo(true, _graph);
-    Iterator<edge> *itE = _selection->getEdgesEqualTo(true, _graph);
-    _layout->translate(center, itN, itE);
-    delete itN;
-    delete itE;
-    itN = _selection->getNodesEqualTo(true, _graph);
-    itE = _selection->getEdgesEqualTo(true, _graph);
+    _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
 
     if (yAngle > xAngle)
-      _layout->rotateY(yAngle, itN, itE);
+      _layout->rotateY(yAngle, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
     else
-      _layout->rotateX(xAngle, itN, itE);
+      _layout->rotateX(xAngle, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
 
-    delete itN;
-    delete itE;
     center *= -1.;
-    itN = _selection->getNodesEqualTo(true, _graph);
-    itE = _selection->getEdgesEqualTo(true, _graph);
-    _layout->translate(center, itN, itE);
-    delete itN;
-    delete itE;
+    _layout->translate(center, _selection->getNodesEqualTo(true, _graph),
+                       _selection->getEdgesEqualTo(true, _graph));
 
     Observable::unholdObservers();
   }

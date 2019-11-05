@@ -794,18 +794,15 @@ the graph ancestors to maintain the subgraph relation between graphs.
 %End
 
 %MethodCode
-  tlp::StableIterator<tlp::node> sItNodes(a0);
-  tlp::node n;
-  while (sItNodes.hasNext()) {
-    n = sItNodes.next();
+  std::vector<tlp::node> nodes = tlp::iteratorVector(a0);
+  for (auto n : nodes) {
     if (!sipCpp->getRoot()->isElement(n)) {
       sipIsErr = throwInvalidNodeException(sipCpp->getRoot(), n);
       break;
     }
   }
   if (sipIsErr == 0) {
-    sItNodes.restart();
-    sipCpp->addNodes(&sItNodes);
+    sipCpp->addNodes(nodes);
   }
 %End
 
@@ -883,18 +880,15 @@ the subgraph relation between graphs.
 %End
 
 %MethodCode
-  tlp::StableIterator<tlp::node> sItNodes(a0);
-  tlp::node n;
-  while (sItNodes.hasNext()) {
-    n = sItNodes.next();
+  std::vector<tlp::node> nodes = tlp::iteratorVector(a0);
+  for (auto n : nodes) {
     if (!sipCpp->isElement(n)) {
       sipIsErr = throwInvalidNodeException(sipCpp, n);
       break;
     }
   }
   if (sipIsErr == 0) {
-    sItNodes.restart();
-    sipCpp->delNodes(&sItNodes, a1);
+    sipCpp->delNodes(nodes, a1);
   }
 %End
 
@@ -1061,10 +1055,8 @@ the graph ancestors to maintain the subgraph relation between graphs.
 %End
 
 %MethodCode
-  tlp::StableIterator<tlp::edge> sItEdges(a0);
-  tlp::edge e;
-  while (sItEdges.hasNext()) {
-    e = sItEdges.next();
+  std::vector<tlp::edge> edges = tlp::iteratorVector(a0);
+  for (auto e : edges) {
     if (!sipCpp->getRoot()->isElement(e)) {
       sipIsErr = throwInvalidEdgeException(sipCpp->getRoot(), e);
       break;
@@ -1088,8 +1080,7 @@ the graph ancestors to maintain the subgraph relation between graphs.
     }
   }
   if (sipIsErr == 0) {
-    sItEdges.restart();
-    sipCpp->addEdges(&sItEdges);
+    sipCpp->addEdges(edges);
   }
 %End
 //===========================================================================================
@@ -1184,18 +1175,15 @@ The ordering of the remaining edges is preserved.
 %End
 
 %MethodCode
-  tlp::StableIterator<tlp::edge> sItEdges(a0);
-  tlp::edge e;
-  while (sItEdges.hasNext()) {
-    e = sItEdges.next();
+  std::vector<tlp::edge> edges = tlp::iteratorVector(a0);
+  for (auto e : edges) {
     if (!sipCpp->isElement(e)) {
       sipIsErr = throwInvalidEdgeException(sipCpp, e);
       break;
     }
   }
   if (sipIsErr == 0) {
-    sItEdges.restart();
-    sipCpp->delEdges(&sItEdges, a1);
+    sipCpp->delEdges(edges, a1);
   }
 %End
 
@@ -3640,10 +3628,9 @@ edges from the metanode to the other nodes.
 %End
 
 %MethodCode
- std::vector<tlp::node>::const_iterator it = a0->begin();
- for (; it != a0->end() ; ++it) {
-   if (!sipCpp->isElement(*it)) {
-     sipIsErr = throwInvalidNodeException(sipCpp, *it);
+ for (auto n : *a0) {
+   if (!sipCpp->isElement(n)) {
+     sipIsErr = throwInvalidNodeException(sipCpp, n);
      break;
    }
  }

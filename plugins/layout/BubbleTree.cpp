@@ -128,7 +128,7 @@ BubbleTree::computeRelativePosition(tlp::node n,
       index[i] = i;
 
     sort(index.begin(), index.end(), greaterRadius(realCircleRadius));
-    std::vector<unsigned>::const_iterator i = index.begin();
+    auto i = index.begin();
 
     for (; i != index.end(); ++i) {
       double radius = realCircleRadius[*i];

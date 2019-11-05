@@ -183,15 +183,13 @@ void InputSample::clearGraphObs() {
 }
 
 void InputSample::initPropertiesObs() {
-  for (vector<NumericProperty *>::iterator it = propertiesList.begin(); it != propertiesList.end();
-       ++it) {
-    (*it)->addObserver(this);
+  for (auto prop : propertiesList) {
+    prop->addObserver(this);
   }
 }
 void InputSample::clearPropertiesObs() {
-  for (vector<NumericProperty *>::iterator it = propertiesList.begin(); it != propertiesList.end();
-       ++it) {
-    (*it)->removeObserver(this);
+  for (auto prop : propertiesList) {
+    prop->removeObserver(this);
   }
 }
 
@@ -295,7 +293,7 @@ tlp::Iterator<tlp::node> *InputSample::getRandomNodeOrder() {
     randomVector = rootGraph->nodes();
     random_shuffle(randomVector.begin(), randomVector.end());
 
-    return new StlIterator<node, vector<node>::iterator>(randomVector.begin(), randomVector.end());
+    return stlIterator(randomVector);
   } else
     return nullptr;
 }

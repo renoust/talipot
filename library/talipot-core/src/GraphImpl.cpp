@@ -48,11 +48,9 @@ GraphImpl::~GraphImpl() {
   // delete recorders
   if (!recorders.empty()) {
     recorders.front()->stopRecording(this);
-    std::list<GraphUpdatesRecorder *>::iterator it = recorders.begin();
 
-    while (it != recorders.end()) {
-      delete (*it);
-      ++it;
+    for (auto r : recorders) {
+      delete r;
     }
 
     recorders.clear();
@@ -356,15 +354,12 @@ bool GraphImpl::canUnpop() {
 }
 //----------------------------------------------------------------
 void GraphImpl::delPreviousRecorders() {
-  std::list<GraphUpdatesRecorder *>::reverse_iterator it = previousRecorders.rbegin();
-
   // we delete previous recorders in reverse order
   // because they are pushed in front of previousRecorders
   // when they are popped from recorders,
   // so the lasts created are back in previousRecorders
-  while (it != previousRecorders.rend()) {
-    delete (*it);
-    ++it;
+  for (auto pr : reversed(previousRecorders)) {
+    delete pr;
   }
 
   previousRecorders.clear();

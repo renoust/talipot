@@ -267,13 +267,13 @@ void SquarifiedTreeMap::squarify(const std::vector<tlp::node> &toTreat, const tl
   vector<node> unTreated;
   double unTreatedSurface = 0;
 
-  vector<node>::const_iterator it;
   double surface = 0;
 
-  for (it = toTreat.begin(); it != toTreat.end(); ++it)
-    surface += nodesSize.get(it->id);
+  for (auto n : toTreat) {
+    surface += nodesSize.get(n.id);
+  }
 
-  it = toTreat.begin();
+  auto it = toTreat.begin();
   double length = std::max(rectArea.width(), rectArea.height());
   double width = std::min(rectArea.width(), rectArea.height());
   double ratio = evaluateRow(rowNodes, *it, width, length, surface);

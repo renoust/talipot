@@ -56,12 +56,10 @@ tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::computeMinMaxNode(const Grap
   if (static_cast<LayoutProperty *>(this)->nbBendedEdges > 0) {
     for (auto ite : sg->edges()) {
       const LineType::RealType &value = this->getEdgeValue(ite);
-      LineType::RealType::const_iterator itCoord;
 
-      for (itCoord = value.begin(); itCoord != value.end(); ++itCoord) {
-        const Coord &tmpCoord = *itCoord;
-        maxV(maxT, tmpCoord);
-        minV(minT, tmpCoord);
+      for (const auto &coord : value) {
+        maxV(maxT, coord);
+        minV(minT, coord);
       }
     }
   }
@@ -86,8 +84,6 @@ tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::computeMinMaxNode(const Grap
 template <>
 void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
     tlp::edge e, tlp::LineType::RealType newValue) {
-  std::unordered_map<unsigned int, std::pair<tlp::Coord, tlp::Coord>>::const_iterator it =
-      minMaxNode.begin();
 
   const std::vector<Coord> &oldV = this->getEdgeValue(e);
 
@@ -97,11 +93,11 @@ void tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::updateEdgeValue(
   static_cast<LayoutProperty *>(this)->nbBendedEdges +=
       (newValue.empty() ? 0 : 1) - (oldV.empty() ? 0 : 1);
 
-  if (it != minMaxNode.end()) {
+  if (!minMaxNode.empty()) {
     // loop on subgraph min/max
-    for (; it != minMaxNode.end(); ++it) {
-      const Coord &minV = it->second.first;
-      const Coord &maxV = it->second.second;
+    for (const auto &it : minMaxNode) {
+      const Coord &minV = it.second.first;
+      const Coord &maxV = it.second.second;
       bool reset = false;
 
       // check if min has to be updated
@@ -259,27 +255,23 @@ void LayoutProperty::rotate(const double &alpha, int rot, Iterator<node> *itN,
                             Iterator<edge> *itE) {
   Observable::holdObservers();
 
-  while (itN->hasNext()) {
-    node itn = itN->next();
-    Coord tmpCoord(getNodeValue(itn));
-    rotateVector(tmpCoord, alpha, rot);
-    setNodeValue(itn, tmpCoord);
+  if (itN) {
+    for (auto itn : itN) {
+      Coord tmpCoord(getNodeValue(itn));
+      rotateVector(tmpCoord, alpha, rot);
+      setNodeValue(itn, tmpCoord);
+    }
   }
 
-  while (itE->hasNext()) {
-    edge ite = itE->next();
-
-    if (!getEdgeValue(ite).empty()) {
-      LineType::RealType tmp = getEdgeValue(ite);
-      LineType::RealType::iterator itCoord;
-      itCoord = tmp.begin();
-
-      while (itCoord != tmp.end()) {
-        rotateVector(*itCoord, alpha, rot);
-        ++itCoord;
+  if (itE) {
+    for (auto ite : itE) {
+      auto vc = getEdgeValue(ite);
+      if (!vc.empty()) {
+        for (auto &c : vc) {
+          rotateVector(c, alpha, rot);
+        }
+        setEdgeValue(ite, vc);
       }
-
-      setEdgeValue(ite, tmp);
     }
   }
 
@@ -307,11 +299,7 @@ void LayoutProperty::rotateX(const double &alpha, const Graph *sg) {
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  rotateX(alpha, itN, itE);
-  delete itN;
-  delete itE;
+  rotateX(alpha, sg->getNodes(), sg->getEdges());
 }
 //=================================================================================
 void LayoutProperty::rotateY(const double &alpha, const Graph *sg) {
@@ -323,11 +311,7 @@ void LayoutProperty::rotateY(const double &alpha, const Graph *sg) {
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  rotateY(alpha, itN, itE);
-  delete itN;
-  delete itE;
+  rotateY(alpha, sg->getNodes(), sg->getEdges());
 }
 //=================================================================================
 void LayoutProperty::rotateZ(const double &alpha, const Graph *sg) {
@@ -339,37 +323,26 @@ void LayoutProperty::rotateZ(const double &alpha, const Graph *sg) {
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  rotateZ(alpha, itN, itE);
-  delete itN;
-  delete itE;
+  rotateZ(alpha, sg->getNodes(), sg->getEdges());
 }
 //=================================================================================
 void LayoutProperty::scale(const tlp::Vec3f &v, Iterator<node> *itN, Iterator<edge> *itE) {
   Observable::holdObservers();
 
-  while (itN->hasNext()) {
-    node itn = itN->next();
+  for (auto itn : itN) {
     Coord tmpCoord(getNodeValue(itn));
     tmpCoord *= v;
     setNodeValue(itn, tmpCoord);
   }
 
-  while (itE->hasNext()) {
-    edge ite = itE->next();
-
-    if (!getEdgeValue(ite).empty()) {
-      LineType::RealType tmp = getEdgeValue(ite);
-      LineType::RealType::iterator itCoord;
-      itCoord = tmp.begin();
-
-      while (itCoord != tmp.end()) {
-        *itCoord *= v;
-        ++itCoord;
+  for (auto ite : itE) {
+    auto vc = getEdgeValue(ite);
+    if (!vc.empty()) {
+      for (auto &c : vc) {
+        c *= v;
       }
 
-      setEdgeValue(ite, tmp);
+      setEdgeValue(ite, vc);
     }
   }
 
@@ -385,11 +358,7 @@ void LayoutProperty::scale(const tlp::Vec3f &v, const Graph *sg) {
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  scale(v, itN, itE);
-  delete itN;
-  delete itE;
+  scale(v, sg->getNodes(), sg->getEdges());
 }
 //=================================================================================
 void LayoutProperty::translate(const tlp::Vec3f &v, Iterator<node> *itN, Iterator<edge> *itE) {
@@ -404,31 +373,25 @@ void LayoutProperty::translate(const tlp::Vec3f &v, Iterator<node> *itN, Iterato
   // invalidate the previously existing min/max computation
   resetBoundingBox();
 
-  if (itN != nullptr)
-    while (itN->hasNext()) {
-      node itn = itN->next();
+  if (itN != nullptr) {
+    for (auto itn : itN) {
       Coord tmpCoord(getNodeValue(itn));
       tmpCoord += v;
       // minimize computation time
       LayoutMinMaxProperty::setNodeValue(itn, tmpCoord);
     }
+  }
 
   if (itE != nullptr && (nbBendedEdges > 0))
-    while (itE->hasNext()) {
-      edge ite = itE->next();
-
-      if (!getEdgeValue(ite).empty()) {
-        LineType::RealType tmp = getEdgeValue(ite);
-        LineType::RealType::iterator itCoord;
-        itCoord = tmp.begin();
-
-        while (itCoord != tmp.end()) {
-          *itCoord += v;
-          ++itCoord;
+    for (auto ite : itE) {
+      auto vc = getEdgeValue(ite);
+      if (!vc.empty()) {
+        for (auto &c : vc) {
+          c += v;
         }
 
         // minimize computation time
-        LayoutMinMaxProperty::setEdgeValue(ite, tmp);
+        LayoutMinMaxProperty::setEdgeValue(ite, vc);
       }
     }
 
@@ -444,11 +407,7 @@ void LayoutProperty::translate(const tlp::Vec3f &v, const Graph *sg) {
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  translate(v, itN, itE);
-  delete itN;
-  delete itE;
+  translate(v, sg->getNodes(), sg->getEdges());
 }
 //=================================================================================
 void LayoutProperty::center(const Graph *sg) {
@@ -663,9 +622,8 @@ void LayoutProperty::computeEmbedding(const node n, Graph *sg) {
   }
 
   const Coord &center = getNodeValue(n);
-  list<pCE>::iterator it;
 
-  for (it = adjCoord.begin(); it != adjCoord.end();) {
+  for (auto it = adjCoord.begin(); it != adjCoord.end();) {
     it->first -= center;
     float norm = it->first.norm();
 
@@ -679,8 +637,8 @@ void LayoutProperty::computeEmbedding(const node n, Graph *sg) {
   adjCoord.sort(AngularOrder());
   vector<edge> tmpOrder;
 
-  for (it = adjCoord.begin(); it != adjCoord.end(); ++it) {
-    tmpOrder.push_back(it->second);
+  for (const auto &it : adjCoord) {
+    tmpOrder.push_back(it.second);
   }
 
   sg->setEdgeOrder(n, tmpOrder);
@@ -721,9 +679,8 @@ vector<double> LayoutProperty::angularResolutions(const node n, const Graph *sg)
 
   // Compute normalized vectors associated to incident edges.
   const Coord &center = getNodeValue(n);
-  list<Coord>::iterator it;
 
-  for (it = adjCoord.begin(); it != adjCoord.end();) {
+  for (auto it = adjCoord.begin(); it != adjCoord.end();) {
     (*it) -= center;
     float norm = (*it).norm();
 
@@ -738,7 +695,7 @@ vector<double> LayoutProperty::angularResolutions(const node n, const Graph *sg)
   // Correctly.
   adjCoord.sort(AngularOrder());
   // Compute the angles
-  it = adjCoord.begin();
+  auto it = adjCoord.begin();
   Coord first = (*it);
   Coord current = first;
   ++it;
@@ -790,10 +747,9 @@ double LayoutProperty::averageAngularResolution(const node n, const Graph *sg) c
     return 0.;
 
   double sum = 0.;
-  vector<double>::const_iterator it = tmp.begin();
 
-  for (; it != tmp.end(); ++it)
-    sum += *it;
+  for (auto d : tmp)
+    sum += d;
 
   return sum / double(tmp.size());
 }
