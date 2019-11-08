@@ -7,7 +7,7 @@
 #  - a "modern" Talipot build using:
 #     * recent compiler (GCC 9 on Linux, clang 9.0 from MacPorts or Homebrew on Mac OS)
 #     * Qt 5.13 on Linux, Qt 5.12 from MacPorts on MacOS, Qt 5.13 from Homebrew on Mac OS
-#     * Python 3.7 on Linux, Python 2.7 on MacOS
+#     * Python 3.8 on Linux, Python 2.7 on MacOS
 # As TravisCI limits build job times to 45 minutes, Talipot is built in two successive stages
 # to avoid timeouts (which happened often with MacOs builds):
 #  - a core build with no Talipot OpenGL and Qt components
@@ -73,7 +73,7 @@ jobs:
       cache: ccache
       addons:
         apt:
-          # we get GCC 9.x and Python 3.7 from external ppas
+          # we get GCC 9.x and Python 3.8 from external ppas
           sources:
             - sourceline: "ppa:ubuntu-toolchain-r/test"
             - sourceline: "ppa:deadsnakes/ppa"
@@ -85,16 +85,17 @@ jobs:
             - ninja-build
             - libqhull-dev
             - libyajl-dev
-            - python3.7
-            - libpython3.7-dev
+            - python3.8
+            - python3.8-distutils
+            - libpython3.8-dev
             - libcppunit-dev
             - binutils-dev
       before_install:
         # force the use of GCC 9
         - eval "${MATRIX_EVAL}"
       env:
-        # use Python 3.7
-        - PYTHON_EXECUTABLE=/usr/bin/python3.7
+        # use Python 3.8
+        - PYTHON_EXECUTABLE=/usr/bin/python3.8
         # use GCC 7
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
       script:
@@ -180,7 +181,7 @@ jobs:
         - xvfb
       addons:
         apt:
-          # we get GCC 9.x, Python 3.7 and Qt 5.13 from external ppas
+          # we get GCC 9.x, Python 3.8 and Qt 5.13 from external ppas
           sources:
             - sourceline: "ppa:ubuntu-toolchain-r/test"
             - sourceline: "ppa:deadsnakes/ppa"
@@ -194,8 +195,9 @@ jobs:
             - ninja-build
             - libqhull-dev
             - libyajl-dev
-            - python3.7
-            - libpython3.7-dev
+            - python3.8
+            - python3.8-distutils
+            - libpython3.8-dev
             - libcppunit-dev
             - binutils-dev
             - qt5-default
@@ -207,8 +209,8 @@ jobs:
         # force the use of GCC 9
         - eval "${MATRIX_EVAL}"
       env:
-        # use Python 3.7
-        - PYTHON_EXECUTABLE=/usr/bin/python3.7
+        # use Python 3.8
+        - PYTHON_EXECUTABLE=/usr/bin/python3.8
         # use GCC 9
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
       script:
