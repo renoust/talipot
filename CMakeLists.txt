@@ -322,6 +322,9 @@ ELSE(YAJL_FOUND)
   SET(YajlLibrary yajl-talipot-${TalipotMMVersion})
 ENDIF(YAJL_FOUND)
 
+SET(VPSCInclude ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libvpsc)
+SET(VPSCLibrary vpsc)
+
 SET(UTF8CppInclude ${PROJECT_SOURCE_DIR}/thirdparty/utf8-cpp/source)
 SET(StbInclude ${PROJECT_SOURCE_DIR}/thirdparty/stb)
 

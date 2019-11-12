@@ -13,9 +13,6 @@
 #include <cassert>
 #include <vector>
 
-#include <talipot/config.h>
-#include <talipot/ParallelTools.h>
-
 #include "generate-constraints.h"
 #include "solve_VPSC.h"
 #include "variable.h"
@@ -31,7 +28,7 @@ using std::ofstream;
 
 #define EXTRA_GAP 0.0001
 using namespace vpsc;
-using namespace tlp;
+
 /**
  * Takes an array of n rectangles and moves them as little as possible
  * such that rectangles are separated by at least xBorder horizontally
@@ -55,7 +52,7 @@ void removeRectangleOverlap(unsigned n, Rectangle rs[], double &xBorder, double 
     double *oldX = new double[n];
     unsigned m = ConstraintsGenerator(n).generateXConstraints(rs, vs.data(), cs, true);
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) { oldX[i] = vs[i].desiredPosition; });
+    for (unsigned int i = 0; i < n; ++i) { oldX[i] = vs[i].desiredPosition; }
 
     Solver vpsc_x(n, vs.data(), m, cs);
 #ifdef RECTANGLE_OVERLAP_LOGGING
@@ -65,7 +62,7 @@ void removeRectangleOverlap(unsigned n, Rectangle rs[], double &xBorder, double 
 #endif
     vpsc_x.solve();
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) { rs[i].moveCentreX(vs[i].position()); });
+    for (unsigned int i = 0; i < n; ++i) { rs[i].moveCentreX(vs[i].position()); }
 
     for (unsigned i = 0; i < m; ++i) {
       delete cs[i];
@@ -84,10 +81,10 @@ void removeRectangleOverlap(unsigned n, Rectangle rs[], double &xBorder, double 
 #endif
     vpsc_y.solve();
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) {
+    for (unsigned int i = 0; i < n; ++i) {
       rs[i].moveCentreY(vs[i].position());
       rs[i].moveCentreX(oldX[i]);
-    });
+    }
 
     delete[] oldX;
 
@@ -112,7 +109,7 @@ void removeRectangleOverlap(unsigned n, Rectangle rs[], double &xBorder, double 
 
     delete[] cs;
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) { rs[i].moveCentreX(vs[i].position()); });
+    for (unsigned int i = 0; i < n; ++i) { rs[i].moveCentreX(vs[i].position()); }
 
   } catch (char const *str) {
     std::cerr << str << std::endl;
@@ -139,7 +136,7 @@ void removeRectangleOverlapX(unsigned n, Rectangle rs[], double &xBorder, double
 #endif
     vpsc_x.solve();
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) { rs[i].moveCentreX(vs[i].position()); });
+    for (unsigned int i = 0; i < n; ++i) { rs[i].moveCentreX(vs[i].position()); }
 
     for (unsigned i = 0; i < m; ++i) {
       delete cs[i];
@@ -172,7 +169,7 @@ void removeRectangleOverlapY(unsigned n, Rectangle rs[], double &yBorder) {
 #endif
     vpsc_y.solve();
 
-    TLP_PARALLEL_MAP_INDICES(n, [&](unsigned int i) { rs[i].moveCentreY(vs[i].position()); });
+    for (unsigned int i = 0; i < n; ++i) { rs[i].moveCentreY(vs[i].position()); }
 
     for (unsigned i = 0; i < m; ++i) {
       delete cs[i];

@@ -1,5 +1,4 @@
 ADD_SUBDIRECTORY(OGDF)
-ADD_SUBDIRECTORY(FastOverlapRemoval)
 ADD_SUBDIRECTORY(Grip)
 ADD_SUBDIRECTORY(LinLog)
 
@@ -107,7 +106,11 @@ TARGET_LINK_LIBRARIES(OrthoTree-${TalipotVersion} ${LibTalipotCoreName})
 ##----------------------------------------------------------------------------------------------------------------------------
 ADD_LIBRARY(PolyominoPacking-${TalipotVersion} SHARED PolyominoPacking.cpp)
 TARGET_LINK_LIBRARIES(PolyominoPacking-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName})
-TALIPOT_INSTALL_PLUGIN(PolyominoPacking-${TalipotVersion} ${TalipotPluginsInstallDir})
+
+##----------------------------------------------------------------------------------------------------------------------------
+INCLUDE_DIRECTORIES(${VPSCInclude})
+ADD_LIBRARY(FastOverlapRemoval-${TalipotVersion} SHARED FastOverlapRemoval.cpp)
+TARGET_LINK_LIBRARIES(FastOverlapRemoval-${TalipotVersion} ${LayoutUtilsLibraryName} ${LibTalipotCoreName} ${VPSCLibrary})
 
 ##----------------------------------------------------------------------------------------------------------------------------
 TALIPOT_INSTALL_PLUGIN(MixedModel-${TalipotVersion} ${TalipotPluginsInstallDir})
@@ -128,3 +131,4 @@ TALIPOT_INSTALL_PLUGIN(ImprovedWalker-${TalipotVersion} ${TalipotPluginsInstallD
 TALIPOT_INSTALL_PLUGIN(SquarifiedTreeMap-${TalipotVersion} ${TalipotPluginsInstallDir})
 TALIPOT_INSTALL_PLUGIN(OrthoTree-${TalipotVersion} ${TalipotPluginsInstallDir})
 TALIPOT_INSTALL_PLUGIN(PerfectLayout-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(PolyominoPacking-${TalipotVersion} ${TalipotPluginsInstallDir})
