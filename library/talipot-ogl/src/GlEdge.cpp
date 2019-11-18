@@ -221,8 +221,8 @@ void GlEdge::draw(float lod, const GlGraphInputData *data, Camera *camera) {
       glMatrixMode(GL_MODELVIEW);
       glPushMatrix();
 
-      Coord &&p1 = camera->viewportTo3DWorld(Coord(0, 0, 0));
-      Coord &&p2 = camera->viewportTo3DWorld(Coord(2, 0, 0));
+      Coord p1 = camera->viewportTo3DWorld(Coord(0, 0, 0));
+      Coord p2 = camera->viewportTo3DWorld(Coord(2, 0, 0));
       selectionOutlineSize = (p2 - p1).norm();
       edgeSize[0] += selectionOutlineSize;
       edgeSize[1] += selectionOutlineSize;
@@ -528,7 +528,7 @@ void GlEdge::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float 
     label->setTranslationAfterRotation(Coord(0, -edgeSize[1] / 2));
   }
 
-  BoundingBox &&bb = getBoundingBox(data, e, src, tgt, srcCoord, tgtCoord, srcSize, tgtSize, bends);
+  BoundingBox bb = getBoundingBox(data, e, src, tgt, srcCoord, tgtCoord, srcSize, tgtSize, bends);
   label->setUseLODOptimisation(true, bb);
   label->setUseMinMaxSize(!data->parameters->isLabelFixedFontSize());
   label->setMinSize(data->parameters->getMinSizeOfLabel());

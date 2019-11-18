@@ -436,7 +436,7 @@ void Observable::sendEvent(const Event &message) {
   vector<pair<Observable *, node>> listenerTonotify;
   bool delayedEventAdded = false;
   for (auto e : ObservationGraph::_oGraph.star(_n)) {
-    node &&src = ObservationGraph::_oGraph.source(e);
+    node src = ObservationGraph::_oGraph.source(e);
 
     if (_n != src && _oAlive[src]) {
       Observable *obs = _oPointer[src];

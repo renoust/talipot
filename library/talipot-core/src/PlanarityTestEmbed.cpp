@@ -145,7 +145,7 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
     // marks as VISITED all nodes in the boundary cycle;
     markPathInT(term, w, backEdgeRepresentant, traversedNodes);
 
-    map<node, list<edge>> &&bEdgesRepres = groupBackEdgesByRepr(
+    map<node, list<edge>> bEdgesRepres = groupBackEdgesByRepr(
         sG, listBackEdges, backEdgeRepresentant, traversedNodes, listRepresentants);
     list<node> toEmbedLater;
 
@@ -187,7 +187,7 @@ void PlanarityTestImpl::calculatePartialEmbedding(Graph *sG, node w, node newCNo
     markPathInT(term2, w, backEdgeRepresentant, traversedNodes);
     markPathInT(term1, t1, backEdgeRepresentant, traversedNodes);
 
-    map<node, list<edge>> &&bEdgesRepres = groupBackEdgesByRepr(
+    map<node, list<edge>> bEdgesRepres = groupBackEdgesByRepr(
         sG, listBackEdges, backEdgeRepresentant, traversedNodes, listRepresentants);
     list<node> toEmbedLater;
     toEmbedLater =

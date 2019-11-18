@@ -57,7 +57,7 @@ void GlNode::init(const GlGraphInputData *data) {
 BoundingBox GlNode::getBoundingBox(const GlGraphInputData *data) {
   init(data);
 
-  Coord &&tmp1 = size / 2.f;
+  Coord tmp1 = size / 2.f;
   if (rot == 0) {
     BoundingBox box(coord - tmp1, coord + tmp1);
     assert(box.isValid());

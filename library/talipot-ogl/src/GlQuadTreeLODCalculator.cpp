@@ -296,7 +296,7 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
                                                  const Vector<int, 4> &currentViewport) {
 
   // aX,aY : rotation on the camera in x and y
-  Coord &&eyeCenter = currentCamera->getCenter() - currentCamera->getEyes();
+  Coord eyeCenter = currentCamera->getCenter() - currentCamera->getEyes();
   double aX = atan(eyeCenter[1] / eyeCenter[2]);
   double aY = atan(eyeCenter[0] / eyeCenter[2]);
 

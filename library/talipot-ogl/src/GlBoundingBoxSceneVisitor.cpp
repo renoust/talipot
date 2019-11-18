@@ -40,7 +40,7 @@ BoundingBox GlBoundingBoxSceneVisitor::getBoundingBox() {
 
 void GlBoundingBoxSceneVisitor::visit(GlSimpleEntity *entity) {
   if (entity->isVisible()) {
-    BoundingBox &&bb = entity->getBoundingBox();
+    BoundingBox bb = entity->getBoundingBox();
 
     if (bb.isValid()) {
       auto ti = ThreadManager::getThreadNumber();
@@ -51,7 +51,7 @@ void GlBoundingBoxSceneVisitor::visit(GlSimpleEntity *entity) {
 }
 
 void GlBoundingBoxSceneVisitor::visit(GlNode *glNode) {
-  BoundingBox &&bb = glNode->getBoundingBox(inputData);
+  BoundingBox bb = glNode->getBoundingBox(inputData);
   auto ti = ThreadManager::getThreadNumber();
 
   bbs[ti].expand(bb, noBBCheck[ti]);
@@ -59,7 +59,7 @@ void GlBoundingBoxSceneVisitor::visit(GlNode *glNode) {
 }
 
 void GlBoundingBoxSceneVisitor::visit(GlEdge *glEdge) {
-  BoundingBox &&bb = glEdge->getBoundingBox(inputData);
+  BoundingBox bb = glEdge->getBoundingBox(inputData);
   auto ti = ThreadManager::getThreadNumber();
 
   bbs[ti].expand(bb, noBBCheck[ti]);

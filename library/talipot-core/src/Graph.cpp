@@ -1047,7 +1047,7 @@ void updatePropertiesUngroup(Graph *graph, node metanode, GraphProperty *cluster
   LayoutProperty *clusterLayout = cluster->getLayoutProperty(layoutProperty);
   SizeProperty *clusterSize = cluster->getSizeProperty(sizeProperty);
   DoubleProperty *clusterRot = cluster->getDoubleProperty(rotationProperty);
-  BoundingBox &&box = tlp::computeBoundingBox(cluster, clusterLayout, clusterSize, clusterRot);
+  BoundingBox box = tlp::computeBoundingBox(cluster, clusterLayout, clusterSize, clusterRot);
   double width = box.width();
   double height = box.height();
   double depth = box.depth();
