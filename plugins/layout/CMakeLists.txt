@@ -132,3 +132,4 @@ TALIPOT_INSTALL_PLUGIN(SquarifiedTreeMap-${TalipotVersion} ${TalipotPluginsInsta
 TALIPOT_INSTALL_PLUGIN(OrthoTree-${TalipotVersion} ${TalipotPluginsInstallDir})
 TALIPOT_INSTALL_PLUGIN(PerfectLayout-${TalipotVersion} ${TalipotPluginsInstallDir})
 TALIPOT_INSTALL_PLUGIN(PolyominoPacking-${TalipotVersion} ${TalipotPluginsInstallDir})
+TALIPOT_INSTALL_PLUGIN(FastOverlapRemoval-${TalipotVersion} ${TalipotPluginsInstallDir})
