@@ -98,7 +98,7 @@ ENDIF(EMSCRIPTEN)
 IF(HAVE_REENTRANT_QHULL)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAVE_REENTRANT_QHULL")
 ENDIF(HAVE_REENTRANT_QHULL)
-INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${PROJECT_SOURCE_DIR} ${ZLIB_INCLUDE_DIR} ${YajlInclude} ${QhullInclude} ${GZStreamInclude} ${UTF8CppInclude})
+INCLUDE_DIRECTORIES(${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${PROJECT_SOURCE_DIR} ${ZLIB_INCLUDE_DIR} ${YAJL_INCLUDE_DIRS} ${QHULL_INCLUDE_DIRS} ${GZStreamInclude} ${UTF8CppInclude})
 
 ADD_CUSTOM_COMMAND(
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/FontAwesomeData.cpp
@@ -120,7 +120,7 @@ SET_SOURCE_FILES_PROPERTIES(FontAwesome.cpp MaterialDesignIcons.cpp
                             PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/FontAwesomeData.cpp;${CMAKE_CURRENT_SOURCE_DIR}/MaterialDesignIconsData.cpp")
 
 ADD_LIBRARY(${LibTalipotCoreName} SHARED ${talipot_LIB_SRCS} ../include/talipot/Release.h)
-TARGET_LINK_LIBRARIES(${LibTalipotCoreName} ${GZStreamLibrary} ${YajlLibrary} ${QhullLibrary} ${CMAKE_DL_LIBS})
+TARGET_LINK_LIBRARIES(${LibTalipotCoreName} ${GZStreamLibrary} ${YAJL_LIBRARIES} ${QHULL_LIBRARIES} ${CMAKE_DL_LIBS})
 IF(WIN32)
   IF(MSVC)
     TARGET_LINK_LIBRARIES(${LibTalipotCoreName} Dbghelp)

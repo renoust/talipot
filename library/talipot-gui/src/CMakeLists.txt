@@ -225,9 +225,9 @@ QTX_WRAP_CPP(MOC_SRCS
 
 QTX_ADD_RESOURCES(RCC_SRCS ../resources/TalipotGUIResource.qrc)
 
-INCLUDE_DIRECTORIES(${TalipotGUIBuildInclude} ${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${ZLIB_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${QuazipInclude})
+INCLUDE_DIRECTORIES(${TalipotGUIBuildInclude} ${TalipotCoreBuildInclude} ${TalipotCoreInclude} ${TalipotOGLInclude} ${TalipotGUIInclude} ${CMAKE_CURRENT_BINARY_DIR} ${ZLIB_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${QUAZIP_INCLUDE_DIRS})
 ADD_LIBRARY(${LibTalipotGUIName} SHARED ${SRCS} ${MOC_SRCS} ${RCC_SRCS} ${UI_HEADERS})
-TARGET_LINK_LIBRARIES(${LibTalipotGUIName} ${QT_LIBRARIES} ${LibTalipotCoreName} ${LibTalipotOGLName} ${QuazipLibrary})
+TARGET_LINK_LIBRARIES(${LibTalipotGUIName} ${QT_LIBRARIES} ${LibTalipotCoreName} ${LibTalipotOGLName} ${QUAZIP_LIBRARIES})
 TARGET_LINK_LIBRARIES(${LibTalipotGUIName} talipot-gui-python)
 
 
