@@ -650,7 +650,7 @@ QWidget *NodeShapeEditorCreator::createWidget(QWidget *parent) const {
   for (const auto &glyph : glyphs) {
     QString shapeName = tlpStringToQString(glyph);
     QPixmap pixmap = GlyphRenderer::render(GlyphManager::glyphId(glyph));
-    shapes.emplace_back(shapeName, pixmap);
+    shapes.push_back({shapeName, pixmap});
   }
 
   QMainWindow *mainWindow = getMainWindow();
@@ -714,14 +714,14 @@ QWidget *EdgeExtremityShapeEditorCreator::createWidget(QWidget *parent) const {
   // making the scrollbars unreachable ...), we use a native
   // dialog with a QListWidget inside
   std::list<std::pair<QString, QPixmap>> shapes;
-  shapes.emplace_back("NONE", QPixmap());
+  shapes.push_back({"NONE", QPixmap()});
 
   auto glyphs = PluginsManager::availablePlugins<EdgeExtremityGlyph>();
 
   for (const auto &glyph : glyphs) {
     QString shapeName = tlpStringToQString(glyph);
     QPixmap pixmap = EdgeExtremityGlyphRenderer::render(EdgeExtremityGlyphManager::glyphId(glyph));
-    shapes.emplace_back(shapeName, pixmap);
+    shapes.push_back({shapeName, pixmap});
   }
 
   QMainWindow *mainWindow = getMainWindow();

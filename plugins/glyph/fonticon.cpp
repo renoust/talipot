@@ -265,8 +265,9 @@ static FontIcon &getFontIcon(const string &iconName) {
     return defaultFontIcon;
   }
   auto it = fontIcons.find(iconName);
-  if (it == fontIcons.end())
-    it = fontIcons.emplace(std::make_pair(iconName, FontIcon(iconName))).first;
+  if (fontIcons.find(iconName) == fontIcons.end()) {
+    it = fontIcons.insert({iconName, FontIcon(iconName)}).first;
+  }
   return it->second;
 }
 

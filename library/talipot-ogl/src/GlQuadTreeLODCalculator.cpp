@@ -169,7 +169,7 @@ void GlQuadTreeLODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity,
     bbs[seBBIndex].expand(bb, noBBCheck[seBBIndex]);
     noBBCheck[seBBIndex] = true;
   }
-  currentLayerLODUnit->simpleEntitiesLODVector.emplace_back(entity, bb);
+  currentLayerLODUnit->simpleEntitiesLODVector.push_back(SimpleEntityLODUnit(entity, bb));
 }
 
 void GlQuadTreeLODCalculator::addEdgeBoundingBox(unsigned int id, unsigned int pos,
@@ -471,8 +471,8 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
     }
     size_t nbRes = resEntities.size();
     for (size_t i = 0; i < nbRes; ++i) {
-      layerLODUnit->simpleEntitiesLODVector.emplace_back(resEntities[i],
-                                                         resEntities[i]->getBoundingBox());
+      layerLODUnit->simpleEntitiesLODVector.push_back(
+          SimpleEntityLODUnit(resEntities[i], resEntities[i]->getBoundingBox()));
     }
   };
   TLP_PARALLEL_SECTIONS(thrdF1, thrdF2, thrdF3);

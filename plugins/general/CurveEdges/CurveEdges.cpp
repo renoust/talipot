@@ -299,9 +299,9 @@ public:
     std::vector<tlp::Coord> controlPoints;
 
     if (x != FLT_MAX && y != FLT_MAX) {
-      controlPoints.emplace_back(x, y);
+      controlPoints.push_back({x, y});
     } else {
-      controlPoints.emplace_back((srcCoord + tgtCoord) / 2.f);
+      controlPoints.push_back((srcCoord + tgtCoord) / 2.f);
     }
 
     return controlPoints;

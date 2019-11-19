@@ -60,7 +60,7 @@ DataSet &DataSet::operator=(const DataSet &set) {
   if (this != &set) {
     data.clear();
     for (const auto &it : set.data) {
-      data.emplace(it.first, it.second->clone());
+      data[it.first] = it.second->clone();
     }
   }
   return *this;
@@ -116,7 +116,7 @@ void DataSet::setData(const std::string &str, const DataType *value) {
     it->second = val;
     return;
   }
-  data.emplace(str, val);
+  data[str] = val;
 }
 
 unsigned int DataSet::size() const {
@@ -209,7 +209,7 @@ bool DataSet::readData(std::istream &is, const std::string &prop,
     }
 
     // no preexisting value
-    data.emplace(prop, dt);
+    data[prop] = dt;
     return true;
   }
 

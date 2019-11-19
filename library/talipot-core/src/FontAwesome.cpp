@@ -58,7 +58,7 @@ const vector<string> &FontAwesome::getSupportedIcons() {
   if (iconsNames.empty()) {
     iconsNames.reserve(iconCodePoint.size());
     for (auto &it : iconCodePoint) {
-      iconsNames.emplace_back(it.first);
+      iconsNames.push_back(it.first);
     }
   }
   return iconsNames;

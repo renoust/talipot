@@ -291,11 +291,11 @@ static float computeExtrusion(const Coord &pBefore, const Coord &pCurrent, const
   if (angleOk && angle < M_PI / 2 + M_PI / 4) {
     // normal form
     if ((xu ^ xv)[2] > 0) {
-      result.emplace_back(pCurrent + bi_xu_xv_nsz);
-      result.emplace_back(pCurrent - bi_xu_xv_nsz);
+      result.push_back(pCurrent + bi_xu_xv_nsz);
+      result.push_back(pCurrent - bi_xu_xv_nsz);
     } else {
-      result.emplace_back(pCurrent - bi_xu_xv_nsz);
-      result.emplace_back(pCurrent + bi_xu_xv_nsz);
+      result.push_back(pCurrent - bi_xu_xv_nsz);
+      result.push_back(pCurrent + bi_xu_xv_nsz);
     }
   } else {
     // broken form
@@ -306,19 +306,19 @@ static float computeExtrusion(const Coord &pBefore, const Coord &pCurrent, const
     if (angleOk && !twoPointsCurve &&
         !(nsz > u.norm() || nsz > v.norm() || fabs(angle - M_PI) < 1E-3)) {
       if ((xu ^ xv)[2] > 0) {
-        result.emplace_back(pCurrent + bi_xu_xv_nsz);
-        result.emplace_back(pCurrent - vunit_sz);
-        result.emplace_back(pCurrent + bi_xu_xv_nsz);
-        result.emplace_back(pCurrent + vunit_sz);
+        result.push_back(pCurrent + bi_xu_xv_nsz);
+        result.push_back(pCurrent - vunit_sz);
+        result.push_back(pCurrent + bi_xu_xv_nsz);
+        result.push_back(pCurrent + vunit_sz);
       } else {
-        result.emplace_back(pCurrent + vunit_sz);
-        result.emplace_back(pCurrent + bi_xu_xv_nsz);
-        result.emplace_back(pCurrent - vunit_sz);
-        result.emplace_back(pCurrent + bi_xu_xv_nsz);
+        result.push_back(pCurrent + vunit_sz);
+        result.push_back(pCurrent + bi_xu_xv_nsz);
+        result.push_back(pCurrent - vunit_sz);
+        result.push_back(pCurrent + bi_xu_xv_nsz);
       }
     } else {
-      result.emplace_back(pCurrent + vunit_sz);
-      result.emplace_back(pCurrent - vunit_sz);
+      result.push_back(pCurrent + vunit_sz);
+      result.push_back(pCurrent - vunit_sz);
       inversion *= -1;
     }
   }
@@ -361,7 +361,7 @@ void buildCurvePoints(const vector<Coord> &vertices, const vector<float> &sizes,
 vector<Coord> splineCurve(const vector<Coord> &vertices) {
   vector<Coord> curve;
   curve.reserve(2 + 3 * (vertices.size() - 2));
-  curve.emplace_back(vertices[0]);
+  curve.push_back(vertices[0]);
 
   for (unsigned int i = 1; i < vertices.size() - 1; ++i) {
     Coord xu(vertices[i - 1] - vertices[i]);
@@ -380,12 +380,12 @@ vector<Coord> splineCurve(const vector<Coord> &vertices) {
     tgt_xu_xv /= tgt_xu_xv.norm();
     Coord dir(tgt_xu_xv ^ bi_xu_xv);
     dir /= dir.norm();
-    curve.emplace_back(vertices[i] - (dir * (n_xu / 5.0f)));
-    curve.emplace_back(vertices[i]);
-    curve.emplace_back(vertices[i] + (dir * (n_xv / 5.0f)));
+    curve.push_back(vertices[i] - (dir * (n_xu / 5.0f)));
+    curve.push_back(vertices[i]);
+    curve.push_back(vertices[i] + (dir * (n_xv / 5.0f)));
   }
 
-  curve.emplace_back(vertices.back());
+  curve.push_back(vertices.back());
   return curve;
 }
 
@@ -395,17 +395,17 @@ void computeCleanVertices(const vector<Coord> &bends, const Coord &startPoint,
 
   if (!bends.empty()) {
     result.reserve(bends.size() + 2);
-    result.emplace_back(startPoint);
+    result.push_back(startPoint);
     Coord lastPoint(bends[0]);
 
     if ((startPoint - lastPoint).norm() > 1E-4)
-      result.emplace_back(lastPoint);
+      result.push_back(lastPoint);
 
     for (unsigned int i = 1; i < bends.size(); ++i) {
       Coord currentPoint(bends[i]);
 
       if ((currentPoint - lastPoint).norm() > 1E-4) {
-        result.emplace_back(currentPoint);
+        result.push_back(currentPoint);
       }
 
       lastPoint = currentPoint;
@@ -413,7 +413,7 @@ void computeCleanVertices(const vector<Coord> &bends, const Coord &startPoint,
 
     if ((endPoint - lastPoint).norm() > 1E-4) {
       lastPoint = endPoint;
-      result.emplace_back(endPoint);
+      result.push_back(endPoint);
     }
 
     if (result.size() < 2) { // only one valid point for a line
@@ -436,8 +436,8 @@ void computeCleanVertices(const vector<Coord> &bends, const Coord &startPoint,
   } else {
     if ((startPoint - endPoint).norm() > 1E-4) {
       result.reserve(2);
-      result.emplace_back(startPoint);
-      result.emplace_back(endPoint);
+      result.push_back(startPoint);
+      result.push_back(endPoint);
 
       // Adjust tangent direction
       if (adjustTangent) {
@@ -486,17 +486,17 @@ void polyQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2, f
     const float nbSubDiv = 20.f;
     vector<Coord> newVertices;
     newVertices.reserve((nbQuads_div2 - 1) * 19 * 2 + 2);
-    newVertices.emplace_back(quadVertices[0]);
-    newVertices.emplace_back(quadVertices[1]);
+    newVertices.push_back(quadVertices[0]);
+    newVertices.push_back(quadVertices[1]);
 
     for (size_t i = 0; i < nbQuads_div2 - 1; ++i) {
       for (float j = 1; j < nbSubDiv; ++j) {
-        newVertices.emplace_back(quadVertices[2 * i] +
-                                 (j / (nbSubDiv - 1)) *
-                                     (quadVertices[2 * (i + 1)] - quadVertices[2 * i]));
-        newVertices.emplace_back(quadVertices[2 * i + 1] +
-                                 (j / (nbSubDiv - 1)) *
-                                     (quadVertices[2 * (i + 1) + 1] - quadVertices[2 * i + 1]));
+        newVertices.push_back(quadVertices[2 * i] +
+                              (j / (nbSubDiv - 1)) *
+                                  (quadVertices[2 * (i + 1)] - quadVertices[2 * i]));
+        newVertices.push_back(quadVertices[2 * i + 1] +
+                              (j / (nbSubDiv - 1)) *
+                                  (quadVertices[2 * (i + 1) + 1] - quadVertices[2 * i + 1]));
       }
     }
 
@@ -513,7 +513,7 @@ void polyQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2, f
   vector<float> texCoords(quadVertices.size() * 2);
 
   for (size_t i = 0; i < nbQuads_div2; ++i) {
-    centerLine.emplace_back((quadVertices[2 * i] + quadVertices[2 * i + 1]) / 2.f);
+    centerLine.push_back((quadVertices[2 * i] + quadVertices[2 * i + 1]) / 2.f);
     bottomOutlineIndices[i] = 2 * i;
     topOutlineIndices[i] = 2 * i + 1;
 

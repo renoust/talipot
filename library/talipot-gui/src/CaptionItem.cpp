@@ -191,8 +191,8 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
 
   if (!_metricProperty) {
     vector<pair<double, float>> metricToSizeFiltered;
-    metricToSizeFiltered.emplace_back(0., 1.);
-    metricToSizeFiltered.emplace_back(1., 1.);
+    metricToSizeFiltered.push_back(make_pair(0., 1.));
+    metricToSizeFiltered.push_back(make_pair(1., 1.));
     _captionGraphicsItem->generateSizeCaption(metricToSizeFiltered, "empty", 0., 1.);
     return;
   }
@@ -228,14 +228,14 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
 
   for (const auto &it : metricToSizeMap) {
     if (it.first >= nextValue) {
-      metricToSizeFiltered.emplace_back(it.first, it.second / maxSize);
+      metricToSizeFiltered.push_back({it.first, it.second / maxSize});
       nextValue += intervale;
     }
   }
 
   if (metricToSizeFiltered.empty()) {
-    metricToSizeFiltered.emplace_back(minProp, 0);
-    metricToSizeFiltered.emplace_back(maxProp, 0);
+    metricToSizeFiltered.push_back({minProp, 0});
+    metricToSizeFiltered.push_back({maxProp, 0});
   }
 
   if (metricToSizeFiltered.size() == 1) {
@@ -244,8 +244,8 @@ void CaptionItem::generateSizeCaption(CaptionType captionType) {
 
   if (metricToSizeFiltered.size() < 2) {
     metricToSizeFiltered.clear();
-    metricToSizeFiltered.emplace_back(0., 1.);
-    metricToSizeFiltered.emplace_back(1., 1.);
+    metricToSizeFiltered.push_back({0., 1.});
+    metricToSizeFiltered.push_back({1., 1.});
     _captionGraphicsItem->generateSizeCaption(metricToSizeFiltered, "empty", 0., 1.);
     return;
   }

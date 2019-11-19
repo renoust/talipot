@@ -546,8 +546,8 @@ public:
 
       // Set the second and third Cubic Bézier curve control points as edge bends
       vector<Coord> bends;
-      bends.emplace_back(p1);
-      bends.emplace_back(p2);
+      bends.push_back(p1);
+      bends.push_back(p2);
 
       viewLayout->setEdgeValue(e, bends);
     }

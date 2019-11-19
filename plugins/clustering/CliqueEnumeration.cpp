@@ -134,7 +134,7 @@ void CliqueEnumeration::getDegenerateOrdering(vector<node> &ordering) {
   set<DegreeOrderingElem *, LessDegreeOrdering> sortednodes;
   for (auto n : sub->nodes()) {
     DegreeOrderingElem *elem = new DegreeOrderingElem(n, sub->deg(n));
-    degrees.insert(make_pair(n, elem));
+    degrees[n] = elem;
     sortednodes.insert(elem);
   }
 

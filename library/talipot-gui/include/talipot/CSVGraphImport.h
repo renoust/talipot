@@ -78,7 +78,7 @@ public:
   };
 
   void addException(const std::string &value, Action action) {
-    _exceptions.emplace_back(value, action);
+    _exceptions.push_back(Exception(value, action));
   }
 
   void clearExceptions() {

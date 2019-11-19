@@ -86,6 +86,8 @@ struct LayerLODUnit {
   std::vector<ComplexEntityLODUnit> nodesLODVector;
   std::vector<ComplexEntityLODUnit> edgesLODVector;
   Camera *camera;
+  LayerLODUnit() : camera(nullptr) {}
+  LayerLODUnit(Camera *camera) : camera(camera) {}
 };
 
 typedef std::vector<LayerLODUnit> LayersLODVector;

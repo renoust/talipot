@@ -55,8 +55,8 @@ void GlyphManager::loadGlyphPlugins() {
 
   for (std::string pluginName : glyphList) {
     int pluginId = PluginsManager::pluginInformation(pluginName).id();
-    glyphIdToName.emplace(std::make_pair(pluginId, pluginName));
-    nameToGlyphId.emplace(std::make_pair(pluginName, pluginId));
+    glyphIdToName[pluginId] = pluginName;
+    nameToGlyphId[pluginName] = pluginId;
   }
 }
 
