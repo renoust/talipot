@@ -463,9 +463,8 @@ bool HierarchicalGraph::run() {
       result->setNodeValue(n, Coord(-tmpC[1], tmpC[0], tmpC[2]));
     }
     for (auto e : graph->edges()) {
-      LineType::RealType tmp = result->getEdgeValue(e);
+      const LineType::RealType &tmp = result->getEdgeValue(e);
       LineType::RealType tmp2;
-      LineType::RealType::iterator it;
 
       for (const auto &p : tmp) {
         tmp2.push_back(Coord(-p[1], p[0], p[2]));

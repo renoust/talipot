@@ -34,8 +34,9 @@ double StrengthClustering::computeMQValue(const vector<unordered_set<node>> &par
   unsigned int i = 0;
   for (const auto &p : partition) {
     for (auto n : p) {
-      clusterId.set(n.id, i++);
+      clusterId.set(n.id, i);
     }
+    ++i;
   }
 
   for (auto e : sg->edges()) {

@@ -218,8 +218,11 @@ public:
   void
   computeMetaValue(AbstractProperty<tlp::DoubleType, tlp::DoubleType, tlp::NumericProperty> *metric,
                    edge mE, Iterator<edge> *itE, Graph *) override {
-    if (edgeCalc)
+    if (edgeCalc) {
       edgeCalc(metric, mE, itE);
+    } else {
+      delete itE;
+    }
   }
 };
 

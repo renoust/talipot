@@ -96,7 +96,6 @@ unsigned int GEMLayout::select() {
 void GEMLayout::vertexdata_init(const float starttemp) {
   _temperature = 0;
   _center.fill(0);
-  std::vector<GEMparticule>::iterator it;
 
   for (auto &p : _particules) {
     p.heat = starttemp;

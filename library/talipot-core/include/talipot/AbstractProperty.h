@@ -526,10 +526,13 @@ public:
   // mE is the meta edge, itE is an iterator on the underlying edges
   // mg is the graph owning mE
   void computeMetaValue(edge e, tlp::Iterator<edge> *itE, Graph *mg) override {
-    if (Tprop::metaValueCalculator)
+    if (Tprop::metaValueCalculator) {
       static_cast<typename tlp::AbstractProperty<Tnode, Tedge, Tprop>::MetaValueCalculator *>(
           Tprop::metaValueCalculator)
           ->computeMetaValue(this, e, itE, mg);
+    } else {
+      delete itE;
+    }
   }
   void setMetaValueCalculator(PropertyInterface::MetaValueCalculator *mvCalc) override {
     if (mvCalc &&
@@ -566,7 +569,9 @@ public:
     // to the underlying edges given by the iterator itE.
     // The method do not have to delete the iterator
     virtual void computeMetaValue(AbstractProperty<Tnode, Tedge, Tprop> *, edge,
-                                  tlp::Iterator<edge> *, Graph *) {}
+                                  tlp::Iterator<edge> *itE, Graph *) {
+      delete itE;
+    }
   };
 
 protected:

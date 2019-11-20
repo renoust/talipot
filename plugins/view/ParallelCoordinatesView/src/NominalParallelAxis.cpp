@@ -80,7 +80,6 @@ const set<unsigned int> &NominalParallelAxis::getDataInSlidersRange() {
 
   dataSubset.clear();
   map<string, unsigned int> labelsInRange;
-  vector<string>::iterator it;
 
   for (const auto &l : labelsOrder) {
     Coord labelCoord = glNominativeAxis->getAxisPointCoordForValue(l);
