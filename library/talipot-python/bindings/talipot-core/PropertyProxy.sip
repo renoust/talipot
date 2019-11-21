@@ -525,10 +525,9 @@ public:
     const sipTypeDef *sipType = sipFindType("tlp::Color");
     if (sipCanConvertToType(a1Wrapper, sipType, SIP_NOT_NONE)) {
       int state=0, err=0;
-      void *cppType = sipConvertToType(a1Wrapper, sipType, Py_None, SIP_NOT_NONE, &state, &err);
-      tlp::Color *c = new tlp::Color(*static_cast<tlp::Color*>(cppType));
-      sipCpp->setNodeValue(*a0, *c);
-      delete c;
+      void *cppType = sipConvertToType(a1Wrapper, sipType, NULL, SIP_NOT_NONE, &state, &err);
+      sipCpp->setNodeValue(*a0, *static_cast<tlp::Color*>(cppType));
+      sipReleaseType(cppType, sipType, state);
     } else {
       sipCpp->setNodeValue(*a0, *a1);
     }
@@ -553,6 +552,7 @@ public:
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
 void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
@@ -562,6 +562,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::node n, const std::vector<double> &val /Constrained/);
@@ -571,6 +572,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::node n, const std::vector<std::string> &val /TypeHint="List[str]"/);
@@ -589,6 +591,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::node n, const std::vector<tlp::Coord> &val /GetWrapper/);
@@ -599,11 +602,10 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
     const sipTypeDef *sipType = sipFindType("std::vector<tlp::Color>");
     if (sipCanConvertToType(a1Wrapper, sipType, SIP_NOT_NONE)) {
       int state=0, err=0;
-      void *cppType = sipConvertToType(a1Wrapper, sipType, Py_None, SIP_NOT_NONE, &state, &err);
-      std::vector<tlp::Color> *vc =
-        new std::vector<tlp::Color>(*static_cast<std::vector<tlp::Color>*>(cppType));
+      void *cppType = sipConvertToType(a1Wrapper, sipType, NULL, SIP_NOT_NONE, &state, &err);
+      std::vector<tlp::Color> *vc = static_cast<std::vector<tlp::Color>*>(cppType);
       sipCpp->setNodeValue(*a0, *vc);
-      delete vc;
+      sipReleaseType(cppType, sipType, state);
     } else {
       sipCpp->setNodeValue(*a0, *a1);
     }
@@ -699,6 +701,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidEdgeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::edge e, const std::vector<int> &val /Constrained/);
@@ -708,6 +711,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidEdgeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::edge e, const std::vector<double> &val /Constrained/);
@@ -717,6 +721,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidEdgeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::edge e, const std::vector<std::string> &val /TypeHint="List[str]"/);
@@ -735,6 +740,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidEdgeException(sipCpp->getGraph(), *a0);
   }
+  delete a1;
 %End
 
   void __setitem__(const tlp::edge e, const std::vector<tlp::Color> &val);
@@ -786,10 +792,9 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   const sipTypeDef *sipType = sipFindType("tlp::Color");
   if (sipCanConvertToType(a0Wrapper, sipType, SIP_NOT_NONE)) {
     int state=0, err=0;
-    void *cppType = sipConvertToType(a0Wrapper, sipType, Py_None, SIP_NOT_NONE, &state, &err);
-    tlp::Color *c = new tlp::Color(*static_cast<tlp::Color*>(cppType));
-    sipCpp->setAllNodeValue(*c);
-    delete c;
+    void *cppType = sipConvertToType(a0Wrapper, sipType, NULL, SIP_NOT_NONE, &state, &err);
+    sipCpp->setAllNodeValue(*static_cast<tlp::Color*>(cppType));
+    sipReleaseType(cppType, sipType, state);
   } else {
     sipCpp->setAllNodeValue(*a0);
   }
@@ -803,16 +808,19 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   void setAllNodeValue(const std::vector<bool> &val /Constrained/);
 %MethodCode
   sipCpp->setAllNodeValue(*a0);
+  delete a0;
 %End
 
   void setAllNodeValue(const std::vector<int> &val /Constrained/);
 %MethodCode
   sipCpp->setAllNodeValue(*a0);
+  delete a0;
 %End
 
   void setAllNodeValue(const std::vector<double> &val /Constrained/);
 %MethodCode
   sipCpp->setAllNodeValue(*a0);
+  delete a0;
 %End
 
   void setAllNodeValue(const std::vector<std::string> &val /TypeHint="List[str]"/);
@@ -823,6 +831,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   void setAllNodeValue(const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
 %MethodCode
   sipCpp->setAllNodeValue(*a0);
+  delete a0;
 %End
 
   void setAllNodeValue(const std::vector<tlp::Coord> &val /GetWrapper/);
@@ -832,11 +841,10 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   const sipTypeDef *sipType = sipFindType("std::vector<tlp::Color>");
   if (sipCanConvertToType(a0Wrapper, sipType, SIP_NOT_NONE)) {
     int state=0, err=0;
-    void *cppType = sipConvertToType(a0Wrapper, sipType, Py_None, SIP_NOT_NONE, &state, &err);
-    std::vector<tlp::Color> *vc =
-      new std::vector<tlp::Color>(*static_cast<std::vector<tlp::Color>*>(cppType));
+    void *cppType = sipConvertToType(a0Wrapper, sipType, NULL, SIP_NOT_NONE, &state, &err);
+    std::vector<tlp::Color> *vc = static_cast<std::vector<tlp::Color>*>(cppType);
     sipCpp->setAllNodeValue(*vc);
-    delete vc;
+    sipReleaseType(cppType, sipType, state);
   } else {
     sipCpp->setAllNodeValue(*a0);
   }
@@ -893,16 +901,19 @@ void setAllNodeValue(SIP_PYOBJECT val);
   void setAllEdgeValue(const std::vector<bool> &val /Constrained/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
+  delete a0;
 %End
 
   void setAllEdgeValue(const std::vector<int> &val /Constrained/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
+  delete a0;
 %End
 
   void setAllEdgeValue(const std::vector<double> &val /Constrained/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
+  delete a0;
 %End
 
   void setAllEdgeValue(const std::vector<std::string> &val /TypeHint="List[str]"/);
@@ -913,6 +924,7 @@ void setAllNodeValue(SIP_PYOBJECT val);
   void setAllEdgeValue(const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
+  delete a0;
 %End
 
   void setAllEdgeValue(const std::vector<tlp::Color> &val);
