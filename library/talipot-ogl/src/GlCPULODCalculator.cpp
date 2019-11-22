@@ -34,6 +34,7 @@ GlCPULODCalculator::~GlCPULODCalculator() {}
 void GlCPULODCalculator::beginNewCamera(Camera *camera) {
   // add a new layerLODUnit and set camera pointer
   layersLODVector.push_back(LayerLODUnit(camera));
+  currentLayerLODUnit = &layersLODVector.back();
 }
 
 void GlCPULODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity, const BoundingBox &bb) {
