@@ -25,6 +25,9 @@
 #include <talipot/GlLabel.h>
 #include <talipot/GlSceneVisitor.h>
 
+#include <memory>
+#include <mutex>
+
 namespace tlp {
 
 struct OcclusionTest;
@@ -42,8 +45,8 @@ public:
    */
   GlEdge(unsigned int eId = UINT_MAX, unsigned int ePos = UINT_MAX, bool sel = false)
       : id(eId), pos(ePos), selectionDraw(sel) {
-    if (!label)
-      label = new GlLabel();
+    if (!label.get())
+      std::call_once(onceFlag, []() { label.reset(new GlLabel); });
   }
 
   /**
@@ -125,7 +128,8 @@ public:
 
 private:
   bool selectionDraw;
-  static GlLabel *label;
+  static std::unique_ptr<GlLabel> label;
+  static std::once_flag onceFlag;
 
   /**
    * Draw the Edge : this function is used by draw function

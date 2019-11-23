@@ -69,6 +69,7 @@ HistogramView::~HistogramView() {
     delete propertiesSelectionWidget;
     delete histoOptionsWidget;
     delete emptyGlGraphComposite;
+    delete histogramsComposite;
     delete labelsComposite;
     delete emptyGraph;
     delete axisComposite;
@@ -782,6 +783,7 @@ void HistogramView::switchFromSmallMultiplesToDetailedView(Histogram *histogramT
   Coord brCoord(detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset, 0, 0));
   Coord tlCoord(detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset + 65, 0, 0) +
                 Coord(0, detailedHistogram->getYAxis()->getAxisLength()));
+  delete emptyRect;
   emptyRect = new GlRect(tlCoord, brCoord, Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 
   float offset2 = (detailedHistogram->getXAxis()->getAxisGradsWidth() / 2.) +
@@ -790,6 +792,7 @@ void HistogramView::switchFromSmallMultiplesToDetailedView(Histogram *histogramT
   Coord brCoord2(detailedHistogram->getXAxis()->getAxisBaseCoord() +
                  Coord(detailedHistogram->getXAxis()->getAxisLength(), 0, 0) -
                  Coord(0, offset2 + 60, 0));
+  delete emptyRect2;
   emptyRect2 = new GlRect(tlCoord2, brCoord2, Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 
   mainLayer->addGlEntity(emptyRect, "emptyRect");
@@ -843,6 +846,8 @@ void HistogramView::switchFromDetailedViewToSmallMultiples() {
   mainLayer->deleteGlEntity(emptyRect2);
   delete emptyRect;
   delete emptyRect2;
+  emptyRect = nullptr;
+  emptyRect2 = nullptr;
 
   if (detailedHistogram != nullptr) {
     mainLayer->deleteGlEntity(detailedHistogram->getBinsComposite());

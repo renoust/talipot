@@ -42,6 +42,9 @@ using namespace std;
 
 namespace tlp {
 
+unique_ptr<GlLabel> GlNode::label;
+once_flag GlNode::onceFlag;
+
 void GlNode::init(const GlGraphInputData *data) {
   if (id != oldId) {
     node n(id);
@@ -203,9 +206,9 @@ void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float 
     return;
 
   if (selected)
-    label.setStencil(data->parameters->getSelectedNodesStencil());
+    label->setStencil(data->parameters->getSelectedNodesStencil());
   else
-    label.setStencil(data->parameters->getNodesLabelStencil());
+    label->setStencil(data->parameters->getNodesLabelStencil());
 
   int fontSize = data->getElementFontSize()->getNodeValue(n);
 
@@ -222,29 +225,29 @@ void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float 
   Coord centerBB(includeBB.center());
   Vec3f sizeBB = includeBB[1] - includeBB[0];
 
-  label.setFontNameSizeAndColor(data->getElementFont()->getNodeValue(n), fontSize, fontColor);
-  label.setOutlineColor(fontBorderColor);
-  label.setOutlineSize(fontBorderWidth);
-  label.setText(tmp);
-  label.setTranslationAfterRotation(centerBB * size);
-  label.setSize(Size(size[0] * sizeBB[0], size[1] * sizeBB[1], 0));
-  label.setSizeForOutAlign(Size(size[0], size[1], 0));
-  label.rotate(0, 0, rot);
-  label.setAlignment(labelPos);
-  label.setScaleToSize(data->parameters->isLabelScaled());
-  label.setUseLODOptimisation(true, this->getBoundingBox(data));
-  label.setLabelsDensity(data->parameters->getLabelsDensity());
-  label.setUseMinMaxSize(!data->parameters->isLabelFixedFontSize());
-  label.setMinSize(data->parameters->getMinSizeOfLabel());
-  label.setMaxSize(data->parameters->getMaxSizeOfLabel());
-  label.setOcclusionTester(test);
-  label.setBillboarded(data->parameters->getLabelsAreBillboarded());
+  label->setFontNameSizeAndColor(data->getElementFont()->getNodeValue(n), fontSize, fontColor);
+  label->setOutlineColor(fontBorderColor);
+  label->setOutlineSize(fontBorderWidth);
+  label->setText(tmp);
+  label->setTranslationAfterRotation(centerBB * size);
+  label->setSize(Size(size[0] * sizeBB[0], size[1] * sizeBB[1], 0));
+  label->setSizeForOutAlign(Size(size[0], size[1], 0));
+  label->rotate(0, 0, rot);
+  label->setAlignment(labelPos);
+  label->setScaleToSize(data->parameters->isLabelScaled());
+  label->setUseLODOptimisation(true, this->getBoundingBox(data));
+  label->setLabelsDensity(data->parameters->getLabelsDensity());
+  label->setUseMinMaxSize(!data->parameters->isLabelFixedFontSize());
+  label->setMinSize(data->parameters->getMinSizeOfLabel());
+  label->setMaxSize(data->parameters->getMaxSizeOfLabel());
+  label->setOcclusionTester(test);
+  label->setBillboarded(data->parameters->getLabelsAreBillboarded());
 
   if (includeBB[1][2] != 0 && !data->parameters->getLabelsAreBillboarded())
-    label.setPosition(Coord(coord[0], coord[1], coord[2] + size[2] / 2.));
+    label->setPosition(Coord(coord[0], coord[1], coord[2] + size[2] / 2.));
   else
-    label.setPosition(Coord(coord[0], coord[1], coord[2]));
+    label->setPosition(Coord(coord[0], coord[1], coord[2]));
 
-  label.drawWithStencil(lod, camera);
+  label->drawWithStencil(lod, camera);
 }
 }

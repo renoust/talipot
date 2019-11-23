@@ -620,8 +620,11 @@ HistogramMetricMapping::~HistogramMetricMapping() {
   delete colorScale;
   delete mappinqPolyQuad;
   delete popupMenu;
+  delete colorMappingMenu;
   delete glyphMappingGraph;
   delete glyphMappingGraphInputData;
+  delete curve;
+  delete selectedAnchor;
 }
 
 bool HistogramMetricMapping::compute(GlMainWidget *) {
@@ -637,15 +640,18 @@ void HistogramMetricMapping::viewChanged(View *view) {
 
   histoView = static_cast<HistogramView *>(view);
   initInteractor();
-  popupMenu = new QMenu();
-  popupMenu->addAction("MappingType")->setEnabled(false);
-  popupMenu->addSeparator();
-  colorMappingMenu = new QMenu("Color");
-  viewColorMappingAction = colorMappingMenu->addAction("viewColor");
-  viewBorderColorMappingAction = colorMappingMenu->addAction("viewBorderColor");
-  popupMenu->addMenu(colorMappingMenu);
-  sizeMapping = popupMenu->addAction("Size");
-  glyphMapping = popupMenu->addAction("Glyph");
+  if (!popupMenu) {
+    popupMenu = new QMenu();
+    popupMenu->addAction("MappingType")->setEnabled(false);
+    popupMenu->addSeparator();
+    colorMappingMenu = new QMenu("Color");
+    viewColorMappingAction = colorMappingMenu->addAction("viewColor");
+    viewBorderColorMappingAction = colorMappingMenu->addAction("viewBorderColor");
+    popupMenu->addMenu(colorMappingMenu);
+    sizeMapping = popupMenu->addAction("Size");
+    glyphMapping = popupMenu->addAction("Glyph");
+  }
+
   viewColorMappingAction->setCheckable(true);
   viewColorMappingAction->setChecked(true);
   viewBorderColorMappingAction->setCheckable(true);

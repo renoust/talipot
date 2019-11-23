@@ -43,11 +43,12 @@
 #include <talipot/GlGlyphRenderer.h>
 #include <talipot/ViewSettings.h>
 
-tlp::GlLabel *tlp::GlEdge::label = nullptr;
-
 using namespace std;
 
 namespace tlp {
+
+unique_ptr<GlLabel> GlEdge::label;
+once_flag GlEdge::onceFlag;
 
 BoundingBox GlEdge::getBoundingBox(const GlGraphInputData *data) {
   edge e = edge(id);

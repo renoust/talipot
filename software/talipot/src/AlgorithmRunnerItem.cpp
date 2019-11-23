@@ -172,6 +172,7 @@ static void copyToLocal(DataSet &data, Graph *g) {
   asLocal<ColorProperty>(var, data, g);
   asLocal<BooleanProperty>(var, data, g);
   asLocal<StringProperty>(var, data, g);
+  delete d;
 }
 
 // simple structure to hold an output property parameter
@@ -348,8 +349,12 @@ void AlgorithmRunnerItem::run(Graph *g) {
       outPropertyParams.push_back(outPropParam);
 
       if (desc.getDirection() == OUT_PARAM) {
-        outPropParam.tmp->setAllNodeDataMemValue(outPropParam.dest->getNodeDefaultDataMemValue());
-        outPropParam.tmp->setAllEdgeDataMemValue(outPropParam.dest->getEdgeDefaultDataMemValue());
+        DataMem *nodeData = outPropParam.dest->getNodeDefaultDataMemValue();
+        DataMem *edgeData = outPropParam.dest->getEdgeDefaultDataMemValue();
+        outPropParam.tmp->setAllNodeDataMemValue(nodeData);
+        outPropParam.tmp->setAllEdgeDataMemValue(edgeData);
+        delete nodeData;
+        delete edgeData;
       } else
         // inout property
         outPropParam.tmp->copy(outPropParam.dest);
@@ -412,8 +417,6 @@ void AlgorithmRunnerItem::run(Graph *g) {
             opp.dest->clonePrototype(opp.dest->getGraph(), storedResultName);
         storedResultProp->copy(opp.tmp);
       }
-
-      delete opp.tmp;
     }
 
     // display spentTime if needed
@@ -426,6 +429,10 @@ void AlgorithmRunnerItem::run(Graph *g) {
 
       qDebug() << log.str().c_str();
     }
+  }
+
+  for (const OutPropertyParam &opp : outPropertyParams) {
+    delete opp.tmp;
   }
 
   afterRun(g, dataSet);

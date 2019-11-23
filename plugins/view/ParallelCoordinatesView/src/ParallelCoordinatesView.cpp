@@ -61,7 +61,15 @@ static void toggleGraphView(GlGraphComposite *glGraph, bool displayNodes) {
 PLUGIN(ParallelCoordinatesView)
 
 ParallelCoordinatesView::ParallelCoordinatesView(const PluginContext *)
-    : GlMainView(true), mainLayer(nullptr), axisSelectionLayer(nullptr), glGraphComposite(nullptr),
+    : GlMainView(true), viewSetupMenu(nullptr), classicLayout(nullptr), circularLayout(nullptr),
+      straightLinesType(nullptr), catmullRomSplineLinesType(nullptr),
+      cubicBSplineInterpolationLinesType(nullptr), thickLines(nullptr), thinLines(nullptr),
+      addRemoveDataFromSelection(nullptr), selectData(nullptr), deleteData(nullptr),
+      showDataProperties(nullptr), axisMenuSeparator(nullptr), axisConfiguration(nullptr),
+      removeAxisAction(nullptr), highlightMenuSeparator(nullptr),
+      selectHighlightedElements(nullptr), addSelectHighlightedElements(nullptr),
+      removeSelectHighlightedElements(nullptr), resetHightlightedElements(nullptr),
+      mainLayer(nullptr), axisSelectionLayer(nullptr), glGraphComposite(nullptr),
       axisPointsGraph(nullptr), graphProxy(nullptr), parallelCoordsDrawing(nullptr),
       dataConfigWidget(nullptr), drawConfigWidget(nullptr), firstSet(true),
       lastNbSelectedProperties(0), center(false), lastViewWindowWidth(0), lastViewWindowHeight(0),
@@ -73,10 +81,20 @@ ParallelCoordinatesView::~ParallelCoordinatesView() {
   }
 
   delete axisPointsGraph;
+  delete axisSelectionLayer;
   delete graphProxy;
   graphProxy = nullptr;
   delete dataConfigWidget;
   delete drawConfigWidget;
+  delete axisConfiguration;
+  delete axisMenuSeparator;
+  delete removeAxisAction;
+  delete highlightMenuSeparator;
+  delete selectHighlightedElements;
+  delete addSelectHighlightedElements;
+  delete removeSelectHighlightedElements;
+  delete resetHightlightedElements;
+  delete viewSetupMenu;
 }
 
 QuickAccessBar *ParallelCoordinatesView::getQuickAccessBarImpl() {
@@ -578,7 +596,6 @@ void ParallelCoordinatesView::buildContextMenu() {
       "The thickness is thin and the same for all the  curves representing the graph elements");
   thinLines->setCheckable(true);
   lineActionGroup->addAction(thinLines);
-
   axisMenuSeparator = new QAction(nullptr);
   axisMenuSeparator->setSeparator(true);
   axisConfiguration = new QAction(tr("Axis configuration"), nullptr);

@@ -44,25 +44,30 @@ using namespace std;
 namespace tlp {
 
 // FTGL fonts must be cached to avoid to much memory consumption
-static std::unordered_map<std::string, FTPolygonFont *> PolygonFonts;
-static std::unordered_map<std::string, FTGLOutlineFont *> OutlineFonts;
+static std::unordered_map<std::string, unique_ptr<FTPolygonFont>> polygonFonts;
+static std::unordered_map<std::string, unique_ptr<FTGLOutlineFont>> outlineFonts;
 
 static FTPolygonFont *getPolygonFont(const std::string &name) {
-  std::unordered_map<std::string, FTPolygonFont *>::iterator itf = PolygonFonts.find(name);
+  auto itf = polygonFonts.find(name);
 
-  if (itf != PolygonFonts.end())
-    return itf->second;
+  if (itf == polygonFonts.end()) {
+    FTPolygonFont *font = new FTPolygonFont(name.c_str());
+    polygonFonts[name].reset(font);
+    return font;
+  }
 
-  return PolygonFonts[name] = new FTPolygonFont(name.c_str());
+  return itf->second.get();
 }
 
 static FTGLOutlineFont *getOutlineFont(const std::string &name) {
-  std::unordered_map<std::string, FTGLOutlineFont *>::iterator itf = OutlineFonts.find(name);
+  auto itf = outlineFonts.find(name);
 
-  if (itf != OutlineFonts.end())
-    return itf->second;
-
-  return OutlineFonts[name] = new FTGLOutlineFont(name.c_str());
+  if (itf == outlineFonts.end()) {
+    FTGLOutlineFont *font = new FTGLOutlineFont(name.c_str());
+    outlineFonts[name].reset(font);
+    return font;
+  }
+  return itf->second.get();
 }
 
 static void initFont(std::string &fontName, FTGLPolygonFont *&font, FTOutlineFont *&borderFont,

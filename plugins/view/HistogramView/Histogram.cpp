@@ -98,6 +98,8 @@ Histogram::~Histogram() {
   delete histogramSize;
   delete histoBinsComposite;
   delete graphComposite;
+  delete xAxis;
+  delete yAxis;
 }
 
 void Histogram::setDataLocation(const ElementType &dataLocation) {
@@ -335,12 +337,8 @@ void Histogram::computeHistogram() {
 
 void Histogram::createAxis() {
 
-  if (xAxis != nullptr && yAxis != nullptr) {
-    delete xAxis;
-    delete yAxis;
-    xAxis = nullptr;
-    yAxis = nullptr;
-  }
+  delete xAxis;
+  delete yAxis;
 
   const float axisLength = DEFAULT_AXIS_LENGTH;
 
@@ -591,6 +589,7 @@ void Histogram::update() {
   edgeAsNodeGraph->getSizeProperty("viewSize")->setAllNodeValue(Size(refSize, refSize, refSize));
   ColorProperty *viewColor = graph->getColorProperty("viewColor");
 
+  reset(true);
   histoBinsComposite->reset(true);
 
   unsigned int cumulativeSize = 0;
