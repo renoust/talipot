@@ -177,14 +177,17 @@ void GlEditableCurve::draw(float lod, Camera *camera) {
   Camera camera2D(camera->getScene(), false);
   camera2D.setScene(camera->getScene());
 
-  auto fn = [&](const Coord &anchor) {
+  auto renderCircle = [&](const Coord &anchor) {
     camera->initGl();
-    camera2D.initGl();
+
     Coord tmp(camera->worldTo2DViewport(anchor));
     tmp[2] = 0;
+
+    camera2D.initGl();
+
     basicCircle.set(tmp, CIRCLE_RADIUS, 0.);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    basicCircle.draw(lod, camera);
+    basicCircle.draw(lod, &camera2D);
 
     if (xAxis != nullptr) {
       int factor = 2;
@@ -198,35 +201,40 @@ void GlEditableCurve::draw(float lod, Camera *camera) {
       GlLabel label(Coord(tmp.getX(), tmp.getY() + factor * CIRCLE_RADIUS, 0),
                     Size((2 * factor) * CIRCLE_RADIUS, (2 * factor) * CIRCLE_RADIUS), curveColor);
       label.setText(labelText);
-      label.draw(lod, camera);
+      label.draw(lod, &camera2D);
     }
   };
 
-  fn(startPoint);
-  for (const Coord &cp : curvePoints)
-    fn(cp);
-  fn(endPoint);
+  renderCircle(startPoint);
+  for (const Coord &cp : curvePoints) {
+    renderCircle(cp);
+  }
+  renderCircle(endPoint);
 
   camera->initGl();
 }
 
 bool GlEditableCurve::pointBelong(const Coord &point) {
-  auto fn = [&](const Coord &cp1, const Coord &cp2) {
+  auto pointOnSegment = [&](const Coord &cp1, const Coord &cp2) {
     double startToEndDist = cp1.dist(cp2);
     double startToPointDist = cp1.dist(point);
     double pointToEndDist = point.dist(cp2);
     return (((startToPointDist + pointToEndDist) - startToEndDist) / startToEndDist < 1E-3);
   };
 
-  if (curvePoints.empty())
-    return fn(startPoint, endPoint);
+  if (curvePoints.empty()) {
+    return pointOnSegment(startPoint, endPoint);
+  }
 
-  if (fn(startPoint, curvePoints[0]))
+  if (pointOnSegment(startPoint, curvePoints[0])) {
     return true;
-  for (size_t i = 0; i < curvePoints.size() - 1; ++i)
-    if (fn(curvePoints[i], curvePoints[i + 1]))
+  }
+  for (size_t i = 0; i < curvePoints.size() - 1; ++i) {
+    if (pointOnSegment(curvePoints[i], curvePoints[i + 1])) {
       return true;
-  return fn(curvePoints[curvePoints.size() - 1], endPoint);
+    }
+  }
+  return pointOnSegment(curvePoints[curvePoints.size() - 1], endPoint);
 }
 
 void GlEditableCurve::addCurveAnchor(const Coord &point) {
@@ -242,21 +250,25 @@ void GlEditableCurve::addCurveAnchor(const Coord &point) {
 Coord *GlEditableCurve::getCurveAnchorAtPointIfAny(const Coord &point, Camera *camera) {
   camera->initGl();
 
-  auto fn = [&](const Coord &cp) {
-    Coord anchorCenter(camera->worldTo2DViewport(cp));
+  auto pointOnAnchor = [&](const Coord &anchor) {
+    Coord anchorCenter(camera->worldTo2DViewport(anchor));
 
     return (point.getX() > (anchorCenter.getX() - CIRCLE_RADIUS) &&
             point.getX() < (anchorCenter.getX() + CIRCLE_RADIUS) &&
             point.getY() > (anchorCenter.getY() - CIRCLE_RADIUS) &&
             point.getY() < (anchorCenter.getY() + CIRCLE_RADIUS));
   };
-  if (fn(startPoint))
+  if (pointOnAnchor(startPoint)) {
     return new Coord(startPoint);
-  for (const Coord &cp : curvePoints)
-    if (fn(cp))
+  }
+  for (const Coord &cp : curvePoints) {
+    if (pointOnAnchor(cp)) {
       return new Coord(cp);
-  if (fn(endPoint))
+    }
+  }
+  if (pointOnAnchor(endPoint)) {
     return new Coord(endPoint);
+  }
   return nullptr;
 }
 
