@@ -156,14 +156,6 @@ void GlOffscreenRenderer::renderScene(const bool centerScene, const bool antiali
 
   scene.setViewport(0, 0, vPWidth, vPHeight);
 
-  glPushAttrib(GL_ALL_ATTRIB_BITS);
-
-  glMatrixMode(GL_PROJECTION);
-  glPushMatrix();
-
-  glMatrixMode(GL_MODELVIEW);
-  glPushMatrix();
-
   glFrameBuf->bind();
 
   if (centerScene) {
@@ -190,14 +182,6 @@ void GlOffscreenRenderer::renderScene(const bool centerScene, const bool antiali
     QOpenGLFramebufferObject::blitFramebuffer(
         glFrameBuf2, QRect(0, 0, glFrameBuf2->width(), glFrameBuf2->height()), glFrameBuf,
         QRect(0, 0, glFrameBuf->width(), glFrameBuf->height()));
-
-  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();
-
-  glMatrixMode(GL_PROJECTION);
-  glPopMatrix();
-
-  glPopAttrib();
 }
 
 void GlOffscreenRenderer::renderExternalScene(GlScene *scene, const bool antialiased) {
@@ -210,14 +194,6 @@ void GlOffscreenRenderer::renderExternalScene(GlScene *scene, const bool antiali
 
   scene->setViewport(0, 0, vPWidth, vPHeight);
 
-  glPushAttrib(GL_ALL_ATTRIB_BITS);
-
-  glMatrixMode(GL_PROJECTION);
-  glPushMatrix();
-
-  glMatrixMode(GL_MODELVIEW);
-  glPushMatrix();
-
   glFrameBuf->bind();
   scene->draw();
   glFrameBuf->release();
@@ -226,14 +202,6 @@ void GlOffscreenRenderer::renderExternalScene(GlScene *scene, const bool antiali
     QOpenGLFramebufferObject::blitFramebuffer(
         glFrameBuf2, QRect(0, 0, glFrameBuf2->width(), glFrameBuf2->height()), glFrameBuf,
         QRect(0, 0, glFrameBuf->width(), glFrameBuf->height()));
-
-  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();
-
-  glMatrixMode(GL_PROJECTION);
-  glPopMatrix();
-
-  glPopAttrib();
 
   scene->setViewport(backupViewport);
 }
