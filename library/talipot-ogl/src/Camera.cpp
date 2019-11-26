@@ -152,8 +152,6 @@ void Camera::initGl() {
 }
 //====================================================
 void Camera::initLight() {
-  GL_TEST_ERROR();
-
   GLfloat pos[4];
 
   if (d3) {
@@ -188,13 +186,9 @@ void Camera::initLight() {
   glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, attL);
   glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, attQ);
   glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-
-  GL_TEST_ERROR();
 }
 //====================================================
 void Camera::initProjection(const Vector<int, 4> &viewport, bool reset) {
-  GL_TEST_ERROR();
-
   glMatrixMode(GL_PROJECTION);
 
   if (reset)
@@ -244,8 +238,6 @@ void Camera::initProjection(const Vector<int, 4> &viewport, bool reset) {
     glOrtho(0, viewport[2], 0, viewport[3], -100, 100);
     glDisable(GL_DEPTH_TEST);
   }
-
-  GL_TEST_ERROR();
 }
 //====================================================
 void Camera::initProjection(bool reset) {
@@ -255,8 +247,6 @@ void Camera::initProjection(bool reset) {
 }
 //====================================================
 void Camera::initModelView() {
-  GL_TEST_ERROR();
-
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
@@ -312,8 +302,6 @@ void Camera::initModelView() {
   glGetFloatv(GL_MODELVIEW_MATRIX, reinterpret_cast<GLfloat *>(&transformMatrix));
   glPopMatrix();
   matrixCoherent = true;
-
-  GL_TEST_ERROR();
 }
 //====================================================
 void Camera::setSceneRadius(double sceneRadius, const BoundingBox sceneBoundingBox) {

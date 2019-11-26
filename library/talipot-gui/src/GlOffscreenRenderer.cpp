@@ -299,6 +299,11 @@ GLuint GlOffscreenRenderer::getGLTexture(const bool generateMipMaps) {
 QOpenGLContext *GlOffscreenRenderer::getOpenGLContext() {
   if (!glContext) {
     glContext = new QOpenGLContext();
+#ifndef NDEBUG
+    QSurfaceFormat format;
+    format.setOption(QSurfaceFormat::DebugContext);
+    glContext->setFormat(format);
+#endif
     offscreenSurface = new QOffscreenSurface();
     glContext->create();
     offscreenSurface->create();

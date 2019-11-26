@@ -15,6 +15,7 @@
 
 #include <talipot/OpenGlConfigManager.h>
 #include <talipot/ParallelTools.h>
+#include <talipot/TlpTools.h>
 
 #include <iostream>
 #include <sstream>
@@ -22,6 +23,88 @@
 //====================================================
 
 using namespace std;
+
+#ifndef NDEBUG
+static void glDebugOutput(GLenum source, GLenum type, GLuint, GLenum severity, GLsizei,
+                          const GLchar *message, const void *) {
+
+  string sourceStr = "Unknown";
+
+  switch (source) {
+  case GL_DEBUG_SOURCE_API:
+    sourceStr = "API";
+    break;
+  case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+    sourceStr = "Window System";
+    break;
+  case GL_DEBUG_SOURCE_SHADER_COMPILER:
+    sourceStr = "Shader Compiler";
+    break;
+  case GL_DEBUG_SOURCE_THIRD_PARTY:
+    sourceStr = "Third Party";
+    break;
+  case GL_DEBUG_SOURCE_APPLICATION:
+    sourceStr = "Application";
+    break;
+  case GL_DEBUG_SOURCE_OTHER:
+    sourceStr = "Other";
+    break;
+  }
+
+  string typeStr;
+
+  switch (type) {
+  case GL_DEBUG_TYPE_ERROR:
+    typeStr = "Error";
+    break;
+  case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+    typeStr = "Deprecated Behaviour";
+    break;
+  case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+    typeStr = "Undefined Behaviour";
+    break;
+  case GL_DEBUG_TYPE_PORTABILITY:
+    typeStr = "Portability";
+    break;
+  case GL_DEBUG_TYPE_PERFORMANCE:
+    typeStr = "Performance";
+    break;
+  case GL_DEBUG_TYPE_MARKER:
+    typeStr = "Marker";
+    break;
+  case GL_DEBUG_TYPE_PUSH_GROUP:
+    typeStr = "Push Group";
+    break;
+  case GL_DEBUG_TYPE_POP_GROUP:
+    typeStr = "Pop Group";
+    break;
+  case GL_DEBUG_TYPE_OTHER:
+    typeStr = "Other";
+    break;
+  }
+
+  string severityStr;
+
+  switch (severity) {
+  case GL_DEBUG_SEVERITY_HIGH:
+    severityStr = "High";
+    break;
+  case GL_DEBUG_SEVERITY_MEDIUM:
+    severityStr = "Medium";
+    break;
+  case GL_DEBUG_SEVERITY_LOW:
+    severityStr = "Low";
+    break;
+  case GL_DEBUG_SEVERITY_NOTIFICATION:
+    severityStr = "Notification";
+    break;
+  }
+
+  tlp::debug() << "[OPENGL DEBUG] "
+               << "Type: " << typeStr << ", Severity: " << severityStr << ", Source: " << sourceStr
+               << ", Message: " << message << std::endl;
+}
+#endif
 
 namespace tlp {
 
@@ -33,6 +116,20 @@ void OpenGlConfigManager::initExtensions() {
   if (!_glewIsInit) {
     glewExperimental = true;
     _glewIsInit = (glewInit() == GLEW_OK);
+#ifndef NDEBUG
+    if (_glewIsInit) {
+      bool canUseDebugOutput = isExtensionSupported("GL_ARB_debug_output") ||
+                               isExtensionSupported("GL_AMD_debug_output");
+      if (canUseDebugOutput) {
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(glDebugOutput, nullptr);
+        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_FALSE);
+        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_HIGH, 0, nullptr,
+                              GL_TRUE);
+      }
+    }
+#endif
   }
 }
 

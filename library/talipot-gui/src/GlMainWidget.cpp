@@ -55,7 +55,6 @@ GlMainWidget::GlMainWidget(QWidget *parent, View *view)
       heightStored(0), glFrameBuf(nullptr), glFrameBuf2(nullptr),
       keepPointOfViewOnSubgraphChanging(false),
       sceneTextureId("scene" + to_string(reinterpret_cast<unsigned long long>(this))) {
-  assert(this->isValid());
   setFocusPolicy(Qt::StrongFocus);
   setMouseTracking(true);
   grabGesture(Qt::PinchGesture);
@@ -65,6 +64,9 @@ GlMainWidget::GlMainWidget(QWidget *parent, View *view)
   QSurfaceFormat format;
   format.setSamples(OpenGlConfigManager::maxNumberOfSamples());
   format.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
+#ifndef NDEBUG
+  format.setOption(QSurfaceFormat::DebugContext);
+#endif
   setFormat(format);
   getScene()->setViewOrtho(Settings::instance().isViewOrtho());
   OpenGlConfigManager::initExtensions();
@@ -430,6 +432,7 @@ QImage GlMainWidget::createPicture(int width, int height, bool center, QImage::F
 }
 
 void GlMainWidget::centerScene(bool graphChanged, float zf) {
+  makeCurrent();
   scene.centerScene();
 
   if (zf != 1)

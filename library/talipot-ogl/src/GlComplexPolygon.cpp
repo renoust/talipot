@@ -432,8 +432,6 @@ void GlComplexPolygon::deactivateQuadBorder(const int polygonId) {
 }
 //=====================================================
 void GlComplexPolygon::draw(float, Camera *) {
-  GL_THROW_ON_ERROR();
-
   if (cameraIs3D()) {
     glEnable(GL_LIGHTING);
   } else {
@@ -538,8 +536,6 @@ void GlComplexPolygon::draw(float, Camera *) {
   }
 
   glDisableClientState(GL_VERTEX_ARRAY);
-
-  GL_THROW_ON_ERROR();
 }
 //===========================================================
 void GlComplexPolygon::translate(const Coord &vec) {

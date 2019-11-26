@@ -80,77 +80,6 @@ static char hullVertexTable[][7] = {
     {6, 0, 4, 5, 6, 2, 3}, // 41
     {6, 1, 2, 3, 7, 4, 5}  // 42
 };
-
-// simple structure to embed an error code and its description
-struct glErrorStruct {
-  GLuint code;
-  const std::string description;
-};
-
-// the known gl errors
-static const struct glErrorStruct glErrorStructs[] = {
-    {GL_NO_ERROR, "no error"},
-    {GL_INVALID_ENUM, "invalid enumerant"},
-    {GL_INVALID_VALUE, "invalid value"},
-    {GL_INVALID_OPERATION, "invalid operation"},
-    {GL_STACK_OVERFLOW, "stack overflow"},
-    {GL_STACK_UNDERFLOW, "stack underflow"},
-    {GL_OUT_OF_MEMORY, "out of memory"},
-#ifdef GL_EXT_framebuffer_object
-    {GL_INVALID_FRAMEBUFFER_OPERATION_EXT, "invalid framebuffer operation"},
-#endif
-    {GL_TABLE_TOO_LARGE, "table too large"},
-    {UINT_MAX, "unknown error"} /* end of list indicator */
-};
-
-// the function to retrieve
-const std::string &glGetErrorDescription(GLuint errorCode) {
-  unsigned int i = 0;
-
-  while (glErrorStructs[i].code != errorCode && glErrorStructs[i].code != UINT_MAX)
-    ++i;
-
-  return glErrorStructs[i].description;
-}
-
-//====================================================
-void glTest(const string &message, int line, bool throwException) {
-#ifndef NDEBUG
-  unsigned int i = 1;
-  GLenum error = glGetError();
-
-  stringstream errorStream;
-  bool haveError = false, throwNeeded = false;
-
-  while (error != GL_NO_ERROR) {
-    haveError = true;
-    // invalid operations do not corrupt GL rendering
-    if (throwException && (error != GL_INVALID_OPERATION))
-      throwNeeded = true;
-
-    if (i == 1) {
-      errorStream << "[OpenGL ERROR] " << message;
-      if (line > -1)
-        errorStream << ':' << line << endl;
-    }
-    errorStream << "========> " << glGetErrorDescription(error) << endl;
-    error = glGetError();
-    ++i;
-  }
-
-  if (haveError) {
-    if (throwNeeded)
-      throw tlp::Exception(errorStream.str());
-    tlp::warning() << errorStream.str();
-  }
-
-#else
-  // fixes unused parameter warnings in release mode
-  (void)message;
-  (void)line;
-  (void)throwException;
-#endif
-}
 //====================================================
 void setColor(const Color &c) {
   glColor4ubv(reinterpret_cast<const unsigned char *>(&c));
@@ -182,14 +111,11 @@ Coord projectPoint(const Coord &obj, const MatrixGL &transform, const Vector<int
   point[3] = 1.0f;
   point = point * transform;
 #ifndef NDEBUG
-
   if (fabs(point[3]) < 1E-6) {
-    std::cerr << "Error in projectPoint with coord : " << obj
-              << " and transform matrix : " << transform;
+    tlp::debug() << "Error in projectPoint with coord : " << obj
+                 << " and transform matrix : " << transform << std::endl;
   }
-
 #endif
-  assert(fabs(point[3]) > 1E-6);
   Coord result(point[0], point[1], point[2]);
   result /= point[3];
 
@@ -212,12 +138,11 @@ Coord unprojectPoint(const Coord &obj, const MatrixGL &invtransform,
 #ifndef NDEBUG
 
   if (fabs(point[3]) < 1E-6) {
-    std::cerr << "Error in unprojectPoint with coord : " << obj
-              << " and transform matrix : " << invtransform;
+    tlp::debug() << "Error in unprojectPoint with coord : " << obj
+                 << " and transform matrix : " << invtransform << std::endl;
   }
 
 #endif
-  assert(fabs(point[3]) > 1E-6);
 
   Coord result(point[0], point[1], point[2]);
   result /= point[3];

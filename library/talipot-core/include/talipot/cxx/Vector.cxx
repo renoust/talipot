@@ -34,8 +34,6 @@ VECTORTLP &VECTORTLP::operator*=(const VECTORTLP &vecto) {
 //======================================================
 TEMPLATEVECTOR
 VECTORTLP &VECTORTLP::operator/=(const TYPE scalaire) {
-  assert(scalaire != static_cast<TYPE>(0));
-
   for (size_t i = 0; i < SIZE; ++i)
     (*this)[i] /= scalaire;
 
@@ -45,7 +43,6 @@ VECTORTLP &VECTORTLP::operator/=(const TYPE scalaire) {
 TEMPLATEVECTOR
 VECTORTLP &VECTORTLP::operator/=(const VECTORTLP &vecto) {
   for (size_t i = 0; i < SIZE; ++i) {
-    assert(vecto[i] != static_cast<TYPE>(0));
     (*this)[i] /= vecto[i];
   }
 
