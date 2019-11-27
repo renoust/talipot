@@ -364,13 +364,6 @@ void Observable::addOnlooker(const Observable &obs, OBSERVABLEEDGETYPE type) con
                                                const_cast<Observable *>(this)->getBoundNode());
       _oType[link] = type;
     } else {
-#ifndef NDEBUG
-
-      if (_oType[link] & type) {
-        tlp::warning() << "[Observable Warning]: observer already connected" << std::endl;
-      }
-
-#endif
       // add the bit for the given type on the edge
       _oType[link] |= type;
     }
