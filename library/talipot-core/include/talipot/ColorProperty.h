@@ -57,5 +57,8 @@ public:
     return propertyTypename;
   }
 };
+#ifdef _MSC_VER
+template class AbstractVectorProperty<ColorVectorType, ColorType>;
+#endif
 }
 #endif // TALIPOT_COLOR_PROPERTY_H

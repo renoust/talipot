@@ -35,7 +35,7 @@ struct dfsBiconnectStruct {
 
   dfsBiconnectStruct(Graph *graph, node n, unsigned int d = 0, node u = node(), node first = node())
       : from(n), u(u), first(first), depth(d),
-        inOutNodes(new StableIterator<node>(graph->getInOutNodes(from))) {}
+        inOutNodes(stableIterator(graph->getInOutNodes(from))) {}
 };
 
 static void makeBiconnectedDFS(Graph *graph, vector<edge> &addedEdges) {
@@ -89,7 +89,7 @@ static void makeBiconnectedDFS(Graph *graph, vector<edge> &addedEdges) {
         dfsParams.depth = currentDepth;
         depth.set(to.id, currentDepth);
         low.set(to.id, currentDepth);
-        dfsParams.inOutNodes = new StableIterator<node>(graph->getInOutNodes(to));
+        dfsParams.inOutNodes = stableIterator(graph->getInOutNodes(to));
         break;
       } else {
         low.set(from.id, std::min(low.get(from.id), depth.get(to.id)));

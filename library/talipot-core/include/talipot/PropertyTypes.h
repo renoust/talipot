@@ -25,9 +25,9 @@
 #include <talipot/Color.h>
 #include <talipot/Edge.h>
 #include <talipot/Node.h>
-#include <talipot/AbstractProperty.h>
 #include <talipot/TypeInterface.h>
 #include <talipot/SerializableType.h>
+#include <talipot/DataSet.h>
 
 namespace tlp {
 
@@ -263,14 +263,6 @@ template class TypeInterface<std::vector<bool>>;
 template class TypeInterface<std::vector<std::string>>;
 template class TypeInterface<tlp::Color>;
 template class TypeInterface<std::string>;
-
-template class AbstractVectorProperty<DoubleVectorType, tlp::DoubleType>;
-template class AbstractVectorProperty<IntegerVectorType, tlp::IntegerType>;
-template class AbstractVectorProperty<BooleanVectorType, tlp::BooleanType>;
-template class AbstractVectorProperty<StringVectorType, tlp::StringType>;
-template class AbstractVectorProperty<ColorVectorType, tlp::ColorType>;
-template class AbstractVectorProperty<SizeVectorType, tlp::SizeType>;
-template class AbstractVectorProperty<CoordVectorType, tlp::PointType>;
 #endif
 }
 

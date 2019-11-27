@@ -121,6 +121,9 @@ public:
     return propertyTypename;
   }
 };
+#ifdef _MSC_VER
+template class AbstractVectorProperty<IntegerVectorType, IntegerType>;
+#endif
 }
 #endif // TALIPOT_INTEGER_PROPERTY_H
 ///@endcond

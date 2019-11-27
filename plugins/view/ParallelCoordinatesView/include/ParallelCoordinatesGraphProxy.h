@@ -161,24 +161,6 @@ private:
   unsigned int unhighlightedEltsColorAlphaValue;
 };
 
-template <typename GraphDataSource>
-class ParallelCoordinatesDataIterator : public Iterator<unsigned int> {
-
-public:
-  ParallelCoordinatesDataIterator(Iterator<GraphDataSource> *graphDataSourceIterator)
-      : graphDataSourceIt(graphDataSourceIterator) {}
-
-  unsigned int next() override {
-    return graphDataSourceIt.next().id;
-  }
-
-  bool hasNext() override {
-    return graphDataSourceIt.hasNext();
-  }
-
-private:
-  StableIterator<GraphDataSource> graphDataSourceIt;
-};
 }
 
 #endif // DOXYGEN_NOTFOR_DEVEL

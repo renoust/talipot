@@ -88,6 +88,14 @@ struct edge {
     return id != UINT_MAX;
   }
 };
+
+// utility lambda functions for type conversion
+static std::function<tlp::edge(unsigned int)> idToEdge = [](unsigned int id) {
+  return tlp::edge(id);
+};
+
+static std::function<unsigned int(tlp::edge)> edgeToId = [](tlp::edge e) { return e.id; };
+
 }
 
 #ifdef _MSC_VER

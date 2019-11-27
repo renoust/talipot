@@ -17,6 +17,7 @@
 #include <talipot/StringProperty.h>
 #include <talipot/IntegerProperty.h>
 #include <talipot/DoubleProperty.h>
+#include <talipot/ConversionIterator.h>
 
 #include "ParallelCoordinatesGraphProxy.h"
 #include "ParallelTools.h"
@@ -127,9 +128,9 @@ void ParallelCoordinatesGraphProxy::deleteData(const unsigned int dataId) {
 
 Iterator<unsigned int> *ParallelCoordinatesGraphProxy::getDataIterator() {
   if (getDataLocation() == NODE) {
-    return new ParallelCoordinatesDataIterator<node>(getNodes());
+    return conversionIterator<unsigned int>(getNodes(), nodeToId);
   } else {
-    return new ParallelCoordinatesDataIterator<edge>(getEdges());
+    return conversionIterator<unsigned int>(getEdges(), edgeToId);
   }
 }
 
@@ -137,11 +138,11 @@ Iterator<unsigned int> *ParallelCoordinatesGraphProxy::getSelectedDataIterator()
   BooleanProperty *viewSelection = static_cast<BooleanProperty *>(getProperty("viewSelection"));
 
   if (getDataLocation() == NODE) {
-    return new ParallelCoordinatesDataIterator<node>(
-        viewSelection->getNodesEqualTo(true, graph_component));
+    return conversionIterator<unsigned int>(viewSelection->getNodesEqualTo(true, graph_component),
+                                            nodeToId);
   } else {
-    return new ParallelCoordinatesDataIterator<edge>(
-        viewSelection->getEdgesEqualTo(true, graph_component));
+    return conversionIterator<unsigned int>(viewSelection->getEdgesEqualTo(true, graph_component),
+                                            edgeToId);
   }
 }
 
@@ -149,9 +150,11 @@ Iterator<unsigned int> *ParallelCoordinatesGraphProxy::getUnselectedDataIterator
   BooleanProperty *viewSelection = static_cast<BooleanProperty *>(getProperty("viewSelection"));
 
   if (getDataLocation() == NODE) {
-    return new ParallelCoordinatesDataIterator<node>(viewSelection->getNodesEqualTo(false));
+    return conversionIterator<unsigned int>(viewSelection->getNodesEqualTo(false, graph_component),
+                                            nodeToId);
   } else {
-    return new ParallelCoordinatesDataIterator<edge>(viewSelection->getEdgesEqualTo(false));
+    return conversionIterator<unsigned int>(viewSelection->getEdgesEqualTo(false, graph_component),
+                                            edgeToId);
   }
 }
 

@@ -72,6 +72,8 @@ public:
     return 0;
   }
 };
-/*\@}*/
+#ifdef _MSC_VER
+template class AbstractVectorProperty<StringVectorType, StringType>;
+#endif
 }
 #endif // TALIPOT_STRING_PROPERTY_H

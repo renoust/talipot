@@ -13,6 +13,7 @@ INSTALL(FILES
   talipot/ColorProperty.h
   talipot/ColorScale.h
   talipot/ConnectedTest.h
+  talipot/ConversionIterator.h
   talipot/Coord.h
   talipot/DataSet.h
   talipot/DoubleProperty.h

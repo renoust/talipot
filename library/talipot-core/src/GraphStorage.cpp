@@ -109,22 +109,6 @@ void GraphStorage::restoreIdsMemento(const GraphStorageIdsMemento *memento) {
 // specific iterator classes used to implement
 // the get*Nodes & get*Edges methods
 
-// define a class to iterate on graph storage edges
-struct EdgeContainerIterator : public Iterator<edge>, public MemoryPool<EdgeContainerIterator> {
-  std::vector<edge>::iterator it, itEnd;
-  EdgeContainerIterator(std::vector<edge> &v) : it(v.begin()), itEnd(v.end()) {}
-  ~EdgeContainerIterator() override {}
-  bool hasNext() override {
-    return (it != itEnd);
-  }
-  edge next() override {
-    assert(hasNext());
-    edge tmp = (*it);
-    ++it;
-    return tmp;
-  }
-};
-
 // define some values for further template specializations
 // IO_IN => in nodes/edges
 // IO_OUT => out nodes/edges
@@ -206,7 +190,7 @@ struct IONodesIterator : public Iterator<node>, public MemoryPool<IONodesIterato
                   const std::vector<std::pair<node, node>> &edges)
       : n(n), edges(edges) {
     if (io_type == IO_INOUT)
-      it = new EdgeContainerIterator(nEdges);
+      it = stlIterator(nEdges);
     else
       it = new IOEdgeContainerIterator<io_type>(n, nEdges, edges);
   }
@@ -238,7 +222,7 @@ struct IONodesIterator : public Iterator<node>, public MemoryPool<IONodesIterato
 };
 //=======================================================
 Iterator<edge> *GraphStorage::getInOutEdges(const node n) const {
-  return new EdgeContainerIterator(nodeData[n.id].edges);
+  return stlIterator(nodeData[n.id].edges);
 }
 //=======================================================
 bool GraphStorage::getEdges(const node src, const node tgt, bool directed,

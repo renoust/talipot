@@ -88,6 +88,14 @@ struct node {
     return id != UINT_MAX;
   }
 };
+
+// utility lambda functions for type conversion
+static std::function<tlp::node(unsigned int)> idToNode = [](unsigned int id) {
+  return tlp::node(id);
+};
+
+static std::function<unsigned int(tlp::node)> nodeToId = [](tlp::node n) { return n.id; };
+
 }
 
 #ifdef _MSC_VER
@@ -119,7 +127,7 @@ struct less<tlp::node> {
     return n.id < n2.id;
   }
 };
-} // namespace std
+}
 ///@endcond
 
 #endif // TALIPOT_NODE_H

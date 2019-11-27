@@ -130,5 +130,8 @@ public:
     return propertyTypename;
   }
 };
+#ifdef _MSC_VER
+template class AbstractVectorProperty<DoubleVectorType, DoubleType>;
+#endif
 }
 #endif // TALIPOT_DOUBLE_PROPERTY_H

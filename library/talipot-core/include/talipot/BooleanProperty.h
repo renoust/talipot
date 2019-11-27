@@ -68,6 +68,9 @@ public:
     return propertyTypename;
   }
 };
+#ifdef _MSC_VER
+template class AbstractVectorProperty<BooleanVectorType, BooleanType>;
+#endif
 }
 
 #endif // TALIPOT_BOOLEAN_PROPERTY_H

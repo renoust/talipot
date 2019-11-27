@@ -52,7 +52,7 @@ GraphView::GraphView(Graph *supergraph, BooleanProperty *filter, unsigned int sg
 
       iteN = graphToFilter->getNodes();
     } else {
-      iteN = new UINTIterator<node>(it);
+      iteN = conversionIterator<node>(it, idToNode);
     }
 
     while (iteN->hasNext()) {
@@ -87,7 +87,7 @@ GraphView::GraphView(Graph *supergraph, BooleanProperty *filter, unsigned int sg
 
       itE = graphToFilter->getEdges();
     } else {
-      itE = new UINTIterator<edge>(it);
+      itE = conversionIterator<edge>(it, idToEdge);
     }
 
     while (itE->hasNext()) {

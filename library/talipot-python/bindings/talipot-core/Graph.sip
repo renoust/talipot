@@ -559,7 +559,7 @@ Returns an iterator on all the subgraphs of the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::Graph *>(sipCpp->getSubGraphs());
+  sipRes = tlp::stableIterator(sipCpp->getSubGraphs());
 %End
 //===========================================================================================
 
@@ -703,7 +703,7 @@ Returns an iterator over all the descendant graphs of the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::Graph *>(sipCpp->getDescendantGraphs());
+  sipRes = tlp::stableIterator(sipCpp->getDescendantGraphs());
 %End
 
 //===========================================================================================
@@ -1480,7 +1480,7 @@ Returns an iterator on the nodes.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNodes());
+  sipRes = tlp::stableIterator(sipCpp->getNodes());
 %End
 
 //===========================================================================================
@@ -1536,7 +1536,7 @@ Return an iterator on the predecessors of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getInNodes(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getInNodes(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1595,7 +1595,7 @@ Returns an iterator on the successors of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getOutNodes(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getOutNodes(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1617,7 +1617,7 @@ Returns an iterator on the neighbours of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getInOutNodes(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getInOutNodes(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1736,7 +1736,7 @@ Returns an iterator on the edges.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getEdges());
+  sipRes = tlp::stableIterator(sipCpp->getEdges());
 %End
 
 //===========================================================================================
@@ -1777,7 +1777,7 @@ Returns a Talipot iterator on the outgoing edges of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getOutEdges(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getOutEdges(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1799,7 +1799,7 @@ Returns an iterator on the incoming and outgoing edges of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getInOutEdges(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getInOutEdges(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1821,7 +1821,7 @@ Returns an iterator on the incoming edges of a node.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getInEdges(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getInEdges(*a0));
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp, *a0);
   }
@@ -1843,7 +1843,7 @@ Returns an iterator on the underlying edges of a meta edge.
 
 %MethodCode
   if (sipCpp->isElement(*a0)) {
-    sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getEdgeMetaInfo(*a0));
+    sipRes = tlp::stableIterator(sipCpp->getEdgeMetaInfo(*a0));
   } else {
     sipIsErr = throwInvalidEdgeException(sipCpp, *a0);
   }
@@ -3017,7 +3017,7 @@ Returns an iterator on the names of the properties local to the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<std::string>(sipCpp->getLocalProperties());
+  sipRes = tlp::stableIterator(sipCpp->getLocalProperties());
 %End
 
 //===========================================================================================
@@ -3032,7 +3032,7 @@ Returns an iterator on the names of the properties inherited from the graph's an
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<std::string>(sipCpp->getInheritedProperties());
+  sipRes = tlp::stableIterator(sipCpp->getInheritedProperties());
 %End
 
 //===========================================================================================
@@ -3047,7 +3047,7 @@ Returns an iterator on the names of all the properties attached to the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<std::string>(sipCpp->getProperties());
+  sipRes = tlp::stableIterator(sipCpp->getProperties());
 %End
 
 //===========================================================================================
@@ -3063,7 +3063,7 @@ whether they are local or inherited.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::PropertyInterface*>(sipCpp->getObjectProperties());
+  sipRes = tlp::stableIterator(sipCpp->getObjectProperties());
 %End
 
 //===========================================================================================
@@ -3078,7 +3078,7 @@ Returns an iterator over the local properties attached to the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::PropertyInterface*>(sipCpp->getLocalObjectProperties());
+  sipRes = tlp::stableIterator(sipCpp->getLocalObjectProperties());
 %End
 
 //===========================================================================================
@@ -3093,7 +3093,7 @@ Returns an iterator over the inherited properties attached to the graph.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::PropertyInterface*>(sipCpp->getInheritedObjectProperties());
+  sipRes = tlp::stableIterator(sipCpp->getInheritedObjectProperties());
 %End
 
 //===========================================================================================

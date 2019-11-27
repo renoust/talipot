@@ -17,45 +17,6 @@
 #include <talipot/GraphProperty.h>
 
 namespace tlp {
-//======================================================================================
-class PropertiesIterator : public Iterator<PropertyInterface *> {
-public:
-  PropertiesIterator(std::map<std::string, PropertyInterface *>::iterator,
-                     std::map<std::string, PropertyInterface *>::iterator);
-  PropertyInterface *next() override;
-  bool hasNext() override;
-  std::map<std::string, PropertyInterface *>::iterator it, itEnd;
-};
-//==============================================================
-PropertiesIterator::PropertiesIterator(std::map<std::string, PropertyInterface *>::iterator itB,
-                                       std::map<std::string, PropertyInterface *>::iterator itE)
-    : it(itB), itEnd(itE) {}
-PropertyInterface *PropertiesIterator::next() {
-  PropertyInterface *tmp = (*it).second;
-  ++it;
-  return tmp;
-}
-bool PropertiesIterator::hasNext() {
-  return (it != itEnd);
-}
-//======================================================================================
-class PropertyNamesIterator : public Iterator<std::string> {
-public:
-  PropertyNamesIterator(std::map<std::string, PropertyInterface *>::iterator itB,
-                        std::map<std::string, PropertyInterface *>::iterator itE)
-      : itProp(itB, itE) {}
-  std::string next() override {
-    std::string tmp = (*(itProp.it)).first;
-    ++(itProp.it);
-    return tmp;
-  }
-
-  bool hasNext() override {
-    return itProp.hasNext();
-  }
-  PropertiesIterator itProp;
-};
-}
 
 using namespace std;
 using namespace tlp;
@@ -317,16 +278,16 @@ void PropertyManager::notifyBeforeDelInheritedProperty(const string &str) {
 }
 
 Iterator<string> *PropertyManager::getLocalProperties() {
-  return new PropertyNamesIterator(localProperties.begin(), localProperties.end());
+  return stlMapKeyIterator(localProperties);
 }
 Iterator<string> *PropertyManager::getInheritedProperties() {
-  return new PropertyNamesIterator(inheritedProperties.begin(), inheritedProperties.end());
+  return stlMapKeyIterator(inheritedProperties);
 }
 Iterator<PropertyInterface *> *PropertyManager::getLocalObjectProperties() {
-  return new PropertiesIterator(localProperties.begin(), localProperties.end());
+  return stlMapValueIterator(localProperties);
 }
 Iterator<PropertyInterface *> *PropertyManager::getInheritedObjectProperties() {
-  return new PropertiesIterator(inheritedProperties.begin(), inheritedProperties.end());
+  return stlMapValueIterator(inheritedProperties);
 }
 //===============================================================
 void PropertyManager::erase(const node n) {
@@ -339,4 +300,5 @@ void PropertyManager::erase(const edge e) {
   for (const auto &itP : localProperties) {
     itP.second->erase(e);
   }
+}
 }

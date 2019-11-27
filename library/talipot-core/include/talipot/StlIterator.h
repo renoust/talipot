@@ -137,6 +137,31 @@ typename std::enable_if<has_const_iterator<Map>::value,
   return new StlMapKeyIterator<Map>(map.begin(), map.end());
 }
 //=================================================
+template <typename Map>
+struct StlMapValueIterator : public tlp::Iterator<typename Map::mapped_type> {
+  StlMapValueIterator(typename Map::const_iterator startIt, typename Map::const_iterator endIt)
+      : it(startIt), itEnd(endIt) {}
+
+  typename Map::mapped_type next() {
+    auto tmp = it->second;
+    ++it;
+    return tmp;
+  }
+
+  bool hasNext() {
+    return it != itEnd;
+  }
+
+private:
+  typename Map::const_iterator it, itEnd;
+};
+//=================================================
+template <typename Map>
+typename std::enable_if<has_const_iterator<Map>::value, StlMapValueIterator<Map> *>::
+    type inline stlMapValueIterator(const Map &map) {
+  return new StlMapValueIterator<Map>(map.begin(), map.end());
+}
+//=================================================
 template <typename Container>
 struct reverse_wrapper {
 

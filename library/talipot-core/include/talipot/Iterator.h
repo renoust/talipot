@@ -330,27 +330,6 @@ inline std::set<T> iteratorSet(Iterator<T> *it) {
   delete it;
   return ret;
 }
-
-#ifndef DOXYGEN_NOTFOR_DEVEL
-template <typename TYPE>
-class UINTIterator : public Iterator<TYPE> {
-public:
-  UINTIterator(Iterator<unsigned int> *it) : it(it) {}
-  ~UINTIterator() override {
-    delete it;
-  }
-  bool hasNext() override {
-    return it->hasNext();
-  }
-  TYPE next() override {
-    return TYPE(it->next());
-  }
-
-private:
-  Iterator<unsigned int> *it;
-};
-
-#endif // DOXYGEN_NOTFOR_DEVEL
 }
 
 #ifdef _MSC_VER

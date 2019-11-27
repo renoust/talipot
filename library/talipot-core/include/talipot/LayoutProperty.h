@@ -332,5 +332,8 @@ public:
 };
 
 typedef CoordVectorProperty LayoutVectorProperty;
+#ifdef _MSC_VER
+template class AbstractVectorProperty<CoordVectorType, PointType>;
+#endif
 }
 #endif // TALIPOT_LAYOUT_PROPERTY_H

@@ -409,8 +409,8 @@ Iterator<std::string> *GraphAbstract::getInheritedProperties() const {
 }
 //=========================================================================
 Iterator<std::string> *GraphAbstract::getProperties() const {
-  return new ConcatIterator<std::string>(propertyContainer->getLocalProperties(),
-                                         propertyContainer->getInheritedProperties());
+  return concatIterator(propertyContainer->getLocalProperties(),
+                        propertyContainer->getInheritedProperties());
 }
 //=========================================================================
 Iterator<PropertyInterface *> *GraphAbstract::getLocalObjectProperties() const {
@@ -422,8 +422,8 @@ Iterator<PropertyInterface *> *GraphAbstract::getInheritedObjectProperties() con
 }
 //=========================================================================
 Iterator<PropertyInterface *> *GraphAbstract::getObjectProperties() const {
-  return new ConcatIterator<PropertyInterface *>(propertyContainer->getLocalObjectProperties(),
-                                                 propertyContainer->getInheritedObjectProperties());
+  return concatIterator(propertyContainer->getLocalObjectProperties(),
+                        propertyContainer->getInheritedObjectProperties());
 }
 //=========================================================================
 bool GraphAbstract::isMetaNode(const node n) const {
@@ -452,28 +452,9 @@ const set<edge> &GraphAbstract::getReferencedEdges(const edge e) const {
   else
     return noReferencedEdges;
 }
-//=========================================================================
-// Iterator on a vector of edges
-// used for the edge associated value of a GraphProperty
-class EdgeSetIterator : public Iterator<edge> {
-  set<edge>::const_iterator it, itEnd;
-
-public:
-  EdgeSetIterator(const set<edge> &edges) : it(edges.begin()), itEnd(edges.end()) {}
-  ~EdgeSetIterator() override {}
-  edge next() override {
-    edge tmp = (*it);
-    ++it;
-    return tmp;
-  }
-
-  bool hasNext() override {
-    return (it != itEnd);
-  }
-};
 
 Iterator<edge> *GraphAbstract::getEdgeMetaInfo(const edge e) const {
-  return new EdgeSetIterator(getReferencedEdges(e));
+  return stlIterator(getReferencedEdges(e));
 }
 
 GraphProperty *GraphAbstract::getMetaGraphProperty() {

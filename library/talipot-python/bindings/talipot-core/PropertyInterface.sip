@@ -111,7 +111,7 @@ from the default value.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNonDefaultValuatedNodes(a0));
+  sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedNodes(a0));
 %End
 
  //===========================================================================================
@@ -157,7 +157,7 @@ from the default value.
 %End
 
 %MethodCode
- sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getNonDefaultValuatedEdges(a0));
+ sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedEdges(a0));
 %End
 
 //===========================================================================================

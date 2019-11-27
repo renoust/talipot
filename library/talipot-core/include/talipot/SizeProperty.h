@@ -84,5 +84,8 @@ public:
     return propertyTypename;
   }
 };
+#ifdef _MSC_VER
+template class AbstractVectorProperty<SizeVectorType, SizeType>;
+#endif
 }
 #endif // TALIPOT_SIZE_PROPERTY_H

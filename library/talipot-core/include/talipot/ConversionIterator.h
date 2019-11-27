@@ -40,13 +40,13 @@ class ConversionIterator : public Iterator<TYPEOUT> {
 public:
   ConversionIterator(Iterator<TYPEIN> *it, ConversionFunc convFunctor)
       : _it(it), _convFunctor(convFunctor) {}
-  ~ConversionIterator() {
+  ~ConversionIterator() override {
     delete _it;
   }
-  inline bool hasNext() {
+  bool hasNext() override {
     return _it->hasNext();
   }
-  inline TYPEOUT next() {
+  TYPEOUT next() override {
     return _convFunctor(_it->next());
   }
 

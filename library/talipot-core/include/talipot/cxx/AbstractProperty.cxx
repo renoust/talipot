@@ -12,7 +12,9 @@
  */
 
 #include <cstdlib>
+
 #include <talipot/BasicIterators.h>
+#include <talipot/ConversionIterator.h>
 
 template <class Tnode, class Tedge, class Tprop>
 tlp::AbstractProperty<Tnode, Tedge, Tprop>::AbstractProperty(tlp::Graph *sg, const std::string &n) {
@@ -66,7 +68,7 @@ tlp::Iterator<tlp::node> *tlp::AbstractProperty<Tnode, Tedge, Tprop>::getNodesEq
   if (it == nullptr)
     return new tlp::SGraphNodeIterator<typename Tnode::RealType>(sg, nodeProperties, val);
 
-  return (new tlp::UINTIterator<node>(it));
+  return tlp::conversionIterator<tlp::node>(it, idToNode);
 }
 //=================================================================================
 template <class Tnode, class Tedge, class Tprop>
@@ -84,7 +86,7 @@ tlp::Iterator<tlp::edge> *tlp::AbstractProperty<Tnode, Tedge, Tprop>::getEdgesEq
   if (it == nullptr)
     return new tlp::SGraphEdgeIterator<typename Tedge::RealType>(sg, edgeProperties, val);
 
-  return (new tlp::UINTIterator<edge>(it));
+  return tlp::conversionIterator<tlp::edge>(it, idToEdge);
 }
 //=============================================================
 template <class Tnode, class Tedge, class Tprop>
@@ -298,7 +300,7 @@ template <class Tnode, class Tedge, class Tprop>
 tlp::Iterator<tlp::node> *
 tlp::AbstractProperty<Tnode, Tedge, Tprop>::getNonDefaultValuatedNodes(const Graph *g) const {
   tlp::Iterator<tlp::node> *it =
-      new tlp::UINTIterator<tlp::node>(nodeProperties.findAll(nodeDefaultValue, false));
+      conversionIterator<tlp::node>(nodeProperties.findAll(nodeDefaultValue, false), idToNode);
 
   if (Tprop::name.empty())
     // we always need to check that nodes belong to graph
@@ -370,7 +372,7 @@ template <class Tnode, class Tedge, class Tprop>
 tlp::Iterator<tlp::edge> *
 tlp::AbstractProperty<Tnode, Tedge, Tprop>::getNonDefaultValuatedEdges(const Graph *g) const {
   tlp::Iterator<tlp::edge> *it =
-      new tlp::UINTIterator<tlp::edge>(edgeProperties.findAll(edgeDefaultValue, false));
+      conversionIterator<tlp::edge>(edgeProperties.findAll(edgeDefaultValue, false), idToEdge);
 
   if (Tprop::name.empty())
     // we always need to check that edges belong to graph

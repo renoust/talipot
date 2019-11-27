@@ -409,7 +409,7 @@ Sets the value of a particular edge.
 
   virtual tlp::Iterator<tlp::node>* getNonDefaultValuatedNodes(const tlp::Graph* subgraph = NULL) const /TransferBack, TypeHint="Iterator[tlp.node]"/;
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNonDefaultValuatedNodes(a0));
+  sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedNodes(a0));
 %End
 
 //===========================================================================================
@@ -429,7 +429,7 @@ whose associated value is equal to the one given in parameter.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNodesEqualTo(getValue(a0), a1));
+  sipRes = tlp::stableIterator(sipCpp->getNodesEqualTo(getValue(a0), a1));
 %End
 //===========================================================================================
 
@@ -443,7 +443,7 @@ whose associated value is equal to the one given in parameter.
 
   virtual tlp::Iterator<tlp::edge>* getNonDefaultValuatedEdges(const tlp::Graph* subgraph = NULL) const /TransferBack, TypeHint="Iterator[tlp.edge]"/;
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getNonDefaultValuatedEdges(a0));
+  sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedEdges(a0));
 %End
 
 //===========================================================================================
@@ -463,7 +463,7 @@ whose associated value is equal to the one given in parameter.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getEdgesEqualTo(getValue(a0), a1));
+  sipRes = tlp::stableIterator(sipCpp->getEdgesEqualTo(getValue(a0), a1));
 %End
 
 //===========================================================================================
@@ -1201,14 +1201,14 @@ Resizes the list attached to a particular edge. The value given in parameter wil
 
   virtual tlp::Iterator<tlp::node>* getNonDefaultValuatedNodes(const tlp::Graph* subgraph= NULL) const /TransferBack, TypeHint="Iterator[tlp.node]"/;
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNonDefaultValuatedNodes(a0));
+  sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedNodes(a0));
 %End
 
 //===========================================================================================
 
   virtual tlp::Iterator<tlp::edge>* getNonDefaultValuatedEdges(const tlp::Graph* subgraph= NULL) const /TransferBack, TypeHint="Iterator[tlp.edge]"/;
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getNonDefaultValuatedEdges(a0));
+  sipRes = tlp::stableIterator(sipCpp->getNonDefaultValuatedEdges(a0));
 %End
 
 //===========================================================================================
@@ -1280,7 +1280,7 @@ whose associated value is equal to the one given in parameter.
 %End
 
 %MethodCode
- sipRes = new tlp::StableIterator<tlp::node>(sipCpp->getNodesEqualTo(*a0, a1));
+ sipRes = tlp::stableIterator(sipCpp->getNodesEqualTo(*a0, a1));
 %End
 
 //===========================================================================================
@@ -1300,7 +1300,7 @@ whose associated value is equal to the one given in parameter.
 %End
 
 %MethodCode
-  sipRes = new tlp::StableIterator<tlp::edge>(sipCpp->getEdgesEqualTo(*a0, a1));
+  sipRes = tlp::stableIterator(sipCpp->getEdgesEqualTo(*a0, a1));
 %End
 
 };

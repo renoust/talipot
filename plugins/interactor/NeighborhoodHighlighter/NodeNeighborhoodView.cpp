@@ -23,25 +23,6 @@
 
 using namespace std;
 
-template <typename T>
-class StlVectorIterator : public Iterator<T> {
-
-public:
-  StlVectorIterator(const vector<T> &stlVector) : stlVector(stlVector), curIdx(0) {}
-
-  T next() override {
-    return stlVector[curIdx++];
-  }
-
-  bool hasNext() override {
-    return curIdx < stlVector.size();
-  }
-
-private:
-  vector<T> stlVector;
-  unsigned int curIdx;
-};
-
 NodeNeighborhoodView::NodeNeighborhoodView(Graph *graph, node n,
                                            NeighborNodesType neighborsNodesType,
                                            unsigned int neighborhoodDist,
@@ -251,7 +232,7 @@ unsigned int NodeNeighborhoodView::edgePos(const edge e) const {
 }
 
 Iterator<node> *NodeNeighborhoodView::getNodes() const {
-  return new StlVectorIterator<node>(graphViewNodes);
+  return stlIterator(graphViewNodes);
 }
 
 Iterator<node> *NodeNeighborhoodView::getInNodes(const node n) const {
@@ -263,7 +244,7 @@ Iterator<node> *NodeNeighborhoodView::getInNodes(const node n) const {
     }
   }
 
-  return new StlVectorIterator<node>(inNodes);
+  return stlIterator(inNodes);
 }
 
 Iterator<node> *NodeNeighborhoodView::getOutNodes(const node n) const {
@@ -275,7 +256,7 @@ Iterator<node> *NodeNeighborhoodView::getOutNodes(const node n) const {
     }
   }
 
-  return new StlVectorIterator<node>(outNodes);
+  return stlIterator(outNodes);
 }
 
 Iterator<node> *NodeNeighborhoodView::getInOutNodes(const node n) const {
@@ -296,11 +277,11 @@ Iterator<node> *NodeNeighborhoodView::getInOutNodes(const node n) const {
   }
 
   inNodes.insert(inNodes.end(), outNodes.begin(), outNodes.end());
-  return new StlVectorIterator<node>(inNodes);
+  return stlIterator(inNodes);
 }
 
 Iterator<edge> *NodeNeighborhoodView::getEdges() const {
-  return new StlVectorIterator<edge>(graphViewEdges);
+  return stlIterator(graphViewEdges);
 }
 
 Iterator<edge> *NodeNeighborhoodView::getOutEdges(const node n) const {
@@ -312,7 +293,7 @@ Iterator<edge> *NodeNeighborhoodView::getOutEdges(const node n) const {
     }
   }
 
-  return new StlVectorIterator<edge>(outEdges);
+  return stlIterator(outEdges);
 }
 
 Iterator<edge> *NodeNeighborhoodView::getInOutEdges(const node n) const {
@@ -333,7 +314,7 @@ Iterator<edge> *NodeNeighborhoodView::getInOutEdges(const node n) const {
   }
 
   inEdges.insert(inEdges.end(), outEdges.begin(), outEdges.end());
-  return new StlVectorIterator<edge>(inEdges);
+  return stlIterator(inEdges);
 }
 
 Iterator<edge> *NodeNeighborhoodView::getInEdges(const node n) const {
@@ -345,5 +326,5 @@ Iterator<edge> *NodeNeighborhoodView::getInEdges(const node n) const {
     }
   }
 
-  return new StlVectorIterator<edge>(inEdges);
+  return stlIterator(inEdges);
 }
