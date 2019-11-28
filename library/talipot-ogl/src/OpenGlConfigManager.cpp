@@ -139,7 +139,7 @@ string OpenGlConfigManager::getOpenGLVersionString() {
 
 double OpenGlConfigManager::getOpenGLVersion() {
   double ret = 0;
-  std::istringstream iss(getOpenGLVersionString()); //.substr(0,3));
+  std::istringstream iss(getOpenGLVersionString());
   iss >> ret;
   return ret;
 }
@@ -157,7 +157,8 @@ bool OpenGlConfigManager::isExtensionSupported(const string &extensionName) {
     auto it = _checkedExtensions.find(extensionName);
     if (it == _checkedExtensions.end()) {
       supported = _checkedExtensions[extensionName] =
-          (glewIsSupported(extensionName.c_str()) == GL_TRUE);
+          (glewIsSupported(extensionName.c_str()) == GL_TRUE &&
+           glewGetExtension(extensionName.c_str()) == GL_TRUE);
     } else
       supported = it->second;
   }
