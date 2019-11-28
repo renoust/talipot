@@ -76,7 +76,8 @@ AboutPage::AboutPage(QWidget *parent) : QWidget(parent), _ui(new Ui::AboutPageDa
       tlpStringToQString(qVersion()) +
       ": <a href=\"https://www.qt.io\">https://www.qt.io</a></li>"
       "  <li> <b> OpenGL </b> " +
-      (openGlOk ? QString::number(OpenGlConfigManager::getOpenGLVersion()) : QString("?.?")) +
+      (openGlOk ? tlpStringToQString(OpenGlConfigManager::getOpenGLVersionString())
+                : QString("?.?")) +
       " (from vendor " +
       (openGlOk ? tlpStringToQString(OpenGlConfigManager::getOpenGLVendor()) : QString("unknown")) +
       "): <a href=\"https://www.opengl.org\">https://www.opengl.org</a> </li>"
