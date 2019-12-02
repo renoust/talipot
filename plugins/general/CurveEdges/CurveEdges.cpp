@@ -106,7 +106,7 @@ public:
     dir /= dir.norm();
     float length = srcCoord.dist(tgtCoord);
     float factor = curveRoundness * length;
-    tlp::Coord normal(dir[1], -dir[0]);
+    tlp::Coord normal = {dir[1], -dir[0]};
     normal *= factor;
 
     if (curveType == CURVE_TYPE_CUBIC_VERTICAL ||

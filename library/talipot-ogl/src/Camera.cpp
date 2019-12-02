@@ -55,9 +55,9 @@ void Camera::setScene(GlScene *scene) {
 //===================================================
 BoundingBox Camera::getBoundingBox() const {
   BoundingBox bb;
-  bb.expand(viewportTo3DWorld(Coord(scene->getViewport()[0], scene->getViewport()[1], 0)));
-  bb.expand(viewportTo3DWorld(Coord(scene->getViewport()[0] + scene->getViewport()[2],
-                                    scene->getViewport()[1] + scene->getViewport()[3], 0)));
+  const Vec4i &viewport = scene->getViewport();
+  bb.expand(viewportTo3DWorld(Coord(viewport[0], viewport[1], 0)));
+  bb.expand(viewportTo3DWorld(Coord(viewport[0] + viewport[2], viewport[1] + viewport[3], 0)));
   return bb;
 }
 //====================================================
@@ -135,7 +135,7 @@ void Camera::strafeLeftRight(float speed) {
 }
 //====================================================
 void Camera::strafeUpDown(float speed) {
-  Coord strafeVector(up);
+  Coord strafeVector = up;
   strafeVector *= speed / strafeVector.norm();
   center += strafeVector;
   eyes += strafeVector;
@@ -152,14 +152,13 @@ void Camera::initGl() {
 }
 //====================================================
 void Camera::initLight() {
-  GLfloat pos[4];
+  Vec4f pos;
 
   if (d3) {
     // set positional light for 3D camera
-    eyes.get(pos[0], pos[1], pos[2]);
-    pos[0] = pos[0] + ((eyes[0] - center[0]) / zoomFactor) + (eyes[0] - center[0]) * 4;
-    pos[1] = pos[1] + ((eyes[1] - center[1]) / zoomFactor) + (eyes[1] - center[1]) * 4;
-    pos[2] = pos[2] + ((eyes[2] - center[2]) / zoomFactor) + (eyes[2] - center[2]) * 4;
+    pos[0] = eyes[0] + ((eyes[0] - center[0]) / zoomFactor) + (eyes[0] - center[0]) * 4;
+    pos[1] = eyes[1] + ((eyes[1] - center[1]) / zoomFactor) + (eyes[1] - center[1]) * 4;
+    pos[2] = eyes[2] + ((eyes[2] - center[2]) / zoomFactor) + (eyes[2] - center[2]) * 4;
     pos[3] = 1;
   } else {
     // set directional light for 2D camera
@@ -169,26 +168,26 @@ void Camera::initLight() {
     pos[3] = 0;
   }
 
-  GLfloat amb[4] = {0.3f, 0.3f, 0.3f, 0.3f};
-  GLfloat dif[4] = {0.5f, 0.5f, 0.5f, 1.0f};
-  GLfloat specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
-  GLfloat attC[3] = {1.0f, 1.0f, 1.0f};
-  GLfloat attL[3] = {0.0f, 0.0f, 0.0f};
-  GLfloat attQ[3] = {0.0f, 0.0f, 0.0f};
+  Vec4f amb = {0.3f, 0.3f, 0.3f, 0.3f};
+  Vec4f dif = {0.5f, 0.5f, 0.5f, 1.0f};
+  Vec4f specular = {0.0f, 0.0f, 0.0f, 1.0f};
+  Vec3f attC = {1.0f, 1.0f, 1.0f};
+  Vec3f attL = {0.0f, 0.0f, 0.0f};
+  Vec3f attQ = {0.0f, 0.0f, 0.0f};
 
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
 
-  glLightfv(GL_LIGHT0, GL_POSITION, pos);
-  glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
-  glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
-  glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION, attC);
-  glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, attL);
-  glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, attQ);
-  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+  glLightfv(GL_LIGHT0, GL_POSITION, pos.data());
+  glLightfv(GL_LIGHT0, GL_AMBIENT, amb.data());
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, dif.data());
+  glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION, attC.data());
+  glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, attL.data());
+  glLightfv(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, attQ.data());
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular.data());
 }
 //====================================================
-void Camera::initProjection(const Vector<int, 4> &viewport, bool reset) {
+void Camera::initProjection(const Vec4i &viewport, bool reset) {
   glMatrixMode(GL_PROJECTION);
 
   if (reset)
@@ -203,7 +202,7 @@ void Camera::initProjection(const Vector<int, 4> &viewport, bool reset) {
 
   if (valid && v1 != v2) {
     sceneBoundingBox.expand(eyes);
-    Coord diagCoord(sceneBoundingBox[1] - sceneBoundingBox[0]);
+    Coord diagCoord = sceneBoundingBox[1] - sceneBoundingBox[0];
     double diag = 2 * sqrt(diagCoord[0] * diagCoord[0] + diagCoord[1] * diagCoord[1] +
                            diagCoord[2] * diagCoord[2]);
     _near = -diag;
@@ -241,7 +240,7 @@ void Camera::initProjection(const Vector<int, 4> &viewport, bool reset) {
 }
 //====================================================
 void Camera::initProjection(bool reset) {
-  Vector<int, 4> viewport = scene->getViewport();
+  const Vec4i &viewport = scene->getViewport();
   assert(viewport[2] != 0 && viewport[3] != 0);
   initProjection(viewport, reset);
 }
@@ -259,16 +258,16 @@ void Camera::initModelView() {
     // but gluLookAt is deprecated on MacOSX 10.9
     // so we prefer to reimplement it
     // from http://www.opengl.org/sdk/docs/man2/xhtml/gluLookAt.xml
-    Coord f(center);
+    Coord f = center;
     f -= eyes;
     // normalize
     f /= f.norm();
 
-    Coord up2(up);
+    Coord up2 = up;
     // normalize
     up2 /= up.norm();
 
-    Coord s(f);
+    Coord s = f;
     s ^= up2;
 
     up2 = s / s.norm() ^ f;
@@ -348,7 +347,7 @@ void Camera::setUp(const Coord &up) {
     sendEvent(Event(*this, Event::TLP_MODIFICATION));
 }
 //====================================================
-void Camera::getProjAndMVMatrix(const Vector<int, 4> &viewport, Matrix<float, 4> &projectionMatrix,
+void Camera::getProjAndMVMatrix(const Vec4i &viewport, Matrix<float, 4> &projectionMatrix,
                                 Matrix<float, 4> &modelviewMatrix) const {
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
@@ -365,8 +364,7 @@ void Camera::getProjAndMVMatrix(const Vector<int, 4> &viewport, Matrix<float, 4>
   glPopMatrix();
 }
 //====================================================
-void Camera::getTransformMatrix(const Vector<int, 4> &viewport,
-                                Matrix<float, 4> &transformMatrix) const {
+void Camera::getTransformMatrix(const Vec4i &viewport, Matrix<float, 4> &transformMatrix) const {
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
   glMatrixMode(GL_MODELVIEW);
@@ -386,7 +384,7 @@ Coord Camera::viewportTo3DWorld(const Coord &point) const {
   const_cast<Camera *>(this)->initProjection();
   const_cast<Camera *>(this)->initModelView();
 
-  Vector<int, 4> viewport = getViewport();
+  const Vec4i &viewport = getViewport();
 
   // Try to find a good z-coordinate for reverse projection
   Coord pScr = projectPoint(Coord(0, 0, 0), transformMatrix, viewport);
@@ -404,11 +402,11 @@ Coord Camera::worldTo2DViewport(const Coord &obj) const {
   const_cast<Camera *>(this)->initProjection();
   const_cast<Camera *>(this)->initModelView();
 
-  Vector<int, 4> viewport = getViewport();
+  const Vec4i &viewport = getViewport();
   return projectPoint(obj, transformMatrix, viewport) - Coord(viewport[0], viewport[1]);
 }
 //====================================================
-Vector<int, 4> Camera::getViewport() const {
+const Vec4i &Camera::getViewport() const {
   return scene->getViewport();
 }
 //====================================================

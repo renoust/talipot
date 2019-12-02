@@ -18,7 +18,6 @@
 // and avoid the compiler error (fatal error C1091)
 %Feature NO_LIMIT_DOC
 
-// Plus set up type aliases for tlp.Coord and tlp.Size
 %PreInitialisationCode
   // Try to load plugins when importing the module from the Python shell
   if (tlp::TalipotPluginsPath.empty()) {
@@ -28,11 +27,6 @@
 %End
 
 %PostInitialisationCode
-  // Set up some type aliases
-  PyObject *moduleDict = PyModule_GetDict(sipModule);
-  PyObject *tlpClass = PyDict_GetItemString(moduleDict, "tlp");
-  PyObject *tlpVec3f = PyObject_GetAttrString(tlpClass, "Vec3f");
-  PyObject_SetAttrString(tlpClass, "Coord", tlpVec3f);
   // ensure that 'talipot' is in globals() to avoid exception when calling methods defined
   // in the talipot module (talipot/__init__.py) from a startup script(executed the first time the module is imported)
   PyRun_SimpleString("import sys;globals()['talipot'] = sys.modules['talipot']");
@@ -90,11 +84,19 @@ inline double getValue(const double &value) {
   return value;
 }
 
-inline tlp::Vec3f *copyValue(const tlp::Vec3f &value) {
-  return new tlp::Vec3f(value);
+inline tlp::Coord *copyValue(const tlp::Coord &value) {
+  return new tlp::Coord(value);
 }
 
-inline const tlp::Vec3f& getValue(const tlp::Vec3f *value) {
+inline const tlp::Coord& getValue(const tlp::Coord *value) {
+  return *value;
+}
+
+inline tlp::Size *copyValue(const tlp::Size &value) {
+  return new tlp::Size(value);
+}
+
+inline const tlp::Size& getValue(const tlp::Size *value) {
   return *value;
 }
 
@@ -114,11 +116,19 @@ inline const tlp::ParameterDescription &getValue(const tlp::ParameterDescription
   return *value;
 }
 
-inline std::vector<tlp::Vec3f> *copyValue(const std::vector<tlp::Vec3f> &value) {
-  return new std::vector<tlp::Vec3f>(value);
+inline std::vector<tlp::Coord> *copyValue(const std::vector<tlp::Coord> &value) {
+  return new std::vector<tlp::Coord>(value);
 }
 
-inline const std::vector<tlp::Vec3f>& getValue(const std::vector<tlp::Vec3f> *value) {
+inline const std::vector<tlp::Coord>& getValue(const std::vector<tlp::Coord> *value) {
+  return *value;
+}
+
+inline std::vector<tlp::Size> *copyValue(const std::vector<tlp::Size> &value) {
+  return new std::vector<tlp::Size>(value);
+}
+
+inline const std::vector<tlp::Size>& getValue(const std::vector<tlp::Size> *value) {
   return *value;
 }
 

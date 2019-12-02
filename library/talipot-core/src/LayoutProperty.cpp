@@ -44,8 +44,8 @@ tlp::MinMaxProperty<tlp::PointType, tlp::LineType>::computeMinMaxNode(const Grap
 #ifndef NDEBUG
   tlp::warning() << __PRETTY_FUNCTION__ << std::endl;
 #endif
-  tlp::Coord maxT(-FLT_MAX, -FLT_MAX, -FLT_MAX);
-  tlp::Coord minT(FLT_MAX, FLT_MAX, FLT_MAX);
+  tlp::Coord maxT = {-FLT_MAX, -FLT_MAX, -FLT_MAX};
+  tlp::Coord minT = {FLT_MAX, FLT_MAX, FLT_MAX};
 
   for (auto itn : sg->nodes()) {
     const Coord &tmpCoord = this->getNodeValue(itn);
@@ -228,7 +228,7 @@ Coord LayoutProperty::getMin(const Graph *sg) {
 #define Y_ROT 1
 #define Z_ROT 2
 static void rotateVector(Coord &vec, double alpha, int rot) {
-  Coord backupVec(vec);
+  Coord backupVec = vec;
   double aRot = 2.0 * M_PI * alpha / 360.0;
   float cosA = float(cos(aRot));
   float sinA = float(sin(aRot));
@@ -257,7 +257,7 @@ void LayoutProperty::rotate(const double &alpha, int rot, Iterator<node> *itN,
 
   if (itN) {
     for (auto itn : itN) {
-      Coord tmpCoord(getNodeValue(itn));
+      Coord tmpCoord = getNodeValue(itn);
       rotateVector(tmpCoord, alpha, rot);
       setNodeValue(itn, tmpCoord);
     }
@@ -330,7 +330,7 @@ void LayoutProperty::scale(const tlp::Vec3f &v, Iterator<node> *itN, Iterator<ed
   Observable::holdObservers();
 
   for (auto itn : itN) {
-    Coord tmpCoord(getNodeValue(itn));
+    Coord tmpCoord = getNodeValue(itn);
     tmpCoord *= v;
     setNodeValue(itn, tmpCoord);
   }
@@ -375,7 +375,7 @@ void LayoutProperty::translate(const tlp::Vec3f &v, Iterator<node> *itN, Iterato
 
   if (itN != nullptr) {
     for (auto itn : itN) {
-      Coord tmpCoord(getNodeValue(itn));
+      Coord tmpCoord = getNodeValue(itn);
       tmpCoord += v;
       // minimize computation time
       LayoutMinMaxProperty::setNodeValue(itn, tmpCoord);

@@ -37,8 +37,8 @@ public:
 
   Size getMax(const Graph *sg = nullptr);
   Size getMin(const Graph *sg = nullptr);
-  void scale(const tlp::Vector<float, 3> &, const Graph *sg = nullptr);
-  void scale(const tlp::Vector<float, 3> &, Iterator<node> *, Iterator<edge> *);
+  void scale(const tlp::Vec3f &, const Graph *sg = nullptr);
+  void scale(const tlp::Vec3f &, Iterator<node> *, Iterator<edge> *);
 
   // redefinition of some PropertyInterface methods
   PropertyInterface *clonePrototype(Graph *, const std::string &) const override;

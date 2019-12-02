@@ -39,24 +39,22 @@ TLP_GL_SCOPE bool cameraIs3D();
  * Project point on screen according to the transformation matrix (modelview * projection)
  * and the viewport (x, y, width, height) given in parameter.
  */
-TLP_GL_SCOPE Coord projectPoint(const Coord &obj, const MatrixGL &, const Vector<int, 4> &viewport);
+TLP_GL_SCOPE Coord projectPoint(const Coord &obj, const MatrixGL &, const Vec4i &viewport);
 /*
  * UnProject point from screen to 3D world according to the inverse transformation matrix (modelview
  * * projection)^-1
  * and the viewport (x, y, width, height) given in parameter.
  */
-TLP_GL_SCOPE Coord unprojectPoint(const Coord &obj, const MatrixGL &,
-                                  const tlp::Vector<int, 4> &viewport);
+TLP_GL_SCOPE Coord unprojectPoint(const Coord &obj, const MatrixGL &, const tlp::Vec4i &viewport);
 TLP_GL_SCOPE GLfloat projectSize(const BoundingBox &bb, const MatrixGL &, const MatrixGL &,
-                                 const Vector<int, 4> &viewport);
+                                 const Vec4i &viewport);
 TLP_GL_SCOPE GLfloat projectSize(const Coord &position, const Size &size, const MatrixGL &,
-                                 const MatrixGL &, const Vector<int, 4> &viewport);
+                                 const MatrixGL &, const Vec4i &viewport);
 TLP_GL_SCOPE float calculateAABBSize(const BoundingBox &bb, const Coord &eye,
                                      const Matrix<float, 4> &transformMatrix,
-                                     const Vector<int, 4> &globalViewport,
-                                     const Vector<int, 4> &currentViewport);
-TLP_GL_SCOPE float calculate2DLod(const BoundingBox &bb, const Vector<int, 4> &globalViewport,
-                                  const Vector<int, 4> &currentViewport);
+                                     const Vec4i &globalViewport, const Vec4i &currentViewport);
+TLP_GL_SCOPE float calculate2DLod(const BoundingBox &bb, const Vec4i &globalViewport,
+                                  const Vec4i &currentViewport);
 
 /**
  * Computes the normals associated to the vertices of a triangulated mesh.

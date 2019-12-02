@@ -17,11 +17,10 @@
 #include <talipot/Matrix.h>
 #include "ScreenFunction.h"
 
-namespace pocore {
 class UniformDeformationScreen : public ScreenFunction {
 public:
-  Vec2f project(const Vec2f &) const override;
-  Vec2f unproject(const Vec2f &) const override;
+  tlp::Vec2f project(const tlp::Vec2f &) const override;
+  tlp::Vec2f unproject(const tlp::Vec2f &) const override;
   void setTranslation(double x, double y);
   void getTranslation(double &x, double &y);
   void setZoom(double zoom);
@@ -38,5 +37,5 @@ private:
   tlp::Matrix<double, 3> _mat;
   tlp::Matrix<double, 3> _invMat;
 };
-} // namespace pocore
+
 #endif // UNIFORM_DEFORMATION_SCREEN_H

@@ -203,7 +203,7 @@ void GlScene::draw() {
           continue;
 
         bb = it.boundingBox;
-        Coord middle((bb[1] + bb[0]) / 2.f);
+        Coord middle = (bb[1] + bb[0]) / 2.f;
         dist = (double(middle[0]) - double(camPos[0])) * (double(middle[0]) - double(camPos[0]));
         dist += (double(middle[1]) - double(camPos[1])) * (double(middle[1]) - double(camPos[1]));
         dist += (double(middle[2]) - double(camPos[2])) * (double(middle[2]) - double(camPos[2]));
@@ -461,7 +461,7 @@ void GlScene::computeAdjustSceneToSize(int width, int height, Coord *center, Coo
       it.second->acceptVisitor(visitor);
   }
 
-  BoundingBox boundingBox(visitor->getBoundingBox());
+  BoundingBox boundingBox = visitor->getBoundingBox();
   delete visitor;
 
   if (!boundingBox.isValid()) {
@@ -483,8 +483,8 @@ void GlScene::computeAdjustSceneToSize(int width, int height, Coord *center, Coo
     return;
   }
 
-  Coord maxC(boundingBox[1]);
-  Coord minC(boundingBox[0]);
+  Coord maxC = boundingBox[1];
+  Coord minC = boundingBox[0];
 
   double dx = maxC[0] - minC[0];
   double dy = maxC[1] - minC[1];
@@ -604,8 +604,8 @@ void GlScene::zoom(float, const Coord &dest) {
 void GlScene::translateCamera(const int x, const int y, const int z) {
   for (const auto &it : layersList) {
     if (it.second->getCamera().is3D() && (!it.second->useSharedCamera())) {
-      Coord v1(0, 0, 0);
-      Coord v2(x, y, z);
+      Coord v1;
+      Coord v2 = Coord(x, y, z);
       v1 = it.second->getCamera().viewportTo3DWorld(v1);
       v2 = it.second->getCamera().viewportTo3DWorld(v2);
       Coord move = v2 - v1;
@@ -649,7 +649,8 @@ void GlScene::glGraphCompositeRemoved(GlLayer *layer, GlGraphComposite *glGraphC
 }
 
 // original gluPickMatrix code from Mesa
-static void pickMatrix(GLdouble x, GLdouble y, GLdouble width, GLdouble height, GLint viewport[4]) {
+static void pickMatrix(GLdouble x, GLdouble y, GLdouble width, GLdouble height,
+                       const Vec4i &viewport) {
   GLfloat m[16];
   GLfloat sx, sy;
   GLfloat tx, ty;
@@ -719,7 +720,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
     layer->acceptVisitor(selectLODCalculator);
   }
 
-  Vector<int, 4> selectionViewport;
+  Vec4i selectionViewport;
   selectionViewport[0] = x;
   selectionViewport[1] = y;
   selectionViewport[2] = w;
@@ -737,7 +738,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
 
     vector<GlGraphComposite *> compositesToRender;
 
-    Vector<int, 4> viewport = camera->getViewport();
+    const Vec4i &viewport = camera->getViewport();
 
     unsigned int size = itLayer.simpleEntitiesLODVector.size();
 
@@ -762,7 +763,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
     glLoadIdentity();
     int newX = x + w / 2;
     int newY = viewport[3] - (y + h / 2);
-    pickMatrix(newX, newY, w, h, reinterpret_cast<GLint *>(&viewport));
+    pickMatrix(newX, newY, w, h, viewport);
 
     camera->initProjection(false);
 

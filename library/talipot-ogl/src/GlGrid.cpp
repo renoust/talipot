@@ -42,7 +42,7 @@ void GlGrid::draw(float, Camera *) {
 
   // xy-plane
   if (displayDim[0]) {
-    Coord A(frontTopLeft);
+    Coord A = frontTopLeft;
 
     while (A[0] <= backBottomRight[0] + 1E-3) {
       glVertex3f(A[0], A[1], A[2]);
@@ -61,7 +61,7 @@ void GlGrid::draw(float, Camera *) {
 
   // yz-plane
   if (displayDim[1]) {
-    Coord A(frontTopLeft);
+    Coord A = frontTopLeft;
 
     while (A[2] <= backBottomRight[2] + 1E-3) {
       glVertex3f(A[0], A[1], A[2]);
@@ -80,7 +80,7 @@ void GlGrid::draw(float, Camera *) {
 
   // xz-plane
   if (displayDim[2]) {
-    Coord A(frontTopLeft);
+    Coord A = frontTopLeft;
 
     while (A[2] <= backBottomRight[2] + 1E-3) {
       glVertex3f(A[0], A[1], A[2]);

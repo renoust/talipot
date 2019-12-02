@@ -16,15 +16,14 @@
 
 #include "LayoutFunction.h"
 
-namespace pocore {
 class SquareLayout : public LayoutFunction {
 public:
   SquareLayout(unsigned int width);
-  Vec2i project(const unsigned int id) const override;
-  unsigned int unproject(const Vec2i &) const override;
+  tlp::Vec2i project(const unsigned int id) const override;
+  unsigned int unproject(const tlp::Vec2i &) const override;
 
 private:
   unsigned int _width;
 };
-} // namespace pocore
+
 #endif // SQUARE_LAYOUT_H

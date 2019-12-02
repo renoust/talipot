@@ -21,13 +21,11 @@
 
 using namespace std;
 
-namespace pocore {
-
 /***************************** Constructor **********************************/
 HSI::HSI(double h, double s, double i) : hue(h < 6 ? h : h - 6), saturation(s), intensity(i) {}
 
 /************************** Conversion from RGB to HSI ***********************/
-HSI::HSI(const RGBA &c) {
+HSI::HSI(const tlp::Color &c) {
   double red = c[0], green = c[1], blue = c[2];
   double mid = (red + green + blue) / 3.0;
   double mr = red - mid;
@@ -43,8 +41,8 @@ HSI::HSI(const RGBA &c) {
 }
 
 /************************** Conversion from HSI to RGB ***********************/
-RGBA HSI::getRGBA() const {
-  RGBA ret;
+tlp::Color HSI::getColor() const {
+  tlp::Color ret;
 
   if (saturation == 0.0) {
     ret[0] = uchar(intensity * 255);
@@ -78,4 +76,3 @@ HSI HSIColorScale::operator[](double f) const {
   return HSI(hue_range * f + foot.hue, sat_range * f + foot.saturation,
              int_range * f + foot.intensity);
 }
-} // namespace pocore

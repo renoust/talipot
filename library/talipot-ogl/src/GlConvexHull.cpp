@@ -215,7 +215,7 @@ ConvexHullItem *GlConvexHull::buildConvexHullsFromHierarchy(Graph *graph,
         // add points of rotated bounding box
         float cosA = cos(alpha);
         float sinA = sin(alpha);
-        Coord vect(0, 0, -0.01f);
+        Coord vect = {0, 0, -0.01f};
         vect.setX(-hw * cosA + hh * sinA);
         vect.setY(-hw * sinA - hh * cosA);
         gConvexHull.push_back(point + vect);
@@ -236,7 +236,7 @@ ConvexHullItem *GlConvexHull::buildConvexHullsFromHierarchy(Graph *graph,
         unsigned int nbBends = bends.size();
 
         for (unsigned int i = 0; i < nbBends; i++) {
-          Coord point(bends[i]);
+          Coord point = bends[i];
           double x = point.getX(), y = point.getY();
           point.setX(x - bendsl);
           point.setY(y - bendsl);

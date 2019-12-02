@@ -50,7 +50,7 @@ static float lineLength(const Coord *line, unsigned int lineSize, vector<float> 
 //================================================
 void getColors(const Coord *line, const unsigned int lineSize, const Color &c1, const Color &c2,
                vector<Color> &result) {
-  tlp::Vector<float, 4> _c1, _c2;
+  tlp::Vec4f _c1, _c2;
 
   for (unsigned int i = 0; i < 4; ++i) {
     _c1[i] = c1[i];
@@ -124,10 +124,10 @@ GLfloat *buildCurvePoints(const vector<Coord> &vertices, const vector<float> &si
   bool inversion = false;
   CurvePoints result(vertices.size());
   // start point
-  Coord xu(startN - vertices[0]);
+  Coord xu = startN - vertices[0];
   xu /= xu.norm();
-  Coord xv(0, 0, 1.);
-  Coord dir(xu ^ xv);
+  Coord xv = {0, 0, 1.};
+  Coord dir = xu ^ xv;
 
   if (fabs(dir.norm()) > 1e-3)
     dir /= dir.norm();
@@ -138,14 +138,14 @@ GLfloat *buildCurvePoints(const vector<Coord> &vertices, const vector<float> &si
   //============
   for (unsigned int i = 1; i < vertices.size() - 1; ++i) {
 
-    Coord xu(vertices[i - 1] - vertices[i]);
-    Coord xv(vertices[i + 1] - vertices[i]);
+    Coord xu = vertices[i - 1] - vertices[i];
+    Coord xv = vertices[i + 1] - vertices[i];
     float n_xu = xu.norm();
     float n_xv = xv.norm();
     xu /= n_xu;
     xv /= n_xv;
 
-    Coord bi_xu_xv(xu + xv);
+    Coord bi_xu_xv = xu + xv;
 
     if (bi_xu_xv == Coord(0, 0, 0)) {
       // two point at the same coord
@@ -156,8 +156,8 @@ GLfloat *buildCurvePoints(const vector<Coord> &vertices, const vector<float> &si
 
     bi_xu_xv /= bi_xu_xv.norm();
     float newSize = sizes[i];
-    Coord u(vertices[i - 1] - vertices[i]);
-    Coord v(vertices[i + 1] - vertices[i]);
+    Coord u = vertices[i - 1] - vertices[i];
+    Coord v = vertices[i + 1] - vertices[i];
     float angle =
         float(M_PI - acos((u[0] * v[0] + u[1] * v[1] + u[2] * v[2]) / (u.norm() * v.norm())));
 
@@ -178,7 +178,7 @@ GLfloat *buildCurvePoints(const vector<Coord> &vertices, const vector<float> &si
 
     } else {
       // broken form
-      Coord vectUnit(-bi_xu_xv[1], bi_xu_xv[0], bi_xu_xv[2]);
+      Coord vectUnit = {-bi_xu_xv[1], bi_xu_xv[0], bi_xu_xv[2]};
 
       if (!(newSize > u.norm() || newSize > v.norm() || fabs(angle - M_PI) < 1E-5)) {
         result.addPoint();
@@ -243,12 +243,12 @@ static float computeExtrusion(const Coord &pBefore, const Coord &pCurrent, const
   if (fabs(v[2]) < 1e-3)
     v[2] = 0;
 
-  Coord xu(u);
+  Coord xu = u;
 
   if (u.norm() != 0)
     xu /= u.norm();
 
-  Coord xv(v);
+  Coord xv = v;
 
   if (v.norm() != 0)
     xv /= v.norm();
@@ -285,7 +285,7 @@ static float computeExtrusion(const Coord &pBefore, const Coord &pCurrent, const
     nsz /= float(cos(angle / 2.0));
   }
 
-  Coord bi_xu_xv_nsz(bi_xu_xv[0] * nsz, bi_xu_xv[1] * nsz, bi_xu_xv[2] * nsz);
+  Coord bi_xu_xv_nsz = {bi_xu_xv[0] * nsz, bi_xu_xv[1] * nsz, bi_xu_xv[2] * nsz};
   bi_xu_xv_nsz *= inversion;
 
   if (angleOk && angle < M_PI / 2 + M_PI / 4) {
@@ -300,7 +300,7 @@ static float computeExtrusion(const Coord &pBefore, const Coord &pCurrent, const
   } else {
     // broken form
 
-    Coord vunit_sz(-bi_xu_xv[1] * sz, bi_xu_xv[0] * sz, bi_xu_xv[2] * sz);
+    Coord vunit_sz = {-bi_xu_xv[1] * sz, bi_xu_xv[0] * sz, bi_xu_xv[2] * sz};
     vunit_sz *= inversion;
 
     if (angleOk && !twoPointsCurve &&
@@ -364,8 +364,8 @@ vector<Coord> splineCurve(const vector<Coord> &vertices) {
   curve.push_back(vertices[0]);
 
   for (unsigned int i = 1; i < vertices.size() - 1; ++i) {
-    Coord xu(vertices[i - 1] - vertices[i]);
-    Coord xv(vertices[i + 1] - vertices[i]);
+    Coord xu = vertices[i - 1] - vertices[i];
+    Coord xv = vertices[i + 1] - vertices[i];
 
     if ((xu ^ xv).norm() < 1E-3)
       continue;
@@ -374,11 +374,11 @@ vector<Coord> splineCurve(const vector<Coord> &vertices) {
     float n_xv = xv.norm();
     xu /= n_xu;
     xv /= n_xv;
-    Coord bi_xu_xv(xu + xv);
+    Coord bi_xu_xv = xu + xv;
     bi_xu_xv /= bi_xu_xv.norm();
-    Coord tgt_xu_xv(xu ^ xv);
+    Coord tgt_xu_xv = xu ^ xv;
     tgt_xu_xv /= tgt_xu_xv.norm();
-    Coord dir(tgt_xu_xv ^ bi_xu_xv);
+    Coord dir = tgt_xu_xv ^ bi_xu_xv;
     dir /= dir.norm();
     curve.push_back(vertices[i] - (dir * (n_xu / 5.0f)));
     curve.push_back(vertices[i]);
@@ -396,13 +396,13 @@ void computeCleanVertices(const vector<Coord> &bends, const Coord &startPoint,
   if (!bends.empty()) {
     result.reserve(bends.size() + 2);
     result.push_back(startPoint);
-    Coord lastPoint(bends[0]);
+    Coord lastPoint = bends[0];
 
     if ((startPoint - lastPoint).norm() > 1E-4)
       result.push_back(lastPoint);
 
     for (unsigned int i = 1; i < bends.size(); ++i) {
-      Coord currentPoint(bends[i]);
+      const Coord &currentPoint = bends[i];
 
       if ((currentPoint - lastPoint).norm() > 1E-4) {
         result.push_back(currentPoint);
@@ -598,9 +598,9 @@ void simpleQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
 
   CurvePoints result(sz);
   // start point
-  Coord xu(startN - vertices[0]);
+  Coord xu = startN - vertices[0];
   xu /= xu.norm();
-  Coord dir(xu ^ lookDir);
+  Coord dir = xu ^ lookDir;
 
   if (fabs(dir.norm()) > 1e-3)
     dir /= dir.norm();
@@ -609,10 +609,10 @@ void simpleQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
   result(0, 1) = vertices[0] + dir * s1;
 
   //============
-  Coord v(vertices[1] - vertices[0]);
+  Coord v = vertices[1] - vertices[0];
   for (unsigned int i = 1; i < sz - 1; ++i) {
     float newSize = sizes[i];
-    Coord u(-v);
+    Coord u = -v;
     v = vertices[i + 1] - vertices[i];
     float angle =
         float(M_PI - acos((u[0] * v[0] + u[1] * v[1] + u[2] * v[2]) / (u.norm() * v.norm())));
@@ -622,8 +622,8 @@ void simpleQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
 
     newSize /= float(cos(angle / 2.));
 
-    Coord xu(u);
-    Coord xv(v);
+    Coord xu = u;
+    Coord xv = v;
     xu = xu ^ lookDir;
     xv = xv ^ (-lookDir);
 
@@ -639,7 +639,7 @@ void simpleQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
       xv /= nrm;
     }
 
-    Coord xu_xv(xu + xv);
+    Coord xu_xv = xu + xv;
 
     nrm = xu_xv.norm();
 
@@ -689,11 +689,11 @@ void simpleQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
       glMultiTexCoord2f(GL_TEXTURE1, 0, 0.0f);
       glVertex3fv(&points[i * 3 + sz * 3]);
     } else {
-      Coord p1_0(points[i * 3 - 3], points[i * 3 - 2], points[i * 3 - 1]);
-      Coord p1_1(points[i * 3], points[i * 3 + 1], points[i * 3 + 2]);
-      Coord p2_0(points[i * 3 + sz * 3 - 3], points[i * 3 + sz * 3 - 2],
-                 points[i * 3 + sz * 3 - 1]);
-      Coord p2_1(points[i * 3 + sz * 3], points[i * 3 + sz * 3 + 1], points[i * 3 + sz * 3 + 2]);
+      Coord p1_0 = {points[i * 3 - 3], points[i * 3 - 2], points[i * 3 - 1]};
+      Coord p1_1 = {points[i * 3], points[i * 3 + 1], points[i * 3 + 2]};
+      Coord p2_0 = {points[i * 3 + sz * 3 - 3], points[i * 3 + sz * 3 - 2],
+                    points[i * 3 + sz * 3 - 1]};
+      Coord p2_1 = {points[i * 3 + sz * 3], points[i * 3 + sz * 3 + 1], points[i * 3 + sz * 3 + 2]};
 
       length += ((p1_1 + p2_1) / 2.f - (p1_0 + p2_0) / 2.f).norm() / (p1_0 - p2_0).norm();
       glMultiTexCoord2f(GL_TEXTURE0, length, 1.0f);
@@ -766,7 +766,7 @@ void bezierQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
     for (unsigned int i = 0; i < MAX_BENDS; ++i)
       points[i] = vertices[i];
 
-    Coord dir(vertices[MAX_BENDS - 1] - vertices[(MAX_BENDS - 2)]);
+    Coord dir = vertices[MAX_BENDS - 1] - vertices[(MAX_BENDS - 2)];
     dir /= dir.norm();
     dir *= ((vertices[MAX_BENDS - 1] - vertices[MAX_BENDS]).norm() / 5.f);
     bezierQuad(points, c1, colors[MAX_BENDS - 1], s1, sizes[MAX_BENDS - 1], startN,
@@ -784,7 +784,7 @@ void bezierQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
   }
 
   unsigned int steps = 40;
-  Vector<float, 4> baseColor, delta;
+  Vec4f baseColor, delta;
 
   for (unsigned int i = 0; i < 4; ++i) {
     baseColor[i] = c1[i];
@@ -802,7 +802,7 @@ void bezierQuad(const vector<Coord> &vertices, const Color &c1, const Color &c2,
   glBegin(GL_QUAD_STRIP);
   glNormal3f(0.0f, 0.0f, 1.0f);
 
-  Vector<float, 4> color = baseColor;
+  Vec4f color = baseColor;
 
   for (unsigned int i = 0; i <= steps; ++i) {
     glColor4ub(uchar(color[0]), uchar(color[1]), uchar(color[2]), uchar(color[3]));
@@ -881,7 +881,7 @@ void bezierLine(const vector<Coord> &vertices, const Color &c1, const Color &c2)
   glBegin(GL_LINE_STRIP);
 
   unsigned int steps = 40;
-  Vector<float, 4> color, delta;
+  Vec4f color, delta;
 
   for (unsigned int i = 0; i < 4; ++i) {
     color[i] = c1[i];

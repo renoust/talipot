@@ -271,7 +271,7 @@ public:
    * @brief Set the viewport of the scene with a vector
    * The viewport must be in many case the size of the widget containing the scene
    */
-  void setViewport(Vector<int, 4> &newViewport) {
+  void setViewport(const Vec4i &newViewport) {
     viewport = newViewport;
   }
 
@@ -290,7 +290,7 @@ public:
    * @brief Get the viewport of the scene
    * The viewport will be in many case the size of the widget containing the scene
    */
-  Vector<int, 4> getViewport() const {
+  const Vec4i &getViewport() const {
     return viewport;
   }
 
@@ -525,7 +525,7 @@ public:
 private:
   std::vector<std::pair<std::string, GlLayer *>> layersList;
   GlLODCalculator *lodCalculator;
-  Vector<int, 4> viewport;
+  Vec4i viewport;
   Color backgroundColor;
   bool viewOrtho;
 

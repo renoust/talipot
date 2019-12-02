@@ -78,8 +78,7 @@ public:
    * \param globalViewport is used to compute LOD
    * \param currentViewport return -1 for all entities outside this viewport
    */
-  void compute(const Vector<int, 4> &globalViewport,
-               const Vector<int, 4> &currentViewport) override;
+  void compute(const Vec4i &globalViewport, const Vec4i &currentViewport) override;
 
   /**
    * This function return the scene bounding box
@@ -104,16 +103,14 @@ public:
 protected:
   virtual void computeFor3DCamera(LayerLODUnit *layerLODUnit, const Coord &eye,
                                   const Matrix<float, 4> &transformMatrix,
-                                  const Vector<int, 4> &globalViewport,
-                                  const Vector<int, 4> &currentViewport);
+                                  const Vec4i &globalViewport, const Vec4i &currentViewport);
 
-  virtual void computeFor2DCamera(LayerLODUnit *layerLODUnit, const Vector<int, 4> &globalViewport,
-                                  const Vector<int, 4> &currentViewport);
+  virtual void computeFor2DCamera(LayerLODUnit *layerLODUnit, const Vec4i &globalViewport,
+                                  const Vec4i &currentViewport);
 
   bool computeEdgesLOD;
   bool computeOutScreenLOD;
 
-  std::vector<bool> noBBCheck;
   std::vector<BoundingBox> bbs;
 
   LayerLODUnit *currentLayerLODUnit;

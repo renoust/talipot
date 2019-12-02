@@ -25,7 +25,7 @@ using namespace std;
 using namespace tlp;
 
 static void rotate(Coord &vec, double alpha) {
-  Coord backupVec(vec);
+  Coord backupVec = vec;
   double zRot = -2.0 * M_PI * alpha / 360.0;
   float cosz = cos(zRot);
   float sinz = sin(zRot);
@@ -44,9 +44,9 @@ static void computeGraphPoints(const std::vector<node> &nodes, const std::vector
                                std::vector<Coord> &gPoints) {
   for (auto n : nodes) {
     if ((selection == nullptr) || selection->getNodeValue(n)) {
-      Size nSize(size->getNodeValue(n));
-      Coord point(layout->getNodeValue(n));
-      double rot(rotation->getNodeValue(n));
+      const Size &nSize = size->getNodeValue(n);
+      Coord point = layout->getNodeValue(n);
+      double rot = rotation->getNodeValue(n);
       vector<Coord> points(4);
       points[0].set(nSize[0] / 2., nSize[1] / 2., nSize[2] / 2.);
       points[1].set(-nSize[0] / 2., -nSize[1] / 2., -nSize[2] / 2.);
@@ -100,30 +100,30 @@ pair<Coord, Coord> tlp::computeBoundingRadius(const Graph *graph, const LayoutPr
   if (graph->isEmpty())
     return result;
 
-  BoundingBox boundingBox(tlp::computeBoundingBox(graph, layout, size, rotation, selection));
-  Coord centre(boundingBox.center());
-  result.first = result.second = centre;
+  BoundingBox boundingBox = tlp::computeBoundingBox(graph, layout, size, rotation, selection);
+  Coord center = boundingBox.center();
+  result.first = result.second = center;
 
   double maxRad = 0;
   for (auto n : graph->nodes()) {
     const Coord &curCoord = layout->getNodeValue(n);
-    Size curSize(size->getNodeValue(n) / 2.0f);
+    Size curSize = size->getNodeValue(n) / 2.0f;
 
     if (selection == nullptr || selection->getNodeValue(n)) {
       double nodeRad = sqrt(curSize.getW() * curSize.getW() + curSize.getH() * curSize.getH());
-      Coord radDir(curCoord - centre);
+      Coord radDir = curCoord - center;
       double curRad = nodeRad + radDir.norm();
 
       if (radDir.norm() < 1e-6) {
         curRad = nodeRad;
-        radDir = Coord(1.0, 0.0, 0.0);
+        radDir = {1, 0, 0};
       }
 
       if (curRad > maxRad) {
         maxRad = curRad;
         radDir /= radDir.norm();
         radDir *= curRad;
-        result.second = radDir + centre;
+        result.second = radDir + center;
       }
     }
   }
@@ -132,7 +132,7 @@ pair<Coord, Coord> tlp::computeBoundingRadius(const Graph *graph, const LayoutPr
     for (auto e : graph->edges()) {
       if (selection == nullptr || selection->getEdgeValue(e)) {
         for (const auto coord : layout->getEdgeValue(e)) {
-          double curRad = (coord - centre).norm();
+          double curRad = (coord - center).norm();
 
           if (curRad > maxRad) {
             maxRad = curRad;
@@ -179,16 +179,16 @@ bool tlp::computeLinesIntersection(const std::pair<tlp::Coord, tlp::Coord> &line
                                    const std::pair<tlp::Coord, tlp::Coord> &line2,
                                    tlp::Coord &intersectionPoint) {
 
-  Coord a(line1.second - line1.first);
-  Coord b(line2.second - line2.first);
-  Coord axb(a ^ b);
+  Coord a = line1.second - line1.first;
+  Coord b = line2.second - line2.first;
+  Coord axb = a ^ b;
   float axbnorm = axb.norm();
 
   // lines are parallel, no intersection
   if (axbnorm == 0)
     return false;
 
-  Coord c(line2.first - line1.first);
+  Coord c = line2.first - line1.first;
   // skew lines, no intersection
   if (c.dotProduct(axb) != 0)
     return false;
@@ -239,7 +239,7 @@ static inline void normalize(Vec3f &v) {
 //======================================================================================================
 
 bool tlp::isLayoutCoPlanar(const vector<Coord> &points, Mat3f &invTransformMatrix) {
-  Coord A(points[0]), B(0), C(0);
+  Coord A = points[0], B, C;
   bool BSet = false;
 
   // pick three points to define a plane
@@ -257,11 +257,11 @@ bool tlp::isLayoutCoPlanar(const vector<Coord> &points, Mat3f &invTransformMatri
     }
   }
 
-  Coord a(B - A);
-  Coord b(C - A);
+  Coord a = B - A;
+  Coord b = C - A;
   normalize(a);
   normalize(b);
-  Coord c(a ^ b);
+  Coord c = a ^ b;
   normalize(c);
   b = c ^ a;
   normalize(b);

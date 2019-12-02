@@ -401,10 +401,10 @@ public:
   void setUniformFloat(const std::string &variateName, const float f);
   void setUniformVec2Float(const std::string &variableName, const Vector<float, 2> &vec2f);
   void setUniformVec2Float(const std::string &variableName, const float f1, const float f2);
-  void setUniformVec3Float(const std::string &variableName, const Vector<float, 3> &vec3f);
+  void setUniformVec3Float(const std::string &variableName, const Vec3f &vec3f);
   void setUniformVec3Float(const std::string &variableName, const float f1, const float f2,
                            const float f3);
-  void setUniformVec4Float(const std::string &variableName, const Vector<float, 4> &vec4f);
+  void setUniformVec4Float(const std::string &variableName, const Vec4f &vec4f);
   void setUniformVec4Float(const std::string &variableName, const float f1, const float f2,
                            const float f3, const float f4);
   void setUniformMat2Float(const std::string &variableName, const Matrix<float, 2> &mat2f,
@@ -421,11 +421,11 @@ public:
                            const bool transpose = false);
 
   void setUniformInt(const std::string &variableName, const int f);
-  void setUniformVec2Int(const std::string &variableName, const Vector<int, 2> &vec2i);
+  void setUniformVec2Int(const std::string &variableName, const Vec2i &vec2i);
   void setUniformVec2Int(const std::string &variableName, const int i1, const int i2);
   void setUniformVec3Int(const std::string &variableName, const Vector<int, 3> &vec3i);
   void setUniformVec3Int(const std::string &variableName, const int i1, const int i2, const int i3);
-  void setUniformVec4Int(const std::string &variableName, const Vector<int, 4> &vec4i);
+  void setUniformVec4Int(const std::string &variableName, const Vec4i &vec4i);
   void setUniformVec4Int(const std::string &variableName, const int i1, const int i2, const int i3,
                          const int i4);
 
@@ -442,20 +442,20 @@ public:
   void setAttributeFloat(const std::string &variableName, const float f);
   void setAttributeVec2Float(const std::string &variableName, const Vector<float, 2> &vec2f);
   void setAttributeVec2Float(const std::string &variableName, const float f1, const float f2);
-  void setAttributeVec3Float(const std::string &variableName, const Vector<float, 3> &vec3f);
+  void setAttributeVec3Float(const std::string &variableName, const Vec3f &vec3f);
   void setAttributeVec3Float(const std::string &variableName, const float f1, const float f2,
                              const float f3);
-  void setAttributeVec4Float(const std::string &variableName, const Vector<float, 4> &vec4f);
+  void setAttributeVec4Float(const std::string &variableName, const Vec4f &vec4f);
   void setAttributeVec4Float(const std::string &variableName, const float f1, const float f2,
                              const float f3, const float f4);
 
   void setAttributeInt(const std::string &variableName, const int f);
-  void setAttributeVec2Int(const std::string &variableName, const Vector<int, 2> &vec2i);
+  void setAttributeVec2Int(const std::string &variableName, const Vec2i &vec2i);
   void setAttributeVec2Int(const std::string &variableName, const int i1, const int i2);
   void setAttributeVec3Int(const std::string &variableName, const Vector<int, 3> &vec3i);
   void setAttributeVec3Int(const std::string &variableName, const int i1, const int i2,
                            const int i3);
-  void setAttributeVec4Int(const std::string &variableName, const Vector<int, 4> &vec4i);
+  void setAttributeVec4Int(const std::string &variableName, const Vec4i &vec4i);
   void setAttributeVec4Int(const std::string &variableName, const int i1, const int i2,
                            const int i3, const int i4);
 
@@ -486,13 +486,13 @@ public:
 
   template <unsigned int SIZE>
   void setUniformVec3FloatArray(const std::string &variableName,
-                                const Array<Vector<float, 3>, SIZE> &vecvec3f);
+                                const Array<Vec3f, SIZE> &vecvec3f);
   void setUniformVec3FloatArray(const std::string &variableName, const unsigned int vec3fCount,
                                 const float *f);
 
   template <unsigned int SIZE>
   void setUniformVec4FloatArray(const std::string &variableName,
-                                const Array<Vector<float, 4>, SIZE> &vecvec4f);
+                                const Array<Vec4f, SIZE> &vecvec4f);
   void setUniformVec4FloatArray(const std::string &variableName, const unsigned int vec4fCount,
                                 const float *f);
 
@@ -522,8 +522,7 @@ public:
   void setUniformIntArray(const std::string &variableName, const unsigned int iCount, const int *i);
 
   template <unsigned int SIZE>
-  void setUniformVec2IntArray(const std::string &variableName,
-                              const Array<Vector<int, 2>, SIZE> &vecvec2i);
+  void setUniformVec2IntArray(const std::string &variableName, const Array<Vec2i, SIZE> &vecvec2i);
   void setUniformVec2IntArray(const std::string &variableName, const unsigned int vec2iCount,
                               const int *i);
 
@@ -534,8 +533,7 @@ public:
                               const int *i);
 
   template <unsigned int SIZE>
-  void setUniformVec4IntArray(const std::string &variableName,
-                              const Array<Vector<int, 4>, SIZE> &vecvec4i);
+  void setUniformVec4IntArray(const std::string &variableName, const Array<Vec4i, SIZE> &vecvec4i);
   void setUniformVec4IntArray(const std::string &variableName, const unsigned int vec4iCount,
                               const int *i);
 

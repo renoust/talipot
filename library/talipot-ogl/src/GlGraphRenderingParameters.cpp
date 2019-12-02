@@ -462,6 +462,6 @@ void GlDefaultSelectionColorManager::setManager(GlDefaultSelectionColorManager *
 }
 
 tlp::Color GlDefaultSelectionColorManager::getDefaultSelectionColor() {
-  static Color selectionColor(23, 81, 228);
+  static Color selectionColor = {23, 81, 228};
   return manager ? manager->defaultSelectionColor() : selectionColor;
 }

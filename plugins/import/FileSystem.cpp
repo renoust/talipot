@@ -137,7 +137,7 @@ public:
     dataSet->get("icons", _useIcons);
     dataSet->get("tree layout", _treeLayout);
     dataSet->get("directory color", dirColor);
-    tlp::Color otherColor(85, 170, 255, 128);
+    tlp::Color otherColor = {85, 170, 255, 128};
     dataSet->get("other color", otherColor);
     bool hiddenFiles(true);
     dataSet->get("include hidden files", hiddenFiles);

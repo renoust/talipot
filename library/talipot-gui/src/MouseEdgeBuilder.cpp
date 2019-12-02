@@ -75,7 +75,7 @@ bool MouseEdgeBuilder::eventFilter(QObject *widget, QEvent *e) {
           Observable::unholdObservers();
 
         } else {
-          Coord point(glMainWidget->width() - qMouseEv->x(), qMouseEv->y(), 0);
+          Coord point = {glMainWidget->width() - float(qMouseEv->x()), float(qMouseEv->y())};
           _bends.push_back(glMainWidget->getScene()->getGraphCamera().viewportTo3DWorld(
               glMainWidget->screenToViewport(point)));
           glMainWidget->redraw();
@@ -120,7 +120,7 @@ bool MouseEdgeBuilder::eventFilter(QObject *widget, QEvent *e) {
         glMainWidget->setCursor(QCursor(Qt::ArrowCursor));
       }
 
-      Coord point(glMainWidget->width() - qMouseEv->x(), qMouseEv->y(), 0);
+      Coord point = Coord(glMainWidget->width() - qMouseEv->x(), qMouseEv->y());
       point = glMainWidget->getScene()->getGraphCamera().viewportTo3DWorld(
           glMainWidget->screenToViewport(point));
       _curPos.set(point[0], point[1], point[2]);

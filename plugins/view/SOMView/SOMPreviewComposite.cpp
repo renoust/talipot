@@ -26,28 +26,28 @@ SOMPreviewComposite::SOMPreviewComposite(tlp::Coord position, tlp::Size size,
                                          ColorScale *colorScale, double minValue, double maxValue)
     : propertyName(propertyName), currentPosition(position) {
 
-  double spacing = 1;
-  double labelSizeRate = 0.1;
+  float spacing = 1;
+  float labelSizeRate = 0.1f;
   float labelHeightSize = size.getH() * labelSizeRate;
-  double scaleSizeRate = 0.1;
+  float scaleSizeRate = 0.1f;
 
-  Coord frameTopLeft(position.getX(), position.getY() + size.getH(), 0);
-  Coord frameBottomRight(position.getX() + size.getW(), position.getY(), 0);
+  Coord frameTopLeft = {position.getX(), position.getY() + size.getH()};
+  Coord frameBottomRight = {position.getX() + size.getW(), position.getY()};
   // Creating the frame.
   frame = new GlRect(frameTopLeft, frameBottomRight, Color(255, 255, 255, 0),
                      Color(255, 255, 255, 0), true, true);
   addGlEntity(frame, "frame");
 
-  tlp::Size labelSize(size.getW() - spacing * 2, labelHeightSize);
-  tlp::Coord labelPosition(position.getX() + labelSize.getW() / 2,
-                           position.getY() + size.getW() - labelSize.getH() / 2);
+  Size labelSize = {size.getW() - spacing * 2, labelHeightSize};
+  Coord labelPosition = {position.getX() + labelSize.getW() / 2.f,
+                         position.getY() + size.getW() - labelSize.getH() / 2.f};
 
   label = new tlp::GlLabel(labelPosition, labelSize, tlp::Color(0, 0, 0));
   label->setText(propertyName);
   addGlEntity(label, "label");
 
-  Coord lColorScalePosition(position.getX() + spacing, position.getY(), 0);
-  Size lColorScaleSize(size.getW() - 2 * spacing, labelHeightSize + size.getH() * scaleSizeRate, 0);
+  Coord lColorScalePosition = {position.getX() + spacing, position.getY()};
+  Size lColorScaleSize = {size.getW() - 2 * spacing, labelHeightSize + size.getH() * scaleSizeRate};
 
   lColorScale = new GlLabelledColorScale(lColorScalePosition, lColorScaleSize, colorScale, minValue,
                                          maxValue);
@@ -58,8 +58,8 @@ SOMPreviewComposite::SOMPreviewComposite(tlp::Coord position, tlp::Size size,
   Size screenshotSize = computeAspectRatio(map->getWidth(), map->getHeight(),
                                            screenshotMaxSize.getW(), screenshotMaxSize.getH());
 
-  Coord screenshotCoord(position.getX() + spacing,
-                        position.getY() + spacing + lColorScaleSize.getH());
+  Coord screenshotCoord = {position.getX() + spacing,
+                           position.getY() + spacing + lColorScaleSize.getH()};
 
   Size diff = screenshotMaxSize - screenshotSize;
 

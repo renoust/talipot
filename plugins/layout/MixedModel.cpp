@@ -122,10 +122,10 @@ bool MixedModel::run() {
       continue;
     } else if (nodes.size() < 4) {
       node n = nodes[0];
-      Coord c(sizeResult->getNodeValue(n));
+      const Coord &c = sizeResult->getNodeValue(n);
       result->setNodeValue(n, Coord(0, 0, 0));
       node n2 = nodes[1];
-      Coord c2(sizeResult->getNodeValue(n2));
+      const Coord &c2 = sizeResult->getNodeValue(n2);
       result->setNodeValue(n2, Coord(spacing + c.getX() / 2 + c2.getX() / 2, 0, 0));
 
       for (auto e : graph->getEdges(n, n2, false))
@@ -133,7 +133,7 @@ bool MixedModel::run() {
 
       if (nodes.size() == 3) {
         node n3 = nodes[2];
-        Coord c3(sizeResult->getNodeValue(n2));
+        const Coord &c3 = sizeResult->getNodeValue(n2);
         result->setNodeValue(
             n3, Coord(2.f * spacing + c.getX() / 2.f + c2.getX() + c3.getX() / 2.f, 0, 0));
         edge e = graph->existEdge(n, n3, false);
@@ -283,9 +283,9 @@ bool MixedModel::run() {
   // rotate layout and size
   if (orientation == "horizontal") {
     for (auto n : graph->nodes()) {
-      Size size(sizeResult->getNodeValue(n));
+      const Size &size = sizeResult->getNodeValue(n);
       sizeResult->setNodeValue(n, Size(size[1], size[0], size[2]));
-      Coord coord = result->getNodeValue(n);
+      const Coord &coord = result->getNodeValue(n);
       result->setNodeValue(n, Coord(-coord[1], coord[0], coord[2]));
     }
     for (auto e : graph->edges()) {
@@ -766,7 +766,7 @@ void MixedModel::assignInOutPoints() { // on considère qu'il n'y a pas d'arc do
 
       if (nbIn > 3) {
         unsigned int j = 0;
-        Coord c(-float(in_l), 0);
+        Coord c = {-float(in_l), 0};
         InPoints[listOfEdgesIN[j]].push_back(c);
         ++j;
 
@@ -822,7 +822,7 @@ void MixedModel::computeCoords() {
   nodeSize.setAll(Coord()); // permet de conserver une taille relative pout les sommets
 
   for (auto n : carte->nodes()) {
-    Coord c(sizeResult->getNodeValue(n));
+    Coord c = sizeResult->getNodeValue(n);
     c[0] += edgeNodeSpacing;
     nodeSize.set(n.id, c);
   }

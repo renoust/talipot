@@ -86,7 +86,7 @@ QPixmap EdgeExtremityGlyphRenderer::render(int glyphId) {
       // need a block to ensure inputData
       // will be destroyed before graph
       GlGraphInputData inputData(graph, &parameters);
-      Color white(255, 255, 255, 0), black(0, 0, 0, 0);
+      Color white = {255, 255, 255, 0}, black = {0, 0, 0, 0};
       inputData.getElementSize()->setAllNodeValue(Size(0.01f, 0.2f, 0.1f));
       inputData.getElementSize()->setAllEdgeValue(Size(0.125f, 0.125f, 0.125f));
       inputData.getElementColor()->setAllNodeValue(white);

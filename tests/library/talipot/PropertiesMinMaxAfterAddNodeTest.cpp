@@ -84,8 +84,8 @@ void PropertiesMinMaxAfterAddNodeTest::testLayoutPropertyMinMaxAfterAddNode() {
   node n1 = graph->addNode();
   node n2 = graph->addNode();
 
-  const Coord firstNodePos(1.0f, 2.0f);
-  const Coord secondNodePos(3.0f, 4.0f);
+  const Coord firstNodePos = {1.0f, 2.0f};
+  const Coord secondNodePos = {3.0f, 4.0f};
 
   property->setNodeValue(n1, firstNodePos);
   property->setNodeValue(n2, secondNodePos);

@@ -317,8 +317,7 @@ void GlShaderProgram::setUniformVec2Float(const std::string &variableName, const
   glUniform2f(loc, f1, f2);
 }
 
-void GlShaderProgram::setUniformVec3Float(const std::string &variableName,
-                                          const Vector<float, 3> &vec3f) {
+void GlShaderProgram::setUniformVec3Float(const std::string &variableName, const Vec3f &vec3f) {
   setUniformVec3FloatArray(variableName, 1, reinterpret_cast<const float *>(&vec3f));
 }
 
@@ -328,8 +327,7 @@ void GlShaderProgram::setUniformVec3Float(const std::string &variableName, const
   glUniform3f(loc, f1, f2, f3);
 }
 
-void GlShaderProgram::setUniformVec4Float(const std::string &variableName,
-                                          const Vector<float, 4> &vec4f) {
+void GlShaderProgram::setUniformVec4Float(const std::string &variableName, const Vec4f &vec4f) {
   setUniformVec4FloatArray(variableName, 1, reinterpret_cast<const float *>(&vec4f));
 }
 
@@ -393,8 +391,7 @@ void GlShaderProgram::setUniformInt(const std::string &variableName, const int i
   glUniform1i(loc, i);
 }
 
-void GlShaderProgram::setUniformVec2Int(const std::string &variableName,
-                                        const Vector<int, 2> &vec2i) {
+void GlShaderProgram::setUniformVec2Int(const std::string &variableName, const Vec2i &vec2i) {
   setUniformVec2IntArray(variableName, 1, reinterpret_cast<const int *>(&vec2i));
 }
 
@@ -415,8 +412,7 @@ void GlShaderProgram::setUniformVec3Int(const std::string &variableName, const i
   glUniform3i(loc, i1, i2, i3);
 }
 
-void GlShaderProgram::setUniformVec4Int(const std::string &variableName,
-                                        const Vector<int, 4> &vec4i) {
+void GlShaderProgram::setUniformVec4Int(const std::string &variableName, const Vec4i &vec4i) {
   setUniformVec4IntArray(variableName, 1, reinterpret_cast<const int *>(&vec4i));
 }
 
@@ -484,8 +480,7 @@ void GlShaderProgram::setAttributeVec2Float(const std::string &variableName, con
   glVertexAttrib2f(loc, f1, f2);
 }
 
-void GlShaderProgram::setAttributeVec3Float(const std::string &variableName,
-                                            const Vector<float, 3> &vec3f) {
+void GlShaderProgram::setAttributeVec3Float(const std::string &variableName, const Vec3f &vec3f) {
   setAttributeVec3Float(variableName, vec3f[0], vec3f[1], vec3f[2]);
 }
 
@@ -495,8 +490,7 @@ void GlShaderProgram::setAttributeVec3Float(const std::string &variableName, con
   glVertexAttrib3f(loc, f1, f2, f3);
 }
 
-void GlShaderProgram::setAttributeVec4Float(const std::string &variableName,
-                                            const Vector<float, 4> &vec4f) {
+void GlShaderProgram::setAttributeVec4Float(const std::string &variableName, const Vec4f &vec4f) {
   setAttributeVec4Float(variableName, vec4f[0], vec4f[1], vec4f[2], vec4f[3]);
 }
 
@@ -511,8 +505,7 @@ void GlShaderProgram::setAttributeInt(const std::string &variableName, const int
   glVertexAttrib1s(loc, i);
 }
 
-void GlShaderProgram::setAttributeVec2Int(const std::string &variableName,
-                                          const Vector<int, 2> &vec2i) {
+void GlShaderProgram::setAttributeVec2Int(const std::string &variableName, const Vec2i &vec2i) {
   setAttributeVec2Int(variableName, vec2i[0], vec2i[1]);
 }
 
@@ -533,8 +526,7 @@ void GlShaderProgram::setAttributeVec3Int(const std::string &variableName, const
   glVertexAttrib3s(loc, i1, i2, i3);
 }
 
-void GlShaderProgram::setAttributeVec4Int(const std::string &variableName,
-                                          const Vector<int, 4> &vec4i) {
+void GlShaderProgram::setAttributeVec4Int(const std::string &variableName, const Vec4i &vec4i) {
   setAttributeVec4Int(variableName, vec4i[0], vec4i[1], vec4i[2], vec4i[3]);
 }
 
@@ -636,7 +628,7 @@ void GlShaderProgram::setUniformVec2FloatArray(const std::string &variableName,
 
 template <unsigned int SIZE>
 void GlShaderProgram::setUniformVec3FloatArray(const std::string &variableName,
-                                               const Array<Vector<float, 3>, SIZE> &vecvec3f) {
+                                               const Array<Vec3f, SIZE> &vecvec3f) {
   float *vvData = getVectorOfVectorData(vecvec3f);
   setUniformVec3FloatArray(variableName, SIZE, vvData);
   delete[] vvData;
@@ -650,7 +642,7 @@ void GlShaderProgram::setUniformVec3FloatArray(const std::string &variableName,
 
 template <unsigned int SIZE>
 void GlShaderProgram::setUniformVec4FloatArray(const std::string &variableName,
-                                               const Array<Vector<float, 4>, SIZE> &vecvec4f) {
+                                               const Array<Vec4f, SIZE> &vecvec4f) {
   float *vvData = getVectorOfVectorData(vecvec4f);
   setUniformVec4FloatArray(variableName, SIZE, vvData);
   delete[] vvData;
@@ -742,7 +734,7 @@ void GlShaderProgram::setUniformIntArray(const std::string &variableName, const 
 
 template <unsigned int SIZE>
 void GlShaderProgram::setUniformVec2IntArray(const std::string &variableName,
-                                             const Array<Vector<int, 2>, SIZE> &vecvec2i) {
+                                             const Array<Vec2i, SIZE> &vecvec2i) {
   int *vvData = getVectorOfVectorData(vecvec2i);
   setUniformVec2IntArray(variableName, SIZE, vvData);
   delete[] vvData;
@@ -770,7 +762,7 @@ void GlShaderProgram::setUniformVec3IntArray(const std::string &variableName,
 
 template <unsigned int SIZE>
 void GlShaderProgram::setUniformVec4IntArray(const std::string &variableName,
-                                             const Array<Vector<int, 4>, SIZE> &vecvec4i) {
+                                             const Array<Vec4i, SIZE> &vecvec4i) {
   int *vvData = getVectorOfVectorData(vecvec4i);
   setUniformVec4IntArray(variableName, SIZE, vvData);
   delete[] vvData;

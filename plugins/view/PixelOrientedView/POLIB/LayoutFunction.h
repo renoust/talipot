@@ -14,14 +14,13 @@
 #ifndef LAYOUT_FUNCTION_H
 #define LAYOUT_FUNCTION_H
 
-#include "potypes.h"
+#include <talipot/Vector.h>
 
-namespace pocore {
 class LayoutFunction {
 public:
   virtual ~LayoutFunction() {}
-  virtual Vec2i project(const unsigned int id) const = 0;
-  virtual unsigned int unproject(const Vec2i &) const = 0;
+  virtual tlp::Vec2i project(const unsigned int id) const = 0;
+  virtual unsigned int unproject(const tlp::Vec2i &) const = 0;
 };
-} // namespace pocore
+
 #endif // LAYOUT_FUNCTION_H

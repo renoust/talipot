@@ -145,7 +145,7 @@ bool FishEyeInteractorComponent::eventFilter(QObject *obj, QEvent *e) {
     QMouseEvent *me = static_cast<QMouseEvent *>(e);
     float x = glWidget->width() - me->x();
     float y = me->y();
-    Coord screenCoords(x, y, 0);
+    Coord screenCoords = {x, y};
     fisheyeCenter = camera->viewportTo3DWorld(glWidget->screenToViewport(screenCoords));
     glWidget->redraw();
     return true;
@@ -196,7 +196,7 @@ bool FishEyeInteractorComponent::draw(GlMainWidget *glWidget) {
 
     Matrix<float, 4> modelViewMatrix;
     camera->getModelviewMatrix(modelViewMatrix);
-    Vector<float, 4> centerCoord;
+    Vec4f centerCoord;
     centerCoord[0] = fisheyeCenter[0];
     centerCoord[1] = fisheyeCenter[1];
     centerCoord[2] = 0;

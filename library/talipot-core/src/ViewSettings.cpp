@@ -27,14 +27,14 @@ static float _defaultNodeBorderWidth(0);
 static float _defaultEdgeBorderWidth(0);
 static float _defaultLabelBorderWidth(1);
 static int _defaultLabelPosition(LabelPosition::Center);
-static Size _defaultNodeSize(Size(1, 1, 1));
-static Size _defaultEdgeSize(Size(0.125, 0.125, 0.5));
+static Size _defaultNodeSize(1);
+static Size _defaultEdgeSize(0.125, 0.125, 0.5);
 static int _defaultNodeShape(NodeShape::Circle);
 static int _defaultEdgeShape(EdgeShape::Polyline);
 static int _defaultEdgeExtremitySrcShape(EdgeExtremityShape::None);
 static int _defaultEdgeExtremityTgtShape(EdgeExtremityShape::Arrow);
-static Size _defaultEdgeExtremitySrcSize(Size(1, 1, 0));
-static Size _defaultEdgeExtremityTgtSize(Size(1, 1, 0));
+static Size _defaultEdgeExtremitySrcSize(1, 1, 0);
+static Size _defaultEdgeExtremityTgtSize(1, 1, 0);
 static std::string _defaultFontFile;
 static int _defaultFontSize(18);
 

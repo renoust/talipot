@@ -35,8 +35,8 @@ namespace tlp {
 BoundingBox computeNewBoundingBox(const BoundingBox &box, const Coord &centerScene, double aX,
                                   double aY) {
   // compute a new bounding box : this bounding box is the rotation of the old bounding box
-  Coord size((box[1] - box[0]) / 2.f);
-  Coord center(box[0] + size);
+  Coord size = (box[1] - box[0]) / 2.f;
+  Coord center = box[0] + size;
   // size = Coord(size.norm(),size.norm(),size.norm());
   size.fill(size.norm());
   center[0] = centerScene[0] + (cos(aY) * (center[0] - centerScene[0]));
@@ -55,7 +55,6 @@ GlQuadTreeLODCalculator::GlQuadTreeLODCalculator()
   // ThreadManager::getNumberOfThreads() bounding boxes for nodes
   // ThreadManager::getNumberOfThreads() bounding boxes for edges
   // 1 bounding box for simple entities
-  noBBCheck.assign(2 * ThreadManager::getNumberOfThreads() + 1, false);
   bbs.resize(2 * ThreadManager::getNumberOfThreads() + 1);
 }
 
@@ -63,14 +62,17 @@ GlQuadTreeLODCalculator::~GlQuadTreeLODCalculator() {
   setHaveToCompute();
   clearCamerasObservers();
 
-  for (auto node : nodesQuadTree)
+  for (auto node : nodesQuadTree) {
     delete node;
+  }
 
-  for (auto node : edgesQuadTree)
+  for (auto node : edgesQuadTree) {
     delete node;
+  }
 
-  for (auto node : entitiesQuadTree)
+  for (auto node : entitiesQuadTree) {
     delete node;
+  }
 }
 
 void GlQuadTreeLODCalculator::setScene(GlScene &scene) {
@@ -166,8 +168,7 @@ void GlQuadTreeLODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity,
                                                          const BoundingBox &bb) {
   // same check as in GlCPULODCalculator::addSimpleEntityBoundingBox
   if (bb[0][0] != numeric_limits<float>::min()) {
-    bbs[seBBIndex].expand(bb, noBBCheck[seBBIndex]);
-    noBBCheck[seBBIndex] = true;
+    bbs[seBBIndex].expand(bb);
   }
   currentLayerLODUnit->simpleEntitiesLODVector.push_back(SimpleEntityLODUnit(entity, bb));
 }
@@ -175,13 +176,11 @@ void GlQuadTreeLODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity,
 void GlQuadTreeLODCalculator::addEdgeBoundingBox(unsigned int id, unsigned int pos,
                                                  const BoundingBox &bb) {
   auto ti = eBBOffset + ThreadManager::getThreadNumber();
-  bbs[ti].expand(bb, noBBCheck[ti]);
-  noBBCheck[ti] = true;
+  bbs[ti].expand(bb);
   currentLayerLODUnit->edgesLODVector[pos].init(id, pos, bb);
 }
 
-void GlQuadTreeLODCalculator::compute(const Vector<int, 4> &globalViewport,
-                                      const Vector<int, 4> &currentViewport) {
+void GlQuadTreeLODCalculator::compute(const Vec4i &globalViewport, const Vec4i &currentViewport) {
 
   if (haveToCompute) {
     // if have to compute : rebuild quadtree
@@ -292,8 +291,8 @@ void GlQuadTreeLODCalculator::compute(const Vector<int, 4> &globalViewport,
 
 void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, const Coord &eye,
                                                  const Matrix<float, 4> &transformMatrix,
-                                                 const Vector<int, 4> &globalViewport,
-                                                 const Vector<int, 4> &currentViewport) {
+                                                 const Vec4i &globalViewport,
+                                                 const Vec4i &currentViewport) {
 
   // aX,aY : rotation on the camera in x and y
   Coord eyeCenter = currentCamera->getCenter() - currentCamera->getEyes();
@@ -302,48 +301,33 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
 
   if (haveToCompute) {
     // Create quadtrees
-    if (noBBCheck[seBBIndex]) // is bb for simple entities valid
+    if (bbs[seBBIndex].isValid()) { // is bb for simple entities valid
       entitiesQuadTree.push_back(new QuadTreeNode<GlSimpleEntity *>(bbs[seBBIndex]));
-    else
+    } else {
       entitiesQuadTree.push_back(nullptr);
-
-    bool bbsOK = false;
-    for (unsigned int i = 0; i < ThreadManager::getNumberOfThreads(); ++i) {
-      if (noBBCheck[i]) {
-        bbsOK = true;
-        break;
-      }
     }
-    if (bbsOK) { // check validity of bbs for nodes
-      // compute nodes dedicated bb
-      BoundingBox bb(bbs[0]);
 
-      for (unsigned int i = 1; i < eBBOffset; ++i) {
-        if (noBBCheck[i])
-          bb.expand(bbs[i], true);
-      }
+    // compute nodes dedicated bb
+    BoundingBox bb = bbs[0];
 
+    for (unsigned int i = 1; i < eBBOffset; ++i) {
+      bb.expand(bbs[i]);
+    }
+
+    if (bb.isValid()) {
       nodesQuadTree.push_back(new QuadTreeNode<std::pair<unsigned int, unsigned int>>(bb));
     } else {
       nodesQuadTree.push_back(nullptr);
     }
 
-    bbsOK = false;
-    for (unsigned int i = 0; i < ThreadManager::getNumberOfThreads(); ++i) {
-      if (noBBCheck[eBBOffset + i]) {
-        bbsOK = true;
-        break;
-      }
+    // compute edges dedicated bb
+    bb = bbs[eBBOffset];
+
+    for (unsigned int i = eBBOffset + 1; i < seBBIndex; ++i) {
+      bb.expand(bbs[i]);
     }
-    if (bbsOK) { // check validity of bbs for edges
-      // compute edges dedicated bb
-      BoundingBox bb(bbs[eBBOffset]);
 
-      for (unsigned int i = eBBOffset + 1; i < seBBIndex; ++i) {
-        if (noBBCheck[i])
-          bb.expand(bbs[i], true);
-      }
-
+    if (bb.isValid()) {
       edgesQuadTree.push_back(new QuadTreeNode<std::pair<unsigned int, unsigned int>>(bb));
     } else {
       edgesQuadTree.push_back(nullptr);
@@ -391,7 +375,7 @@ void GlQuadTreeLODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, con
   invTransformMatrix.inverse();
   Coord pSrc = projectPoint(Coord(0, 0, 0), transformMatrix, globalViewport);
 
-  Vector<int, 4> transformedViewport = currentViewport;
+  Vec4i transformedViewport = currentViewport;
   transformedViewport[1] = globalViewport[3] - (currentViewport[1] + currentViewport[3]);
   BoundingBox cameraBoundingBox;
 

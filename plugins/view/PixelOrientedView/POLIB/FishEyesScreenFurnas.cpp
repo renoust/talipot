@@ -94,7 +94,6 @@ static double projectRho(double rho, double R, double k, double) {
   */
 }
 
-namespace pocore {
 //==============================================================
 FishEyesScreenFurnas::FishEyesScreenFurnas() {
   R = 50;
@@ -152,4 +151,3 @@ Vec2f FishEyesScreenFurnas::unproject(const Vec2f &p) const {
   return result;
 }
 //==============================================================
-} // namespace pocore

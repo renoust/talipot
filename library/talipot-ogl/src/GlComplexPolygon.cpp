@@ -381,7 +381,7 @@ void GlComplexPolygon::runTesselation() {
         int idxx = p[j] * 3;
         int idxy = p[j] * 3 + 1;
         int idxz = p[j] * 3 + 2;
-        Coord p(verts[idxx], verts[idxy], verts[idxz]);
+        Coord p = {verts[idxx], verts[idxy], verts[idxz]};
         verticesTmp.push_back(p);
 
         // if we did not encounter the vertex so far, add it in the verticesData vector

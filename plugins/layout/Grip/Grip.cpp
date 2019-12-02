@@ -235,7 +235,6 @@ void Grip::seeLayout(unsigned int end) {
 }
 //======================================================
 void Grip::initialPlacement(unsigned int start, unsigned int end) {
-  // cerr << __PRETTY_FUNCTION__ << endl;
   for (unsigned int i = start; i <= end; ++i) {
     node currNode = misf->ordering[i];
     misf->getNearest(currNode, neighbors[currNode], neighbors_dist[currNode], level,
@@ -244,7 +243,7 @@ void Grip::initialPlacement(unsigned int start, unsigned int end) {
 
   for (unsigned int i = start; i <= end; ++i) {
     node currNode = misf->ordering[i];
-    Coord c_tmp(0, 0, 0);
+    Coord c_tmp;
     float nbConsidered = 0.;
 
     for (unsigned int j = 0; j < neighbors[currNode].size(); ++j) {

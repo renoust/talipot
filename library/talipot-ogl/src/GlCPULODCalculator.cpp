@@ -23,9 +23,8 @@ using namespace std;
 
 namespace tlp {
 
-GlCPULODCalculator::GlCPULODCalculator() : computeEdgesLOD(true), noBBCheck(false) {
+GlCPULODCalculator::GlCPULODCalculator() : computeEdgesLOD(true) {
   threadSafe = true;
-  noBBCheck.assign(ThreadManager::getNumberOfThreads(), false);
   bbs.resize(ThreadManager::getNumberOfThreads());
 }
 
@@ -48,8 +47,7 @@ void GlCPULODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity, cons
   //   TODO: See if we can change the bounding box compute in Gl2DRect
   if (bb[0][0] != numeric_limits<float>::min()) {
     auto ti = ThreadManager::getThreadNumber();
-    bbs[ti].expand(bb, noBBCheck[ti]);
-    noBBCheck[ti] = true;
+    bbs[ti].expand(bb);
   }
 
   currentLayerLODUnit->simpleEntitiesLODVector.push_back(SimpleEntityLODUnit(entity, bb));
@@ -57,24 +55,22 @@ void GlCPULODCalculator::addSimpleEntityBoundingBox(GlSimpleEntity *entity, cons
 void GlCPULODCalculator::addNodeBoundingBox(unsigned int id, unsigned int pos,
                                             const BoundingBox &bb) {
   auto ti = ThreadManager::getThreadNumber();
-  bbs[ti].expand(bb, noBBCheck[ti]);
-  noBBCheck[ti] = true;
+  bbs[ti].expand(bb);
   currentLayerLODUnit->nodesLODVector[pos].init(id, pos, bb);
 }
 void GlCPULODCalculator::addEdgeBoundingBox(unsigned int id, unsigned int pos,
                                             const BoundingBox &bb) {
   auto ti = ThreadManager::getThreadNumber();
-  bbs[ti].expand(bb, noBBCheck[ti]);
-  noBBCheck[ti] = true;
+  bbs[ti].expand(bb);
   currentLayerLODUnit->edgesLODVector[pos].init(id, pos, bb);
 }
 
 BoundingBox GlCPULODCalculator::getSceneBoundingBox() {
-  BoundingBox bb(bbs[0]);
+  BoundingBox bb = bbs[0];
 
-  for (unsigned int i = 1; i < bbs.size(); ++i)
-    if (noBBCheck[i])
-      bb.expand(bbs[i], true);
+  for (unsigned int i = 1; i < bbs.size(); ++i) {
+    bb.expand(bbs[i]);
+  }
   return bb;
 }
 
@@ -83,8 +79,7 @@ void GlCPULODCalculator::reserveMemoryForGraphElts(unsigned int nbNodes, unsigne
   currentLayerLODUnit->edgesLODVector.resize(nbEdges);
 }
 
-void GlCPULODCalculator::compute(const Vector<int, 4> &globalViewport,
-                                 const Vector<int, 4> &currentViewport) {
+void GlCPULODCalculator::compute(const Vec4i &globalViewport, const Vec4i &currentViewport) {
 
   for (auto &it : layersLODVector) {
     Camera *camera = it.camera;
@@ -106,8 +101,8 @@ void GlCPULODCalculator::compute(const Vector<int, 4> &globalViewport,
 
 void GlCPULODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, const Coord &eye,
                                             const Matrix<float, 4> &transformMatrix,
-                                            const Vector<int, 4> &globalViewport,
-                                            const Vector<int, 4> &currentViewport) {
+                                            const Vec4i &globalViewport,
+                                            const Vec4i &currentViewport) {
 
   unsigned int nb = 0;
   if ((renderingEntitiesFlag & RenderingSimpleEntities) != 0) {
@@ -144,9 +139,8 @@ void GlCPULODCalculator::computeFor3DCamera(LayerLODUnit *layerLODUnit, const Co
   }
 }
 
-void GlCPULODCalculator::computeFor2DCamera(LayerLODUnit *layerLODUnit,
-                                            const Vector<int, 4> &globalViewport,
-                                            const Vector<int, 4> &currentViewport) {
+void GlCPULODCalculator::computeFor2DCamera(LayerLODUnit *layerLODUnit, const Vec4i &globalViewport,
+                                            const Vec4i &currentViewport) {
 
   for (auto &it : layerLODUnit->simpleEntitiesLODVector) {
     it.lod = calculate2DLod(it.boundingBox, globalViewport, currentViewport);

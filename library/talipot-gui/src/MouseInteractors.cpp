@@ -54,13 +54,6 @@ bool MousePanNZoomNavigator::eventFilter(QObject *widget, QEvent *e) {
   if (e->type() == QEvent::Gesture) {
     QGestureEvent *gesture = static_cast<QGestureEvent *>(e);
     QPointF center;
-    // swipe events and pan events are never fired, known Qt bug
-    /*if(gesture->gesture(Qt::SwipeGesture)) {
-      QSwipeGesture* swipe = (QSwipeGesture*)gesture->gesture(Qt::SwipeGesture);
-      int x = cos(swipe->swipeAngle()) * swipe->property("velocity").toFloat();
-      int y = sin(swipe->swipeAngle()) * swipe->property("velocity").toFloat();
-      g->getScene()->translateCamera(x, y, 0);
-    }*/
 
     if (gesture->gesture(Qt::PinchGesture)) {
       QPinchGesture *pinch = static_cast<QPinchGesture *>(gesture->gesture(Qt::PinchGesture));
@@ -82,21 +75,8 @@ bool MousePanNZoomNavigator::eventFilter(QObject *widget, QEvent *e) {
       }
 
       if (pinch->changeFlags() & QPinchGesture::RotationAngleChanged) {
-        /*//backup the current camera center
-              Coord oldCenter = camera.getCenter();
-              Coord oldEye = camera.getEyes();
-        //sets the camera center to the center of the pich gesture
-              Coord rotationCenter(g->mapFromGlobal(pinch->centerPoint().toPoint()).x(),
-        g->mapFromGlobal(pinch->centerPoint().toPoint()).y(), oldCenter.getZ());
-              Coord rotationEye=camera.getEyes()+(rotationCenter-oldCenter);
-              camera.setCenter(rotationCenter);
-              camera.setEyes(rotationEye);*/
         // rotates the camera
         camera.rotate((pinch->rotationAngle() - pinch->lastRotationAngle()) / 180 * M_PI, 0, 0, 1);
-        /*
-        //restore old camera center and eyes
-              camera.setCenter(oldCenter);
-              camera.setEyes(oldEye); */
       }
 
       if (pinch->state() == Qt::GestureFinished) {

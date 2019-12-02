@@ -68,39 +68,33 @@ SizeProperty::SizeProperty(Graph *sg, const std::string &n)
   setMetaValueCalculator(&mvSizeCalculator);
 }
 //====================================================================
-void SizeProperty::scale(const tlp::Vector<float, 3> &v, Iterator<node> *itN, Iterator<edge> *itE) {
+void SizeProperty::scale(const tlp::Vec3f &v, Iterator<node> *itN, Iterator<edge> *itE) {
   Observable::holdObservers();
 
-  while (itN->hasNext()) {
-    node itn = itN->next();
-    Size tmpSize(getNodeValue(itn));
+  for (auto n : itN) {
+    Size tmpSize = getNodeValue(n);
     tmpSize *= v;
-    setNodeValue(itn, tmpSize);
+    setNodeValue(n, tmpSize);
   }
 
-  while (itE->hasNext()) {
-    edge ite = itE->next();
-    Size tmpSize(getEdgeValue(ite));
+  for (auto e : itE) {
+    Size tmpSize = getEdgeValue(e);
     tmpSize *= v;
-    setEdgeValue(ite, tmpSize);
+    setEdgeValue(e, tmpSize);
   }
 
   resetMinMax();
   Observable::unholdObservers();
 }
 //=============================================================================
-void SizeProperty::scale(const tlp::Vector<float, 3> &v, const Graph *sg) {
+void SizeProperty::scale(const tlp::Vec3f &v, const Graph *sg) {
   if (sg == nullptr)
     sg = graph;
 
   if (sg->isEmpty())
     return;
 
-  Iterator<node> *itN = sg->getNodes();
-  Iterator<edge> *itE = sg->getEdges();
-  scale(v, itN, itE);
-  delete itN;
-  delete itE;
+  scale(v, sg->getNodes(), sg->getEdges());
 }
 //=============================================================================
 Size SizeProperty::getMax(const Graph *sg) {
@@ -134,8 +128,8 @@ Size SizeProperty::getMin(const Graph *sg) {
 }
 //=============================================================================
 void SizeProperty::computeMinMax(const Graph *sg) {
-  Size maxS(-FLT_MAX, -FLT_MAX, -FLT_MAX);
-  Size minS(FLT_MAX, FLT_MAX, FLT_MAX);
+  Size maxS = {-FLT_MAX, -FLT_MAX, -FLT_MAX};
+  Size minS = {FLT_MAX, FLT_MAX, FLT_MAX};
 
   for (auto itn : sg->nodes()) {
     const Size &tmpSize = getNodeValue(itn);

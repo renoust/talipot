@@ -152,12 +152,11 @@ void Cone::draw(node n, float) {
 
   GlTextureManager::deactivateTexture();
 }
-Coord Cone::getAnchor(const Coord &vector) const {
-  Coord anchor = vector;
+Coord Cone::getAnchor(const Coord &v) const {
+  Coord anchor = v;
 
-  float x, y, z, n;
-  anchor.get(x, y, z);
-  n = sqrt(x * x + y * y);
+  float x = v.x(), y = v.y(), z = v.z();
+  float n = sqrt(x * x + y * y);
   float vx0, vy0, vx1, vy1, x0, y0, x1, y1, px, py;
   x0 = 0;
   y0 = 0.5;

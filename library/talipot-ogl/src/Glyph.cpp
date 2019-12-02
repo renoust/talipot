@@ -53,7 +53,7 @@ Coord Glyph::getAnchor(const Coord &nodeCenter, const Coord &from, const Size &s
 
   if (zRotation != 0) {
     // unrotate
-    Coord saveAnchor(anchor);
+    Coord saveAnchor = anchor;
     double zRot = -2.0 * M_PI * zRotation / 360.0;
     anchor[0] = saveAnchor[0] * cos(zRot) - saveAnchor[1] * sin(zRot);
     anchor[1] = saveAnchor[0] * sin(zRot) + saveAnchor[1] * cos(zRot);
@@ -77,7 +77,7 @@ Coord Glyph::getAnchor(const Coord &nodeCenter, const Coord &from, const Size &s
 
   if (zRotation != 0) {
     // rerotate
-    Coord saveAnchor(anchor);
+    Coord saveAnchor = anchor;
     double zRot = 2.0 * M_PI * zRotation / 360.0;
     anchor[0] = saveAnchor[0] * cos(zRot) - saveAnchor[1] * sin(zRot);
     anchor[1] = saveAnchor[0] * sin(zRot) + saveAnchor[1] * cos(zRot);
@@ -86,11 +86,8 @@ Coord Glyph::getAnchor(const Coord &nodeCenter, const Coord &from, const Size &s
   return nodeCenter + anchor;
 }
 //=================================================================
-Coord Glyph::getAnchor(const Coord &vector) const {
-  Coord anchor = vector;
-  /* anchor must be on the surface of a sphere centered on nodecenter, radius is 0.5 */
-  anchor *= 0.5f / anchor.norm();
-  return anchor;
+Coord Glyph::getAnchor(const Coord &v) const {
+  return v * (0.5f / v.norm());
 }
 //=================================================================
 void Glyph::drawRectInScreenPlane(GlRect &rect, const Size &size, bool disableMasks) {

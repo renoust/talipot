@@ -15,7 +15,7 @@
 #define TALIPOT_BOUNDING_BOX_H
 
 #include <cassert>
-#include <talipot/Vector.h>
+#include <talipot/Coord.h>
 #include <talipot/config.h>
 
 namespace tlp {
@@ -57,7 +57,7 @@ namespace tlp {
  *
  *
  */
-struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
+struct TLP_SCOPE BoundingBox : public Array<Coord, 2> {
 
   /**
    * @brief Creates an invalid boundig box.
@@ -75,15 +75,15 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param compute indicates whether the bounding box has to be computed with the min/max args
    *
    **/
-  BoundingBox(const tlp::Vec3f &min, const tlp::Vec3f &max, bool checkMinMax = false);
+  BoundingBox(const tlp::Coord &min, const tlp::Coord &max);
 
   /**
    * @brief Returns the geometrical center of the bounding box.
    * An assertion is raised in debug mode if the BoundingBox is not valid.
    *
-   * @return The center of the bounding box :Vec3f
+   * @return The center of the bounding box :Coord
    **/
-  inline Vec3f center() const {
+  inline Coord center() const {
     assert(isValid());
     return ((*this)[0] + (*this)[1]) / 2.f;
   }
@@ -125,7 +125,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param coord A point in the 3D space we want the bounding box to encompass.
    * @return void
    **/
-  void expand(const tlp::Vec3f &coord);
+  void expand(const tlp::Coord &coord);
 
   /**
    * @brief Expands the bounding box to one containing the bounding box passed as parameter.
@@ -134,7 +134,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param bb A bounding box.
    * @return void
    **/
-  void expand(const tlp::BoundingBox &bb, bool noCheck = false);
+  void expand(const tlp::BoundingBox &bb);
 
   /**
    * @brief Translates the bounding box by the displacement given by the vector passed as parameter.
@@ -142,7 +142,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param vec The displacement vector in 3D space to translate this bounding box by.
    * @return void
    **/
-  void translate(const tlp::Vec3f &vec);
+  void translate(const tlp::Coord &vec);
 
   /**
    * @brief Scales the bounding box, i.e. multiplying its components by a vector passed as
@@ -151,7 +151,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param factor The factor vector to scale this bounding box by.
    * @return void
    **/
-  void scale(const tlp::Vec3f &factor);
+  void scale(const tlp::Coord &factor);
 
   /**
    * @brief Checks whether the bounding box's lowest point is less than it's highest point.
@@ -167,7 +167,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param coord A point in the 3D space.
    * @return bool Whether coord is in the bounding box.
    **/
-  bool contains(const tlp::Vec3f &coord) const;
+  bool contains(const tlp::Coord &coord) const;
 
   /**
    * @brief Checks if the given bounding box is inside the current bounding box. If one of the
@@ -192,7 +192,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
    * @param segEnd the end point of the line segment on which to check intersection
    * @return bool Whether the line segment intersects the bounding box
    **/
-  bool intersect(const Vec3f &segStart, const Vec3f &segEnd) const;
+  bool intersect(const Coord &segStart, const Coord &segEnd) const;
 
   /**
   * @brief The vector passed as parameter is modified to contain the 8 points of the bounding box.
@@ -225,7 +225,7 @@ struct TLP_SCOPE BoundingBox : public Array<Vec3f, 2> {
   * @param bb A vector in which to put the points of the bounding box.
   * @return void
   **/
-  void getCompleteBB(Vec3f bb[8]) const;
+  void getCompleteBB(Coord bb[8]) const;
 };
 }
 

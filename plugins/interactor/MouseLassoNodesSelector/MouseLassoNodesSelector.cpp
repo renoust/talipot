@@ -135,34 +135,34 @@ void MouseLassoNodesSelectorInteractorComponent::selectGraphElementsUnderPolygon
       nodeBB[1][2] = nodeBB[1][2] - f * dz;
       vector<float> xVec;
       vector<float> yVec;
-      Coord nodeBBBLBScr(camera->worldTo2DViewport(Coord(nodeBB[0])));
+      Coord nodeBBBLBScr = camera->worldTo2DViewport(nodeBB[0]);
       xVec.push_back(nodeBBBLBScr.getX());
       yVec.push_back(nodeBBBLBScr.getY());
-      Coord nodeBBTLBScr(
-          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[0][2])));
+      Coord nodeBBTLBScr =
+          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[0][2]));
       xVec.push_back(nodeBBTLBScr[0]);
       yVec.push_back(nodeBBTLBScr[1]);
-      Coord nodeBBTRBScr(
-          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[1][1], nodeBB[0][2])));
+      Coord nodeBBTRBScr =
+          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[1][1], nodeBB[0][2]));
       xVec.push_back(nodeBBTRBScr[0]);
       yVec.push_back(nodeBBTRBScr[1]);
-      Coord nodeBBBRBScr(
-          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[0][2])));
+      Coord nodeBBBRBScr =
+          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[0][2]));
       xVec.push_back(nodeBBBRBScr[0]);
       yVec.push_back(nodeBBBRBScr[1]);
-      Coord nodeBBBLFScr(
-          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[0][1], nodeBB[1][2])));
+      Coord nodeBBBLFScr =
+          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[0][1], nodeBB[1][2]));
       xVec.push_back(nodeBBBLFScr[0]);
       yVec.push_back(nodeBBBLFScr[1]);
-      Coord nodeBBTLFScr(
-          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[1][2])));
+      Coord nodeBBTLFScr =
+          camera->worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[1][2]));
       xVec.push_back(nodeBBTLFScr[0]);
       yVec.push_back(nodeBBTLFScr[1]);
-      Coord nodeBBTRFScr(camera->worldTo2DViewport(Coord(nodeBB[1])));
+      Coord nodeBBTRFScr = camera->worldTo2DViewport(nodeBB[1]);
       xVec.push_back(nodeBBTRFScr[0]);
       yVec.push_back(nodeBBTRFScr[1]);
-      Coord nodeBBBRFScr(
-          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[1][2])));
+      Coord nodeBBBRFScr =
+          camera->worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[1][2]));
       xVec.push_back(nodeBBBRFScr[0]);
       yVec.push_back(nodeBBBRFScr[1]);
       vector<Coord> quad;

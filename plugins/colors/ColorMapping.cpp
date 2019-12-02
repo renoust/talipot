@@ -85,7 +85,7 @@ private:
   StringCollection eltTypes;
   StringCollection targetType;
   ColorScale colorScale;
-  Vector<float, 4> deltaRGBA;
+  Vec4f deltaRGBA;
   std::vector<std::pair<std::string, Color>> enumeratedMappingResultVector;
   std::map<std::string, std::vector<unsigned int>> mapMetricElements;
   double maxInput;

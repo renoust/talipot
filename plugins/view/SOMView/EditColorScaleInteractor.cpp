@@ -90,9 +90,10 @@ void EditColorScaleInteractor::viewChanged(View *view) {
   if (somView != nullptr) {
     assert(colorScale == nullptr);
     GlMainWidget *glMainWidget = somView->getMapWidget();
-    Size screenSize(glMainWidget->width() * widthPercent, glMainWidget->height() * heightPercent);
-    Coord bottomLeftScreenCoord((glMainWidget->width() - screenSize.getW()) * .5,
-                                glMainWidget->height() * .1, 0);
+    Size screenSize = {glMainWidget->width() * widthPercent,
+                       glMainWidget->height() * heightPercent};
+    Coord bottomLeftScreenCoord = {(glMainWidget->width() - screenSize.getW()) * .5f,
+                                   glMainWidget->height() * .1f};
     colorScale = new GlLabelledColorScale(bottomLeftScreenCoord, screenSize,
                                           somView->getColorScale(), 0, 0, false);
 
@@ -139,9 +140,10 @@ bool EditColorScaleInteractor::screenSizeChanged(SOMView *somView) {
 
   if (glMainWidget->width() != glMainWidgetWidth || glMainWidget->height() != glMainWidgetHeight) {
     if (colorScale) {
-      Size screenSize(glMainWidget->width() * widthPercent, glMainWidget->height() * heightPercent);
-      Coord bottomLeftScreenCoord((glMainWidget->width() - screenSize.getW()) * .5,
-                                  glMainWidget->height() * .1, 0);
+      Size screenSize = {glMainWidget->width() * widthPercent,
+                         glMainWidget->height() * heightPercent};
+      Coord bottomLeftScreenCoord = {(glMainWidget->width() - screenSize.getW()) * .5f,
+                                     glMainWidget->height() * .1f};
       colorScale->setPosition(bottomLeftScreenCoord);
       colorScale->setSize(screenSize);
       glMainWidgetWidth = glMainWidget->width();

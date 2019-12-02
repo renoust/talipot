@@ -103,8 +103,8 @@ bool cameraIs3D() {
   return glIsEnabled(GL_LIGHT0);
 }
 //====================================================
-Coord projectPoint(const Coord &obj, const MatrixGL &transform, const Vector<int, 4> &viewport) {
-  Vector<float, 4> point;
+Coord projectPoint(const Coord &obj, const MatrixGL &transform, const Vec4i &viewport) {
+  Vec4f point;
   point[0] = obj[0];
   point[1] = obj[1];
   point[2] = obj[2];
@@ -116,7 +116,7 @@ Coord projectPoint(const Coord &obj, const MatrixGL &transform, const Vector<int
                  << " and transform matrix : " << transform << std::endl;
   }
 #endif
-  Coord result(point[0], point[1], point[2]);
+  Coord result = {point[0], point[1], point[2]};
   result /= point[3];
 
   result[0] = viewport[0] + (1.0f + result[0]) * viewport[2] * 0.5f;
@@ -125,9 +125,8 @@ Coord projectPoint(const Coord &obj, const MatrixGL &transform, const Vector<int
   return result;
 }
 //====================================================
-Coord unprojectPoint(const Coord &obj, const MatrixGL &invtransform,
-                     const Vector<int, 4> &viewport) {
-  Vector<float, 4> point;
+Coord unprojectPoint(const Coord &obj, const MatrixGL &invtransform, const Vec4i &viewport) {
+  Vec4f point;
 
   point[0] = (obj[0] - viewport[0]) / viewport[2] * 2.0f - 1.0f;
   point[1] = (obj[1] - viewport[1]) / viewport[3] * 2.0f - 1.0f;
@@ -144,14 +143,14 @@ Coord unprojectPoint(const Coord &obj, const MatrixGL &invtransform,
 
 #endif
 
-  Coord result(point[0], point[1], point[2]);
+  Coord result = {point[0], point[1], point[2]};
   result /= point[3];
 
   return result;
 }
 //====================================================
 GLfloat projectSize(const Coord &position, const Size &size, const MatrixGL &projectionMatrix,
-                    const MatrixGL &modelviewMatrix, const Vector<int, 4> &viewport) {
+                    const MatrixGL &modelviewMatrix, const Vec4i &viewport) {
   BoundingBox box;
   box.expand(position - size / 2.f);
   box.expand(position + size / 2.f);
@@ -159,8 +158,8 @@ GLfloat projectSize(const Coord &position, const Size &size, const MatrixGL &pro
 }
 //====================================================
 GLfloat projectSize(const BoundingBox &bb, const MatrixGL &projectionMatrix,
-                    const MatrixGL &modelviewMatrix, const Vector<int, 4> &viewport) {
-  Coord bbSize(bb[1] - bb[0]);
+                    const MatrixGL &modelviewMatrix, const Vec4i &viewport) {
+  Coord bbSize = bb[1] - bb[0];
   float nSize = bbSize.norm(); // Enclosing bounding box
 
   MatrixGL translate;
@@ -186,17 +185,17 @@ GLfloat projectSize(const BoundingBox &bb, const MatrixGL &projectionMatrix,
 
   tmp *= projectionMatrix;
 
-  Vector<float, 4> vect1;
+  Vec4f vect1;
   vect1[0] = 0.5;
   vect1[1] = 0;
   vect1[2] = 0;
   vect1[3] = 1.0;
-  Vector<float, 4> proj1 = vect1 * tmp;
+  Vec4f proj1 = vect1 * tmp;
 
-  Vector<float, 4> vect2;
+  Vec4f vect2;
   vect2.fill(0);
   vect2[3] = 1.0;
-  Vector<float, 4> proj2 = vect2 * tmp;
+  Vec4f proj2 = vect2 * tmp;
 
   float x1 = (proj1[0] / proj1[3] * 0.5 + 0.5) * viewport[2];
   float x2 = (proj2[0] / proj2[3] * 0.5 + 0.5) * viewport[2];
@@ -237,10 +236,9 @@ GLfloat projectSize(const BoundingBox &bb, const MatrixGL &projectionMatrix,
 }
 //====================================================
 float calculateAABBSize(const BoundingBox &bb, const Coord &eye,
-                        const Matrix<float, 4> &transformMatrix,
-                        const Vector<int, 4> &globalViewport,
-                        const Vector<int, 4> &currentViewport) {
-  BoundingBox bbTmp(bb);
+                        const Matrix<float, 4> &transformMatrix, const Vec4i &globalViewport,
+                        const Vec4i &currentViewport) {
+  BoundingBox bbTmp = bb;
   Coord src[8];
   Coord dst[8];
   int pos;
@@ -318,7 +316,7 @@ float calculateAABBSize(const BoundingBox &bb, const Coord &eye,
   }
 }
 //====================================================
-float calculate2DLod(const BoundingBox &bb, const Vector<int, 4> &, const Vector<int, 4> &) {
+float calculate2DLod(const BoundingBox &bb, const Vec4i &, const Vec4i &) {
   return (bb[1][0] - bb[0][0]) * (bb[1][1] - bb[0][1]);
 }
 //====================================================

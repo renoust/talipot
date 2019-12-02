@@ -392,19 +392,19 @@ void ScatterPlot2DView::computeNodeSizes() {
   if (!scatterPlotSize) {
     scatterPlotSize = new SizeProperty(scatterPlotGraph);
   } else {
-    scatterPlotSize->setAllNodeValue(Size(0, 0, 0));
-    scatterPlotSize->setAllEdgeValue(Size(0, 0, 0));
+    scatterPlotSize->setAllNodeValue(Size(0));
+    scatterPlotSize->setAllEdgeValue(Size(0));
   }
 
   SizeProperty *viewSize = scatterPlotGraph->getSizeProperty("viewSize");
 
-  Size eltMinSize(viewSize->getMin());
-  Size eltMaxSize(viewSize->getMax());
-  Size pointMinSize(optionsWidget->getMinSizeMapping());
-  Size pointMaxSize(optionsWidget->getMaxSizeMapping());
+  Size eltMinSize = viewSize->getMin();
+  Size eltMaxSize = viewSize->getMax();
+  Size pointMinSize = optionsWidget->getMinSizeMapping();
+  Size pointMaxSize = optionsWidget->getMaxSizeMapping();
 
   Size resizeFactor;
-  Size deltaSize(eltMaxSize - eltMinSize);
+  Size deltaSize = eltMaxSize - eltMinSize;
 
   for (unsigned int i = 0; i < 3; ++i) {
     if (deltaSize[i] != 0) {
@@ -416,7 +416,7 @@ void ScatterPlot2DView::computeNodeSizes() {
 
   for (auto n : scatterPlotGraph->nodes()) {
     const Size &nodeSize = viewSize->getNodeValue(n);
-    Size adjustedNodeSize(pointMinSize + resizeFactor * (nodeSize + Size(-1.0f, -1.0f, -1.0f)));
+    Size adjustedNodeSize = pointMinSize + resizeFactor * (nodeSize - Size(1.0f));
     scatterPlotSize->setNodeValue(n, adjustedNodeSize);
   }
 
@@ -433,7 +433,7 @@ QuickAccessBar *ScatterPlot2DView::getQuickAccessBarImpl() {
 void ScatterPlot2DView::buildScatterPlotsMatrix() {
 
   dataLocation = propertiesSelectionWidget->getDataLocation();
-  Color backgroundColor(optionsWidget->getBackgroundColor());
+  Color backgroundColor = optionsWidget->getBackgroundColor();
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color foregroundColor;
@@ -510,9 +510,9 @@ void ScatterPlot2DView::buildScatterPlotsMatrix() {
         pair<string, string> overviewsMapKey =
             make_pair(selectedGraphProperties[i], selectedGraphProperties[j]);
         ScatterPlot2D *scatterOverview = nullptr;
-        Coord overviewBlCorner(i * (OVERVIEWS_SIZE + OFFSET_BETWEEN_PREVIEWS),
-                               (selectedGraphProperties.size() - j - 1.0f) *
-                                   (OVERVIEWS_SIZE + OFFSET_BETWEEN_PREVIEWS));
+        Coord overviewBlCorner = {i * (OVERVIEWS_SIZE + OFFSET_BETWEEN_PREVIEWS),
+                                  (selectedGraphProperties.size() - j - 1.0f) *
+                                      (OVERVIEWS_SIZE + OFFSET_BETWEEN_PREVIEWS)};
         map<pair<string, string>, ScatterPlot2D *>::iterator it =
             scatterPlotsMap.find(overviewsMapKey);
 
@@ -568,7 +568,7 @@ void ScatterPlot2DView::buildScatterPlotsMatrix() {
 }
 
 void ScatterPlot2DView::addEmptyViewLabel() {
-  Color backgroundColor(optionsWidget->getBackgroundColor());
+  Color backgroundColor = optionsWidget->getBackgroundColor();
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color foregroundColor;

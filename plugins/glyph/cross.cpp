@@ -118,19 +118,17 @@ void Cross::draw(node n, float lod) {
             glGraphInputData->getElementBorderColor()->getNodeValue(n),
             glGraphInputData->getElementBorderWidth()->getNodeValue(n), textureName, lod);
 }
-Coord Cross::getAnchor(const Coord &vector) const {
-  Coord v(vector);
-  float x, y, z;
-  v.get(x, y, z);
+Coord Cross::getAnchor(const Coord &v) const {
+  float x = v.x(), y = v.y();
   // initialize anchor as the middle of segment points[0], points[1]
-  Coord anchor(0, 0.5, 0);
+  Coord anchor = {0, 0.5, 0};
   float distMin = x * x + ((y - 0.5) * (y - 0.5));
   // check with the middle of segment points[3], points[4]
   float dist = ((x - 0.5) * (x - 0.5)) + y * y;
 
   if (distMin > dist) {
     distMin = dist;
-    anchor = Coord(0.5, 0, 0);
+    anchor = {0.5, 0, 0};
   }
 
   // check with the middle of segment points[7], points[6]
@@ -138,12 +136,12 @@ Coord Cross::getAnchor(const Coord &vector) const {
 
   if (distMin > dist) {
     distMin = dist;
-    anchor = Coord(0, -0.5, 0);
+    anchor = {0, -0.5, 0};
   }
 
   // check with the middle of segment points[9], points[10]
   if (distMin > ((x + 0.5) * (x + 0.5)) + y * y)
-    return Coord(-0.5, 0, 0);
+    return {-0.5, 0, 0};
 
   return anchor;
 }

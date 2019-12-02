@@ -106,7 +106,7 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
   }
 
   // Backup initial viewport
-  Vector<int, 4> backupViewport = baseScene.getViewport();
+  Vec4i backupViewport = baseScene.getViewport();
 
   // Backup initial cameras
   vector<Camera> cameras;
@@ -167,7 +167,7 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
 
   // Rotation of the coordinates to have no crossing lines
   while (p1[0] > p3[0]) {
-    Coord tmp(p0);
+    Coord tmp = p0;
     p0 = p1;
     p1 = p2;
     p2 = p3;
@@ -175,7 +175,7 @@ void GlOverviewGraphicsItem::draw(bool generatePixmap) {
   }
 
   while (p1[1] < p3[1]) {
-    Coord tmp(p0);
+    Coord tmp = p0;
     p0 = p3;
     p3 = p2;
     p2 = p1;
@@ -308,9 +308,9 @@ void GlOverviewGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void GlOverviewGraphicsItem::setScenePosition(QPointF pos) {
 
-  Coord position(width + _frameWidth - pos.x(), pos.y() - _frameWidth, 0);
+  Coord position = Coord(width + _frameWidth - pos.x(), pos.y() - _frameWidth);
 
-  Vector<int, 4> backupViewport = baseScene.getViewport();
+  Vec4i backupViewport = baseScene.getViewport();
 
   baseScene.setViewport(0, 0, width, height);
 

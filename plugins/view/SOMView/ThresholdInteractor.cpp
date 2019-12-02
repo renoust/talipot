@@ -78,7 +78,7 @@ void ColorScaleSlider::buildComposite(const std::string &textureName) {
 
   float arrowLen = size.getW() * 0.25;
 
-  Size labelSize(size.getW(), size.getH());
+  Size labelSize = {size.getW(), size.getH()};
   vector<Color> fillColors;
   fillColors.insert(fillColors.begin(), 3, linkedScale->getGlColorScale()->getColorAtPos(position));
 
@@ -91,7 +91,7 @@ void ColorScaleSlider::buildComposite(const std::string &textureName) {
   Coord p2 = Coord(points[1].getX(), position.getY() - size.getH(), 0);
 
   rect = new GlQuad(p1, p2, points[1], points[2], Color(255, 255, 255));
-  Coord labelPosition(position.getX(), p1.getY() + (points[1].getY() - p1.getY()) * 0.5);
+  Coord labelPosition = {position.getX(), p1.getY() + (points[1].getY() - p1.getY()) * 0.5f};
   rect->setTextureName(textureName);
   arrow = new GlPolygon(points, fillColors, fillColors, true, false);
   addGlEntity(arrow, "arrow");
@@ -176,7 +176,7 @@ void ColorScaleSlider::updatePosition() {
   float xShift = xPos - position.getX();
 
   if (xShift != 0) {
-    Coord move(xShift, 0, 0);
+    Coord move = {xShift, 0};
     arrow->translate(move);
     label->translate(move);
     rect->translate(move);
@@ -250,8 +250,9 @@ void SliderBar::draw(float lod, tlp::Camera *camera) {
   Coord rPos = right->getBasePosition();
   Size rSize = right->getSize();
 
-  Coord topLeft(lPos.getX() + lSize.getW() * 0.5, lPos.getY() - lSize.getH(), lPos.getZ());
-  Coord bottomRight(rPos.getX() - rSize.getW() * .5, rPos.getY() - rSize.getH() * .25, rPos.getZ());
+  Coord topLeft = {lPos.getX() + lSize.getW() * 0.5f, lPos.getY() - lSize.getH(), lPos.getZ()};
+  Coord bottomRight = {rPos.getX() - rSize.getW() * 0.5f, rPos.getY() - rSize.getH() * 0.25f,
+                       rPos.getZ()};
 
   // Sliders are overlapping don't draw the slider bar
   if (bottomRight.getX() - topLeft.getX() > 0) {
@@ -486,7 +487,7 @@ void ThresholdInteractor::buildSliders(SOMView *somView) {
   BooleanProperty *mask = somView->getMask();
   SOMMap *som = somView->getSOM();
   assert(som);
-  Size sliderSize(colorScale->getSize().getH(), colorScale->getSize().getH());
+  Size sliderSize = {colorScale->getSize().getH(), colorScale->getSize().getH()};
 
   double minValue, maxValue, intervalMinValue, intervalMaxValue;
   // Get the minimum and the maximum values.

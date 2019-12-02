@@ -170,7 +170,7 @@ public:
 
       for (unsigned int i = 0; i < subMesh->PointCount(); ++i) {
         FTPoint point = subMesh->Point(i);
-        tlp::Coord p(point.Xf() / HRESf, point.Yf() / HRESf, 0.0f);
+        Coord p = {point.Xf() / HRESf, point.Yf() / HRESf};
 
         if (vertexIdx.find(p) == vertexIdx.end()) {
           meshBB.expand(p);
@@ -188,18 +188,18 @@ public:
 
       for (unsigned int i = 0; i < contour->PointCount() - 1; ++i) {
         FTPoint point = contour->Point(i);
-        tlp::Coord p(point.Xf() / HRESf, point.Yf() / HRESf, 0.0f);
+        Coord p = {point.Xf() / HRESf, point.Yf() / HRESf};
         outlineIndices.push_back(ushort_cast(vertexIdx[p]));
         point = contour->Point(i + 1);
-        p = Coord(point.Xf() / HRESf, point.Yf() / HRESf, 0.0f);
+        p = {point.Xf() / HRESf, point.Yf() / HRESf};
         outlineIndices.push_back(ushort_cast(vertexIdx[p]));
       }
 
       FTPoint point = contour->Point(contour->PointCount() - 1);
-      tlp::Coord p(point.Xf() / HRESf, point.Yf() / HRESf, 0.0f);
+      Coord p = {point.Xf() / HRESf, point.Yf() / HRESf};
       outlineIndices.push_back(ushort_cast(vertexIdx[p]));
       point = contour->Point(0);
-      p = Coord(point.Xf() / HRESf, point.Yf() / HRESf, 0.0f);
+      p = {point.Xf() / HRESf, point.Yf() / HRESf};
       outlineIndices.push_back(ushort_cast(vertexIdx[p]));
     }
 

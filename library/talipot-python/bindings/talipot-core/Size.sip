@@ -11,67 +11,20 @@
  *
  */
 
-// Small hack used internally to differentiate tlp.Coord and tlp.Size types in Python
-// (as tlp::Coord and tlp::Size are just typedef to tlp::Vec3f in C++)
-
-%ModuleHeaderCode
 namespace tlp {
 
-class PySize : public tlp::Vec3f {
-
- public:
-
-  PySize(const float v=1) : tlp::Vec3f(v) {}
-
-  PySize(const float a0, const float a1, const float a2) : tlp::Vec3f(a0, a1, a2) {}
-
-  PySize(const tlp::PySize &s) : tlp::Vec3f(s) {}
-
-  PySize(const tlp::Vec3f &s) : tlp::Vec3f(s) {}
-
-  tlp::PySize operator*(const tlp::Vec3f &v) const {
-    return static_cast<tlp::Vec3f>(*this) * v;
-  }
-
-  tlp::PySize operator*(const float &f) const {
-    return static_cast<tlp::Vec3f>(*this) * f;
-  }
-
-  tlp::PySize operator+(const tlp::Vec3f &v) const {
-    return static_cast<tlp::Vec3f>(*this) * v;
-  }
-
-  tlp::PySize operator+(const float &f) const {
-    return static_cast<tlp::Vec3f>(*this) + f;
-  }
-
-  tlp::PySize operator-(const tlp::Vec3f &v) const {
-    return static_cast<tlp::Vec3f>(*this) - v;
-  }
-
-  tlp::PySize operator-(const float &f) const {
-    return static_cast<tlp::Vec3f>(*this) - f;
-  }
-
-};
-
-}
+class Size : tlp::Vec3f /TypeHint="tlp.Size"/ {
+%TypeHeaderCode
+#include <talipot/Size.h>
 %End
-
-namespace tlp {
-
-class PySize : tlp::Vec3f /PyName=Size, TypeHint="tlp.Size"/ {
 
 %ConvertToTypeCode
 
   if (sipIsErr == NULL) {
-    if (sipCanConvertToType(sipPy, sipFindType("tlp::PySize"), SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
+    if (sipCanConvertToType(sipPy, sipFindType("tlp::Size"), SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
       return 1;
     }
     if (isTupleAndCanConvertToVec3fType(sipPy)) {
-      return 1;
-    }
-    if (sipCanConvertToType(sipPy, sipFindType("tlp::Vec3f"), SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
       return 1;
     }
     return 0;
@@ -79,146 +32,111 @@ class PySize : tlp::Vec3f /PyName=Size, TypeHint="tlp.Size"/ {
 
   int state=0, err=0;
 
-  if (sipCanConvertToType(sipPy, sipFindType("tlp::PySize"), SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
-    const sipTypeDef *sipType = sipFindType("tlp::PySize");
-    tlp::PySize *ps = static_cast<tlp::PySize*>(sipConvertToType(sipPy, sipType, NULL, SIP_NOT_NONE|SIP_NO_CONVERTORS, &state, &err));
-    *sipCppPtr = new tlp::PySize(*ps);
+  if (sipCanConvertToType(sipPy, sipFindType("tlp::Size"), SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
+    const sipTypeDef *sipType = sipFindType("tlp::Size");
+    tlp::Size *ps = static_cast<tlp::Size*>(sipConvertToType(sipPy, sipType, NULL, SIP_NOT_NONE|SIP_NO_CONVERTORS, &state, &err));
+    *sipCppPtr = new tlp::Size(*ps);
     sipReleaseType(ps, sipType, state);
-  } else if (PyList_Check(sipPy) || PyTuple_Check(sipPy)) {
-    *sipCppPtr = convertToVec3fType<tlp::PySize>(sipPy, 1);
   } else {
-    const sipTypeDef *sipType = sipFindType("tlp::Vec3f");
-    tlp::Vec3f *v = static_cast<tlp::Vec3f*>(sipConvertToType(sipPy, sipType, NULL, SIP_NOT_NONE|SIP_NO_CONVERTORS, &state, &err));
-    *sipCppPtr = new tlp::PySize(*v);
-    sipReleaseType(v, sipType, state);
+    *sipCppPtr = convertToVec3fType<tlp::Size>(sipPy, 1);
   }
 
   return sipGetState(sipTransferObj);
 
 %End
+
 
  public:
 
-  PySize(const float v=1);
+  Size(float w = 1, float h = 1, float d = 1);
 
-  PySize(const float a0, const float a1, const float a2);
+  Size(const tlp::Vec3f &s);
 
-  PySize(const tlp::PySize &s);
+  void setW(const float width);
+%Docstring
+tlp.Vec3f.setW(width)
 
-  PySize(const tlp::Vec3f &s);
+Convenient method. Sets the first component of the vector.
 
-  tlp::PySize operator*(const tlp::Vec3f &) const;
-
-  tlp::PySize operator*(const float &) const;
-
-  tlp::PySize operator+(const tlp::Vec3f &) const;
-
-  tlp::PySize operator+(const float &) const;
-
-  tlp::PySize operator-(const tlp::Vec3f &) const;
-
-  tlp::PySize operator-(const float &) const;
-
-  tlp::PySize operator/(const tlp::Vec3f &) const;
-%MethodCode
-  if ((*a1)[0] && (*a1)[1] && (*a1)[2]) {
-    sipRes = new tlp::PySize((*a0 / *a1));
-  } else {
-    sipIsErr = -1;
-    PyErr_SetString(PyExc_ZeroDivisionError, "division of a float vector[3] by a float vector[3] with a zero element");
-  }
+:param width: a value
+:type width: float
 %End
 
-  tlp::PySize operator/(const float &) const;
-%MethodCode
-  if (a1 != 0) {
-    sipRes = new tlp::PySize((*a0 / a1));
-  } else {
-    sipIsErr = -1;
-    PyErr_SetString(PyExc_ZeroDivisionError, "division of a float vector[3] by zero");
-  }
+  void setH(const float height);
+%Docstring
+tlp.Vec3f.setH(height)
+
+Convenient method. Sets the second component of the vector.
+
+:param height: a value
+:type height: float
+%End
+
+  void setD(const float depth);
+%Docstring
+tlp.Vec3f.setD(depth)
+
+Convenient method. Sets the third component of the vector.
+
+:param depth: a value
+:type depth: float
+%End
+
+  float getW() const;
+%Docstring
+tlp.Vec3f.getW()
+
+Convenient method. Returns the first component of the vector.
+
+:rtype: float
+%End
+
+  float getH() const;
+%Docstring
+tlp.Vec3f.getH()
+
+Convenient method. Returns the second component of the vector.
+
+:rtype: float
+%End
+
+  float getD() const;
+%Docstring
+tlp.Vec3f.getD()
+
+Convenient method. Returns the third component of the vector.
+
+:rtype: float
+%End
+
+  float width() const;
+%Docstring
+tlp.Vec3f.width()
+
+Convenient method. Returns the first component of the vector.
+
+:rtype: float
+%End
+
+  float height() const;
+%Docstring
+tlp.Vec3f.height()
+
+Convenient method. Returns the second component of the vector.
+
+:rtype: float
+%End
+
+  float depth() const;
+%Docstring
+tlp.Vec3f.depth()
+
+Convenient method. Returns the third component of the vector.
+
+:rtype: float
 %End
 
 };
 
-typedef tlp::PySize Size;
-
-};
-
-%MappedType std::vector<tlp::PySize> {
-%TypeHeaderCode
-#include <vector>
-%End
-
-%ConvertFromTypeCode
-  PyObject *l;
-
-  const sipTypeDef* kpTypeDef = getSipType("tlp::PySize");
-
-  if (!kpTypeDef) {
-    return NULL;
-  }
-
-  if ((l = PyList_New(sipCpp -> size())) == NULL) {
-    return NULL;
-  }
-
-  for (size_t i = 0; i < sipCpp -> size(); ++i) {
-    tlp::PySize *cpp = new tlp::PySize(sipCpp -> at(i));
-    PyObject *pobj;
-
-    if ((pobj = sipConvertFromNewType(cpp, kpTypeDef, sipTransferObj)) == NULL) {
-      Py_XDECREF(l);
-      return NULL;
-    }
-
-    PyList_SET_ITEM(l, i, pobj);
-  }
-
-  return l;
-%End
-
-%ConvertToTypeCode
-
-  const sipTypeDef* kpTypeDef = getSipType("tlp::PySize");
-
-  if (!kpTypeDef) {
-    return 0;
-  }
-
-  // Check if type is compatible
-  if (sipIsErr == NULL) {
-    if (!PyList_Check(sipPy)) {
-      return 0;
-    }
-    for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
-      PyObject *item = PyList_GET_ITEM(sipPy, i);
-      if (!sipCanConvertToType(item, kpTypeDef, SIP_NOT_NONE|SIP_NO_CONVERTORS)) {
-        return 0;
-      }
-    }
-    return 1;
-  }
-
-  std::vector<tlp::PySize> *v = new std::vector<tlp::PySize>();
-  v->reserve(PyList_GET_SIZE(sipPy));
-  for (SIP_SSIZE_T i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
-    int state;
-    tlp::PySize* p = reinterpret_cast<tlp::PySize*>(sipConvertToType(PyList_GET_ITEM(sipPy, i), kpTypeDef, sipTransferObj, SIP_NOT_NONE|SIP_NO_CONVERTORS, &state, sipIsErr));
-
-    if (*sipIsErr) {
-      sipReleaseType(p, kpTypeDef, state);
-      delete v;
-      return 0;
-    }
-
-    v->push_back(*p);
-
-    sipReleaseType(p, kpTypeDef, state);
-  }
-
-  *sipCppPtr = v;
-  return sipGetState(sipTransferObj);
-%End
 };
 

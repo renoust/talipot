@@ -180,7 +180,7 @@ void GlEditableCurve::draw(float lod, Camera *camera) {
   auto renderCircle = [&](const Coord &anchor) {
     camera->initGl();
 
-    Coord tmp(camera->worldTo2DViewport(anchor));
+    Coord tmp = camera->worldTo2DViewport(anchor);
     tmp[2] = 0;
 
     camera2D.initGl();
@@ -238,7 +238,7 @@ bool GlEditableCurve::pointBelong(const Coord &point) {
 }
 
 void GlEditableCurve::addCurveAnchor(const Coord &point) {
-  Coord anchorPoint(point);
+  Coord anchorPoint = point;
   anchorPoint.setZ(startPoint.getZ());
   boundingBox.expand(anchorPoint);
 
@@ -251,7 +251,7 @@ Coord *GlEditableCurve::getCurveAnchorAtPointIfAny(const Coord &point, Camera *c
   camera->initGl();
 
   auto pointOnAnchor = [&](const Coord &anchor) {
-    Coord anchorCenter(camera->worldTo2DViewport(anchor));
+    Coord anchorCenter = camera->worldTo2DViewport(anchor);
 
     return (point.getX() > (anchorCenter.getX() - CIRCLE_RADIUS) &&
             point.getX() < (anchorCenter.getX() + CIRCLE_RADIUS) &&
@@ -274,8 +274,8 @@ Coord *GlEditableCurve::getCurveAnchorAtPointIfAny(const Coord &point, Camera *c
 
 Coord GlEditableCurve::translateCurveAnchorToPoint(const Coord &curveAnchor,
                                                    const Coord &targetPoint) {
-  Coord translationVector(targetPoint - curveAnchor);
-  Coord newAnchorCenter(curveAnchor + translationVector);
+  Coord translationVector = targetPoint - curveAnchor;
+  Coord newAnchorCenter = curveAnchor + translationVector;
 
   if (newAnchorCenter.getX() < minPoint.getX()) {
     newAnchorCenter.setX(minPoint.getX());
@@ -560,7 +560,7 @@ void GlGlyphScale::draw(float, Camera *camera) {
 
 void GlGlyphScale::translate(const Coord &move) {
   for (auto n : glyphGraph->nodes()) {
-    Coord currentNodeCoord(glyphGraphLayout->getNodeValue(n));
+    Coord currentNodeCoord = glyphGraphLayout->getNodeValue(n);
     glyphGraphLayout->setNodeValue(n, currentNodeCoord + move);
   }
 }
@@ -697,11 +697,11 @@ void HistogramMetricMapping::initInteractor() {
     return;
   }
 
-  Coord curveStartPoint(histoXAxis->getAxisBaseCoord());
+  Coord curveStartPoint = histoXAxis->getAxisBaseCoord();
 
   if (curve == nullptr || lastXAxisLength != histoXAxis->getAxisLength()) {
-    Coord curveEndPoint(histoXAxis->getAxisBaseCoord().getX() + histoXAxis->getAxisLength(),
-                        histoYAxis->getAxisBaseCoord().getY() + histoYAxis->getAxisLength(), 0);
+    Coord curveEndPoint = {histoXAxis->getAxisBaseCoord().getX() + histoXAxis->getAxisLength(),
+                           histoYAxis->getAxisBaseCoord().getY() + histoYAxis->getAxisLength()};
 
     if (curve != nullptr) {
       curve->updateSize(curveStartPoint, curveEndPoint);
@@ -728,8 +728,8 @@ void HistogramMetricMapping::initInteractor() {
         new GlColorScale(colorScale, curveStartPoint - Coord(scaleAxisOffset, 0, 0),
                          histoYAxis->getAxisLength(), scaleWidth, GlColorScale::Vertical);
   } else {
-    Coord lastBaseCoord(glColorScale->getBaseCoord());
-    Coord newBaseCoord(curveStartPoint - Coord(histoYAxis->getMaxLabelWidth() + scaleWidth, 0, 0));
+    Coord lastBaseCoord = glColorScale->getBaseCoord();
+    Coord newBaseCoord = curveStartPoint - Coord(histoYAxis->getMaxLabelWidth() + scaleWidth, 0);
 
     if (lastBaseCoord != newBaseCoord) {
       glColorScale->translate(newBaseCoord - lastBaseCoord);
@@ -742,8 +742,8 @@ void HistogramMetricMapping::initInteractor() {
                         curveStartPoint - Coord(scaleAxisOffset, 0, 0), histoYAxis->getAxisLength(),
                         scaleWidth, Color(0, 0, 0), GlSizeScale::Vertical);
   } else {
-    Coord lastBaseCoord(glSizeScale->getBaseCoord());
-    Coord newBaseCoord(curveStartPoint - Coord(histoYAxis->getMaxLabelWidth() + scaleWidth, 0, 0));
+    Coord lastBaseCoord = glSizeScale->getBaseCoord();
+    Coord newBaseCoord = curveStartPoint - Coord(histoYAxis->getMaxLabelWidth() + scaleWidth, 0);
 
     if (lastBaseCoord != newBaseCoord) {
       glSizeScale->translate(newBaseCoord - lastBaseCoord);
@@ -757,8 +757,8 @@ void HistogramMetricMapping::initInteractor() {
                                     histoYAxis->getAxisLength(), GlGlyphScale::Vertical);
     glGlyphScale->setGlyphsList(glyphScaleConfigDialog->getSelectedGlyphsId());
   } else {
-    Coord lastBaseCoord(glGlyphScale->getBaseCoord());
-    Coord newBaseCoord(curveStartPoint - Coord(histoYAxis->getMaxLabelWidth(), 0, 0));
+    Coord lastBaseCoord = glGlyphScale->getBaseCoord();
+    Coord newBaseCoord = curveStartPoint - Coord(histoYAxis->getMaxLabelWidth(), 0);
 
     if (lastBaseCoord != newBaseCoord) {
       glGlyphScale->translate(newBaseCoord - lastBaseCoord);
@@ -788,11 +788,11 @@ bool HistogramMetricMapping::eventFilter(QObject *widget, QEvent *e) {
   initInteractor();
 
   if (e->type() == QEvent::MouseMove) {
-    int x = glWidget->width() - me->x();
-    int y = me->y();
-    Coord screenCoords(x, y, 0);
-    Coord sceneCoords(glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
-        glWidget->screenToViewport(screenCoords)));
+    float x = glWidget->width() - me->x();
+    float y = me->y();
+    Coord screenCoords = {x, y};
+    Coord sceneCoords = glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
+        glWidget->screenToViewport(screenCoords));
 
     if (!curveDragStarted) {
       Coord *anchor = curve->getCurveAnchorAtPointIfAny(
@@ -814,7 +814,7 @@ bool HistogramMetricMapping::eventFilter(QObject *widget, QEvent *e) {
         glWidget->setCursor(QCursor(Qt::ArrowCursor));
       }
     } else if (selectedAnchor != nullptr) {
-      Coord newAnchorCord(curve->translateCurveAnchorToPoint(*selectedAnchor, sceneCoords));
+      Coord newAnchorCord = curve->translateCurveAnchorToPoint(*selectedAnchor, sceneCoords);
       delete selectedAnchor;
       selectedAnchor = new Coord(newAnchorCord);
       updateMapping(histoXAxis, histoView->getDetailedHistogram()->getNbHistogramBins());
@@ -831,11 +831,11 @@ bool HistogramMetricMapping::eventFilter(QObject *widget, QEvent *e) {
       delete selectedAnchor;
       selectedAnchor = nullptr;
     } else {
-      int x = glWidget->width() - me->x();
-      int y = me->y();
-      Coord screenCoords(x, y, 0);
-      Coord sceneCoords(glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
-          glWidget->screenToViewport(screenCoords)));
+      float x = glWidget->width() - me->x();
+      float y = me->y();
+      Coord screenCoords = {x, y};
+      Coord sceneCoords = glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
+          glWidget->screenToViewport(screenCoords));
 
       if (curve->pointBelong(sceneCoords)) {
         curve->addCurveAnchor(sceneCoords);
@@ -873,11 +873,11 @@ bool HistogramMetricMapping::eventFilter(QObject *widget, QEvent *e) {
       curveDragStarted = true;
       glWidget->setCursor(QCursor(Qt::ClosedHandCursor));
     } else if (me->buttons() == Qt::RightButton) {
-      int x = glWidget->width() - me->x();
-      int y = me->y();
-      Coord screenCoords(x, y, 0);
-      Coord sceneCoords(glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
-          glWidget->screenToViewport(screenCoords)));
+      float x = glWidget->width() - me->x();
+      float y = me->y();
+      Coord screenCoords = {x, y};
+      Coord sceneCoords = glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
+          glWidget->screenToViewport(screenCoords));
 
       if (pointerUnderScale(sceneCoords)) {
         if (mappingType == VIEWCOLOR_MAPPING) {
@@ -995,23 +995,23 @@ bool HistogramMetricMapping::draw(GlMainWidget *glMainWidget) {
       yEnd = glGlyphScale->getBaseCoord().getY();
     }
 
-    Coord startPoint(curve->getFirstCurvePoint());
-    Coord endPoint(curve->getLastCurvePoint());
+    Coord startPoint = curve->getFirstCurvePoint();
+    Coord endPoint = curve->getLastCurvePoint();
     vector<Coord> curvePoints(curve->getCurvePoints());
 
     vector<Coord> curvePointsCp(curvePoints);
     curvePointsCp.insert(curvePointsCp.begin(), startPoint);
     curvePointsCp.push_back(endPoint);
 
-    Color lineColor(histoXAxis->getAxisColor());
+    Color lineColor = histoXAxis->getAxisColor();
 
     glDisable(GL_LIGHTING);
 
     for (size_t i = 0; i < curvePointsCp.size(); ++i) {
-      Coord startLine(xStart, curvePointsCp[i].getY(), 0);
+      Coord startLine = {xStart, curvePointsCp[i].getY()};
       GlLines::glDrawLine(startLine, curvePointsCp[i], 0.5, GlLines::TLP_DASHED, lineColor,
                           lineColor);
-      Coord endLine(curvePointsCp[i].getX(), yEnd);
+      Coord endLine = {curvePointsCp[i].getX(), yEnd};
       GlLines::glDrawLine(curvePointsCp[i], endLine, 0.5, GlLines::TLP_DASHED, lineColor,
                           lineColor);
     }
@@ -1038,7 +1038,7 @@ bool HistogramMetricMapping::pointerUnderScale(const Coord &sceneCoords) {
   if (scale == nullptr) {
     return false;
   } else {
-    BoundingBox scaleBB(scale->getBoundingBox());
+    BoundingBox scaleBB = scale->getBoundingBox();
     return (sceneCoords.getX() >= scaleBB[0][0] && sceneCoords.getX() <= scaleBB[1][0] &&
             sceneCoords.getY() >= scaleBB[0][1] && sceneCoords.getY() <= scaleBB[1][1]);
   }
@@ -1070,18 +1070,18 @@ void HistogramMetricMapping::updateGraphWithMapping(Graph *graph, LayoutProperty
   if (histoView->getDataLocation() == NODE) {
 
     for (auto n : graph->nodes()) {
-      Coord nodeHistoCoord(histogramLayout->getNodeValue(n));
+      const Coord &nodeHistoCoord = histogramLayout->getNodeValue(n);
       float yCurve = curve->getYCoordForX(nodeHistoCoord.getX());
 
       if (mappingType == VIEWCOLOR_MAPPING || mappingType == VIEWBORDERCOLOR_MAPPING) {
-        Color newNodeColor(glColorScale->getColorAtPos(Coord(0, yCurve, 0)));
+        Color newNodeColor = glColorScale->getColorAtPos(Coord(0, yCurve, 0));
         graphColors->setNodeValue(n, newNodeColor);
       } else if (mappingType == SIZE_MAPPING) {
         float newNodeSize = glSizeScale->getSizeAtPos(Coord(0, yCurve, 0));
 
         if (sizeScaleConfigDialog->doMappingOnViewSize()) {
-          Size newSize(newNodeSize, newNodeSize, newNodeSize);
-          Size currentSize(graphSizes->getNodeValue(n));
+          Size newSize = {newNodeSize};
+          const Size &currentSize = graphSizes->getNodeValue(n);
 
           if (!sizeScaleConfigDialog->applySizeMappingOnX()) {
             newSize[0] = currentSize[0];
@@ -1107,11 +1107,11 @@ void HistogramMetricMapping::updateGraphWithMapping(Graph *graph, LayoutProperty
 
   } else {
     for (auto e : graph->edges()) {
-      Coord edgeHistoCoord(histogramLayout->getEdgeValue(e)[0]);
+      const Coord &edgeHistoCoord = histogramLayout->getEdgeValue(e)[0];
       float yCurve = curve->getYCoordForX(edgeHistoCoord.getX());
 
       if (mappingType == VIEWCOLOR_MAPPING) {
-        Color newEdgeColor(glColorScale->getColorAtPos(Coord(0, yCurve, 0)));
+        Color newEdgeColor = glColorScale->getColorAtPos(Coord(0, yCurve, 0));
         graphColors->setEdgeValue(e, newEdgeColor);
       }
     }
@@ -1162,7 +1162,7 @@ void HistogramMetricMapping::updateMapping(GlQuantitativeAxis *histoXAxis,
               histoXAxis->getAxisBaseCoord().getY() - offset, 0),
         color);
   } else if (mappingType == SIZE_MAPPING) {
-    Color color(histoXAxis->getAxisColor());
+    Color color = histoXAxis->getAxisColor();
     mappinqPolyQuad->setOutlined(true);
     mappinqPolyQuad->setOutlineColor(histoXAxis->getAxisColor());
 

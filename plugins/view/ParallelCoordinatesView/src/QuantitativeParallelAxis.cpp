@@ -241,7 +241,7 @@ Coord QuantitativeParallelAxis::getPointCoordOnAxisForData(const unsigned int da
         graphProxy->getPropertyValueForData<IntegerProperty, IntegerType>(getAxisName(), dataIdx));
   }
 
-  Coord axisPointCoord(glQuantitativeAxis->getAxisPointCoordForValue(value));
+  Coord axisPointCoord = glQuantitativeAxis->getAxisPointCoordForValue(value);
 
   if (rotationAngle != 0.0f) {
     rotateVector(axisPointCoord, rotationAngle, Z_ROT);
@@ -315,7 +315,7 @@ const set<unsigned int> &QuantitativeParallelAxis::getDataInRange(float yLowBoun
   rotationAngle = 0.0f;
 
   for (unsigned int dataId : graphProxy->getDataIterator()) {
-    Coord dataCoord(getPointCoordOnAxisForData(dataId));
+    Coord dataCoord = getPointCoordOnAxisForData(dataId);
 
     if (dataCoord.getY() <= yHighBound && dataCoord.getY() >= yLowBound) {
       dataSubset.insert(dataId);
@@ -343,11 +343,11 @@ const set<unsigned int> &QuantitativeParallelAxis::getDataBetweenBoxPlotBounds()
 void QuantitativeParallelAxis::updateSlidersWithDataSubset(const set<unsigned int> &dataSubset) {
   float rotAngleBak = rotationAngle;
   rotationAngle = 0.0f;
-  Coord max(getBaseCoord());
-  Coord min(getBaseCoord() + Coord(0.0f, getAxisHeight()));
+  Coord max = getBaseCoord();
+  Coord min = getBaseCoord() + Coord(0.0f, getAxisHeight());
 
   for (auto d : dataSubset) {
-    Coord dataCoord(getPointCoordOnAxisForData(d));
+    Coord dataCoord = getPointCoordOnAxisForData(d);
 
     if (dataCoord.getY() < min.getY()) {
       min = dataCoord;
@@ -365,7 +365,7 @@ void QuantitativeParallelAxis::updateSlidersWithDataSubset(const set<unsigned in
 
 void QuantitativeParallelAxis::setAscendingOrder(const bool ascendingOrder) {
 
-  Coord baseCoord(getBaseCoord());
+  Coord baseCoord = getBaseCoord();
   float axisHeight = getAxisHeight();
 
   if (ascendingOrder != hasAscendingOrder()) {

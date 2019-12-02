@@ -763,9 +763,9 @@ void LinLogLayout::initWeights() {
 
 OctTree *LinLogLayout::buildOctTree() {
   // compute mimima and maxima of positions in each dimension
-  Coord minPos(100000, 100000, 100000);
-  Coord maxPos(-100000, -100000, -100000);
-  Coord zero(0, 0, 0);
+  Coord minPos = {100000.f, 100000.f, 100000.f};
+  Coord maxPos = {-100000.f, -100000.f, -100000.f};
+  Coord zero;
 
   node n;
   for (auto u : linLogWeight.getNonDefaultValuatedNodes()) {

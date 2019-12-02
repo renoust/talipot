@@ -24,6 +24,8 @@ static std::unordered_map<std::string, std::string> &getTypenamesMap() {
   static std::unordered_map<std::string, std::string> ret;
   ret[tlp::demangleClassName(typeid(std::string).name())] = "std::string";
   ret[tlp::demangleClassName(typeid(tlp::Vec3f).name())] = "tlp::Vec3f";
+  ret[tlp::demangleClassName(typeid(tlp::Coord).name())] = "tlp::Coord";
+  ret[tlp::demangleClassName(typeid(tlp::Size).name())] = "tlp::Size";
   ret[tlp::demangleClassName(typeid(std::vector<int>).name())] = "std::vector<int>";
   ret[tlp::demangleClassName(typeid(std::vector<unsigned int>).name())] = "std::vector<uint>";
   ret[tlp::demangleClassName(typeid(std::vector<long>).name())] = "std::vector<long>";
@@ -590,6 +592,8 @@ bool setCppValueFromPyObject(PyObject *pyObj, ValueSetter &valSetter, tlp::DataT
   CHECK_SIP_TYPE_CONVERSION(std::string, "std::string")
   CHECK_SIP_TYPE_CONVERSION(tlp::node, "tlp::node")
   CHECK_SIP_TYPE_CONVERSION(tlp::edge, "tlp::edge")
+  CHECK_SIP_TYPE_CONVERSION(tlp::Coord, "tlp::Coord")
+  CHECK_SIP_TYPE_CONVERSION(tlp::Size, "tlp::Size")
   CHECK_SIP_TYPE_CONVERSION(tlp::Vec3f, "tlp::Vec3f")
   CHECK_SIP_TYPE_CONVERSION(tlp::Color, "tlp::Color")
   CHECK_SIP_POINTER_TYPE_CONVERSION(tlp::Graph, "tlp::Graph")

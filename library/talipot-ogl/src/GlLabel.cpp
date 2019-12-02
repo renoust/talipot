@@ -377,7 +377,7 @@ void GlLabel::draw(float, Camera *camera) {
       break;
     }
 
-    Size occlusionSize(wModified * scaleToApply / 2., hModified * scaleToApply / 2., 0);
+    Size occlusionSize = {wModified * scaleToApply / 2.f, hModified * scaleToApply / 2.f};
 
     float angle = M_PI * zRot / 180;
 
@@ -543,7 +543,7 @@ void GlLabel::draw(float, Camera *camera) {
                                             -sizeForOutAlign[2] / 2.),
                      transformMatrix, camera->getViewport()));
 
-    Coord billboardedTranlation(0, 0, 0);
+    Coord billboardedTranlation;
 
     switch (alignment) {
 

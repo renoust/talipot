@@ -33,7 +33,7 @@ void GlLabelledColorScale::buildComposite(ColorScale *colorScale) {
   float labelHeightSize = size.getH() * 0.5;
   float scaleLength = size.getW();
   float scaleThickness = (1 - 0.5) * size.getH();
-  Size valueLabelSize(size.getW() / 3, labelHeightSize, 0);
+  Size valueLabelSize = {size.getW() / 3, labelHeightSize};
 
   Coord minValueLabelPosition;
   Coord maxValueLabelPosition;

@@ -25,16 +25,15 @@ namespace tlp {
 GlBoundingBoxSceneVisitor::GlBoundingBoxSceneVisitor(GlGraphInputData *inputData)
     : inputData(inputData) {
   threadSafe = true;
-  noBBCheck.assign(ThreadManager::getNumberOfThreads(), false);
   bbs.resize(ThreadManager::getNumberOfThreads());
 }
 
 BoundingBox GlBoundingBoxSceneVisitor::getBoundingBox() {
-  BoundingBox bb(bbs[0]);
+  BoundingBox bb = bbs[0];
 
-  for (unsigned int i = 1; i < bbs.size(); ++i)
-    if (noBBCheck[i])
-      bb.expand(bbs[i], true);
+  for (unsigned int i = 1; i < bbs.size(); ++i) {
+    bb.expand(bbs[i]);
+  }
   return bb;
 }
 
@@ -44,8 +43,7 @@ void GlBoundingBoxSceneVisitor::visit(GlSimpleEntity *entity) {
 
     if (bb.isValid()) {
       auto ti = ThreadManager::getThreadNumber();
-      bbs[ti].expand(bb, noBBCheck[ti]);
-      noBBCheck[ti] = true;
+      bbs[ti].expand(bb);
     }
   }
 }
@@ -53,16 +51,13 @@ void GlBoundingBoxSceneVisitor::visit(GlSimpleEntity *entity) {
 void GlBoundingBoxSceneVisitor::visit(GlNode *glNode) {
   BoundingBox bb = glNode->getBoundingBox(inputData);
   auto ti = ThreadManager::getThreadNumber();
-
-  bbs[ti].expand(bb, noBBCheck[ti]);
-  noBBCheck[ti] = true;
+  bbs[ti].expand(bb);
 }
 
 void GlBoundingBoxSceneVisitor::visit(GlEdge *glEdge) {
   BoundingBox bb = glEdge->getBoundingBox(inputData);
   auto ti = ThreadManager::getThreadNumber();
 
-  bbs[ti].expand(bb, noBBCheck[ti]);
-  noBBCheck[ti] = true;
+  bbs[ti].expand(bb);
 }
 }

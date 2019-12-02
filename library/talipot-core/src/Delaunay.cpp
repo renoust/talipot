@@ -204,8 +204,8 @@ static vector<Coord> buildGrid(const Coord &A, const Coord &B, const Coord &C, c
   vector<Coord> ret;
 
   for (float i = 1; i < nbSubDiv - 1; ++i) {
-    Coord start(A + (i / (nbSubDiv - 1) * (B - A)));
-    Coord end(D + (i / (nbSubDiv - 1) * (C - D)));
+    Coord start = A + (i / (nbSubDiv - 1) * (B - A));
+    Coord end = D + (i / (nbSubDiv - 1) * (C - D));
 
     for (float j = 0; j < nbSubDiv; ++j) {
       ret.push_back(start + (j / (nbSubDiv - 1)) * (end - start));
@@ -510,7 +510,7 @@ bool tlp::voronoiDiagram(vector<Coord> &sites, VoronoiDiagram &voronoiDiagram) {
     // Iterate over each delaunay simplex
     std::unordered_map<Face, unsigned int> faceToCircumCenter;
     map<Coord, unsigned int> circumCenterToIdx;
-    tlp::Coord A(0), B(0), C(0), D(0);
+    tlp::Coord A, B, C, D;
 
     for (size_t i = 0; i < simplices.size(); ++i) {
       vector<unsigned int> sitesIdx;

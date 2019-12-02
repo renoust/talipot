@@ -51,11 +51,11 @@ bool ScatterPlot2DViewNavigator::eventFilter(QObject *widget, QEvent *e) {
 
     if (e->type() == QEvent::MouseMove && scatterPlot2dView->matrixViewSet()) {
       QMouseEvent *me = static_cast<QMouseEvent *>(e);
-      int x = glWidget->width() - me->x();
-      int y = me->y();
-      Coord screenCoords(x, y, 0.0f);
-      Coord sceneCoords(glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
-          glWidget->screenToViewport(screenCoords)));
+      float x = glWidget->width() - me->x();
+      float y = me->y();
+      Coord screenCoords = {x, y};
+      Coord sceneCoords = glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
+          glWidget->screenToViewport(screenCoords));
       selectedScatterPlotOverview = getOverviewUnderPointer(sceneCoords);
       return true;
     } else if (e->type() == QEvent::MouseButtonDblClick) {

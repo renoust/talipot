@@ -32,11 +32,11 @@ void EdgeExtremityGlyph::get3DTransformationMatrix(const Coord &src, const Coord
                                                    MatrixGL &transformationMatrix,
                                                    MatrixGL &scalingMatrix) {
   // Vecteur AB
-  Vector<float, 3> vAB;
+  Vec3f vAB;
   // Vecteur V
-  Vector<float, 3> vV;
+  Vec3f vV;
   // Vecteur W
-  Vector<float, 3> vW;
+  Vec3f vW;
 
   vAB = dest - src;
   float nAB; //|AB|
@@ -91,11 +91,11 @@ void EdgeExtremityGlyph::get2DTransformationMatrix(const Coord &src, const Coord
                                                    MatrixGL &transformationMatrix,
                                                    MatrixGL &scalingMatrix) {
   //  Vecteur AB
-  Vector<float, 3> vAB;
+  Vec3f vAB;
   // Vecteur V
-  Vector<float, 3> vV;
+  Vec3f vV;
   // Vecteur W
-  Vector<float, 3> vW;
+  Vec3f vW;
 
   vAB = dest - src;
   float nAB; //|AB|

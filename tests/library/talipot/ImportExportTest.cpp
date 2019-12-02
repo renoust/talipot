@@ -64,10 +64,10 @@ void ImportExportTest::testAttributes() {
   const int i = 33;
   const unsigned int ui = 256;
   const long l = 56845725;
-  const Coord c(1, 2, 3);
-  const Coord c2(10, 20, 30);
+  const Coord c = {1, 2, 3};
+  const Coord c2 = {10, 20, 30};
   const Color col = Color::Azure;
-  const Size s(4, 5, 6);
+  const Size s = {4, 5, 6};
   vector<string> vs;
   vs.push_back("foo");
   vs.push_back("bar");

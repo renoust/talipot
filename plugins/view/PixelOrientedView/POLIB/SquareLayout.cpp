@@ -18,11 +18,10 @@
 using namespace std;
 using namespace tlp;
 
-namespace pocore {
 //==============================================================
 SquareLayout::SquareLayout(unsigned int width) : _width(width) {}
 //==============================================================
-unsigned int SquareLayout::unproject(const Vector<int, 2> &point) const {
+unsigned int SquareLayout::unproject(const Vec2i &point) const {
 
   int x = point[0] + _width / 2;
   int y = point[1] + _width / 2;
@@ -36,10 +35,9 @@ unsigned int SquareLayout::unproject(const Vector<int, 2> &point) const {
   return uint(y) * _width + uint(x);
 }
 //==============================================================
-Vector<int, 2> SquareLayout::project(const unsigned int id) const {
-  Vector<int, 2> point;
+Vec2i SquareLayout::project(const unsigned int id) const {
+  Vec2i point;
   point[0] = id % _width - _width / 2;
   point[1] = id / _width - _width / 2;
   return point;
 }
-} // namespace pocore

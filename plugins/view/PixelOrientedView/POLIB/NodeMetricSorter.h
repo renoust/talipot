@@ -20,8 +20,6 @@
 #include <map>
 #include <vector>
 
-namespace pocore {
-
 template <typename PROPERTYTYPE, typename PROPERTY>
 class NodeMetricPropertyOrderRelation {
 
@@ -64,6 +62,5 @@ private:
 
   static std::map<tlp::Graph *, NodeMetricSorter *> instances;
 };
-} // namespace pocore
 
 #endif // NODE_METRIC_SORTER_H

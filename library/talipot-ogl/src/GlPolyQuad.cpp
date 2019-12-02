@@ -69,7 +69,7 @@ void GlPolyQuad::draw(float, Camera *) {
 
   vector<Coord> vertexArray;
   vector<float> texCoordsArray;
-  vector<Vector<float, 4>> colorsArray;
+  vector<Vec4f> colorsArray;
   vector<unsigned short> quadIndices;
   vector<unsigned short> outlineIndices;
 
@@ -91,8 +91,8 @@ void GlPolyQuad::draw(float, Camera *) {
   outlineIndices.resize(nbVertices);
 
   for (size_t i = 0; i < (polyQuadEdges.size() / 2) - 1; ++i) {
-    Vector<float, 4> startColor;
-    Vector<float, 4> endColor;
+    Vec4f startColor;
+    Vec4f endColor;
     startColor[0] = polyQuadEdgesColors[i].getRGL();
     startColor[1] = polyQuadEdgesColors[i].getGGL();
     startColor[2] = polyQuadEdgesColors[i].getBGL();
@@ -139,7 +139,7 @@ void GlPolyQuad::draw(float, Camera *) {
         texCoordsArray.push_back(GLfloat(i) + GLfloat(j) * texCoordFactor);
         texCoordsArray.push_back(1.0f);
 
-        Vector<float, 4> color =
+        Vec4f color =
             startColor + (j / float(nbSubdivisionsPerSegment - 1)) * (endColor - startColor);
         colorsArray.push_back(color);
         colorsArray.push_back(color);

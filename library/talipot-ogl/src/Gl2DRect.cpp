@@ -58,7 +58,7 @@ BoundingBox Gl2DRect::getBoundingBox() {
 }
 
 void Gl2DRect::draw(float lod, Camera *camera) {
-  Vector<int, 4> viewport = camera->getViewport();
+  const Vec4i &viewport = camera->getViewport();
 
   Coord center;
   Size size;

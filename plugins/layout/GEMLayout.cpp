@@ -145,7 +145,7 @@ Coord GEMLayout::computeForces(unsigned int v, float shake, float gravity, bool 
   // repulsive forces (magnetic)
   for (unsigned int u = 0; u < _nbNodes; ++u) {
     if (!testPlaced || _particules[u].in > 0) { // test whether the node is already placed
-      Coord d(vPos - _particules[u].pos);
+      Coord d = vPos - _particules[u].pos;
       float n = d[0] * d[0] + d[1] * d[1] + d[2] * d[2]; // d.norm() * d.norm();
 
       if (n > 0.)
@@ -171,7 +171,7 @@ Coord GEMLayout::computeForces(unsigned int v, float shake, float gravity, bool 
       else
         edgeLength = EDGELENGTH;
 
-      Coord d(vPos - gemQ.pos);
+      Coord d = vPos - gemQ.pos;
       float n = d.norm() / vMass;
       n = std::min(n, MAXATTRACT); //   1048576L
       force -= (d * n) / (edgeLength * edgeLength + 1.f);

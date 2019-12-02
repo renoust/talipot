@@ -16,8 +16,8 @@
 
 #include <talipot/BoundingBox.h>
 
-static bool getIntersection(float fDst1, float fDst2, const tlp::Vec3f &p1, const tlp::Vec3f &p2,
-                            tlp::Vec3f &hit) {
+static bool getIntersection(float fDst1, float fDst2, const tlp::Coord &p1, const tlp::Coord &p2,
+                            tlp::Coord &hit) {
   if ((fDst1 * fDst2) >= 0.0f)
     return false;
 
@@ -36,17 +36,12 @@ BoundingBox::BoundingBox() {
   assert(!isValid());
 }
 
-BoundingBox::BoundingBox(const tlp::Vec3f &min, const tlp::Vec3f &max, bool compute) {
-  if (compute)
-    tlp::minMaxVectors(min, max, (*this)[0], (*this)[1]);
-  else {
-    (*this)[0] = min;
-    (*this)[1] = max;
-  }
+BoundingBox::BoundingBox(const tlp::Coord &min, const tlp::Coord &max) {
+  tlp::minMaxVectors(min, max, (*this)[0], (*this)[1]);
   assert(isValid());
 }
 
-void BoundingBox::expand(const tlp::Vec3f &coord) {
+void BoundingBox::expand(const tlp::Coord &coord) {
   if (!isValid()) {
     (*this)[0] = coord;
     (*this)[1] = coord;
@@ -56,20 +51,21 @@ void BoundingBox::expand(const tlp::Vec3f &coord) {
   }
 }
 
-void BoundingBox::expand(const tlp::BoundingBox &bb, bool noCheck) {
-  if (noCheck || isValid()) {
+void BoundingBox::expand(const tlp::BoundingBox &bb) {
+  if (isValid()) {
     (*this)[0] = tlp::minVector((*this)[0], bb[0]);
     (*this)[1] = tlp::maxVector((*this)[1], bb[1]);
-  } else
+  } else {
     *this = bb;
+  }
 }
 
-void BoundingBox::translate(const tlp::Vec3f &vec) {
+void BoundingBox::translate(const tlp::Coord &vec) {
   (*this)[0] += vec;
   (*this)[1] += vec;
 }
 
-void BoundingBox::scale(const tlp::Vec3f &vec) {
+void BoundingBox::scale(const tlp::Coord &vec) {
   if (isValid()) {
     (*this)[0] *= vec;
     (*this)[1] *= vec;
@@ -81,7 +77,7 @@ bool BoundingBox::isValid() const {
          (*this)[0][2] <= (*this)[1][2];
 }
 
-bool BoundingBox::contains(const tlp::Vec3f &coord) const {
+bool BoundingBox::contains(const tlp::Coord &coord) const {
   if (isValid()) {
     return (coord[0] >= (*this)[0][0] && coord[1] >= (*this)[0][1] && coord[2] >= (*this)[0][2]) &&
            (coord[0] <= (*this)[1][0] && coord[1] <= (*this)[1][1] && coord[2] <= (*this)[1][2]);
@@ -123,7 +119,7 @@ bool BoundingBox::intersect(const tlp::BoundingBox &boundingBox) const {
   return true;
 }
 
-bool BoundingBox::intersect(const Vec3f &segStart, const Vec3f &segEnd) const {
+bool BoundingBox::intersect(const Coord &segStart, const Coord &segEnd) const {
   if (!isValid())
     return false;
 
@@ -149,7 +145,7 @@ bool BoundingBox::intersect(const Vec3f &segStart, const Vec3f &segEnd) const {
       segStart[1] < (*this)[1][1] && segStart[2] > (*this)[0][2] && segStart[2] < (*this)[1][2])
     return true;
 
-  Vec3f hit;
+  Coord hit;
 
   if ((getIntersection(segStart[0] - (*this)[0][0], segEnd[0] - (*this)[0][0], segStart, segEnd,
                        hit) &&
@@ -174,7 +170,7 @@ bool BoundingBox::intersect(const Vec3f &segStart, const Vec3f &segEnd) const {
   return false;
 }
 
-void BoundingBox::getCompleteBB(Vec3f bb[8]) const {
+void BoundingBox::getCompleteBB(Coord bb[8]) const {
   bb[0] = (*this)[0];
   bb[1] = (*this)[0];
   bb[1][0] = (*this)[1][0];

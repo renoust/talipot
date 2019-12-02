@@ -95,7 +95,7 @@ BoundingBox GlEdge::getBoundingBox(const GlGraphInputData *data, const edge e, c
   vector<Coord> tmp;
   tlp::computeCleanVertices(bends, srcCoord, tgtCoord, srcAnchor, tgtAnchor, tmp);
 
-  BoundingBox bb(srcAnchor, tgtAnchor, true);
+  BoundingBox bb = {srcAnchor, tgtAnchor};
   if (!tmp.empty()) {
 
     Size edgeSize;
@@ -285,8 +285,8 @@ void GlEdge::drawEdge(const Coord &srcNodePos, const Coord &tgtNodePos, const Co
   if (bends.empty())
     shape = EdgeShape::Polyline;
 
-  Coord srcDir(srcNodePos);
-  Coord tgtDir(tgtNodePos);
+  Coord srcDir = srcNodePos;
+  Coord tgtDir = tgtNodePos;
   vector<Coord> tmp;
   computeCleanVertices(bends, startPoint, endPoint, srcDir, tgtDir, tmp);
 

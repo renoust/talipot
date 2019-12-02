@@ -201,8 +201,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
 
   // Fake scene creation
   //  This scene is needed by lod calculator to compute lod
-  fakeScene->setViewport(camera->getViewport()[0], camera->getViewport()[1],
-                         camera->getViewport()[2], camera->getViewport()[3]);
+  fakeScene->setViewport(camera->getViewport());
   fakeScene->getLayer("fakeLayer")->setSharedCamera(camera);
 
   // LOD computation
@@ -368,7 +367,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
 
     entityWithDistanceCompare::inputData = inputData;
     multiset<EntityWithDistance, entityWithDistanceCompare> entitiesSet;
-    Coord camPos = camera->getEyes();
+    const Coord &camPos = camera->getEyes();
 
     if (!selectionDrawActivate || ((selectionType & RenderingNodes) != 0)) {
       // Collect complex entities
@@ -378,7 +377,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
           continue;
 
         BoundingBox &bb = it.boundingBox;
-        Coord middle((bb[1] + bb[0]) / 2.f);
+        Coord middle = (bb[1] + bb[0]) / 2.f;
         double dist =
             (double(middle[0]) - double(camPos[0])) * (double(middle[0]) - double(camPos[0]));
         dist += (double(middle[1]) - double(camPos[1])) * (double(middle[1]) - double(camPos[1]));
@@ -393,7 +392,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
           continue;
 
         BoundingBox &bb = it.boundingBox;
-        Coord middle((bb[0] + bb[1]) / 2.f);
+        Coord middle = (bb[0] + bb[1]) / 2.f;
         double dist =
             (double(middle[0]) - double(camPos[0])) * (double(middle[0]) - double(camPos[0]));
         dist += (double(middle[1]) - double(camPos[1])) * (double(middle[1]) - double(camPos[1]));

@@ -56,7 +56,7 @@ private:
   void calcLayout(tlp::node n, tlp::NodeStaticProperty<tlp::Vector<double, 5>> &relativePosition);
   void calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
                    tlp::NodeStaticProperty<tlp::Vector<double, 5>> &relativePosition,
-                   const tlp::Vector<double, 3> &, const tlp::Vector<double, 3> &);
+                   const tlp::Vec3d &, const tlp::Vec3d &);
   tlp::Graph *tree;
   tlp::SizeProperty *nodeSize;
   bool nAlgo;

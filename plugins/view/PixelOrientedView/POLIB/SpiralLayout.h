@@ -17,11 +17,10 @@
 #include <string>
 #include "LayoutFunction.h"
 
-namespace pocore {
 class SpiralLayout : public LayoutFunction {
 public:
-  Vec2i project(const unsigned int id) const override;
-  unsigned int unproject(const Vec2i &) const override;
+  tlp::Vec2i project(const unsigned int id) const override;
+  unsigned int unproject(const tlp::Vec2i &) const override;
 };
-} // namespace pocore
+
 #endif // SPIRAL_LAYOUT_H

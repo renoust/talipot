@@ -493,7 +493,7 @@ void Histogram::updateLayout() {
                      2.;
       }
 
-      Coord nodeCoord(nodeXCoord, nodeYCoord, 0);
+      Coord nodeCoord = {nodeXCoord, nodeYCoord};
 
       if (dataLocation == NODE) {
         histogramLayout->setNodeValue(node(histogramBins[i][j]), nodeCoord);
@@ -515,10 +515,10 @@ void Histogram::updateSizes() {
   SizeProperty *viewSize = graph->getSizeProperty("viewSize");
 
   Size resizeFactor;
-  const Size &eltMinSize(viewSize->getMin());
-  const Size &eltMaxSize(viewSize->getMax());
+  Size eltMinSize = viewSize->getMin();
+  Size eltMaxSize = viewSize->getMax();
   float minSize = (refSize / 10.);
-  Size deltaSize(eltMaxSize - eltMinSize);
+  Size deltaSize = eltMaxSize - eltMinSize;
 
   for (unsigned int i = 0; i < 2; ++i) {
     if (deltaSize[i] != 0) {
@@ -597,7 +597,7 @@ void Histogram::update() {
   GlPolyQuad *cumulativeHistogram = new GlPolyQuad();
 
   for (unsigned int i = 0; i < nbHistogramBins; ++i) {
-    Vector<int, 4> quadColorCumul;
+    Vec4i quadColorCumul;
     quadColorCumul.fill(0);
     Color quadColor;
     unsigned int binSize = histogramBins[i].size();
@@ -632,10 +632,10 @@ void Histogram::update() {
         binYBottom = yAxis->getAxisPointCoordForValue(cumulativeSize - binSize).getY();
       }
 
-      Coord startLeftVertex(binXCoord, binYBottom);
-      Coord endLeftVertex(binXCoord, binYTop);
-      Coord startRightVertex(binXCoordEnd, binYBottom);
-      Coord endRightVertex(binXCoordEnd, binYTop);
+      Coord startLeftVertex = {binXCoord, binYBottom};
+      Coord endLeftVertex = {binXCoord, binYTop};
+      Coord startRightVertex = {binXCoordEnd, binYBottom};
+      Coord endRightVertex = {binXCoordEnd, binYTop};
       vector<Coord> polyQuadCoords;
       polyQuadCoords.push_back(startLeftVertex);
       polyQuadCoords.push_back(startRightVertex);

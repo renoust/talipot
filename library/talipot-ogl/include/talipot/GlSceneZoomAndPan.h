@@ -122,7 +122,7 @@ public:
 
 protected:
   Camera &camera;
-  Vector<int, 4> viewport;
+  Vec4i viewport;
   int nbAnimationSteps;
   bool optimalPath;
   double p;

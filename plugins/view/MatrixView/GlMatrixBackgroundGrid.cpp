@@ -33,10 +33,10 @@ BoundingBox GlMatrixBackgroundGrid::getBoundingBox() {
 }
 
 void GlMatrixBackgroundGrid::draw(float lod, tlp::Camera *camera) {
-  Vector<int, 4> viewPort = camera->getViewport();
+  const Vec4i &viewPort = camera->getViewport();
 
-  Coord topLeft(camera->viewportTo3DWorld(Coord(viewPort[0] + viewPort[2], viewPort[1], 0))),
-      bottomRight(camera->viewportTo3DWorld(Coord(viewPort[0], viewPort[1] + viewPort[3], 0)));
+  Coord topLeft = camera->viewportTo3DWorld(Coord(viewPort[0] + viewPort[2], viewPort[1], 0)),
+        bottomRight = camera->viewportTo3DWorld(Coord(viewPort[0], viewPort[1] + viewPort[3], 0));
 
   GridDisplayMode mode = _view->gridDisplayMode();
 

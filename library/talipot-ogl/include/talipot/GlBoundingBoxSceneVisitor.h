@@ -60,7 +60,6 @@ public:
   BoundingBox getBoundingBox();
 
 private:
-  std::vector<bool> noBBCheck;
   std::vector<BoundingBox> bbs;
   GlGraphInputData *inputData;
 };

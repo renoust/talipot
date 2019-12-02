@@ -404,7 +404,7 @@ void ParallelCoordinatesView::updateWithProgressBar() {
 }
 
 void ParallelCoordinatesView::addEmptyViewLabel() {
-  Color backgroundColor(drawConfigWidget->getBackgroundColor());
+  Color backgroundColor = drawConfigWidget->getBackgroundColor();
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color foregroundColor;

@@ -198,13 +198,13 @@ BubbleTree::computeRelativePosition(tlp::node n,
 
 void BubbleTree::calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
                              NodeStaticProperty<Vector<double, 5>> &relativePosition,
-                             const tlp::Vector<double, 3> &enclosingCircleCenter,
-                             const tlp::Vector<double, 3> &originNodePosition) {
+                             const tlp::Vec3d &enclosingCircleCenter,
+                             const tlp::Vec3d &originNodePosition) {
   /*
    * Make rotation around the center of the enclosing circle in order to align :
    * the virtual node, the enclosing circle' center and the grand father of the node.
    */
-  Vector<double, 3> bend, zeta, zetaOriginal;
+  Vec3d bend, zeta, zetaOriginal;
   bend.fill(0.);
   bend[0] = nrPos[4];
 
@@ -213,7 +213,7 @@ void BubbleTree::calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
   zeta[2] = 0.;
   zetaOriginal = zeta;
 
-  Vector<double, 3> vect, vect3;
+  Vec3d vect, vect3;
   vect = originNodePosition - enclosingCircleCenter;
   vect /= vect.norm();
   vect3 = zeta + bend;
@@ -223,7 +223,7 @@ void BubbleTree::calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
   cosAlpha = (vect3.dotProduct(vect));
   sinAlpha = (vect ^ vect3)[2];
 
-  Vector<double, 3> rot1, rot2;
+  Vec3d rot1, rot2;
   rot1[0] = cosAlpha;
   rot1[1] = -sinAlpha;
   rot1[2] = 0.;
@@ -242,8 +242,8 @@ void BubbleTree::calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
     bend += zetaOriginal;
     bend = rot1 * bend[0] + rot2 * bend[1];
     bend += enclosingCircleCenter;
-    Vector<double, 3> a = enclosingCircleCenter + zeta - bend;
-    Vector<double, 3> b = originNodePosition - bend;
+    Vec3d a = enclosingCircleCenter + zeta - bend;
+    Vec3d b = originNodePosition - bend;
     a /= a.norm();
     b /= b.norm();
 
@@ -265,7 +265,7 @@ void BubbleTree::calcLayout2(tlp::node n, tlp::Vector<double, 5> &nrPos,
   while (it->hasNext()) {
     node itn = it->next();
     tlp::Vector<double, 5> &rPos = relativePosition[itn];
-    Vector<double, 3> newpos;
+    Vec3d newpos;
     newpos[0] = rPos[0];
     newpos[1] = rPos[1];
     newpos[2] = 0.;
@@ -291,7 +291,7 @@ void BubbleTree::calcLayout(tlp::node n, NodeStaticProperty<Vector<double, 5>> &
 
     while (it->hasNext()) {
       node itn = it->next();
-      Vector<double, 3> origin, tmp;
+      Vec3d origin, tmp;
       tlp::Vector<double, 5> &rPos = relativePosition[itn];
       origin[0] = rPos[0] - nPos2;
       origin[1] = rPos[1] - nPos3;

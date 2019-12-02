@@ -62,15 +62,15 @@ BoundingBox GlNode::getBoundingBox(const GlGraphInputData *data) {
 
   Coord tmp1 = size / 2.f;
   if (rot == 0) {
-    BoundingBox box(coord - tmp1, coord + tmp1);
+    BoundingBox box = {coord - tmp1, coord + tmp1};
     assert(box.isValid());
     return box;
   } else {
     float cosAngle = cos(rot / 180. * M_PI);
     float sinAngle = sin(rot / 180. * M_PI);
-    Coord tmp2(tmp1[0], -tmp1[1], tmp1[2]);
-    Coord tmp3(-tmp1[0], -tmp1[1], -tmp1[2]);
-    Coord tmp4(-tmp1[0], tmp1[1], -tmp1[2]);
+    Coord tmp2 = {tmp1[0], -tmp1[1], tmp1[2]};
+    Coord tmp3 = {-tmp1[0], -tmp1[1], -tmp1[2]};
+    Coord tmp4 = {-tmp1[0], tmp1[1], -tmp1[2]};
     tmp1.set(tmp1[0] * cosAngle - tmp1[1] * sinAngle, tmp1[0] * sinAngle + tmp1[1] * cosAngle,
              tmp1[2]);
     tmp2.set(tmp2[0] * cosAngle - tmp2[1] * sinAngle, tmp2[0] * sinAngle + tmp2[1] * cosAngle,
@@ -80,7 +80,7 @@ BoundingBox GlNode::getBoundingBox(const GlGraphInputData *data) {
     tmp4.set(tmp4[0] * cosAngle - tmp4[1] * sinAngle, tmp4[0] * sinAngle + tmp4[1] * cosAngle,
              tmp4[2]);
 
-    BoundingBox bb(coord + tmp1, coord + tmp2, true);
+    BoundingBox bb = {coord + tmp1, coord + tmp2};
     bb.expand(coord + tmp3);
     bb.expand(coord + tmp4);
     return bb;
@@ -128,7 +128,7 @@ void GlNode::draw(float lod, const GlGraphInputData *data, Camera *camera) {
   // If node size in z is equal to 0 we have to scale with FLT_EPSILON to preserve normal
   // (because if we do a scale of (x,y,0) and if we have a normal like (0,0,1) the new normal after
   // scale will be (0,0,0) and we will have light problem)
-  Size nodeSize(size);
+  Size nodeSize = size;
   if (nodeSize[2] == 0)
     nodeSize[2] = FLT_EPSILON;
 
@@ -222,7 +222,7 @@ void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float 
 
   BoundingBox includeBB;
   data->glyphs.get(glyph)->getTextBoundingBox(includeBB, n);
-  Coord centerBB(includeBB.center());
+  Coord centerBB = includeBB.center();
   Vec3f sizeBB = includeBB[1] - includeBB[0];
 
   label->setFontNameSizeAndColor(data->getElementFont()->getNodeValue(n), fontSize, fontColor);

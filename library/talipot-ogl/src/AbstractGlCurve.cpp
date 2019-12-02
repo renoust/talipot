@@ -723,8 +723,8 @@ void AbstractGlCurve::drawCurve(std::vector<Coord> &controlPoints, const Color &
 
   if (!texture.empty()) {
     unsigned int i = nbCurvePoints / 2;
-    Coord firstCurvePoint(computeCurvePointOnCPU(controlPoints, i / float(nbCurvePoints - 1)));
-    Coord nexCurvePoint(computeCurvePointOnCPU(controlPoints, (i + 1) / float(nbCurvePoints - 1)));
+    Coord firstCurvePoint = computeCurvePointOnCPU(controlPoints, i / float(nbCurvePoints - 1));
+    Coord nexCurvePoint = computeCurvePointOnCPU(controlPoints, (i + 1) / float(nbCurvePoints - 1));
     float dist = firstCurvePoint.dist(nexCurvePoint);
     texCoordFactor = dist / (startSize * 2.0f);
   }

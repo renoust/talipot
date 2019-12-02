@@ -16,14 +16,12 @@
 
 #include "ScreenFunction.h"
 
-namespace pocore {
-
 class FishEyesScreen : public ScreenFunction {
 
 public:
   FishEyesScreen();
-  Vec2f project(const Vec2f &) const override;
-  Vec2f unproject(const Vec2f &) const override;
+  tlp::Vec2f project(const tlp::Vec2f &) const override;
+  tlp::Vec2f unproject(const tlp::Vec2f &) const override;
   void setCenter(double x, double y);
   void setRadius(double r);
   double getRadius();
@@ -32,7 +30,6 @@ public:
 private:
   double R;
   double k;
-  Vec2f fisheyesCenter;
+  tlp::Vec2f fisheyesCenter;
 };
-} // namespace pocore
 #endif // FISH_EYES_SCREEN_H

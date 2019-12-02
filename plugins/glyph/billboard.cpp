@@ -79,7 +79,7 @@ void Billboard::draw(node n, float) {
     rect.setOutlineMode(false);
   }
 
-  Size sz(1, 1, 1);
+  Size sz = {1};
 
   if (glGraphInputData->getElementSize())
     sz = glGraphInputData->getElementSize()->getNodeValue(n);
@@ -88,11 +88,8 @@ void Billboard::draw(node n, float) {
   Glyph::drawRectInScreenPlane(rect, sz, false);
 }
 //========================================================
-Coord Billboard::getAnchor(const Coord &vector) const {
-  Coord v(vector);
-  float x, y, z, fmax;
-  v.get(x, y, z);
-  fmax = std::max(fabsf(x), fabsf(y)); // fmax = fabsf(x) >? fabsf(y);
+Coord Billboard::getAnchor(const Coord &v) const {
+  float fmax = std::max(fabsf(v.x()), fabsf(v.y()));
 
   if (fmax > 0.0f)
     return v * (0.5f / fmax);

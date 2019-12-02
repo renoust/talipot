@@ -60,9 +60,9 @@ void NominalParallelAxis::setLabels() {
 }
 
 Coord NominalParallelAxis::getPointCoordOnAxisForData(const unsigned int dataIdx) {
-  string propertyValue(
-      graphProxy->getPropertyValueForData<StringProperty, StringType>(getAxisName(), dataIdx));
-  Coord axisPointCoord(glNominativeAxis->getAxisPointCoordForValue(propertyValue));
+  string propertyValue =
+      graphProxy->getPropertyValueForData<StringProperty, StringType>(getAxisName(), dataIdx);
+  Coord axisPointCoord = glNominativeAxis->getAxisPointCoordForValue(propertyValue);
 
   if (rotationAngle != 0.0f) {
     rotateVector(axisPointCoord, rotationAngle, Z_ROT);
@@ -105,11 +105,11 @@ const set<unsigned int> &NominalParallelAxis::getDataInSlidersRange() {
 void NominalParallelAxis::updateSlidersWithDataSubset(const set<unsigned int> &dataSubset) {
   float rotAngleBak = rotationAngle;
   rotationAngle = 0.0f;
-  Coord max(getBaseCoord());
-  Coord min(getBaseCoord() + Coord(0.0f, getAxisHeight()));
+  Coord max = getBaseCoord();
+  Coord min = getBaseCoord() + Coord(0.0f, getAxisHeight());
 
   for (auto d : dataSubset) {
-    Coord labelCoord(getPointCoordOnAxisForData(d));
+    Coord labelCoord = getPointCoordOnAxisForData(d);
 
     if (labelCoord.getY() < min.getY()) {
       min = labelCoord;

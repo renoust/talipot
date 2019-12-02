@@ -30,9 +30,9 @@ using namespace std;
 
 namespace tlp {
 
-static Color axisHighlight(14, 241, 212, 127);
+static Color axisHighlight = {14, 241, 212, 127};
 
-static Color axisToSwapHighlight(0, 255, 0, 127);
+static Color axisToSwapHighlight = {0, 255, 0, 127};
 
 ParallelCoordsAxisSwapper::ParallelCoordsAxisSwapper()
     : parallelView(nullptr), selectedAxis(nullptr), otherAxisToSwap(nullptr),
@@ -61,9 +61,9 @@ bool ParallelCoordsAxisSwapper::eventFilter(QObject *widget, QEvent *e) {
     } else {
       x = glWidget->width() - me->x();
       y = me->y();
-      Coord screenCoords(x, y, 0);
-      Coord sceneCoords(glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
-          glWidget->screenToViewport(screenCoords)));
+      Coord screenCoords = Coord(x, y);
+      Coord sceneCoords = glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
+          glWidget->screenToViewport(screenCoords));
 
       if (parallelView->getLayoutType() == ParallelCoordinatesDrawing::CIRCULAR) {
         float rotAngle = computeABACAngleWithAlKashi(Coord(0.0f, 0.0f, 0.0f),
@@ -76,7 +76,7 @@ bool ParallelCoordsAxisSwapper::eventFilter(QObject *widget, QEvent *e) {
         }
 
       } else {
-        Coord translationVector(sceneCoords - selectedAxis->getBaseCoord());
+        Coord translationVector = sceneCoords - selectedAxis->getBaseCoord();
         selectedAxis->translate(Coord(translationVector.getX(), 0.0f, 0.0f));
       }
 
@@ -102,7 +102,7 @@ bool ParallelCoordsAxisSwapper::eventFilter(QObject *widget, QEvent *e) {
 
     if (selectedAxis != nullptr && dragStarted) {
       selectedAxis->setRotationAngle(0.0f);
-      Coord translationVector(initialSelectedAxisCoord - selectedAxis->getBaseCoord());
+      Coord translationVector = initialSelectedAxisCoord - selectedAxis->getBaseCoord();
       selectedAxis->translate(Coord(translationVector.getX(), translationVector.getY(), 0.0f));
       selectedAxis->setRotationAngle(initialSelectedAxisRotAngle);
       parallelView->addAxis(selectedAxis);

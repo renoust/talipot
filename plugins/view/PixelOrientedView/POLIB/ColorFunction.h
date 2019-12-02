@@ -14,13 +14,12 @@
 #ifndef COLOR_FUNCTION_H
 #define COLOR_FUNCTION_H
 
-#include "potypes.h"
+#include <talipot/Color.h>
 
-namespace pocore {
 class ColorFunction {
 public:
   virtual ~ColorFunction() {}
-  virtual RGBA getColor(const double &value, const unsigned int itemId) const = 0;
+  virtual tlp::Color getColor(double value, unsigned int itemId) const = 0;
 };
-} // namespace pocore
+
 #endif // COLOR_FUNCTION_H

@@ -13,7 +13,7 @@
 
 #include "PixelOrientedMediator.h"
 
-namespace pocore {
+using namespace tlp;
 
 PixelOrientedMediator::PixelOrientedMediator(LayoutFunction *layout, ColorFunction *color)
     : layout(layout), color(color), trans1(new FishEyesScreen()),
@@ -30,14 +30,14 @@ PixelOrientedMediator::PixelOrientedMediator(LayoutFunction *layout, ColorFuncti
 
 PixelOrientedMediator::~PixelOrientedMediator() {}
 
-Vec2f PixelOrientedMediator::screenToScene(const pocore::Vec2i &p) {
+Vec2f PixelOrientedMediator::screenToScene(const Vec2i &p) {
   Vec2f q;
   q[0] = double(p[0]) - double(imageSize[0] / 2.);
   q[1] = double(p[1]) - double(imageSize[1] / 2.);
   return trans2->unproject(trans1->unproject(q));
 }
 
-Vec2i PixelOrientedMediator::sceneToScreen(const pocore::Vec2i &p) {
+Vec2i PixelOrientedMediator::sceneToScreen(const Vec2i &p) {
   Vec2f q;
   q[0] = double(p[0]);
   q[1] = double(p[1]);
@@ -129,9 +129,9 @@ unsigned int PixelOrientedMediator::getRankForPixelPos(Vec2i pos) {
   return layout->unproject(fPosI);
 }
 
-RGBA PixelOrientedMediator::getColorForPixelAtPos(Vec2i pos, DimensionBase *data,
-                                                  bool withFishEye) {
-  RGBA backgroundColor;
+Color PixelOrientedMediator::getColorForPixelAtPos(Vec2i pos, DimensionBase *data,
+                                                   bool withFishEye) {
+  Color backgroundColor;
   backgroundColor.fill(255);
 
   Vec2f fPos = screenToScene(pos);
@@ -142,7 +142,7 @@ RGBA PixelOrientedMediator::getColorForPixelAtPos(Vec2i pos, DimensionBase *data
   unsigned int rank = layout->unproject(fPosI);
 
   if (rank < data->numberOfItems()) {
-    RGBA curColor = color->getColor(data->getItemValueAtRank(rank), data->getItemIdAtRank(rank));
+    Color curColor = color->getColor(data->getItemValueAtRank(rank), data->getItemIdAtRank(rank));
 
     if (withFishEye) {
       Vec2f fPosIf;
@@ -173,4 +173,3 @@ RGBA PixelOrientedMediator::getColorForPixelAtPos(Vec2i pos, DimensionBase *data
 Vec2i PixelOrientedMediator::getPixelPosForRank(const unsigned int rank) {
   return sceneToScreen(layout->project(rank));
 }
-} // namespace pocore

@@ -709,9 +709,9 @@ struct WebImport : public ImportModule {
     string server = "www.labri.fr";
     string url;
     bool computelayout = true;
-    Color pColor(255, 0, 0);
-    Color lColor(0, 0, 255, 128);
-    Color rColor(255, 255, 0, 128);
+    Color pColor = {255, 0, 0};
+    Color lColor = {0, 0, 255, 128};
+    Color rColor = {255, 255, 0, 128};
     maxSize = 1000;
     visitOther = false;
     extractNonHttp = true;

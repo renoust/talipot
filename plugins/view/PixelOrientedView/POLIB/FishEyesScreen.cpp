@@ -51,8 +51,7 @@ double projectRho(double rho, double R, double k) {
   double t8 = rho + rho * R / (t2 + 1.0 + R / k);
   return t8;
 }
-} // namespace
-namespace pocore {
+}
 //==============================================================
 FishEyesScreen::FishEyesScreen() {
   R = 50. * 50. / 2.0;
@@ -114,4 +113,3 @@ Vec2f FishEyesScreen::unproject(const Vec2f &p) const {
   return result;
 }
 //==============================================================
-} // namespace pocore

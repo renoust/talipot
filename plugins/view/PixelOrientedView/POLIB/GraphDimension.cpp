@@ -24,8 +24,6 @@
 using namespace tlp;
 using namespace std;
 
-namespace pocore {
-
 map<Graph *, unsigned int> GraphDimension::graphDimensionsMap;
 
 GraphDimension::GraphDimension(Graph *graph, const string &dimName)
@@ -137,4 +135,3 @@ vector<unsigned int> GraphDimension::links(const unsigned int itemId) const {
       concatIterator(graph->getInNodes(node(itemId)), graph->getOutNodes(node(itemId))),
       [](node n) { return n.id; }));
 }
-} // namespace pocore

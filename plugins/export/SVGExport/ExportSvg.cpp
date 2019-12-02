@@ -483,8 +483,8 @@ bool ExportSvg::addShape(const tlp::NodeShape::NodeShapes &type, const Coord &co
   case NodeShape::Square:
   case NodeShape::RoundedBox:
     _res.writeStartElement("rect");
-    _res.writeAttribute("x", QString::number(x - size.getX() / 2));
-    _res.writeAttribute("y", QString::number(y - size.getY() / 2));
+    _res.writeAttribute("x", QString::number(x - size.getW() / 2));
+    _res.writeAttribute("y", QString::number(y - size.getH() / 2));
     _res.writeAttribute("width", QString::number(w * 2));
     _res.writeAttribute("height", QString::number(h * 2));
 

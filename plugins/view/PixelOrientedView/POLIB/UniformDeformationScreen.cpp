@@ -13,14 +13,12 @@
 
 #include "UniformDeformationScreen.h"
 
-namespace pocore {
-
 UniformDeformationScreen::UniformDeformationScreen() : _tx(0), _ty(0), _zoom(1) {
   updateMatrix();
 }
 //=======================================================
-Vec2f UniformDeformationScreen::project(const Vec2f &point) const {
-  Vec2f scPoint;
+tlp::Vec2f UniformDeformationScreen::project(const tlp::Vec2f &point) const {
+  tlp::Vec2f scPoint;
   tlp::Vector<double, 3> vect, vectres;
   vect[0] = point[0];
   vect[1] = point[1];
@@ -31,8 +29,8 @@ Vec2f UniformDeformationScreen::project(const Vec2f &point) const {
   return scPoint;
 }
 //=======================================================
-Vec2f UniformDeformationScreen::unproject(const Vec2f &point) const {
-  Vec2f scPoint(point);
+tlp::Vec2f UniformDeformationScreen::unproject(const tlp::Vec2f &point) const {
+  tlp::Vec2f scPoint(point);
   tlp::Vector<double, 3> vect, vectres;
   vect[0] = point[0];
   vect[1] = point[1];
@@ -83,4 +81,3 @@ void UniformDeformationScreen::updateMatrix() {
   _invMat = _mat;
   _invMat.inverse();
 }
-} // namespace pocore

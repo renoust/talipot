@@ -55,9 +55,9 @@ bool PixelOrientedViewNavigator::eventFilter(QObject *widget, QEvent *e) {
 
   if (e->type() == QEvent::MouseMove && pixelView->smallMultiplesViewSet()) {
     QMouseEvent *me = static_cast<QMouseEvent *>(e);
-    int x = glWidget->width() - me->x();
-    int y = me->y();
-    Coord screenCoords(x, y, 0);
+    float x = glWidget->width() - me->x();
+    float y = me->y();
+    Coord screenCoords = {x, y};
     Coord sceneCoords = glWidget->getScene()->getGraphCamera().viewportTo3DWorld(
         glWidget->screenToViewport(screenCoords));
     PixelOrientedOverview *overviewUnderPointer = getOverviewUnderPointer(sceneCoords);

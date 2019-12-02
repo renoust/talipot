@@ -354,7 +354,7 @@ void MatrixView::normalizeSizes(double maxVal) {
       getGlMainWidget()->getScene()->getGlGraphComposite()->getInputData()->getElementSize();
 
   for (auto n : graph()->nodes()) {
-    Size s(originalSizes->getNodeValue(n));
+    const Size &s = originalSizes->getNodeValue(n);
     maxWidth = max<float>(maxWidth, s[0]);
     maxHeight = max<float>(maxHeight, s[1]);
   }
@@ -364,7 +364,8 @@ void MatrixView::normalizeSizes(double maxVal) {
     if (!_displayedNodesAreNodes->getNodeValue(n))
       continue;
 
-    Size s(originalSizes->getNodeValue(node(_displayedNodesToGraphEntities->getNodeValue(n))));
+    const Size &s =
+        originalSizes->getNodeValue(node(_displayedNodesToGraphEntities->getNodeValue(n)));
     matrixSizes->setNodeValue(n, Size(s[0] * maxVal / maxWidth, s[1] * maxVal / maxHeight, 1));
   }
   Observable::unholdObservers();
@@ -530,7 +531,7 @@ void MatrixView::updateLayout() {
 
   LayoutProperty *layout =
       getGlMainWidget()->getScene()->getGlGraphComposite()->getInputData()->getElementLayout();
-  Coord horiz(1, 0, 0), vert(0, -1, 0);
+  Coord horiz = {1, 0, 0}, vert = {0, -1, 0};
   IntegerProperty *position = getGlMainWidget()
                                   ->getScene()
                                   ->getGlGraphComposite()

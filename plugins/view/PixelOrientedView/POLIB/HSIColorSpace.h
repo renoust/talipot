@@ -18,17 +18,15 @@
 #ifndef HSI_COLOR_SPACE_H
 #define HSI_COLOR_SPACE_H
 
-#include "potypes.h"
-
-namespace pocore {
+#include <talipot/Color.h>
 
 class HSI {
 
 public:
   HSI(double hue, double saturation, double intensity);
-  HSI(const RGBA &c);
+  HSI(const tlp::Color &c);
   double value(double hue_phase) const;
-  RGBA getRGBA() const;
+  tlp::Color getColor() const;
 
   double hue, saturation, intensity;
 };
@@ -43,5 +41,5 @@ private:
   HSI foot;
   double hue_range, sat_range, int_range;
 };
-} // namespace pocore
+
 #endif // HSI_COLOR_SPACE_H

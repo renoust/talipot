@@ -26,7 +26,7 @@ Circlef getEnclosingCircle(GlGraphInputData *inputData, BooleanProperty *selecti
   BoundingBox bbox(computeBoundingBox(inputData->getGraph(), inputData->getElementLayout(),
                                       inputData->getElementSize(), inputData->getElementRotation(),
                                       selection));
-  Coord center(bbox.center());
+  Coord center = bbox.center();
   float norm = (bbox[1] - bbox[0]).norm();
   Circlef result;
   result[0] = center.getX();

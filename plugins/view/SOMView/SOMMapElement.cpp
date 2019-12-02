@@ -83,7 +83,7 @@ void SOMMapElement::buildMainComposite(tlp::Coord basePos, tlp::Size gridSize, S
         float x = (j * ri * 2) + ri;
         float y = ((i + 1) * ((2 * r) - h)) - h;
 
-        Coord center(basePos.getX() + x, top - y, 0);
+        Coord center = {basePos.getX() + x, top - y};
 
         if (i % 2 != 0) {
           center.setX(center.getX() + ri);
@@ -100,14 +100,14 @@ void SOMMapElement::buildMainComposite(tlp::Coord basePos, tlp::Size gridSize, S
     }
   } else {
 
-    Coord elementSize(gridSize.getW() / map->getWidth(), gridSize.getH() / map->getHeight(), 0);
+    Coord elementSize = {gridSize.getW() / map->getWidth(), gridSize.getH() / map->getHeight()};
 
     for (unsigned int i = 0; i < map->getHeight(); ++i) {
       for (unsigned int j = 0; j < map->getWidth(); ++j) {
-        Coord topLeft(j * elementSize.getX(), (map->getHeight() - i) * elementSize.getY(), 0);
+        Coord topLeft = {j * elementSize.getX(), (map->getHeight() - i) * elementSize.getY()};
         topLeft += basePos;
-        Coord bottomRight(topLeft.getX() + elementSize.getX(), topLeft.getY() - elementSize.getY(),
-                          0);
+        Coord bottomRight = {topLeft.getX() + elementSize.getX(),
+                             topLeft.getY() - elementSize.getY()};
 
         assert(topLeft.getX() < bottomRight.getX() && topLeft.getY() > bottomRight.getY());
         tlp::GlRect *rec = nullptr;

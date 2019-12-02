@@ -114,11 +114,11 @@ bool MouseBoxZoomer::eventFilter(QObject *widget, QEvent *e) {
         started = false;
 
         if (!(w == 0 && h == 0)) {
-          int width = glw->width();
-          int height = glw->height();
+          float width = glw->width();
+          float height = glw->height();
 
-          Coord bbMin(width - x, height - y + h);
-          Coord bbMax(width - (x + w), height - y);
+          Coord bbMin = Coord(width - x, height - y + h);
+          Coord bbMax = Coord(width - (x + w), height - y);
 
           if (abs(bbMax[0] - bbMin[0]) > 1 && abs(bbMax[1] - bbMin[1]) > 1) {
 

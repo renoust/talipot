@@ -43,7 +43,7 @@ void AroundTexturedSphere::drawGlyph(const Color &glyphColor, const Size &glyphS
   rect.setOutlineMode(false);
 
   rect.setTextureName(TalipotBitmapDir + aroundTextureFile);
-  Color aroundColor(glyphColor);
+  Color aroundColor = glyphColor;
   aroundColor.setA(alpha);
   rect.setFillColor(aroundColor);
 

@@ -136,13 +136,13 @@ void TlpImportExportTest::testExportAttributes() {
   ostream *os = new ofstream("export_attributes.tlp");
   bool b = true, sb = false;
   double d = 100., sd = 50.;
-  Color color(1, 2, 3, 4), scolor(4, 3, 2, 1);
-  Coord coord(5., 6., 7.), scoord(0., 8., 9.);
+  Color color = {1, 2, 3, 4}, scolor = {4, 3, 2, 1};
+  Coord coord = {5., 6., 7.}, scoord = {0., 8., 9.};
   float f = 200., sf = 100.;
   int i = -10, si = -5;
   unsigned int ui = 10, sui = 5;
-  Size size(8., 9., 10.), ssize(10., 9., 8.);
-  string str("data"), sstr("atad");
+  Size size = {8., 9., 10.}, ssize = {10., 9., 8.};
+  string str = "data", sstr = "atad";
   vector<string> sv;
   sv.push_back(str);
   sv.push_back(sstr);

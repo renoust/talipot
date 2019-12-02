@@ -370,7 +370,7 @@ struct DOT_YY {
     // Size
 
     {
-      Size s( 0.75f, 0.5f, 0.5f ); // in inches unit
+      Size s = {0.75f, 0.5f, 0.5f}; // in inches unit
       if( inAttr.mask & DOT_ATTR::WIDTH ) s.setW( inAttr.size.getW() );
       if( inAttr.mask & DOT_ATTR::HEIGHT ) s.setH( inAttr.size.getH() );
       if( inAttr.mask & DOT_ATTR::DEPTH ) s.setD( inAttr.size.getD() );

@@ -11,65 +11,61 @@
  *
  */
 
-///@cond DOXYGEN_HIDDEN
-
 #ifndef TALIPOT_COLOR_H
 #define TALIPOT_COLOR_H
 
 #include <talipot/Vector.h>
 
-///
 namespace tlp {
 
-class TLP_SCOPE Color : public tlp::Vector<unsigned char, 4> {
+class TLP_SCOPE Color : public Vector<unsigned char, 4> {
 public:
-  ///
-  inline Color(const tlp::Vector<unsigned char, 4> &);
-  ///
-  inline Color(const unsigned char red = 0, const unsigned char green = 0,
-               const unsigned char blue = 0, const unsigned char alpha = 255);
-  ///
-  inline void set(const unsigned char red = 0, const unsigned char green = 0,
-                  const unsigned char blue = 0, const unsigned char alpha = 255);
-  ///
-  inline float getRGL() const;
-  ///
-  inline float getGGL() const;
-  ///
-  inline float getBGL() const;
-  ///
-  inline float getAGL() const;
-  ///
-  inline float *getGL() const;
-  ///
-  inline unsigned char getR() const;
-  ///
-  inline unsigned char getG() const;
-  ///
-  inline unsigned char getB() const;
-  ///
-  inline unsigned char getA() const;
-  ///
-  inline void setR(const unsigned char red);
-  ///
-  inline void setG(const unsigned char green);
-  ///
-  inline void setB(const unsigned char blue);
-  ///
-  inline void setA(const unsigned char alpha);
-  ///
+  Color(const Vector<unsigned char, 4> &);
+
+  Color(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0,
+        unsigned char alpha = 255);
+
+  void set(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0,
+           unsigned char alpha = 255);
+
+  float getRGL() const;
+
+  float getGGL() const;
+
+  float getBGL() const;
+
+  float getAGL() const;
+
+  float *getGL() const;
+
+  unsigned char getR() const;
+
+  unsigned char getG() const;
+
+  unsigned char getB() const;
+
+  unsigned char getA() const;
+
+  void setR(unsigned char red);
+
+  void setG(unsigned char green);
+
+  void setB(unsigned char blue);
+
+  void setA(unsigned char alpha);
+
   long getTrueColor();
-  ///
+
   int getH() const;
-  ///
+
   int getS() const;
-  ///
+
   int getV() const;
-  ///
+
   void setH(int);
-  ///
+
   void setS(int);
-  ///
+
   void setV(int);
 
   static const Color Amaranth;
@@ -157,47 +153,48 @@ TLP_SCOPE std::ostream &operator<<(std::ostream &os, const tlp::Color &);
 TLP_SCOPE std::istream &operator>>(std::istream &is, tlp::Color &);
 }
 
-tlp::Color::Color(const tlp::Vector<unsigned char, 4> &v) : tlp::Vector<unsigned char, 4>(v) {}
+inline tlp::Color::Color(const tlp::Vector<unsigned char, 4> &c)
+    : tlp::Vector<unsigned char, 4>(c) {}
 
-tlp::Color::Color(const unsigned char red, const unsigned char green, const unsigned char blue,
-                  const unsigned char alpha) {
+inline tlp::Color::Color(unsigned char red, unsigned char green, unsigned char blue,
+                         unsigned char alpha) {
   set(red, green, blue, alpha);
 }
 
-void tlp::Color::set(unsigned char red, unsigned char green, unsigned char blue,
-                     unsigned char alpha) {
+inline void tlp::Color::set(unsigned char red, unsigned char green, unsigned char blue,
+                            unsigned char alpha) {
   (*this)[0] = red;
   (*this)[1] = green;
   (*this)[2] = blue;
   (*this)[3] = alpha;
 }
 
-unsigned char tlp::Color::getR() const {
+inline unsigned char tlp::Color::getR() const {
   return (*this)[0];
 }
-unsigned char tlp::Color::getG() const {
+inline unsigned char tlp::Color::getG() const {
   return (*this)[1];
 }
-unsigned char tlp::Color::getB() const {
+inline unsigned char tlp::Color::getB() const {
   return (*this)[2];
 }
-unsigned char tlp::Color::getA() const {
+inline unsigned char tlp::Color::getA() const {
   return (*this)[3];
 }
 
-float tlp::Color::getRGL() const {
+inline float tlp::Color::getRGL() const {
   return float((*this)[0] / 255.0);
 }
-float tlp::Color::getGGL() const {
+inline float tlp::Color::getGGL() const {
   return float((*this)[1] / 255.0);
 }
-float tlp::Color::getBGL() const {
+inline float tlp::Color::getBGL() const {
   return float((*this)[2] / 255.0);
 }
-float tlp::Color::getAGL() const {
+inline float tlp::Color::getAGL() const {
   return float((*this)[3] / 255.0);
 }
-float *tlp::Color::getGL() const {
+inline float *tlp::Color::getGL() const {
   float *result = new float[4];
   result[0] = getRGL();
   result[1] = getGGL();
@@ -206,28 +203,26 @@ float *tlp::Color::getGL() const {
   return result;
 }
 
-void tlp::Color::setR(unsigned char red) {
+inline void tlp::Color::setR(unsigned char red) {
   (*this)[0] = red;
 }
-void tlp::Color::setG(unsigned char green) {
+inline void tlp::Color::setG(unsigned char green) {
   (*this)[1] = green;
 }
-void tlp::Color::setB(unsigned char blue) {
+inline void tlp::Color::setB(unsigned char blue) {
   (*this)[2] = blue;
 }
-void tlp::Color::setA(unsigned char alpha) {
+inline void tlp::Color::setA(unsigned char alpha) {
   (*this)[3] = alpha;
 }
 
 namespace std {
 template <>
 struct hash<tlp::Color> {
-  inline std::size_t operator()(const tlp::Color &c) const {
+  std::size_t operator()(const tlp::Color &c) const {
     return hash_vector(c);
   }
 };
-} // namespace std
+}
 
 #endif // TALIPOT_COLOR_H
-
-///@endcond

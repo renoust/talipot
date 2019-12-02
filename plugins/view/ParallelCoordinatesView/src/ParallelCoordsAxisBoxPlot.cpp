@@ -30,8 +30,8 @@ using namespace std;
 
 namespace tlp {
 
-const Color lightBlue(0, 217, 255, 100);
-const Color darkBlue(0, 0, 255, 255);
+const Color lightBlue = {0, 217, 255, 100};
+const Color darkBlue = {0, 0, 255, 255};
 
 GlAxisBoxPlot::GlAxisBoxPlot(QuantitativeParallelAxis *axis, const Color &fillColor,
                              const Color &outlineColor)
@@ -138,7 +138,7 @@ void GlAxisBoxPlot::draw(float lod, Camera *camera) {
                                          highlightRangeLowBound->getY(), 0.0f),
                                    Coord(highlightRangeLowBound->getX() - boxWidth / 2.0f,
                                          highlightRangeLowBound->getY(), 0.0f)};
-    Color outlineColorTranslucent(outlineColor);
+    Color outlineColorTranslucent = outlineColor;
     outlineColorTranslucent.setA(10);
     GlQuad highlightBox(highlightBoxCoords[0], highlightBoxCoords[1], highlightBoxCoords[2],
                         highlightBoxCoords[3], outlineColorTranslucent);
@@ -379,11 +379,11 @@ bool ParallelCoordsAxisBoxPlot::eventFilter(QObject *widget, QEvent *e) {
 
   if (e->type() == QEvent::MouseMove) {
     QMouseEvent *me = static_cast<QMouseEvent *>(e);
-    int x = glWidget->width() - me->x();
-    int y = me->y();
-    Coord screenCoords(x, y, 0.0f);
-    Coord sceneCoords(glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
-        glWidget->screenToViewport(screenCoords)));
+    float x = glWidget->width() - me->x();
+    float y = me->y();
+    Coord screenCoords = {x, y};
+    Coord sceneCoords = glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
+        glWidget->screenToViewport(screenCoords));
     selectedAxis = parallelView->getAxisUnderPointer(me->x(), me->y());
 
     if (selectedAxis != nullptr) {

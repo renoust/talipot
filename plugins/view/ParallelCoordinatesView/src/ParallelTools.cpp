@@ -28,7 +28,7 @@ float computeABACAngleWithAlKashi(const Coord &A, const Coord &B, const Coord &C
 }
 
 void rotateVector(Coord &vec, float alpha, int rot) {
-  Coord backupVec(vec);
+  Coord backupVec = vec;
   float aRot = 2.0f * M_PI * alpha / 360.0f;
   float cosA = cos(aRot);
   float sinA = sin(aRot);

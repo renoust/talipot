@@ -506,9 +506,9 @@ bool HistogramStatistics::draw(GlMainWidget *glMainWidget) {
   glDisable(GL_DEPTH_TEST);
 
   if (!densityEstimationCurvePoints.empty()) {
-    Color curveColor(255, 0, 0);
-    Coord startPoint(densityEstimationCurvePoints[0]);
-    Coord endPoint(densityEstimationCurvePoints[densityEstimationCurvePoints.size() - 1]);
+    Color curveColor = {255, 0, 0};
+    Coord startPoint = densityEstimationCurvePoints[0];
+    Coord endPoint = densityEstimationCurvePoints[densityEstimationCurvePoints.size() - 1];
     vector<Coord> densityEstimationCurvePointsCp(densityEstimationCurvePoints);
     densityEstimationCurvePointsCp.erase(densityEstimationCurvePointsCp.begin());
     densityEstimationCurvePointsCp.pop_back();

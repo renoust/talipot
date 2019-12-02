@@ -14,15 +14,14 @@
 #ifndef SCREEN_FUNCTION_H
 #define SCREEN_FUNCTION_H
 
-#include "potypes.h"
+#include <talipot/Vector.h>
 
-namespace pocore {
 class ScreenFunction {
 
 public:
   virtual ~ScreenFunction() {}
-  virtual Vec2f project(const Vec2f &) const = 0;
-  virtual Vec2f unproject(const Vec2f &) const = 0;
+  virtual tlp::Vec2f project(const tlp::Vec2f &) const = 0;
+  virtual tlp::Vec2f unproject(const tlp::Vec2f &) const = 0;
 };
-} // namespace pocore
+
 #endif // SCREEN_FUNCTION_H

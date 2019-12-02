@@ -422,11 +422,11 @@ bool HistogramView::eventFilter(QObject *object, QEvent *event) {
       !detailedHistogram->uniformQuantificationHistogram()) {
     GlMainWidget *glw = getGlMainWidget();
     QHelpEvent *he = static_cast<QHelpEvent *>(event);
-    int x = glw->width() - he->x();
-    int y = he->y();
-    Coord screenCoords(x, y, 0);
-    Coord sceneCoords(glw->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
-        glw->screenToViewport(screenCoords)));
+    float x = glw->width() - he->x();
+    float y = he->y();
+    Coord screenCoords = {x, y};
+    Coord sceneCoords = glw->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
+        glw->screenToViewport(screenCoords));
     BoundingBox xAxisBB = xAxisDetail->getBoundingBox();
 
     if (sceneCoords.getX() > xAxisBB[0][0] && sceneCoords.getX() < xAxisBB[1][0] &&
@@ -444,7 +444,7 @@ bool HistogramView::eventFilter(QObject *object, QEvent *event) {
 
 void HistogramView::addEmptyViewLabel() {
 
-  Color backgroundColor(histoOptionsWidget->getBackgroundColor());
+  Color backgroundColor = histoOptionsWidget->getBackgroundColor();
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color foregroundColor;
@@ -625,16 +625,16 @@ void HistogramView::buildHistograms() {
   const unsigned int N =
       uint(squareRoot) + (fmod(float(selectedProperties.size()), squareRoot) == 0.f ? 0u : 1u);
 
-  Color backgroundColor(histoOptionsWidget->getBackgroundColor());
+  Color backgroundColor = histoOptionsWidget->getBackgroundColor();
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color foregroundColor;
   int bgV = backgroundColor.getV();
 
   if (bgV < 128) {
-    foregroundColor = Color(255, 255, 255);
+    foregroundColor = Color::White;
   } else {
-    foregroundColor = Color(0, 0, 0);
+    foregroundColor = Color::Black;
   }
 
   vector<GlLabel *> propertiesLabels;
@@ -649,9 +649,9 @@ void HistogramView::buildHistograms() {
     unsigned int row = i / N;
     unsigned int col = i % N;
 
-    Coord overviewBLCorner(
+    Coord overviewBLCorner = {
         col * (OVERVIEW_SIZE + spaceBetweenOverviews),
-        -(labelHeight + row * (OVERVIEW_SIZE + spaceBetweenOverviews + labelHeight)), 0);
+        -(labelHeight + row * (OVERVIEW_SIZE + spaceBetweenOverviews + labelHeight))};
     ostringstream oss;
     oss << "histogram overview for property " << selectedProperties[i];
 
@@ -780,18 +780,18 @@ void HistogramView::switchFromSmallMultiplesToDetailedView(Histogram *histogramT
   mainLayer->addGlEntity(histogramToDetail->getBinsComposite(), "bins composite");
 
   float offset = detailedHistogram->getYAxis()->getMaxLabelWidth() + 90;
-  Coord brCoord(detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset, 0, 0));
-  Coord tlCoord(detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset + 65, 0, 0) +
-                Coord(0, detailedHistogram->getYAxis()->getAxisLength()));
+  Coord brCoord = detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset, 0, 0);
+  Coord tlCoord = detailedHistogram->getYAxis()->getAxisBaseCoord() - Coord(offset + 65, 0, 0) +
+                  Coord(0, detailedHistogram->getYAxis()->getAxisLength());
   delete emptyRect;
   emptyRect = new GlRect(tlCoord, brCoord, Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 
   float offset2 = (detailedHistogram->getXAxis()->getAxisGradsWidth() / 2.) +
                   detailedHistogram->getXAxis()->getLabelHeight();
-  Coord tlCoord2(detailedHistogram->getXAxis()->getAxisBaseCoord() - Coord(0, offset2, 0));
-  Coord brCoord2(detailedHistogram->getXAxis()->getAxisBaseCoord() +
-                 Coord(detailedHistogram->getXAxis()->getAxisLength(), 0, 0) -
-                 Coord(0, offset2 + 60, 0));
+  Coord tlCoord2 = detailedHistogram->getXAxis()->getAxisBaseCoord() - Coord(0, offset2, 0);
+  Coord brCoord2 = detailedHistogram->getXAxis()->getAxisBaseCoord() +
+                   Coord(detailedHistogram->getXAxis()->getAxisLength(), 0, 0) -
+                   Coord(0, offset2 + 60, 0);
   delete emptyRect2;
   emptyRect2 = new GlRect(tlCoord2, brCoord2, Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 

@@ -18,16 +18,15 @@
 
 #include "LayoutFunction.h"
 
-namespace pocore {
 class HilbertLayout : public LayoutFunction {
 public:
   HilbertLayout(unsigned char order);
-  Vec2i project(const unsigned int id) const override;
-  unsigned int unproject(const Vec2i &) const override;
+  tlp::Vec2i project(const unsigned int id) const override;
+  unsigned int unproject(const tlp::Vec2i &) const override;
 
 private:
   unsigned char order;
   int shift;
 };
-} // namespace pocore
+
 #endif // HILBERT_LAYOUT_H

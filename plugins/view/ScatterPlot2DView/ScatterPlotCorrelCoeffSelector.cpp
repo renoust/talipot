@@ -418,7 +418,7 @@ bool ScatterPlotCorrelCoeffSelector::draw(GlMainWidget *glMainWidget) {
 
   Camera camera2D(camera.getScene(), false);
 
-  Color backgroundColor(glMainWidget->getScene()->getBackgroundColor());
+  Color backgroundColor = glMainWidget->getScene()->getBackgroundColor();
   Color foregroundColor;
   int bgV = backgroundColor.getV();
 
@@ -431,16 +431,16 @@ bool ScatterPlotCorrelCoeffSelector::draw(GlMainWidget *glMainWidget) {
   if (!polygonEdit.empty()) {
     for (size_t i = 0; i < polygonEdit.size() - 1; ++i) {
       camera.initGl();
-      Coord lineStart(camera.worldTo2DViewport(polygonEdit[i]));
-      Coord lineEnd(camera.worldTo2DViewport(polygonEdit[i + 1]));
+      Coord lineStart = camera.worldTo2DViewport(polygonEdit[i]);
+      Coord lineEnd = camera.worldTo2DViewport(polygonEdit[i + 1]);
       camera2D.initGl();
       GlLines::glDrawLine(lineStart, lineEnd, 1.0f, GlLines::TLP_DASHED, foregroundColor,
                           foregroundColor);
     }
 
     camera.initGl();
-    Coord lineStart(camera.worldTo2DViewport(polygonEdit[polygonEdit.size() - 1]));
-    Coord lineEnd(camera.worldTo2DViewport(currentPointerSceneCoords));
+    Coord lineStart = camera.worldTo2DViewport(polygonEdit[polygonEdit.size() - 1]);
+    Coord lineEnd = camera.worldTo2DViewport(currentPointerSceneCoords);
     camera2D.initGl();
     GlLines::glDrawLine(lineStart, lineEnd, 1.0f, GlLines::TLP_DASHED, foregroundColor,
                         foregroundColor);
@@ -448,7 +448,7 @@ bool ScatterPlotCorrelCoeffSelector::draw(GlMainWidget *glMainWidget) {
 
   for (size_t i = 0; i < polygonEdit.size(); ++i) {
     camera.initGl();
-    Coord pointCoord(camera.worldTo2DViewport(polygonEdit[i]));
+    Coord pointCoord = camera.worldTo2DViewport(polygonEdit[i]);
     camera2D.initGl();
     basicCircle.set(pointCoord, POINT_RADIUS, 0.);
     basicCircle.draw(0, nullptr);
@@ -470,7 +470,7 @@ void ScatterPlotCorrelCoeffSelector::getPolygonAndPointUnderPointerIfAny(
   selectedPolygon = nullptr;
   delete selectedPolygonPoint;
   selectedPolygonPoint = nullptr;
-  Coord pointerViewportCoord(camera->worldTo2DViewport(pointerSceneCoord));
+  Coord pointerViewportCoord = camera->worldTo2DViewport(pointerSceneCoord);
 
   for (size_t i = 0; i < polygons.size(); ++i) {
     selectedPolygonPoint =
@@ -506,7 +506,7 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
   Graph *graph = glWidget->getScene()->getGlGraphComposite()->getInputData()->getGraph();
   Camera &camera = glWidget->getScene()->getLayer("Main")->getCamera();
 
-  BoundingBox polygonSceneBB(polygon->getBoundingBox());
+  BoundingBox polygonSceneBB = polygon->getBoundingBox();
   BoundingBox polygonScrBB;
   polygonScrBB.expand(camera.worldTo2DViewport(Coord(polygonSceneBB[0])));
   polygonScrBB.expand(camera.worldTo2DViewport(Coord(polygonSceneBB[1])));
@@ -550,28 +550,34 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
       nodeBB[1][2] = nodeBB[1][2] - f * dz;
       vector<float> xVec;
       vector<float> yVec;
-      Coord nodeBBBLBScr(camera.worldTo2DViewport(Coord(nodeBB[0])));
+      Coord nodeBBBLBScr = camera.worldTo2DViewport(nodeBB[0]);
       xVec.push_back(nodeBBBLBScr.getX());
       yVec.push_back(nodeBBBLBScr.getY());
-      Coord nodeBBTLBScr(camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[0][2])));
+      Coord nodeBBTLBScr =
+          camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[0][2]));
       xVec.push_back(nodeBBTLBScr.getX());
       yVec.push_back(nodeBBTLBScr.getY());
-      Coord nodeBBTRBScr(camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[1][1], nodeBB[0][2])));
+      Coord nodeBBTRBScr =
+          camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[1][1], nodeBB[0][2]));
       xVec.push_back(nodeBBTRBScr.getX());
       yVec.push_back(nodeBBTRBScr.getY());
-      Coord nodeBBBRBScr(camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[0][2])));
+      Coord nodeBBBRBScr =
+          camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[0][2]));
       xVec.push_back(nodeBBBRBScr.getX());
       yVec.push_back(nodeBBBRBScr.getY());
-      Coord nodeBBBLFScr(camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[0][1], nodeBB[1][2])));
+      Coord nodeBBBLFScr =
+          camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[0][1], nodeBB[1][2]));
       xVec.push_back(nodeBBBLFScr.getX());
       yVec.push_back(nodeBBBLFScr.getY());
-      Coord nodeBBTLFScr(camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[1][2])));
+      Coord nodeBBTLFScr =
+          camera.worldTo2DViewport(Coord(nodeBB[0][0], nodeBB[1][1], nodeBB[1][2]));
       xVec.push_back(nodeBBTLFScr.getX());
       yVec.push_back(nodeBBTLFScr.getY());
-      Coord nodeBBTRFScr(camera.worldTo2DViewport(Coord(nodeBB[1])));
+      Coord nodeBBTRFScr = camera.worldTo2DViewport(Coord(nodeBB[1]));
       xVec.push_back(nodeBBTRFScr.getX());
       yVec.push_back(nodeBBTRFScr.getY());
-      Coord nodeBBBRFScr(camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[1][2])));
+      Coord nodeBBBRFScr =
+          camera.worldTo2DViewport(Coord(nodeBB[1][0], nodeBB[0][1], nodeBB[1][2]));
       xVec.push_back(nodeBBBRFScr.getX());
       yVec.push_back(nodeBBBRFScr.getY());
       vector<Coord> quad;

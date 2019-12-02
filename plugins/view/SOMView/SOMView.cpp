@@ -336,8 +336,8 @@ bool SOMView::createPicture(const std::string &pictureName, int width, int heigh
 void SOMView::drawPreviews() {
 
   vector<string> propertiesName(properties->getSelectedProperties());
-  int thumbWidth = 50;
-  int thumbHeight = 50;
+  float thumbWidth = 50;
+  float thumbHeight = 50;
   int spacing = 5;
   int pos = 0;
   int colNumber = int(ceil(sqrt(double(propertiesName.size()))));
@@ -347,9 +347,10 @@ void SOMView::drawPreviews() {
     double maxValue;
     ColorProperty *colorProperty = computePropertyColor(p, minValue, maxValue);
 
-    Coord previewCoord((pos % colNumber) * (thumbWidth + spacing),
-                       (colNumber - 1) - int(floor(pos / colNumber)) * (thumbHeight + spacing), 0);
-    Size previewSize(thumbWidth, thumbHeight, 0);
+    Coord previewCoord =
+        Coord((pos % colNumber) * (thumbWidth + spacing),
+              (colNumber - 1) - int(floor(pos / colNumber)) * (thumbHeight + spacing));
+    Size previewSize = {thumbWidth, thumbHeight};
 
     // If the input data uses normalized values we had to translate it to get the real value.
     unsigned int propertyIndex = inputSample.findIndexForProperty(p);
@@ -660,8 +661,8 @@ void SOMView::computeMapping() {
   // Compute node displaying area
   Size nodeDisplayAreaSize = mapCompositeElements->getNodeAreaSize();
 
-  Coord marginShift(nodeDisplayAreaSize.getW() * marginCoef,
-                    -(nodeDisplayAreaSize.getH() * marginCoef));
+  Coord marginShift = {nodeDisplayAreaSize.getW() * marginCoef,
+                       -(nodeDisplayAreaSize.getH() * marginCoef)};
   Size realAreaSize = nodeDisplayAreaSize * (1 - marginCoef * 2);
   // Compute elements size
   int colNumber = int(ceil(sqrt(maxSize)));
@@ -806,7 +807,7 @@ bool SOMView::eventFilter(QObject *obj, QEvent *event) {
 
       if (me->button() == Qt::LeftButton) {
         vector<SOMPreviewComposite *> properties;
-        Coord screenCoords(me->x(), me->y(), 0.0f);
+        Coord screenCoords = Coord(me->x(), me->y());
         Coord viewportCoords = getGlMainWidget()->screenToViewport(screenCoords);
         getPreviewsAtViewportCoord(viewportCoords.x(), viewportCoords.y(), properties);
 
@@ -821,7 +822,7 @@ bool SOMView::eventFilter(QObject *obj, QEvent *event) {
     if (event->type() == QMouseEvent::ToolTip) {
       QHelpEvent *he = static_cast<QHelpEvent *>(event);
       vector<SOMPreviewComposite *> properties;
-      Coord screenCoords(he->x(), he->y(), 0.0f);
+      Coord screenCoords = Coord(he->x(), he->y(), 0.0f);
       Coord viewportCoords = getGlMainWidget()->screenToViewport(screenCoords);
       getPreviewsAtViewportCoord(viewportCoords.x(), viewportCoords.y(), properties);
 
@@ -1144,7 +1145,7 @@ void SOMView::addEmptyViewLabel() {
   mainLayer->addGlEntity(noDimsLabel, "no dimensions label");
   mainLayer->addGlEntity(noDimsLabel1, "no dimensions label 1");
   mainLayer->addGlEntity(noDimsLabel2, "no dimensions label 2");
-  BoundingBox bbox(noDimsLabel->getBoundingBox());
+  BoundingBox bbox = noDimsLabel->getBoundingBox();
   bbox.expand(noDimsLabel2->getBoundingBox()[0]);
   bbox.expand(noDimsLabel2->getBoundingBox()[1]);
   previewWidget->getScene()->centerScene();

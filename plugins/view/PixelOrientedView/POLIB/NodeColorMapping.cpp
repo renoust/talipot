@@ -20,14 +20,12 @@
 using namespace tlp;
 using namespace std;
 
-const Color COLOR_SELECT(255, 102, 255, 255);
-
-namespace pocore {
+const Color COLOR_SELECT = {255, 102, 255, 255};
 
 NodeColorMapping::NodeColorMapping(Graph *graph) : graph(graph) {}
 
-RGBA NodeColorMapping::getColor(const double &, const unsigned int itemId) const {
-  RGBA ret;
+Color NodeColorMapping::getColor(double, unsigned int itemId) const {
+  Color ret;
 
   if (graph->getBooleanProperty("viewSelection")->getNodeValue(node(itemId))) {
     ret[0] = COLOR_SELECT.getR();
@@ -44,4 +42,3 @@ RGBA NodeColorMapping::getColor(const double &, const unsigned int itemId) const
 
   return ret;
 }
-} // namespace pocore

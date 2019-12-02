@@ -14,14 +14,14 @@
 #ifndef LOGARITHMIC_MAPPING_COLOR_H
 #define LOGARITHMIC_MAPPING_COLOR_H
 
-#include "potypes.h"
+#include <talipot/Color.h>
+
 #include "LinearMappingColor.h"
 
-namespace pocore {
 class LogarithmicMappingColor : public LinearMappingColor {
 public:
-  LogarithmicMappingColor(const double &min, const double &max);
-  RGBA getColor(const double &value, const unsigned int) const override;
+  LogarithmicMappingColor(double min, double max);
+  tlp::Color getColor(double value, unsigned int) const override;
 };
-} // namespace pocore
+
 #endif // LOGARITHMIC_MAPPING_COLOR_H

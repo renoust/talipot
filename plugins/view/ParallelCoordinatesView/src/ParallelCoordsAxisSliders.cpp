@@ -29,12 +29,12 @@ using namespace std;
 
 namespace tlp {
 
-const Color redColor(255, 0, 0);
-const Color blackColor(0, 0, 0);
-const Color greenColor(0, 255, 0);
-const Color blueColor(14, 241, 212);
-const Color orangeColor(255, 123, 0);
-const Color lightGreen(197, 255, 0);
+const Color redColor = {255, 0, 0};
+const Color blackColor = {0, 0, 0};
+const Color greenColor = {0, 255, 0};
+const Color blueColor = {14, 241, 212};
+const Color orangeColor = {255, 123, 0};
+const Color lightGreen = {197, 255, 0};
 
 AxisSlider::AxisSlider(const sliderType type, const Coord &sliderCoord, const float halfWidth,
                        const float halfHeight, const Color &sliderColor, const Color &labelColor,
@@ -49,28 +49,28 @@ AxisSlider::AxisSlider(const sliderType type, const Coord &sliderCoord, const fl
 
   float n = (type == TOP_SLIDER) ? 1.0f : -1.0f;
 
-  Coord arrowPolygonVertice1(sliderCoord);
-  Coord arrowPolygonVertice2(sliderCoord.getX() + halfWidth / 2.0f,
-                             sliderCoord.getY() + n * (halfHeight / 2.0f));
-  Coord arrowPolygonVertice3(sliderCoord.getX() + halfWidth / 4.0f,
-                             sliderCoord.getY() + n * (halfHeight / 2.0f));
-  Coord arrowPolygonVertice4(sliderCoord.getX() + halfWidth / 4.0f,
-                             sliderCoord.getY() + n * halfHeight);
-  Coord arrowPolygonVertice5(sliderCoord.getX() - halfWidth / 4.0f,
-                             sliderCoord.getY() + n * halfHeight);
-  Coord arrowPolygonVertice6(sliderCoord.getX() - halfWidth / 4.0f,
-                             sliderCoord.getY() + n * (halfHeight / 2.0f));
-  Coord arrowPolygonVertice7(sliderCoord.getX() - halfWidth / 2.0f,
-                             sliderCoord.getY() + n * (halfHeight / 2.0f));
+  Coord arrowPolygonVertice1 = sliderCoord;
+  Coord arrowPolygonVertice2 = {sliderCoord.getX() + halfWidth / 2.0f,
+                                sliderCoord.getY() + n * (halfHeight / 2.0f)};
+  Coord arrowPolygonVertice3 = {sliderCoord.getX() + halfWidth / 4.0f,
+                                sliderCoord.getY() + n * (halfHeight / 2.0f)};
+  Coord arrowPolygonVertice4 = {sliderCoord.getX() + halfWidth / 4.0f,
+                                sliderCoord.getY() + n * halfHeight};
+  Coord arrowPolygonVertice5 = {sliderCoord.getX() - halfWidth / 4.0f,
+                                sliderCoord.getY() + n * halfHeight};
+  Coord arrowPolygonVertice6 = {sliderCoord.getX() - halfWidth / 4.0f,
+                                sliderCoord.getY() + n * (halfHeight / 2.0f)};
+  Coord arrowPolygonVertice7 = {sliderCoord.getX() - halfWidth / 2.0f,
+                                sliderCoord.getY() + n * (halfHeight / 2.0f)};
 
-  Coord sliderPolygonVertice2(sliderCoord.getX() + 1.5f * halfWidth,
-                              sliderCoord.getY() + n * halfHeight);
-  Coord sliderPolygonVertice3(sliderCoord.getX() + 1.5f * halfWidth,
-                              sliderCoord.getY() + 2.5f * n * halfHeight);
-  Coord sliderPolygonVertice4(sliderCoord.getX() - 1.5f * halfWidth,
-                              sliderCoord.getY() + 2.5f * n * halfHeight);
-  Coord sliderPolygonVertice1(sliderCoord.getX() - 1.5f * halfWidth,
-                              sliderCoord.getY() + n * halfHeight);
+  Coord sliderPolygonVertice2 = {sliderCoord.getX() + 1.5f * halfWidth,
+                                 sliderCoord.getY() + n * halfHeight};
+  Coord sliderPolygonVertice3 = {sliderCoord.getX() + 1.5f * halfWidth,
+                                 sliderCoord.getY() + 2.5f * n * halfHeight};
+  Coord sliderPolygonVertice4 = {sliderCoord.getX() - 1.5f * halfWidth,
+                                 sliderCoord.getY() + 2.5f * n * halfHeight};
+  Coord sliderPolygonVertice1 = {sliderCoord.getX() - 1.5f * halfWidth,
+                                 sliderCoord.getY() + n * halfHeight};
 
   arrowPolygonCoords.push_back(arrowPolygonVertice1);
   arrowPolygonColors.push_back(sliderColor);
@@ -153,10 +153,10 @@ BoundingBox AxisSlider::getBoundingBox() {
   BoundingBox slidersBoundingBox = glBBSV.getBoundingBox();
 
   if (rotationAngle != 0.0f) {
-    Coord bbBL(slidersBoundingBox[0]);
-    Coord bbTR(slidersBoundingBox[1]);
-    Coord bbBR(slidersBoundingBox[1][0], slidersBoundingBox[0][1]);
-    Coord bbTL(slidersBoundingBox[0][0], slidersBoundingBox[1][1]);
+    Coord bbBL = slidersBoundingBox[0];
+    Coord bbTR = slidersBoundingBox[1];
+    Coord bbBR = {slidersBoundingBox[1][0], slidersBoundingBox[0][1]};
+    Coord bbTL = {slidersBoundingBox[0][0], slidersBoundingBox[1][1]};
     rotateVector(bbBL, rotationAngle, Z_ROT);
     rotateVector(bbTR, rotationAngle, Z_ROT);
     rotateVector(bbBR, rotationAngle, Z_ROT);
@@ -260,11 +260,11 @@ bool ParallelCoordsAxisSliders::eventFilter(QObject *widget, QEvent *e) {
 
   if (e->type() == QEvent::MouseMove) {
     QMouseEvent *me = static_cast<QMouseEvent *>(e);
-    int x = glWidget->width() - me->x();
-    int y = me->y();
-    Coord screenCoords(x, y, 0.0f);
-    Coord sceneCoords(glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
-        glWidget->screenToViewport(screenCoords)));
+    float x = glWidget->width() - me->x();
+    float y = me->y();
+    Coord screenCoords = {x, y};
+    Coord sceneCoords = glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
+        glWidget->screenToViewport(screenCoords));
 
     if (!axisSliderDragStarted && !slidersRangeDragStarted) {
       selectedAxis = parallelView->getAxisUnderPointer(me->x(), me->y());

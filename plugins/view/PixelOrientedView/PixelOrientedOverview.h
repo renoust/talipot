@@ -34,14 +34,13 @@ class LayoutProperty;
 class PixelOrientedOverview : public GlComposite {
 
 public:
-  PixelOrientedOverview(pocore::GraphDimension *data,
-                        pocore::PixelOrientedMediator *pixelOrientedMediator, Coord blCornerPos,
-                        const std::string &dimName, const Color &backgroundColor,
+  PixelOrientedOverview(GraphDimension *data, PixelOrientedMediator *pixelOrientedMediator,
+                        Coord blCornerPos, const std::string &dimName, const Color &backgroundColor,
                         const Color &textColor);
 
   ~PixelOrientedOverview() override;
 
-  pocore::GraphDimension *getData() const {
+  GraphDimension *getData() const {
     return data;
   }
   std::string getDimensionName() const {
@@ -76,8 +75,8 @@ private:
     boundingBox = glBBSV.getBoundingBox();
   }
 
-  pocore::GraphDimension *data;
-  pocore::PixelOrientedMediator *pixelOrientedMediator;
+  GraphDimension *data;
+  PixelOrientedMediator *pixelOrientedMediator;
 
   GlGraphComposite *graphComposite;
   LayoutProperty *pixelLayout;

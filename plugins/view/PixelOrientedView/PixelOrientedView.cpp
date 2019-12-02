@@ -42,7 +42,6 @@
 #include <QGraphicsView>
 
 using namespace std;
-using namespace pocore;
 
 static void setGraphView(tlp::GlGraphComposite *glGraph, bool displayNodes) {
   tlp::GlGraphRenderingParameters param = glGraph->getRenderingParameters();
@@ -130,11 +129,11 @@ void PixelOrientedView::initGlWidget() {
   setGraphView(graphComposite, false);
 }
 
-void PixelOrientedView::setColorFunction(pocore::ColorFunction *colorFunction) {
+void PixelOrientedView::setColorFunction(ColorFunction *colorFunction) {
   pixelOrientedMediator->setColorFunction(colorFunction);
 }
 
-void PixelOrientedView::setLayoutFunction(pocore::LayoutFunction *layoutFunction) {
+void PixelOrientedView::setLayoutFunction(LayoutFunction *layoutFunction) {
   pixelOrientedMediator->setLayoutFunction(layoutFunction);
 }
 
@@ -215,7 +214,7 @@ void PixelOrientedView::setState(const DataSet &dataSet) {
 
   propertiesSelectionWidget->setWidgetParameters(pixelOrientedGraph, propertiesTypesFilter);
 
-  Color backgroundColor(255, 255, 255);
+  Color backgroundColor = Color::White;
   dataSet.get("background color", backgroundColor);
   optionsWidget->setBackgroundColor(backgroundColor);
 
@@ -445,7 +444,7 @@ void PixelOrientedView::destroyData() {
 }
 
 void PixelOrientedView::addEmptyViewLabel() {
-  Color backgroundColor(optionsWidget->getBackgroundColor());
+  Color backgroundColor = {optionsWidget->getBackgroundColor()};
   getGlMainWidget()->getScene()->setBackgroundColor(backgroundColor);
 
   Color textColor = getTextColor();

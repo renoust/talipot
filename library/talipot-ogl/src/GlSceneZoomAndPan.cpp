@@ -26,13 +26,13 @@ GlSceneZoomAndPan::GlSceneZoomAndPan(GlScene *glScene, const BoundingBox &boundi
                                      const bool optimalPath, const double p)
     : camera(glScene->getLayer(layerName)->getCamera()), viewport(glScene->getViewport()),
       nbAnimationSteps(nbAnimationSteps), optimalPath(optimalPath), p(p),
-      camCenterStart(camera.getCenter()), camCenterEnd(Coord(boundingBox.center())),
+      camCenterStart(camera.getCenter()), camCenterEnd(boundingBox.center()),
       additionalAnimation(nullptr) {
 
   camCenterEnd[2] = camCenterStart[2];
 
-  Coord blScene(camera.viewportTo3DWorld(Coord(0, 0, 0)));
-  Coord trScene(camera.viewportTo3DWorld(Coord(viewport[2], viewport[3], 0)));
+  Coord blScene = camera.viewportTo3DWorld(Coord(0, 0, 0));
+  Coord trScene = camera.viewportTo3DWorld(Coord(viewport[2], viewport[3], 0));
 
   BoundingBox sceneBB;
   sceneBB.expand(blScene);

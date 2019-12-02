@@ -14,17 +14,16 @@
 #ifndef PIXEL_ORIENTED_MEDIATOR_H
 #define PIXEL_ORIENTED_MEDIATOR_H
 
+#include <talipot/Vector.h>
+
 #include "UniformDeformationScreen.h"
 #include "FishEyesScreen.h"
 #include "SpiralLayout.h"
 #include "HSIColorMapping.h"
-#include "potypes.h"
 #include "ColorFunction.h"
 #include "DimensionBase.h"
 
 #include <map>
-
-namespace pocore {
 
 class PixelOrientedMediator {
 
@@ -76,22 +75,22 @@ public:
   void setLastMousePosition(const int x, const int y);
   void updateFishEyePosition(const int x, const int y, DimensionBase *data);
   void translateFishEye(const int x, const int y);
-  Vec2i getFishEyeTranslationVector() const {
+  tlp::Vec2i getFishEyeTranslationVector() const {
     return fishTranslation;
   }
-  Vec2f getFishEyeCenter() const {
+  tlp::Vec2f getFishEyeCenter() const {
     return fishCenter;
   }
 
-  RGBA getColorForPixelAtPos(Vec2i pos, DimensionBase *data, bool withFishEye = false);
-  unsigned int getRankForPixelPos(Vec2i pos);
-  Vec2i getPixelPosForRank(const unsigned int rank);
+  tlp::Color getColorForPixelAtPos(tlp::Vec2i pos, DimensionBase *data, bool withFishEye = false);
+  unsigned int getRankForPixelPos(tlp::Vec2i pos);
+  tlp::Vec2i getPixelPosForRank(const unsigned int rank);
 
 private:
-  Vec2f screenToScene(const pocore::Vec2i &p);
-  Vec2i sceneToScreen(const pocore::Vec2i &p);
+  tlp::Vec2f screenToScene(const tlp::Vec2i &p);
+  tlp::Vec2i sceneToScreen(const tlp::Vec2i &p);
 
-  Vec2i imageSize;
+  tlp::Vec2i imageSize;
 
   LayoutFunction *layout;
   ColorFunction *color;
@@ -103,12 +102,11 @@ private:
   unsigned int centerItem;
 
   double zoom;
-  Vec2i lastMousePosition;
-  Vec2i totalMove;
-  Vec2i totalFishMove;
-  Vec2i fishTranslation;
-  Vec2f fishCenter;
+  tlp::Vec2i lastMousePosition;
+  tlp::Vec2i totalMove;
+  tlp::Vec2i totalFishMove;
+  tlp::Vec2i fishTranslation;
+  tlp::Vec2f fishCenter;
 };
-} // namespace pocore
 
 #endif // PIXEL_ORIENTED_MEDIATOR_H

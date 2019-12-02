@@ -14,24 +14,21 @@
 #ifndef NODE_COLOR_MAPPING_H
 #define NODE_COLOR_MAPPING_H
 
+#include <talipot/Color.h>
 #include <talipot/Graph.h>
 #include <string>
 
 #include "ColorFunction.h"
-#include "potypes.h"
-
-namespace pocore {
 
 class NodeColorMapping : public ColorFunction {
 
 public:
   NodeColorMapping(tlp::Graph *graph);
 
-  RGBA getColor(const double &, const unsigned int itemId) const override;
+  tlp::Color getColor(double, unsigned int itemId) const override;
 
 private:
   tlp::Graph *graph;
 };
-} // namespace pocore
 
 #endif // NODE_COLOR_MAPPING_H

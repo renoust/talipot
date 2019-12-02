@@ -120,7 +120,7 @@ public:
   /**
    * @brief Return the viewport of the attached scene
    */
-  Vector<int, 4> getViewport() const;
+  const Vec4i &getViewport() const;
 
   /**
    * @brief Return the scene radius
@@ -155,7 +155,7 @@ public:
    *
    * 3D position of the camera
    */
-  Coord getEyes() const {
+  const Coord &getEyes() const {
     return eyes;
   }
 
@@ -170,7 +170,7 @@ public:
    *
    * 3D coordinates of point visualized by the camera
    */
-  Coord getCenter() const {
+  const Coord &getCenter() const {
     return center;
   }
 
@@ -185,7 +185,7 @@ public:
    *
    * normalized up 3D coordinates of the camera
    */
-  Coord getUp() const {
+  const Coord &getUp() const {
     return up;
   }
 
@@ -253,13 +253,13 @@ public:
   /**
    * Get the projection and the modelview matrix generated with the given viewport
    */
-  void getProjAndMVMatrix(const Vector<int, 4> &viewport, Matrix<float, 4> &projectionMatrix,
+  void getProjAndMVMatrix(const Vec4i &viewport, Matrix<float, 4> &projectionMatrix,
                           Matrix<float, 4> &modelviewMatrix) const;
 
   /**
    * Get the transform matrix generated with the given viewport
    */
-  void getTransformMatrix(const Vector<int, 4> &viewport, Matrix<float, 4> &transformMatrix) const;
+  void getTransformMatrix(const Vec4i &viewport, Matrix<float, 4> &transformMatrix) const;
 
   /**
    * @brief Init Gl parameters
@@ -274,7 +274,7 @@ public:
   /**
    * @brief Init projection with the given viewport. Load identity matrix if reset is set as true
    */
-  void initProjection(const Vector<int, 4> &viewport, bool reset = true);
+  void initProjection(const Vec4i &viewport, bool reset = true);
 
   /**
    * @brief Init projection with the scene viewport. Load identity matrix if reset is set as true

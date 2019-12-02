@@ -406,15 +406,13 @@ void GlBox::draw(const Color &fillColor, const Color &outlineColor, float outlin
 }
 
 //============================================================
-Coord GlBox::getAnchor(const Coord &vector) {
-  float x, y, z, fmax;
-  vector.get(x, y, z);
-  fmax = std::max(std::max(fabsf(x), fabsf(y)), fabsf(z));
+Coord GlBox::getAnchor(const Coord &v) {
+  float fmax = std::max(std::max(fabsf(v.x()), fabsf(v.y())), fabsf(v.z()));
 
   if (fmax > 0.0f)
-    return vector * (0.5f / fmax);
+    return v * (0.5f / fmax);
   else
-    return vector;
+    return v;
 }
 
 }

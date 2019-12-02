@@ -11,8 +11,6 @@
  *
  */
 
-///@cond DOXYGEN_HIDDEN
-
 #ifndef TALIPOT_VECTOR_H
 #define TALIPOT_VECTOR_H
 
@@ -20,9 +18,11 @@
 #include <talipot/Array.h>
 #include <talipot/config.h>
 #include <talipot/TlpTools.h>
+
 #include <cmath>
 #include <limits>
 #include <cstring>
+#include <iostream>
 
 #define VECTOR Vector<TYPE, SIZE, OTYPE, DTYPE>
 #define TEMPLATEVECTOR template <typename TYPE, size_t SIZE, typename OTYPE, typename DTYPE>
@@ -36,7 +36,7 @@ inline OTYPE tlpsqr(const TYPE a) {
 
 template <typename TYPE, typename OTYPE>
 inline TYPE tlpsqrt(const OTYPE a) {
-  return static_cast<TYPE>(sqrt(a));
+  return static_cast<TYPE>(std::sqrt(a));
 }
 
 template <>
@@ -60,273 +60,132 @@ inline double tlpsqrt<double, long double>(long double a) {
 template <typename TYPE, size_t SIZE, typename OTYPE = double, typename DTYPE = TYPE>
 class Vector : public Array<TYPE, SIZE> {
 public:
-  inline VECTOR() {
-    memset(this->data(), 0, SIZE * sizeof(TYPE));
+  VECTOR() {
+    Array<TYPE, SIZE>::fill(0);
   }
-  inline VECTOR(const Vector<TYPE, SIZE, OTYPE> &v) {
+
+  VECTOR(const Vector<TYPE, SIZE, OTYPE, DTYPE> &v) {
     set(v);
   }
-  inline VECTOR(const Vector<TYPE, SIZE + 1, OTYPE> &v) {
+
+  VECTOR(Vector<TYPE, SIZE, OTYPE, DTYPE> &&v) {
     set(v);
   }
-  inline VECTOR(const TYPE x) {
-    fill(x);
+
+  VECTOR(const Vector<TYPE, SIZE + 1, OTYPE> &v) {
+    set(v);
   }
-  inline VECTOR(const TYPE x, const TYPE y) {
-    if (int(SIZE) - 2 > 0)
-      memset(this->data() + 2, 0, (SIZE - 2) * sizeof(TYPE));
+
+  VECTOR(const TYPE x) {
+    Array<TYPE, SIZE>::fill(x);
+  }
+
+  VECTOR(const TYPE x, const TYPE y) : VECTOR() {
     set(x, y);
   }
-  inline VECTOR(const TYPE x, const TYPE y, const TYPE z) {
-    if (int(SIZE) - 3 > 0)
-      memset(this->data() + 3, 0, (SIZE - 3) * sizeof(TYPE));
+
+  VECTOR(const TYPE x, const TYPE y, const TYPE z) : VECTOR() {
     set(x, y, z);
   }
-  inline VECTOR(const Vector<TYPE, 2, OTYPE> &v, const TYPE z) {
+
+  VECTOR(const Vector<TYPE, 2, OTYPE> &v, const TYPE z) : VECTOR() {
     set(v, z);
   }
-  inline VECTOR(const TYPE x, const TYPE y, const TYPE z, const TYPE w) {
+
+  VECTOR(const TYPE x, const TYPE y, const TYPE z, const TYPE w) : VECTOR() {
     set(x, y, z, w);
   }
-  inline VECTOR(const Vector<TYPE, 2, OTYPE> &v, const TYPE z, const TYPE w) {
+
+  VECTOR(const Vector<TYPE, 2, OTYPE> &v, const TYPE z, const TYPE w) : VECTOR() {
     set(v, z, w);
   }
-  inline VECTOR(const Vector<TYPE, 3, OTYPE> &v, const TYPE w) {
+
+  VECTOR(const Vector<TYPE, 3, OTYPE> &v, const TYPE w) : VECTOR() {
     set(v, w);
   }
 
-  inline void set(const TYPE x) {
+  void set(const TYPE x) {
     (*this)[0] = x;
   }
-  inline void set(const TYPE x, const TYPE y) {
+
+  void set(const TYPE x, const TYPE y) {
     assert(SIZE > 1);
     (*this)[0] = x;
     (*this)[1] = y;
   }
-  inline void set(const TYPE x, const TYPE y, const TYPE z) {
+
+  void set(const TYPE x, const TYPE y, const TYPE z) {
     assert(SIZE > 2);
     (*this)[0] = x;
     (*this)[1] = y;
     (*this)[2] = z;
   }
-  inline void set(const TYPE x, const TYPE y, const TYPE z, const TYPE w) {
+
+  void set(const TYPE x, const TYPE y, const TYPE z, const TYPE w) {
     assert(SIZE > 3);
     (*this)[0] = x;
     (*this)[1] = y;
     (*this)[2] = z;
     (*this)[3] = w;
   }
-  inline void set(const Vector<TYPE, 2, OTYPE> &v, const TYPE z) {
+
+  void set(const Vector<TYPE, 2, OTYPE> &v, const TYPE z) {
     assert(SIZE > 2);
-    memcpy(this->data(), v.data(), 2 * sizeof(TYPE));
-    (*this)[2] = z;
+    set(v[0], v[1], z);
   }
-  inline void set(const Vector<TYPE, 2, OTYPE> &v, const TYPE z, const TYPE w) {
+
+  void set(const Vector<TYPE, 2, OTYPE> &v, const TYPE z, const TYPE w) {
     assert(SIZE > 3);
-    memcpy(this->data(), v.data(), 2 * sizeof(TYPE));
-    (*this)[2] = z;
+    set(v[0], v[1], z, w);
+  }
+
+  void set(const Vector<TYPE, 3, OTYPE> &v, const TYPE w) {
+    assert(SIZE > 3);
+    set(v[0], v[1], v[2], w);
     (*this)[3] = w;
   }
-  inline void set(const Vector<TYPE, 3, OTYPE> &v, const TYPE w) {
-    assert(SIZE > 3);
-    memcpy(this->data(), v.data(), 3 * sizeof(TYPE));
-    (*this)[3] = w;
-  }
-  inline void set(const Vector<TYPE, SIZE, OTYPE> &v) {
-    memcpy(this->data(), v.data(), SIZE * sizeof(TYPE));
-  }
-  inline void set(const Vector<TYPE, SIZE + 1, OTYPE> &v) {
-    memcpy(this->data(), v.data(), SIZE * sizeof(TYPE));
-  }
-  inline void get(TYPE &x) const {
-    x = (*this)[0];
-  }
-  inline void get(TYPE &x, TYPE &y) const {
-    assert(SIZE > 1);
-    x = (*this)[0];
-    y = (*this)[1];
-  }
-  inline void get(TYPE &x, TYPE &y, TYPE &z) const {
-    assert(SIZE > 2);
-    x = (*this)[0];
-    y = (*this)[1];
-    z = (*this)[2];
-  }
-  inline void get(TYPE &x, TYPE &y, TYPE &z, TYPE &w) const {
-    assert(SIZE > 3);
-    x = (*this)[0];
-    y = (*this)[1];
-    z = (*this)[2];
-    w = (*this)[3];
+
+  void set(const Vector<TYPE, SIZE, OTYPE> &v) {
+    std::copy(v.begin(), v.begin() + SIZE, Array<TYPE, SIZE>::begin());
   }
 
-  // convenient accessor for coordinates
-  inline TYPE x() const {
-    return (*this)[0];
-  }
-  inline TYPE y() const {
-    assert(SIZE > 1);
-    return (*this)[1];
-  }
-  inline TYPE z() const {
-    assert(SIZE > 2);
-    return (*this)[2];
-  }
-  inline TYPE w() const {
-    assert(SIZE > 3);
-    return (*this)[3];
+  void set(const Vector<TYPE, SIZE + 1, OTYPE> &v) {
+    std::copy(v.begin(), v.begin() + SIZE, Array<TYPE, SIZE>::begin());
   }
 
-  inline TYPE &x() {
-    return (*this)[0];
-  }
-  inline TYPE &y() {
-    assert(SIZE > 1);
-    return (*this)[1];
-  }
-  inline TYPE &z() {
-    assert(SIZE > 2);
-    return (*this)[2];
-  }
-  inline TYPE &w() {
-    assert(SIZE > 3);
-    return (*this)[3];
-  }
+  VECTOR &operator*=(const TYPE);
 
-  inline TYPE width() const {
-    return x();
-  }
-  inline TYPE height() const {
-    return y();
-  }
-  inline TYPE depth() const {
-    return z();
-  }
+  VECTOR &operator*=(const VECTOR &);
 
-  inline TYPE &width() {
-    return x();
-  }
-  inline TYPE &height() {
-    return y();
-  }
-  inline TYPE &depth() {
-    return z();
-  }
+  VECTOR &operator/=(const TYPE);
 
-  inline TYPE r() const {
-    return x();
-  }
-  inline TYPE g() const {
-    return y();
-  }
-  inline TYPE b() const {
-    return z();
-  }
-  inline TYPE a() const {
-    return w();
-  }
+  VECTOR &operator/=(const VECTOR &);
 
-  inline TYPE &r() {
-    return x();
-  }
-  inline TYPE &g() {
-    return y();
-  }
-  inline TYPE &b() {
-    return z();
-  }
-  inline TYPE &a() {
-    return w();
-  }
+  VECTOR &operator+=(const TYPE);
 
-  inline TYPE s() const {
-    return x();
-  }
-  inline TYPE t() const {
-    return y();
-  }
-  inline TYPE p() const {
-    return z();
-  }
-  inline TYPE q() const {
-    return w();
-  }
+  VECTOR &operator+=(const VECTOR &);
 
-  inline TYPE &s() {
-    return x();
-  }
-  inline TYPE &t() {
-    return y();
-  }
-  inline TYPE &p() {
-    return z();
-  }
-  inline TYPE &q() {
-    return w();
-  }
+  VECTOR &operator-=(const TYPE);
 
-  inline void setX(TYPE xx) {
-    x() = xx;
-  }
-  inline void setY(TYPE yy) {
-    y() = yy;
-  }
-  inline void setZ(TYPE zz) {
-    z() = zz;
-  }
+  VECTOR &operator-=(const VECTOR &);
 
-  inline TYPE getX() const {
-    return x();
-  }
-  inline TYPE getY() const {
-    return y();
-  }
-  inline TYPE getZ() const {
-    return z();
-  }
+  VECTOR &operator^=(const VECTOR &);
 
-  inline void setW(const TYPE width) {
-    x() = width;
-  }
+  bool operator>(const VECTOR &) const;
 
-  inline void setH(const TYPE height) {
-    y() = height;
-  }
+  bool operator<(const VECTOR &) const;
 
-  inline void setD(const TYPE depth) {
-    z() = depth;
-  }
+  bool operator!=(const VECTOR &) const;
 
-  inline TYPE getW() const {
-    return x();
-  }
-  inline TYPE getH() const {
-    return y();
-  }
-  inline TYPE getD() const {
-    return z();
-  }
+  bool operator==(const VECTOR &) const;
 
-  inline VECTOR &operator*=(const TYPE);
-  inline VECTOR &operator*=(const VECTOR &);
-  inline VECTOR &operator/=(const TYPE);
-  inline VECTOR &operator/=(const VECTOR &);
-  inline VECTOR &operator+=(const TYPE);
-  inline VECTOR &operator+=(const VECTOR &);
-  inline VECTOR &operator-=(const TYPE);
-  inline VECTOR &operator-=(const VECTOR &);
-  inline VECTOR &operator^=(const VECTOR &);
+  TYPE norm() const;
 
-  inline bool operator>(const VECTOR &) const;
-  inline bool operator<(const VECTOR &) const;
-  inline bool operator!=(const VECTOR &) const;
-  inline bool operator==(const VECTOR &) const;
-  inline VECTOR &fill(const TYPE obj);
-  inline TYPE norm() const;
-  inline TYPE length() const {
+  TYPE length() const {
     return norm();
   }
-  inline VECTOR &normalize() {
+
+  VECTOR &normalize() {
     OTYPE tmp = 0;
 
     for (size_t i = 0; i < SIZE; ++i)
@@ -345,10 +204,12 @@ public:
 
     return *this;
   }
-  inline DTYPE dist(const VECTOR &) const;
-  inline TYPE dotProduct(const VECTOR &) const;
 
-  inline VECTOR &operator=(const VECTOR &) = default;
+  DTYPE dist(const VECTOR &) const;
+
+  TYPE dotProduct(const VECTOR &) const;
+
+  VECTOR &operator=(const VECTOR &) = default;
 };
 
 TEMPLATEVECTOR
@@ -505,84 +366,84 @@ size_t hash_vector(const tlp::VECTOR &v) {
 
 template <>
 struct hash<tlp::Vec2ui> {
-  inline std::size_t operator()(const tlp::Vec2ui &v) const {
+  std::size_t operator()(const tlp::Vec2ui &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec3ui> {
-  inline std::size_t operator()(const tlp::Vec3ui &v) const {
+  std::size_t operator()(const tlp::Vec3ui &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec4ui> {
-  inline std::size_t operator()(const tlp::Vec4ui &v) const {
+  std::size_t operator()(const tlp::Vec4ui &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec2i> {
-  inline std::size_t operator()(const tlp::Vec2i &v) const {
+  std::size_t operator()(const tlp::Vec2i &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec3i> {
-  inline std::size_t operator()(const tlp::Vec3i &v) const {
+  std::size_t operator()(const tlp::Vec3i &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec4i> {
-  inline std::size_t operator()(const tlp::Vec4i &v) const {
+  std::size_t operator()(const tlp::Vec4i &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec2d> {
-  inline std::size_t operator()(const tlp::Vec2d &v) const {
+  std::size_t operator()(const tlp::Vec2d &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec3d> {
-  inline std::size_t operator()(const tlp::Vec3f &v) const {
+  std::size_t operator()(const tlp::Vec3f &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec4d> {
-  inline std::size_t operator()(const tlp::Vec4d &v) const {
+  std::size_t operator()(const tlp::Vec4d &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec2f> {
-  inline std::size_t operator()(const tlp::Vec2f &v) const {
+  std::size_t operator()(const tlp::Vec2f &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec3f> {
-  inline std::size_t operator()(const tlp::Vec3f &v) const {
+  std::size_t operator()(const tlp::Vec3f &v) const {
     return hash_vector(v);
   }
 };
 
 template <>
 struct hash<tlp::Vec4f> {
-  inline std::size_t operator()(const tlp::Vec4f &v) const {
+  std::size_t operator()(const tlp::Vec4f &v) const {
     return hash_vector(v);
   }
 };
@@ -595,4 +456,3 @@ struct hash<tlp::Vec4f> {
 #undef TEMPLATEVECTOR
 
 #endif // TALIPOT_VECTOR_H
-///@endcond

@@ -394,11 +394,8 @@ void RoundedBox::draw(node n, float lod) {
   }
 }
 
-Coord RoundedBox::getAnchor(const Coord &vector) const {
-  Coord v(vector);
-  float x, y, z, fmax;
-  v.get(x, y, z);
-  fmax = std::max(fabsf(x), fabsf(y));
+Coord RoundedBox::getAnchor(const Coord &v) const {
+  float fmax = std::max(fabsf(v.x()), fabsf(v.y()));
 
   if (fmax > 0.0f)
     return v * (0.5f / fmax);

@@ -74,14 +74,14 @@ void OrthoTree::computeLayout(const node n, NodeStaticProperty<double> &vertical
   double prev = 0.;
   for (auto e : graph->getOutEdges(n)) {
     node u = graph->opposite(e, n);
-    Coord c(cn);
+    Coord c = cn;
     c[0] += layerSpacing;
     c[1] -= prev;
 
     prev += verticalSize[u] + nodeSpacing;
     result->setNodeValue(u, c);
 
-    Coord bend(cn[0], c[1], 0);
+    Coord bend = {cn[0], c[1]};
     vector<Coord> bends(1);
     bends[0] = bend;
     result->setEdgeValue(e, bends);

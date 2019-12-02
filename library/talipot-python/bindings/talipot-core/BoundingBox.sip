@@ -31,7 +31,7 @@ A bounding box can be instantiated and manipulated the following ways::
 
   # Initialize a bounding box by specifying the lowest and highest point.
   # The validity of the bounding box is checked in debug mode (an assertion is raised if it is not valid).
-  bb2 = tlp.BoundingBox(tlp.Vec3f(0,0,0), tlp.Vec3f(10,10,10))
+  bb2 = tlp.BoundingBox(tlp.Coord(0,0,0), tlp.Coord(10,10,10))
 
   # Reading / writing the bounding box components can be done through the [] operator
   min = bb2[0]
@@ -40,15 +40,15 @@ A bounding box can be instantiated and manipulated the following ways::
 
   BoundingBox();
 
-  BoundingBox(const tlp::Vec3f& min, const tlp::Vec3f& max);
+  BoundingBox(const tlp::Coord& min, const tlp::Coord& max);
 
-  tlp::Vec3f center() const;
+  tlp::Coord center() const;
 %Docstring
 tlp.BoundingBox.center()
 
 Returns the geometrical center of the bounding box.
 
-:rtype: :class:`tlp.Vec3f`
+:rtype: :class:`tlp.Coord`
 %End
 
   float width() const;
@@ -78,7 +78,7 @@ Returns the depth of the bounding box.
 :rtype: float
 %End
 
-  void expand(const tlp::Vec3f& point);
+  void expand(const tlp::Coord& point);
 %Docstring
 tlp.BoundingBox.expand(point)
 
@@ -86,27 +86,27 @@ Expands the bounding box to one containing the vector passed as parameter.
 If the vector is inside the bounding box, it remains unchanged.
 
 :param point: A point in the 3D space we want the bounding box to encompass.
-:type point: :class:`tlp.Vec3f`
+:type point: :class:`tlp.Coord`
 %End
 
-  void translate(const tlp::Vec3f& displacement);
+  void translate(const tlp::Coord& displacement);
 %Docstring
 tlp.BoundingBox.translate(displacement)
 
 Translates the bounding box by the displacement given by the vector passed as parameter.
 
 :param displacement: The displacement vector in 3D space to translate this bounding box by.
-:type displacement: :class:`tlp.Vec3f`
+:type displacement: :class:`tlp.Coord`
 %End
 
-  void scale(const tlp::Vec3f& factor);
+  void scale(const tlp::Coord& factor);
 %Docstring
 tlp.BoundingBox.scale(factor)
 
 Scales the bounding box, i.e. multiplying its components by a factor vector.
 
 :param factor: The factor vector to scale this bounding box by.
-:type factor: :class:`tlp.Vec3f`
+:type factor: :class:`tlp.Coord`
 %End
 
   bool isValid() const;
@@ -119,7 +119,7 @@ Checks whether the bounding box's lowest point is less than it's highest point.
 :rtype: boolean
 %End
 
-  bool contains(const tlp::Vec3f& coord) const;
+  bool contains(const tlp::Coord& coord) const;
 %Docstring
 tlp.BoundingBox.contains(point)
 
@@ -127,7 +127,7 @@ Checks if the given point is inside the current bounding box.
 If the bounding box is invalid the result is always :const:`False`.
 
 :param point: a point in the 3D space.
-:type point: :class:`tlp.Vec3f`
+:type point: :class:`tlp.Coord`
 :rtype: boolean
 %End
 
@@ -143,7 +143,7 @@ If one of the bounding boxes is invalid returns :const:`False`.
 :rtype: boolean
 %End
 
-  bool intersect(const tlp::Vec3f &segStart, const tlp::Vec3f &segEnd) const;
+  bool intersect(const tlp::Coord &segStart, const tlp::Coord &segEnd) const;
 %Docstring
 tlp.BoundingBox.intersect(segStart, segEnd)
 
@@ -151,13 +151,13 @@ Checks if the bounding box intersects the given line segment.
 If the bounding box is invalid the result is always :const:`False`.
 
 :param segStart: the start point of the line segment on which to check intersection
-:type segStart: :class:`tlp.Vec3f`
+:type segStart: :class:`tlp.Coord`
 :param segEnd: the end point of the line segment on which to check intersection
-:type segEnd: :class:`tlp.Vec3f`
+:type segEnd: :class:`tlp.Coord`
 :rtype: boolean
 %End
 
-  tlp::Vec3f& operator[](const unsigned int i) const /NoCopy/;
+  tlp::Coord& operator[](const unsigned int i) const /NoCopy/;
 %MethodCode
   if (a0 < 2) {
     sipRes = &(*sipCpp)[a0];
@@ -167,7 +167,7 @@ If the bounding box is invalid the result is always :const:`False`.
   }
 %End
 
-  void __setitem__(int i, const tlp::Vec3f &value);
+  void __setitem__(int i, const tlp::Coord &value);
 %MethodCode
   if (a0 < 2) {
     (*sipCpp)[a0] = *a1;

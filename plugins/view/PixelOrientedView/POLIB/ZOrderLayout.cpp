@@ -17,13 +17,11 @@
 #include "ZOrderLayout.h"
 
 using namespace std;
-using namespace pocore;
 
 //===============================================================
 namespace {
-inline Vec2i zorderPoint(const unsigned int key, const unsigned char order) {
-  //  cerr << "========" << endl;
-  Vec2i point;
+inline tlp::Vec2i zorderPoint(const unsigned int key, const unsigned char order) {
+  tlp::Vec2i point;
   point.fill(0);
 
   for (char i = order - 1; i >= 0; --i) {
@@ -36,8 +34,7 @@ inline Vec2i zorderPoint(const unsigned int key, const unsigned char order) {
   return point;
 }
 
-inline unsigned int zorderKey(const Vec2i &p, const unsigned char order) {
-  //  cerr << "========" << endl;
+inline unsigned int zorderKey(const tlp::Vec2i &p, const unsigned char order) {
   unsigned int key = 0;
 
   for (char i = order - 1; i >= 0; --i) {
@@ -49,16 +46,14 @@ inline unsigned int zorderKey(const Vec2i &p, const unsigned char order) {
 
   return key;
 }
-} // namespace
+}
 //===============================================================
-namespace pocore {
 ZorderLayout::ZorderLayout(unsigned char order) : order(order) {
   shift = int(rint(sqrt(pow(4., order)) / 2.));
 }
 //==============================================================
-unsigned int ZorderLayout::unproject(const Vec2i &point) const {
-  //    cerr << point << " ==> " << shift << " order=" << (int)order << endl;
-  Vec2i p;
+unsigned int ZorderLayout::unproject(const tlp::Vec2i &point) const {
+  tlp::Vec2i p;
 
   if (point[0] <= -shift || point[0] >= shift)
     return UINT_MAX;
@@ -71,8 +66,6 @@ unsigned int ZorderLayout::unproject(const Vec2i &point) const {
   return zorderKey(p, order);
 }
 //==============================================================
-Vec2i ZorderLayout::project(const unsigned int id) const {
+tlp::Vec2i ZorderLayout::project(const unsigned int id) const {
   return zorderPoint(id, order) -= shift;
 }
-} // namespace pocore
-//==============================================================================

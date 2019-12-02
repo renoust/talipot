@@ -22,8 +22,6 @@
 #include "DimensionBase.h"
 #include "NodeMetricSorter.h"
 
-namespace pocore {
-
 class GraphDimension : public DimensionBase {
 
 public:
@@ -61,6 +59,5 @@ private:
   NodeMetricSorter *nodeSorter;
   static std::map<tlp::Graph *, unsigned int> graphDimensionsMap;
 };
-} // namespace pocore
 
 #endif // GRAPH_DIMENSION_H

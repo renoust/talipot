@@ -21,7 +21,6 @@
 
 #include "PixelOrientedOverview.h"
 
-using namespace pocore;
 using namespace std;
 
 template <typename T>
@@ -170,7 +169,7 @@ void PixelOrientedOverview::computePixelView(GlMainWidget *glWidget) {
 
   for (unsigned int i = 0; i < graph->numberOfNodes(); ++i) {
     node n = node(data->getItemIdAtRank(i));
-    pocore::Vec2i pos = pixelOrientedMediator->getPixelPosForRank(i);
+    Vec2i pos = pixelOrientedMediator->getPixelPosForRank(i);
     Coord nodeCoord = Coord(pos[0], pos[1], 0);
     xCoordSet.insert(pos[0]);
     pixelLayout->setNodeValue(n, nodeCoord);

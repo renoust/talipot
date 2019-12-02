@@ -36,7 +36,7 @@ public:
 
   void setNodeValue(const tlp::node &n, const std::string &val);
 
-  void setNodeValue(const tlp::node &n, const tlp::PySize &val);
+  void setNodeValue(const tlp::node &n, const tlp::Size &val);
 
   void setNodeValue(const tlp::node &n, const tlp::Coord &val);
 
@@ -50,7 +50,7 @@ public:
 
   void setNodeValue(const tlp::node &n, const std::vector<std::string> &val);
 
-  void setNodeValue(const tlp::node &n, const std::vector<tlp::PySize> &val);
+  void setNodeValue(const tlp::node &n, const std::vector<tlp::Size> &val);
 
   void setNodeValue(const tlp::node &n, const std::vector<tlp::Coord> &val);
 
@@ -64,7 +64,7 @@ public:
 
   void setEdgeValue(const tlp::edge &e, const std::string &val);
 
-  void setEdgeValue(const tlp::edge &e, const tlp::PySize &val);
+  void setEdgeValue(const tlp::edge &e, const tlp::Size &val);
 
   void setEdgeValue(const tlp::edge &e, const std::vector<tlp::Coord> &val);
 
@@ -78,7 +78,7 @@ public:
 
   void setEdgeValue(const tlp::edge &e, const std::vector<std::string> &val);
 
-  void setEdgeValue(const tlp::edge &e, const std::vector<tlp::PySize> &val);
+  void setEdgeValue(const tlp::edge &e, const std::vector<tlp::Size> &val);
 
   void setEdgeValue(const tlp::edge &e, const std::vector<tlp::Color> &val);
 
@@ -90,7 +90,7 @@ public:
 
   void setAllNodeValue(const std::string &val);
 
-  void setAllNodeValue(const tlp::PySize &val);
+  void setAllNodeValue(const tlp::Size &val);
 
   void setAllNodeValue(const tlp::Coord &val);
 
@@ -104,7 +104,7 @@ public:
 
   void setAllNodeValue(const std::vector<std::string> &val);
 
-  void setAllNodeValue(const std::vector<tlp::PySize> &val);
+  void setAllNodeValue(const std::vector<tlp::Size> &val);
 
   void setAllNodeValue(const std::vector<tlp::Coord> &val);
 
@@ -118,7 +118,7 @@ public:
 
   void setAllEdgeValue(const std::string &val);
 
-  void setAllEdgeValue(const tlp::PySize &val);
+  void setAllEdgeValue(const tlp::Size &val);
 
   void setAllEdgeValue(const std::vector<tlp::Coord> &val);
 
@@ -132,7 +132,7 @@ public:
 
   void setAllEdgeValue(const std::vector<std::string> &val);
 
-  void setAllEdgeValue(const std::vector<tlp::PySize> &val);
+  void setAllEdgeValue(const std::vector<tlp::Size> &val);
 
   void setAllEdgeValue(const std::vector<tlp::Color> &val);
 
@@ -191,7 +191,7 @@ void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const tlp::Coord &val)
   static_cast<tlp::LayoutProperty*>(_property)->setNodeValue(n, val);
 }
 
-void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const tlp::PySize &val) {
+void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const tlp::Size &val) {
   _property = _graph->getSizeProperty(_propertyName);
   static_cast<tlp::SizeProperty*>(_property)->setNodeValue(n, val);
 }
@@ -231,7 +231,7 @@ void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const std::vector<tlp:
   static_cast<tlp::CoordVectorProperty*>(_property)->setNodeValue(n, val);
 }
 
-void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const std::vector<tlp::PySize> &val) {
+void tlp::PropertyProxy::setNodeValue(const tlp::node &n, const std::vector<tlp::Size> &val) {
   if (val.size() == 0) return;
   _property = _graph->getSizeVectorProperty(_propertyName);
   static_cast<tlp::SizeVectorProperty*>(_property)->setNodeValue(n, reinterpret_cast<const std::vector<tlp::Size> &>(val));
@@ -269,7 +269,7 @@ void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const std::vector<tlp:
   static_cast<tlp::LayoutProperty*>(_property)->setEdgeValue(e, val);
 }
 
-void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const tlp::PySize &val) {
+void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const tlp::Size &val) {
   _property = _graph->getSizeProperty(_propertyName);
   static_cast<tlp::SizeProperty*>(_property)->setEdgeValue(e, val);
 }
@@ -303,7 +303,7 @@ void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const std::vector<std:
   static_cast<tlp::StringVectorProperty*>(_property)->setEdgeValue(e, val);
 }
 
-void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const std::vector<tlp::PySize> &val) {
+void tlp::PropertyProxy::setEdgeValue(const tlp::edge &e, const std::vector<tlp::Size> &val) {
   if (val.size() == 0) return;
   _property = _graph->getSizeVectorProperty(_propertyName);
   static_cast<tlp::SizeVectorProperty*>(_property)->setEdgeValue(e, reinterpret_cast<const std::vector<tlp::Size> &>(val));
@@ -340,7 +340,7 @@ void tlp::PropertyProxy::setAllNodeValue(const tlp::Coord &val) {
   static_cast<tlp::LayoutProperty*>(_property)->setAllNodeValue(val);
 }
 
-void tlp::PropertyProxy::setAllNodeValue(const tlp::PySize &val) {
+void tlp::PropertyProxy::setAllNodeValue(const tlp::Size &val) {
   _property = _graph->getSizeProperty(_propertyName);
   static_cast<tlp::SizeProperty*>(_property)->setAllNodeValue(val);
 }
@@ -380,7 +380,7 @@ void tlp::PropertyProxy::setAllNodeValue(const std::vector<tlp::Coord> &val) {
   static_cast<tlp::CoordVectorProperty*>(_property)->setAllNodeValue(val);
 }
 
-void tlp::PropertyProxy::setAllNodeValue(const std::vector<tlp::PySize> &val) {
+void tlp::PropertyProxy::setAllNodeValue(const std::vector<tlp::Size> &val) {
   if (val.size() == 0) return;
   _property = _graph->getSizeVectorProperty(_propertyName);
   static_cast<tlp::SizeVectorProperty*>(_property)->setAllNodeValue(reinterpret_cast<const std::vector<tlp::Size> &>(val));
@@ -418,7 +418,7 @@ void tlp::PropertyProxy::setAllEdgeValue(const std::vector<tlp::Coord> &val) {
   static_cast<tlp::LayoutProperty*>(_property)->setAllEdgeValue(val);
 }
 
-void tlp::PropertyProxy::setAllEdgeValue(const tlp::PySize &val) {
+void tlp::PropertyProxy::setAllEdgeValue(const tlp::Size &val) {
   _property = _graph->getSizeProperty(_propertyName);
   static_cast<tlp::SizeProperty*>(_property)->setAllEdgeValue(val);
 }
@@ -452,7 +452,7 @@ void tlp::PropertyProxy::setAllEdgeValue(const std::vector<std::string> &val) {
   static_cast<tlp::StringVectorProperty*>(_property)->setAllEdgeValue(val);
 }
 
-void tlp::PropertyProxy::setAllEdgeValue(const std::vector<tlp::PySize> &val) {
+void tlp::PropertyProxy::setAllEdgeValue(const std::vector<tlp::Size> &val) {
   if (val.size() == 0) return;
   _property = _graph->getSizeVectorProperty(_propertyName);
   static_cast<tlp::SizeVectorProperty*>(_property)->setAllEdgeValue(reinterpret_cast<const std::vector<tlp::Size> &>(val));
@@ -508,7 +508,7 @@ public:
   }
 %End
 
-  void __setitem__(const tlp::node n, const tlp::PySize &val /Constrained/);
+  void __setitem__(const tlp::node n, const tlp::Size &val /Constrained/);
 %MethodCode
   if (sipCpp->getGraph()->isElement(*a0)) {
     sipCpp->setNodeValue(*a0, *a1);
@@ -584,16 +584,6 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   }
 %End
 
-  void __setitem__(const tlp::node n, const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
-%MethodCode
-  if (sipCpp->getGraph()->isElement(*a0)) {
-    sipCpp->setNodeValue(*a0, *a1);
-  } else {
-    sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
-  }
-  delete a1;
-%End
-
   void __setitem__(const tlp::node n, const std::vector<tlp::Coord> &val /GetWrapper/);
 %MethodCode
   if (sipCpp->getGraph()->isElement(*a0)) {
@@ -612,6 +602,27 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
   }
+%End
+
+  void __setitem__(const tlp::node n, const std::vector<tlp::Size> &val /Constrained, GetWrapper, TypeHint="List[tlp.Size]"/);
+%MethodCode
+  if (sipCpp->getGraph()->isElement(*a0)) {
+    // when a list of tuples is provided as input, constrain tuples elements to float type
+    // for creating a size vector property otherwise create a color vector property
+    const sipTypeDef *sipType = sipFindType("std::vector<tlp::Color>");
+    if (sipCanConvertToType(a1Wrapper, sipType, SIP_NOT_NONE)) {
+      int state=0, err=0;
+      void *cppType = sipConvertToType(a1Wrapper, sipType, NULL, SIP_NOT_NONE, &state, &err);
+      std::vector<tlp::Color> *vc = static_cast<std::vector<tlp::Color>*>(cppType);
+      sipCpp->setNodeValue(*a0, *vc);
+      sipReleaseType(cppType, sipType, state);
+    } else {
+      sipCpp->setNodeValue(*a0, *a1);
+    }
+  } else {
+    sipIsErr = throwInvalidNodeException(sipCpp->getGraph(), *a0);
+  }
+  delete a1;
 %End
 
   void __setitem__(const tlp::node n, const std::vector<tlp::Color> &val);
@@ -667,7 +678,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   }
 %End
 
-  void __setitem__(const tlp::edge e, const tlp::PySize &val /Constrained/);
+  void __setitem__(const tlp::edge e, const tlp::Size &val /Constrained/);
 %MethodCode
   if (sipCpp->getGraph()->isElement(*a0)) {
     sipCpp->setEdgeValue(*a0, *a1);
@@ -733,7 +744,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   }
 %End
 
-  void __setitem__(const tlp::edge e, const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
+  void __setitem__(const tlp::edge e, const std::vector<tlp::Size> &val /Constrained, TypeHint="List[tlp.Size]"/);
 %MethodCode
   if (sipCpp->getGraph()->isElement(*a0)) {
     sipCpp->setEdgeValue(*a0, *a1);
@@ -780,7 +791,7 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   sipCpp->setAllNodeValue(*a0);
 %End
 
-  void setAllNodeValue(const tlp::PySize &val /Constrained/);
+  void setAllNodeValue(const tlp::Size &val /Constrained/);
 %MethodCode
   sipCpp->setAllNodeValue(*a0);
 %End
@@ -828,12 +839,6 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   sipCpp->setAllNodeValue(*a0);
 %End
 
-  void setAllNodeValue(const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
-%MethodCode
-  sipCpp->setAllNodeValue(*a0);
-  delete a0;
-%End
-
   void setAllNodeValue(const std::vector<tlp::Coord> &val /GetWrapper/);
 %MethodCode
   // when a list of tuples is provided as input, constrain tuples elements to float type
@@ -848,6 +853,12 @@ void __setitem__(const tlp::node n, const std::vector<int> &val /Constrained/);
   } else {
     sipCpp->setAllNodeValue(*a0);
   }
+%End
+
+  void setAllNodeValue(const std::vector<tlp::Size> &val /Constrained, TypeHint="List[tlp.Size]"/);
+%MethodCode
+  sipCpp->setAllNodeValue(*a0);
+  delete a0;
 %End
 
   void setAllNodeValue(const std::vector<tlp::Color> &val);
@@ -883,7 +894,7 @@ void setAllNodeValue(SIP_PYOBJECT val);
   sipCpp->setAllEdgeValue(*a0);
 %End
 
-  void setAllEdgeValue(const tlp::PySize &val /Constrained/);
+  void setAllEdgeValue(const tlp::Size &val /Constrained/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
 %End
@@ -921,7 +932,7 @@ void setAllNodeValue(SIP_PYOBJECT val);
   sipCpp->setAllEdgeValue(*a0);
 %End
 
-  void setAllEdgeValue(const std::vector<tlp::PySize> &val /Constrained, TypeHint="List[tlp.Size]"/);
+  void setAllEdgeValue(const std::vector<tlp::Size> &val /Constrained, TypeHint="List[tlp.Size]"/);
 %MethodCode
   sipCpp->setAllEdgeValue(*a0);
   delete a0;

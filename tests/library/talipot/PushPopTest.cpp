@@ -1246,7 +1246,7 @@ void PushPopTest::testAddSubgraphProp() {
 void PushPopTest::testMetaNode() {
   node n0 = graph->addNode();
   LayoutProperty *layout = graph->getLayoutProperty("viewLayout");
-  Coord coord0(-1, -1, -1);
+  Coord coord0 = {-1, -1, -1};
   layout->setNodeValue(n0, coord0);
 
   vector<node> tmp;
@@ -1259,7 +1259,7 @@ void PushPopTest::testMetaNode() {
 
   // create meta node
   node metaNode = clone->createMetaNode(tmp);
-  Color mColor(255, 255, 255, 127);
+  Color mColor = {255, 255, 255, 127};
   ColorProperty *color = graph->getColorProperty("viewColor");
   color->setNodeValue(metaNode, mColor);
 

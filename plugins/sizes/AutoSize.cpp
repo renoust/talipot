@@ -50,12 +50,12 @@ private:
     SizeProperty *entrySize = graph->getSizeProperty("viewSize");
 
     // Compute the minimal distance to one neighbour.
-    const Coord tmp1(entryLayout->getNodeValue(n));
+    const Coord &tmp1 = entryLayout->getNodeValue(n);
     double dist = DBL_MAX;
 
     for (auto neigh : graph->nodes()) {
       if (neigh != n) {
-        const Coord tmp2(entryLayout->getNodeValue(neigh));
+        const Coord &tmp2 = entryLayout->getNodeValue(neigh);
         double tmpDist = sqrt((tmp1.getX() - tmp2.getX()) * (tmp1.getX() - tmp2.getX()) +
                               (tmp1.getY() - tmp2.getY()) * (tmp1.getY() - tmp2.getY()) +
                               (tmp1.getZ() - tmp2.getZ()) * (tmp1.getZ() - tmp2.getZ()));
@@ -73,13 +73,13 @@ private:
 
   Size getEdgeValue(const edge e) {
     auto eEnds = graph->ends(e);
-    Size s(result->getNodeValue(eEnds.first));
-    Size t(result->getNodeValue(eEnds.second));
-    Coord tmp(s.getW(), s.getH(), s.getD());
-    Coord tmp2(t.getW(), t.getH(), t.getD());
+    const Size &s = result->getNodeValue(eEnds.first);
+    const Size &t = result->getNodeValue(eEnds.second);
+    Coord tmp = {s.getW(), s.getH(), s.getD()};
+    Coord tmp2 = {t.getW(), t.getH(), t.getD()};
     float sizes = tmp.norm();
     float sizet = tmp2.norm();
-    return (Size(sizes / 16, sizet / 16, sizet / 4));
+    return Size(sizes / 16, sizet / 16, sizet / 4);
   }
 };
 

@@ -62,7 +62,7 @@ bool MouseNodeBuilder::eventFilter(QObject *widget, QEvent *e) {
         Observable::holdObservers();
         node newNode;
         newNode = _graph->addNode();
-        Coord point(glMainWidget->width() - qMouseEv->x(), qMouseEv->y(), 0);
+        Coord point = Coord(glMainWidget->width() - float(qMouseEv->x()), float(qMouseEv->y()));
         point = glMainWidget->getScene()->getGraphCamera().viewportTo3DWorld(
             glMainWidget->screenToViewport(point));
 

@@ -219,7 +219,7 @@ bool PolyominoPacking::run() {
 
   for (size_t i = 0; i < polyominos.size(); ++i) {
     Polyomino &poly = polyominos[i];
-    Coord move(poly.newPlace[0], poly.newPlace[1]);
+    Coord move = Coord(poly.newPlace[0], poly.newPlace[1]);
     const std::vector<node> &ccNodes = *poly.ccNodes;
     unsigned int nbNodes = ccNodes.size();
 
@@ -342,7 +342,7 @@ void PolyominoPacking::genPolyomino(Polyomino &poly, LayoutProperty *layout, Siz
 void PolyominoPacking::fillEdge(edge e, const Vec2i &p, std::vector<Vec2i> &cells, int dx, int dy,
                                 LayoutProperty *layout) {
 
-  Coord pf(p[0], p[1]);
+  Coord pf = Coord(p[0], p[1]);
   auto ends = graph->ends(e);
   const Coord &srcCoord = layout->getNodeValue(ends.first);
   Coord tgtCoord = layout->getNodeValue(ends.second);

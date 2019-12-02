@@ -194,14 +194,12 @@ void Cylinder::draw(node n, float) {
   GlTextureManager::deactivateTexture();
 }
 
-Coord Cylinder::getAnchor(const Coord &vector) const {
-  Coord anchor = vector;
-  float x, y, z, n;
-  anchor.get(x, y, z);
-  n = sqrt(x * x + y * y);
+Coord Cylinder::getAnchor(const Coord &v) const {
+  float x = v.x(), y = v.y(), z = v.z();
+  float n = sqrt(x * x + y * y);
 
   if (n == 0.0f)
-    return anchor;
+    return v;
 
   n = 0.5f / n;
   x *= n;
@@ -214,7 +212,7 @@ Coord Cylinder::getAnchor(const Coord &vector) const {
   if (z > +0.5f)
     z = +0.5f; // z = z <? +0.5f;
 
-  return Coord(x, y, z);
+  return {x, y, z};
 }
 
 /** \addtogroup glyph */
@@ -266,16 +264,13 @@ void HalfCylinder::draw(node n, float) {
   GlTextureManager::deactivateTexture();
 }
 //=================================================================================================
-Coord HalfCylinder::getAnchor(const Coord &vector) const {
-  Coord anchor(vector);
-  float x, y, z, n;
-  anchor.get(x, y, z);
-  n = sqrt(x * x + y * y);
+Coord HalfCylinder::getAnchor(const Coord &v) const {
+  float n = sqrt(v.x() * v.x() + v.y() * v.y());
 
   if (n == 0.0f)
-    return anchor;
+    return v;
 
-  return anchor * (0.5f / n);
+  return v * (0.5f / n);
 }
 
 class EECylinder : public EdgeExtremityGlyph, public CylinderBase {

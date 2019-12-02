@@ -156,7 +156,7 @@ bool FastOverlapRemoval::run() {
     }
 
     for (unsigned int i = 0; i < nbNodes; ++i) {
-      Coord newPos(nodeRectangles[i].getCentreX(), nodeRectangles[i].getCentreY(), 0.0);
+      Coord newPos = Coord(nodeRectangles[i].getCentreX(), nodeRectangles[i].getCentreY());
       LayoutAlgorithm::result->setNodeValue(nodes[i], newPos);
     }
   }

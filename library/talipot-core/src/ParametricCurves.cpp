@@ -22,8 +22,8 @@ namespace tlp {
 static void computeLinearBezierPoints(const Coord &p0, const Coord &p1, vector<Coord> &curvePoints,
                                       const unsigned int nbCurvePoints) {
   float h = 1.0 / float((nbCurvePoints - 1));
-  Coord firstFD((p1 - p0) * h);
-  Coord c(p0);
+  Coord firstFD = (p1 - p0) * h;
+  Coord c = p0;
 
   curvePoints.resize(nbCurvePoints);
 
@@ -49,10 +49,10 @@ static void computeQuadraticBezierPoints(const Coord &p0, const Coord &p1, const
   float h2 = h * h;
 
   // Compute Initial forward difference
-  Coord firstFD(p0 * (h2 - 2 * h) + p1 * (-2 * h2 + 2 * h) + p2 * h2);
-  Coord secondFD(p0 * 2.f * h2 - p1 * 4.f * h2 + p2 * 2.f * h2);
+  Coord firstFD = p0 * (h2 - 2 * h) + p1 * (-2 * h2 + 2 * h) + p2 * h2;
+  Coord secondFD = p0 * 2.f * h2 - p1 * 4.f * h2 + p2 * 2.f * h2;
 
-  Coord c(p0);
+  Coord c = p0;
 
   curvePoints.resize(nbCurvePoints);
 
@@ -76,9 +76,9 @@ static void computeCubicBezierPoints(const Coord &p0, const Coord &p1, const Coo
                                      const unsigned int nbCurvePoints) {
 
   // Compute polynomial coefficients from Bezier points
-  Coord A(p0 * -1.f + (p1 - p2) * 3.f + p3);
-  Coord B(p0 * 3.f - p1 * 6.f + p2 * 3.f);
-  Coord C(p0 * -3.f + p1 * 3.f);
+  Coord A = p0 * -1.f + (p1 - p2) * 3.f + p3;
+  Coord B = p0 * 3.f - p1 * 6.f + p2 * 3.f;
+  Coord C = p0 * -3.f + p1 * 3.f;
 
   // Compute our step size
   float h = 1.0 / float(nbCurvePoints - 1);
@@ -88,11 +88,11 @@ static void computeCubicBezierPoints(const Coord &p0, const Coord &p1, const Coo
   float h22 = h2 * 2;
 
   // Compute forward differences from Bezier points and "h"
-  Coord firstFD(A * h3 + B * h2 + C * h);
-  Coord thirdFD(A * h36);
-  Coord secondFD(thirdFD + B * h22);
+  Coord firstFD = A * h3 + B * h2 + C * h;
+  Coord thirdFD = A * h36;
+  Coord secondFD = thirdFD + B * h22;
 
-  Coord c(p0);
+  Coord c = p0;
 
   curvePoints.resize(nbCurvePoints);
 
@@ -153,13 +153,13 @@ Coord computeBezierPoint(const vector<Coord> &controlPoints, const float t) {
 
   computeCoefficients(t, nbControlPoints);
 
-  Vector<double, 3> bezierPoint;
+  Vec3d bezierPoint;
   bezierPoint[0] = bezierPoint[1] = bezierPoint[2] = 0;
   double curCoeff = 1.0;
   double r = double(nbControlPoints);
 
   for (size_t i = 0; i < controlPoints.size(); ++i) {
-    Vector<double, 3> controlPoint;
+    Vec3d controlPoint;
     controlPoint[0] = controlPoints[i][0];
     controlPoint[1] = controlPoints[i][1];
     controlPoint[2] = controlPoints[i][2];
@@ -279,22 +279,26 @@ static Coord computeCatmullRomPointImpl(const vector<Coord> &controlPoints, cons
   vector<Coord> bezierControlPoints;
 
   if (i == 0) {
-    computeBezierSegmentControlPoints(
-        closedCurve ? controlPoints[controlPoints.size() - 2]
-                    : controlPoints[i] - (controlPoints[i + 1] - controlPoints[i]),
-        controlPoints[i], controlPoints[i + 1], controlPoints[i + 2], bezierControlPoints, alpha);
+    Coord firstPoint = controlPoints[controlPoints.size() - 2];
+    if (!closedCurve) {
+      firstPoint = controlPoints[i] - (controlPoints[i + 1] - controlPoints[i]);
+    }
+    computeBezierSegmentControlPoints(firstPoint, controlPoints[i], controlPoints[i + 1],
+                                      controlPoints[i + 2], bezierControlPoints, alpha);
   } else if (i == controlPoints.size() - 2) {
+    Coord lastPoint = controlPoints[1];
+    if (!closedCurve) {
+      lastPoint = controlPoints[i + 1] + (controlPoints[i + 1] - controlPoints[i]);
+    }
     computeBezierSegmentControlPoints(controlPoints[i - 1], controlPoints[i], controlPoints[i + 1],
-                                      closedCurve ? controlPoints[1]
-                                                  : controlPoints[i + 1] +
-                                                        (controlPoints[i + 1] - controlPoints[i]),
-                                      bezierControlPoints, alpha);
+                                      lastPoint, bezierControlPoints, alpha);
   } else if (i == controlPoints.size() - 1) {
+    Coord lastPoint = controlPoints[1];
+    if (!closedCurve) {
+      lastPoint = controlPoints[i] + (controlPoints[i] - controlPoints[i - 1]);
+    }
     computeBezierSegmentControlPoints(controlPoints[i - 2], controlPoints[i - 1], controlPoints[i],
-                                      closedCurve ? controlPoints[1]
-                                                  : controlPoints[i] +
-                                                        (controlPoints[i] - controlPoints[i - 1]),
-                                      bezierControlPoints, alpha);
+                                      lastPoint, bezierControlPoints, alpha);
   } else {
     computeBezierSegmentControlPoints(controlPoints[i - 1], controlPoints[i], controlPoints[i + 1],
                                       controlPoints[i + 2], bezierControlPoints, alpha);
@@ -396,7 +400,7 @@ Coord computeOpenUniformBsplinePoint(const vector<Coord> &controlPoints, const f
                             coeffs[curveDegree];
     }
 
-    Coord curvePoint(0.0f, 0.0f, 0.0f);
+    Coord curvePoint;
     int startIdx = k - curveDegree;
 
     for (unsigned int i = 0; i <= curveDegree; ++i) {

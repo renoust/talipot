@@ -66,9 +66,9 @@ bool ParallelCoordsAxisSpacer::eventFilter(QObject *widget, QEvent *e) {
     } else if (selectedAxis != nullptr) {
       x = glWidget->width() - me->x();
       y = me->y();
-      Coord screenCoords(x, y, 0.0f);
-      Coord sceneCoords(glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
-          glWidget->screenToViewport(screenCoords)));
+      Coord screenCoords = Coord(x, y);
+      Coord sceneCoords = glWidget->getScene()->getLayer("Main")->getCamera().viewportTo3DWorld(
+          glWidget->screenToViewport(screenCoords));
 
       if (parallelView->getLayoutType() == ParallelCoordinatesDrawing::CIRCULAR) {
         float rotAngle = computeABACAngleWithAlKashi(Coord(0.0f, 0.0f, 0.0f),
@@ -98,9 +98,8 @@ bool ParallelCoordsAxisSpacer::eventFilter(QObject *widget, QEvent *e) {
           }
         }
       } else {
-        Coord translationVector(sceneCoords.getX() - selectedAxis->getBaseCoord().getX(), 0.0f,
-                                0.0f);
-        BoundingBox axisBB(selectedAxis->getBoundingBox());
+        Coord translationVector = {sceneCoords.getX() - selectedAxis->getBaseCoord().getX(), 0.0f};
+        BoundingBox axisBB = selectedAxis->getBoundingBox();
         axisBB.translate(translationVector);
 
         if ((neighborsAxis.first == nullptr ||

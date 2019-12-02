@@ -190,7 +190,7 @@ void GlOffscreenRenderer::renderExternalScene(GlScene *scene, const bool antiali
 
   initFrameBuffers(antialiased);
 
-  Vector<int, 4> backupViewport = scene->getViewport();
+  Vec4i backupViewport = scene->getViewport();
 
   scene->setViewport(0, 0, vPWidth, vPHeight);
 

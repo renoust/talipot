@@ -380,7 +380,7 @@ public:
       }
 
       // check other parameters
-      Size nSize(0.1f, 0.1f, 0);
+      Size nSize = {0.1f, 0.1f};
 
       for (; i < nbTokens; ++i) {
         if (tokens[i] == "x_fact") {

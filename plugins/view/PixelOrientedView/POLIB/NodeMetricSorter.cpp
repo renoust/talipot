@@ -20,8 +20,6 @@
 using namespace std;
 using namespace tlp;
 
-namespace pocore {
-
 map<Graph *, NodeMetricSorter *> NodeMetricSorter::instances;
 
 NodeMetricSorter *NodeMetricSorter::getInstance(Graph *graph) {
@@ -113,4 +111,3 @@ unsigned int NodeMetricSorter::getNodeRankForProperty(tlp::node n, const string 
 
   return 0;
 }
-} // namespace pocore

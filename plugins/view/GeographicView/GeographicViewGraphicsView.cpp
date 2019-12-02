@@ -1150,8 +1150,8 @@ void GeographicViewGraphicsView::switchViewType() {
         }
 
         if (nodeLatLng.find(n) != nodeLatLng.end()) {
-          Coord tmp(nodeLatLng[n].first * 2. / 360. * M_PI, nodeLatLng[n].second * 2. / 360. * M_PI,
-                    0);
+          Coord tmp = Coord(nodeLatLng[n].first * 2. / 360. * M_PI,
+                            nodeLatLng[n].second * 2. / 360. * M_PI);
 
           float lambda = tmp[1];
           float theta;
@@ -1172,10 +1172,10 @@ void GeographicViewGraphicsView::switchViewType() {
         const std::pair<node, node> &eEnds = graph->ends(e);
         node src = eEnds.first;
         node tgt = eEnds.second;
-        Coord srcC(nodeLatLng[src].first * 2. / 360. * M_PI,
-                   nodeLatLng[src].second * 2. / 360. * M_PI, 0);
-        Coord tgtC(nodeLatLng[tgt].first * 2. / 360. * M_PI,
-                   nodeLatLng[tgt].second * 2. / 360. * M_PI, 0);
+        Coord srcC = Coord(nodeLatLng[src].first * 2. / 360. * M_PI,
+                           nodeLatLng[src].second * 2. / 360. * M_PI);
+        Coord tgtC = Coord(nodeLatLng[tgt].first * 2. / 360. * M_PI,
+                           nodeLatLng[tgt].second * 2. / 360. * M_PI);
 
         unsigned int bendsNumber = 2;
         vector<Coord> bends;
@@ -1192,7 +1192,8 @@ void GeographicViewGraphicsView::switchViewType() {
 
           float phi = M_PI / 2.0 - tmp[0];
 
-          Coord tmp1(75. * sin(phi) * cos(theta), 75. * sin(phi) * sin(theta), 75. * cos(phi));
+          Coord tmp1 =
+              Coord(75. * sin(phi) * cos(theta), 75. * sin(phi) * sin(theta), 75. * cos(phi));
 
           bends.push_back(tmp1);
         }

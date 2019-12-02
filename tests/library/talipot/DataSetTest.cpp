@@ -175,7 +175,7 @@ void DataSetTest::testDataSetSerialization() {
   dataSet.set("long", l);
 
   // tlp::Coord
-  const Coord c(1, 2, 3);
+  const Coord c = {1, 2, 3};
   dataSet.set("Coord", c);
 
   // tlp::Color
@@ -183,7 +183,7 @@ void DataSetTest::testDataSetSerialization() {
   dataSet.set("Color", col);
 
   // tlp::Size
-  const Size s(4, 5, 6);
+  const Size s = {4, 5, 6};
   dataSet.set("Size", s);
 
   // std::vector<std::string>

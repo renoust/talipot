@@ -45,7 +45,7 @@ ParallelAxis::ParallelAxis(GlAxis *glAxis, const float axisAreaWidth, const floa
   glAxis->addCaption(captionPosition, 20.0f, true, axisAreaWidth / 2.0f,
                      glAxis->getAxisLength() / 18.0f);
   glAxis->updateAxis();
-  BoundingBox axisBB(glAxis->getBoundingBox());
+  BoundingBox axisBB = glAxis->getBoundingBox();
   emptyRect = new GlRect(Coord(axisBB[0][0], axisBB[1][1] + glAxis->getAxisLength() / 10.0f),
                          Coord(axisBB[1][0], axisBB[0][1] - glAxis->getAxisLength() / 15.0f),
                          Color(0, 0, 0, 0), Color(0, 0, 0, 0), true, false);
@@ -61,7 +61,7 @@ ParallelAxis::~ParallelAxis() {
 void ParallelAxis::setAxisHeight(const float height) {
   float resizeFactor = height / getAxisHeight();
   glAxis->setAxisLength(height);
-  Coord baseCoord(glAxis->getAxisBaseCoord());
+  Coord baseCoord = glAxis->getAxisBaseCoord();
   bottomSliderCoord =
       baseCoord + Coord(0.0f, (bottomSliderCoord.getY() - baseCoord.getY()) * resizeFactor);
   topSliderCoord =
@@ -122,7 +122,7 @@ void ParallelAxis::redraw() {
 }
 
 void ParallelAxis::resetSlidersPosition() {
-  Coord baseCoord(glAxis->getAxisBaseCoord());
+  Coord baseCoord = glAxis->getAxisBaseCoord();
   bottomSliderCoord = baseCoord;
   topSliderCoord = baseCoord + Coord(0.0f, getAxisHeight());
 }
@@ -136,13 +136,13 @@ void ParallelAxis::disableTrickForSelection() {
 }
 
 BoundingBox ParallelAxis::getBoundingBox() {
-  BoundingBox glAxisBB(glAxis->getBoundingBox());
+  BoundingBox glAxisBB = glAxis->getBoundingBox();
 
   if (rotationAngle != 0.0f) {
-    Coord bbBL(glAxisBB[0]);
-    Coord bbTR(glAxisBB[1]);
-    Coord bbBR(glAxisBB[1][0], glAxisBB[0][1]);
-    Coord bbTL(glAxisBB[0][0], glAxisBB[1][1]);
+    Coord bbBL = glAxisBB[0];
+    Coord bbTR = glAxisBB[1];
+    Coord bbBR = {glAxisBB[1][0], glAxisBB[0][1]};
+    Coord bbTL = {glAxisBB[0][0], glAxisBB[1][1]};
     rotateVector(bbBL, rotationAngle, Z_ROT);
     rotateVector(bbTR, rotationAngle, Z_ROT);
     rotateVector(bbBR, rotationAngle, Z_ROT);
@@ -159,11 +159,11 @@ BoundingBox ParallelAxis::getBoundingBox() {
 
 Array<Coord, 4> ParallelAxis::getBoundingPolygonCoords() const {
   Array<Coord, 4> ret;
-  BoundingBox glAxisBB(glAxis->getBoundingBox());
-  Coord bbBL(glAxisBB[0]);
-  Coord bbTR(glAxisBB[1]);
-  Coord bbBR(glAxisBB[1][0], glAxisBB[0][1]);
-  Coord bbTL(glAxisBB[0][0], glAxisBB[1][1]);
+  BoundingBox glAxisBB = glAxis->getBoundingBox();
+  Coord bbBL = glAxisBB[0];
+  Coord bbTR = glAxisBB[1];
+  Coord bbBR = {glAxisBB[1][0], glAxisBB[0][1]};
+  Coord bbTL = {glAxisBB[0][0], glAxisBB[1][1]};
 
   if (rotationAngle != 0.0f) {
     rotateVector(bbBL, rotationAngle, Z_ROT);

@@ -286,9 +286,9 @@ void ParallelCoordinatesDrawing::plotAllData(GlMainWidget *glWidget, GlProgressB
 
 void ParallelCoordinatesDrawing::plotData(const unsigned int dataId, const Color &color) {
 
-  Size eltMinSize(graphProxy->getSizeProperty("viewSize")->getMin());
-  Size dataViewSize(graphProxy->getDataViewSize(dataId));
-  Size adjustedViewSize(axisPointMinSize + resizeFactor * (dataViewSize - eltMinSize));
+  Size eltMinSize = graphProxy->getSizeProperty("viewSize")->getMin();
+  Size dataViewSize = graphProxy->getDataViewSize(dataId);
+  Size adjustedViewSize = axisPointMinSize + resizeFactor * (dataViewSize - eltMinSize);
   float pointRadius =
       ((adjustedViewSize[0] + adjustedViewSize[1] + adjustedViewSize[2]) / 3.0f) / 2.0f;
   float lineHalfWidth = pointRadius - (1.0f / 10.0f) * pointRadius;
@@ -298,7 +298,7 @@ void ParallelCoordinatesDrawing::plotData(const unsigned int dataId, const Color
 
   for (size_t j = 0; j < axisOrder.size(); j++) {
 
-    Coord pointCoord(parallelAxis[axisOrder[j]]->getPointCoordOnAxisForData(dataId));
+    Coord pointCoord = parallelAxis[axisOrder[j]]->getPointCoordOnAxisForData(dataId);
     float axisRotAngle = parallelAxis[axisOrder[j]]->getRotationAngle();
     ostringstream oss;
     oss << "data " << dataId << " var " << axisOrder[j];
@@ -333,8 +333,8 @@ void ParallelCoordinatesDrawing::plotData(const unsigned int dataId, const Color
 
     if (linesType == STRAIGHT) {
       if (linesThickness == THICK) {
-        Coord vec1(0.0f, -lineHalfWidth);
-        Coord vec2(0.0f, lineHalfWidth);
+        Coord vec1 = {0.0f, -lineHalfWidth};
+        Coord vec2 = {0.0f, lineHalfWidth};
 
         if (axisRotAngle != 0.0f) {
           rotateVector(vec1, axisRotAngle, Z_ROT);
@@ -460,8 +460,8 @@ void ParallelCoordinatesDrawing::swapAxis(ParallelAxis *axis1, ParallelAxis *axi
 
   if (layoutType == PARALLEL) {
 
-    Coord ci(parallelAxis[axis1->getAxisName()]->getBaseCoord());
-    Coord cj(parallelAxis[axis2->getAxisName()]->getBaseCoord());
+    Coord ci = parallelAxis[axis1->getAxisName()]->getBaseCoord();
+    Coord cj = parallelAxis[axis2->getAxisName()]->getBaseCoord();
 
     parallelAxis[axis1->getAxisName()]->translate(cj - ci);
     parallelAxis[axis2->getAxisName()]->translate(ci - cj);
@@ -585,10 +585,10 @@ const vector<string> &ParallelCoordinatesDrawing::getAxisNames() const {
 }
 
 void ParallelCoordinatesDrawing::computeResizeFactor() {
-  Size eltMinSize(graphProxy->getSizeProperty("viewSize")->getMin());
-  Size eltMaxSize(graphProxy->getSizeProperty("viewSize")->getMax());
+  Size eltMinSize = graphProxy->getSizeProperty("viewSize")->getMin();
+  Size eltMaxSize = graphProxy->getSizeProperty("viewSize")->getMax();
 
-  Size deltaSize(eltMaxSize - eltMinSize);
+  Size deltaSize = eltMaxSize - eltMinSize;
 
   for (unsigned int i = 0; i < 3; ++i) {
     if (deltaSize[i] != 0.0f) {

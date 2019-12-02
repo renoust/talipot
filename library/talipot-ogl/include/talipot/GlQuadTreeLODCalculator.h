@@ -70,16 +70,14 @@ public:
    * See compute function of GlCPULODCalculator for more details
    * This function do some computation and after call computeFor2DCamera() or computeFor3DCamera()
    */
-  void compute(const Vector<int, 4> &globalViewport,
-               const Vector<int, 4> &currentViewport) override;
+  void compute(const Vec4i &globalViewport, const Vec4i &currentViewport) override;
 
   /**
    * Specific function to compute LOD for 3D cameras
    */
   void computeFor3DCamera(LayerLODUnit *layerLODUnit, const Coord &eye,
-                          const Matrix<float, 4> &transformMatrix,
-                          const Vector<int, 4> &globalViewport,
-                          const Vector<int, 4> &currentViewport) override;
+                          const Matrix<float, 4> &transformMatrix, const Vec4i &globalViewport,
+                          const Vec4i &currentViewport) override;
 
   /**
    * Change the input data used by this LOD calculator

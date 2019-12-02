@@ -239,25 +239,14 @@ void QuadTreeBundle::createQuadTree(Graph *graph, tlp::LayoutProperty *lay,
   node c = graph->addNode();
   node d = graph->addNode();
 
-  //  graph->addEdge(a, b);
-  //  graph->addEdge(b, c);
-  //  graph->addEdge(c, d);
-  //  graph->addEdge(d, a);
-
-  /*
-  resultNode.push_back(a);
-  resultNode.push_back(b);
-  resultNode.push_back(c);
-  resultNode.push_back(d);
-   */
   assert(bb[0][0] < bb[1][0]);
   assert(bb[0][1] < bb[1][1]);
 
   layout->setNodeValue(a, Coord(bb[0][0], bb[0][1], 0));
   layout->setNodeValue(c, Coord(bb[1][0], bb[1][1], 0));
 
-  Coord cB(bb[1][0], bb[0][1], 0);
-  Coord cD(bb[0][0], bb[1][1], 0);
+  Coord cB = {bb[1][0], bb[0][1]};
+  Coord cD = {bb[0][0], bb[1][1]};
 
   layout->setNodeValue(b, cB);
   layout->setNodeValue(d, cD);

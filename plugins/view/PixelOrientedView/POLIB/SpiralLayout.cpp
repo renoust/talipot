@@ -23,9 +23,8 @@ namespace {
 inline double eq2D2(const double c) {
   return (4. - sqrt(16. - 16. * c)) / -8.;
 }
-} // namespace
+}
 
-namespace pocore {
 //==============================================================
 unsigned int SpiralLayout::unproject(const Vec2i &point) const {
   int x = point[0];
@@ -54,8 +53,8 @@ unsigned int SpiralLayout::unproject(const Vec2i &point) const {
   return p;
 }
 //==============================================================
-Vector<int, 2> SpiralLayout::project(const unsigned int _id) const {
-  Vector<int, 2> point;
+Vec2i SpiralLayout::project(const unsigned int _id) const {
+  Vec2i point;
 
   if (_id == 0) {
     point[0] = 0;
@@ -103,94 +102,3 @@ Vector<int, 2> SpiralLayout::project(const unsigned int _id) const {
 
   return point;
 }
-} // namespace pocore
-//==============================================================================
-/*
- *  781
- *  602
- *  543
- *
- */
-/*
-bool testProject() {
-  cerr << __PRETTY_FUNCTION__ << endl;
-  int points[2];
-  unsigned char color[4];
-  compute(0, points, color);
-  if (points[0]!=0 || points[1]!=0) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(1, points, color);
-  if (points[0]!=1 || points[1]!=1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(2, points, color);
-  if (points[0]!=1 || points[1]!=0) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(3, points, color);
-  if (points[0]!=1 || points[1]!=-1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(4, points, color);
-  if (points[0]!=0 || points[1]!=-1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(5, points, color);
-  if (points[0]!=-1 || points[1]!=-1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(6, points, color);
-  if (points[0]!=-1 || points[1]!=0) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(7, points, color);
-  if (points[0]!=-1 || points[1]!=1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(8, points, color);
-  if (points[0]!=0 || points[1]!=1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(9, points, color);
-  if (points[0]!=2 || points[1]!=2) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(10, points, color);
-  if (points[0]!=2 || points[1]!=1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(11, points, color);
-  if (points[0]!=2 || points[1]!=0) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(12, points, color);
-  if (points[0]!=2 || points[1]!=-1) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(13, points, color);
-  if (points[0]!=2 || points[1]!=-2) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  compute(25, points, color);
-  if (points[0]!=3 || points[1]!=3) {
-    cerr << "error : " << __LINE__ << ": (" << points[0] << "," << points[1] << ")" << endl;
-  }
-  return true;
-}
-bool testUnproject() {
-  cerr << __PRETTY_FUNCTION__ << endl;
-  int points[2];
-  unsigned char color[4];
-  for (unsigned int i = 0; i< 10000; ++i) {
-    compute(i, points, color);
-    if (inverseCompute(points) != i) {
-      cerr << "error line : " << __LINE__ ;
-    cerr << "/ inv :";
-    cerr << inverseCompute(points) << " / pos : (" << points[0] << "," << points[1] << ") /";
-    cerr << " i: " << i << endl;
-    }
-  }
-  return true;
-}
-*/

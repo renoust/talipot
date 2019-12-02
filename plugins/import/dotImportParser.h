@@ -508,7 +508,7 @@ struct DOT_YY {
     {
       // because default shape is an ellipse
       // we distorse the size
-      Size s(0.75, 0.5f, 0.5f); // in inches unit
+      Size s = {0.75, 0.5f, 0.5f}; // in inches unit
 
       if ((inAttr.mask & DOT_ATTR::SHAPE) && (inAttr.shape != DEFAULT_SHAPE))
         // no distorsion if it not the default shape

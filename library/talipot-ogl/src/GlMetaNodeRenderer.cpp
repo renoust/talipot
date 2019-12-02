@@ -116,7 +116,7 @@ void GlMetaNodeRenderer::render(node n, float, Camera *camera) {
 
   Coord size = second - first;
 
-  Vector<int, 4> viewport;
+  Vec4i viewport;
   viewport[0] = center[0] - size[0] / 2;
   viewport[1] = center[1] - size[1] / 2;
   viewport[2] = size[0];

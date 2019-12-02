@@ -18,7 +18,6 @@
 
 #include <QWidget>
 
-#include "POLIB/potypes.h"
 #include "POLIB/SpiralLayout.h"
 #include "POLIB/SquareLayout.h"
 #include "POLIB/ZOrderLayout.h"
@@ -134,33 +133,33 @@ private:
   PixelOrientedOptionsWidget *optionsWidget;
   ViewGraphPropertiesSelectionWidget *propertiesSelectionWidget;
 
-  pocore::PixelOrientedMediator *pixelOrientedMediator;
+  PixelOrientedMediator *pixelOrientedMediator;
 
-  std::map<std::string, pocore::LayoutFunction *> layoutFunctionsMap;
+  std::map<std::string, LayoutFunction *> layoutFunctionsMap;
 
   void initGlWidget();
 
   void initLayoutFunctions();
-  void setColorFunction(pocore::ColorFunction *colorFunction);
-  void setLayoutFunction(pocore::LayoutFunction *layoutFunction);
+  void setColorFunction(ColorFunction *colorFunction);
+  void setLayoutFunction(LayoutFunction *layoutFunction);
 
   unsigned int lastNbNodes;
   std::vector<std::string> selectedGraphProperties;
   std::map<std::string, PixelOrientedOverview *> overviewsMap;
   std::map<std::string, bool> overviewGenMap;
-  std::map<std::string, pocore::GraphDimension *> dataMap;
+  std::map<std::string, GraphDimension *> dataMap;
 
   unsigned int overviewWidth;
   unsigned int overviewHeight;
   unsigned int minWidth;
   float refSize;
 
-  pocore::HilbertLayout *hilbertLayout;
-  pocore::SquareLayout *squareLayout;
-  pocore::SpiralLayout *spiralLayout;
-  pocore::ZorderLayout *zorderLayout;
+  HilbertLayout *hilbertLayout;
+  SquareLayout *squareLayout;
+  SpiralLayout *spiralLayout;
+  ZorderLayout *zorderLayout;
 
-  pocore::NodeColorMapping *talipotNodeColorMapping;
+  NodeColorMapping *talipotNodeColorMapping;
 
   bool smallMultiplesView;
 

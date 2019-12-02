@@ -69,8 +69,7 @@ OrientableLayout::convertEdgeLinetype(const std::vector<tlp::Coord> &v) {
   std::vector<OrientableCoord> orientableLine;
 
   for (const auto &c : v) {
-    OrientableCoord newOrientableCoord(this, c);
-    orientableLine.push_back(newOrientableCoord);
+    orientableLine.push_back(OrientableCoord(this, c));
   }
 
   return orientableLine;

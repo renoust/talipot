@@ -184,8 +184,7 @@ public:
   /**
    * Compute all lod
    */
-  virtual void compute(const Vector<int, 4> &globalViewport,
-                       const Vector<int, 4> &currentViewport) = 0;
+  virtual void compute(const Vec4i &globalViewport, const Vec4i &currentViewport) = 0;
 
   /**
    * Return a pointer on LOD result

@@ -14,20 +14,18 @@
 #ifndef LINEAR_MAPPING_COLOR_H
 #define LINEAR_MAPPING_COLOR_H
 
-#include "potypes.h"
+#include <talipot/Color.h>
 #include "ColorFunction.h"
 
-namespace pocore {
 class LinearMappingColor : public ColorFunction {
 public:
-  LinearMappingColor(const double &min, const double &max);
-  RGBA getColor(const double &value, const unsigned int) const override;
+  LinearMappingColor(double min, double max);
+  tlp::Color getColor(double value, unsigned int) const override;
 
 private:
   double _min;
   double _max;
-  RGBA startColor;
-  RGBA endColor;
+  tlp::Color startColor;
+  tlp::Color endColor;
 };
-} // namespace pocore
 #endif // LINEAR_MAPPING_COLOR_H
