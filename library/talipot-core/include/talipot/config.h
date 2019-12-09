@@ -42,6 +42,7 @@ typedef unsigned char uchar;
 #pragma warning(disable : 4503) // decorated name too long, truncated
 #pragma warning(disable : 4344) // template specialisation results in different function being
                                 // called (getProperty<>)
+#pragma warning(disable : 4305) // truncation from double to float
 
 // disable deprecated warnings when compiling the talipot dlls, as MSVC is overly verbose with
 // deprecation
