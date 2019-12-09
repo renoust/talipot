@@ -55,7 +55,7 @@ QWidget *NumberEditorCreator<T>::createWidget(QWidget *parent) const {
   } else if (typeid(T).name() == typeid(tlp::UnsignedIntegerType).name()) {
     dsb->setRange(0, UINT_MAX);
   } else if (typeid(T).name() == typeid(tlp::LongType).name()) {
-    dsb->setRange(-LONG_MAX, LONG_MAX);
+    dsb->setRange(double(-LONG_MAX), double(LONG_MAX));
   } else if (typeid(T).name() == typeid(tlp::FloatType).name()) {
     dsb->setRange(-FLT_MAX, FLT_MAX);
   } else {
