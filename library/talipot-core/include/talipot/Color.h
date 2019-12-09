@@ -25,9 +25,6 @@ public:
   Color(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0,
         unsigned char alpha = 255);
 
-  void set(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0,
-           unsigned char alpha = 255);
-
   float getRGL() const;
 
   float getGGL() const;
@@ -159,14 +156,6 @@ inline tlp::Color::Color(const tlp::Vector<unsigned char, 4> &c)
 inline tlp::Color::Color(unsigned char red, unsigned char green, unsigned char blue,
                          unsigned char alpha) {
   set(red, green, blue, alpha);
-}
-
-inline void tlp::Color::set(unsigned char red, unsigned char green, unsigned char blue,
-                            unsigned char alpha) {
-  (*this)[0] = red;
-  (*this)[1] = green;
-  (*this)[2] = blue;
-  (*this)[3] = alpha;
 }
 
 inline unsigned char tlp::Color::getR() const {
