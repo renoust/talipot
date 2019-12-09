@@ -23,7 +23,7 @@
 #include <talipot/Matrix.h>
 
 namespace tlp {
-class GlSimpleEntity;
+class GlEntity;
 class Camera;
 
 /**
@@ -52,15 +52,15 @@ public:
   /**
    * This function is called by GlLODSceneVisitor when a simple entity is found
    */
-  void addSimpleEntityBoundingBox(GlSimpleEntity *entity, const BoundingBox &bb) override;
+  void addEntityBoundingBox(GlEntity *entity, const BoundingBox &bb) override;
   /**
    * This function is called by GlLODSceneVisitor when a node is found
    */
-  void addNodeBoundingBox(unsigned int id, unsigned int pos, const BoundingBox &bb) override;
+  void addNodeBoundingBox(Graph *graph, node n, const BoundingBox &bb) override;
   /**
    * This function is called by GlLODSceneVisitor when an edge is found
    */
-  void addEdgeBoundingBox(unsigned int id, unsigned int pos, const BoundingBox &bb) override;
+  void addEdgeBoundingBox(Graph *graph, edge e, const BoundingBox &bb) override;
 
   /**
    * Reserve memory to store nodes and edges LOD

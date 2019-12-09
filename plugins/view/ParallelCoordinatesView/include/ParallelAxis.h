@@ -16,7 +16,7 @@
 
 #ifndef DOXYGEN_NOTFOR_DEVEL
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlAxis.h>
 
 #include <set>
@@ -25,7 +25,7 @@ namespace tlp {
 
 class GlRect;
 
-class ParallelAxis : public GlSimpleEntity {
+class ParallelAxis : public GlEntity {
 
 public:
   ~ParallelAxis() override;

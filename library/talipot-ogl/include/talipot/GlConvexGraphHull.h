@@ -22,7 +22,7 @@
 namespace tlp {
 
 class GlComposite;
-class GlSimpleEntity;
+class GlEntity;
 class Camera;
 class Graph;
 class LayoutProperty;

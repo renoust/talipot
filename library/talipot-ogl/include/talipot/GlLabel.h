@@ -18,7 +18,7 @@
 #include <talipot/Color.h>
 #include <talipot/Size.h>
 #include <talipot/Camera.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 class FTGLPolygonFont;
 class FTOutlineFont;
@@ -37,7 +37,7 @@ struct OcclusionTest;
  * label->setText("example");
  * @endcode
  */
-class TLP_GL_SCOPE GlLabel final : public GlSimpleEntity {
+class TLP_GL_SCOPE GlLabel final : public GlEntity {
   /**
    * @brief Set default parameters of GlLabel
    *

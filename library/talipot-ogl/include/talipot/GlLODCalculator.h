@@ -23,7 +23,7 @@
 
 #include <talipot/BoundingBox.h>
 #include <talipot/GlSceneVisitor.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlNode.h>
 #include <talipot/GlEdge.h>
 #include <talipot/GlLayer.h>
@@ -32,59 +32,56 @@ namespace tlp {
 
 class Camera;
 class GlEntity;
-class GlSimpleEntity;
+class GlEntity;
 class GlScene;
 class GlGraphInputData;
 
 enum RenderingEntitiesFlag {
-  RenderingSimpleEntities = 1,
+  RenderingEntities = 1,
   RenderingNodes = 2,
   RenderingEdges = 4,
   RenderingAll = 7,
   RenderingWithoutRemove = 8
 };
 
-struct EntityLODUnit {
-  EntityLODUnit() : lod(-1) {}
-  EntityLODUnit(const BoundingBox &boundingBox) : boundingBox(boundingBox), lod(-1) {}
+struct LODUnit {
+  LODUnit() : lod(-1) {}
+  LODUnit(const BoundingBox &boundingBox) : boundingBox(boundingBox), lod(-1) {}
   BoundingBox boundingBox;
   float lod;
 };
 
 // struct to store simple entity lod
-struct SimpleEntityLODUnit : public EntityLODUnit {
-  SimpleEntityLODUnit(GlSimpleEntity *entity = nullptr) : EntityLODUnit(), entity(entity) {}
-  SimpleEntityLODUnit(GlSimpleEntity *entity, const BoundingBox &boundingBox)
-      : EntityLODUnit(boundingBox), entity(entity) {}
-  GlSimpleEntity *entity;
+struct EntityLODUnit : public LODUnit {
+  EntityLODUnit(GlEntity *entity = nullptr) : LODUnit(), entity(entity) {}
+  EntityLODUnit(GlEntity *entity, const BoundingBox &boundingBox)
+      : LODUnit(boundingBox), entity(entity) {}
+  GlEntity *entity;
 
-  void init(GlSimpleEntity *e, const BoundingBox &bb) {
+  void init(GlEntity *e, const BoundingBox &bb) {
     entity = e;
     boundingBox = bb;
   }
 };
 
 // struct to store complex entity (nodes/edges) lod
-struct ComplexEntityLODUnit : public EntityLODUnit {
-  ComplexEntityLODUnit(unsigned int id = UINT_MAX, unsigned int pos = UINT_MAX)
-      : EntityLODUnit(), id(id), pos(pos) {}
-  ComplexEntityLODUnit(unsigned int id, unsigned int pos, const BoundingBox &boundingBox)
-      : EntityLODUnit(boundingBox), id(id), pos(pos) {}
+struct GraphElementLODUnit : public LODUnit {
+  GraphElementLODUnit(unsigned int id = UINT_MAX) : LODUnit(), id(id) {}
+  GraphElementLODUnit(unsigned int id, const BoundingBox &boundingBox)
+      : LODUnit(boundingBox), id(id) {}
 
-  void init(unsigned int i, unsigned int p, const BoundingBox &bb) {
+  void init(unsigned int i, const BoundingBox &bb) {
     id = i;
-    pos = p;
     boundingBox = bb;
   }
 
   unsigned int id;
-  unsigned int pos;
 };
 
 struct LayerLODUnit {
-  std::vector<SimpleEntityLODUnit> simpleEntitiesLODVector;
-  std::vector<ComplexEntityLODUnit> nodesLODVector;
-  std::vector<ComplexEntityLODUnit> edgesLODVector;
+  std::vector<EntityLODUnit> entitiesLODVector;
+  std::vector<GraphElementLODUnit> nodesLODVector;
+  std::vector<GraphElementLODUnit> edgesLODVector;
   Camera *camera;
   LayerLODUnit() : camera(nullptr) {}
   LayerLODUnit(Camera *camera) : camera(camera) {}
@@ -103,23 +100,23 @@ public:
   virtual GlLODCalculator *clone() = 0;
 
   /**
-   * Visit a GlSimpleEntity
+   * Visit a GlEntity
    */
-  void visit(GlSimpleEntity *entity) override {
-    addSimpleEntityBoundingBox(entity, entity->getBoundingBox());
+  void visit(GlEntity *entity) override {
+    addEntityBoundingBox(entity, entity->getBoundingBox());
   }
 
   /**
    * Visit a node
    */
   void visit(GlNode *glNode) override {
-    addNodeBoundingBox(glNode->id, glNode->pos, glNode->getBoundingBox(inputData));
+    addNodeBoundingBox(glNode->graph, glNode->n, glNode->getBoundingBox(inputData));
   }
   /**
    * Visit an Edge
    */
   void visit(GlEdge *glEdge) override {
-    addEdgeBoundingBox(glEdge->id, glEdge->pos, glEdge->getBoundingBox(inputData));
+    addEdgeBoundingBox(glEdge->graph, glEdge->e, glEdge->getBoundingBox(inputData));
   }
   /**
    * Visit a layer
@@ -148,7 +145,7 @@ public:
 
   /**
    * Set RenderingEntitiesFlag to :
-   * RenderingSimpleEntities,RenderingNodes,RenderingEdges,RenderingAll,RenderingWithoutRemove
+   * RenderingEntities,RenderingNodes,RenderingEdges,RenderingAll,RenderingWithoutRemove
    */
   virtual void setRenderingEntitiesFlag(RenderingEntitiesFlag flag) {
     renderingEntitiesFlag = flag;
@@ -171,15 +168,15 @@ public:
   /**
    * Record a new simple entity in current camera context
    */
-  virtual void addSimpleEntityBoundingBox(GlSimpleEntity *entity, const BoundingBox &bb) = 0;
+  virtual void addEntityBoundingBox(GlEntity *entity, const BoundingBox &bb) = 0;
   /**
    * Record a new node in current camera context
    */
-  virtual void addNodeBoundingBox(unsigned int id, unsigned int pos, const BoundingBox &bb) = 0;
+  virtual void addNodeBoundingBox(Graph *graph, node n, const BoundingBox &bb) = 0;
   /**
    * Record a new edge in current camera context
    */
-  virtual void addEdgeBoundingBox(unsigned int id, unsigned int pos, const BoundingBox &bb) = 0;
+  virtual void addEdgeBoundingBox(Graph *graph, edge e, const BoundingBox &bb) = 0;
 
   /**
    * Compute all lod

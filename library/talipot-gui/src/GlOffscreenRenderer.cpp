@@ -83,7 +83,7 @@ unsigned int GlOffscreenRenderer::getViewportHeight() {
   return glFrameBuf->height();
 }
 
-void GlOffscreenRenderer::addGlEntityToScene(GlSimpleEntity *entity) {
+void GlOffscreenRenderer::addGlEntityToScene(GlEntity *entity) {
   ostringstream oss;
   oss << "entity " << ++entitiesCpt;
   mainLayer->addGlEntity(entity, oss.str());
@@ -95,7 +95,7 @@ void GlOffscreenRenderer::addGraphToScene(Graph *graph) {
 
 void GlOffscreenRenderer::addGraphCompositeToScene(GlGraphComposite *graphComposite) {
   // Delete old composite if it exist
-  GlSimpleEntity *oldComposite = mainLayer->findGlEntity("graph");
+  GlEntity *oldComposite = mainLayer->findGlEntity("graph");
 
   if (oldComposite != nullptr) {
     mainLayer->deleteGlEntity(oldComposite);

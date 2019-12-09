@@ -463,9 +463,9 @@ void PixelOrientedView::addEmptyViewLabel() {
 }
 
 void PixelOrientedView::removeEmptyViewLabel() {
-  GlSimpleEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
-  GlSimpleEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
-  GlSimpleEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
+  GlEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
+  GlEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
+  GlEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
 
   if (noDimsLabel != nullptr) {
     mainLayer->deleteGlEntity(noDimsLabel);

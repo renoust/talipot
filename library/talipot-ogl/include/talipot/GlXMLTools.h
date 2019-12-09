@@ -28,7 +28,7 @@ namespace tlp {
 /**
  * static tools class use to store/load xml data
  */
-class GlSimpleEntity;
+class GlEntity;
 
 class TLP_GL_SCOPE GlXMLTools {
 
@@ -93,7 +93,7 @@ public:
   /**
    * Create a GlEntity with the given name
    */
-  static GlSimpleEntity *createEntity(const std::string &name);
+  static GlEntity *createEntity(const std::string &name);
 
   /**
    * Get the XML output for a vector of Object

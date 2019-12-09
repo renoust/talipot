@@ -21,7 +21,7 @@
 #include <talipot/Color.h>
 #include <talipot/Coord.h>
 #include <talipot/config.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 
@@ -30,7 +30,7 @@ namespace tlp {
  * \brief This is a general class to render an OpenGL laine
  * This class is use to render an OpenGl line
  */
-class TLP_GL_SCOPE GlLine : public GlSimpleEntity {
+class TLP_GL_SCOPE GlLine : public GlEntity {
 public:
   /**
    * Enpty constructor

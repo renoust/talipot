@@ -16,7 +16,7 @@
 
 #include <string>
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GLInteractor.h>
 #include <talipot/Color.h>
 
@@ -24,7 +24,7 @@ namespace tlp {
 
 class QuantitativeParallelAxis;
 
-class GlAxisBoxPlot : public GlSimpleEntity {
+class GlAxisBoxPlot : public GlEntity {
 
 public:
   GlAxisBoxPlot(QuantitativeParallelAxis *axis, const Color &fillColor, const Color &outlineColor);

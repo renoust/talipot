@@ -84,7 +84,7 @@ SET(SRCS
   SceneLayersModel.cpp
   SceneLayersConfigWidget.cpp
   TreeViewComboBox.cpp
-  GlSimpleEntityItemModel.cpp
+  GlEntityItemModel.cpp
   PluginModel.cpp
   GraphNeedsSavingObserver.cpp
   FileDownloader.cpp
@@ -179,7 +179,7 @@ QTX_WRAP_CPP(MOC_SRCS
   ../include/talipot/GlMainWidget.h
   ../include/talipot/GlMainWidgetGraphicsItem.h
   ../include/talipot/GlOverviewGraphicsItem.h
-  ../include/talipot/GlSimpleEntityItemModel.h
+  ../include/talipot/GlEntityItemModel.h
   ../include/talipot/GraphHierarchiesModel.h
   ../include/talipot/GraphNeedsSavingObserver.h
   ../include/talipot/GraphTableItemDelegate.h

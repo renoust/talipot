@@ -11,7 +11,8 @@
  *
  */
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
+#include <talipot/GlSceneVisitor.h>
 
 #include <talipot/GlComposite.h>
 
@@ -20,17 +21,17 @@
 using namespace std;
 
 namespace tlp {
-GlSimpleEntity::~GlSimpleEntity() {
+GlEntity::~GlEntity() {
   for (auto parent : parents) {
     parent->deleteGlEntity(this, false);
   }
 }
 
-void GlSimpleEntity::addParent(GlComposite *composite) {
+void GlEntity::addParent(GlComposite *composite) {
   parents.push_back(composite);
 }
 
-void GlSimpleEntity::setVisible(bool visible) {
+void GlEntity::setVisible(bool visible) {
   if (this->visible == visible)
     return;
 
@@ -41,12 +42,16 @@ void GlSimpleEntity::setVisible(bool visible) {
   }
 }
 
-void GlSimpleEntity::removeParent(GlComposite *composite) {
+void GlEntity::removeParent(GlComposite *composite) {
   auto it = find(parents.begin(), parents.end(), composite);
 
   if (it != parents.end()) {
     parents.erase(it);
   }
+}
+
+void GlEntity::acceptVisitor(GlSceneVisitor *visitor) {
+  visitor->visit(this);
 }
 
 }

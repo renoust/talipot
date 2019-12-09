@@ -16,13 +16,13 @@
 #ifndef TALIPOT_GL_CURVE_H
 #define TALIPOT_GL_CURVE_H
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 /** \brief This class is use to display an OpenGl curve
  *
  */
-class TLP_GL_SCOPE GlCurve : public GlSimpleEntity {
+class TLP_GL_SCOPE GlCurve : public GlEntity {
 public:
   /**
    * Basic constructor with vector of coord, begin/end color and begin/end size

@@ -23,10 +23,10 @@ using namespace std;
 namespace tlp {
 
 void drawComposite(GlComposite *composite, float lod, Camera *camera) {
-  map<string, GlSimpleEntity *> glEntities(composite->getGlEntities());
+  map<string, GlEntity *> glEntities(composite->getGlEntities());
 
   for (const auto &it : glEntities) {
-    GlSimpleEntity *entity = it.second;
+    GlEntity *entity = it.second;
     GlComposite *compositeEntity = dynamic_cast<GlComposite *>(entity);
 
     if (compositeEntity != nullptr) {

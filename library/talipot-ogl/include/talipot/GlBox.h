@@ -18,15 +18,15 @@
 
 #include <talipot/Color.h>
 #include <talipot/Size.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 
 /**
  * @ingroup OpenGL
- * @brief General class used to render boxes as GlSimpleEntity.
+ * @brief General class used to render boxes as GlEntity.
  */
-class TLP_GL_SCOPE GlBox : public GlSimpleEntity {
+class TLP_GL_SCOPE GlBox : public GlEntity {
 
 public:
   /**

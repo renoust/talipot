@@ -385,7 +385,7 @@ void GeographicView::loadStoredPolyInformation(const DataSet &dataset) {
     DataSet polyConf;
     dataset.get("polygons", polyConf);
     GlComposite *composite = geoViewGraphicsView->getPolygon();
-    const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
+    const map<string, GlEntity *> &entities = composite->getGlEntities();
 
     for (const auto &it : entities) {
       DataSet entityData;
@@ -405,7 +405,7 @@ void GeographicView::loadStoredPolyInformation(const DataSet &dataset) {
 void GeographicView::saveStoredPolyInformation(DataSet &dataset) const {
   GlComposite *composite = geoViewGraphicsView->getPolygon();
   DataSet polyConf;
-  const map<string, GlSimpleEntity *> &entities = composite->getGlEntities();
+  const map<string, GlEntity *> &entities = composite->getGlEntities();
 
   for (const auto &it : entities) {
     DataSet entityData;

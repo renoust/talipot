@@ -17,7 +17,7 @@
 #include "POLIB/GraphDimension.h"
 #include "POLIB/PixelOrientedMediator.h"
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlBoundingBoxSceneVisitor.h>
 #include <talipot/Graph.h>
 #include <talipot/GlRect.h>

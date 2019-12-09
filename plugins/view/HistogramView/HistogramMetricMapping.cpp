@@ -553,7 +553,7 @@ void GlGlyphScale::draw(float, Camera *camera) {
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   for (auto n : glyphGraph->nodes()) {
-    glNode.id = n.id;
+    glNode.n = n;
     glNode.draw(30, glyphGraphInputData, camera);
   }
 }
@@ -986,9 +986,9 @@ bool HistogramMetricMapping::draw(GlMainWidget *glMainWidget) {
       yEnd = glSizeScale->getBaseCoord().getY();
     } else {
       glGlyphScale->draw(0, &camera);
-      GlNode glNode(0);
+      GlNode glNode;
       for (auto n : glyphMappingGraph->nodes()) {
-        glNode.id = n.id;
+        glNode.n = n;
         glNode.draw(30, glyphMappingGraphInputData, &camera);
       }
       xStart = glGlyphScale->getBaseCoord().getX();
@@ -1025,7 +1025,7 @@ bool HistogramMetricMapping::draw(GlMainWidget *glMainWidget) {
 }
 
 bool HistogramMetricMapping::pointerUnderScale(const Coord &sceneCoords) {
-  GlSimpleEntity *scale = nullptr;
+  GlEntity *scale = nullptr;
 
   if (mappingType == VIEWCOLOR_MAPPING || mappingType == VIEWBORDERCOLOR_MAPPING) {
     scale = glColorScale;

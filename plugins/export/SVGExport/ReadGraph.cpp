@@ -70,7 +70,7 @@ static bool treatEdges(Graph *graph, tlp::PluginProgress *pp, ExportInterface &e
       return false;
     }
 
-    GlEdge glEdge(e);
+    GlEdge glEdge(e, graph);
     Coord srcCoord, tgtCoord;
     Size srcSize, tgtSize;
     vector<Coord> edgeVertices;

@@ -28,6 +28,8 @@ class BooleanProperty;
 class DoubleProperty;
 class SizeProperty;
 
+class GlLayer;
+
 /// This interactor allows to move/rotate/stretch the current selection layout
 class TLP_QT_SCOPE MouseSelectionEditor : public GLInteractorComponent {
 

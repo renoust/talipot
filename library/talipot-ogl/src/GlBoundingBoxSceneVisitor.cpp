@@ -13,7 +13,7 @@
 
 #include <talipot/GlBoundingBoxSceneVisitor.h>
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlNode.h>
 #include <talipot/GlEdge.h>
 #include <talipot/ParallelTools.h>
@@ -37,7 +37,7 @@ BoundingBox GlBoundingBoxSceneVisitor::getBoundingBox() {
   return bb;
 }
 
-void GlBoundingBoxSceneVisitor::visit(GlSimpleEntity *entity) {
+void GlBoundingBoxSceneVisitor::visit(GlEntity *entity) {
   if (entity->isVisible()) {
     BoundingBox bb = entity->getBoundingBox();
 

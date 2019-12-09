@@ -23,7 +23,7 @@
 
 namespace tlp {
 
-class GlSimpleEntity;
+class GlEntity;
 class Graph;
 class GlGraphComposite;
 
@@ -34,7 +34,7 @@ class GlGraphComposite;
  * After a selection, objects of SelectedEntity is returned
  * To use this object the first thing to do is to call getEntity type to know the type of Entity
  * After that you can :
- *   - Get the GlSimpleEnity pointer (getSimpleEntity())
+ *   - Get the GlSimpleEnity pointer (getEntity())
  *   - Get the id of node/edge and the graph associated (getComplexEntityId() and
  * getComplexEntityGraph())
  *
@@ -49,17 +49,17 @@ struct SelectedEntity {
   };
 
   SelectedEntity()
-      : simpleEntity(nullptr), complexEntityId(uint(-1)), entityType(UNKNOW_SELECTED),
+      : entity(nullptr), complexEntityId(uint(-1)), entityType(UNKNOW_SELECTED),
         complexEntityGraph(nullptr) {}
-  SelectedEntity(GlSimpleEntity *entity)
-      : simpleEntity(entity), complexEntityId(uint(-1)), entityType(SIMPLE_ENTITY_SELECTED),
+  SelectedEntity(GlEntity *entity)
+      : entity(entity), complexEntityId(uint(-1)), entityType(SIMPLE_ENTITY_SELECTED),
         complexEntityGraph(nullptr) {}
   SelectedEntity(Graph *graph, unsigned int id, SelectedEntityType type)
-      : simpleEntity(nullptr), complexEntityId(id), entityType(type), complexEntityGraph(graph) {}
+      : entity(nullptr), complexEntityId(id), entityType(type), complexEntityGraph(graph) {}
 
-  GlSimpleEntity *getSimpleEntity() const {
-    assert(simpleEntity != nullptr);
-    return simpleEntity;
+  GlEntity *getEntity() const {
+    assert(entity != nullptr);
+    return entity;
   }
 
   unsigned int getComplexEntityId() const {
@@ -112,7 +112,7 @@ struct SelectedEntity {
   }
 
 protected:
-  GlSimpleEntity *simpleEntity;
+  GlEntity *entity;
   unsigned int complexEntityId;
   SelectedEntityType entityType;
   Graph *complexEntityGraph;
@@ -130,7 +130,7 @@ protected:
  * If you create more than one GlLayer, layers are rendered one after one, so the first GlLayer
  * added is rendered in first.
  * @see GlLayer
- * @see GlSimpleEntity
+ * @see GlEntity
  *
  *
  * After adding layers you can do a centerScene() and a draw()
@@ -251,7 +251,7 @@ public:
 
   /**
    * @brief Select entities in scene
-   * @param type Entities type to select (SelectSimpleEntities,SelectNodes,SelectEdges)
+   * @param type Entities type to select (SelectEntities,SelectNodes,SelectEdges)
    * @param x screen coordinates
    * @param y screen coordinates
    * @param h height in screen coordinates
@@ -567,8 +567,8 @@ public:
    * @brief You don't have to call these functions
    * They are called by GlComposite to send entity modification event
    */
-  void notifyModifyEntity(GlSimpleEntity *entity);
-  void notifyDeletedEntity(GlSimpleEntity *entity);
+  void notifyModifyEntity(GlEntity *entity);
+  void notifyDeletedEntity(GlEntity *entity);
 
   ///@endcond
 };

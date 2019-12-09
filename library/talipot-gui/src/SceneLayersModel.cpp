@@ -108,7 +108,7 @@ QModelIndex SceneLayersModel::parent(const QModelIndex &child) const {
       return QModelIndex(); // Item was a layer, aka. a top level item.
   }
 
-  GlSimpleEntity *entity = static_cast<GlSimpleEntity *>(child.internalPointer());
+  GlEntity *entity = static_cast<GlEntity *>(child.internalPointer());
   GlComposite *parent = entity->getParent();
 
   if (parent == nullptr)
@@ -153,7 +153,7 @@ int SceneLayersModel::rowCount(const QModelIndex &parent) const {
   if (GRAPH_COMPOSITE_IDS.contains(parent.internalId()))
     return 0;
 
-  GlSimpleEntity *entity = static_cast<GlSimpleEntity *>(parent.internalPointer());
+  GlEntity *entity = static_cast<GlEntity *>(parent.internalPointer());
 
   if (_scene->getGlGraphComposite() == entity)
     return GRAPH_COMPOSITE_IDS.size();
@@ -170,7 +170,7 @@ int SceneLayersModel::columnCount(const QModelIndex &) const {
 
 QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
   GlComposite *parent = nullptr;
-  GlSimpleEntity *entity = nullptr;
+  GlEntity *entity = nullptr;
   GlLayer *layer = nullptr;
 
   if (GRAPH_COMPOSITE_IDS.contains(index.internalId())) {
@@ -237,7 +237,7 @@ QVariant SceneLayersModel::data(const QModelIndex &index, int role) const {
     layer = static_cast<GlLayer *>(index.internalPointer());
     entity = layer->getComposite();
   } else {
-    entity = static_cast<GlSimpleEntity *>(index.internalPointer());
+    entity = static_cast<GlEntity *>(index.internalPointer());
     parent = entity->getParent();
   }
 
@@ -323,14 +323,14 @@ bool SceneLayersModel::setData(const QModelIndex &index, const QVariant &value, 
     return true;
   }
 
-  GlSimpleEntity *entity = nullptr;
+  GlEntity *entity = nullptr;
   GlLayer *layer = nullptr;
 
   if (!index.parent().isValid()) {
     layer = static_cast<GlLayer *>(index.internalPointer());
     entity = layer->getComposite();
   } else
-    entity = static_cast<GlSimpleEntity *>(index.internalPointer());
+    entity = static_cast<GlEntity *>(index.internalPointer());
 
   bool val = value.value<int>() == int(Qt::Checked);
 
@@ -385,7 +385,7 @@ void SceneLayersModel::treatEvent(const Event &e) {
         QModelIndexList persistentIndexes = persistentIndexList();
 
         for (int i = 0; i < persistentIndexes.size(); ++i) {
-          if (persistentIndexes.at(i).internalPointer() == glse->getGlSimpleEntity()) {
+          if (persistentIndexes.at(i).internalPointer() == glse->getGlEntity()) {
             changePersistentIndex(persistentIndexes.at(i), QModelIndex());
             break;
           }

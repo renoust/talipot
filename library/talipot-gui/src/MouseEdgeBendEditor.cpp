@@ -104,7 +104,7 @@ bool MouseEdgeBendEditor::eventFilter(QObject *widget, QEvent *e) {
           // We have click outside an entity
           _operation = NONE_OP;
         } else {
-          selectedEntity = circleString->findKey(select[0].getSimpleEntity());
+          selectedEntity = circleString->findKey(select[0].getEntity());
 
           if (qMouseEv->modifiers() &
 #if defined(__APPLE__)
@@ -189,7 +189,7 @@ bool MouseEdgeBendEditor::eventFilter(QObject *widget, QEvent *e) {
 
     if (!selectedEntities.empty())
       if (selectedEntities[0].getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED)
-        if (selectedEntities[0].getSimpleEntity() == edgeEntity) {
+        if (selectedEntities[0].getEntity() == edgeEntity) {
           mouseButtonPressOnEdge = true;
           return true;
         }
@@ -201,7 +201,7 @@ bool MouseEdgeBendEditor::eventFilter(QObject *widget, QEvent *e) {
 
     if (!selectedEntities.empty())
       if (selectedEntities[0].getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED)
-        if (selectedEntities[0].getSimpleEntity() == edgeEntity && mouseButtonPressOnEdge) {
+        if (selectedEntities[0].getEntity() == edgeEntity && mouseButtonPressOnEdge) {
           mouseButtonPressOnEdge = false;
           return true;
         }

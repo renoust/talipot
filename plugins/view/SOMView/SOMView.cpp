@@ -770,12 +770,12 @@ vector<SOMPreviewComposite *> SOMView::getPreviews() {
 
 void SOMView::getPreviewsAtViewportCoord(int x, int y, std::vector<SOMPreviewComposite *> &result) {
   vector<SelectedEntity> selectedEntities;
-  previewWidget->getScene()->selectEntities(RenderingSimpleEntities, x, y, 0, 0, nullptr,
+  previewWidget->getScene()->selectEntities(RenderingEntities, x, y, 0, 0, nullptr,
                                             selectedEntities);
 
   for (const auto &itEntities : selectedEntities) {
     for (const auto &itSOM : propertyToPreviews) {
-      if (itSOM.second->isElement(itEntities.getSimpleEntity())) {
+      if (itSOM.second->isElement(itEntities.getEntity())) {
         result.push_back(itSOM.second);
       }
     }
@@ -1153,9 +1153,9 @@ void SOMView::addEmptyViewLabel() {
 
 void SOMView::removeEmptyViewLabel() {
   GlLayer *mainLayer = previewWidget->getScene()->getLayer("Main");
-  GlSimpleEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
-  GlSimpleEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
-  GlSimpleEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
+  GlEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
+  GlEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
+  GlEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
 
   if (noDimsLabel) {
     mainLayer->deleteGlEntity(noDimsLabel);

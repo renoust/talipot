@@ -50,7 +50,7 @@ void PathHighlighter::clear() {
 
     for (const auto &it : entities) {
       string entityName(it.first);
-      GlSimpleEntity *entity(layer->findGlEntity(entityName));
+      GlEntity *entity(layer->findGlEntity(entityName));
 
       if (entity) {
         layer->deleteGlEntity(entity);
@@ -64,7 +64,7 @@ void PathHighlighter::clear() {
   }
 }
 
-void PathHighlighter::addGlEntity(GlScene *scene, GlSimpleEntity *entity, bool deleteOnExit,
+void PathHighlighter::addGlEntity(GlScene *scene, GlEntity *entity, bool deleteOnExit,
                                   const string &name) {
   string realName = name;
 

@@ -204,7 +204,7 @@ void ColorScaleSlider::update(std::set<Observable *>::iterator, std::set<Observa
 void ColorScaleSlider::observableDestroyed(Observable *) {}
 
 SliderBar::SliderBar(ColorScaleSlider *left, ColorScaleSlider *right, const string &textureName)
-    : GlSimpleEntity(), left(left), right(right), texture(textureName), isVisible(false) {}
+    : GlEntity(), left(left), right(right), texture(textureName), isVisible(false) {}
 
 SliderBar::~SliderBar() {}
 
@@ -322,7 +322,7 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
     // Update Camera for selection
     layer->set2DMode();
     glMainWidget->getScene()->addExistingLayer(layer);
-    glMainWidget->getScene()->selectEntities(RenderingSimpleEntities, me->x(), me->y(), 0, 0, layer,
+    glMainWidget->getScene()->selectEntities(RenderingEntities, me->x(), me->y(), 0, 0, layer,
                                              selectedEntities);
     glMainWidget->getScene()->removeLayer(layer, false);
 
@@ -332,7 +332,7 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
         for (const auto &itDisplay : layer->getGlEntities()) {
           GlComposite *composite = dynamic_cast<GlComposite *>(itDisplay.second);
 
-          if (composite && !composite->findKey(itPE.getSimpleEntity()).empty()) {
+          if (composite && !composite->findKey(itPE.getEntity()).empty()) {
 
             Slider *slider = dynamic_cast<Slider *>(composite);
 
@@ -343,7 +343,7 @@ bool ThresholdInteractor::eventFilter(QObject *widget, QEvent *event) {
 
             break;
           } else {
-            if (itDisplay.second == (itPE.getSimpleEntity())) {
+            if (itDisplay.second == (itPE.getEntity())) {
               Slider *slider = dynamic_cast<Slider *>(itDisplay.second);
 
               if (slider) {

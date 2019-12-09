@@ -42,9 +42,9 @@ public:
   GlBoundingBoxSceneVisitor(GlGraphInputData *inputData);
 
   /**
-   * Method used for GlSimpleEntity
+   * Method used for GlEntity
    */
-  void visit(GlSimpleEntity *entity) override;
+  void visit(GlEntity *entity) override;
   /**
    * Method used for GlNodes (and GlMetaNodes)
    */

@@ -22,18 +22,18 @@
 
 namespace tlp {
 
-class GlSimpleEntity;
+class GlEntity;
 
-class TLP_QT_SCOPE GlSimpleEntityItemEditor {
+class TLP_QT_SCOPE GlEntityItemEditor {
 public:
-  GlSimpleEntityItemEditor(GlSimpleEntity *ent) : entity(ent) {}
-  virtual ~GlSimpleEntityItemEditor() {}
+  GlEntityItemEditor(GlEntity *ent) : entity(ent) {}
+  virtual ~GlEntityItemEditor() {}
 
   /**
    * @brief Return properties names for this entity
    * These properties names are used to dynamically configure the embedded entity
    * for example these function can be used by Mouse information interactor
-   * If you create a class that inherits of GlSimpleEntityItemEditor : you can reimplement this
+   * If you create a class that inherits of GlEntityItemEditor : you can reimplement this
    * function to return your properties names
    * for example : return QStringList() << "fillColor" << "outlineColor";
    * @return QList of properties names
@@ -44,7 +44,7 @@ public:
    * @brief Return properties (in  QVariant format) for this entity
    * These properties QVariant are used to dynamically configure the entity
    * for example these function can be used by Mouse information interactor
-   * If you create a class that inherits of GlSimpleEntity : you can reimplement this function to
+   * If you create a class that inherits of GlEntity : you can reimplement this function to
    * return your properties
    * for example : return QVariantList() << QVariant::fromValue<Color>(getFillColor()) <<
    * QVariant::fromValue<Color>(getOutlineColor());
@@ -57,7 +57,7 @@ public:
    * functions
    * This function is call when we want to set value of a property
    * this parameter is returned in list by propertiesNames() and properties functions
-   * If you create a class that inherits of GlSimpleEntityItemEditor : you can reimplement this
+   * If you create a class that inherits of GlEntityItemEditor : you can reimplement this
    * function to set your properties
    * For example :
    * if(name=="fillColor")
@@ -68,18 +68,18 @@ public:
   virtual void setProperty(const QString &name, const QVariant &value);
 
 protected:
-  GlSimpleEntity *entity;
+  GlEntity *entity;
 };
 
-class TLP_QT_SCOPE GlSimpleEntityItemModel : public QAbstractItemModel {
+class TLP_QT_SCOPE GlEntityItemModel : public QAbstractItemModel {
   Q_OBJECT
-  Q_ENUMS(SimpleEntityRole)
+  Q_ENUMS(EntityRole)
 
 public:
-  enum SimpleEntityRole { SimpleEntityRole = Qt::UserRole + 1 };
+  enum EntityRole { EntityRole = Qt::UserRole + 1 };
 
-  GlSimpleEntityItemModel(GlSimpleEntityItemEditor *itemEditor, QObject *parent = nullptr);
-  ~GlSimpleEntityItemModel() override;
+  GlEntityItemModel(GlEntityItemEditor *itemEditor, QObject *parent = nullptr);
+  ~GlEntityItemModel() override;
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   int columnCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -100,7 +100,7 @@ public:
   }
 
 protected:
-  GlSimpleEntityItemEditor *editor;
+  GlEntityItemEditor *editor;
 };
 }
 

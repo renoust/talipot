@@ -24,9 +24,8 @@
 #include <talipot/GlXMLTools.h>
 #include <talipot/GlCPULODCalculator.h>
 #include <talipot/GlBoundingBoxSceneVisitor.h>
-#include <talipot/GlSelectSceneVisitor.h>
 #include <talipot/Camera.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlGraphComposite.h>
 #include <talipot/GlSceneObserver.h>
 
@@ -41,11 +40,11 @@ struct EntityWithDistance {
 
   EntityWithDistance(const double &dist, const EntityLODUnit *entity)
       : distance(dist), entity(entity), isComplexEntity(false), isNode(true) {}
-  EntityWithDistance(const double &dist, const ComplexEntityLODUnit *entity, bool isNode)
+  EntityWithDistance(const double &dist, const GraphElementLODUnit *entity, bool isNode)
       : distance(dist), entity(entity), isComplexEntity(true), isNode(isNode) {}
 
   double distance;
-  const EntityLODUnit *entity;
+  const LODUnit *entity;
   bool isComplexEntity;
   bool isNode;
 };
@@ -183,7 +182,7 @@ void GlScene::draw() {
     // Draw simple entities
     if (getGlGraphComposite() &&
         !getGlGraphComposite()->getInputData()->parameters->isElementZOrdered()) {
-      for (const auto &it : itLayer.simpleEntitiesLODVector) {
+      for (const auto &it : itLayer.entitiesLODVector) {
         if (it.lod < 0)
           continue;
 
@@ -198,7 +197,7 @@ void GlScene::draw() {
       BoundingBox bb;
       double dist;
 
-      for (const auto &it : itLayer.simpleEntitiesLODVector) {
+      for (const auto &it : itLayer.entitiesLODVector) {
         if (it.lod < 0)
           continue;
 
@@ -212,7 +211,7 @@ void GlScene::draw() {
 
       for (const auto &it : entitiesSet) {
         // Simple entities
-        GlSimpleEntity *entity = static_cast<const SimpleEntityLODUnit *>(it.entity)->entity;
+        GlEntity *entity = static_cast<const EntityLODUnit *>(it.entity)->entity;
         glStencilFunc(GL_LEQUAL, entity->getStencil(), 0xFFFF);
         entity->draw(it.entity->lod, camera);
       }
@@ -426,12 +425,12 @@ void GlScene::notifyModifyLayer(const std::string &name, GlLayer *layer) {
     sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_MODIFYLAYER, name, layer));
 }
 
-void GlScene::notifyModifyEntity(GlSimpleEntity *entity) {
+void GlScene::notifyModifyEntity(GlEntity *entity) {
   if (hasOnlookers())
     sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_MODIFYENTITY, entity));
 }
 
-void GlScene::notifyDeletedEntity(GlSimpleEntity *entity) {
+void GlScene::notifyDeletedEntity(GlEntity *entity) {
   if (hasOnlookers())
     sendEvent(GlSceneEvent(*this, GlSceneEvent::TLP_DELENTITY, entity));
 }
@@ -740,7 +739,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
 
     const Vec4i &viewport = camera->getViewport();
 
-    unsigned int size = itLayer.simpleEntitiesLODVector.size();
+    unsigned int size = itLayer.entitiesLODVector.size();
 
     if (size == 0)
       continue;
@@ -779,10 +778,10 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
 
     unordered_map<unsigned int, SelectedEntity> idToEntity;
 
-    if (type & RenderingSimpleEntities) {
+    if (type & RenderingEntities) {
       unsigned int id = 1;
 
-      for (const auto &it : itLayer.simpleEntitiesLODVector) {
+      for (const auto &it : itLayer.entitiesLODVector) {
         if (it.lod < 0)
           continue;
 
@@ -794,7 +793,7 @@ bool GlScene::selectEntities(RenderingEntitiesFlag type, int x, int y, int w, in
     }
 
     if ((type & RenderingNodes) || (type & RenderingEdges)) {
-      for (const auto &it : itLayer.simpleEntitiesLODVector) {
+      for (const auto &it : itLayer.entitiesLODVector) {
         if (it.lod < 0)
           continue;
 

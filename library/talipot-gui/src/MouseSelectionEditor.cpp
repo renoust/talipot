@@ -209,13 +209,13 @@ bool MouseSelectionEditor::eventFilter(QObject *widget, QEvent *e) {
 
       for (unsigned int i = 0; (i < select.size()) && (shapeId == -1); ++i) {
         for (int j = 0; j < 8; ++j) {
-          if (select[i].getSimpleEntity() == &_controls[j]) {
+          if (select[i].getEntity() == &_controls[j]) {
             shapeId = i;
           }
         }
 
         for (int j = 0; j < 6; ++j) {
-          if (select[i].getSimpleEntity() == &_advControls[j]) {
+          if (select[i].getEntity() == &_advControls[j]) {
             advShape = true;
             shapeId = i;
           }
@@ -224,13 +224,13 @@ bool MouseSelectionEditor::eventFilter(QObject *widget, QEvent *e) {
 
       if (shapeId != -1) {
         if (!advShape) {
-          static_cast<GlCircle *>(select[shapeId].getSimpleEntity())
+          static_cast<GlCircle *>(select[shapeId].getEntity())
               ->setFillColor(Color(40, 255, 40, 200));
-          static_cast<GlCircle *>(select[shapeId].getSimpleEntity())
+          static_cast<GlCircle *>(select[shapeId].getEntity())
               ->setOutlineColor(Color(20, 128, 20, 200));
         }
 
-        getOperation(select[shapeId].getSimpleEntity());
+        getOperation(select[shapeId].getEntity());
 
         switch (operation) {
         case ALIGN_TOP:

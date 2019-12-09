@@ -54,9 +54,8 @@ SET(talipot-ogl_LIB_SRCS
   GlScene.cpp
   GlSceneObserver.cpp
   GlSceneZoomAndPan.cpp
-  GlSelectSceneVisitor.cpp
   GlShaderProgram.cpp
-  GlSimpleEntity.cpp
+  GlEntity.cpp
   GlSphere.cpp
   GlStar.cpp
   GlTextureManager.cpp

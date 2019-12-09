@@ -62,7 +62,7 @@ protected:
 
   SOMMap *som;
 
-  std::unordered_map<node, GlSimpleEntity *> nodesMap;
+  std::unordered_map<node, GlEntity *> nodesMap;
 
   Coord position;
   Size size;

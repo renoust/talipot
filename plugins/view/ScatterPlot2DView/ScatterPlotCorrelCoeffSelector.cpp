@@ -535,7 +535,7 @@ void ScatterPlotCorrelCoeffSelector::mapPolygonColorToCorrelCoeffOfData(
     GlNode glNode;
 
     for (size_t i = 0; i < tmpNodes.size(); ++i) {
-      glNode.id = tmpNodes[i].getComplexEntityId();
+      glNode.n = node(tmpNodes[i].getComplexEntityId());
       BoundingBox nodeBB(
           glNode.getBoundingBox(glWidget->getScene()->getGlGraphComposite()->getInputData()));
       float dx = nodeBB[1][0] - nodeBB[0][0];

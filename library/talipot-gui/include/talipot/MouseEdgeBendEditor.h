@@ -31,7 +31,7 @@ class DoubleProperty;
 class CoordVectorProperty;
 class IntegerProperty;
 
-class EdgeEntity : public GlSimpleEntity {
+class EdgeEntity : public GlEntity {
 
   Coord start;
   Coord end;

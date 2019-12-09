@@ -93,7 +93,7 @@ inline double square(double x) {
 } // namespace
 static void drawComposite(tlp::GlComposite *composite, float lod, tlp::Camera *camera) {
   for (const auto &it : composite->getGlEntities()) {
-    tlp::GlSimpleEntity *entity = it.second;
+    tlp::GlEntity *entity = it.second;
     tlp::GlComposite *compositeEntity = dynamic_cast<tlp::GlComposite *>(entity);
 
     if (compositeEntity != nullptr) {

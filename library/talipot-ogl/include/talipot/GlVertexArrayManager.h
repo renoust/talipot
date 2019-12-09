@@ -55,9 +55,9 @@ public:
   ~GlVertexArrayManager() override;
 
   /**
-   * Method used for GlSimpleEntity
+   * Method used for GlEntity
    */
-  void visit(GlSimpleEntity *) override {}
+  void visit(GlEntity *) override {}
 
   /**
    * Method used for GlNodes (and GlMetaNodes)

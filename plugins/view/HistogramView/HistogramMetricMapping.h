@@ -20,7 +20,7 @@
 #include <talipot/config.h>
 #include <talipot/GLInteractor.h>
 #include <talipot/TlpTools.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlCircle.h>
 #include <talipot/GlLabel.h>
 #include <talipot/GlPolyQuad.h>
@@ -36,7 +36,7 @@
 
 namespace tlp {
 
-class GlEditableCurve : public GlSimpleEntity {
+class GlEditableCurve : public GlEntity {
 
 public:
   GlEditableCurve(const Coord &startPoint, const Coord &endPoint, const Color &curveColor);
@@ -105,7 +105,7 @@ private:
   GlQuantitativeAxis *xAxis;
 };
 
-class GlSizeScale : public GlSimpleEntity {
+class GlSizeScale : public GlEntity {
 
 public:
   enum Orientation { Horizontal, Vertical };
@@ -164,7 +164,7 @@ private:
   GlLabel *minLabel, *maxLabel;
 };
 
-class GlGlyphScale : public GlSimpleEntity {
+class GlGlyphScale : public GlEntity {
 
 public:
   enum Orientation { Horizontal, Vertical };

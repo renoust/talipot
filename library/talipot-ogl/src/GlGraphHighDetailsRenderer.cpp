@@ -41,11 +41,11 @@ struct EntityWithDistance {
 
   EntityWithDistance(const double &dist, EntityLODUnit *entity)
       : distance(dist), entity(entity), isComplexEntity(false), isNode(false) {}
-  EntityWithDistance(const double &dist, ComplexEntityLODUnit *entity, bool isNode)
+  EntityWithDistance(const double &dist, GraphElementLODUnit *entity, bool isNode)
       : distance(dist), entity(entity), isComplexEntity(true), isNode(isNode) {}
 
   double distance;
-  EntityLODUnit *entity;
+  LODUnit *entity;
   bool isComplexEntity;
   bool isNode;
 };
@@ -63,18 +63,18 @@ struct entityWithDistanceCompare {
 
       if (e1.isNode) {
         e1Color = inputData->getElementColor()->getNodeValue(
-            node(static_cast<ComplexEntityLODUnit *>(e1.entity)->id));
+            node(static_cast<GraphElementLODUnit *>(e1.entity)->id));
       } else {
         e1Color = inputData->getElementColor()->getEdgeValue(
-            edge(static_cast<ComplexEntityLODUnit *>(e1.entity)->id));
+            edge(static_cast<GraphElementLODUnit *>(e1.entity)->id));
       }
 
       if (e2.isNode) {
         e2Color = inputData->getElementColor()->getNodeValue(
-            node(static_cast<ComplexEntityLODUnit *>(e2.entity)->id));
+            node(static_cast<GraphElementLODUnit *>(e2.entity)->id));
       } else {
         e2Color = inputData->getElementColor()->getEdgeValue(
-            edge(static_cast<ComplexEntityLODUnit *>(e2.entity)->id));
+            edge(static_cast<GraphElementLODUnit *>(e2.entity)->id));
       }
 
       if (e1Color[3] == 255 && e2Color[3] == 255) {
@@ -273,7 +273,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
             (*selectionCurrentId)++;
           }
 
-          GlNode glNode(it.id, it.pos);
+          GlNode glNode(node(it.id), graph);
           glNode.draw(it.lod, inputData, camera);
         } else {
           nodesMetricOrdered.push_back({node(it.id), it.lod});
@@ -305,7 +305,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
           (*selectionCurrentId)++;
         }
 
-        GlNode glNode(it.first.id, graph->nodePos(node(it.first.id)));
+        GlNode glNode(node(it.first.id), graph);
         glNode.draw(it.second, inputData, camera);
       }
     }
@@ -330,7 +330,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
             (*selectionCurrentId)++;
           }
 
-          GlEdge glEdge(it.id, it.pos, selectionDrawActivate);
+          GlEdge glEdge(edge(it.id), graph, selectionDrawActivate);
           glEdge.draw(it.lod, inputData, camera);
         } else {
           edgesMetricOrdered.push_back({edge(it.id), it.lod});
@@ -358,7 +358,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
             (*selectionCurrentId)++;
           }
 
-          GlEdge glEdge(it.first.id, graph->edgePos(edge(it.first.id)), selectionDrawActivate);
+          GlEdge glEdge(edge(it.first.id), graph, selectionDrawActivate);
           glEdge.draw(it.second, inputData, camera);
         }
       }
@@ -404,7 +404,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
     // Draw
     for (const auto &it : entitiesSet) {
       // Complex entities
-      ComplexEntityLODUnit *entity = static_cast<ComplexEntityLODUnit *>(it.entity);
+      GraphElementLODUnit *entity = static_cast<GraphElementLODUnit *>(it.entity);
 
       if (it.isNode) {
 
@@ -427,7 +427,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
             (*selectionCurrentId)++;
           }
 
-          GlNode glNode(entity->id, graph->nodePos(node(entity->id)));
+          GlNode glNode(node(entity->id), graph);
           glNode.draw(entity->lod, inputData, camera);
 
           if (renderOnlyOneNode)
@@ -454,7 +454,7 @@ void GlGraphHighDetailsRenderer::draw(float, Camera *camera) {
           (*selectionCurrentId)++;
         }
 
-        GlEdge glEdge(entity->id, graph->edgePos(edge(entity->id)), selectionDrawActivate);
+        GlEdge glEdge(edge(entity->id), graph, selectionDrawActivate);
         glEdge.draw(entity->lod, inputData, camera);
       }
     }
@@ -584,7 +584,7 @@ void GlGraphHighDetailsRenderer::drawLabelsForComplexEntities(bool drawSelected,
 
       if (selectionProperty->getNodeValue(n) == drawSelected) {
         if (!metric) {
-          GlNode glNode(n.id, it.pos);
+          GlNode glNode(n, graph);
           glNode.drawLabel(occlusionTest, inputData, lod, layerLODUnit.camera);
         } else {
           // Metric ordered
@@ -602,7 +602,7 @@ void GlGraphHighDetailsRenderer::drawLabelsForComplexEntities(bool drawSelected,
       sort(nodesMetricOrdered.begin(), nodesMetricOrdered.end(), ltn);
 
       for (auto it : nodesMetricOrdered) {
-        GlNode glNode(it.first.id, graph->nodePos(node(it.first.id)));
+        GlNode glNode(node(it.first.id), graph);
         glNode.drawLabel(occlusionTest, inputData, it.second, layerLODUnit.camera);
       }
     }
@@ -627,7 +627,7 @@ void GlGraphHighDetailsRenderer::drawLabelsForComplexEntities(bool drawSelected,
       if (selectionProperty->getEdgeValue(e) == drawSelected) {
         if (!metric) {
           // Not metric ordered
-          GlEdge glEdge(e.id, it.pos);
+          GlEdge glEdge(e, graph);
           glEdge.drawLabel(occlusionTest, inputData, it.lod, layerLODUnit.camera);
         } else {
           // Metric ordered
@@ -645,7 +645,7 @@ void GlGraphHighDetailsRenderer::drawLabelsForComplexEntities(bool drawSelected,
       sort(edgesMetricOrdered.begin(), edgesMetricOrdered.end(), lte);
 
       for (auto &it : edgesMetricOrdered) {
-        GlEdge glEdge(it.first.id, graph->edgePos(edge(it.first.id)));
+        GlEdge glEdge(edge(it.first.id), graph);
         glEdge.drawLabel(occlusionTest, inputData, it.second, layerLODUnit.camera);
       }
     }

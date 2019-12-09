@@ -54,26 +54,27 @@ void GlGraphRenderer::visitGraph(GlSceneVisitor *visitor, bool visitHiddenEntiti
 }
 
 void GlGraphRenderer::visitNodes(Graph *graph, GlSceneVisitor *visitor) {
-  auto fn = [&](node n, unsigned int i) {
-    GlNode glNode(n, i);
+  auto visitNode = [&](node n) {
+    GlNode glNode(n, graph);
     visitor->visit(&glNode);
   };
 
-  if (visitor->isThreadSafe())
-    TLP_PARALLEL_MAP_NODES_AND_INDICES(graph, fn);
-  else
-    TLP_MAP_NODES_AND_INDICES(graph, fn);
+  if (visitor->isThreadSafe()) {
+    TLP_PARALLEL_MAP_NODES(graph, visitNode);
+  } else {
+    TLP_MAP_NODES(graph, visitNode);
+  }
 }
 
 void GlGraphRenderer::visitEdges(Graph *graph, GlSceneVisitor *visitor) {
-  auto fn = [&](edge e, unsigned int i) {
-    GlEdge glEdge(e, i);
+  auto visitEdge = [&](edge e) {
+    GlEdge glEdge(e, graph);
     visitor->visit(&glEdge);
   };
 
   if (visitor->isThreadSafe())
-    TLP_PARALLEL_MAP_EDGES_AND_INDICES(graph, fn);
+    TLP_PARALLEL_MAP_EDGES(graph, visitEdge);
   else
-    TLP_MAP_EDGES_AND_INDICES(graph, fn);
+    TLP_MAP_EDGES(graph, visitEdge);
 }
 }

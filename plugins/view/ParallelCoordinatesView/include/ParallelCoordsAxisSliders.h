@@ -14,7 +14,7 @@
 #ifndef PARALLEL_COORDS_AXIS_SLIDERS_H
 #define PARALLEL_COORDS_AXIS_SLIDERS_H
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GLInteractor.h>
 #include <talipot/GlLabel.h>
 #include <talipot/GlPolygon.h>
@@ -28,7 +28,7 @@ class ParallelCoordinatesView;
 
 enum sliderType { TOP_SLIDER = 0, BOTTOM_SLIDER = 1 };
 
-class AxisSlider : public GlSimpleEntity {
+class AxisSlider : public GlEntity {
 
 public:
   AxisSlider(const sliderType type, const Coord &sliderCoord, const float halfWidth,

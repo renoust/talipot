@@ -10,7 +10,6 @@ INSTALL(FILES
   talipot/GlCatmullRomCurve.h
   talipot/GlCircle.h
   talipot/GlColorScale.h
-  talipot/GlComplexeEntity.h
   talipot/GlComplexPolygon.h
   talipot/GlComposite.h
   talipot/GlCPULODCalculator.h
@@ -39,7 +38,6 @@ INSTALL(FILES
   talipot/GlSceneVisitor.h
   talipot/GlSceneZoomAndPan.h
   talipot/GlShaderProgram.h
-  talipot/GlSimpleEntity.h
   talipot/GlSphere.h
   talipot/GlStar.h
   talipot/GlTextureManager.h

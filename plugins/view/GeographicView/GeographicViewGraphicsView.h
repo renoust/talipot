@@ -179,7 +179,7 @@ private:
   QPushButton *zoomInButton;
 
   GlComposite *polygonEntity;
-  GlSimpleEntity *planisphereEntity;
+  GlEntity *planisphereEntity;
 
   AddressSelectionDialog *addressSelectionDialog;
   QGraphicsProxyWidget *addressSelectionProxy;

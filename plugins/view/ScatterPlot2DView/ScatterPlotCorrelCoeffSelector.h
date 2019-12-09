@@ -14,7 +14,7 @@
 #ifndef SCATTER_PLOT_CORREL_COEFF_SELECTOR_H
 #define SCATTER_PLOT_CORREL_COEFF_SELECTOR_H
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlCircle.h>
 #include <talipot/GLInteractor.h>
 
@@ -23,7 +23,7 @@ namespace tlp {
 class ScatterPlotCorrelCoeffSelectorOptionsWidget;
 class ScatterPlot2DView;
 
-class GlEditableComplexPolygon : public GlSimpleEntity {
+class GlEditableComplexPolygon : public GlEntity {
 
 public:
   GlEditableComplexPolygon(std::vector<Coord> polygonPoints, const Color &color);

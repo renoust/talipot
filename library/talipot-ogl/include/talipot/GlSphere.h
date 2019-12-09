@@ -19,7 +19,7 @@
 #include <talipot/Coord.h>
 #include <talipot/Color.h>
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 
@@ -27,7 +27,7 @@ namespace tlp {
  * @ingroup OpenGL
  * @brief Class to create a sphere with GlEntity system
  */
-class TLP_GL_SCOPE GlSphere : public GlSimpleEntity {
+class TLP_GL_SCOPE GlSphere : public GlEntity {
 
 public:
   /**

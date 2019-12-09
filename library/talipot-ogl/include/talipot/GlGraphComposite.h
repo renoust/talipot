@@ -29,8 +29,8 @@ class GlGraphRenderer;
  * @ingroup OpenGL
  * @brief Class use to visualize graph in OpenGL Tulip engine
  *
- * GlSimpleEntity specialisation used to visualize graph in GlScene system
- * @see GlSimpleEntity
+ * GlEntity specialisation used to visualize graph in GlScene system
+ * @see GlEntity
  * @see GlScene
  *
  * To visualize graph you have to create a new GlGraphComposite and add it to a GlLayer of a GlScene

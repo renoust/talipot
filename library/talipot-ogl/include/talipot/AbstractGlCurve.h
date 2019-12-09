@@ -22,14 +22,14 @@
 
 #include <talipot/Color.h>
 #include <talipot/Coord.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 
 class GlShaderProgram;
 class GlShader;
 
-class TLP_GL_SCOPE AbstractGlCurve : public GlSimpleEntity {
+class TLP_GL_SCOPE AbstractGlCurve : public GlEntity {
 
 public:
   AbstractGlCurve(const std::string &shaderProgramName, const std::string &curveSpecificShaderCode);

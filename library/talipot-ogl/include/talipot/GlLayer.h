@@ -32,7 +32,7 @@ class GlGraphComposite;
  * Layers are used with GlScene : you can add a layer to a scene and a scene can have many layers
  * @see Camera
  * @see GlComposite
- * @see GlSimpleEntity
+ * @see GlEntity
  * @see GlScene
  *
  *
@@ -124,7 +124,7 @@ public:
   /**
    * @brief Add an entity to GlComposite of the layer
    */
-  void addGlEntity(GlSimpleEntity *entity, const std::string &name);
+  void addGlEntity(GlEntity *entity, const std::string &name);
 
   /**
    * @brief A Convenience function that adds a graph to the layer
@@ -143,17 +143,17 @@ public:
    * @brief Remove entity
    * This entity is not deleted
    */
-  void deleteGlEntity(GlSimpleEntity *entity);
+  void deleteGlEntity(GlEntity *entity);
 
   /**
    * @brief Return entity with name : key
    */
-  GlSimpleEntity *findGlEntity(const std::string &key);
+  GlEntity *findGlEntity(const std::string &key);
 
   /**
    * @brief Return the map of layer's entities
    */
-  const std::map<std::string, GlSimpleEntity *> &getGlEntities() const;
+  const std::map<std::string, GlEntity *> &getGlEntities() const;
 
   /**
    * @brief Return the GlComposite used by the layer

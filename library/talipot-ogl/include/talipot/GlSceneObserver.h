@@ -23,9 +23,9 @@
 
 namespace tlp {
 
+class GlEntity;
 class GlLayer;
 class GlScene;
-class GlSimpleEntity;
 
 /** \brief An observer to the scene
  * An observer to the scene who observe layers
@@ -43,9 +43,9 @@ public:
   GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType, const std::string &layerName,
                GlLayer *layer);
 
-  GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType, GlSimpleEntity *entity);
+  GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType, GlEntity *entity);
 
-  GlSimpleEntity *getGlSimpleEntity() const;
+  GlEntity *getGlEntity() const;
 
   std::string getLayerName() const;
 
@@ -57,7 +57,7 @@ protected:
   GlSceneEventType sceneEventType;
   std::string layerName;
   GlLayer *layer;
-  GlSimpleEntity *glSimpleEntity;
+  GlEntity *entity;
 };
 }
 

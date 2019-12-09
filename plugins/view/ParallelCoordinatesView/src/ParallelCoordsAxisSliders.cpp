@@ -463,7 +463,7 @@ AxisSlider *ParallelCoordsAxisSliders::getSliderUnderPointer(GlMainWidget *glWid
   if (glWidget->pickGlEntities(x, y, pickedEntities, selectionLayer)) {
     for (size_t i = 0; i < pickedEntities.size(); ++i) {
       for (auto as : axisSlidersMap[axis]) {
-        if (as == pickedEntities[i].getSimpleEntity()) {
+        if (as == pickedEntities[i].getEntity()) {
           return as;
         }
       }

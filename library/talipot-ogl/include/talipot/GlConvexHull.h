@@ -50,15 +50,7 @@ public:
   /**
    * Function used to visit composite's children
    */
-  void acceptVisitor(GlSceneVisitor *visitor) override {
-    if (boundingBox.isValid()) {
-      visitor->visit(this);
-    }
-
-    for (auto entity : _sortedElements) {
-      entity->acceptVisitor(visitor);
-    }
-  }
+  void acceptVisitor(GlSceneVisitor *visitor) override;
 
   /**
    * Return the name of this convex hull

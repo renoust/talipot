@@ -89,7 +89,7 @@ void GlMetaNodeRenderer::render(node n, float, Camera *camera) {
   scene->getGlGraphComposite()->getRenderingParametersPointer()->setEdgesLabelStencil(
       metaLabelStencil);
 
-  GlNode glNode(n.id);
+  GlNode glNode(n, metaGraph);
 
   BoundingBox includeBB;
   _inputData->glyphs.get(_inputData->getElementShape()->getNodeValue(n))

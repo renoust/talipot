@@ -137,7 +137,7 @@ map<string, string> GlXMLTools::getProperties(const string &inString,
   return properties;
 }
 
-GlSimpleEntity *GlXMLTools::createEntity(const string &name) {
+GlEntity *GlXMLTools::createEntity(const string &name) {
   if (name == "GlBox") {
     return new GlBox();
   } else if (name == "GlCircle") {

@@ -19,7 +19,7 @@
 #include <talipot/config.h>
 #include <talipot/Coord.h>
 #include <talipot/Color.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 #include <vector>
 #include <string>
@@ -34,7 +34,7 @@ namespace tlp {
  * This generic class is used  to render a connected group of quadrilaterals (textured or not) that
  * shares edges as GlEntity
  */
-class TLP_GL_SCOPE GlPolyQuad : public GlSimpleEntity {
+class TLP_GL_SCOPE GlPolyQuad : public GlEntity {
 
 public:
   /**

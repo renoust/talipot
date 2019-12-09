@@ -95,7 +95,7 @@ protected:
   float currentShift;
 };
 
-class SliderBar : public Slider, public tlp::GlSimpleEntity {
+class SliderBar : public Slider, public tlp::GlEntity {
 
 public:
   SliderBar(ColorScaleSlider *left, ColorScaleSlider *right, const std::string &textureName);

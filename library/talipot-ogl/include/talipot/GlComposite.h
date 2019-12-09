@@ -18,19 +18,21 @@
 #include <list>
 #include <string>
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/config.h>
 
 namespace tlp {
 
+class GlLayer;
+
 /**
  * @ingroup OpenGL
- * \brief GlSimpleEntity used to aggregate other GlEntity
+ * \brief GlEntity used to aggregate other GlEntity
  *
  * This class provide basic container to manage other GlEntity
- * @see GlSimpleEntity
+ * @see GlEntity
  */
-class TLP_GL_SCOPE GlComposite : public GlSimpleEntity {
+class TLP_GL_SCOPE GlComposite : public GlEntity {
 
 public:
   /**
@@ -57,7 +59,7 @@ public:
    * The composite does not takes the entity's ownership, i.e. it is not its responsibility to
    * delete it.
    */
-  void addGlEntity(GlSimpleEntity *entity, const std::string &key);
+  void addGlEntity(GlEntity *entity, const std::string &key);
   /**
    * @brief Remove entity with name : key
    *
@@ -69,19 +71,19 @@ public:
    *
    * The entity is not deleted
    */
-  void deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity = true);
+  void deleteGlEntity(GlEntity *entity, bool informTheEntity = true);
   /**
    * @brief Find name of given entity
    */
-  std::string findKey(GlSimpleEntity *entity);
+  std::string findKey(GlEntity *entity);
   /**
    * @brief Find entity with name : key
    */
-  GlSimpleEntity *findGlEntity(const std::string &key);
+  GlEntity *findGlEntity(const std::string &key);
   /**
    * @brief Return map of entities in composite
    */
-  const std::map<std::string, GlSimpleEntity *> &getGlEntities() const {
+  const std::map<std::string, GlEntity *> &getGlEntities() const {
     return elements;
   }
 
@@ -89,7 +91,7 @@ public:
    * @brief Set stencil number for all composite's children
    *
    * For more information on stencil  :
-   * @see GlSimpleEntity
+   * @see GlEntity
    */
   void setStencil(int stencil) override {
     this->stencil = stencil;
@@ -163,10 +165,10 @@ public:
   /**
    * Call when a child of the composite is modified
    */
-  void notifyModified(GlSimpleEntity *entity);
+  void notifyModified(GlEntity *entity);
 
   /**
-   * \attention This function do nothing, GlComposite is a GlSimpleEntity so draw function must be
+   * \attention This function do nothing, GlComposite is a GlEntity so draw function must be
    * define
    */
   void draw(float, Camera *) override {}
@@ -174,8 +176,8 @@ public:
   ///@endcond
 
 protected:
-  std::map<std::string, GlSimpleEntity *> elements;
-  std::list<GlSimpleEntity *>
+  std::map<std::string, GlEntity *> elements;
+  std::list<GlEntity *>
       _sortedElements; // necessary to enable ordering of elements (for alpha blending)
   std::vector<GlLayer *> layerParents;
   bool deleteComponentsInDestructor;

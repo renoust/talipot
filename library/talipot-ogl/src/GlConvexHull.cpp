@@ -18,6 +18,7 @@
 #include <talipot/GlTools.h>
 #include <talipot/GlConvexHull.h>
 #include <talipot/GlXMLTools.h>
+#include <talipot/GlSceneVisitor.h>
 
 using namespace std;
 
@@ -288,5 +289,15 @@ void GlConvexHull::setWithXML(const string &inString, unsigned int &currentPosit
   GlXMLTools::setWithXML(inString, currentPosition, "outlineColor", _outlineColors);
   GlXMLTools::setWithXML(inString, currentPosition, "filled", _filled);
   GlXMLTools::setWithXML(inString, currentPosition, "outlined", _outlined);
+}
+//====================================================
+void GlConvexHull::acceptVisitor(GlSceneVisitor *visitor) {
+  if (boundingBox.isValid()) {
+    visitor->visit(this);
+  }
+
+  for (auto entity : _sortedElements) {
+    entity->acceptVisitor(visitor);
+  }
 }
 }

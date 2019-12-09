@@ -19,7 +19,7 @@
 #include <talipot/Color.h>
 #include <talipot/Coord.h>
 #include <talipot/Size.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 #include <talipot/OpenGlIncludes.h>
 
@@ -30,7 +30,7 @@ namespace tlp {
  * @brief class to create a abstract polygon
  * @warning You don't have to use this class, it's only a base class for some others entities
  */
-class TLP_GL_SCOPE GlAbstractPolygon : public GlSimpleEntity {
+class TLP_GL_SCOPE GlAbstractPolygon : public GlEntity {
 public:
   ///@cond DOXYGEN_HIDDEN
 

@@ -652,7 +652,7 @@ void GeographicViewGraphicsView::mapToPolygon() {
   if (!composite)
     return;
 
-  const map<string, GlSimpleEntity *> entities = composite->getGlEntities();
+  const map<string, GlEntity *> entities = composite->getGlEntities();
 
   for (auto n : graph->nodes()) {
 

@@ -432,9 +432,9 @@ void ParallelCoordinatesView::addEmptyViewLabel() {
 }
 
 void ParallelCoordinatesView::removeEmptyViewLabel() {
-  GlSimpleEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
-  GlSimpleEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
-  GlSimpleEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
+  GlEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
+  GlEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
+  GlEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
 
   if (noDimsLabel != nullptr) {
     mainLayer->deleteGlEntity(noDimsLabel);
@@ -770,7 +770,7 @@ bool ParallelCoordinatesView::mapGlEntitiesInRegionToData(std::set<unsigned int>
 
   if (result) {
     for (const auto &ite : selectedEntities) {
-      GlEntity *entity = ite.getSimpleEntity();
+      GlEntity *entity = ite.getEntity();
       unsigned int selectedEltId;
 
       if (parallelCoordsDrawing->getDataIdFromGlEntity(entity, selectedEltId)) {
@@ -918,7 +918,7 @@ ParallelAxis *ParallelCoordinatesView::getAxisUnderPointer(const int x, const in
   vector<SelectedEntity> pickedEntities;
 
   if (getGlMainWidget()->pickGlEntities(x, y, pickedEntities, axisSelectionLayer)) {
-    return dynamic_cast<ParallelAxis *>(pickedEntities[0].getSimpleEntity());
+    return dynamic_cast<ParallelAxis *>(pickedEntities[0].getEntity());
   }
 
   axisSelectionLayer->getComposite()->reset(false);

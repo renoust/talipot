@@ -453,7 +453,7 @@ void ScatterPlot2DView::buildScatterPlotsMatrix() {
   float gridTop = gridRight;
   float cellSize = OVERVIEWS_SIZE + OFFSET_BETWEEN_PREVIEWS;
 
-  GlSimpleEntity *lastGrid = matrixComposite->findGlEntity("grid");
+  GlEntity *lastGrid = matrixComposite->findGlEntity("grid");
   matrixComposite->reset(false);
   delete lastGrid;
   labelsComposite->reset(true);
@@ -595,9 +595,9 @@ void ScatterPlot2DView::addEmptyViewLabel() {
 }
 
 void ScatterPlot2DView::removeEmptyViewLabel() {
-  GlSimpleEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
-  GlSimpleEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
-  GlSimpleEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
+  GlEntity *noDimsLabel = mainLayer->findGlEntity("no dimensions label");
+  GlEntity *noDimsLabel1 = mainLayer->findGlEntity("no dimensions label 1");
+  GlEntity *noDimsLabel2 = mainLayer->findGlEntity("no dimensions label 2");
 
   if (noDimsLabel != nullptr) {
     mainLayer->deleteGlEntity(noDimsLabel);
@@ -774,7 +774,7 @@ void ScatterPlot2DView::destroyOverviews() {
 
   scatterPlotsMap.clear();
   detailedScatterPlot = nullptr;
-  GlSimpleEntity *grid = matrixComposite->findGlEntity("grid");
+  GlEntity *grid = matrixComposite->findGlEntity("grid");
   matrixComposite->deleteGlEntity(grid);
   delete grid;
   labelsComposite->reset(true);

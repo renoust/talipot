@@ -20,7 +20,7 @@
 
 namespace tlp {
 
-class GlSimpleEntity;
+class GlEntity;
 class GlNode;
 class GlEdge;
 class GlLayer;
@@ -31,7 +31,7 @@ public:
   GlSceneVisitor() : threadSafe(false) {}
   virtual ~GlSceneVisitor() {}
 
-  virtual void visit(GlSimpleEntity *) {}
+  virtual void visit(GlEntity *) {}
   virtual void visit(GlNode *) {}
   virtual void visit(GlEdge *) {}
   virtual void visit(GlLayer *) {}

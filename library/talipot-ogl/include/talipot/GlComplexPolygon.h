@@ -21,7 +21,7 @@
 #include <talipot/Color.h>
 #include <talipot/Coord.h>
 #include <talipot/config.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 
 namespace tlp {
 
@@ -71,7 +71,7 @@ namespace tlp {
  * In complex polygon you can add a smooth border : see activateQuadBorder(..) function
  * And you can specify the texture zoom : see setTextureZoom(...) function
  */
-class TLP_GL_SCOPE GlComplexPolygon : public GlSimpleEntity {
+class TLP_GL_SCOPE GlComplexPolygon : public GlEntity {
 
 public:
   /**

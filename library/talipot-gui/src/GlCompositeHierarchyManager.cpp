@@ -129,7 +129,7 @@ void GlCompositeHierarchyManager::treatEvent(const Event &evt) {
                                     oldPropertyValue);
         graph->removeAttribute(GlCompositeHierarchyManager::temporaryPropertyValue);
         GlComposite *composite = _graphsComposites[graph].first;
-        GlSimpleEntity *temporaryEntity = composite->findGlEntity(oldPropertyValue);
+        GlEntity *temporaryEntity = composite->findGlEntity(oldPropertyValue);
 
         if (temporaryEntity) {
           composite->deleteGlEntity(temporaryEntity);
@@ -301,6 +301,6 @@ GlHierarchyMainComposite::GlHierarchyMainComposite(GlCompositeHierarchyManager *
 
 void GlHierarchyMainComposite::setVisible(bool visible) {
   _manager->setVisible(visible);
-  GlSimpleEntity::setVisible(visible);
+  GlEntity::setVisible(visible);
 }
 }

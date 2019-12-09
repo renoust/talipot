@@ -51,8 +51,6 @@ unique_ptr<GlLabel> GlEdge::label;
 once_flag GlEdge::onceFlag;
 
 BoundingBox GlEdge::getBoundingBox(const GlGraphInputData *data) {
-  edge e = edge(id);
-
   auto ends = data->graph->ends(e);
   const node src = ends.first;
   const node tgt = ends.second;
@@ -121,9 +119,6 @@ BoundingBox GlEdge::getBoundingBox(const GlGraphInputData *data, const edge e, c
 }
 
 void GlEdge::draw(float lod, const GlGraphInputData *data, Camera *camera) {
-
-  edge e(id);
-
   auto ends = data->graph->ends(e);
   const node src = ends.first;
   const node tgt = ends.second;
@@ -392,7 +387,6 @@ void GlEdge::drawEdge(const Coord &srcNodePos, const Coord &tgtNodePos, const Co
 
 void GlEdge::drawLabel(bool drawSelect, OcclusionTest *test, const GlGraphInputData *data,
                        float lod) {
-  edge e = edge(id);
   bool select = data->getElementSelected()->getEdgeValue(e);
 
   if (select != drawSelect)
@@ -407,8 +401,6 @@ void GlEdge::drawLabel(OcclusionTest *test, const GlGraphInputData *data) {
 
 void GlEdge::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float lod,
                        Camera *camera) {
-
-  edge e(id);
 
   const string &tmp = data->getElementLabel()->getEdgeValue(e);
 

@@ -274,7 +274,7 @@ bool GlMainWidget::pickGlEntities(const int x, const int y, const int width, con
                                   std::vector<SelectedEntity> &pickedEntities, GlLayer *layer) {
   makeCurrent();
   return scene.selectEntities(
-      static_cast<RenderingEntitiesFlag>(RenderingSimpleEntities | RenderingWithoutRemove),
+      static_cast<RenderingEntitiesFlag>(RenderingEntities | RenderingWithoutRemove),
       screenToViewport(x), screenToViewport(y), screenToViewport(width), screenToViewport(height),
       layer, pickedEntities);
 }

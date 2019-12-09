@@ -13,8 +13,8 @@
 
 #include <cassert>
 #include <talipot/GlSceneObserver.h>
-
 #include <talipot/GlScene.h>
+#include <talipot/GlEntity.h>
 
 using namespace std;
 
@@ -25,13 +25,11 @@ GlSceneEvent::GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType
     : Event(scene, Event::TLP_MODIFICATION), sceneEventType(sceneEventType), layerName(layerName),
       layer(layer) {}
 
-GlSceneEvent::GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType,
-                           GlSimpleEntity *entity)
-    : Event(scene, Event::TLP_MODIFICATION), sceneEventType(sceneEventType),
-      glSimpleEntity(entity) {}
+GlSceneEvent::GlSceneEvent(const GlScene &scene, GlSceneEventType sceneEventType, GlEntity *entity)
+    : Event(scene, Event::TLP_MODIFICATION), sceneEventType(sceneEventType), entity(entity) {}
 
-GlSimpleEntity *GlSceneEvent::getGlSimpleEntity() const {
-  return glSimpleEntity;
+GlEntity *GlSceneEvent::getGlEntity() const {
+  return entity;
 }
 
 std::string GlSceneEvent::getLayerName() const {

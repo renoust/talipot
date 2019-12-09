@@ -14,11 +14,11 @@
 #ifndef GL_MATRIX_BACKGROUND_GRID_H
 #define GL_MATRIX_BACKGROUND_GRID_H
 
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 namespace tlp {
 class MatrixView;
 
-class GlMatrixBackgroundGrid : public tlp::GlSimpleEntity {
+class GlMatrixBackgroundGrid : public tlp::GlEntity {
 public:
   GlMatrixBackgroundGrid(MatrixView *view);
   tlp::BoundingBox getBoundingBox() override;

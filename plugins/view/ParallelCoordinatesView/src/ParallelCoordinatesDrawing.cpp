@@ -354,7 +354,7 @@ void ParallelCoordinatesDrawing::plotData(const unsigned int dataId, const Color
   if (axisOrder.size() < 2)
     return;
 
-  GlSimpleEntity *line = nullptr;
+  GlEntity *line = nullptr;
   bool closeSpline = (layoutType == CIRCULAR);
 
   if (linesType == STRAIGHT) {

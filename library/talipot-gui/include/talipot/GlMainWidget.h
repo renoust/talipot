@@ -43,7 +43,7 @@ class GlCompositeHierarchyManager;
  *   - see the result
  *
  * @see GlLayer
- * @see GlSimpleEntity
+ * @see GlEntity
  *
  *
  * If you only want to visualize a graph, you can call the setGraph function
@@ -88,7 +88,7 @@ public:
    * At the construction this GlScene is empty
    * @see GlScene
    * @see GlScene::createLayer(const std::string &name)
-   * @see GlLayer::addGlEntity(GlSimpleEntity *entity,const std::string& name)
+   * @see GlLayer::addGlEntity(GlEntity *entity,const std::string& name)
    */
   tlp::GlScene *getScene() {
     return &scene;

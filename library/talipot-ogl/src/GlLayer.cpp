@@ -92,7 +92,7 @@ void GlLayer::acceptVisitor(GlSceneVisitor *visitor) {
   }
 }
 
-void GlLayer::addGlEntity(GlSimpleEntity *entity, const std::string &name) {
+void GlLayer::addGlEntity(GlEntity *entity, const std::string &name) {
   composite.addGlEntity(entity, name);
 
   if (scene)
@@ -111,18 +111,18 @@ void GlLayer::deleteGlEntity(const std::string &key) {
     scene->notifyModifyLayer(this->name, this);
 }
 
-void GlLayer::deleteGlEntity(GlSimpleEntity *entity) {
+void GlLayer::deleteGlEntity(GlEntity *entity) {
   composite.deleteGlEntity(entity);
 
   if (scene)
     scene->notifyModifyLayer(this->name, this);
 }
 
-GlSimpleEntity *GlLayer::findGlEntity(const std::string &key) {
+GlEntity *GlLayer::findGlEntity(const std::string &key) {
   return composite.findGlEntity(key);
 }
 
-const std::map<std::string, GlSimpleEntity *> &GlLayer::getGlEntities() const {
+const std::map<std::string, GlEntity *> &GlLayer::getGlEntities() const {
   return composite.getGlEntities();
 }
 

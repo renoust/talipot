@@ -30,7 +30,7 @@ class QOpenGLFramebufferObject;
 
 namespace tlp {
 
-class GlSimpleEntity;
+class GlEntity;
 class GlGraphComposite;
 class GlMainWidget;
 
@@ -88,7 +88,7 @@ public:
   /**
    * @brief Add an entity to the scene. The scene become the owner of the object.
    **/
-  void addGlEntityToScene(GlSimpleEntity *entity);
+  void addGlEntityToScene(GlEntity *entity);
   /**
    * @brief Add a graph composite to the scene. The scene become the owner of the object.
    **/

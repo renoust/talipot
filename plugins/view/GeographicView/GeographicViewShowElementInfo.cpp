@@ -22,7 +22,7 @@
 #include <talipot/NodeLinkDiagramComponentInteractor.h>
 #include <talipot/ItemDelegate.h>
 #include <talipot/GraphElementModel.h>
-#include <talipot/GlSimpleEntityItemModel.h>
+#include <talipot/GlEntityItemModel.h>
 #include <talipot/GlComplexPolygon.h>
 
 #include <QPropertyAnimation>
@@ -35,11 +35,11 @@ using namespace tlp;
 
 // this class is needed to allow interactive settings
 // of some GlComplexPolygon rendering properties
-class tlp::GlComplexPolygonItemEditor : public GlSimpleEntityItemEditor {
+class tlp::GlComplexPolygonItemEditor : public GlEntityItemEditor {
 public:
-  GlComplexPolygonItemEditor(GlComplexPolygon *poly) : GlSimpleEntityItemEditor(poly) {}
+  GlComplexPolygonItemEditor(GlComplexPolygon *poly) : GlEntityItemEditor(poly) {}
 
-  // redefined inherited methods from GlSimpleEntityItemEditor
+  // redefined inherited methods from GlEntityItemEditor
   QStringList propertiesNames() const override {
     return QStringList() << "fillColor"
                          << "outlineColor";
@@ -201,23 +201,23 @@ bool GeographicViewShowElementInfo::eventFilter(QObject *widget, QEvent *e) {
           } else if (selectedEntity.getEntityType() == SelectedEntity::SIMPLE_ENTITY_SELECTED) {
 
             GlComplexPolygon *polygon =
-                dynamic_cast<GlComplexPolygon *>(selectedEntity.getSimpleEntity());
+                dynamic_cast<GlComplexPolygon *>(selectedEntity.getEntity());
 
             if (!polygon)
               return false;
 
             _informationWidgetItem->setVisible(true);
             QLabel *title = _informationWidget->findChild<QLabel *>();
-            title->setText(selectedEntity.getSimpleEntity()
+            title->setText(selectedEntity.getEntity()
                                ->getParent()
-                               ->findKey(selectedEntity.getSimpleEntity())
+                               ->findKey(selectedEntity.getEntity())
                                .c_str());
 
             delete _editor;
 
             _editor = new GlComplexPolygonItemEditor(polygon);
 
-            tableView()->setModel(new GlSimpleEntityItemModel(_editor, _informationWidget));
+            tableView()->setModel(new GlEntityItemModel(_editor, _informationWidget));
             int size = title->height() + _informationWidget->layout()->spacing() +
                        tableView()->rowHeight(0) + tableView()->rowHeight(1) + 10;
             _informationWidget->setMaximumHeight(size);

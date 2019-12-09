@@ -16,7 +16,7 @@
 #include <talipot/GlLabel.h>
 #include <talipot/GlQuad.h>
 #include <talipot/GlLines.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/GlMainWidget.h>
 
 #include "ParallelCoordinatesView.h"

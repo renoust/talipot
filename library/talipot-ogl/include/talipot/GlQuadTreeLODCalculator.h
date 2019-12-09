@@ -59,11 +59,11 @@ public:
   /**
    * This function is call by GlLODSceneVisitor when a simple entity is found
    */
-  void addSimpleEntityBoundingBox(GlSimpleEntity *entity, const BoundingBox &bb) override;
+  void addEntityBoundingBox(GlEntity *entity, const BoundingBox &bb) override;
   /**
    * This function is call by GlLODSceneVisitor when an edge is found
    */
-  void addEdgeBoundingBox(unsigned int id, unsigned int pos, const BoundingBox &bb) override;
+  void addEdgeBoundingBox(Graph *graph, edge e, const BoundingBox &bb) override;
 
   /**
    * This function compute LOD
@@ -106,10 +106,10 @@ protected:
 
   void setHaveToCompute();
 
-  std::vector<QuadTreeNode<std::pair<uint, uint>> *> nodesQuadTree;
-  std::vector<QuadTreeNode<std::pair<uint, uint>> *> edgesQuadTree;
-  std::vector<QuadTreeNode<GlSimpleEntity *> *> entitiesQuadTree;
-  std::vector<std::vector<SimpleEntityLODUnit>> simpleEntities;
+  std::vector<QuadTreeNode<unsigned int> *> nodesQuadTree;
+  std::vector<QuadTreeNode<unsigned int> *> edgesQuadTree;
+  std::vector<QuadTreeNode<GlEntity *> *> entitiesQuadTree;
+  std::vector<std::vector<EntityLODUnit>> entities;
 
   bool haveToCompute;
   bool haveToInitObservers;
@@ -129,7 +129,7 @@ protected:
   GlGraphRenderingParameters oldParameters;
 
   int quadTreesVectorPosition;
-  int simpleEntitiesVectorPosition;
+  int entitiesVectorPosition;
 };
 }
 

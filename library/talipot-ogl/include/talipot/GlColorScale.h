@@ -17,7 +17,7 @@
 #define TALIPOT_GL_COLOR_SCALE_H
 
 #include <talipot/Observable.h>
-#include <talipot/GlSimpleEntity.h>
+#include <talipot/GlEntity.h>
 #include <talipot/Color.h>
 
 namespace tlp {
@@ -25,7 +25,7 @@ namespace tlp {
 class ColorScale;
 class GlPolyQuad;
 
-class TLP_GL_SCOPE GlColorScale : public GlSimpleEntity, public Observable {
+class TLP_GL_SCOPE GlColorScale : public GlEntity, public Observable {
 
 public:
   enum Orientation { Horizontal, Vertical };

@@ -11,16 +11,11 @@
  *
  */
 
-///@cond DOXYGEN_HIDDEN
-
 #ifndef TALIPOT_GL_EDGE_H
 #define TALIPOT_GL_EDGE_H
 
-#ifndef DOXYGEN_NOTFOR_DEVEL
-
 #include <talipot/PropertyTypes.h>
 #include <talipot/Size.h>
-#include <talipot/GlComplexeEntity.h>
 #include <talipot/Matrix.h>
 #include <talipot/GlLabel.h>
 #include <talipot/GlSceneVisitor.h>
@@ -32,19 +27,20 @@ namespace tlp {
 
 struct OcclusionTest;
 class EdgeExtremityGlyph;
+class GlGraphInputData;
 
 /**
  * Class to represent an edge of a graph
  */
-class TLP_GL_SCOPE GlEdge final : public GlComplexeEntity {
+class TLP_GL_SCOPE GlEdge {
 
 public:
   /**
    * Build an edge with the id : id
    * id must be the id of the edge in graph
    */
-  GlEdge(unsigned int eId = UINT_MAX, unsigned int ePos = UINT_MAX, bool sel = false)
-      : id(eId), pos(ePos), selectionDraw(sel) {
+  GlEdge(edge e = edge(), Graph *graph = nullptr, bool sel = false)
+      : e(e), graph(graph), selectionDraw(sel) {
     if (!label.get())
       std::call_once(onceFlag, []() { label.reset(new GlLabel); });
   }
@@ -52,14 +48,14 @@ public:
   /**
    * Virtual function to accept GlSceneVisitor on this class
    */
-  void acceptVisitor(GlSceneVisitor *visitor) override {
+  void acceptVisitor(GlSceneVisitor *visitor) {
     visitor->visit(this);
   }
 
   /**
    * Return the edge bounding box
    */
-  BoundingBox getBoundingBox(const GlGraphInputData *data) override;
+  BoundingBox getBoundingBox(const GlGraphInputData *data);
 
   /**
    * Return the edge bounding box
@@ -72,7 +68,7 @@ public:
   /**
    * Draw the edge with level of detail : lod and Camera : camera
    */
-  void draw(float lod, const GlGraphInputData *data, Camera *camera) override;
+  void draw(float lod, const GlGraphInputData *data, Camera *camera);
 
   /**
    * Draw the label of the edge if drawEdgesLabel is true and if label selection is equal to
@@ -83,7 +79,7 @@ public:
   /**
    * Draw the label of the edge if drawEdgesLabel is true
    */
-  void drawLabel(OcclusionTest *test, const GlGraphInputData *data) override;
+  void drawLabel(OcclusionTest *test, const GlGraphInputData *data);
 
   /**
    * Draw the label of the edge if drawEdgesLabel is true
@@ -123,8 +119,8 @@ public:
     selectionDraw = selectDraw;
   }
 
-  // edge id and edge position in graph->edges()
-  unsigned int id, pos;
+  edge e;
+  Graph *graph;
 
 private:
   bool selectionDraw;
@@ -174,7 +170,4 @@ private:
 };
 }
 
-#endif // DOXYGEN_NOTFOR_DEVEL
-
 #endif // TALIPOT_GL_EDGE_H
-///@endcond

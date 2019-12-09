@@ -59,7 +59,7 @@ void GlComposite::removeLayerParent(GlLayer *layer) {
 }
 //============================================================
 void GlComposite::reset(bool deleteElems) {
-  vector<GlSimpleEntity *> toTreat;
+  vector<GlEntity *> toTreat;
 
   for (const auto &it : elements) {
     // Push elements to treat in a vector as deleting elements in the loop
@@ -95,7 +95,7 @@ void GlComposite::reset(bool deleteElems) {
   }
 }
 //============================================================
-void GlComposite::addGlEntity(GlSimpleEntity *entity, const string &key) {
+void GlComposite::addGlEntity(GlEntity *entity, const string &key) {
   assert(entity != nullptr);
 
   bool doSceneTreatment = false;
@@ -141,7 +141,7 @@ void GlComposite::deleteGlEntity(const string &key, bool informTheEntity) {
   if (elements.count(key) == 0)
     return;
 
-  GlSimpleEntity *entity = elements[key];
+  GlEntity *entity = elements[key];
 
   if (informTheEntity)
     entity->removeParent(this);
@@ -175,7 +175,7 @@ void GlComposite::deleteGlEntity(const string &key, bool informTheEntity) {
   }
 }
 //============================================================
-void GlComposite::deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity) {
+void GlComposite::deleteGlEntity(GlEntity *entity, bool informTheEntity) {
   for (const auto &it : elements) {
     if (entity == it.second) {
 
@@ -206,7 +206,7 @@ void GlComposite::deleteGlEntity(GlSimpleEntity *entity, bool informTheEntity) {
   }
 }
 //============================================================
-string GlComposite::findKey(GlSimpleEntity *entity) {
+string GlComposite::findKey(GlEntity *entity) {
   for (const auto &it : elements) {
     if (entity == it.second) {
       return it.first;
@@ -216,7 +216,7 @@ string GlComposite::findKey(GlSimpleEntity *entity) {
   return "";
 }
 //============================================================
-GlSimpleEntity *GlComposite::findGlEntity(const string &key) {
+GlEntity *GlComposite::findGlEntity(const string &key) {
   auto ite = elements.find(key);
 
   if (ite == elements.end())
@@ -231,7 +231,7 @@ void GlComposite::translate(const Coord &move) {
   }
 }
 //============================================================
-void GlComposite::notifyModified(GlSimpleEntity *entity) {
+void GlComposite::notifyModified(GlEntity *entity) {
   if (!layerParents.empty())
     layerParents[0]->getScene()->notifyModifyEntity(entity);
 }
@@ -272,7 +272,7 @@ void GlComposite::setWithXML(const string &inString, unsigned int &currentPositi
     assert(properties.count("name") != 0);
     assert(properties.count("type") != 0);
 
-    GlSimpleEntity *entity = GlXMLTools::createEntity(properties["type"]);
+    GlEntity *entity = GlXMLTools::createEntity(properties["type"]);
 
     if (entity) {
       bool visible;

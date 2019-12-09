@@ -46,15 +46,11 @@ unique_ptr<GlLabel> GlNode::label;
 once_flag GlNode::onceFlag;
 
 void GlNode::init(const GlGraphInputData *data) {
-  if (id != oldId) {
-    node n(id);
-    oldId = id;
-    coord = data->getElementLayout()->getNodeValue(n);
-    glyph = data->getElementShape()->getNodeValue(n);
-    size = data->getElementSize()->getNodeValue(n);
-    rot = data->getElementRotation()->getNodeValue(n);
-    selected = data->getElementSelected()->getNodeValue(n);
-  }
+  coord = data->getElementLayout()->getNodeValue(n);
+  glyph = data->getElementShape()->getNodeValue(n);
+  size = data->getElementSize()->getNodeValue(n);
+  rot = data->getElementRotation()->getNodeValue(n);
+  selected = data->getElementSelected()->getNodeValue(n);
 }
 
 BoundingBox GlNode::getBoundingBox(const GlGraphInputData *data) {
@@ -93,14 +89,13 @@ void GlNode::draw(float lod, const GlGraphInputData *data, Camera *camera) {
 
   glEnable(GL_CULL_FACE);
 
-  node n(id);
-
   // do not render metanode is lod is too low
   if (data->getGraph()->isMetaNode(n) && lod >= LOD_MIN_TRESHOLD) {
     data->getMetaNodeRenderer()->render(n, lod, camera);
   }
 
-  if (lod < LOD_MIN_TRESHOLD) { // less than four pixel on screen, we use points instead of glyphs
+  // less than four pixel on screen, we use points instead of glyphs
+  if (lod < LOD_MIN_TRESHOLD) {
     if (lod < 1)
       lod = 1;
 
@@ -182,8 +177,6 @@ void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data) {
 void GlNode::drawLabel(OcclusionTest *test, const GlGraphInputData *data, float lod,
                        Camera *camera) {
   init(data);
-  node n(id);
-
   // If glyph cannot render label: return
   if (data->glyphs.get(glyph)->renderLabel())
     return;
