@@ -60,6 +60,8 @@ bash -lc "sed -i -e 's/5\.12\.3/5\.12\.4/g' C:/msys64/mingw64/lib/cmake/Qt5WebKi
 bash -lc "sed -i -e 's/5\.12\.3/5\.12\.4/g' C:/msys64/mingw64/lib/cmake/Qt5WebKitWidgets/Qt5WebKitWidgetsConfig.cmake || true"
 bash -lc "sed -i -e 's/5\.12\.4/5\.13\.1/g' C:/msys64/mingw64/lib/cmake/Qt5WebKit/Qt5WebKitConfig.cmake || true"
 bash -lc "sed -i -e 's/5\.12\.4/5\.13\.1/g' C:/msys64/mingw64/lib/cmake/Qt5WebKitWidgets/Qt5WebKitWidgetsConfig.cmake || true"
+bash -lc "sed -i -e 's/5\.13\.1/5\.13\.2/g' C:/msys64/mingw64/lib/cmake/Qt5WebKit/Qt5WebKitConfig.cmake || true"
+bash -lc "sed -i -e 's/5\.13\.1/5\.13\.2/g' C:/msys64/mingw64/lib/cmake/Qt5WebKitWidgets/Qt5WebKitWidgetsConfig.cmake || true"
 set TALIPOT_BUILD_DOC=ON
 goto talipot_build
 
