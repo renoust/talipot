@@ -119,7 +119,7 @@ void AlgorithmRunner::insertItem(QWidget *w, const QString &name) {
     }
 
     categoryLayout->insertWidget(index, groupBox);
-  } else {
+  } else if (group.isEmpty()) {
     groupBox = categoryBox;
   }
 
