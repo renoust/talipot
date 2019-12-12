@@ -71,8 +71,8 @@ class GraphMLHandler(xml.sax.ContentHandler):
                     self.attrLabel = 'label'
 
                 # Create a Talipot property compatible with the attribute type
-                while self.graph.existProperty(attrName):
-                    attrName = '_'+attrName
+                if self.graph.existProperty(attrName):
+                    attrName += '_' + attrType
 
                 self.getGraphProperty(self.currentAttrId, attrName, attrType)
                 # save attributes info for later use
